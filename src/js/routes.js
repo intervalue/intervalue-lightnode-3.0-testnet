@@ -17,25 +17,25 @@ if (window && window.navigator) {
 //Setting up route
 angular
   .module('copayApp')
-  .config(function(historicLogProvider, $provide, $logProvider, $stateProvider, $urlRouterProvider, $compileProvider, $qProvider) {
-  	$qProvider.errorOnUnhandledRejections(false);
+  .config(function (historicLogProvider, $provide, $logProvider, $stateProvider, $urlRouterProvider, $compileProvider, $qProvider) {
+    $qProvider.errorOnUnhandledRejections(false);
     $urlRouterProvider.otherwise('/');
 
     $logProvider.debugEnabled(true);
     $provide.decorator('$log', ['$delegate',
-      function($delegate) {
+      function ($delegate) {
         var historicLog = historicLogProvider.$get();
 
-        ['debug', 'info', 'warn', 'error', 'log'].forEach(function(level) {
+        ['debug', 'info', 'warn', 'error', 'log'].forEach(function (level) {
 
           var orig = $delegate[level];
-          $delegate[level] = function() {
+          $delegate[level] = function () {
             if (level == 'error')
               console.log(arguments);
 
             var args = [].slice.call(arguments);
             if (!Array.isArray(args)) args = [args];
-            args = args.map(function(v) {
+            args = args.map(function (v) {
               try {
                 if (typeof v == 'undefined') v = 'undefined';
                 if (!v) v = 'null';
@@ -62,7 +62,7 @@ angular
               if (window.cordova)
                 console.log(args.join(' '));
               historicLog.add(level, args.join(' '));
-	          orig.apply(null, args);
+              orig.apply(null, args);
             } catch (e) {
               console.log('ERROR (at log decorator):', e, args[0]);
             }
@@ -87,13 +87,13 @@ angular
         }
       });
 
-    $stateProvider      
+    $stateProvider
       .state('walletHome', {
         url: '/',
         walletShouldBeComplete: true,
         needProfile: true,
         deepStateRedirect: true,
-    	sticky: true,
+        sticky: true,
         views: {
           'main': {
             templateUrl: 'views/walletHome.html',
@@ -109,7 +109,7 @@ angular
           }
         }
       })
-      
+
       .state('create', {
         url: '/create',
         templateUrl: 'views/create.html',
@@ -135,7 +135,7 @@ angular
         walletShouldBeComplete: false,
         needProfile: true,
         deepStateRedirect: true,
-    	sticky: true,
+        sticky: true,
         views: {
           'chat': {
             templateUrl: 'views/correspondentDevices.html'
@@ -162,15 +162,15 @@ angular
           },
         }
       })
-    .state('correspondentDevices.addCorrespondentDevice', {
-      url: '/add',
-      needProfile: true,
-      views: {
-        'dialog': {
-          templateUrl: 'views/addCorrespondentDevice.html'
-        },
-      }
-    })
+      .state('correspondentDevices.addCorrespondentDevice', {
+        url: '/add',
+        needProfile: true,
+        views: {
+          'dialog': {
+            templateUrl: 'views/addCorrespondentDevice.html'
+          },
+        }
+      })
       .state('correspondentDevices.addCorrespondentDevice.inviteCorrespondentDevice', {
         url: '/invite',
         walletShouldBeComplete: false,
@@ -248,16 +248,16 @@ angular
         }
       })
       .state('preferences.preferencesAdvanced', {
-	      url: '/advanced',
-	      templateUrl: 'views/preferencesAdvanced.html',
-	      walletShouldBeComplete: true,
-	      needProfile: true,
-	      views: {
-	        'main@': {
-	          templateUrl: 'views/preferencesAdvanced.html'
-	        },
-	      }
-	    })
+        url: '/advanced',
+        templateUrl: 'views/preferencesAdvanced.html',
+        walletShouldBeComplete: true,
+        needProfile: true,
+        views: {
+          'main@': {
+            templateUrl: 'views/preferencesAdvanced.html'
+          },
+        }
+      })
       .state('preferences.preferencesAdvanced.preferencesInformation', {
         url: '/information',
         walletShouldBeComplete: true,
@@ -320,16 +320,16 @@ angular
           },
         }
       })
-       .state('preferencesGlobal.preferencesTor', {
-	      url: '/tor',
-	      templateUrl: 'views/preferencesTor.html',
-	      walletShouldBeComplete: true,
-	      needProfile: true,
-	      views: {
-		      'main@': {
-			      templateUrl: 'views/preferencesTor.html'
-		      }
-	      }
+      .state('preferencesGlobal.preferencesTor', {
+        url: '/tor',
+        templateUrl: 'views/preferencesTor.html',
+        walletShouldBeComplete: true,
+        needProfile: true,
+        views: {
+          'main@': {
+            templateUrl: 'views/preferencesTor.html'
+          }
+        }
       })
       .state('preferencesGlobal.preferencesLanguage', {
         url: '/language',
@@ -396,16 +396,16 @@ angular
         }
       })
       .state('preferencesGlobal.preferencesWitnesses', {
-	      url: '/witnesses',
-	      templateUrl: 'views/preferencesWitnesses.html',
-	      walletShouldBeComplete: true,
-	      needProfile: true,
-	      views: {
-	        'main@': {
-	          templateUrl: 'views/preferencesWitnesses.html'
-	        },
-	      }
-	    })
+        url: '/witnesses',
+        templateUrl: 'views/preferencesWitnesses.html',
+        walletShouldBeComplete: true,
+        needProfile: true,
+        views: {
+          'main@': {
+            templateUrl: 'views/preferencesWitnesses.html'
+          },
+        }
+      })
       .state('preferencesGlobal.preferencesWitnesses.preferencesEditWitness', {
         url: '/edit',
         walletShouldBeComplete: true,
@@ -428,15 +428,15 @@ angular
         }
       })
       .state('preferencesGlobal.recoveryFromSeed', {
-	      url: '/recoveryFromSeed',
-	      templateUrl: 'views/recoveryFromSeed.html',
-	      walletShouldBeComplete: true,
-	      needProfile: true,
-	      views: {
-		      'main@': {
-			      templateUrl: 'views/recoveryFromSeed.html'
-		      }
-	      }
+        url: '/recoveryFromSeed',
+        templateUrl: 'views/recoveryFromSeed.html',
+        walletShouldBeComplete: true,
+        needProfile: true,
+        views: {
+          'main@': {
+            templateUrl: 'views/recoveryFromSeed.html'
+          }
+        }
       })
       .state('preferencesGlobal.export', {
         url: '/export',
@@ -459,18 +459,18 @@ angular
         }
       })
 
-    .state('preferencesGlobal.preferencesAbout', {
-      url: '/about',
-      templateUrl: 'views/preferencesAbout.html',
-      walletShouldBeComplete: true,
-      needProfile: true,
-      views: {
-        'main@': {
-          templateUrl: 'views/preferencesAbout.html'
-        },
-      }
-    })
-    .state('preferencesGlobal.preferencesAbout.disclaimer', {
+      .state('preferencesGlobal.preferencesAbout', {
+        url: '/about',
+        templateUrl: 'views/preferencesAbout.html',
+        walletShouldBeComplete: true,
+        needProfile: true,
+        views: {
+          'main@': {
+            templateUrl: 'views/preferencesAbout.html'
+          },
+        }
+      })
+      .state('preferencesGlobal.preferencesAbout.disclaimer', {
         url: '/disclaimer',
         needProfile: false,
         views: {
@@ -479,7 +479,7 @@ angular
           }
         }
       })
-    .state('preferencesGlobal.preferencesAbout.translators', {
+      .state('preferencesGlobal.preferencesAbout.translators', {
         url: '/translators',
         walletShouldBeComplete: true,
         needProfile: true,
@@ -489,7 +489,7 @@ angular
           }
         }
       })
-    .state('preferencesGlobal.preferencesAbout.preferencesLogs', {
+      .state('preferencesGlobal.preferencesAbout.preferencesLogs', {
         url: '/logs',
         templateUrl: 'views/preferencesLogs.html',
         walletShouldBeComplete: true,
@@ -501,46 +501,46 @@ angular
         }
       })
 
-    .state('add', {
-      url: '/add',
-      needProfile: true,
-      views: {
-        'main': {
-          templateUrl: 'views/add.html'
-        },
-      }
-    })
+      .state('add', {
+        url: '/add',
+        needProfile: true,
+        views: {
+          'main': {
+            templateUrl: 'views/add.html'
+          },
+        }
+      })
       .state('cordova', { // never used
         url: '/cordova/:status/:isHome',
         views: {
           'main': {
-            controller: function($rootScope, $state, $stateParams, $timeout, go, isCordova) {
-                console.log('cordova status: '+$stateParams.status);
-                switch ($stateParams.status) {
-                    case 'resume':
-                        $rootScope.$emit('Local/Resume');
-                        break;
-                    case 'backbutton':
-                        if (isCordova && $stateParams.isHome == 'true' && !$rootScope.modalOpened)
-                            navigator.app.exitApp();
-                        else
-                            $rootScope.$emit('closeModal');
-                        break;
-                };
-                // why should we go home on resume or backbutton?
-                /*
-              $timeout(function() {
-                $rootScope.$emit('Local/SetTab', 'walletHome', true);
-              }, 100);
-              go.walletHome();
-              */
+            controller: function ($rootScope, $state, $stateParams, $timeout, go, isCordova) {
+              console.log('cordova status: ' + $stateParams.status);
+              switch ($stateParams.status) {
+                case 'resume':
+                  $rootScope.$emit('Local/Resume');
+                  break;
+                case 'backbutton':
+                  if (isCordova && $stateParams.isHome == 'true' && !$rootScope.modalOpened)
+                    navigator.app.exitApp();
+                  else
+                    $rootScope.$emit('closeModal');
+                  break;
+              };
+              // why should we go home on resume or backbutton?
+              /*
+            $timeout(function() {
+              $rootScope.$emit('Local/SetTab', 'walletHome', true);
+            }, 100);
+            go.walletHome();
+            */
             }
           }
         },
         needProfile: false
       });
   })
-  .run(function($rootScope, $state, $log, uriHandler, isCordova, profileService, $timeout, nodeWebkit, uxLanguage, animationService) {
+  .run(function ($rootScope, $state, $log, uriHandler, isCordova, profileService, $timeout, nodeWebkit, uxLanguage, animationService) {
     FastClick.attach(document.body);
 
     uxLanguage.init();
@@ -564,23 +564,23 @@ angular
       win.menu = nativeMenuBar;
     }
 
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
 
       if (!profileService.profile && toState.needProfile) {
-		  
+
         // Give us time to open / create the profile
         event.preventDefault();
 
-		if (!profileService.assocVisitedFromStates)
-			profileService.assocVisitedFromStates = {};
-		breadcrumbs.add('$stateChangeStart no profile from '+fromState.name+' to '+toState.name);
-		if (profileService.assocVisitedFromStates[fromState.name] && !fromState.name)
-			return breadcrumbs.add("already loading profile, ignoring duplicate $stateChangeStart from "+fromState.name);
-		profileService.assocVisitedFromStates[fromState.name] = true;
+        if (!profileService.assocVisitedFromStates)
+          profileService.assocVisitedFromStates = {};
+        breadcrumbs.add('$stateChangeStart no profile from ' + fromState.name + ' to ' + toState.name);
+        if (profileService.assocVisitedFromStates[fromState.name] && !fromState.name)
+          return breadcrumbs.add("already loading profile, ignoring duplicate $stateChangeStart from " + fromState.name);
+        profileService.assocVisitedFromStates[fromState.name] = true;
 
         // Try to open local profile
-        profileService.loadAndBindProfile(function(err) {
-		  delete profileService.assocVisitedFromStates[fromState.name];
+        profileService.loadAndBindProfile(function (err) {
+          delete profileService.assocVisitedFromStates[fromState.name];
           if (err) {
             if (err.message && err.message.match('NOPROFILE')) {
               $log.debug('No profile... redirecting');
@@ -602,12 +602,12 @@ angular
 
         $state.transitionTo('copayers');
         event.preventDefault();
-      } 
+      }
 
       if (!animationService.transitionAnimated(fromState, toState)) {
         event.preventDefault();
         // Time for the backpane to render
-        setTimeout(function() {
+        setTimeout(function () {
           $state.transitionTo(toState);
         }, 50);
       }
