@@ -1,16 +1,16 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('recoveryFromSeed',
-	function ($rootScope, $scope, $log, $timeout, profileService) {
+	function ($rootScope, $scope, $log, $timeout, profileService, configService) {
 
 		var async = require('async');
 		var conf = require('intervaluecore/conf.js');
 		var wallet_defined_by_keys = require('intervaluecore/wallet_defined_by_keys.js');
 		var objectHash = require('intervaluecore/object_hash.js');
-		try{
+		try {
 			var ecdsa = require('secp256k1');
 		}
-		catch(e){
+		catch (e) {
 			var ecdsa = require('intervaluecore/node_modules/secp256k1' + '');
 		}
 		var Mnemonic = require('bitcore-mnemonic');
@@ -28,12 +28,14 @@ angular.module('copayApp.controllers').controller('recoveryFromSeed',
 		self.xPrivKey = '';
 		self.assocIndexesToWallets = {};
 
+		var defaults = configService.getDefaults();
+
 		function determineIfAddressUsed(address, cb) {
-			db.query("SELECT 1 FROM outputs WHERE address = ? LIMIT 1", [address], function(outputsRows) {
+			db.query("SELECT 1 FROM outputs WHERE address = ? LIMIT 1", [address], function (outputsRows) {
 				if (outputsRows.length === 1)
 					cb(true);
 				else {
-					db.query("SELECT 1 FROM unit_authors WHERE address = ? LIMIT 1", [address], function(unitAuthorsRows) {
+					db.query("SELECT 1 FROM unit_authors WHERE address = ? LIMIT 1", [address], function (unitAuthorsRows) {
 						cb(unitAuthorsRows.length === 1);
 					});
 				}
@@ -50,11 +52,11 @@ angular.module('copayApp.controllers').controller('recoveryFromSeed',
 			var assocMaxAddressIndexes = {};
 
 			function checkAndAddCurrentAddress(is_change) {
-				var address = objectHash.getChash160(["sig", {"pubkey": wallet_defined_by_keys.derivePubkey(xPubKey, 'm/' + is_change + '/' + currentAddressIndex)}]);
-				determineIfAddressUsed(address, function(bUsed) {
+				var address = objectHash.getChash160(["sig", { "pubkey": wallet_defined_by_keys.derivePubkey(xPubKey, 'm/' + is_change + '/' + currentAddressIndex) }]);
+				determineIfAddressUsed(address, function (bUsed) {
 					if (bUsed) {
 						lastUsedAddressIndex = currentAddressIndex;
-						if (!assocMaxAddressIndexes[currentWalletIndex]) assocMaxAddressIndexes[currentWalletIndex] = {main: 0};
+						if (!assocMaxAddressIndexes[currentWalletIndex]) assocMaxAddressIndexes[currentWalletIndex] = { main: 0 };
 						if (is_change) {
 							assocMaxAddressIndexes[currentWalletIndex].change = currentAddressIndex;
 						} else {
@@ -116,7 +118,7 @@ angular.module('copayApp.controllers').controller('recoveryFromSeed',
 			var currentAccount = 0;
 
 			function addAddress(wallet, is_change, index, maxIndex) {
-				wallet_defined_by_keys.issueAddress(wallet, is_change, index, function(addressInfo) {
+				wallet_defined_by_keys.issueAddress(wallet, is_change, index, function (addressInfo) {
 					index++;
 					if (index <= maxIndex) {
 						addAddress(wallet, is_change, index, maxIndex);
@@ -162,7 +164,7 @@ angular.module('copayApp.controllers').controller('recoveryFromSeed',
 				opts.mnemonic = self.inputMnemonic;
 				opts.account = account;
 
-				profileService.createWallet(opts, function(err, walletId) {
+				profileService.createWallet(opts, function (err, walletId) {
 					self.assocIndexesToWallets[account] = walletId;
 					n++;
 					(n < arrWalletIndexes.length) ? createWallet(n) : cb();
@@ -187,14 +189,14 @@ angular.module('copayApp.controllers').controller('recoveryFromSeed',
 				var arrTmpAddresses = [];
 				for (var i = 0; i < 20; i++) {
 					var index = (is_change ? assocMaxAddressIndexes[currentWalletIndex].change : assocMaxAddressIndexes[currentWalletIndex].main) + i;
-					arrTmpAddresses.push(objectHash.getChash160(["sig", {"pubkey": wallet_defined_by_keys.derivePubkey(xPubKey, 'm/' + is_change + '/' + index)}]));
+					arrTmpAddresses.push(objectHash.getChash160(["sig", { "pubkey": wallet_defined_by_keys.derivePubkey(xPubKey, 'm/' + is_change + '/' + index) }]));
 				}
 				myWitnesses.readMyWitnesses(function (arrWitnesses) {
 					network.requestFromLightVendor('light/get_history', {
 						addresses: arrTmpAddresses,
 						witnesses: arrWitnesses
 					}, function (ws, request, response) {
-						if(response && response.error){
+						if (response && response.error) {
 							var breadcrumbs = require('intervaluecore/breadcrumbs.js');
 							breadcrumbs.add('Error scanForAddressesAndWalletsInLightClient: ' + response.error);
 							self.error = 'When scanning an error occurred, please try again later.';
@@ -214,11 +216,11 @@ angular.module('copayApp.controllers').controller('recoveryFromSeed',
 							checkAndAddCurrentAddresses(is_change);
 						} else {
 							if (is_change) {
-								if(assocMaxAddressIndexes[currentWalletIndex].change === 0 && assocMaxAddressIndexes[currentWalletIndex].main === 0) delete assocMaxAddressIndexes[currentWalletIndex];
+								if (assocMaxAddressIndexes[currentWalletIndex].change === 0 && assocMaxAddressIndexes[currentWalletIndex].main === 0) delete assocMaxAddressIndexes[currentWalletIndex];
 								currentWalletIndex++;
-								if(currentWalletIndex - lastUsedWalletIndex > 3){
+								if (currentWalletIndex - lastUsedWalletIndex > 3) {
 									cb(assocMaxAddressIndexes);
-								}else{
+								} else {
 									setCurrentWallet();
 								}
 							} else {
@@ -242,9 +244,9 @@ angular.module('copayApp.controllers').controller('recoveryFromSeed',
 			var arrWalletIndexes = Object.keys(assocMaxAddressIndexes);
 			if (arrWalletIndexes.length) {
 				removeAddressesAndWallets(function () {
-					var myDeviceAddress = objectHash.getDeviceAddress(ecdsa.publicKeyCreate(self.xPrivKey.derive("m/1'").privateKey.bn.toBuffer({size: 32}), true).toString('base64'));
+					var myDeviceAddress = objectHash.getDeviceAddress(ecdsa.publicKeyCreate(self.xPrivKey.derive("m/1'").privateKey.bn.toBuffer({ size: 32 }), true).toString('base64'));
 					profileService.replaceProfile(self.xPrivKey.toString(), self.inputMnemonic, myDeviceAddress, function () {
-						device.setDevicePrivateKey(self.xPrivKey.derive("m/1'").privateKey.bn.toBuffer({size: 32}));
+						device.setDevicePrivateKey(self.xPrivKey.derive("m/1'").privateKey.bn.toBuffer({ size: 32 }));
 						createWallets(arrWalletIndexes, function () {
 							createAddresses(assocMaxAddressIndexes, function () {
 								self.scanning = false;
@@ -267,16 +269,79 @@ angular.module('copayApp.controllers').controller('recoveryFromSeed',
 			}
 		}
 
-		self.recoveryForm = function() {
+		function addWalletAndAddress(mnemonic) {
+			var opts = {
+				m: 1,
+				n: 1,
+				name: 'wallet',
+				networkName: 'livenet',
+				cosigners: [],
+				// isSingleAddress: $scope.isSingleAddress
+				mnemonic: mnemonic,
+				isSingleAddress: typeof $scope.isSingleAddress == 'undefined' ? defaults.wallet.singleAddress : $scope.isSingleAddress
+			};
+
+			$timeout(function () {
+				profileService.createWallet(opts, function (err, walletId) {
+					self.scanning = false;
+					if (err) {
+						$log.warn(err);
+						self.error = err;
+						$timeout(function () {
+							$rootScope.$apply();
+						});
+						return;
+					}
+
+					//if (opts.mnemonic || opts.externalSource || opts.extendedPrivateKey) {
+					if (opts.externalSource) {
+						if (opts.n == 1) {
+							$rootScope.$emit('Local/WalletImported', walletId);
+						}
+					}
+					/*if (opts.n > 1)
+						$rootScope.$emit('Local/ShowAlert', "Please approve wallet creation on other devices", 'fi-key', function(){
+							go.walletHome();
+						});*/
+
+					if (opts.isSingleAddress) {
+						profileService.setSingleAddressFlag(true);
+					}
+
+					$rootScope.$emit('Local/ShowAlert', "1 wallet recovered.", 'fi-check', function () {
+					});
+				});
+			}, 100);
+		}
+
+		function checkIsExist(mnemonic) {
+			var credentials = profileService.profile.credentials;
+			var xPriKey = new Mnemonic(mnemonic).toHDPrivateKey();
+			for (var cre of credentials) {
+				if (cre.xPrivKey == xPriKey) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		self.recoveryForm = function () {
 			if (self.inputMnemonic) {
 				self.error = '';
 				self.inputMnemonic = self.inputMnemonic.toLowerCase();
 				if ((self.inputMnemonic.split(' ').length % 3 === 0) && Mnemonic.isValid(self.inputMnemonic)) {
-					self.scanning = true;
-					if (self.bLight) {
-						scanForAddressesAndWalletsInLightClient(self.inputMnemonic, cleanAndAddWalletsAndAddresses);
-					} else {
-						scanForAddressesAndWallets(self.inputMnemonic, cleanAndAddWalletsAndAddresses);
+					if (checkIsExist(self.inputMnemonic)) {
+						self.error = 'can not recover existed wallet';
+						return;
+					}
+					else {
+						self.scanning = true;
+						if (self.bLight) {
+							addWalletAndAddress(self.inputMnemonic);
+							// scanForAddressesAndWalletsInLightClient(self.inputMnemonic, cleanAndAddWalletsAndAddresses);
+						} else {
+							scanForAddressesAndWallets(self.inputMnemonic, cleanAndAddWalletsAndAddresses);
+						}
 					}
 				} else {
 					self.error = 'Seed is not valid';
