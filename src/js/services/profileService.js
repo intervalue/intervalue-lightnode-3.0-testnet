@@ -425,7 +425,8 @@ angular.module('copayApp.services')
         root.setAndStoreFocus(null, function () {
           storageService.storeProfile(root.profile, function (err) {
             if (err) return cb(err);
-            return cb();
+            var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
+            return walletDefinedByKeys.deleteWalletFromUI(walletId, cb);
           });
         });
       });
