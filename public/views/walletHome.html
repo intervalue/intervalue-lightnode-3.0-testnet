@@ -750,6 +750,9 @@ input.datafeed_input {
                     {{item.ammount}}<span>INVE</span>
                 </div>
             </div>
+            <div ng-controller="signaturePubkeyControllers as sign">
+                <qrcode size="220" data="{{sign.generatePubkey('')}}"></qrcode>
+            </div>
         </div>
     </div> <!-- END wallet -->
 
