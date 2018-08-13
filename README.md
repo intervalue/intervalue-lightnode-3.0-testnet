@@ -1,4 +1,4 @@
-InterValue’s light node is a wallet for storage and transfer of decentralized value. See http://www.inve.one/.
+InterValue-3.0-testnet’s light node is a wallet for storage and transfer of decentralized value. See http://www.inve.one/.
 
 ## Binary Downloads
 
@@ -32,7 +32,7 @@ npm install -g bower
 npm install -g grunt-cli
 ```
 
-Build InterValue:
+Build InterValue-3.0-testnet:
 
 ```sh
 bower install
@@ -43,13 +43,13 @@ If you are on Windows or using NW.js and Node.js versions other than recommended
 
 After first run, you'll likely encounter runtime error complaining about node_sqlite3.node not being found, copy the file from the neighboring directory to where the program tries to find it, and run again. (e.g. from `intervalue/node_modules/sqlite3/lib/binding/node-v51-darwin-x64` to `intervalue/node_modules/sqlite3/lib/binding/node-webkit-v0.21.6-darwin-x64`)
 
-Then run InterValue desktop client:
+Then run InterValue-3.0-testnet desktop client:
 
 ```sh
 /path/to/your/nwjs/nwjs .
 ```
 
-## Build InterValue App Bundles
+## Build InterValue-3.0-testnet App Bundles
 
 All app bundles will be placed at `../intervaluebuilds` dir, so create it first: `mkdir -p ../intervaluebuilds`
 
@@ -74,7 +74,7 @@ All app bundles will be placed at `../intervaluebuilds` dir, so create it first:
   * In case of ios-deploy missing error: `npm install -g ios-deploy`
   * In case of `DeviceSupport` missing error, run `cd /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport/ && sudo ln -s 10.3.1\ \(14E8301\)/ 10.3`
   * If you encounter 'bitcore' not found after app launch, install it also `npm install bitcore-lib` and remove `../intervaluebuilds/project-IOS` folder completely, then rerun make again.
-  * On code signing error, open Xcode project `../intervaluebuilds/project-IOS/platforms/ios/InterValue.xcodeproj` in Xcode, open project properties, select InterValue target and set your AppleID account as a team. Xcode may also ask you to change bundle identifier to be unique, just append any random string to 'org.intervalue.wallet' bundle identifier.
+  * On code signing error, open Xcode project `../intervaluebuilds/project-IOS/platforms/ios/InterValue-3.0-testnet.xcodeproj` in Xcode, open project properties, select InterValue-3.0-testnet target and set your AppleID account as a team. Xcode may also ask you to change bundle identifier to be unique, just append any random string to 'org.intervalue.wallet' bundle identifier.
 
 ### macOS
 
@@ -93,9 +93,9 @@ All app bundles will be placed at `../intervaluebuilds` dir, so create it first:
 - `make linux64`
 
 
-## About InterValue
+## About InterValue-3.0-testnet
 
-InterValue is an infrastructure of Blockchain 4.0 with features such as DAG enhanced data structure, HashNet Concensus, full functions supported, high-performance, easy to use, friendly user experience, scalability. 
+InterValue-3.0-testnet is an infrastructure of Blockchain 4.0 with features such as DAG enhanced data structure, HashNet Concensus, full functions supported, high-performance, easy to use, friendly user experience, scalability. 
 
 ## Delete cash files
 
@@ -108,7 +108,7 @@ InterValue is an infrastructure of Blockchain 4.0 with features such as DAG enha
 
 ## Translations
 
-InterValue uses standard gettext PO files for translations and [Crowdin](https://crowdin.com/project/intervalue) as the front-end tool for translators. To join our team of translators, please create an account at [Crowdin](https://crowdin.com) and translate the InterValue documentation and application text into your native language.
+InterValue-3.0-testnet uses standard gettext PO files for translations and [Crowdin](https://crowdin.com/project/intervalue) as the front-end tool for translators. To join our team of translators, please create an account at [Crowdin](https://crowdin.com) and translate the InterValue-3.0-testnet documentation and application text into your native language.
 
 To download and build using the latest translations from Crowdin, please use the following commands:
 
