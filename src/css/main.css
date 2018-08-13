@@ -4,69 +4,25 @@
  *
  */
 
-@font-face {
-  font-family: 'Roboto';
-  src: url('../font/Roboto-Thin.ttf') format('truetype');
-  font-weight: thin;
-  font-style: normal;
+@font-face{
+  font-family: "pfmedium";
+  src: url('../font/PingFang-Medium.ttf');
 }
-@font-face {
-  font-family: 'Roboto';
-  src: url('../font/Roboto-ThinItalic.ttf') format('truetype');
-  font-weight: thin;
-  font-style: italic;
+@font-face{
+  font-family: "pfregular";
+  src: url('../font/PingFang-regular.ttf');
 }
-@font-face {
-  font-family: 'Roboto';
-  src: url('../font/Roboto-Light.ttf') format('truetype');
-  font-weight: light;
-  font-style: normal;
+@font-face{
+  font-family: "pfbold";
+  src: url('../font/PingFang-Bold.ttf');
 }
-@font-face {
-  font-family: 'Roboto';
-  src: url('../font/Roboto-LightItalic.ttf') format('truetype');
-  font-weight: light;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('../font/Roboto-Medium.ttf') format('truetype');
-  font-weight: medium;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('../font/Roboto-MediumItalic.ttf') format('truetype');
-  font-weight: medium;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('../font/Roboto-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('../font/Roboto-Italic.ttf') format('truetype');
-  font-weight: normal;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('../font/Roboto-Bold.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('../font/Roboto-BoldItalic.ttf') format('truetype');
-  font-weight: bold;
-  font-style: italic;
+@font-face{
+  font-family: "pflight";
+  src: url('../font/PingFang-Light.ttf');
 }
 
  body {
-  font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: pfmedium,Arial,"微软雅黑";
 }
 
 
@@ -1214,7 +1170,7 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
   	border-radius: 3px 3px 0 0;
 	font-size: 14px;
 	font-weight: 500;
-	font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif
+	font-family: pfmedium,Arial,"微软雅黑";
 }
 .mtab-title.disabled {
 	cursor: not-allowed;
