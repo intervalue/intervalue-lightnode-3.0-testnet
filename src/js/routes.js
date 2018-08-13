@@ -549,8 +549,8 @@ angular
     if (!isCordova) {
       uriHandler.register();
     }
-
-    if (nodeWebkit.isDefined()) {
+    //屏蔽顶部空块
+    /*if (nodeWebkit.isDefined()) {
       var gui = require('nw.gui');
       var win = gui.Window.get();
       var nativeMenuBar = new gui.Menu({
@@ -562,7 +562,7 @@ angular
         $log.debug('This is not OSX');
       }
       win.menu = nativeMenuBar;
-    }
+    }*/
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
 

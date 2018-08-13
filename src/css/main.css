@@ -22,7 +22,7 @@
 }
 
  body {
-  font-family: pfmedium,Arial,"微软雅黑";
+  font-family: pfregular,Arial,"微软雅黑";
 }
 
 
@@ -258,7 +258,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill, inpu
 
 .page, .main {
   height:100%;
-  background-color: #fff;
+  background-color: #3b3b3b;
 }
 
 .button.small.side-bar {
@@ -479,6 +479,7 @@ ul.manage li {
 .m10t {margin-top: 10px;}
 .m15b {margin-bottom: 15px;}
 .m15r {margin-right: 15px;}
+.m16v {margin: 16px 0;}
 .m20b {margin-bottom: 20px;}
 .m30b {margin-bottom: 30px;}
 .m40b {margin-bottom: 40px;}
@@ -501,7 +502,9 @@ ul.manage li {
 .p20v {padding: 20px 0;}
 .p25l {padding-left: 25px;}
 .p15 {padding:15px;}
+.p15h {padding:0 15px;}
 .p20 {padding:20px;}
+.p29t {padding-top: 29px;}
 .p10 {padding:10px;}
 .p10b {padding-bottom:10px;}
 .p45t {padding-top:45px;}
@@ -1170,7 +1173,7 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
   	border-radius: 3px 3px 0 0;
 	font-size: 14px;
 	font-weight: 500;
-	font-family: pfmedium,Arial,"微软雅黑";
+	font-family: pfregular,Arial,"微软雅黑";
 }
 .mtab-title.disabled {
 	cursor: not-allowed;
