@@ -703,9 +703,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         'icon': 'icon-history',
         'link': 'history'
     }, {
-        'title': gettext('Shadow'),
+        'title': gettext('Wallet'),
         'icon': 'icon-history',
-        'link': 'Shadow'
+        'link': 'wallet'
     }];
 
   self.addonViews = addonManager.addonViews();
@@ -1702,6 +1702,30 @@ angular.module('copayApp.controllers').controller('indexController', function ($
       $rootScope.$apply();
     });
   });
+  //fault data
+  self.adddataw = [
+      {
+          "name": "walletname1",
+          "addr": "walletaddr1",
+          "ammount": "100.56498545",
+          "walletid": "unyb5+/p5636vmFYwGj5606ZaFr/FVdPMllxeQcLxko="
+      }, {
+          "name": "aadsdsdds",
+          "addr": "rsdtsfgfdsgyy",
+          "ammount": "120.1423132",
+          "walletid": "unyb5+/afdafdesafda06ZaFr/FVdPMllxeQcLxko="
+      }, {
+          "name": "ytutryhrgdfcsd",
+          "addr": "htiouhotikhtht",
+          "ammount": "220.132132",
+          "walletid": "unyb5+/dfdegfewfdsfsdfaFr/FVdPMllxeQcLxko="
+      }
+  ];
+
+  self.towalletname = function (name, addr, ammount, walletid) {
+      $state.go('walletname', {name: name,addr: addr,ammount: ammount,walletid: walletid,});
+  };
+
 
   (function () {
     "drag dragover dragstart dragenter".split(" ").forEach(function (e) {

@@ -1,0 +1,25 @@
+<div
+        class="topbar-container"
+        ng-include="'views/includes/topbar.html'"
+        ng-init="titleSection='Backup'; closeToHome = true">
+</div>
+
+<div class="content" ng-controller="walletnameController as nameW">
+    <div class="adwnnumo">
+        <div class="adwnnum">
+            <i class="icon-scan size-60"></i>
+            <b>{{nameW.ammount}}INVE</b>
+            <p>{{nameW.addr}}</p>
+        </div>
+        <div class="adwnlinput">
+            <label>钱包名</label>
+            <input placeholder="{{nameW.name}}" />
+        </div>
+        <div>
+            修改密码
+        </div>
+
+    </div>
+
+</div>
+

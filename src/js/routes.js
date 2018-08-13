@@ -510,6 +510,16 @@ angular
           },
         }
       })
+
+      .state('walletname', {
+        url: '/walletname?name&addr&ammount&walletid',
+        needProfile: true,
+        views: {
+            'main@': {
+                templateUrl: 'views/walletname.html'
+            },
+        }
+      })
       .state('cordova', { // never used
         url: '/cordova/:status/:isHome',
         views: {
