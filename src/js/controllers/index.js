@@ -660,28 +660,53 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     go.walletHome();
   };
 
-  self.menu = [{
-    'title': gettext('Home'),
-    'icon': 'icon-home',
-    'link': 'walletHome'
-  }, {
-    'title': gettext('Receive'),
-    'icon': 'icon-receive2',
-    'link': 'receive'
-  }, {
-    'title': gettext('Send'),
-    'icon': 'icon-paperplane',
-    'link': 'send'
-  }, {
-    'title': gettext('History'),
-    'icon': 'icon-history',
-    'link': 'history'
-  }, {
-    'title': gettext('Chat'),
-    'icon': 'icon-bubble',
-    'new_state': 'correspondentDevices',
-    'link': 'chat'
-  }];
+  // self.menu = [{
+  //   'title': gettext('Home'),
+  //   'icon': 'icon-home',
+  //   'link': 'walletHome'
+  // }, {
+  //   'title': gettext('Receive'),
+  //   'icon': 'icon-receive2',
+  //   'link': 'receive'
+  // }, {
+  //   'title': gettext('Send'),
+  //   'icon': 'icon-paperplane',
+  //   'link': 'send'
+  // }, {
+  //   'title': gettext('History'),
+  //   'icon': 'icon-history',
+  //   'link': 'history'
+  // }, {
+  //     'title': gettext('Shadow'),
+  //     'icon': 'icon-history',
+  //     'link': 'Shadow'
+  // }, {
+  //   'title': gettext('Chat'),
+  //   'icon': 'icon-bubble',
+  //   'new_state': 'correspondentDevices',
+  //   'link': 'chat'
+  // }];
+    self.menu = [{
+        'title': gettext('Home'),
+        'icon': 'icon-home',
+        'link': 'walletHome'
+    }, {
+        'title': gettext('Receive'),
+        'icon': 'icon-receive2',
+        'link': 'receive'
+    }, {
+        'title': gettext('Send'),
+        'icon': 'icon-paperplane',
+        'link': 'send'
+    }, {
+        'title': gettext('History'),
+        'icon': 'icon-history',
+        'link': 'history'
+    }, {
+        'title': gettext('Shadow'),
+        'icon': 'icon-history',
+        'link': 'Shadow'
+    }];
 
   self.addonViews = addonManager.addonViews();
   self.menu = self.menu.concat(addonManager.addonMenuItems());

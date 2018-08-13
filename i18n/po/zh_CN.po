@@ -766,6 +766,11 @@ msgstr "隐藏钱包种子"
 msgid "History"
 msgstr "历史记录"
 
+#: public/views/modals/share.html:43
+#: src/js/controllers/index.js:677
+msgid "Shadow"
+msgstr "阴影"
+
 #: src/js/controllers/index.js:665
 msgid "Home"
 msgstr "首页"
