@@ -12,7 +12,11 @@ angular.module('copayApp.controllers').controller('signaturePubkeyControllers',
 
         self.generatePubkey =  function (address) {
             shadowWallet.getVerificationQRCode(address,function(verificationQRCode) {
-                alert(verificationQRCode);
+                if(verificationQRCode){
+                    alert(verificationQRCode);
+                }else{
+                    alert('The address does not exist or there are multiple!!');
+                }
             });
         }
 
