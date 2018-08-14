@@ -95,10 +95,10 @@ angular.module('copayApp.services')
       if (lodash.isEmpty(root.focusedClient)) {
         $rootScope.$emit('Local/NoWallets');
       } else {
-        $rootScope.$emit('Local/NewFocusedWallet');
+        $rootScope.$emit('Local/NewFocusedWallet', function () { return cb() });
       }
 
-      return cb();
+      // return cb();
     };
 
     root.setAndStoreFocus = function (walletId, cb) {
@@ -616,11 +616,19 @@ angular.module('copayApp.services')
       root.profile.mnemonicEncrypted = fc.credentials.mnemonicEncrypted;
       delete root.profile.xPrivKey;
       delete root.profile.mnemonic;
+      var p_cre = lodash.find(root.profile.credentials, { walletId: fc.credentials.walletId });
+      p_cre.xPrivKeyEncrypted = fc.credentials.xPrivKeyEncrypted;
+      p_cre.mnemonicEncrypted = fc.credentials.mnemonicEncrypted;
+      delete p_cre.xPrivKey;
+      delete p_cre.mnemonic;
+
       root.lockFC();
-      for (var wid in root.walletClients) {
-        root.walletClients[wid].credentials.xPrivKeyEncrypted = root.profile.xPrivKeyEncrypted;
-        delete root.walletClients[wid].credentials.xPrivKey;
-      }
+      // root.walletClients[fc.credentials.walletId].credentials.xPrivKeyEncrypted = root.profile.xPrivKeyEncrypted;
+      // delete root.walletClients[fc.credentials.walletId].credentials.xPrivKey;
+      // for (var wid in root.walletClients) {
+      //   root.walletClients[wid].credentials.xPrivKeyEncrypted = root.profile.xPrivKeyEncrypted;
+      //   delete root.walletClients[wid].credentials.xPrivKey;
+      // }
       storageService.storeProfile(root.profile, function () {
         $log.debug('Wallet encrypted');
         return cb();
@@ -647,10 +655,15 @@ angular.module('copayApp.services')
       root.profile.mnemonic = fc.credentials.mnemonic;
       delete root.profile.xPrivKeyEncrypted;
       delete root.profile.mnemonicEncrypted;
-      for (var wid in root.walletClients) {
-        root.walletClients[wid].credentials.xPrivKey = root.profile.xPrivKey;
-        delete root.walletClients[wid].credentials.xPrivKeyEncrypted;
-      }
+      var p_cre = lodash.find(root.profile.credentials, { walletId: fc.credentials.walletId });
+      p_cre.xPrivKey = fc.credentials.xPrivKey;
+      p_cre.mnemonic = fc.credentials.mnemonic;
+      delete p_cre.xPrivKeyEncrypted;
+      delete p_cre.mnemonicEncrypted;
+      // for (var wid in root.walletClients) {
+      //   root.walletClients[wid].credentials.xPrivKey = root.profile.xPrivKey;
+      //   delete root.walletClients[wid].credentials.xPrivKeyEncrypted;
+      // }
       storageService.storeProfile(root.profile, function () {
         $log.debug('Wallet encryption disabled');
         return cb();

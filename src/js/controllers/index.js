@@ -686,27 +686,27 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   //   'new_state': 'correspondentDevices',
   //   'link': 'chat'
   // }];
-    self.menu = [{
-        'title': gettext('Home'),
-        'icon': 'icon-home',
-        'link': 'walletHome'
-    }, {
-        'title': gettext('Receive'),
-        'icon': 'icon-receive2',
-        'link': 'receive'
-    }, {
-        'title': gettext('Send'),
-        'icon': 'icon-paperplane',
-        'link': 'send'
-    }, {
-        'title': gettext('History'),
-        'icon': 'icon-history',
-        'link': 'history'
-    }, {
-        'title': gettext('Wallet'),
-        'icon': 'icon-history',
-        'link': 'wallet'
-    }];
+  self.menu = [{
+    'title': gettext('Home'),
+    'icon': 'icon-home',
+    'link': 'walletHome'
+  }, {
+    'title': gettext('Receive'),
+    'icon': 'icon-receive2',
+    'link': 'receive'
+  }, {
+    'title': gettext('Send'),
+    'icon': 'icon-paperplane',
+    'link': 'send'
+  }, {
+    'title': gettext('History'),
+    'icon': 'icon-history',
+    'link': 'history'
+  }, {
+    'title': gettext('Wallet'),
+    'icon': 'icon-history',
+    'link': 'wallet'
+  }];
 
   self.addonViews = addonManager.addonViews();
   self.menu = self.menu.concat(addonManager.addonMenuItems());
@@ -734,7 +734,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     });
   };
 
-  self.setFocusedWallet = function () {
+  self.setFocusedWallet = function (cb) {
     var fc = profileService.focusedClient;
     if (!fc) return;
 
@@ -793,6 +793,12 @@ angular.module('copayApp.controllers').controller('indexController', function ($
       self.updateSingleAddressFlag();
       self.setAddressbook();
 
+      profileService.profile.mnemonic = fc.credentials.mnemonic;
+      profileService.profile.mnemonicEncrypted = fc.credentials.mnemonicEncrypted;
+      profileService.profile.xPrivKey = fc.credentials.xPrivKey;
+      profileService.profile.xPrivKeyEncrypted = fc.credentials.xPrivKeyEncrypted;
+
+      // storageService.storeProfile(profileService.profile, function () {
       console.log("reading cosigners");
       var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
       walletDefinedByKeys.readCosigners(self.walletId, function (arrCosignerInfos) {
@@ -805,6 +811,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
       self.needsBackup = false;
       self.singleAddressWallet = false;
       self.openWallet();
+      if (cb) {
+        cb();
+      }
       /*if (fc.isPrivKeyExternal()) {
           self.needsBackup = false;
           self.openWallet();
@@ -814,6 +823,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             self.openWallet();
           });
       }*/
+      // });
     });
   };
 
@@ -1632,9 +1642,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     });
   });
 
-  $rootScope.$on('Local/NewFocusedWallet', function () {
+  $rootScope.$on('Local/NewFocusedWallet', function (event, cb) {
     console.log('on Local/NewFocusedWallet');
-    self.setFocusedWallet();
+    self.setFocusedWallet(cb);
     //self.updateTxHistory();
     go.walletHome();
   });
@@ -1705,26 +1715,26 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   //fault data
   // self.adddataw = profileService.walletClients;
   self.adddataw = [
-      {
-          "name": "walletname1",
-          "addr": "walletaddr1",
-          "ammount": "100.56498545",
-          "walletid": "unyb5+/p5636vmFYwGj5606ZaFr/FVdPMllxeQcLxko="
-      }, {
-          "name": "aadsdsdds",
-          "addr": "rsdtsfgfdsgyy",
-          "ammount": "120.1423132",
-          "walletid": "unyb5+/afdafdesafda06ZaFr/FVdPMllxeQcLxko="
-      }, {
-          "name": "ytutryhrgdfcsd",
-          "addr": "htiouhotikhtht",
-          "ammount": "220.132132",
-          "walletid": "unyb5+/dfdegfewfdsfsdfaFr/FVdPMllxeQcLxko="
-      }
+    {
+      "name": "walletname1",
+      "addr": "walletaddr1",
+      "ammount": "100.56498545",
+      "walletid": "unyb5+/p5636vmFYwGj5606ZaFr/FVdPMllxeQcLxko="
+    }, {
+      "name": "aadsdsdds",
+      "addr": "rsdtsfgfdsgyy",
+      "ammount": "120.1423132",
+      "walletid": "unyb5+/afdafdesafda06ZaFr/FVdPMllxeQcLxko="
+    }, {
+      "name": "ytutryhrgdfcsd",
+      "addr": "htiouhotikhtht",
+      "ammount": "220.132132",
+      "walletid": "unyb5+/dfdegfewfdsfsdfaFr/FVdPMllxeQcLxko="
+    }
   ];
 
   self.towalletname = function (name, addr, ammount, walletid) {
-      $state.go('walletnamea', {name: name,addr: addr,ammount: ammount,walletid: walletid,});
+    $state.go('walletnamea', { name: name, addr: addr, ammount: ammount, walletid: walletid, });
   };
 
 
