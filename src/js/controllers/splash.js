@@ -34,6 +34,7 @@ angular.module('copayApp.controllers').controller('splashController',
 			self.step = 'device_name';
 			return;
 		}
+
 		var fs = require('fs'+'');
 		var desktopApp = require('intervaluecore/desktop_app.js');
 		var appDataDir = desktopApp.getAppDataDir();
@@ -42,8 +43,8 @@ angular.module('copayApp.controllers').controller('splashController',
 			if (err)
 				throw Error('failed to write conf.json: '+err);
 			var conf = require('intervaluecore/conf.js');
-			if (!conf.bLight)
-				throw Error("Failed to switch to light, please restart the app");
+			/*if (!conf.bLight)
+				throw Error("Failed to switch to light, please restart the app");*/
 			self.step = 'device_name';
 			$timeout(function(){
 				$scope.$apply();
