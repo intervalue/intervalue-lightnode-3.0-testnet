@@ -749,6 +749,11 @@ input.datafeed_input {
                     {{item.ammount}}<span>INVE</span>
                 </div>
             </div>
+            <div ng-controller="signaturePubkeyControllers as sign">
+            <input type="button" value="testgeneratePubkey" ng-click="sign.generatePubkey(index.shared_address || home.addr[index.walletId])">
+            <input type="button" value="testgenerateVerification" ng-click="sign.generateVerification(index.shared_address || home.addr[index.walletId])">
+            <input type="button" value="generateSignatureDetl" ng-click="sign.generateSignatureDetl(index.shared_address || home.addr[index.walletId])">
+            </div>
         </div>
     </div> <!-- END wallet -->
 
