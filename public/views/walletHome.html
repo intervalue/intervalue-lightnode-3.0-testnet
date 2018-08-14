@@ -736,7 +736,6 @@ input.datafeed_input {
     -->
     <div id="wallet" class="history tab-view">
         <div class="adwwto">
-
             <div class="adwwt" ng-repeat="item in index.adddataw">
                 <div class="adwwtflex" ng-click="index.towalletname(item.name, item.addr, item.ammount, item.walletid)">
                     <i class="fi-widget size-18 vm wallet-settings"></i>
@@ -749,9 +748,6 @@ input.datafeed_input {
                 <div class="adwwtnum">
                     {{item.ammount}}<span>INVE</span>
                 </div>
-            </div>
-            <div ng-controller="signaturePubkeyControllers as sign">
-                <qrcode size="220" data="{{sign.generatePubkey('')}}"></qrcode>
             </div>
         </div>
     </div> <!-- END wallet -->

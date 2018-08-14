@@ -1703,6 +1703,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     });
   });
   //fault data
+  // self.adddataw = profileService.walletClients;
   self.adddataw = [
       {
           "name": "walletname1",
