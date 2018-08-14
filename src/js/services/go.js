@@ -117,37 +117,62 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
 
 
 	function handleUri(uri){
-		if (uri.indexOf("intervalue:") == -1 ) return handleFile(uri);
-
+		//if (uri.indexOf("intervalue:") == -1 ) return handleFile(uri);
+        if (uri.indexOf("intervalue:") == -1 && uri.indexOf("shadow") == -1) return handleFile(uri);
 		console.log("handleUri "+uri);
+		//付款扫码验证
+		if(uri.indexOf("intervalue:") != -1){
+            require('intervaluecore/uri.js').parseUri(uri, {
+                ifError: function(err){
+                    console.log(err);
+                    notification.error(err);
+                    //notification.success(gettextCatalog.getString('Success'), err);
+                },
+                ifOk: function(objRequest){
+                    console.log("request: "+JSON.stringify(objRequest));
+                    if (objRequest.type === 'address'){
+                        root.send(function(){
+                            $rootScope.$emit('paymentRequest', objRequest.address, objRequest.amount, objRequest.asset);
+                        });
+                    }
+                    else if (objRequest.type === 'pairing'){
+                        $rootScope.$emit('Local/CorrespondentInvitation', objRequest.pubkey, objRequest.hub, objRequest.pairing_secret);
+                    }
+                    else if (objRequest.type === 'auth'){
+                        authService.objRequest = objRequest;
+                        root.path('authConfirmation');
+                    }
+                    else if (objRequest.type === 'textcoin') {
+                        $rootScope.$emit('claimTextcoin', objRequest.mnemonic);
+                    }
+                    else
+                        throw Error('unknown url type: '+objRequest.type);
+                }
+            });
+            //冷钱包二维码验证
+		}else if(uri.indexOf("shadow") != -1){
+				require('intervaluecore/shadowUri.js').shadowParseUri(uri,{
+				ifError: function(err){
+					console.log(err);
+				},
+				ifOk: function(objRequest){
+					var shadowWallet = require('intervaluecore/shadowWallet');
+					//生成授权签名码
+					if(objRequest.type ==='shadow'){
+						shadowWallet.getSignatureCode(objRequest,function (signatureCode) {
+                            $rootScope.$emit('', signatureCode);
+                        })
+					}
+					else if(objRequest.type === 'sign'){
 
-		require('intervaluecore/uri.js').parseUri(uri, {
-			ifError: function(err){
-				console.log(err);
-				notification.error(err);
-				//notification.success(gettextCatalog.getString('Success'), err);
-			},
-			ifOk: function(objRequest){
-				console.log("request: "+JSON.stringify(objRequest));
-				if (objRequest.type === 'address'){
-					root.send(function(){
-						$rootScope.$emit('paymentRequest', objRequest.address, objRequest.amount, objRequest.asset);
-					});
+					}
+                    else if(objRequest.type === 'signDetl'){
+
+                    }
 				}
-				else if (objRequest.type === 'pairing'){
-					$rootScope.$emit('Local/CorrespondentInvitation', objRequest.pubkey, objRequest.hub, objRequest.pairing_secret);
-				}
-				else if (objRequest.type === 'auth'){
-					authService.objRequest = objRequest;
-					root.path('authConfirmation');
-				}
-				else if (objRequest.type === 'textcoin') {
-					$rootScope.$emit('claimTextcoin', objRequest.mnemonic);
-				}
-				else
-					throw Error('unknown url type: '+objRequest.type);
-			}
-		});
+                });
+		}
+
 	}
 
 	var last_handle_file_ts = 0;
