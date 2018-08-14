@@ -117,7 +117,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
 
 
 	function handleUri(uri){
-		if (uri.indexOf("intervalue:") == -1) return handleFile(uri);
+		if (uri.indexOf("intervalue:") == -1 ) return handleFile(uri);
 
 		console.log("handleUri "+uri);
 
