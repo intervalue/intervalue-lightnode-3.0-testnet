@@ -2,7 +2,7 @@
 var db = require('intervaluecore/db');
 var shadowWallet = require('intervaluecore/shadowWallet');
 angular.module('copayApp.controllers').controller('signaturePubkeyControllers',
-    function($scope, $rootScope, $timeout,go) {
+    function($scope, $rootScope, $timeout,go,profileService) {
         var self = this;
 
         /**
@@ -25,7 +25,8 @@ angular.module('copayApp.controllers').controller('signaturePubkeyControllers',
          * @param verificationQRCode
          */
         self.generateVerification = function(verificationQRCode){
-            shadowWallet.getSignatureCode(verificationQRCode,function(signatureCode) {
+            var wc = profileService.walletClients;
+            shadowWallet.getSignatureCode(verificationQRCode,wc.xPrivKey,function(signatureCode) {
                 alert(signatureCode);
             });
         }
