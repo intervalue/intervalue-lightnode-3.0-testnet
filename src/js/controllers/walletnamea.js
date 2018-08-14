@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('walletnameController',
+angular.module('copayApp.controllers').controller('walletnameaController',
     function($rootScope, $scope, $timeout, profileService, go, gettext, $stateParams, isCordova) {
 
         var self = this;

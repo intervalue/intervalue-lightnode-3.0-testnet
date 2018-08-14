@@ -1,0 +1,28 @@
+<div
+        class="topbar-container"
+        ng-include="'views/includes/topbar.html'"
+        ng-init="titleSection='Backup'; goBackToState = true">
+</div>
+
+<div class="content" ng-controller="changewalletpController as cpass">
+    <div class="adcpitem">
+        <md-input-container class="adcpmdic">
+            <label for="curadpass">当前密码</label>
+            <input mdinput type="text" name="curadpass" ng-model="value">
+        </md-input-container>
+    </div>
+    <div class="adcpitem">
+        <md-input-container class="adcpmdic">
+            <label for="newadpass">新密码</label>
+            <input mdinput type="text" name="newadpass">
+        </md-input-container>
+    </div>
+    <div class="adcpitem">
+        <md-input-container class="adcpmdic">
+            <label for="comadpass">确认密码</label>
+            <input mdinput type="text" name="comadpass">
+        </md-input-container>
+    </div>
+    <div>忘记密码？导入助记词可重置密码。<a>马上导入</a></div>
+</div>
+

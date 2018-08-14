@@ -4,7 +4,7 @@
         ng-init="titleSection='Backup'; closeToHome = true">
 </div>
 
-<div class="content" ng-controller="walletnameController as nameW">
+<div class="content" ng-controller="walletnameaController as nameW">
     <div class="adwnnumo">
         <div class="adwnnum">
             <i class="icon-scan size-60"></i>
@@ -15,7 +15,7 @@
             <label>钱包名</label>
             <input placeholder="{{nameW.name}}" />
         </div>
-        <div ng-click="$root.go(walletname.changewalletp)">
+        <div ng-click="$root.go('walletnamea.changewalletp')">
             修改密码
         </div>
 

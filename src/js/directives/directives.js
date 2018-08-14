@@ -552,19 +552,56 @@ angular.module('copayApp.directives')
                 </ul>\
                 '
     }
+  }).directive('historyBack', ['$window', function($window){
+    return {
+        restrict: "A",
+        link: function(scope, element, attrs) {
+            element.on('click', function() {
+                $window.history.back();
+            });
+        }
+    }
+  }]).directive("mdInputContainer", function(){
+    return {
+        scope: {},
+        restrict: 'E',
+        controller: function($scope, $element){
+            this.setFocused = function(isFocused) {
+                $element.toggleClass('md-input-focused', !!isFocused);
+            };
+            this.setHasValue = function(hasValue) {
+                $element.toggleClass('md-input-has-value', !!hasValue);
+            };
+        }
+    }
+  }).directive("mdinput",function(){
+    return {
+        scope: {},
+        restrict: 'A',
+        require: '^mdInputContainer',
+        link: function(scope, elem, attrs, controllerInstance){
+            var el = angular.element(elem)
+            var self = this;
+            el
+                .on('focus', function(ev) {
+                    controllerInstance.setFocused(true);
+                })
+                .on('blur', function(ev) {
+                    controllerInstance.setFocused(false);
+                });
+        }
+    }
   }).filter('encodeURIComponent', function() {
     return window.encodeURIComponent;
-})
- .filter('objectKeys', [function() {
+  }).filter('objectKeys', [function() {
     return function(item) {
         if (!item) return null;
         var keys = Object.keys(item);
         keys.sort();
         return keys;
     };
-}])
-.filter('sumNumbers', [function(){
+  }]).filter('sumNumbers', [function(){
   return function(str) {
         return str ? str.split(/[\n\s,;]/).reduce(function(acc, val){return isNaN(+val) ? acc : acc + (+val)}, 0) : 0;
     };
-}]);
+  }]);

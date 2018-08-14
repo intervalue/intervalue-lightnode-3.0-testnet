@@ -1724,7 +1724,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   ];
 
   self.towalletname = function (name, addr, ammount, walletid) {
-      $state.go('walletname', {name: name,addr: addr,ammount: ammount,walletid: walletid,});
+      $state.go('walletnamea', {name: name,addr: addr,ammount: ammount,walletid: walletid,});
   };
 
 

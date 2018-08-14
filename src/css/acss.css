@@ -116,6 +116,14 @@
     font-size: 22px;
     color: #c7c7c7;
 }
+/*changewalletp*/
+.adcpitem{margin-top: 30px;height: 60px;width:100%;}
+.adcpmdic{position: relative;width:100%;}
+.adcpmdic input,.adcpmdic label{position: absolute;font-size:28px;top:10px;left: 10px;width:100%;}
+.adcpmdic label{z-index: 1;white-space: nowrap;}
+.md-input-focused{position: relative;height: 100px;transition: all 0.3s ease-in-out;}
+.md-input-focused label{top: -10px;font-size:14px;transition: all 0.3s ease-in-out;}
+.md-input-focused input{background: blue;border: 1px solid red;position: absolute;top: 10px;left: 10px;transition: all 0.3s ease-in-out;}
 /*公共样式*/
 .awbtn{font-size: 14px;width: 100%; height: 45px; line-height: 45px; padding: 0; background-color: #FFFFFF; border: 1px solid #3B3B3B;
     color: #3B3B3B; border-radius: 3px !important; margin: 0;}

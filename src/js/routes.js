@@ -97,7 +97,7 @@ angular
         views: {
           'main': {
             templateUrl: 'views/walletHome.html',
-          },
+          }
         }
       })
       .state('unsupported', {
@@ -118,7 +118,7 @@ angular
         views: {
           'main': {
             templateUrl: 'views/create.html'
-          },
+          }
         }
       })
       .state('copayers', {
@@ -127,7 +127,7 @@ angular
         views: {
           'main': {
             templateUrl: 'views/copayers.html'
-          },
+          }
         }
       })
       .state('correspondentDevices', {
@@ -139,7 +139,7 @@ angular
         views: {
           'chat': {
             templateUrl: 'views/correspondentDevices.html'
-          },
+          }
         }
       })
       .state('correspondentDevices.correspondentDevice', {
@@ -149,7 +149,7 @@ angular
         views: {
           'dialog': {
             templateUrl: 'views/correspondentDevice.html'
-          },
+          }
         }
       })
       .state('correspondentDevices.correspondentDevice.editCorrespondentDevice', {
@@ -159,7 +159,7 @@ angular
         views: {
           'dialog@correspondentDevices': {
             templateUrl: 'views/editCorrespondentDevice.html'
-          },
+          }
         }
       })
       .state('correspondentDevices.addCorrespondentDevice', {
@@ -168,7 +168,7 @@ angular
         views: {
           'dialog': {
             templateUrl: 'views/addCorrespondentDevice.html'
-          },
+          }
         }
       })
       .state('correspondentDevices.addCorrespondentDevice.inviteCorrespondentDevice', {
@@ -178,7 +178,7 @@ angular
         views: {
           'dialog@correspondentDevices': {
             templateUrl: 'views/inviteCorrespondentDevice.html'
-          },
+          }
         }
       })
       .state('correspondentDevices.addCorrespondentDevice.acceptCorrespondentInvitation', {
@@ -188,7 +188,7 @@ angular
         views: {
           'dialog@correspondentDevices': {
             templateUrl: 'views/acceptCorrespondentInvitation.html'
-          },
+          }
         }
       })
       .state('correspondentDevices.bot', {
@@ -198,7 +198,7 @@ angular
         views: {
           'dialog': {
             templateUrl: 'views/bot.html'
-          },
+          }
         }
       })
       .state('authConfirmation', {
@@ -208,7 +208,7 @@ angular
         views: {
           'main': {
             templateUrl: 'views/authConfirmation.html'
-          },
+          }
         }
       })
       .state('preferences', {
@@ -220,7 +220,7 @@ angular
         views: {
           'main': {
             templateUrl: 'views/preferences.html',
-          },
+          }
         }
       })
       .state('preferences.preferencesColor', {
@@ -231,7 +231,7 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/preferencesColor.html'
-          },
+          }
         }
       })
 
@@ -243,7 +243,7 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/preferencesAlias.html'
-          },
+          }
 
         }
       })
@@ -255,7 +255,7 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/preferencesAdvanced.html'
-          },
+          }
         }
       })
       .state('preferences.preferencesAdvanced.preferencesInformation', {
@@ -265,7 +265,7 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/preferencesInformation.html'
-          },
+          }
         }
       })
       .state('preferences.preferencesAdvanced.paperWallet', {
@@ -276,7 +276,7 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/paperWallet.html'
-          },
+          }
         }
       })
       .state('preferences.preferencesAdvanced.preferencesDeleteWallet', {
@@ -287,7 +287,7 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/preferencesDeleteWallet.html'
-          },
+          }
         }
       })
       .state('preferencesGlobal', {
@@ -297,7 +297,7 @@ angular
         views: {
           'main': {
             templateUrl: 'views/preferencesGlobal.html',
-          },
+          }
         }
       })
       .state('preferencesGlobal.preferencesDeviceName', {
@@ -307,7 +307,7 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/preferencesDeviceName.html'
-          },
+          }
         }
       })
       .state('preferencesGlobal.preferencesHub', {
@@ -317,7 +317,7 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/preferencesHub.html'
-          },
+          }
         }
       })
       .state('preferencesGlobal.preferencesTor', {
@@ -338,7 +338,7 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/preferencesLanguage.html'
-          },
+          }
         }
       })
       .state('preferencesGlobal.preferencesAttestorAddresses', {
@@ -348,7 +348,7 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/preferencesAttestorAddresses.html'
-          },
+          }
         }
       })
       .state('preferencesGlobal.preferencesAttestorAddresses.preferencesEditAttestorAddress', {
@@ -358,7 +358,7 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/preferencesEditAttestorAddress.html'
-          },
+          }
         }
       })
       .state('preferencesGlobal.preferencesUnit', {
@@ -369,7 +369,7 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/preferencesUnit.html'
-          },
+          }
         }
       })
       .state('preferencesGlobal.preferencesBbUnit', {
@@ -380,7 +380,7 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/preferencesBbUnit.html'
-          },
+          }
         }
       })
       .state('preferencesGlobal.preferencesEmail', {
@@ -391,7 +391,7 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/preferencesEmail.html'
-          },
+          }
 
         }
       })
@@ -403,7 +403,7 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/preferencesWitnesses.html'
-          },
+          }
         }
       })
       .state('preferencesGlobal.preferencesWitnesses.preferencesEditWitness', {
@@ -413,7 +413,7 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/preferencesEditWitness.html'
-          },
+          }
         }
       })
       .state('preferencesGlobal.backup', {
@@ -424,7 +424,7 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/backup.html'
-          },
+          }
         }
       })
       .state('preferencesGlobal.recoveryFromSeed', {
@@ -446,7 +446,7 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/export.html'
-          },
+          }
         }
       })
       .state('preferencesGlobal.import', {
@@ -455,7 +455,7 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/import.html'
-          },
+          }
         }
       })
 
@@ -467,7 +467,7 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/preferencesAbout.html'
-          },
+          }
         }
       })
       .state('preferencesGlobal.preferencesAbout.disclaimer', {
@@ -497,7 +497,7 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/preferencesLogs.html'
-          },
+          }
         }
       })
 
@@ -507,18 +507,27 @@ angular
         views: {
           'main': {
             templateUrl: 'views/add.html'
-          },
+          }
         }
       })
 
-      .state('walletname', {
+      .state('walletnamea', {
         url: '/walletname?name&addr&ammount&walletid',
         needProfile: true,
         views: {
             'main@': {
-                templateUrl: 'views/walletname.html'
-            },
+                templateUrl: 'views/walletnamea.html'
+            }
         }
+      })
+      .state('walletnamea.changewalletp', {
+          url: '/changepass',
+          needProfile: true,
+          views: {
+              'main@': {
+                  templateUrl: 'views/changewalletp.html'
+              }
+          }
       })
       .state('cordova', { // never used
         url: '/cordova/:status/:isHome',
