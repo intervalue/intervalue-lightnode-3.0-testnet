@@ -13,7 +13,7 @@ angular.module('copayApp.controllers').controller('signaturePubkeyControllers',
         self.generatePubkey =  function (address) {
             shadowWallet.getVerificationQRCode(address,function(verificationQRCode) {
                 if(verificationQRCode){
-                    alert(verificationQRCode);
+                    return verificationQRCode;
                 }else{
                     alert('The address does not exist or there are multiple!!');
                 }
@@ -25,8 +25,8 @@ angular.module('copayApp.controllers').controller('signaturePubkeyControllers',
          * @param verificationQRCode
          */
         self.generateVerification = function(verificationQRCode){
-            var wc = profileService.walletClients;
-            shadowWallet.getSignatureCode(verificationQRCode,wc.xPrivKey,function(signatureCode) {
+            alert(verificationQRCode);
+            shadowWallet.getSignatureCode(verificationQRCode,function(signatureCode) {
                 alert(signatureCode);
             });
         }
@@ -37,7 +37,8 @@ angular.module('copayApp.controllers').controller('signaturePubkeyControllers',
          * @param signatureCode
          */
         self.generateSignatureDetl = function(signatureCode){
-            shadowWallet.getSignatureDetlCode(signatureCode,function(signatureDetlCode){
+            var wc = profileService.walletClients;
+            shadowWallet.getSignatureDetlCode(signatureCode,wc.xPrivKey,function(signatureDetlCode){
                 alert(signatureDetlCode);
             });
         }
