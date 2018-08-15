@@ -811,7 +811,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
       self.needsBackup = false;
       self.singleAddressWallet = false;
       self.openWallet();
-      if (cb) {
+      if (lodash.isFunction(cb)) {
         cb();
       }
       /*if (fc.isPrivKeyExternal()) {
