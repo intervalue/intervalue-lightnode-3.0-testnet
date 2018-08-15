@@ -537,16 +537,7 @@ angular
                   templateUrl: 'views/importwallet.html'
               }
           }
-      }).state('shadowDevice.shadowDevice', {//第一次扫描冷钱包后，生成签名后地址二维码
-        url: '/shadow',
-        walletShouldBeComplete: false,
-        needProfile: true,
-        views: {
-            'dialog': {
-                templateUrl: 'views/shadowDevice.html'
-            }
-        }
-    })
+      })
       .state('cordova', { // never used
         url: '/cordova/:status/:isHome',
         views: {

@@ -20,44 +20,41 @@
             </div>
         </div>
     </div>
-
-    <form name="" ng-submit="" novalidate>
-        <div class="row">
-            <div class="large-12 columns">
-                <div ng-show="import.importtab1">
-                    <label for="aicode">钱包口令
-                    </label>
-                    <textarea name="aicode"></textarea>
-                    <div class="adcpitem">
-                        <div mdinputc class="adcpmdic">
-                            <label for="curadpass">密码</label>
-                            <input mdinput type="text" name="curadpass" ng-model="value">
-                        </div>
+    <div class="row">
+        <div class="large-12 columns">
+            <div ng-show="import.importtab1">
+                <label for="aicode">钱包口令
+                </label>
+                <textarea name="aicode"></textarea>
+                <div class="adcpitem">
+                    <div mdinputc class="adcpmdic">
+                        <label for="curadpass">密码</label>
+                        <input mdinput type="text" name="curadpass" ng-model="value">
                     </div>
-                    <div class="adcpitem">
-                        <div mdinputc class="adcpmdic">
-                            <label for="curadpass">重复密码</label>
-                            <input mdinput type="text" name="curadpass" ng-model="value">
-                        </div>
+                </div>
+                <div class="adcpitem">
+                    <div mdinputc class="adcpmdic">
+                        <label for="curadpass">重复密码</label>
+                        <input mdinput type="text" name="curadpass" ng-model="value">
                     </div>
-                    <button type="submit" class="button round black expand m0">
-                        <span translate>开始导入</span>
-                    </button>
                 </div>
+                <button class="button round black expand m0">
+                    <span translate>开始导入</span>
+                </button>
+            </div>
 
-                <div class="row" ng-show="import.importtab2">
-                    dfdfdfdfdf
-                    <button type="submit" class="button round black expand m0">
-                        <span translate>开始导入fgff</span>
-                    </button>
+            <div class="row" ng-show="import.importtab2">
+                dfdfdfdfdf
+                <button class="button round black expand m0" ng-click="index.showshadow = true">
+                    <span translate>开始导入fgff</span>
+                </button>
 
-                </div>
-
-
+            </div>
 
 
-            </div> <!-- large-12 columns -->
-        </div> <!-- row -->
-    </form>
+
+
+        </div> <!-- large-12 columns -->
+    </div> <!-- row -->
 </div>
 <div class="extra-margin-bottom"></div>
