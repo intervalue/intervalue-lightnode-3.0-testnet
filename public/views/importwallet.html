@@ -1,0 +1,63 @@
+<div
+        class="topbar-container"
+        ng-include="'views/includes/topbar.html'"
+        ng-init="titleSection='Create new wallet';  closeToHome = true; noColor = true">
+</div>
+
+
+
+<div class="content p20v" ng-controller="importwalletController as import">
+
+    <div class="create-tab small-only-text-center">
+        <div class="row">
+            <div class="tab-container small-6 medium-3 large-2" ng-class="{'selected': import.importtab1}">
+                <a href
+                   ng-click="import.showimporttabone()" translate>Plain Wallet</a>
+            </div>
+            <div class="tab-container small-6 medium-3 large-2" ng-class="{'selected': import.importtab2}">
+                <a href
+                   ng-click="import.showimporttabtwo()" translate>观察者钱包</a>
+            </div>
+        </div>
+    </div>
+
+    <form name="" ng-submit="" novalidate>
+        <div class="row">
+            <div class="large-12 columns">
+                <div ng-show="import.importtab1">
+                    <label for="aicode">钱包口令
+                    </label>
+                    <textarea name="aicode"></textarea>
+                    <div class="adcpitem">
+                        <div mdinputc class="adcpmdic">
+                            <label for="curadpass">密码</label>
+                            <input mdinput type="text" name="curadpass" ng-model="value">
+                        </div>
+                    </div>
+                    <div class="adcpitem">
+                        <div mdinputc class="adcpmdic">
+                            <label for="curadpass">重复密码</label>
+                            <input mdinput type="text" name="curadpass" ng-model="value">
+                        </div>
+                    </div>
+                    <button type="submit" class="button round black expand m0">
+                        <span translate>开始导入</span>
+                    </button>
+                </div>
+
+                <div class="row" ng-show="import.importtab2">
+                    dfdfdfdfdf
+                    <button type="submit" class="button round black expand m0">
+                        <span translate>开始导入fgff</span>
+                    </button>
+
+                </div>
+
+
+
+
+            </div> <!-- large-12 columns -->
+        </div> <!-- row -->
+    </form>
+</div>
+<div class="extra-margin-bottom"></div>

@@ -529,6 +529,15 @@ angular
               }
           }
       })
+      .state('importwallet', {
+          url: '/import',
+          needProfile: true,
+          views: {
+              'main': {
+                  templateUrl: 'views/importwallet.html'
+              }
+          }
+      })
       .state('cordova', { // never used
         url: '/cordova/:status/:isHome',
         views: {

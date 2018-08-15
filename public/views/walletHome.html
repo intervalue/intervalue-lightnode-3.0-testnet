@@ -754,6 +754,8 @@ input.datafeed_input {
             <input type="button" value="testgenerateVerification" ng-click="sign.generateVerification(index.shared_address || home.addr[index.walletId])">
             <input type="button" value="generateSignatureDetl" ng-click="sign.generateSignatureDetl(index.shared_address || home.addr[index.walletId])">
             </div>
+            <button ng-click="$root.go('create')">创建钱包</button>
+            <button ng-click="$root.go('importwallet')">导入钱包</button>
         </div>
     </div> <!-- END wallet -->
 

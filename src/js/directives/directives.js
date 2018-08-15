@@ -561,10 +561,10 @@ angular.module('copayApp.directives')
             });
         }
     }
-  }]).directive("mdInputContainer", function(){
+  }]).directive("mdinputc", function(){
     return {
         scope: {},
-        restrict: 'E',
+        restrict: 'A',
         controller: function($scope, $element){
             this.setFocused = function(isFocused) {
                 $element.toggleClass('md-input-focused', !!isFocused);
@@ -578,7 +578,7 @@ angular.module('copayApp.directives')
     return {
         scope: {},
         restrict: 'A',
-        require: '^mdInputContainer',
+        require: '^mdinputc',
         link: function(scope, elem, attrs, controllerInstance){
             var el = angular.element(elem)
             var self = this;
