@@ -1,7 +1,7 @@
-
 <div class="shadowModalMask" ng-click="index.showshadow = false">
 </div>
 
-<div ng-controller="shadowDeviceController as sdow" class="shadowModal" ng-class="{'animated  bounceInUp':index.showshadow}">
-    ddddddddddddddddddddddd
+
+<div ng-controller="shadowDeviceControllers as shadow" class="shadowModal" ng-class="{'animated  bounceInUp':index.showshadow}">
+    <qrcode size="220" version="15" data="{{index.verificationQRCode}}"></qrcode>
 </div>

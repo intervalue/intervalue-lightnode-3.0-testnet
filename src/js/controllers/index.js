@@ -1738,6 +1738,25 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     $state.go('walletnamea', { name: name, addr: addr, ammount: ammount, walletid: walletid, });
   };
 
+    /**
+     * 根据当前地址生成对应pubkey二维码
+     * @param address
+     */
+    self.generatePubkey =  function (address) {
+        var shadowWallet = require('intervaluecore/shadowWallet');
+        shadowWallet.getVerificationQRCode(address,function(verificationQRCode) {
+            if(verificationQRCode){
+                self.verificationQRCode = verificationQRCode;
+                self.showshadow = true;
+                $timeout(function () {
+                    $rootScope.$apply();
+                });
+                console.log(verificationQRCode);
+            }else{
+                alert('The address does not exist or there are multiple!!');
+            }
+        });
+    };
 
   (function () {
     "drag dragover dragstart dragenter".split(" ").forEach(function (e) {
@@ -1755,4 +1774,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
       }
     }, false);
   })();
+
+
 });

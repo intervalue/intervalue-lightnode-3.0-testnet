@@ -157,17 +157,41 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
 				},
 				ifOk: function(objRequest){
 					var shadowWallet = require('intervaluecore/shadowWallet');
-					//扫码pubkey二维码后，签名生成地址
+					//第一次扫码pubkey二维码后，签名生成地址
 					if(objRequest.type ==='shadow'){
 						shadowWallet.getSignatureCode(objRequest,function (signatureCode) {
-                            $rootScope.$emit('Local/ShadowInvitation', signatureCode);
+							if(signatureCode){
+                                index.showshadow=true;
+                                //$rootScope.$emit('Local/ShadowInvitation', signatureCode);
+							}else{
+								console.log("Incorrect data type!!!"+objRequest.type)
+                                throw Error('Incorrect data type!!!'+objRequest.type);
+							}
+
                         })
 					}
+					//第二次扫码授权
 					else if(objRequest.type === 'sign'){
-						var wc = profileService.walletClients;
+						var xprivkey = profileService.walletClients;
+						shadowWallet.getSignatureDetlCode(objRequest,xprivkey,function (SignatureDetlCode) {
+							if(SignatureDetlCode){
+                                $rootScope.$emit('Local/ShadowSignInvitation', SignatureDetlCode);
+							}else{
+                                console.log(" sign Incorrect data type!!!"+objRequest.type)
+                                throw Error('sign Incorrect data type!!!'+objRequest.type);
+							}
+                        })
 					}
+					//第三次扫码，生成热钱包
                     else if(objRequest.type === 'signDetl'){
-
+                        shadowWallet.generateShadowWallet(objRequest,function (ShadowWallet) {
+							if(ShadowWallet){
+                                $rootScope.$emit('Local/generateShadowWallet', ShadowWallet);
+							}else {
+                                console.log("signDetl Incorrect data type!!!"+objRequest.type)
+                                throw Error('IsignDetl ncorrect data type!!!'+objRequest.type);
+							}
+                        })
                     }
 				}
                 });
