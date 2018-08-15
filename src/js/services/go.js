@@ -157,15 +157,14 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
 				},
 				ifOk: function(objRequest){
 					var shadowWallet = require('intervaluecore/shadowWallet');
-					//生成授权签名码
+					//扫码pubkey二维码后，签名生成地址
 					if(objRequest.type ==='shadow'){
-						var wc = profileService.walletClients;
-						shadowWallet.getSignatureCode(objRequest,wc.xPrivKey,function (signatureCode) {
+						shadowWallet.getSignatureCode(objRequest,function (signatureCode) {
                             $rootScope.$emit('Local/ShadowInvitation', signatureCode);
                         })
 					}
 					else if(objRequest.type === 'sign'){
-
+						var wc = profileService.walletClients;
 					}
                     else if(objRequest.type === 'signDetl'){
 

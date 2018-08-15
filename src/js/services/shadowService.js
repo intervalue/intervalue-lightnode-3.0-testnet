@@ -15,6 +15,6 @@ angular.module('copayApp.services').factory('shadowService', function($state, $r
     });
 
     root.signInvitation = function (signatureCode, cb) {
-        return ;
+        go.path('shadowDevice.shadowDevice');
     }
 });

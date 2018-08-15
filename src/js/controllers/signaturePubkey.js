@@ -24,10 +24,21 @@ angular.module('copayApp.controllers').controller('signaturePubkeyControllers',
          * 生成授权签名
          * @param verificationQRCode
          */
-        self.generateVerification = function(verificationQRCode){
+        /*self.generateVerification = function(verificationQRCode){
             alert(verificationQRCode);
             shadowWallet.getSignatureCode(verificationQRCode,function(signatureCode) {
                 alert(signatureCode);
+            });
+        }*/
+        self.generateVerification = function(address){
+            alert(address);
+            shadowWallet.getVerificationQRCode(address,function(verificationQRCode) {
+                if (verificationQRCode) {
+                    alert(verificationQRCode);
+                    shadowWallet.getSignatureCode(verificationQRCode, function (signatureCode) {
+                        alert(signatureCode);
+                    });
+                }
             });
         }
 
