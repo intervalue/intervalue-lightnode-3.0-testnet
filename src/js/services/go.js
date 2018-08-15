@@ -161,8 +161,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
 					if(objRequest.type ==='shadow'){
 						shadowWallet.getSignatureCode(objRequest,function (signatureCode) {
 							if(signatureCode){
-                                index.showshadow=true;
-                                //$rootScope.$emit('Local/ShadowInvitation', signatureCode);
+                                $rootScope.$emit('Local/ShadowInvitation', signatureCode);
 							}else{
 								console.log("Incorrect data type!!!"+objRequest.type)
                                 throw Error('Incorrect data type!!!'+objRequest.type);

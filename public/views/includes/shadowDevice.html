@@ -3,5 +3,33 @@
 
 
 <div ng-controller="shadowDeviceControllers as shadow" class="shadowModal" ng-class="{'animated  bounceInUp':index.showshadow}">
-    <qrcode size="220" version="15" data="{{index.verificationQRCode}}"></qrcode>
+    <div ng-show="index.showshadowewm1">
+        <qrcode size="220" version="15" data="{{index.verificationQRCode}}"></qrcode>
+    </div>
+    <div ng-show="index.showshadowewm2">
+
+        <qrcode size="220" version="15" data="{{index.verificationQRCode}}" ></qrcode>
+        <button class="button round black expand m0" ng-click="index.showshadow = true">
+            <span translate>下一步</span>
+        </button>
+    </div>
+    <div ng-show="index.showshadowewm3">
+        <nav class="tab-bar ng-scope">
+            <section class="left-small">
+                <a ng-click="index.showshadowewm2=true;index.showshadowewm3=false;"><i class="icon-arrow-left3 icon-back"></i>
+                    <span class="text-back ng-binding">Back</span>
+                </a>
+            </section>
+            <section class="middle tab-bar-section">
+                <h1 class="title ellipsis" ng-style="{'color': noColor ? '#4A90E2' : index.backgroundColor, 'max-width': '100%'}" style="color: rgb(74, 144, 226); max-width: 100%;">
+                </h1>
+            </section>
+        </nav>
+        <div>
+            <a id="camera-icon" class="p10 ng-isolate-scope" ng-click="openScanner()"  on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"><i class="icon-scan size-21"></i></a>
+        </div>
+        <button class="button round black expand m0" ng-click="index.showshadow = true">
+            <span translate>完成授权</span>
+        </button>
+    </div>
 </div>

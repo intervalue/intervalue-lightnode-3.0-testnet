@@ -749,13 +749,13 @@ input.datafeed_input {
                     {{item.ammount}}<span>INVE</span>
                 </div>
             </div>
-
-            <input type="button" value="testgeneratePubkey" ng-click="index.generatePubkey(index.shared_address || home.addr[index.walletId])">
+            <div ng-controller="shadowDeviceControllers as shadow">
             <input type="button" value="testgenerateVerification" ng-click="shadow.generateVerification(index.shared_address || home.addr[index.walletId])">
             <input type="button" value="generateSignatureDetl" ng-click="shadow.generateSignatureDetl(index.shared_address || home.addr[index.walletId])">
-
+            </div>
             <button ng-click="$root.go('create')">创建钱包</button>
             <button ng-click="$root.go('importwallet')">导入钱包</button>
+            <button ng-click="index.generatePubkey(index.shared_address || home.addr[index.walletId])">冷钱包验证码</button>
         </div>
     </div> <!-- END wallet -->
 

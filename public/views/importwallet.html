@@ -35,7 +35,7 @@
                 <div class="adcpitem">
                     <div mdinputc class="adcpmdic">
                         <label for="curadpass">重复密码</label>
-                        <input mdinput type="text" name="curadpass" ng-model="value">
+                        <input mdinput type="text" name="curadpass" ng-value="index.verificationQRCode">
                     </div>
                 </div>
                 <button class="button round black expand m0">
@@ -44,7 +44,11 @@
             </div>
 
             <div class="row" ng-show="import.importtab2">
-                dfdfdfdfdf
+                <div>观察钱包不需要导入私钥，只导入钱包地址，进行日常查看账户、交易和接受通知。大额资金的私钥建议使用冷钱包或硬件钱包管理，避免泄露被盗。</div>
+                <div mdinputc class="adcpmdic">
+                    <label>扫描或输入钱包地址</label>
+                    <input mdinput type="text"  value="">
+                </div>
                 <button class="button round black expand m0" ng-click="index.showshadow = true">
                     <span translate>开始导入fgff</span>
                 </button>

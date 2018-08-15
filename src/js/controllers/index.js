@@ -25,6 +25,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   self.$state = $state;
   self.usePushNotifications = isCordova && !isMobile.Windows();
   self.showshadow= false;
+  self.verificationQRCode = '';
+  self.showshadowewm1 = true;
+  self.showshadowewm2 = false;
+  self.showshadowewm3 = false;
+
   /*
   console.log("process", process.env);
   var os = require('os');
@@ -1713,6 +1718,19 @@ angular.module('copayApp.controllers').controller('indexController', function ($
       $rootScope.$apply();
     });
   });
+  $rootScope.$on('Local/ShadowInvitation', function(){
+    self.showshadow = true;
+  });
+  $rootScope.$on('Local/ShadowSignInvitation', function(){
+      self.showshadow = true;
+      self.showshadowewm1 = false;
+      self.showshadowewm2 = true;
+  });
+  $rootScope.$on('Local/generateShadowWallet', function(){
+      self.showshadow = true;
+      self.showshadowewm2 = false;
+      self.showshadowewm3 = true;
+  });
   //fault data
   // self.adddataw = profileService.walletClients;
   self.adddataw = [
@@ -1738,25 +1756,25 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     $state.go('walletnamea', { name: name, addr: addr, ammount: ammount, walletid: walletid, });
   };
 
-    /**
-     * 根据当前地址生成对应pubkey二维码
-     * @param address
-     */
-    self.generatePubkey =  function (address) {
-        var shadowWallet = require('intervaluecore/shadowWallet');
-        shadowWallet.getVerificationQRCode(address,function(verificationQRCode) {
-            if(verificationQRCode){
-                self.verificationQRCode = verificationQRCode;
-                self.showshadow = true;
-                $timeout(function () {
-                    $rootScope.$apply();
-                });
-                console.log(verificationQRCode);
-            }else{
-                alert('The address does not exist or there are multiple!!');
-            }
-        });
-    };
+  /**
+   * 根据当前地址生成对应pubkey二维码
+   * @param address
+   */
+  self.generatePubkey =  function (address) {
+      var shadowWallet = require('intervaluecore/shadowWallet');
+      shadowWallet.getVerificationQRCode(address,function(verificationQRCode) {
+          if(verificationQRCode){
+              self.verificationQRCode = verificationQRCode;
+              self.showshadow = true;
+              $timeout(function () {
+                  $rootScope.$apply();
+              });
+              console.log(verificationQRCode);
+          }else{
+              alert('The address does not exist or there are multiple!!');
+          }
+      });
+  };
 
   (function () {
     "drag dragover dragstart dragenter".split(" ").forEach(function (e) {
