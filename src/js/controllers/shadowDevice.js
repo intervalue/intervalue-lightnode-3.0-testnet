@@ -4,6 +4,7 @@ var shadowWallet = require('intervaluecore/shadowWallet');
 angular.module('copayApp.controllers').controller('shadowDeviceControllers',
     function($scope, $rootScope, $timeout,go,profileService) {
         var self = this;
+        var random ;
         /**
          * 根据当前地址生成对应pubkey二维码
          * @param address
@@ -58,21 +59,22 @@ angular.module('copayApp.controllers').controller('shadowDeviceControllers',
          }*/
 
         self.generateSignatureDetl = function(address){
-            var cc;
+            var mnemonic;
             var wc = profileService.walletClients;
             for(var index in wc){
-                cc = wc[index].credentials.xPrivKey;
+                mnemonic = wc[index].credentials.mnemonic;
             }
 
-            console.log("============================",cc);
-            alert(cc);
+            console.log("============================",mnemonic);
+            alert(mnemonic);
             shadowWallet.getVerificationQRCode(address,function(verificationQRCode) {
                 if (verificationQRCode) {
                     alert(verificationQRCode);
                     shadowWallet.getSignatureCode(verificationQRCode, function (signatureCode) {
                         alert(signatureCode);
-                        shadowWallet.getSignatureDetlCode(signatureCode,cc,function(signatureDetlCode){
-                            alert(signatureDetlCode);
+                        shadowWallet.getSignatureDetlCode(signatureCode,mnemonic,function(signatureDetlCode){
+                            console.log(JSON.stringify(signatureDetlCode));
+                            alert(JSON.stringify(signatureDetlCode));
                         });
                     });
                 }

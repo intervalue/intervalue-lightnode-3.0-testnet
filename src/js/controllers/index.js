@@ -1718,8 +1718,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
       $rootScope.$apply();
     });
   });
-  $rootScope.$on('Local/ShadowInvitation', function(){
+  $rootScope.$on('Local/ShadowInvitation', function(event,signatureCode){
+    self.signatureCode = signatureCode;
     self.showshadow = true;
+    self.showshadowewm1 = false;
+    self.showshadowewm2 = true;
   });
   $rootScope.$on('Local/ShadowSignInvitation', function(){
       self.showshadow = true;

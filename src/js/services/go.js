@@ -156,12 +156,13 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
 					console.log(err);
 				},
 				ifOk: function(objRequest){
+					objRequest = JSON.parse(objRequest.toString());
 					var shadowWallet = require('intervaluecore/shadowWallet');
 					//第一次扫码pubkey二维码后，签名生成地址
 					if(objRequest.type ==='shadow'){
 						shadowWallet.getSignatureCode(objRequest,function (signatureCode) {
 							if(signatureCode){
-                                $rootScope.$emit('Local/ShadowInvitation', signatureCode);
+                                $rootScope.$emit('Local/ShadowInvitation',signatureCode);
 							}else{
 								console.log("Incorrect data type!!!"+objRequest.type)
                                 throw Error('Incorrect data type!!!'+objRequest.type);
@@ -171,8 +172,12 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
 					}
 					//第二次扫码授权
 					else if(objRequest.type === 'sign'){
-						var xprivkey = profileService.walletClients;
-						shadowWallet.getSignatureDetlCode(objRequest,xprivkey,function (SignatureDetlCode) {
+                        var mnemonic;
+                        var wc = profileService.walletClients;
+                        for(var index in wc){
+                            mnemonic = wc[index].credentials.mnemonic;
+                        }
+						shadowWallet.getSignatureDetlCode(objRequest,mnemonic,function (SignatureDetlCode) {
 							if(SignatureDetlCode){
                                 $rootScope.$emit('Local/ShadowSignInvitation', SignatureDetlCode);
 							}else{
