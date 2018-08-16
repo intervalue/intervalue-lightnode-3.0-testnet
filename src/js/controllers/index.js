@@ -195,7 +195,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   });
 
   var catchup_balls_at_start = -1;
-  eventBus.on('catching_up_started', function () {
+  /*eventBus.on('catching_up_started', function () {
     self.setOngoingProcess('Syncing', true);
     setSyncProgress();
   });
@@ -220,7 +220,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   eventBus.on('refresh_light_done', function () {
     console.log('refresh_light_done');
     self.setOngoingProcess('Syncing', false);
-  });
+  });*/
 
   eventBus.on("confirm_on_other_devices", function () {
     $rootScope.$emit('Local/ShowAlert', "Transaction created.\nPlease approve it on the other devices.", 'fi-key', function () {
@@ -301,9 +301,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     });
   });
 
-  $rootScope.$on('process_status_change', function (event, process_name, isEnabled) {
+ /* $rootScope.$on('process_status_change', function (event, process_name, isEnabled) {
     self.setOngoingProcess(process_name, isEnabled);
-  });
+  });*/
 
   // in arrOtherCosigners, 'other' is relative to the initiator
   eventBus.on("create_new_wallet", function (walletId, arrWalletDefinitionTemplate, arrDeviceAddresses, walletName, arrOtherCosigners, isSingleAddress) {
@@ -722,7 +722,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   self.tab = 'walletHome';
 
 
-  self.setOngoingProcess = function (processName, isOn) {
+ /* self.setOngoingProcess = function (processName, isOn) {
     $log.debug('onGoingProcess', processName, isOn);
     self[processName] = isOn;
     self.onGoingProcess[processName] = isOn;
@@ -738,7 +738,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     $timeout(function () {
       $rootScope.$apply();
     });
-  };
+  };*/
 
   self.setFocusedWallet = function (cb) {
     var fc = profileService.focusedClient;
@@ -924,12 +924,12 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     $timeout(function () {
 
-      if (!opts.quiet)
+     /* if (!opts.quiet)
         self.setOngoingProcess('updatingStatus', true);
 
       $log.debug('Updating Status:', fc.credentials.walletName);
       if (!opts.quiet)
-        self.setOngoingProcess('updatingStatus', false);
+        self.setOngoingProcess('updatingStatus', false);*/
 
 
       fc.getBalance(self.shared_address, function (err, assocBalances, assocSharedBalances) {
@@ -967,10 +967,10 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   self.updateBalance = function () {
     var fc = profileService.focusedClient;
     $timeout(function () {
-      self.setOngoingProcess('updatingBalance', true);
+      /*self.setOngoingProcess('updatingBalance', true);*/
       $log.debug('Updating Balance');
       fc.getBalance(self.shared_address, function (err, assocBalances, assocSharedBalances) {
-        self.setOngoingProcess('updatingBalance', false);
+        /*self.setOngoingProcess('updatingBalance', false);*/
         if (err)
           throw "impossible error from getBalance";
         $log.debug('updateBalance Wallet Balance:', assocBalances, assocSharedBalances);
@@ -987,10 +987,10 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     breadcrumbs.add('openWallet ' + fc.credentials.walletId);
     $timeout(function () {
       //$rootScope.$apply();
-      self.setOngoingProcess('openingWallet', true);
+      /*self.setOngoingProcess('openingWallet', true);*/
       self.updateError = false;
       fc.openWallet(function onOpenedWallet(err, walletStatus) {
-        self.setOngoingProcess('openingWallet', false);
+        /*self.setOngoingProcess('openingWallet', false);*/
         if (err)
           throw "impossible error from openWallet";
         $log.debug('Wallet Opened');
@@ -1191,11 +1191,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     var allTxs = [];
 
     $log.debug('Generating CSV from History');
-    self.setOngoingProcess('generatingCSV', true);
+    /*self.setOngoingProcess('generatingCSV', true);*/
 
     $timeout(function () {
       fc.getTxHistory(self.arrBalances[self.assetIndex].asset, self.shared_address, function (txs) {
-        self.setOngoingProcess('generatingCSV', false);
+       /* self.setOngoingProcess('generatingCSV', false);*/
         $log.debug('Wallet Transaction History:', txs);
 
         var data = txs;
@@ -1352,7 +1352,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.showPopup(msg, 'fi-alert', cb);
   };
 
-  self.recreate = function (cb) {
+ /* self.recreate = function (cb) {
     var fc = profileService.focusedClient;
     self.setOngoingProcess('recreating', true);
     fc.recreateWallet(function (err) {
@@ -1366,7 +1366,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         $rootScope.$emit('Local/WalletImported', self.walletId);
       }, 100);
     });
-  };
+  };*/
 
   self.openMenu = function () {
     backButton.menuOpened = true;
@@ -1724,10 +1724,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.showshadowewm1 = false;
     self.showshadowewm2 = true;
   });
-  $rootScope.$on('Local/ShadowSignInvitation', function(){
+  $rootScope.$on('Local/ShadowSignInvitation', function(event,SignatureDetlCode){
+      self.SignatureDetlCode = SignatureDetlCode;
       self.showshadow = true;
-      self.showshadowewm1 = false;
-      self.showshadowewm2 = true;
+      self.showshadowewm2 = false;
+      self.showshadowewm3 = true;
   });
   $rootScope.$on('Local/generateShadowWallet', function(){
       self.showshadow = true;
@@ -1767,7 +1768,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
       var shadowWallet = require('intervaluecore/shadowWallet');
       shadowWallet.getVerificationQRCode(address,function(verificationQRCode) {
           if(verificationQRCode){
-              self.verificationQRCode = verificationQRCode;
+              self.verificationQRCode = JSON.stringify(verificationQRCode);
               self.showshadow = true;
               $timeout(function () {
                   $rootScope.$apply();

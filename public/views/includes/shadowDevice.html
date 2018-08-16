@@ -3,17 +3,17 @@
 
 
 <div ng-controller="shadowDeviceControllers as shadow" class="shadowModal" ng-class="{'animated  bounceInUp':index.showshadow}">
-    <div ng-show="index.showshadowewm1">
+    <div ng-show="index.showshadowewm1" class="text-center">
         <qrcode size="220" version="15" data="{{index.verificationQRCode}}"></qrcode>
     </div>
-    <div ng-show="index.showshadowewm2">
+    <div ng-show="index.showshadowewm2" class="text-center">
 
-        <qrcode size="220" version="15" data="{{index.verificationQRCode}}" ></qrcode>
+        <qrcode size="220" version="15" data="{{index.signatureCode}}" ></qrcode>
         <button class="button round black expand m0" ng-click="index.showshadow = true">
             <span translate>下一步</span>
         </button>
     </div>
-    <div ng-show="index.showshadowewm3">
+    <div ng-show="index.showshadowewm3" class="text-center">
         <nav class="tab-bar ng-scope">
             <section class="left-small">
                 <a ng-click="index.showshadowewm2=true;index.showshadowewm3=false;"><i class="icon-arrow-left3 icon-back"></i>

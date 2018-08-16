@@ -13,11 +13,11 @@ checkOK() {
 }
 
 # Configs
-#cd node_modules/intervaluecore
-#babel ./*.js -d babel
-#cp -rf babel/* .
-#rm -rf babel
-#cd ../..
+cd node_modules/intervaluecore
+babel ./*.js -d babel
+cp -rf babel/* .
+rm -rf babel
+cd ../..
 BUILDDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PROJECT="$BUILDDIR/../../intervaluebuilds/project-$1"
 if [ ! -d "$BUILDDIR/../../intervaluebuilds" ]; then
@@ -92,7 +92,7 @@ if [ ! -d $PROJECT ]; then
 		cordova plugin add cordova-plugin-android-support-v4-jar
 		checkOK
 
-		cordova plugin add https://github.com/jrontend/phonegap-plugin-barcodescanner.git
+		cordova plugin add https://github.com/ylwhlhp/phonegap-plugin-barcodescanner.git
 	fi
 	checkOK
 
