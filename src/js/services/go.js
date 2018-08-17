@@ -116,13 +116,19 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
 	};
 
 	function handleUriAddr(uri) {
+		alert(uri);
+		uri = uri.replace('InterValue-3.0-testnet:','');
+		alert(uri)
 		if(uri.length === 32) {
             var shadowWallet = require('intervaluecore/shadowWallet');
             //第一次扫码地址后生成授权签名
                 shadowWallet.getSignatureCode(uri,function (signatureCode) {
+                	alert(signatureCode);
                     if(signatureCode){
                         $rootScope.$emit('Local/ShadowInvitation',signatureCode);
-                    }
+                    } else {
+                    	throw  error('address is not found!!');
+					}
 
                 });
 		}
@@ -132,10 +138,10 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
 
 	function handleUri(uri){
 		//if (uri.indexOf("intervalue:") == -1 ) return handleFile(uri);
-        if (uri.indexOf("intervalue:") == -1 && uri.indexOf("shadow") == -1) return handleFile(uri);
+        if (uri.indexOf("InterValue-3.0-testnet:") == -1 && uri.indexOf("shadow") == -1) return handleFile(uri);
 		console.log("handleUri "+uri);
 		//付款扫码验证
-		if(uri.indexOf("intervalue:") != -1){
+		if(uri.indexOf("InterValue-3.0-testnet:") != -1){
             require('intervaluecore/uri.js').parseUri(uri, {
                 ifError: function(err){
                     console.log(err);
@@ -181,8 +187,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
 								console.log("Incorrect data type!!!"+objRequest.type)
                                 throw Error('Incorrect data type!!!'+objRequest.type);
 							}
-
-                        })
+                        });
 					}
 					//第二次扫码授权
 					else if(objRequest.type === 'sign'){
