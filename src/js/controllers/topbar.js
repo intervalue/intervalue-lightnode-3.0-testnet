@@ -7,6 +7,11 @@ angular.module('copayApp.controllers').controller('topbarController', function($
         //$rootScope.$emit('dataScanned', data);
     };
 
+    this.onQrCodeScannedAddr = function(data) {
+        go.handleUriAddr(data);
+
+    };
+
     this.openSendScreen = function() {
         go.send();
     };

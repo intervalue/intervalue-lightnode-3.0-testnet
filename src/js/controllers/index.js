@@ -1730,10 +1730,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
       self.showshadowewm2 = false;
       self.showshadowewm3 = true;
   });
-  $rootScope.$on('Local/generateShadowWallet', function(){
-      self.showshadow = true;
-      self.showshadowewm2 = false;
-      self.showshadowewm3 = true;
+  $rootScope.$on('Local/generateShadowWallet', function(event,ShadowWallet){
+      self.ShadowWallet = ShadowWallet ;
+      alert(ShadowWallet);
   });
   //fault data
   // self.adddataw = profileService.walletClients;

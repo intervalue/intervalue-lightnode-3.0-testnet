@@ -115,6 +115,20 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
 		root.openExternalLink(url, target);
 	};
 
+	function handleUriAddr(uri) {
+		if(uri.length === 32) {
+            var shadowWallet = require('intervaluecore/shadowWallet');
+            //第一次扫码地址后生成授权签名
+                shadowWallet.getSignatureCode(uri,function (signatureCode) {
+                    if(signatureCode){
+                        $rootScope.$emit('Local/ShadowInvitation',signatureCode);
+                    }
+
+                });
+		}
+    }
+
+    root.handleUriAddr  = handleUriAddr;
 
 	function handleUri(uri){
 		//if (uri.indexOf("intervalue:") == -1 ) return handleFile(uri);
