@@ -30,15 +30,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   self.showshadowewm2 = false;
   self.showshadowewm3 = false;
 
-  /*
-  console.log("process", process.env);
-  var os = require('os');
-  console.log("os", os);
-  //console.log("os homedir="+os.homedir());
-  console.log("release="+os.release());
-  console.log("hostname="+os.hostname());
-  //console.log(os.userInfo());
-  */
 
 
   function updatePublicKeyRing(walletClient, onDone) {
@@ -195,32 +186,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   });
 
   var catchup_balls_at_start = -1;
-  /*eventBus.on('catching_up_started', function () {
-    self.setOngoingProcess('Syncing', true);
-    setSyncProgress();
-  });
-  eventBus.on('catchup_next_hash_tree', function () {
-    setSyncProgress();
-  });
-  eventBus.on('catching_up_done', function () {
-    catchup_balls_at_start = -1;
-    self.setOngoingProcess('Syncing', false);
-    self.syncProgress = "";
-  });
-  eventBus.on('unhandled_private_payments_left', function (count_left) { // light only
-    var bChanged = (self.count_unhandled_private_payments !== count_left);
-    self.count_unhandled_private_payments = count_left;
-    if (bChanged)
-      self.setOngoingProcess('handling_private', count_left > 0);
-  });
-  eventBus.on('refresh_light_started', function () {
-    console.log('refresh_light_started');
-    self.setOngoingProcess('Syncing', true);
-  });
-  eventBus.on('refresh_light_done', function () {
-    console.log('refresh_light_done');
-    self.setOngoingProcess('Syncing', false);
-  });*/
 
   eventBus.on("confirm_on_other_devices", function () {
     $rootScope.$emit('Local/ShowAlert', "Transaction created.\nPlease approve it on the other devices.", 'fi-key', function () {
@@ -235,11 +200,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     });
   });
 
-  /*
-  eventBus.on("transaction_sent", function(){
-      self.updateAll();
-      self.updateTxHistory();
-  });*/
 
   eventBus.on("new_my_transactions", function () {
     breadcrumbs.add('new_my_transactions');
@@ -301,9 +261,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     });
   });
 
- /* $rootScope.$on('process_status_change', function (event, process_name, isEnabled) {
-    self.setOngoingProcess(process_name, isEnabled);
-  });*/
 
   // in arrOtherCosigners, 'other' is relative to the initiator
   eventBus.on("create_new_wallet", function (walletId, arrWalletDefinitionTemplate, arrDeviceAddresses, walletName, arrOtherCosigners, isSingleAddress) {
@@ -697,17 +654,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     'icon': 'icon-home',
     'link': 'walletHome'
   }, {
-    'title': gettext('Receive'),
-    'icon': 'icon-receive2',
-    'link': 'receive'
-  }, {
-    'title': gettext('Send'),
+    'title': gettext('Transaction'),
     'icon': 'icon-paperplane',
     'link': 'send'
-  }, {
-    'title': gettext('History'),
-    'icon': 'icon-history',
-    'link': 'history'
   }, {
     'title': gettext('Wallet'),
     'icon': 'icon-history',

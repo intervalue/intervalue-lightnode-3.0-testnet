@@ -1189,6 +1189,10 @@ msgstr "问题："
 msgid "Receive"
 msgstr "接收"
 
+#: src/js/controllers/index.js:669
+msgid "Transaction"
+msgstr "交易"
+
 #: public/views/walletHome.html:655
 msgid "Received"
 msgstr "已接收"
@@ -2135,3 +2139,5 @@ msgstr "{{item.n}}-的-{{item.m}}"
 msgid "{{prefGlobal.torEnabled?'On':'Off'}}"
 msgstr "{{prefGlobal.torEnabled?'On':'Off'}}"
 
+msgid "Scan"
+msgstr "扫一扫"

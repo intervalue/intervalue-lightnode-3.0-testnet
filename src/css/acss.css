@@ -172,9 +172,23 @@
 /* 滚动条滑块 */::-webkit-scrollbar-thumb {border-radius: 10px;background: #c5c5c5;}
 ::-webkit-scrollbar-thumb:window-inactive {background: rgba(255,0,0,0.4);}
 
-
-
-
+/*重写foundation  css*/
+.left-off-canvas-menu{
+    left: auto;
+    right: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    -moz-transform: translate3d(100%, 0, 0);
+    -ms-transform: translate(100%, 0);
+    -o-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+}
+.move-right > .inner-wrap{
+    -webkit-transform: translate3d(-15.625rem, 0, 0);
+    -moz-transform: translate3d(-15.625rem, 0, 0);
+    -ms-transform: translate(-15.625rem, 0);
+    -o-transform: translate3d(-15.625rem, 0, 0);
+    transform: translate3d(-15.625rem, 0, 0);
+}
 
 
 
