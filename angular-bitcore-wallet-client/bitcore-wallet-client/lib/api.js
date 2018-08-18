@@ -532,6 +532,17 @@ API.prototype.getSignerWithLocalPrivateKey = function () {
   };
 };
 
+API.prototype.getLocalPrivateKey = function (account, is_change, address_index) {
+  var self = this;
+  var coin = (self.credentials.network == 'livenet' ? "0" : "1");
+  var path = "m/44'/" + coin + "'/" + account + "'/" + is_change + "/" + address_index;
+  var xPrivKey = new Bitcore.HDPrivateKey.fromString(self.credentials.xPrivKey);
+  var privateKey = xPrivKey.derive(path).privateKey;
+  //var privKeyBuf = privateKey.toBuffer();
+  var privKeyBuf = privateKey.bn.toBuffer({ size: 32 }); // https://github.com/bitpay/bitcore-lib/issues/47
+  return privateKey;
+};
+
 
 API.prototype.sendMultiPayment = function (opts, cb) {
   var self = this;
@@ -539,6 +550,7 @@ API.prototype.sendMultiPayment = function (opts, cb) {
   var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
 
   opts.signWithLocalPrivateKey = this.getSignerWithLocalPrivateKey();
+  opts.getLocalPrivateKey = this.getLocalPrivateKey();
 
   if (opts.shared_address) {
     opts.paying_addresses = [opts.shared_address];
