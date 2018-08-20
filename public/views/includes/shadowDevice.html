@@ -4,19 +4,18 @@
 <!--热钱包界面-->
 <div ng-controller="shadowDeviceControllers as shadow" class="shadowModal" ng-class="{'animated  bounceInUp':index.showshadow}">
     <!--热钱包界面-->
-    <div>
-        <div ng-show="index.showshadowewm1" class="text-center">
-            <qrcode size="220" version="15" data="{{index.verificationAddress}}"></qrcode>
-        </div>
-        <div ng-show="index.showshadowewm2" class="text-center">
-            <div style="text-align:center">授权签名</div>
-            <qrcode size="220" version="15" data="{{index.signatureCodeQRCode}}" ></qrcode>
-            <button class="button round black expand m0" ng-click="index.showshadowewm3= true; index.showshadowewm2 = false">
-                <span translate>下一步</span>
-            </button>
-        </div>
+    <div ng-show="index.shadowstep == 'hot1'" class="text-center">
+        <qrcode size="220" version="15" data="{{index.verificationAddress}}"></qrcode>
+    </div>
+    <div ng-show="index.shadowstep == 'hot2'" class="text-center">
+        <div style="text-align:center">授权签名</div>
+        <qrcode size="220" version="15" data="{{index.signatureCodeQRCode}}" ></qrcode>
+        <button class="button round black expand m0" ng-click="index.shadowstep == 'hot3'">
+            <span translate>下一步</span>
+        </button>
+    </div>
 
-        <div ng-show="index.showshadowewm3" class="text-center">
+    <div ng-show="index.shadowstep == 'hot3'" class="text-center">
             <section>
                 完成授权
             </section>
@@ -39,28 +38,28 @@
                 <span translate>完成授权</span>
             </button>
         </div>
-    </div>
     <!--热钱包界面-->
     <!--冷钱包界面-->
-    <div>
-        <div>
+    <div ng-show="index.shadowstep == 'cold1'">
+        <div class="adcpitem">
+            <div mdinputc class="adcpmdic">
+                <label>授权地址</label>
+                <input mdinput type="text" ng-model="value">
+            </div>
             <div class="adcpitem">
                 <div mdinputc class="adcpmdic">
-                    <label>授权地址</label>
-                    <input mdinput type="text" ng-model="value">
+                    <label>数据</label>
+                    <input mdinput type="text"  ng-model="value">
                 </div>
-                <div class="adcpitem">
-                    <div mdinputc class="adcpmdic">
-                        <label>数据</label>
-                        <input mdinput type="text"  ng-model="value">
-                    </div>
-                </div>
-                <button class="button round black expand m0" ng-click="index.showshadowewm3= true; index.showshadowewm2 = false">
-                    <span translate>下一步</span>
-                </button>
             </div>
+            <button class="button round black expand m0" ng-click="index.showshadowewm3= true; index.showshadowewm2 = false">
+                <span translate>下一步</span>
+            </button>
         </div>
-
+    </div>
+    <div ng-show="index.shadowstep == 'cold2'">
+        <qrcode size="220" version="15" data="{{index.verificationAddress}}"></qrcode>
     </div>
     <!--冷钱包界面-->
 </div>
+

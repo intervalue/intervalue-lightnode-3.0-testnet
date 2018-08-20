@@ -26,11 +26,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   self.usePushNotifications = isCordova && !isMobile.Windows();
   self.showshadow= false;
   self.verificationQRCode = '';
-  self.showshadowewm1 = true;
-  self.showshadowewm2 = false;
-  self.showshadowewm3 = false;
   self.signatureAddr = '';
-
+  self.shadowstep = 'hot1';
 
 
   function updatePublicKeyRing(walletClient, onDone) {
@@ -1682,14 +1679,13 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             if(verificationQRCode){
                 self.verificationQRCode = JSON.stringify(verificationQRCode);
                 self.showshadow = true;
-                self.showshadowewm2 = true;
+                self.shadowstep = 'hot2';
                 $timeout(function () {
                     $rootScope.$apply();
                 });
                 console.log(verificationQRCode);
             }else{
                 self.showshadow = false;
-                self.showshadowewm1 = false;
                 alert('Please scan the cold wallet QR code or fill in the address first!!');
             }
         });
@@ -1704,14 +1700,13 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             if(signatureCodeQRCode){
                 self.signatureCodeQRCode = JSON.stringify(signatureCodeQRCode);
                 self.showshadow = true;
-                self.showshadowewm2 = true;
+                self.shadowstep == 'hot2'
                 $timeout(function () {
                     $rootScope.$apply();
                 });
                 console.log(signatureCodeQRCode);
             }else{
                 self.showshadow = false;
-                self.showshadowewm1 = false;
                 alert('Please scan the cold wallet QR code or fill in the address first!!');
             }
         });
@@ -1720,15 +1715,13 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   $rootScope.$on('Local/ShadowInvitation', function(event,signatureCode){
     self.signatureCode = signatureCode;
     self.showshadow = true;
-    self.showshadowewm1 = false;
-    self.showshadowewm2 = true;
+    self.shadowstep == 'hot2'
   });
 
   $rootScope.$on('Local/ShadowSignInvitation', function(event,SignatureDetlCode){
       self.SignatureDetlCode = SignatureDetlCode;
       self.showshadow = true;
-      self.showshadowewm2 = false;
-      self.showshadowewm3 = true;
+      self.shadowstep == 'hot3'
   });
 
   $rootScope.$on('Local/generateShadowWallet', function(event,ShadowWallet){
@@ -1767,7 +1760,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.generatePubkey =  function (address) {
               self.verificationAddress = "InterValue-3.0-testnet:"+address;
               self.showshadow = true;
-              self.showshadowewm1 = true;
+              self.shadowstep == 'hot1'
               $timeout(function () {
                   $rootScope.$apply();
               });
@@ -1783,14 +1776,12 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   //         if(verificationQRCode){
   //             self.verificationQRCode = JSON.stringify(verificationQRCode);
   //             self.showshadow = true;
-  //             self.showshadowewm2 = true;
   //             $timeout(function () {
   //                 $rootScope.$apply();
   //             });
   //             console.log(verificationQRCode);
   //         }else{
   //             self.showshadow = false;
-  //             self.showshadowewm1 = false;
   //             alert('Please scan the cold wallet QR code or fill in the address first!!');
   //         }
   //     });
