@@ -376,7 +376,8 @@ angular.module('copayApp.services')
           //         $log.debug("reusing xPrivKey from focused client");
           //         opts.extendedPrivateKey = root.focusedClient.credentials.xPrivKey;
           //         opts.mnemonic = root.profile.mnemonic;
-          opts.account = account;
+          // opts.account = account;
+          opts.account = 0;
         }
         root._seedWallet(opts, function (err, walletClient) {
           if (err)
