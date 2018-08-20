@@ -1,18 +1,21 @@
 <nav ng-controller="topbarController as topbar" class="tab-bar">
-  <section class="left-small">
-    <a id="hamburger" class="p10" ng-show="!goBackToState && !closeToHome  && !index.noFocusedWallet"
-      ng-click="index.openMenu()"><i class="fi-list size-24"></i>
-    </a>
-    <a ng-show="goBackToState"
-      ng-click="$root.go('^', true); goBackToState = null"><i class="icon-arrow-left3 icon-back"></i>
-      <span class="text-back">{{'Back'|translate}}</span>
-    </a>
-
-    <a ng-show="closeToHome" class="p10 "
-      ng-click="topbar.goHome(); closeToHome = null">
-      <span class="text-close">{{'Close'|translate}}</span>
-    </a>
-  </section>
+    <section class="left-small">
+        <!--<a id="hamburger" class="p10" ng-show="!goBackToState && !closeToHome  && !index.noFocusedWallet"-->
+           <!--ng-click="index.openMenu()"><i class="fi-list size-24"></i>-->
+        <!--</a>-->
+        <a ng-show="goBackToState"
+           ng-click="$root.go('^', true); goBackToState = null"><i class="icon-arrow-left3 icon-back"></i>
+            <span class="text-back">{{'Back'|translate}}</span>
+        </a>
+        <a ng-show="goToWallet"
+           ng-click="topbar.goHome(); index.setTab(item, false, 0, true);"><i class="icon-arrow-left3 icon-back"></i>
+            <span class="text-back">{{'Back'|translate}}</span>
+        </a>
+        <a ng-show="closeToHome" class="p10"
+           ng-click="topbar.goHome(); closeToHome = null">
+            <span class="text-close">{{'Close'|translate}}</span>
+        </a>
+    </section>
 
   <section class="right-small" ng-show="showCamera">
     <qr-scanner ng-show="index.isComplete" on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>

@@ -240,10 +240,10 @@ input.datafeed_input {
             <div class="row"  ng-hide="home.hideAmount">
                 <div class="large-12 medium-12 columns">
                     <div class="right" ng-hide="sendPaymentForm.amount.$pristine && !sendPaymentForm.amount.$modelValue ">
-                  <span class="has-error right size-12" ng-if="sendPaymentForm.amount.$invalid">
-                    <i class="icon-close-circle size-14"></i>
-                    <span clas="vm" translate>Not valid</span>
-                  </span>
+                      <span class="has-error right size-12" ng-if="sendPaymentForm.amount.$invalid">
+                        <i class="icon-close-circle size-14"></i>
+                        <span class="vm" translate>Not valid</span>
+                      </span>
                         <small class="text-primary right" ng-if="!sendPaymentForm.amount.$invalid">
                             <i class="icon-checkmark-circle size-14"></i>
                         </small>
