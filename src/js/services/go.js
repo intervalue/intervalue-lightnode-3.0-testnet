@@ -120,7 +120,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
 		uri = uri.replace('InterValue-3.0-testnet:','');
 		alert(uri)
 		if(uri.length === 32) {
-            var shadowWallet = require('intervaluecore/shadowWallet');
+            /*var shadowWallet = require('intervaluecore/shadowWallet');
             //第一次扫码地址后生成授权签名
                 shadowWallet.getSignatureCode(uri,function (signatureCode) {
                 	alert(signatureCode);
@@ -130,7 +130,8 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                     	throw  error('address is not found!!');
 					}
 
-                });
+                });*/
+            $rootScope.$emit('Local/ShadowAddress',uri);
 		}
     }
 

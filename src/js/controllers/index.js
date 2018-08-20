@@ -29,6 +29,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   self.showshadowewm1 = true;
   self.showshadowewm2 = false;
   self.showshadowewm3 = false;
+  self.signatureAddr = '';
 
 
 
@@ -1667,18 +1668,69 @@ angular.module('copayApp.controllers').controller('indexController', function ($
       $rootScope.$apply();
     });
   });
+
+    $rootScope.$on('Local/ShadowAddress', function(event,adress){
+        self.signatureAddr = adress;
+        $timeout(function () {
+            $rootScope.$apply();
+        });
+    });
+
+    $rootScope.$on('Local/ShadowInvitation', function(event,address){
+        var shadowWallet = require('intervaluecore/shadowWallet');
+        shadowWallet.getVerificationQRCode(address,function(verificationQRCode) {
+            if(verificationQRCode){
+                self.verificationQRCode = JSON.stringify(verificationQRCode);
+                self.showshadow = true;
+                self.showshadowewm2 = true;
+                $timeout(function () {
+                    $rootScope.$apply();
+                });
+                console.log(verificationQRCode);
+            }else{
+                self.showshadow = false;
+                self.showshadowewm1 = false;
+                alert('Please scan the cold wallet QR code or fill in the address first!!');
+            }
+        });
+    });
+
+    /**
+     * 生成授权签名二维码
+     */
+    $rootScope.$on('Local/ShadowAddressForm', function(event,address){
+        var shadowWallet = require('intervaluecore/shadowWallet');
+        shadowWallet.getSignatureCode(address,function(signatureCodeQRCode) {
+            if(signatureCodeQRCode){
+                self.signatureCodeQRCode = JSON.stringify(signatureCodeQRCode);
+                self.showshadow = true;
+                self.showshadowewm2 = true;
+                $timeout(function () {
+                    $rootScope.$apply();
+                });
+                console.log(signatureCodeQRCode);
+            }else{
+                self.showshadow = false;
+                self.showshadowewm1 = false;
+                alert('Please scan the cold wallet QR code or fill in the address first!!');
+            }
+        });
+    });
+
   $rootScope.$on('Local/ShadowInvitation', function(event,signatureCode){
     self.signatureCode = signatureCode;
     self.showshadow = true;
     self.showshadowewm1 = false;
     self.showshadowewm2 = true;
   });
+
   $rootScope.$on('Local/ShadowSignInvitation', function(event,SignatureDetlCode){
       self.SignatureDetlCode = SignatureDetlCode;
       self.showshadow = true;
       self.showshadowewm2 = false;
       self.showshadowewm3 = true;
   });
+
   $rootScope.$on('Local/generateShadowWallet', function(event,ShadowWallet){
       self.ShadowWallet = ShadowWallet ;
       alert(ShadowWallet);
@@ -1709,24 +1761,40 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   };
 
   /**
-   * 根据当前地址生成对应pubkey二维码
+   * 根据当前地址生成对应二维码
    * @param address
    */
-  self.generatePubkey =  function (address) {
-      var shadowWallet = require('intervaluecore/shadowWallet');
-      shadowWallet.getVerificationQRCode(address,function(verificationQRCode) {
-          if(verificationQRCode){
-              self.verificationQRCode = JSON.stringify(verificationQRCode);
+    self.generatePubkey =  function (address) {
+              self.verificationAddress = "InterValue-3.0-testnet:"+address;
               self.showshadow = true;
+              self.showshadowewm1 = true;
               $timeout(function () {
                   $rootScope.$apply();
               });
-              console.log(verificationQRCode);
-          }else{
-              alert('The address does not exist or there are multiple!!');
-          }
-      });
+
   };
+  //   self.generateAddressQRCode =  function () {
+  //       var form = $scope.addressForm;
+  //       alert(form);
+  //       var address = form.address;
+  //
+  //     var shadowWallet = require('intervaluecore/shadowWallet');
+  //     shadowWallet.getVerificationQRCode(address,function(verificationQRCode) {
+  //         if(verificationQRCode){
+  //             self.verificationQRCode = JSON.stringify(verificationQRCode);
+  //             self.showshadow = true;
+  //             self.showshadowewm2 = true;
+  //             $timeout(function () {
+  //                 $rootScope.$apply();
+  //             });
+  //             console.log(verificationQRCode);
+  //         }else{
+  //             self.showshadow = false;
+  //             self.showshadowewm1 = false;
+  //             alert('Please scan the cold wallet QR code or fill in the address first!!');
+  //         }
+  //     });
+  // };
 
   (function () {
     "drag dragover dragstart dragenter".split(" ").forEach(function (e) {

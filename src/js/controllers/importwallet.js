@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('importwalletController',
-    function ($scope) {
+    function ($scope,$rootScope) {
         var self = this;
         self.importtab1 = false;
         self.importtab2 = true;
@@ -12,6 +12,15 @@ angular.module('copayApp.controllers').controller('importwalletController',
         self.showimporttabtwo = function(){
             self.importtab1 = false;
             self.importtab2 = true;
+        }
+        /**
+         * 获取importwallet form表单
+         */
+        self.generateAddressQRCode = function () {
+            var form = $scope.addressForm;
+            var address = form.address.$modelValue;
+            alert(address);
+            $rootScope.$emit('Local/ShadowAddressForm',address);
         }
 
     });
