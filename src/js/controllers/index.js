@@ -1325,7 +1325,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     go.swipe();
   };
 
-  self.swipeRight = function () {
+  self.swipeLeft = function () {
     if (!self.bSwipeSuspended)
       self.openMenu();
     else
@@ -1736,9 +1736,10 @@ angular.module('copayApp.controllers').controller('indexController', function ($
       });
   });
 
-  $rootScope.$on('Local/generateShadowWallet', function(event,ShadowWallet){
-      self.ShadowWallet = ShadowWallet ;
-      alert(ShadowWallet);
+  $rootScope.$on('Local/generateShadowWallet', function(event,shadowWallet){
+      self.shadowWallet = JSON.stringify(shadowWallet) ;
+      self.shadowstep = 'hot3';
+      alert(shadowWallet);
   });
   //fault data
   // self.adddataw = profileService.walletClients;

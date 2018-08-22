@@ -16,48 +16,50 @@
     </div>
 
     <div ng-show="index.shadowstep == 'hot3'" class="text-center">
-            <section>
-                完成授权
+        <section>
+            完成授权
+        </section>
+        <section  ng-controller="topbarController as topbar">
+            <qr-scanner on-scan="topbar.onQrCodeScannedAddr(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
+        </section>
+        <nav class="tab-bar ng-scope">
+            <section class="left-small">
+                <a ng-click="index.shadowstep = 'hot2';"><i class="icon-arrow-left3 icon-back"></i>
+                    <span class="text-back ng-binding">Back</span>
+                </a>
             </section>
-            <section  ng-controller="topbarController as topbar">
-                <qr-scanner on-scan="topbar.onQrCodeScannedAddr(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
+            <section class="middle tab-bar-section">
+                <h1 class="title ellipsis" ng-style="{'color': noColor ? '#4A90E2' : index.backgroundColor, 'max-width': '100%'}" style="color: rgb(74, 144, 226); max-width: 100%;">
+                </h1>
+                <textarea >{{}}</textarea>
             </section>
-            <qrcode size="220" version="15" data="{{index.signatureCode}}" ></qrcode>
-            <nav class="tab-bar ng-scope">
-                <section class="left-small">
-                    <a ng-click="index.shadowstep = 'hot2';"><i class="icon-arrow-left3 icon-back"></i>
-                        <span class="text-back ng-binding">Back</span>
-                    </a>
-                </section>
-                <section class="middle tab-bar-section">
-                    <h1 class="title ellipsis" ng-style="{'color': noColor ? '#4A90E2' : index.backgroundColor, 'max-width': '100%'}" style="color: rgb(74, 144, 226); max-width: 100%;">
-                    </h1>
-                </section>
-            </nav>
-            <button class="button round black expand m0" ng-click="index.showshadow = true">
-                <span translate>完成授权</span>
-            </button>
-        </div>
+        </nav>
+        <button class="button round black expand m0" ng-click="index.showshadow = true">
+            <span translate>完成授权</span>
+        </button>
+    </div>
     <!--热钱包界面-->
+
+
     <!--冷钱包界面-->
-    <div ng-show="index.shadowstep == 'cold1'">
+    <div ng-show="index.shadowstep == 'cold1'" class="text-center">
         <div class="adcpitem">
             <div  class="adcpmdic">
                 <label>授权地址</label>
                 <input  type="text" value={{index.signatureDetlCodeAddr}}>
             </div>
-            <div class="adcpitem">
-                <div class="adcpmdic">
-                    <label>数据</label>
-                    <input  type="text"  value="value">
-                </div>
-            </div>
-            <button class="button round black expand m0" ng-click="index.shadowstep = 'cold2'">
-                <span translate>下一步</span>
-            </button>
         </div>
+        <div class="adcpitem">
+            <div class="adcpmdic">
+                <label>数据</label>
+                <input  type="text"  value="value">
+            </div>
+        </div>
+        <button class="button round black expand m0" ng-click="index.shadowstep = 'cold2'">
+            <span translate>下一步</span>
+        </button>
     </div>
-    <div ng-show="index.shadowstep == 'cold2'">
+    <div ng-show="index.shadowstep == 'cold2'" class="text-center">
         <qrcode size="220" version="15" data="{{index.signatureDetlCode}}"></qrcode>
     </div>
     <!--冷钱包界面-->
