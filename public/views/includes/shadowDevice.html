@@ -22,7 +22,6 @@
         <section  ng-controller="topbarController as topbar">
             <qr-scanner on-scan="topbar.onQrCodeScannedAddr(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
         </section>
-        <qrcode size="220" version="15" data="{{index.signatureCode}}" ></qrcode>
         <nav class="tab-bar ng-scope">
             <section class="left-small">
                 <a ng-click="index.shadowstep = 'hot2';"><i class="icon-arrow-left3 icon-back"></i>
@@ -32,6 +31,7 @@
             <section class="middle tab-bar-section">
                 <h1 class="title ellipsis" ng-style="{'color': noColor ? '#4A90E2' : index.backgroundColor, 'max-width': '100%'}" style="color: rgb(74, 144, 226); max-width: 100%;">
                 </h1>
+                <textarea >{{}}</textarea>
             </section>
         </nav>
         <button class="button round black expand m0" ng-click="index.showshadow = true">
@@ -39,6 +39,8 @@
         </button>
     </div>
     <!--热钱包界面-->
+
+
     <!--冷钱包界面-->
     <div ng-show="index.shadowstep == 'cold1'" class="text-center">
         <div class="adcpitem">

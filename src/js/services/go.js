@@ -161,9 +161,9 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                     }
                     //第三次扫码，生成热钱包
                     else if(objRequest.type === 'signDetl'){
-                        shadowWallet.generateShadowWallet(objRequest,function (ShadowWallet) {
-                            if(ShadowWallet){
-                                $rootScope.$emit('Local/generateShadowWallet', ShadowWallet);
+                        shadowWallet.generateShadowWallet(objRequest,function (shadowWallet) {
+                            if(shadowWallet){
+                                $rootScope.$emit('Local/generateShadowWallet', shadowWallet);
                             }else {
                                 console.log("signDetl Incorrect data type!!!"+objRequest.type)
                                 throw Error('IsignDetl ncorrect data type!!!'+objRequest.type);
