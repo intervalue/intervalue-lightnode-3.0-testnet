@@ -18,8 +18,9 @@ angular.module('copayApp.controllers').controller('importwalletController',
          */
         self.generateAddressQRCode = function () {
             var form = $scope.addressForm;
-            var address = form.address.$modelValue;
-            alert(address);
+            console.log(form);
+            var address = form.$$element[0][0].value;
+            console.log(address);
             $rootScope.$emit('Local/ShadowAddressForm',address);
         }
 

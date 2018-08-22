@@ -42,14 +42,14 @@
     <!--冷钱包界面-->
     <div ng-show="index.shadowstep == 'cold1'">
         <div class="adcpitem">
-            <div mdinputc class="adcpmdic">
+            <div  class="adcpmdic">
                 <label>授权地址</label>
-                <input  type="text" value={{index.signatureDetlCodeaddr}}>
+                <input  type="text" value={{index.signatureDetlCodeAddr}}>
             </div>
             <div class="adcpitem">
-                <div mdinputc class="adcpmdic">
+                <div class="adcpmdic">
                     <label>数据</label>
-                    <input mdinput type="text"  ng-model="value">
+                    <input  type="text"  value="value">
                 </div>
             </div>
             <button class="button round black expand m0" ng-click="index.shadowstep = 'cold2'">

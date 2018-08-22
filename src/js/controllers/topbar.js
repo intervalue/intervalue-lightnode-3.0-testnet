@@ -8,6 +8,7 @@ angular.module('copayApp.controllers').controller('topbarController', function($
     };
 
     this.onQrCodeScannedAddr = function(data) {
+        alert(data);
         go.handleUriAddr(data);
 
     };

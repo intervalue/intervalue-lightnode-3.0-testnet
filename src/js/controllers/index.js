@@ -1666,8 +1666,12 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     });
   });
 
-    $rootScope.$on('Local/ShadowAddress', function(event,adress){
-        self.signatureAddr = adress;
+    /**
+     * 生成待授权二维码
+     */
+    $rootScope.$on('Local/ShadowAddress', function(event,address){
+        alert(address);
+        self.signatureAddr = address;
         $timeout(function () {
             $rootScope.$apply();
         });
