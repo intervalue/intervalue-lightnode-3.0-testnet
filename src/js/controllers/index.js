@@ -1325,7 +1325,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     go.swipe();
   };
 
-  self.swipeRight = function () {
+  self.swipeLeft = function () {
     if (!self.bSwipeSuspended)
       self.openMenu();
     else
