@@ -1700,7 +1700,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             if(signatureCodeQRCode){
                 self.signatureCodeQRCode = JSON.stringify(signatureCodeQRCode);
                 self.showshadow = true;
-                self.shadowstep == 'hot2'
+                self.shadowstep = 'hot2'
                 $timeout(function () {
                     $rootScope.$apply();
                 });
@@ -1715,13 +1715,21 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   $rootScope.$on('Local/ShadowInvitation', function(event,signatureCode){
     self.signatureCode = signatureCode;
     self.showshadow = true;
-    self.shadowstep == 'hot2'
+    self.shadowstep = 'hot2';
+    $timeout(function () {
+        $rootScope.$apply();
+    });
   });
 
-  $rootScope.$on('Local/ShadowSignInvitation', function(event,SignatureDetlCode){
-      self.SignatureDetlCode = SignatureDetlCode;
+  $rootScope.$on('Local/ShadowSignInvitation', function(event,signatureDetlCode){
+    alert(JSON.stringify(signatureDetlCode));
+      self.signatureDetlCodeAddr = signatureDetlCode.addr;
+      self.signatureDetlCode = JSON.stringify(signatureDetlCode);
       self.showshadow = true;
-      self.shadowstep == 'hot3'
+      self.shadowstep = 'cold1';
+      $timeout(function () {
+          $rootScope.$apply();
+      });
   });
 
   $rootScope.$on('Local/generateShadowWallet', function(event,ShadowWallet){
@@ -1760,7 +1768,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.generatePubkey =  function (address) {
               self.verificationAddress = "InterValue-3.0-testnet:"+address;
               self.showshadow = true;
-              self.shadowstep == 'hot1'
+              self.shadowstep = 'hot1'
               $timeout(function () {
                   $rootScope.$apply();
               });

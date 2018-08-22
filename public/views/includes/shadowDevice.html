@@ -10,7 +10,7 @@
     <div ng-show="index.shadowstep == 'hot2'" class="text-center">
         <div style="text-align:center">授权签名</div>
         <qrcode size="220" version="15" data="{{index.signatureCodeQRCode}}" ></qrcode>
-        <button class="button round black expand m0" ng-click="index.shadowstep == 'hot3'">
+        <button class="button round black expand m0" ng-click="index.shadowstep = 'hot3'">
             <span translate>下一步</span>
         </button>
     </div>
@@ -25,7 +25,7 @@
             <qrcode size="220" version="15" data="{{index.signatureCode}}" ></qrcode>
             <nav class="tab-bar ng-scope">
                 <section class="left-small">
-                    <a ng-click="index.showshadowewm2=true;index.showshadowewm3=false;"><i class="icon-arrow-left3 icon-back"></i>
+                    <a ng-click="index.shadowstep = 'hot2';"><i class="icon-arrow-left3 icon-back"></i>
                         <span class="text-back ng-binding">Back</span>
                     </a>
                 </section>
@@ -44,7 +44,7 @@
         <div class="adcpitem">
             <div mdinputc class="adcpmdic">
                 <label>授权地址</label>
-                <input mdinput type="text" ng-model="value">
+                <input  type="text" value={{index.signatureDetlCodeaddr}}>
             </div>
             <div class="adcpitem">
                 <div mdinputc class="adcpmdic">
@@ -52,13 +52,13 @@
                     <input mdinput type="text"  ng-model="value">
                 </div>
             </div>
-            <button class="button round black expand m0" ng-click="index.showshadowewm3= true; index.showshadowewm2 = false">
+            <button class="button round black expand m0" ng-click="index.shadowstep = 'cold2'">
                 <span translate>下一步</span>
             </button>
         </div>
     </div>
     <div ng-show="index.shadowstep == 'cold2'">
-        <qrcode size="220" version="15" data="{{index.verificationAddress}}"></qrcode>
+        <qrcode size="220" version="15" data="{{index.signatureDetlCode}}"></qrcode>
     </div>
     <!--冷钱包界面-->
 </div>
