@@ -78,6 +78,15 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
         });
     };
 
+    root.wallet = function(cb) {
+        $stickyState.reset('walletHome');
+        root.path('walletHome', function() {
+            $rootScope.$emit('Local/SetTab', 'wallet');
+            if (cb)
+                cb();
+        });
+    };
+
     root.history = function(cb) {
         root.path('walletHome', function() {
             $rootScope.$emit('Local/SetTab', 'history');
