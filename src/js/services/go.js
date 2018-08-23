@@ -125,12 +125,9 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
     };
 
     function handleUriAddr(uri) {
-
         if(uri.indexOf("InterValue-3.0-testnet:") != -1){
             uri = uri.replace('InterValue-3.0-testnet:','');
-            alert(uri.length);
             if(uri.length === 32) {
-                alert(uri);
                 $rootScope.$emit('Local/ShadowAddress',uri);
             }            //冷钱包二维码验证
         }else if(uri.indexOf("shadow") != -1){
@@ -147,8 +144,8 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                             if(signatureCode){
                                 $rootScope.$emit('Local/ShadowInvitation',signatureCode);
                             }else{
-                                console.log("Incorrect data type!!!"+objRequest.type)
-                                throw Error('Incorrect data type!!!'+objRequest.type);
+                                console.log("signatureCode is "+signatureCode)
+                                throw Error('signatureCode is '+signatureCode);
                             }
                         });
                     }
@@ -157,14 +154,17 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                         var mnemonic;
                         var wc = profileService.walletClients;
                         for(var index in wc){
-                            mnemonic = wc[index].credentials.mnemonic;
+                            if(objRequest.xpub === wc[index].credentials.xPubKey){
+                                mnemonic = wc[index].credentials.mnemonic;
+                                break;
+                            }
                         }
                         shadowWallet.getSignatureDetlCode(objRequest,mnemonic,function (signatureDetlCode) {
                             if(signatureDetlCode){
                                 $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
                             }else{
-                                console.log(" sign Incorrect data type!!!"+objRequest.type)
-                                throw Error('sign Incorrect data type!!!'+objRequest.type);
+                                console.log(" signatureDetlCode is "+signatureDetlCode)
+                                throw Error('signatureDetlCode is '+signatureDetlCode);
                             }
                         })
                     }
@@ -174,8 +174,8 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                             if(shadowWallet){
                                 $rootScope.$emit('Local/generateShadowWallet', shadowWallet);
                             }else {
-                                console.log("signDetl Incorrect data type!!!"+objRequest.type)
-                                throw Error('IsignDetl ncorrect data type!!!'+objRequest.type);
+                                console.log("shadowWallet is  "+shadowWallet)
+                                throw Error('shadowWallet is   '+shadowWallet);
                             }
                         })
                     }

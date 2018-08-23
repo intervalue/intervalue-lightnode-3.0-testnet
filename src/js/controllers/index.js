@@ -1726,7 +1726,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   });
 
   $rootScope.$on('Local/ShadowSignInvitation', function(event,signatureDetlCode){
-    alert(JSON.stringify(signatureDetlCode));
       self.signatureDetlCodeAddr = signatureDetlCode.addr;
       self.signatureDetlCode = JSON.stringify(signatureDetlCode);
       self.showshadow = true;
@@ -1737,9 +1736,12 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   });
 
   $rootScope.$on('Local/generateShadowWallet', function(event,shadowWallet){
+      self.signatureData = shadowWallet.signature;
       self.shadowWallet = JSON.stringify(shadowWallet) ;
       self.shadowstep = 'hot3';
-      alert(shadowWallet);
+      $timeout(function () {
+          $rootScope.$apply();
+      });
   });
   //fault data
   console.log(profileService.walletClients) ;
