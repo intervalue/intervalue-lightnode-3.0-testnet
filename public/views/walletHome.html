@@ -315,11 +315,12 @@ input.datafeed_input {
 
         <div class="adwwto">
             <div class="adwwt" ng-repeat="item in index.adddataw">
-                <div class="adwwtflex" ng-click="index.towalletname(item.name, item.addr, item.ammount, item.walletid)">
+                <div class="adwwtflex" ng-click="index.towalletname(item.name, item.addr, item.ammount, item.walletId)">
                     <i class="fi-widget size-18 vm wallet-settings"></i>
                     <div class="adwwt100">
                         <div class="adwwtname">{{item.name}}</div>
                         <div class="adwwtaddr">{{item.addr}}</div>
+                        <div class="adwwtaddr">{{item.walletId}}</div>
                     </div>
                     <i class="icon-arrow-right3 size-24"></i>
                 </div>
