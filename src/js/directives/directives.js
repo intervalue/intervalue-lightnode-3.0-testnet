@@ -585,10 +585,20 @@ angular.module('copayApp.directives')
             el
                 .on('focus', function(ev) {
                     controllerInstance.setFocused(true);
+                    if((elem[0].value).trim() !== ''){
+                        controllerInstance.setHasValue(true);
+                    }
                 })
                 .on('blur', function(ev) {
                     controllerInstance.setFocused(false);
+                    if((elem[0].value).trim() !== ''){
+                        controllerInstance.setHasValue(true);
+                    }
                 });
+            scope.$on('$destroy', function() {
+                controllerInstance.setFocused(false);
+                controllerInstance.setHasValue(false);
+            });
         }
     }
   }).filter('encodeURIComponent', function() {
