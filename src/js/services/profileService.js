@@ -322,7 +322,7 @@ angular.module('copayApp.services')
       console.log("_createNewProfile");
       if (opts.noWallet)
         return cb(null, Profile.create());
-      root._seedWallet({}, function (err, walletClient) {
+      root._seedWallet(opts, function (err, walletClient) {
         if (err)
           return cb(err);
         var config = configService.getSync();
@@ -332,7 +332,7 @@ angular.module('copayApp.services')
         require('intervaluecore/light_wallet.js').setLightVendorHost(config.hub);
         // initDeviceProperties sets my_device_address needed by walletClient.createWallet
         walletClient.initDeviceProperties(walletClient.credentials.xPrivKey, null, config.hub, config.deviceName);
-        var walletName = gettextCatalog.getString('Small Expenses Wallet');
+        var walletName = opts.walletName || gettextCatalog.getString('Small Expenses Wallet');
         walletClient.createWallet(walletName, 1, 1, {
           //	isSingleAddress: true,
           network: 'livenet'

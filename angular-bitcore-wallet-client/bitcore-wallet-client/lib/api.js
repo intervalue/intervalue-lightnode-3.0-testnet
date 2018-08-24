@@ -133,6 +133,9 @@ API.prototype.seedFromMnemonic = function (words, opts) {
 
   opts = opts || {};
   this.credentials = Credentials.fromMnemonic(opts.network || 'livenet', words, opts.passphrase, opts.account || 0, opts.derivationStrategy || Constants.DERIVATION_STRATEGIES.BIP44);
+  if (opts.password) {
+    this.credentials.setPrivateKeyEncryption(password, opts.passwordOpts || API.privateKeyEncryptionOpts);
+  }
 };
 
 /**
