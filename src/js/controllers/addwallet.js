@@ -82,7 +82,16 @@ angular.module('copayApp.controllers').controller('addwalletController',
             return JSON.stringify(self.chosenWords);
         }, function(newValue, oldValue){
             if(self.chosenWords.length > 11){
-                if(JSON.stringify(self.chosenWords) == JSON.stringify(self.showcodes)){
+
+                var chostr = '';
+                for(var i = 0 ; i < self.chosenWords.length; i++){
+                    chostr += self.chosenWords[i].id;
+                }
+                var showstr = '';
+                for(var i = 0 ; i < self.showcodes.length; i++){
+                    showstr += self.showcodes[i].id;
+                }
+                if(chostr == showstr){
                     self.step = 'deletecode';
                 }else{
                     self.showcodeerr = true;
