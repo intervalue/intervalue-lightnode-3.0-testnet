@@ -1,23 +1,18 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('addwalletController',
-    function($rootScope, $scope, $timeout) {
+    function($rootScope, $scope, $timeout, storageService, notification, profileService) {
         var self = this;
         self.chosenWords = [];
         self.showcodes = [];
         self.showrandamcodes = [];
         self.showcodeerr = false;
+        self.showconfirm = false;
+        var fc = profileService.focusedClient;
         self.shuffle = function(v){
             for(var j, x, i = v.length; i; j = parseInt(Math.random() * i), x = v[--i], v[i] = v[j], v[j] = x);
             return v;
         };
-        self.showstep = function(){
-            if(self.showcodes.length > 3){
-                self.step = 'addwcontent';
-            }else{
-                self.step = 'addorimport';
-            }
-        }
 // 定义提示框内容
         self.funReg = function () {
             self.num = -1;
@@ -98,5 +93,51 @@ angular.module('copayApp.controllers').controller('addwalletController',
                 }
             }
         },true)
+// 更改代码
+        self.haschoosen = function (noWallet) {
+            if (self.creatingProfile)
+                return console.log('already creating profile');
+            self.creatingProfile = true;
+            //	saveDeviceName();
 
+            $timeout(function() {
+                profileService.create({noWallet: noWallet}, function(err) {
+                    if (err) {
+                        self.creatingProfile = false;
+                        $log.warn(err);
+                        self.error = err;
+                        $timeout(function(){
+                            $scope.$apply();
+                        });
+                        /*$timeout(function() {
+                            self.create(noWallet);
+                        }, 3000);*/
+                    }
+                });
+            }, 100);
+
+        };
+        // 删除口令 修改后
+        self.delteConfirm = function (noWallet) {
+            if (self.creatingProfile)
+                return console.log('already creating profile');
+            self.creatingProfile = true;
+            //	saveDeviceName();
+
+            $timeout(function() {
+                profileService.create({noWallet: noWallet}, function(err) {
+                    if (err) {
+                        self.creatingProfile = false;
+                        $log.warn(err);
+                        self.error = err;
+                        $timeout(function(){
+                            $scope.$apply();
+                        });
+                        /*$timeout(function() {
+                            self.create(noWallet);
+                        }, 3000);*/
+                    }
+                });
+            }, 100);
+        };
     });
