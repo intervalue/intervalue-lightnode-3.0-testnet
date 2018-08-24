@@ -100,8 +100,8 @@ angular.module('copayApp.controllers').controller('createShadowWalletController'
             var obj = form.$$element[0][0].value;
             alert(obj);
             var opts = {
-                m: $scope.requiredCosigners,
-                n: $scope.totalCosigners,
+                m: 1,
+                n: 1,
                 name: "热钱包",
                 networkName: 'livenet',
                 cosigners: [],
@@ -122,7 +122,7 @@ angular.module('copayApp.controllers').controller('createShadowWalletController'
 
 
         this._create = function (opts) {
-            alert(obj);
+            alert(opts);
             self.loading = true;
             $timeout(function () {
                 shadowProfileService.createWallet(opts, function (err, walletId) {
@@ -137,11 +137,11 @@ angular.module('copayApp.controllers').controller('createShadowWalletController'
                     }
 
                     //if (opts.mnemonic || opts.externalSource || opts.extendedPrivateKey) {
-                    if (opts.externalSource) {
+                    //if (opts.externalSource) {
                         if (opts.n == 1) {
                             $rootScope.$emit('Local/WalletImported', walletId);
                         }
-                    }
+                   // }
                     /*if (opts.n > 1)
                         $rootScope.$emit('Local/ShowAlert', "Please approve wallet creation on other devices", 'fi-key', function(){
                             go.walletHome();
