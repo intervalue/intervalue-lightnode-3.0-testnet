@@ -11,13 +11,6 @@ angular.module('copayApp.controllers').controller('addwalletController',
             for(var j, x, i = v.length; i; j = parseInt(Math.random() * i), x = v[--i], v[i] = v[j], v[j] = x);
             return v;
         };
-        self.copyArr = function(arr){
-            let res = []
-            for (let i = 0; i < arr.length; i++) {
-                res.push(arr[i])
-            }
-            return res
-        }
         self.showstep = function(){
             if(self.showcodes.length > 3){
                 self.step = 'addwcontent';
@@ -32,11 +25,10 @@ angular.module('copayApp.controllers').controller('addwalletController',
             var newlist = [];
             if(self.showrandamcodes.length > 3){
                 // 显示乱序提示框
-                self.showrandamcodes = self.shuffle(self.copyArr(self.showrandamcodes));
+                self.showrandamcodes = self.shuffle(JSON.parse(JSON.stringify(self.showrandamcodes)));
                 // 显示乱序提示框  结束
                 return false;
             }else{
-                console.log('33333333')
                 for(var i = 0; i <= 11; i++){
                     var newStr = {
                         id: i,
@@ -45,8 +37,8 @@ angular.module('copayApp.controllers').controller('addwalletController',
                     };
                     newlist.push(newStr);
                 }
-                self.showcodes = newlist;
-                self.showrandamcodes = self.shuffle(self.copyArr(newlist));
+                self.showcodes = JSON.parse(JSON.stringify(newlist));
+                self.showrandamcodes = self.shuffle(JSON.parse(JSON.stringify(newlist)));
             }
             $timeout(function() {
                 $scope.$digest();
@@ -57,10 +49,7 @@ angular.module('copayApp.controllers').controller('addwalletController',
             self.showcodeerr = false;
             if($event.srcElement.tagName == 'SPAN'){
                 self.showrandamcodes.forEach(function(item, index){
-
                     if (item.id == $event.srcElement.id) {
-                        console.log(item.id)
-                        console.log(index)
                         self.showrandamcodes[index].chosen = true;
                         self.chosenWords.push({
                             id: item.id,
@@ -93,7 +82,11 @@ angular.module('copayApp.controllers').controller('addwalletController',
             return JSON.stringify(self.chosenWords);
         }, function(newValue, oldValue){
             if(self.chosenWords.length > 11){
-                self.step = 'deletecode';
+                if(JSON.stringify(self.chosenWords) == JSON.stringify(self.showcodes)){
+                    self.step = 'deletecode';
+                }else{
+                    self.showcodeerr = true;
+                }
             }
         },true)
 
