@@ -106,6 +106,10 @@ API.prototype.clearMnemonic = function () {
   return this.credentials.clearMnemonic();
 };
 
+API.prototype.createRandomMnemonic = function (language) {
+    return Credentials.createRandomMnemonic(language);
+};
+
 
 /**
  * Seed from extended private key
