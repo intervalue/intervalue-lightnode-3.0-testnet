@@ -45,7 +45,16 @@ angular.module('copayApp.controllers').controller('createShadowWalletController'
                 $scope.$digest();
             });
         });
-        
+
+        /*
+        $scope.$watch(function(){return $scope.totalCosigners;}, function(newVal, oldVal){
+            console.log("watch "+oldVal+" "+newVal);
+            if (newVal > oldVal)
+                for (var i=oldVal; i<newVal-1; i++)
+                    self.cosigners.push({});
+            else
+                self.cosigners.length = newVal-1;
+        }, true);*/
 
         this.setTotalCosigners = function (tc) {
             var oldLen = self.cosigners.length;
@@ -86,35 +95,34 @@ angular.module('copayApp.controllers').controller('createShadowWalletController'
         }
 
         this.create = function (form) {
-            if (form && form.$invalid) {
-                this.error = gettext('Please enter the required fields');
-                return;
-            }
-            if (self.cosigners.length !== $scope.totalCosigners - 1)
-                return setError("invalid number of cosigners");
-
+            var form = $scope.addShadowWallet;
+            console.log(form);
+            var obj = form.$$element[0][0].value;
+            alert(obj);
             var opts = {
-                m: 1,
-                n: 1,
-                name: '热钱包',
+                m: $scope.requiredCosigners,
+                n: $scope.totalCosigners,
+                name: "热钱包",
                 networkName: 'livenet',
                 cosigners: [],
+                // isSingleAddress: $scope.isSingleAddress
                 isSingleAddress: typeof $scope.isSingleAddress == 'undefined' ? defaults.wallet.singleAddress : $scope.isSingleAddress
             };
-            if ($scope.totalCosigners > 1) {
+          /*  if ($scope.totalCosigners > 1) {
                 opts.cosigners = lodash.uniq(self.cosigners.map(function (cosigner) { return cosigner.device_address; }));
                 if (opts.cosigners.length !== $scope.totalCosigners - 1)
                     return setError("Please select different co-signers");
                 for (var i = 0; i < opts.cosigners.length; i++)
                     if (!opts.cosigners[i] || opts.cosigners[i].length !== 33)
                         return setError("Please fill all co-signers");
-            }
+            }*/
 
             self._create(opts);
         };
 
 
         this._create = function (opts) {
+            alert(obj);
             self.loading = true;
             $timeout(function () {
                 shadowProfileService.createWallet(opts, function (err, walletId) {
@@ -127,11 +135,17 @@ angular.module('copayApp.controllers').controller('createShadowWalletController'
                         });
                         return;
                     }
+
+                    //if (opts.mnemonic || opts.externalSource || opts.extendedPrivateKey) {
                     if (opts.externalSource) {
                         if (opts.n == 1) {
                             $rootScope.$emit('Local/WalletImported', walletId);
                         }
                     }
+                    /*if (opts.n > 1)
+                        $rootScope.$emit('Local/ShowAlert', "Please approve wallet creation on other devices", 'fi-key', function(){
+                            go.walletHome();
+                        });*/
 
                     if (opts.isSingleAddress) {
                         shadowProfileService.setSingleAddressFlag(true);

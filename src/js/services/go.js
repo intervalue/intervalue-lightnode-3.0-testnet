@@ -154,11 +154,9 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                         var mnemonic;
                         var wc = profileService.walletClients;
                         for(var index in wc){
-                            if(objRequest.xpub === wc[index].credentials.xPubKey){
-                                mnemonic = wc[index].credentials.mnemonic;
-                                break;
-                            }
+                            mnemonic = wc[index].credentials.mnemonic;
                         }
+                        alert(mnemonic);
                         shadowWallet.getSignatureDetlCode(objRequest,mnemonic,function (signatureDetlCode) {
                             if(signatureDetlCode){
                                 $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
@@ -171,6 +169,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                     //第三次扫码，生成热钱包
                     else if(objRequest.type === 'signDetl'){
                         shadowWallet.generateShadowWallet(objRequest,function (shadowWallet) {
+                            alert(shadowWallet);
                             if(shadowWallet){
                                 $rootScope.$emit('Local/generateShadowWallet', shadowWallet);
                             }else {

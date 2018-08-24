@@ -1670,7 +1670,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
      * 生成待授权二维码
      */
     $rootScope.$on('Local/ShadowAddress', function(event,address){
-        alert(address);
         self.signatureAddr = address;
         $timeout(function () {
             $rootScope.$apply();
@@ -1704,15 +1703,15 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             if(signatureCodeQRCode){
                 self.signatureCodeQRCode = JSON.stringify(signatureCodeQRCode);
                 self.showshadow = true;
-                self.shadowstep = 'hot2'
-                $timeout(function () {
-                    $rootScope.$apply();
-                });
+                self.shadowstep = 'hot2';
                 console.log(signatureCodeQRCode);
             }else{
                 self.showshadow = false;
                 alert('Please scan the cold wallet QR code or fill in the address first!!');
             }
+            $timeout(function () {
+                $rootScope.$apply();
+            });
         });
     });
 
@@ -1736,8 +1735,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   });
 
   $rootScope.$on('Local/generateShadowWallet', function(event,shadowWallet){
-      self.signatureData = shadowWallet.signature;
-      self.shadowWallet = JSON.stringify(shadowWallet) ;
+      self.signatureData = shadowWallet.sign;
+      self.shadowWallet = JSON.stringify(shadowWallet);
       self.shadowstep = 'hot3';
       $timeout(function () {
           $rootScope.$apply();

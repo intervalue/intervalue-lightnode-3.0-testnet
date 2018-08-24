@@ -21,7 +21,10 @@ angular.module('copayApp.controllers').controller('importwalletController',
             console.log(form);
             var address = form.$$element[0][0].value;
             console.log(address);
-            $rootScope.$emit('Local/ShadowAddressForm',address);
+            if(address && address.length == 32){
+                $rootScope.$emit('Local/ShadowAddressForm',address);
+            }
+
         }
 
     });

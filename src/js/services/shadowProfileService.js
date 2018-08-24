@@ -258,7 +258,7 @@ angular.module('copayApp.services')
             var walletClient = bwcService.getClient();
             var network = opts.networkName || 'livenet';
 
-/*
+
             if (opts.mnemonic) {
                 try {
                     opts.mnemonic = root._normalizeMnemonic(opts.mnemonic);
@@ -280,8 +280,7 @@ angular.module('copayApp.services')
                     $log.warn(ex);
                     return cb(gettext('Could not create using the specified extended private key'));
                 }
-            } else*/
-                if (opts.extendedPublicKey) {
+            } else if (opts.extendedPublicKey) {
                 try {
                     walletClient.seedFromExtendedPublicKey(opts.extendedPublicKey, opts.externalSource, opts.entropySource, {
                         account: opts.account || 0,
@@ -341,13 +340,13 @@ angular.module('copayApp.services')
                     if (err)
                         return cb(gettext('Error creating wallet') + ": " + err);
                     console.log("created wallet, client: ", JSON.stringify(walletClient));
-                    /*var xPrivKey = walletClient.credentials.xPrivKey;
+                    var xPrivKey = walletClient.credentials.xPrivKey;
                     var mnemonic = walletClient.credentials.mnemonic;
-                    console.log("mnemonic: " + mnemonic + ', xPrivKey: ' + xPrivKey);*/
+                    console.log("mnemonic: " + mnemonic + ', xPrivKey: ' + xPrivKey);
                     var p = Profile.create({
                         credentials: [JSON.parse(walletClient.export())],
-                        xPrivKey: null,
-                        mnemonic: null,
+                        xPrivKey: xPrivKey,
+                        mnemonic: mnemonic,
                         tempDeviceKey: tempDeviceKey.toString('base64'),
                         my_device_address: device.getMyDeviceAddress()
                     });
@@ -360,19 +359,24 @@ angular.module('copayApp.services')
         // create additional wallet (the first wallet is created in _createNewProfile())
         root.createWallet = function (opts, cb) {
             $log.debug('Creating Wallet:', opts);
-  /*          if (!root.focusedClient.credentials.xPrivKey) { // locked
+            if (!root.focusedClient.credentials.xPrivKey) { // locked
                 root.unlockFC(null, function (err) {
                     if (err)
                         return cb(err.message);
                     root.createWallet(opts, cb);
                 });
                 return console.log('need password to create new wallet');
-            }*/
+            }
             var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
             walletDefinedByKeys.readNextAccount(function (account) {
                 console.log("next account = " + account);
                 if (!opts.extendedPrivateKey && !opts.mnemonic) {
-
+                    // if (!root.focusedClient.credentials.xPrivKey)
+                    // 	throw Error("no root.focusedClient.credentials.xPrivKey");
+                    //         $log.debug("reusing xPrivKey from focused client");
+                    //         opts.extendedPrivateKey = root.focusedClient.credentials.xPrivKey;
+                    //         opts.mnemonic = root.profile.mnemonic;
+                    // opts.account = account;
                     opts.account = 0;
                 }
                 root._seedWallet(opts, function (err, walletClient) {
