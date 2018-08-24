@@ -23,25 +23,26 @@
     <div class="addwcontent" ng-if="addw.step == 'addwallet'">
         <p>！密码用于交易授权，强度非常重要</p>
         <p>！InterValue不存储密码，也无法帮您找回，请务必牢记</p>
+        <p ng-if="addw.addwalleterr">密码不一致</p>
         <div class="adcpitem">
             <div mdinputc class="adcpmdic">
                 <label>钱包名称</label>
-                <input mdinput type="text">
+                <input mdinput type="text" ng-model="addw.addwname">
             </div>
         </div>
         <div class="adcpitem">
             <div mdinputc class="adcpmdic">
                 <label>密码</label>
-                <input mdinput type="text">
+                <input mdinput type="text" ng-model="addw.addwpass">
             </div>
         </div>
         <div class="adcpitem">
             <div mdinputc class="adcpmdic">
                 <label>重复密码</label>
-                <input mdinput type="text">
+                <input mdinput type="text" ng-model="addw.addwrpass">
             </div>
         </div>
-        <button ng-click="addw.step = 'showcode'">下一步</button>
+        <button ng-click="addw.passequal()" ng-disabled="!addw.addwname || !addw.addwpass || !addw.addwrpass">下一步</button>
     </div>
     <!--创建钱包信息  end-->
     <!--显示钱包口令  start-->
@@ -74,12 +75,12 @@
     <div class="addwcontent" ng-if="addw.step == 'deletecode'">
         <p>确认您的钱包助记词</p>
         <button ng-click="addw.showconfirm = true;">删除助记词</button>
-        <button ng-click="addw.haschoosen(); index.splashClick = false">跳过</button>
+        <button ng-click="addw.delteConfirm('noWallet', addw.addwname, addw.addwpass, addw.mnemonic);">跳过</button>
         <div ng-if="addw.showconfirm" class="addwcontent">
             <div>
                 <p>您确定要删除助记词吗？</p>
                 <p>此操作将彻底删除应用中助记词并且不可恢复，请再次确认您已经将助记词备份到安全的地方。</p>
-                <button ng-click="addw.delteConfirm();">确认</button>
+                <button ng-click="addw.delteConfirm('noWallet', addw.addwname, addw.addwpass, addw.mnemonic);">确认</button>
                 <button ng-click="addw.showconfirm = false;">取消</button>
             </div>
         </div>

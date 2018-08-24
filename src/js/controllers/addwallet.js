@@ -3,12 +3,26 @@
 angular.module('copayApp.controllers').controller('addwalletController',
     function($rootScope, $scope, $timeout, storageService, notification, profileService) {
         var self = this;
+        self.addwname = '';
+        self.addwpass = '';
+        self.addwrpass = '';
         self.chosenWords = [];
         self.showcodes = [];
         self.showrandamcodes = [];
+        self.mnemonic = '';
         self.showcodeerr = false;
+        self.addwalleterr = false;
         self.showconfirm = false;
         var fc = profileService.focusedClient;
+        self.passequal = function(){
+            if(self.addwpass !== self.addwrpass){
+                self.addwalleterr = true;
+                return false;
+            }else{
+                self.step = "showcode";
+            }
+        }
+        //乱序
         self.shuffle = function(v){
             for(var j, x, i = v.length; i; j = parseInt(Math.random() * i), x = v[--i], v[i] = v[j], v[j] = x);
             return v;
@@ -77,7 +91,6 @@ angular.module('copayApp.controllers').controller('addwalletController',
             return JSON.stringify(self.chosenWords);
         }, function(newValue, oldValue){
             if(self.chosenWords.length > 11){
-
                 var chostr = '';
                 for(var i = 0 ; i < self.chosenWords.length; i++){
                     chostr += self.chosenWords[i].id;
@@ -87,6 +100,9 @@ angular.module('copayApp.controllers').controller('addwalletController',
                     showstr += self.showcodes[i].id;
                 }
                 if(chostr == showstr){
+                    for(var i = 0 ; i < self.showcodes.length; i++){
+                        self.mnemonic += ' '+self.showcodes[i].str;
+                    }
                     self.step = 'deletecode';
                 }else{
                     self.showcodeerr = true;
@@ -118,14 +134,14 @@ angular.module('copayApp.controllers').controller('addwalletController',
 
         };
         // 删除口令 修改后
-        self.delteConfirm = function (noWallet) {
+        self.delteConfirm = function (noWallet,walletName,mnemonic,passphrase) {
             if (self.creatingProfile)
                 return console.log('already creating profile');
             self.creatingProfile = true;
             //	saveDeviceName();
 
             $timeout(function() {
-                profileService.create({noWallet: noWallet}, function(err) {
+                profileService.create({noWallet: noWallet, walletName:walletName, password:passphrase, mnemonic:mnemonic}, function(err) {
                     if (err) {
                         self.creatingProfile = false;
                         $log.warn(err);
