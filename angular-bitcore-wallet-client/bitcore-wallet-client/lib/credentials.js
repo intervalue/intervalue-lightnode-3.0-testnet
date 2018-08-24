@@ -260,7 +260,8 @@ Credentials.prototype.hasWalletInfo = function () {
 };
 
 Credentials.prototype.isPrivKeyEncrypted = function () {
-  return (!!this.xPrivKeyEncrypted) && !this.xPrivKey;
+  // return (!!this.xPrivKeyEncrypted) && !this.xPrivKey;
+  return (!!this.xPrivKeyEncrypted);
 };
 
 Credentials.prototype.hasPrivKeyEncrypted = function () {
@@ -300,8 +301,8 @@ Credentials.prototype.lock = function () {
   if (!this.xPrivKeyEncrypted)
     throw new Error('Could not lock, no encrypted private key');
 
-  delete this.xPrivKey;
-  delete this.mnemonic;
+  // delete this.xPrivKey;
+  // delete this.mnemonic;
 };
 
 Credentials.prototype.unlock = function (password) {
