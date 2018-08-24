@@ -615,13 +615,13 @@ angular.module('copayApp.services')
         throw Error("no xPrivKeyEncrypted after setting encryption");
       root.profile.xPrivKeyEncrypted = fc.credentials.xPrivKeyEncrypted;
       root.profile.mnemonicEncrypted = fc.credentials.mnemonicEncrypted;
-      delete root.profile.xPrivKey;
-      delete root.profile.mnemonic;
+      // delete root.profile.xPrivKey;
+      // delete root.profile.mnemonic;
       var p_cre = lodash.find(root.profile.credentials, { walletId: fc.credentials.walletId });
       p_cre.xPrivKeyEncrypted = fc.credentials.xPrivKeyEncrypted;
       p_cre.mnemonicEncrypted = fc.credentials.mnemonicEncrypted;
-      delete p_cre.xPrivKey;
-      delete p_cre.mnemonic;
+      // delete p_cre.xPrivKey;
+      // delete p_cre.mnemonic;
 
       root.lockFC();
       // root.walletClients[fc.credentials.walletId].credentials.xPrivKeyEncrypted = root.profile.xPrivKeyEncrypted;
