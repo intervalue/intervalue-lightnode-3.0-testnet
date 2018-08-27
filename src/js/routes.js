@@ -559,6 +559,18 @@ angular
               }
           }
       })
+      .state('receive', {
+          url: '/receive',
+          templateUrl: 'views/receive.html',
+          walletShouldBeComplete: true,
+          needProfile: true,
+          views: {
+              'main@': {
+                  templateUrl: 'views/receive.html'
+
+              }
+          }
+      })
       .state('cordova', { // never used
         url: '/cordova/:status/:isHome',
         views: {
