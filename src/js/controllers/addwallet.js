@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('addwalletController',
-    function ($rootScope, $scope, $timeout, storageService, notification, profileService, bwcService) {
+    function ($rootScope, $scope, $timeout, storageService, notification, profileService, bwcService, $log) {
         var self = this;
         self.addwname = '';
         self.addwpass = '';
