@@ -18,7 +18,7 @@
         <div ng-click="$root.go('walletnamea.changewalletp')">
             修改密码
         </div>
-        <button ng-click="$root.go('backup');index.backwaname = true;">备份助记词</button>
+        <button ng-show="nameW.mnemonic || nameW.mnemonicEncrypted" ng-click="$root.go('backup');index.backwaname = true;">备份助记词</button>
         <button>删除钱包</button>
     </div>
 
