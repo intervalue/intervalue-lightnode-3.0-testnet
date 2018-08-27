@@ -334,7 +334,9 @@ input.datafeed_input {
             </div>
             <button ng-click="$root.go('create')">创建钱包</button>
             <button ng-click="$root.go('importwallet')">导入钱包</button>
-            <button ng-click="index.generatePubkey(index.shared_address || home.addr[index.walletId])">冷钱包验证码</button>
+            <!--<button ng-click="index.generatePubkey(index.shared_address || home.addr[index.walletId])">冷钱包验证码</button>-->
+            <div ng-controller="createShadowWalletController  as cs"><button ng-click="cs.create()">冷钱包验证码</button></div>
+
         </div>
     </div> <!-- END wallet -->
 
