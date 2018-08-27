@@ -654,6 +654,8 @@ angular
             }
           } else {
             $log.debug('Profile loaded ... Starting UX.');
+            console.log(JSON.stringify((profileService.profile.credentials)));
+            $rootScope.adddataw = profileService.profile.credentials;
             return $state.transitionTo(toState.name || toState, toParams);
           }
         });

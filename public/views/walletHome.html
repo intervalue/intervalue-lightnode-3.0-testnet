@@ -102,7 +102,7 @@
                         <div>
                             <div>
                                 <span>{{ (index.alias || index.walletName)}}</span>
-                                <span ng-show="index.needsBackupa" ng-click="$root.go('backup')">请备份</span>
+                                <span ng-show="index.needsBackupa" ng-click="$root.go('backup');index.backhome = true;">请备份</span>
                             </div>
                             <div><span></span> INVE</div>
                             <div ng-click="$root.go('receive')">二维码</div>
@@ -274,18 +274,18 @@
             </nav>
 
             <div class="adwwto">
-                <div class="adwwt" ng-repeat="item in index.adddataw">
-                    <div class="adwwtflex" ng-click="index.towalletname(item.name, item.addr, item.ammount, item.walletId)">
+                <div class="adwwt" ng-repeat="item in adddataw">
+                    <div class="adwwtflex" ng-click="index.towalletname(item.walletName, item.addr, item.account, item.walletId, item.mnemonic, item.mnemonicEncrypted)">
                         <i class="fi-widget size-18 vm wallet-settings"></i>
                         <div class="adwwt100">
-                            <div class="adwwtname">{{item.name}}</div>
+                            <div class="adwwtname">{{item.walletName}}<span ng-show="item.mnemonic || item.mnemonicEncrypted" ng-click="$root.go('backup');index.backwallet=true">请备份</span></div>
                             <div class="adwwtaddr">{{item.addr}}</div>
                             <div class="adwwtaddr">{{item.walletId}}</div>
                         </div>
                         <i class="icon-arrow-right3 size-24"></i>
                     </div>
                     <div class="adwwtnum">
-                        {{item.ammount}}<span>INVE</span>
+                        {{item.account}}<span>INVE</span>
                     </div>
                 </div>
                 <div ng-controller="shadowDeviceControllers as shadow">

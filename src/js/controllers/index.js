@@ -29,6 +29,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   self.signatureAddr = '';
   self.shadowstep = 'hot1';
   self.needsBackupa = true;
+  self.backwallet = false;
+  self.backhome = false;
 
   function updatePublicKeyRing(walletClient, onDone) {
     var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
@@ -1742,15 +1744,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
           $rootScope.$apply();
       });
   });
-  //fault data
-  console.log(profileService.walletClients) ;
-  var shadowWallet = require('intervaluecore/shadowWallet');
-  shadowWallet.getWallets(function (data) {
-      self.adddataw =data;
-  });
-  //   self.adddataw = profileService.profile.credentials;
-  self.towalletname = function (name, addr, ammount, walletid) {
-    $state.go('walletnamea', { name: name, addr: addr, ammount: ammount, walletid: walletid, });
+  self.towalletname = function (name, addr, ammount, walletid, mnemonic, mnemonicEncrypted) {
+    $state.go('walletnamea', { name: name, addr: addr, ammount: ammount, walletid: walletid, mnemonic: mnemonic, mnemonicEncrypted: mnemonicEncrypted});
   };
 
   /**
