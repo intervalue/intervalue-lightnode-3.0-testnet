@@ -16,6 +16,7 @@
                     <span translate>Import wallet </span>
                 </a>
             </li>
+            {{addw.ducodes}}
         </ul>
     </div>
     <!--选择导入钱包还是创建钱包  end-->
@@ -75,12 +76,12 @@
     <div class="addwcontent" ng-if="addw.step == 'deletecode'">
         <p>确认您的钱包助记词</p>
         <button ng-click="addw.showconfirm = true;">删除助记词</button>
-        <button ng-click="addw.delteConfirm('noWallet', addw.addwname, addw.addwpass, addw.mnemonic);">跳过</button>
+        <button ng-click="addw.delteConfirm(addw.addwname, addw.addwpass, addw.mnemonic);">跳过</button>
         <div ng-if="addw.showconfirm" class="addwcontent">
             <div>
                 <p>您确定要删除助记词吗？</p>
                 <p>此操作将彻底删除应用中助记词并且不可恢复，请再次确认您已经将助记词备份到安全的地方。</p>
-                <button ng-click="addw.delteConfirm('noWallet', addw.addwname, addw.addwpass, addw.mnemonic);">确认</button>
+                <button ng-click="addw.delteConfirm(addw.addwname, addw.addwpass, addw.mnemonic);">确认</button>
                 <button ng-click="addw.showconfirm = false;">取消</button>
             </div>
         </div>

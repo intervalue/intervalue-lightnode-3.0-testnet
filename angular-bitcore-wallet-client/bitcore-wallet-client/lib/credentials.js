@@ -60,6 +60,15 @@ var wordsForLang = {
   'fr': Mnemonic.Words.FRENCH,
 };
 
+Credentials.createRandomMnemonic = function (language) {
+    var m = new Mnemonic(wordsForLang[language]);
+    while (!Mnemonic.isValid(m.toString())) {
+        console.log('--- retrying mnemonic generation');
+        m = new Mnemonic(wordsForLang[language])
+    };
+    return m.toString();
+}
+
 Credentials.createWithMnemonic = function (network, passphrase, language, account) {
   _checkNetwork(network);
   if (!wordsForLang[language])
@@ -260,8 +269,7 @@ Credentials.prototype.hasWalletInfo = function () {
 };
 
 Credentials.prototype.isPrivKeyEncrypted = function () {
-  // return (!!this.xPrivKeyEncrypted) && !this.xPrivKey;
-  return (!!this.xPrivKeyEncrypted);
+  return (!!this.xPrivKeyEncrypted) && !this.xPrivKey;
 };
 
 Credentials.prototype.hasPrivKeyEncrypted = function () {
@@ -301,8 +309,8 @@ Credentials.prototype.lock = function () {
   if (!this.xPrivKeyEncrypted)
     throw new Error('Could not lock, no encrypted private key');
 
-  // delete this.xPrivKey;
-  // delete this.mnemonic;
+  delete this.xPrivKey;
+  delete this.mnemonic;
 };
 
 Credentials.prototype.unlock = function (password) {

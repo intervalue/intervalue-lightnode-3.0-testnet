@@ -621,7 +621,7 @@ angular
           if (err) {
             if (err.message && err.message.match('NOPROFILE')) {
               $log.debug('No profile... redirecting');
-              return $state.transitionTo('splash');
+              return $state.transitionTo('addwallet');
             } else if (err.message && err.message.match('NONAGREEDDISCLAIMER')) {
               $log.debug('Display disclaimer... redirecting');
               return $state.transitionTo('preferencesGlobal.preferencesAbout.disclaimer');

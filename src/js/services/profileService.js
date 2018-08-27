@@ -265,6 +265,7 @@ angular.module('copayApp.services')
           walletClient.seedFromMnemonic(opts.mnemonic, {
             network: network,
             passphrase: opts.passphrase,
+            password: opts.password,
             account: opts.account || 0,
             derivationStrategy: opts.derivationStrategy || 'BIP44',
           });
@@ -297,6 +298,7 @@ angular.module('copayApp.services')
           walletClient.seedFromRandomWithMnemonic({
             network: network,
             passphrase: opts.passphrase,
+            password: opts.password,
             language: lang,
             account: opts.account || 0,
           });
@@ -306,6 +308,7 @@ angular.module('copayApp.services')
             $log.info('Using default language for mnemonic');
             walletClient.seedFromRandomWithMnemonic({
               network: network,
+              password: opts.password,
               passphrase: opts.passphrase,
               account: opts.account || 0,
             });
@@ -359,14 +362,14 @@ angular.module('copayApp.services')
     // create additional wallet (the first wallet is created in _createNewProfile())
     root.createWallet = function (opts, cb) {
       $log.debug('Creating Wallet:', opts);
-      if (!root.focusedClient.credentials.xPrivKey) { // locked
-        root.unlockFC(null, function (err) {
-          if (err)
-            return cb(err.message);
-          root.createWallet(opts, cb);
-        });
-        return console.log('need password to create new wallet');
-      }
+      // if (!root.focusedClient.credentials.xPrivKey) { // locked
+      //   root.unlockFC(null, function (err) {
+      //     if (err)
+      //       return cb(err.message);
+      //     root.createWallet(opts, cb);
+      //   });
+      //   return console.log('need password to create new wallet');
+      // }
       var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
       walletDefinedByKeys.readNextAccount(function (account) {
         console.log("next account = " + account);
