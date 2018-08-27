@@ -4,7 +4,6 @@ angular.module('copayApp.controllers').controller('walletnameaController',
     function($rootScope, $scope, $timeout, profileService, go, gettext, $stateParams, isCordova) {
 
         var self = this;
-        self.show = false;
         self.walletid = $stateParams.walletid;
         self.name = $stateParams.name;
         self.addr = $stateParams.addr;
