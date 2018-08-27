@@ -362,14 +362,14 @@ angular.module('copayApp.services')
     // create additional wallet (the first wallet is created in _createNewProfile())
     root.createWallet = function (opts, cb) {
       $log.debug('Creating Wallet:', opts);
-      if (!root.focusedClient.credentials.xPrivKey) { // locked
-        root.unlockFC(null, function (err) {
-          if (err)
-            return cb(err.message);
-          root.createWallet(opts, cb);
-        });
-        return console.log('need password to create new wallet');
-      }
+      // if (!root.focusedClient.credentials.xPrivKey) { // locked
+      //   root.unlockFC(null, function (err) {
+      //     if (err)
+      //       return cb(err.message);
+      //     root.createWallet(opts, cb);
+      //   });
+      //   return console.log('need password to create new wallet');
+      // }
       var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
       walletDefinedByKeys.readNextAccount(function (account) {
         console.log("next account = " + account);
