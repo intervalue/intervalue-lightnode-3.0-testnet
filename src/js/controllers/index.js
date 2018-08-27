@@ -31,6 +31,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   self.needsBackupa = true;
   self.backwallet = false;
   self.backhome = false;
+  self.backwaname = false;
 
   function updatePublicKeyRing(walletClient, onDone) {
     var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
