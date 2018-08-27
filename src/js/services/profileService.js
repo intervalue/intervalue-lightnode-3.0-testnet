@@ -265,6 +265,7 @@ angular.module('copayApp.services')
           walletClient.seedFromMnemonic(opts.mnemonic, {
             network: network,
             passphrase: opts.passphrase,
+            password: opts.password,
             account: opts.account || 0,
             derivationStrategy: opts.derivationStrategy || 'BIP44',
           });
@@ -297,6 +298,7 @@ angular.module('copayApp.services')
           walletClient.seedFromRandomWithMnemonic({
             network: network,
             passphrase: opts.passphrase,
+            password: opts.password,
             language: lang,
             account: opts.account || 0,
           });
@@ -306,6 +308,7 @@ angular.module('copayApp.services')
             $log.info('Using default language for mnemonic');
             walletClient.seedFromRandomWithMnemonic({
               network: network,
+              password: opts.password,
               passphrase: opts.passphrase,
               account: opts.account || 0,
             });
