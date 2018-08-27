@@ -547,6 +547,18 @@ angular
               }
           }
       })
+      .state('backup', {
+          url: '/backup',
+          templateUrl: 'views/backup.html',
+          walletShouldBeComplete: true,
+          needProfile: true,
+          views: {
+              'main@': {
+                  templateUrl: 'views/backup.html'
+
+              }
+          }
+      })
       .state('cordova', { // never used
         url: '/cordova/:status/:isHome',
         views: {
