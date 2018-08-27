@@ -281,6 +281,8 @@
                             <div class="adwwtname">{{item.walletName}}<span ng-show="item.mnemonic || item.mnemonicEncrypted" ng-click="$root.go('backup');index.backwallet=true">请备份</span></div>
                             <div class="adwwtaddr">{{item.addr}}</div>
                             <div class="adwwtaddr">{{item.walletId}}</div>
+                            {{item.mnemonic}}
+                            {{item.mnemonicEncrypted}}
                         </div>
                         <i class="icon-arrow-right3 size-24"></i>
                     </div>

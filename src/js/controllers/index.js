@@ -31,6 +31,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   self.needsBackupa = true;
   self.backwallet = false;
   self.backhome = false;
+  self.backwaname = false;
 
 
   function updatePublicKeyRing(walletClient, onDone) {
@@ -1744,6 +1745,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
       });
   });
   self.towalletname = function (name, addr, ammount, walletid, mnemonic, mnemonicEncrypted) {
+    console.log(22222222222222222222222)
+    console.log(mnemonic)
+      console.log(mnemonicEncrypted)
     $state.go('walletnamea', { name: name, addr: addr, ammount: ammount, walletid: walletid, mnemonic: mnemonic, mnemonicEncrypted: mnemonicEncrypted});
   };
 

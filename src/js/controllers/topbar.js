@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('topbarController', function($scope, $rootScope, go) {
+angular.module('copayApp.controllers').controller('topbarController', function($scope, $rootScope, go, $state) {
 
     this.onQrCodeScanned = function(data) {
         go.handleUri(data);
@@ -27,4 +27,7 @@ angular.module('copayApp.controllers').controller('topbarController', function($
         go.wallet();
     };
 
+    this.goToWaname = function() {
+        $state.go('walletnamea');
+    };
 });

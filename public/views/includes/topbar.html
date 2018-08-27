@@ -4,18 +4,21 @@
            <!--ng-click="index.openMenu()"><i class="fi-list size-24"></i>-->
         <!--</a>-->
         <a ng-show="goBackToState"
-           ng-click="$root.go('^', true); goBackToState = null"><i class="icon-arrow-left3 icon-back"></i>
+           ng-click="$root.go('^', true); goBackToState = null">
+            <i class="icon-arrow-left3 icon-back"></i>
             <span class="text-back">{{'Back'|translate}}</span>
         </a>
         <a ng-show="goToWallet"
-           ng-click="topbar.goWallet();goToWallet = null;index.backwallet = false;"><i class="icon-arrow-left3 icon-back"></i>
+           ng-click="topbar.goWallet();goToWallet = null;index.backwallet = false;">
+            <i class="icon-arrow-left3 icon-back"></i>
             <span class="text-back">{{'Back'|translate}}</span>
         </a>
         <a ng-show="closeToHome" class="p10"
            ng-click="topbar.goHome(); closeToHome = null;index.backhome = false;">
             <span class="text-close">{{'Close'|translate}}</span>
         </a>
-        <a ng-show="historyBack">
+        <a ng-show="goToWaname"
+           ng-click="topbar.goToWaname(); goToWaname = null;index.backwaname = false;">
             <i class="icon-arrow-left3 icon-back"></i>
             <span class="text-back">{{'Back'|translate}}</span>
         </a>
