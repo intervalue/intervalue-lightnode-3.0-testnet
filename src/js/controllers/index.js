@@ -32,6 +32,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   self.backwallet = false;
   self.backhome = false;
 
+
   function updatePublicKeyRing(walletClient, onDone) {
     var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
     walletDefinedByKeys.readCosigners(walletClient.credentials.walletId, function (arrCosigners) {
@@ -868,11 +869,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
       return breadcrumbs.add('updateAll not complete yet');
 
     // reconnect if lost connection
-    var device = require('intervaluecore/device.js');
-    device.loginToHub();
-
+    /*var device = require('intervaluecore/device.js');
+    device.loginToHub();*/
     $timeout(function () {
-
      /* if (!opts.quiet)
         self.setOngoingProcess('updatingStatus', true);
 
@@ -1432,7 +1431,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     return value;
   };
-
+ console.log(profileService.walletClients);
   $rootScope.$on('Local/ClearHistory', function (event) {
     $log.debug('The wallet transaction history has been deleted');
     self.txHistory = self.completeHistory = [];
