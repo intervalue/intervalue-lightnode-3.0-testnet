@@ -1744,11 +1744,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   });
   //fault data
   console.log(profileService.walletClients) ;
-  // var shadowWallet = require('intervaluecore/shadowWallet');
-  // shadowWallet.getWallets(function (data) {
-  //     self.adddataw =data;
-  // });
-    self.adddataw = profileService.profile.credentials;
+  var shadowWallet = require('intervaluecore/shadowWallet');
+  shadowWallet.getWallets(function (data) {
+      self.adddataw =data;
+  });
+  //   self.adddataw = profileService.profile.credentials;
   self.towalletname = function (name, addr, ammount, walletid) {
     $state.go('walletnamea', { name: name, addr: addr, ammount: ammount, walletid: walletid, });
   };

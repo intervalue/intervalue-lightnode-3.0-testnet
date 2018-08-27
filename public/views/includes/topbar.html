@@ -15,6 +15,10 @@
            ng-click="topbar.goHome(); closeToHome = null">
             <span class="text-close">{{'Close'|translate}}</span>
         </a>
+        <a history-back ng-show="historyBack">
+                <i class="icon-arrow-left3 icon-back"></i>
+                <span class="text-back">{{'Back'|translate}}</span>
+        </a>
     </section>
 
   <section class="right-small" ng-show="showCamera">
