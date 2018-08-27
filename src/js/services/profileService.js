@@ -113,10 +113,10 @@ angular.module('copayApp.services')
 
       var client = bwcService.getClient(JSON.stringify(credentials));
 
-      // client.credentials.xPrivKey = root.profile.xPrivKey;
-      // client.credentials.mnemonic = root.profile.mnemonic;
-      // client.credentials.xPrivKeyEncrypted = root.profile.xPrivKeyEncrypted;
-      // client.credentials.mnemonicEncrypted = root.profile.mnemonicEncrypted;
+      /* client.credentials.xPrivKey = root.profile.xPrivKey;
+       client.credentials.mnemonic = root.profile.mnemonic;
+       client.credentials.xPrivKeyEncrypted = root.profile.xPrivKeyEncrypted;
+       client.credentials.mnemonicEncrypted = root.profile.mnemonicEncrypted;*/
 
       root.walletClients[credentials.walletId] = client;
 
@@ -399,6 +399,29 @@ angular.module('copayApp.services')
       });
     };
 
+      /**
+       * 创建热钱包
+       * @param opts
+       * @param addr
+       * @param cb
+       */
+      root.createHotWallet = function (opts, addr, cb) {
+          $log.debug('Creating ColdWallet:', opts);
+          var walletClient = bwcService.getClient();
+
+          walletClient.import(JSON.stringify(opts));
+
+          walletClient.createWallet(opts.name, opts.m, opts.n, {
+              network: opts.network,
+              account: opts.account,
+              cosigners: opts.cosigners
+          }, function (err) {
+              if (err)
+                  return cb(gettext('Error creating wallet') + ": " + err);
+              opts.observed = true;
+              root._addWalletClient(walletClient, opts, cb);
+          });
+      };
 
     root.getClient = function (walletId) {
       return root.walletClients[walletId];
