@@ -28,7 +28,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
   self.verificationQRCode = '';
   self.signatureAddr = '';
   self.shadowstep = 'hot1';
-
+  self.needsBackupa = true;
 
   function updatePublicKeyRing(walletClient, onDone) {
     var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');

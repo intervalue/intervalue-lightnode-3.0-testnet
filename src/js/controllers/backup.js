@@ -41,6 +41,7 @@ angular.module('copayApp.controllers').controller('wordsController',
     };
 
     self.delete = function() {
+      self.needsBackupa = false;
       confirmDialog.show(msg, function(ok) {
         if (ok) {
           fc.clearMnemonic();
