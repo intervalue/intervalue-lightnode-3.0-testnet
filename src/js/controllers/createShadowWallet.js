@@ -23,6 +23,7 @@ angular.module('copayApp.controllers').controller('createShadowWalletController'
             };
             // var coldDeviceAddr = obj_from_coldWallet.addr;
             var hotDeviceAddr  = profileService.profile.my_device_address;
+            alert(hotDeviceAddr);
             $timeout(function () {
                 profileService.createHotWallet(opts, hotDeviceAddr, function (err, walletId) {
                     if (err) {

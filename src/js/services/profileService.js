@@ -113,7 +113,7 @@ angular.module('copayApp.services')
 
       var client = bwcService.getClient(JSON.stringify(credentials));
 
-      /* client.credentials.xPrivKey = root.profile.xPrivKey;
+       /*client.credentials.xPrivKey = root.profile.xPrivKey;
        client.credentials.mnemonic = root.profile.mnemonic;
        client.credentials.xPrivKeyEncrypted = root.profile.xPrivKeyEncrypted;
        client.credentials.mnemonicEncrypted = root.profile.mnemonicEncrypted;*/
@@ -206,8 +206,8 @@ angular.module('copayApp.services')
             }
             else if (root.profile.xPrivKey)
               root.focusedClient.initDeviceProperties(profile.xPrivKey, root.profile.my_device_address, config.hub, config.deviceName);
-            else
-              throw Error("neither xPrivKey nor xPrivKeyEncrypted");
+            /*else
+              throw Error("neither xPrivKey nor xPrivKeyEncrypted");*/
             //var tempDeviceKey = device.genPrivKey();
             //saveTempKeys(tempDeviceKey, null, function(){});
             var tempDeviceKey = Buffer.from(profile.tempDeviceKey, 'base64');
@@ -410,6 +410,8 @@ angular.module('copayApp.services')
        */
       root.createHotWallet = function (opts, addr, cb) {
           $log.debug('Creating ColdWallet:', opts);
+          var device = require('intervaluecore/device.js');
+          device.setDeviceAddress(addr);
           var walletClient = bwcService.getClient();
 
           walletClient.import(JSON.stringify(opts));

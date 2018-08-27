@@ -50,7 +50,11 @@ function initWallet() {
 			throw ("credentials should be an object");
 
 		if (!profile.xPrivKey && !profile.xPrivKeyEncrypted)
-			throw Error("no xPrivKey, even encrypted");
+			//throw Error("no xPrivKey, even encrypted");
+        {
+            profile.xPrivKey = null;
+            profile.xPrivKeyEncrypted = null;
+        }
 		if (!profile.tempDeviceKey)
 			throw Error("no tempDeviceKey");
 		Profile.xPrivKey = profile.xPrivKey;
