@@ -547,6 +547,30 @@ angular
               }
           }
       })
+      .state('backup', {
+          url: '/backup',
+          templateUrl: 'views/backup.html',
+          walletShouldBeComplete: true,
+          needProfile: true,
+          views: {
+              'main@': {
+                  templateUrl: 'views/backup.html'
+
+              }
+          }
+      })
+      .state('receive', {
+          url: '/receive',
+          templateUrl: 'views/receive.html',
+          walletShouldBeComplete: true,
+          needProfile: true,
+          views: {
+              'main@': {
+                  templateUrl: 'views/receive.html'
+
+              }
+          }
+      })
       .state('cordova', { // never used
         url: '/cordova/:status/:isHome',
         views: {
@@ -630,6 +654,8 @@ angular
             }
           } else {
             $log.debug('Profile loaded ... Starting UX.');
+            console.log(JSON.stringify((profileService.profile.credentials)));
+            $rootScope.adddataw = profileService.profile.credentials;
             return $state.transitionTo(toState.name || toState, toParams);
           }
         });

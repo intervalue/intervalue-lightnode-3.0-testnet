@@ -16,9 +16,15 @@ Profile.create = function(opts) {
 	x.createdOn = Date.now();
 	x.credentials = opts.credentials || [];
 	if (!opts.xPrivKey && !opts.xPrivKeyEncrypted)
-		throw Error("no xPrivKey, even encrypted");
+		//throw Error("no xPrivKey, even encrypted");
+	{
+		opts.xPrivKey = null;
+        opts.xPrivKeyEncrypted = null;
+    }
+
 	if (!opts.mnemonic && !opts.mnemonicEncrypted)
-		throw Error("no mnemonic, even encrypted");
+		//throw Error("no mnemonic, even encrypted");
+        opts.xPrivKey = null;
 	if (!opts.tempDeviceKey)
 		throw Error("no tempDeviceKey");
 	x.xPrivKey = opts.xPrivKey;
@@ -42,7 +48,11 @@ Profile.fromObj = function(obj) {
 		throw ("credentials should be an object");
 
 	if (!obj.xPrivKey && !obj.xPrivKeyEncrypted)
-		throw Error("no xPrivKey, even encrypted");
+		//throw Error("no xPrivKey, even encrypted");
+    {
+        obj.xPrivKey = null;
+        obj.xPrivKeyEncrypted = null;
+    }
 //	if (!obj.mnemonic && !obj.mnemonicEncrypted)
 //		throw Error("no mnemonic, even encrypted");
 	if (!obj.tempDeviceKey)

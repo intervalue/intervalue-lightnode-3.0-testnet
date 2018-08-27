@@ -9,6 +9,8 @@ angular.module('copayApp.controllers').controller('walletnameaController',
         self.name = $stateParams.name;
         self.addr = $stateParams.addr;
         self.ammount = $stateParams.ammount;
-        console.log($stateParams)
+        self.mnemonic = $stateParams.mnemonic;
+        self.mnemonicEncrypted = $stateParams.mnemonicEncrypted;
+        console.log($stateParams);
         var fc = profileService.focusedClient;
     });
