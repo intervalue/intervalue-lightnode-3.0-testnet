@@ -43,7 +43,7 @@
     top: 6px;
 }
 /*addwallet*/
-.addwcontent{position: absolute;top:0;left:0;width: 100%;height: 100%;background:#fff;overflow:auto;}
+.addwcontent{position: absolute;top:0;left:0;width: 100%;height: 100%;background:#fff;overflow:auto;box-sizing: border-box;padding:0 15px;}
 .wordsbox{margin:60px auto;text-align: center;display: flex;justify-content: center;flex-wrap: wrap;}
 .wordsbox span{margin:6px;border: 1px solid #213EF0;padding: 4px 6px;box-sizing: border-box;cursor: pointer;}
 
@@ -129,17 +129,22 @@
     width: 100%;
     height: 100%;
 }
-.adcpmdic input[type='text'], .adcpmdic label {
+.adcpmdic input[type='text']{
     position: absolute;
     font-size: 16px;
     top: 10px;
-    left: 10px;
     padding: 0;
     font-weight: normal;
     margin: 0;
     width: 100%;
 }
 .adcpmdic label {
+    position: absolute;
+    font-size: 16px;
+    top: 10px;
+    padding: 0;
+    font-weight: normal;
+    margin: 0;
     white-space: nowrap;
 }
 .md-input-focused {
@@ -154,12 +159,36 @@
 }
 .md-input-focused input[type='text'] {
     background: blue;
-    border: 1px solid red;
     position: absolute;
     top: 10px;
-    left: 10px;
     transition: all 0.2s ease-in-out;
 }
+.adinputitem {
+    height: 40px;
+}
+.adinputic {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.adinputic .adinputimg{
+    width:22px;
+    height:20px;
+    text-align: center;
+    position: absolute;
+    top:0;
+    left: 4px;
+}
+.adinputic input[type='text']{
+    position: absolute;
+    font-size: 16px;
+    top:0;
+    padding: 0;
+    font-weight: normal;
+    margin: 0;
+    width: 100%;
+}
+adinputic input[type='text']::-webkit-input-placeholder { color:#00f; }
 /*公共样式*/
 .awbtn{font-size: 14px;width: 100%; height: 45px; line-height: 45px; padding: 0; background-color: #FFFFFF; border: 1px solid #3B3B3B;
     color: #3B3B3B; border-radius: 3px !important; margin: 0;}
@@ -170,6 +199,7 @@
 .adbg{
     background: #3B3B3B;
 }
+
 ::-webkit-scrollbar { width: 6px;height:6px;}
 /* 滚动槽 */::-webkit-scrollbar-track {-webkit-box-shadow: inset 0 0 6px #fff;border-radius: 10px;}
 /* 滚动条滑块 */::-webkit-scrollbar-thumb {border-radius: 10px;background: #c5c5c5;}
@@ -192,7 +222,9 @@
     -o-transform: translate3d(-15.625rem, 0, 0);
     transform: translate3d(-15.625rem, 0, 0);
 }
+button.disabled, button[disabled], .button.disabled, .button[disabled]{
 
+}
 
 
 

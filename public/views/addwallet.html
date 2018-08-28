@@ -21,28 +21,47 @@
     <!--选择导入钱包还是创建钱包  end-->
     <!--创建钱包信息  start-->
     <div class="addwcontent" ng-if="addw.step == 'addwallet'">
+        <nav class="tab-bar">
+            <section class="left-small">
+                <a ng-click="addw.step = 'addorimport'">
+                    <img src="./img/chatbackstate.png" />
+                </a>
+            </section>
+            <section class="middle tab-bar-section">
+                <h1 class="title ellipsis" ng-style="{'color': noColor ? '#4A90E2' : index.backgroundColor, 'max-width': '100%'}">
+                    Create new wallet
+                </h1>
+            </section>
+        </nav>
+
         <p>！密码用于交易授权，强度非常重要</p>
         <p>！InterValue不存储密码，也无法帮您找回，请务必牢记</p>
         <p ng-if="addw.addwalleterr">密码不一致</p>
-        <div class="adcpitem">
-            <div mdinputc class="adcpmdic">
-                <label>钱包名称</label>
-                <input mdinput type="text" ng-model="addw.addwname">
+        <div class="adinputitem">
+            <div class="adinputic">
+                <div class="adinputimg">
+                    <img src="./img/walletnameinput.png">
+                </div>
+                <input type="text" ng-model="addw.addwname" ng-attr-placeholder="Wallet name">
             </div>
         </div>
-        <div class="adcpitem">
-            <div mdinputc class="adcpmdic">
-                <label>密码</label>
-                <input mdinput type="text" ng-model="addw.addwpass">
+        <div class="adinputitem">
+            <div class="adinputic">
+                <div class="adinputimg">
+                    <img src="./img/walletpassinput.png">
+                </div>
+                <input type="text" ng-model="addw.addwpass" ng-attr-placeholder="Password">
             </div>
         </div>
-        <div class="adcpitem">
-            <div mdinputc class="adcpmdic">
-                <label>重复密码</label>
-                <input mdinput type="text" ng-model="addw.addwrpass">
+        <div class="adinputitem">
+            <div class="adinputic">
+                <div class="adinputimg">
+                    <img src="./img/walletpassrinput.png">
+                </div>
+                <input type="text" ng-model="addw.addwrpass" ng-attr-placeholder="Repeat password">
             </div>
         </div>
-        <button ng-click="addw.passequal()" ng-disabled="!addw.addwname || !addw.addwpass || !addw.addwrpass" translate></button>
+        <button ng-click="addw.passequal()" ng-disabled="!addw.addwname || !addw.addwpass || !addw.addwrpass" translate>Next</button>
     </div>
     <!--创建钱包信息  end-->
     <!--显示钱包口令  start-->

@@ -2141,5 +2141,8 @@ msgid "Scan"
 msgstr "扫一扫"
 
 #: wo jia de start
-msgid "next"
+msgid "Next"
 msgstr "下一步"
+
+msgid "Password"
+msgstr "密码"

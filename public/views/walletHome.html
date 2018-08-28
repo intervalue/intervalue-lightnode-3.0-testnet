@@ -274,7 +274,7 @@
             </nav>
 
             <div class="adwwto">
-                <div class="adwwt" ng-repeat="item in adddataw">
+                <div class="adwwt" ng-repeat="item in adddataw track by $index">
                     <div class="adwwtflex" ng-click="index.towalletname(item.walletName, item.addr, item.account, item.walletId, item.mnemonic, item.mnemonicEncrypted)">
                         <i class="fi-widget size-18 vm wallet-settings"></i>
                         <div class="adwwt100">
@@ -296,8 +296,8 @@
                 </div>
                 <button ng-click="$root.go('create')">创建钱包</button>
                 <button ng-click="$root.go('importwallet')">导入钱包</button>
-                <button ng-click="index.generatePubkey(index.shared_address || home.addr[index.walletId])">冷钱包验证码</button>
-                <!--<div ng-controller="createShadowWalletController  as cs"><button ng-click="cs.create()">冷钱包验证码</button></div>-->
+                <!--<button ng-click="index.generatePubkey(index.shared_address || home.addr[index.walletId])">冷钱包验证码</button>-->
+                <div ng-controller="createShadowWalletController  as cs"><button ng-click="cs.create()">冷钱包验证码</button></div>
             </div>
         </div> <!-- END wallet -->
 
