@@ -120,10 +120,10 @@
             <p class="center redcolor m28b" translate>Confirm your mnemonic</p>
             <p ng-show="addw.showcodeerr">口令不正确</p>
             <div>
-                <div class="wordsbox" ng-click="addw.minuswordf($event)">
+                <div class="addwslcbox m24b" ng-click="addw.minuswordf($event)">
                     <span ng-repeat="item in addw.chosenWords" id="{{item.id}}" >{{item.str}}</span>
                 </div>
-                <div class="wordsbox" ng-click="addw.addwordf($event)">
+                <div class="wordsbox m12b" ng-click="addw.addwordf($event)">
                     <span ng-repeat="item in addw.showrandamcodes" id="{{item.id}}" ng-show="!item.chosen">{{item.str}}</span>
                 </div>
             </div>

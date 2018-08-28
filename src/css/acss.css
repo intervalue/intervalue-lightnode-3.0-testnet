@@ -58,9 +58,11 @@
 .addwscbox span{margin-right: 4px;float: left;font-size:12px;}
 /*showcode part end*/
 /*selectcode part start*/
-.wordsbox{background:#F9FAFC;border-radius:3px;border:1px solid #D6D6D6;padding:12px 12px 20px;}
-.wordsbox:after{display: block;overflow: hidden;clear:both;content:'';}
-.wordsbox span{margin-right: 4px;float: left;font-size:12px;border-radius: 3px;border: 1px solid #D6D6D6;}
+.addwslcbox{border-radius:3px;border:1px solid #D6D6D6;padding:12px 12px 20px;}
+.addwslcbox:after{display: block;overflow: hidden;clear:both;content:'';}
+.addwslcbox span{margin-right: 4px;float: left;font-size:12px;}
+.wordsbox{display:flex;justify-content: space-between;flex-wrap:wrap;}
+.wordsbox span{font-size:12px;border-radius: 3px;border: 1px solid #D6D6D6;display:block;width:23%;text-align:center;padding:6px 26px;cursor:pointer;margin-bottom:12px;}
 /*selectcode part end*/
 /*walletHome-wallet-part*/
 .adwwto{
