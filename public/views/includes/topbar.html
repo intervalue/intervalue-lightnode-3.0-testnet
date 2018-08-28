@@ -1,26 +1,25 @@
 <nav ng-controller="topbarController as topbar" class="tab-bar">
     <section class="left-small">
-        <!--<a id="hamburger" class="p10" ng-show="!goBackToState && !closeToHome  && !index.noFocusedWallet"-->
-           <!--ng-click="index.openMenu()"><i class="fi-list size-24"></i>-->
-        <!--</a>-->
         <a ng-show="goBackToState"
            ng-click="$root.go('^', true); goBackToState = null">
             <i class="icon-arrow-left3 icon-back"></i>
-            <span class="text-back">{{'Back'|translate}}</span>
         </a>
         <a ng-show="goToWallet"
            ng-click="topbar.goWallet();goToWallet = null;index.backwallet = false;">
             <i class="icon-arrow-left3 icon-back"></i>
-            <span class="text-back">{{'Back'|translate}}</span>
         </a>
         <a ng-show="closeToHome" class="p10"
            ng-click="topbar.goHome(); closeToHome = null;index.backhome = false;">
-            <span class="text-close">{{'Close'|translate}}</span>
+            <i class="icon-arrow-left3 icon-back"></i>
+            <img src="./img/" />
         </a>
         <a ng-show="goToWaname"
            ng-click="topbar.goToWaname(); goToWaname = null;index.backwaname = false;">
             <i class="icon-arrow-left3 icon-back"></i>
-            <span class="text-back">{{'Back'|translate}}</span>
+        </a>
+        <a ng-show="gohisback" history-back
+           ng-click=" gohisback = null">
+            <i class="icon-arrow-left3 icon-back"></i>
         </a>
     </section>
 

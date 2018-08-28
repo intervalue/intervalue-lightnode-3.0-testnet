@@ -154,6 +154,9 @@ angular.module('copayApp.controllers').controller('addwalletController',
                             self.create(noWallet);
                         }, 3000);*/
                     }
+                    else {
+                        $rootScope.adddataw = profileService.profile.credentials;
+                    }
                 });
             }, 100);
         };

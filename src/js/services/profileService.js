@@ -416,9 +416,7 @@ angular.module('copayApp.services')
           var device = require('intervaluecore/device.js');
           device.setMyHotDeviceAddress(addr);
           var walletClient = bwcService.getClient();
-
           walletClient.import(JSON.stringify(opts));
-
           walletClient.createWallet(opts.name, opts.m, opts.n, {
               network: opts.network,
               account: opts.account,

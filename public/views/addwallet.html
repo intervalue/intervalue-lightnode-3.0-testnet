@@ -16,7 +16,6 @@
                     <span translate>Import wallet </span>
                 </a>
             </li>
-            {{addw.ducodes}}
         </ul>
     </div>
     <!--选择导入钱包还是创建钱包  end-->
@@ -43,7 +42,7 @@
                 <input mdinput type="text" ng-model="addw.addwrpass">
             </div>
         </div>
-        <button ng-click="addw.passequal()" ng-disabled="!addw.addwname || !addw.addwpass || !addw.addwrpass">下一步</button>
+        <button ng-click="addw.passequal()" ng-disabled="!addw.addwname || !addw.addwpass || !addw.addwrpass" translate></button>
     </div>
     <!--创建钱包信息  end-->
     <!--显示钱包口令  start-->

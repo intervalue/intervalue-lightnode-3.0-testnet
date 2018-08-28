@@ -1702,14 +1702,14 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     $rootScope.$on('Local/ShadowAddressForm', function(event,address){
         var shadowWallet = require('intervaluecore/shadowWallet');
         shadowWallet.getSignatureCode(address,function(signatureCodeQRCode) {
-            if(signatureCodeQRCode){
+            if(typeof signatureCodeQRCode == "object"){
                 self.signatureCodeQRCode = JSON.stringify(signatureCodeQRCode);
                 self.showshadow = true;
                 self.shadowstep = 'hot2';
                 console.log(signatureCodeQRCode);
             }else{
                 self.showshadow = false;
-                alert('Please scan the cold wallet QR code or fill in the address first!!');
+                alert(signatureCodeQRCode);
             }
             $timeout(function () {
                 $rootScope.$apply();
@@ -1745,9 +1745,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
       });
   });
   self.towalletname = function (name, addr, ammount, walletid, mnemonic, mnemonicEncrypted) {
-    console.log(22222222222222222222222)
-    console.log(mnemonic)
-      console.log(mnemonicEncrypted)
     $state.go('walletnamea', { name: name, addr: addr, ammount: ammount, walletid: walletid, mnemonic: mnemonic, mnemonicEncrypted: mnemonicEncrypted});
   };
 
