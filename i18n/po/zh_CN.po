@@ -385,8 +385,6 @@ msgstr ""
 #: public/views/modals/signed-message.html:39
 #: public/views/modals/signed-message.html:4
 #: public/views/modals/vote.html:4
-msgid "Close"
-msgstr "关闭"
 
 #: public/views/create.html:90
 msgid "Co-signer {{$index+1}}:"
@@ -2141,3 +2139,7 @@ msgstr "{{prefGlobal.torEnabled?'On':'Off'}}"
 
 msgid "Scan"
 msgstr "扫一扫"
+
+#: wo jia de start
+msgid "next"
+msgstr "下一步"
