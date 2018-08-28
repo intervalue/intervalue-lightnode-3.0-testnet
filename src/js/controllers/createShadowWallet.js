@@ -7,15 +7,13 @@ angular.module('copayApp.controllers').controller('createShadowWalletController'
 
 
         this.create = function (form) {
-            //var form = $scope.addShadowWallet;
-            //console.log(form);
-            //var obj = form.$$element[0][0].value;
-            var obj = {"sign":"XM7cvzIHofkCXd8VI+QjvYpDVdP2f0J+1vsYagCsPTp5EBa3VMeTwSkY+tdEpnK7gvzhFTPKyPhVEiHd4gWOMw==","xpub":"xpub6CF6k3emCLMuaaQE5MPrKUrZSAp1ZFPp44fYpsehhMQ5U1xCn8YmWS5ignuQP4XvCnXVSnajzp9G8poxf7muTekLcRatDJvzZQJGWudhUPk","addr":"KL3M65WEDDZ7VHBB2TT7PSDNBOK4TWAG","pubkey":"Au0+pcbtyca6hqmezn7oVGXhUIkTYHwpAWpwp1CLfa7p"};
-
+            var form = $scope.addShadowWallet;
+            var obj = JSON.parse(form.$$element[0][0].value);
+           // var obj = {"sign":"XM7cvzIHofkCXd8VI+QjvYpDVdP2f0J+1vsYagCsPTp5EBa3VMeTwSkY+tdEpnK7gvzhFTPKyPhVEiHd4gWOMw==","xpub":"xpub6CF6k3emCLMuaaQE5MPrKUrZSAp1ZFPp44fYpsehhMQ5U1xCn8YmWS5ignuQP4XvCnXVSnajzp9G8poxf7muTekLcRatDJvzZQJGWudhUPk","addr":"KL3M65WEDDZ7VHBB2TT7PSDNBOK4TWAG","pubkey":"Au0+pcbtyca6hqmezn7oVGXhUIkTYHwpAWpwp1CLfa7p"};
             var opts = {
                 m: 1,
                 n: 1,
-                name: "INVE",
+                name: "热钱包",
                 xPubKey: obj.xpub,
                 account: 0,
                 network: 'livenet',
@@ -23,7 +21,6 @@ angular.module('copayApp.controllers').controller('createShadowWalletController'
             };
             // var coldDeviceAddr = obj_from_coldWallet.addr;
             var hotDeviceAddr  = profileService.profile.my_device_address;
-            alert(hotDeviceAddr);
             $timeout(function () {
                 profileService.createHotWallet(opts, hotDeviceAddr, function (err, walletId) {
                     if (err) {

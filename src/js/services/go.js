@@ -128,6 +128,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
         if(uri.indexOf("InterValue-3.0-testnet:") != -1){
             uri = uri.replace('InterValue-3.0-testnet:','');
             if(uri.length === 32) {
+
                 $rootScope.$emit('Local/ShadowAddress',uri);
             }            //冷钱包二维码验证
         }else if(uri.indexOf("shadow") != -1){
@@ -141,7 +142,8 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                     //第一次扫码pubkey二维码后，签名生成地址
                     if(objRequest.type ==='shadow'){
                         shadowWallet.getSignatureCode(objRequest,function (signatureCode) {
-                            if(signatureCode){
+                            alert(typeof  signatureCode );
+                            if(typeof signatureCode=="object"){
                                 $rootScope.$emit('Local/ShadowInvitation',signatureCode);
                             }else{
                                 console.log("signatureCode is "+signatureCode)
@@ -155,12 +157,13 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                         var wc = profileService.walletClients;
                         db.query('select extended_pubkey  from extended_pubkeys as a  left join my_addresses as b on a.wallet=b.wallet where b.address=?',[objRequest.addr],function (rows) {
                             for(var index in wc){
-                                if(rows[0].extended_pubkey == wc[index].credentials.xPubKey)
-                                mnemonic = wc[index].credentials.mnemonic;
-                                break;
+                                if(rows[0].extended_pubkey == wc[index].credentials.xPubKey){
+                                    mnemonic = wc[index].credentials.mnemonic;
+                                    break;
+                                }
                             }
                             shadowWallet.getSignatureDetlCode(objRequest,mnemonic,function (signatureDetlCode) {
-                                if(signatureDetlCode){
+                                if(typeof  signatureDetlCode =="object"){
                                     $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
                                 }else{
                                     console.log(" signatureDetlCode is "+signatureDetlCode)
@@ -173,10 +176,10 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                     //第三次扫码，生成热钱包
                     else if(objRequest.type === 'signDetl'){
                         shadowWallet.generateShadowWallet(objRequest,function (shadowWallet) {
-                            if(shadowWallet){
+                            if( typeof shadowWallet=="object"){
                                 $rootScope.$emit('Local/generateShadowWallet', shadowWallet);
                             }else {
-                                console.log("shadowWallet is  "+shadowWallet)
+                                console.log("shadowWallet is  "+shadowWallet);
                                 throw Error('shadowWallet is   '+shadowWallet);
                             }
                         });
