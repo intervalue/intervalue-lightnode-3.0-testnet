@@ -2146,3 +2146,31 @@ msgstr "下一步"
 
 msgid "Password"
 msgstr "密码"
+
+msgid "Backup mnemonic"
+msgstr "备份助记词"
+
+msgid "The password is used to protect the private key and transaction authorization, and the strength is very important!"
+msgstr "密码用于保护私钥和交易授权，强度非常重要！"
+
+msgid "InterValue does not store passwords and cannot be retrieved for you. Please keep in mind!"
+msgstr "InterValue不存储密码，也无法帮您找回，请务必牢记！"
+
+msgid "Please do not take a screenshot and copy your wallet password."
+msgstr "请勿截图，抄写下您的钱包口令"
+
+msgid "The password is used to restore the wallet, write it accurately on paper, and save it where you only know it."
+msgstr "口令用于恢复钱包，将它准确地写在纸上，并保存在只有你知道的地方"
+
+msgid "Confirm your mnemonic"
+msgstr "确认您的助记词"
+
+
+
+
+
+
+
+
+
+

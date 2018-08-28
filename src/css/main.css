@@ -459,6 +459,7 @@ ul.manage li {
 .p0i {padding: 0 !important;}
 .db {display: block;}
 .size-10 { font-size: 10px; }
+.size-11 { font-size: 11px; }
 .size-12 { font-size: 12px; }
 .size-14 { font-size: 14px; }
 .size-16 { font-size: 16px; }
@@ -482,7 +483,9 @@ ul.manage li {
 .m15r {margin-right: 15px;}
 .m16v {margin: 16px 0;}
 .m20b {margin-bottom: 20px;}
+.m28b {margin-bottom: 28px;}
 .m30b {margin-bottom: 30px;}
+.m40t {margin-top: 40px;}
 .m40b {margin-bottom: 40px;}
 .m50b {margin-bottom: 50px;}
 .m10r {margin-right: 10px;}
@@ -668,7 +671,7 @@ input {
 
 input[type="color"], input[type="date"], input[type="datetime-local"], input[type="datetime"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"], textarea {
   color: #6A7D90;
-  height: 35px;
+  height: 40px;
   background: transparent;
   border: none;
   padding:0;
@@ -891,7 +894,7 @@ button.gray:focus,
 
 button.disabled, button[disabled], .button.disabled, .button[disabled] {
   border-color: transparent !important;
-  background-color: #A5B2BF !important;
+  background-color: #babfc3 !important;
   color: #fff !important;
 }
 

@@ -1,22 +1,24 @@
-<div ng-controller="addwalletController as addw" ng-init="addw.step = 'addorimport';">
+<div ng-controller="addwalletController as addw" ng-init="addw.step = 'selectcode';">
     <!--选择导入钱包还是创建钱包  start-->
     <div class="addwcontent" ng-if="addw.step == 'addorimport'">
-        <ul class="no-bullet manage size-12">
-            <li>
-                <a title="Create new wallet" ng-click="addw.step = 'addwallet'">
-                    <i class="fi-plus circle plus-fixed"></i>
-                    <i class="icon-arrow-right3 size-18 right m20t"></i>
-                    <span translate>Create new wallet</span>
-                </a>
-            </li>
-            <li>
-                <a title="Import wallet" ng-click="">
-                    <i class="icon-download circle"></i>
-                    <i class="icon-arrow-right3 size-18 right m20t"></i>
-                    <span translate>Import wallet </span>
-                </a>
-            </li>
-        </ul>
+        <div class="addwcontentin">
+            <ul class="no-bullet manage size-12">
+                <li>
+                    <a title="Create new wallet" ng-click="addw.step = 'addwallet'">
+                        <i class="fi-plus circle plus-fixed"></i>
+                        <i class="icon-arrow-right3 size-18 right m20t"></i>
+                        <span translate>Create new wallet</span>
+                    </a>
+                </li>
+                <li>
+                    <a title="Import wallet" ng-click="">
+                        <i class="icon-download circle"></i>
+                        <i class="icon-arrow-right3 size-18 right m20t"></i>
+                        <span translate>Import wallet </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
     <!--选择导入钱包还是创建钱包  end-->
     <!--创建钱包信息  start-->
@@ -28,79 +30,120 @@
                 </a>
             </section>
             <section class="middle tab-bar-section">
-                <h1 class="title ellipsis" ng-style="{'color': noColor ? '#4A90E2' : index.backgroundColor, 'max-width': '100%'}">
+                <h1 class="title ellipsis" translate>
                     Create new wallet
                 </h1>
             </section>
         </nav>
-
-        <p>！密码用于交易授权，强度非常重要</p>
-        <p>！InterValue不存储密码，也无法帮您找回，请务必牢记</p>
-        <p ng-if="addw.addwalleterr">密码不一致</p>
-        <div class="adinputitem">
-            <div class="adinputic">
-                <div class="adinputimg">
-                    <img src="./img/walletnameinput.png">
-                </div>
-                <input type="text" ng-model="addw.addwname" ng-attr-placeholder="Wallet name">
+        <div class="f9fafch"></div>
+        <div class="addwcontentin">
+            <div class="fleximgtext">
+                <img src="./img/warn.png">
+                <div translate class="addwwarntext">The password is used to protect the private key and transaction authorization, and the strength is very important!</div>
             </div>
-        </div>
-        <div class="adinputitem">
-            <div class="adinputic">
-                <div class="adinputimg">
-                    <img src="./img/walletpassinput.png">
-                </div>
-                <input type="text" ng-model="addw.addwpass" ng-attr-placeholder="Password">
+            <div class="fleximgtext">
+                <img src="./img/warn.png">
+                <div translate class="addwwarntext">InterValue does not store passwords and cannot be retrieved for you. Please keep in mind!</div>
             </div>
-        </div>
-        <div class="adinputitem">
-            <div class="adinputic">
-                <div class="adinputimg">
-                    <img src="./img/walletpassrinput.png">
+            <p ng-if="addw.addwalleterr">密码不一致</p>
+            <div class="adinputitem">
+                <div class="adinputic">
+                    <div class="adinputimg">
+                        <img src="./img/walletnameinput.png">
+                    </div>
+                    <input type="text" ng-model="addw.addwname" ng-attr-placeholder="Wallet name">
                 </div>
-                <input type="text" ng-model="addw.addwrpass" ng-attr-placeholder="Repeat password">
             </div>
+            <div class="adinputitem">
+                <div class="adinputic">
+                    <div class="adinputimg">
+                        <img src="./img/walletpassinput.png">
+                    </div>
+                    <input type="text" ng-model="addw.addwpass" ng-attr-placeholder="Password">
+                </div>
+            </div>
+            <div class="adinputitem">
+                <div class="adinputic">
+                    <div class="adinputimg">
+                        <img src="./img/walletpassrinput.png">
+                    </div>
+                    <input type="text" ng-model="addw.addwrpass" ng-attr-placeholder="Repeat password">
+                </div>
+            </div>
+            <button class="m40t" ng-click="addw.passequal()" ng-disabled="!addw.addwname || !addw.addwpass || !addw.addwrpass" translate>Next</button>
         </div>
-        <button ng-click="addw.passequal()" ng-disabled="!addw.addwname || !addw.addwpass || !addw.addwrpass" translate>Next</button>
     </div>
     <!--创建钱包信息  end-->
     <!--显示钱包口令  start-->
     <div class="addwcontent" ng-if="addw.step == 'showcode'" ng-init="addw.funReg()">
-        <p>请勿截图，抄写下您的钱包口令</p>
-        <p>口令用于恢复钱包，将它准确地写在纸上，并保存在只有你知道的地方</p>
-        <p>showcodeshowcodeshowcodeshowcodeshowcodeshowcodeshowcodeshowcodeshowcode</p>
-        <div class="wordsbox">
-            <span class="cli" ng-repeat="item in addw.showcodes" id="{{item.id}}" ng-show="!item.chosen">{{item.str}}</span>
+        <nav class="tab-bar">
+            <section class="left-small">
+                <a ng-click="addw.step = 'addwallet'">
+                    <img src="./img/chatbackstate.png" />
+                </a>
+            </section>
+            <section class="middle tab-bar-section">
+                <h1 class="title ellipsis">
+                    Backup mnemonic
+                </h1>
+            </section>
+        </nav>
+        <div class="f9fafch"></div>
+        <div class="addwcontentin">
+            <img class="warnbigimg" src="./img/warnbig.png" />
+            <p class="center redcolor m28b" translate>Please do not take a screenshot and copy your wallet password.</p>
+            <p class="center size-11" translate>The password is used to restore the wallet, write it accurately on paper, and save it where you only know it.</p>
+            <div class="addwscbox m28b">
+                <span ng-repeat="item in addw.showcodes">{{item.str}}</span>
+            </div>
+            <button ng-click="addw.step = 'selectcode'">下一步</button>
         </div>
-        <button ng-click="addw.step = 'selectcode'">下一步</button>
     </div>
     <!--显示钱包口令  end-->
     <!--选择钱包口令  start-->
-    <div class="addwcontent" ng-if="addw.step == 'selectcode'">
-        <p>请按顺序选择助记词以确认您的备份正确</p>
-        <p ng-show="addw.showcodeerr">口令不正确</p>
-        <div>
-            <div class="wordsbox" ng-click="addw.minuswordf($event)">
-                <span ng-repeat="item in addw.chosenWords" id="{{item.id}}" >{{item.str}}</span>
+    <div class="addwcontent" ng-if="addw.step == 'selectcode'" ng-init="addw.funReg()">
+        <nav class="tab-bar">
+            <section class="left-small">
+                <a ng-click="addw.step = 'showcode'">
+                    <img src="./img/chatbackstate.png" />
+                </a>
+            </section>
+            <section class="middle tab-bar-section">
+                <h1 class="title ellipsis">
+                    Backup mnemonic
+                </h1>
+            </section>
+        </nav>
+        <div class="f9fafch"></div>
+        <div class="addwcontentin">
+            <img class="warnbigimg" src="./img/warnbig.png" />
+            <p class="center redcolor m28b" translate>Confirm your mnemonic</p>
+            <p ng-show="addw.showcodeerr">口令不正确</p>
+            <div>
+                <div class="wordsbox" ng-click="addw.minuswordf($event)">
+                    <span ng-repeat="item in addw.chosenWords" id="{{item.id}}" >{{item.str}}</span>
+                </div>
+                <div class="wordsbox" ng-click="addw.addwordf($event)">
+                    <span ng-repeat="item in addw.showrandamcodes" id="{{item.id}}" ng-show="!item.chosen">{{item.str}}</span>
+                </div>
             </div>
-            <div class="wordsbox" ng-click="addw.addwordf($event)">
-                <span ng-repeat="item in addw.showrandamcodes" id="{{item.id}}" ng-show="!item.chosen">{{item.str}}</span>
-            </div>
+            <button ng-click="addw.step = 'showcode'">上一步</button>
         </div>
-        <button ng-click="addw.step = 'showcode'">上一步</button>
     </div>
     <!--选择钱包口令  end-->
     <!--删除口令  start-->
     <div class="addwcontent" ng-if="addw.step == 'deletecode'">
-        <p>确认您的钱包助记词</p>
-        <button ng-click="addw.showconfirm = true;">删除助记词</button>
-        <button ng-click="addw.delteConfirm(addw.addwname, addw.addwpass, addw.mnemonic);">跳过</button>
-        <div ng-if="addw.showconfirm" class="addwcontent">
-            <div>
-                <p>您确定要删除助记词吗？</p>
-                <p>此操作将彻底删除应用中助记词并且不可恢复，请再次确认您已经将助记词备份到安全的地方。</p>
-                <button ng-click="addw.delteConfirm(addw.addwname, addw.addwpass, addw.mnemonic);">确认</button>
-                <button ng-click="addw.showconfirm = false;">取消</button>
+        <div class="addwcontentin">
+            <p>确认您的钱包助记词</p>
+            <button ng-click="addw.showconfirm = true;">删除助记词</button>
+            <button ng-click="addw.delteConfirm(addw.addwname, addw.addwpass, addw.mnemonic);">跳过</button>
+            <div ng-if="addw.showconfirm" class="addwcontent">
+                <div>
+                    <p>您确定要删除助记词吗？</p>
+                    <p>此操作将彻底删除应用中助记词并且不可恢复，请再次确认您已经将助记词备份到安全的地方。</p>
+                    <button ng-click="addw.delteConfirm(addw.addwname, addw.addwpass, addw.mnemonic);">确认</button>
+                    <button ng-click="addw.showconfirm = false;">取消</button>
+                </div>
             </div>
         </div>
     </div>
