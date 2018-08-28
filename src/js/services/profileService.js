@@ -82,8 +82,11 @@ angular.module('copayApp.services')
       $log.debug('Set focus:', walletId);
 
       // Set local object
-      if (walletId)
-        root.focusedClient = root.walletClients[walletId];
+      if (walletId){
+          var device = require('intervaluecore/device');
+          device.uPMyHotDeviceAddress(walletId);
+          root.focusedClient = root.walletClients[walletId];
+      }
       else
         root.focusedClient = [];
 
@@ -411,7 +414,7 @@ angular.module('copayApp.services')
       root.createHotWallet = function (opts, addr, cb) {
           $log.debug('Creating ColdWallet:', opts);
           var device = require('intervaluecore/device.js');
-          device.setDeviceAddress(addr);
+          device.setMyHotDeviceAddress(addr);
           var walletClient = bwcService.getClient();
 
           walletClient.import(JSON.stringify(opts));

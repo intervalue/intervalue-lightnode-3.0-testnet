@@ -153,17 +153,22 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                     else if(objRequest.type === 'sign'){
                         var mnemonic;
                         var wc = profileService.walletClients;
-                        for(var index in wc){
-                            mnemonic = wc[index].credentials.mnemonic;
-                        }
-                        shadowWallet.getSignatureDetlCode(objRequest,mnemonic,function (signatureDetlCode) {
-                            if(signatureDetlCode){
-                                $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
-                            }else{
-                                console.log(" signatureDetlCode is "+signatureDetlCode)
-                                throw Error('signatureDetlCode is '+signatureDetlCode);
+                        db.query('select extended_pubkey  from extended_pubkeys as a  left join my_addresses as b on a.wallet=b.wallet where b.address=?',[objRequest.addr],function (rows) {
+                            for(var index in wc){
+                                if(rows[0].extended_pubkey == wc[index].credentials.xPubKey)
+                                mnemonic = wc[index].credentials.mnemonic;
+                                break;
                             }
-                        })
+                            shadowWallet.getSignatureDetlCode(objRequest,mnemonic,function (signatureDetlCode) {
+                                if(signatureDetlCode){
+                                    $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
+                                }else{
+                                    console.log(" signatureDetlCode is "+signatureDetlCode)
+                                    throw Error('signatureDetlCode is '+signatureDetlCode);
+                                }
+                            })
+                        });
+
                     }
                     //第三次扫码，生成热钱包
                     else if(objRequest.type === 'signDetl'){
