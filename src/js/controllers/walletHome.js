@@ -858,7 +858,7 @@ angular.module('copayApp.controllers')
 				});
 				return;
 			}
-
+/*
 			var comment = form.comment.$modelValue;
 
 			// ToDo: use a credential's (or fc's) function for this
@@ -866,7 +866,7 @@ angular.module('copayApp.controllers')
 				var msg = 'Could not add message to imported wallet without shared encrypting key';
 				$log.warn(msg);
 				return self.setSendError(gettext(msg));
-			}
+			}*/
 
 			var wallet = require('intervaluecore/wallet.js');
 			var assetInfo = $scope.index.arrBalances[$scope.index.assetIndex];
