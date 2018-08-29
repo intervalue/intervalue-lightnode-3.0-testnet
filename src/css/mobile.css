@@ -134,7 +134,8 @@ _:-ms-fullscreen, :root .main {
   bottom: 0;
   width: 100%;
   z-index: 5;
-  background: #2C3E50;
+  background: #fff;
+  box-shadow:0px 0px 9px 0px rgba(0,0,0,0.06);
 }
 
 .second-bottom-bar {
@@ -154,10 +155,11 @@ _:-ms-fullscreen, :root .main {
 .amount {
   width: 100%;
   text-align: center;
-  padding: 2.5rem 1rem 0.5rem 1rem;
-  margin-bottom: 11px;
+  padding: 35px;
   color: #fff;
-  height: 200px;
+  height: 192px;
+  box-sizing: border-box;
+  background:#323232;
 }
 
 .amount a{
@@ -227,16 +229,31 @@ ul.copayer-list img {
 }
 
 .bottombar-item a {
-  color: #9EA9B3;
-  padding: 0.5rem 0;
+  color: #323232;
   display: block;
+  padding: 6px 0 4px;
+  height:48px;
 }
 
 .bottombar-item a.active {
-  color: #E4E8EC;
-  background-color: #122232;
+  color: #45AD8E;
+  background-color: #fff;
 }
-
+.bottombar-item a img{
+  margin-bottom: 2px;
+}
+/*.bottombar-item a .activebimg{*/
+  /*position:absolute;*/
+  /*top:-3px;*/
+  /*left:50%;*/
+  /*transform: translateX(-50%);*/
+/*}*/
+/*.bottombar-item a.active .tu{*/
+  /*position:absolute;*/
+  /*bottom:4px;*/
+  /*left:50%;*/
+  /*transform: translateX(-50%);*/
+/*}*/
 .bottombar-item .badge {
 	position: absolute;
 }
@@ -787,9 +804,8 @@ textarea:focus
   width:100%;
   position: absolute;
   top: 0;
-  bottom: 37px;
+  bottom: 48px;
   overflow: auto;
-  padding-bottom: 40px;
 }
 
 .tab-in {
