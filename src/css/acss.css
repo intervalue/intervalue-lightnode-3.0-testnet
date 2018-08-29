@@ -154,8 +154,9 @@
 /*公共样式 end*/
 
 /*重写foundation  css start*/
-.left-off-canvas-menu{left:auto;right:0;-webkit-transform:translate3d(100%,0,0);-moz-transform:translate3d(100%,0,0);-ms-transform:translate(100%,0);-o-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0);}
-.move-right > .inner-wrap{-webkit-transform:translate3d(-15.625rem,0,0);-moz-transform:translate3d(-15.625rem,0,0);-ms-transform:translate(-15.625rem,0);-o-transform:translate3d(-15.625rem,0,0);transform:translate3d(-15.625rem,0,0);}
+.left-off-canvas-menu{left:auto;right:0;-webkit-transform:translate3d(100%,0,0);-moz-transform:translate3d(100%,0,0);-ms-transform:translate(100%,0);
+    -o-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0);width:210px;}
+.move-right > .inner-wrap{-webkit-transform:translate3d(-210px,0,0);-moz-transform:translate3d(-210px,0,0);-ms-transform:translate(-210px,0);-o-transform:translate3d(-210px,0,0);transform:translate3d(-210px,0,0);}
 /*重写foundation  css end*/
 
 
