@@ -45,12 +45,11 @@
 /*addwallet*/
 .addwcontent{position: absolute;top:0;left:0;width: 100%;height: 100%;background:#fff;overflow:auto;box-sizing: border-box;
     box-shadow:0px 0px 5px 0px rgba(153,153,153,0.12);border-radius:3px 3px 0px 0px;}
-.addwcontentin{padding:30px 15px 0;}
+.addwcontentin{padding:30px 15px 20px;}
 .addwcontentin .warnbigimg{display: block;margin:0 auto 32px;}
 /*addwallet part start*/
 .addwcontentin .fleximgtext{margin-bottom: 12px;}
 .addwcontentin .fleximgtext:nth-child(2){margin-bottom: 36px;}
-.addwwarntext{font-size:12px;font-weight:400;color:#D45757;}
 /*addwallet part end*/
 /*showcode part start*/
 .addwscbox{background:#F9FAFC;border-radius:3px;border:1px solid #D6D6D6;padding:12px 12px 20px;}
@@ -58,11 +57,14 @@
 .addwscbox span{margin-right: 4px;float: left;font-size:12px;}
 /*showcode part end*/
 /*selectcode part start*/
-.addwslcbox{border-radius:3px;border:1px solid #D6D6D6;padding:12px 12px 20px;}
+.addwslcbox{border-radius:3px;border:1px solid #D6D6D6;padding:12px 4px 4px 12px;height:68px;}
 .addwslcbox:after{display: block;overflow: hidden;clear:both;content:'';}
-.addwslcbox span{margin-right: 4px;float: left;font-size:12px;}
+.addwslcbox span{margin-right: 8px;margin-bottom:8px;float: left;font-size:12px;}
 .wordsbox{display:flex;justify-content: space-between;flex-wrap:wrap;}
-.wordsbox span{font-size:12px;border-radius: 3px;border: 1px solid #D6D6D6;display:block;width:23%;text-align:center;padding:6px 26px;cursor:pointer;margin-bottom:12px;}
+.wordsbox button{font-size:12px;border-radius: 3px;border: 1px solid #D6D6D6;background:#fff;display:block;width:23%;text-align:center;cursor:pointer;margin-bottom:12px;
+height:30px;line-height: 30px;color:#323232;text-transform:lowercase;}
+.wordsbox button:disabled{background:#D6D6D6;border:1px solid #D6D6D6;}
+.wordsbox button:hover{background:#fff;border: 1px solid #D6D6D6;}
 /*selectcode part end*/
 /*walletHome-wallet-part*/
 .adwwto{
@@ -139,15 +141,21 @@
 /*changewalletp*/
 
 /*公共样式*/
-.awbtn{font-size: 14px;width: 100%; height: 46px; line-height: 46px; padding: 0; background-color: #FFFFFF; border: 1px solid #3B3B3B;
-    color: #3B3B3B; border-radius: 3px !important; margin: 0;}
-.abbtn{font-size: 14px;width: 100%;height:46px;line-height: 46px;padding: 0;background-color: #3B3B3B;color:#fff;border-radius: 3px !important;margin:0;}
+.awbtn{background-color: #FFFFFF; border: 1px solid #3B3B3B;color: #3B3B3B;}
+.awbtn:hover{border:none;}
 .awbtn50{float:right;font-size: 14px;width: 49%; height: 46px; line-height: 46px; padding: 0; background-color: #FFFFFF; border: 1px solid #3B3B3B;
     color: #3B3B3B; border-radius: 3px !important; margin: 0;}
 .abbtn50{float:left;font-size: 14px;width: 49%;height:46px;line-height: 46px;padding: 0;background-color: #3B3B3B;color:#fff;border-radius: 3px !important;margin:0;}
 .adbg{ background: #3B3B3B;}
 .f9fafch{background: #F9FAFC;height: 20px;width:100%;}
 .redcolor{color: #D45757;}
+.popconfirm{position: fixed;width:100%;height: 100%;top:0;left:0;z-index:100;}
+.popconfirm .popmask{position: absolute;width:100%;height: 100%;text-align: center;top:0;left:0;background: rgba(0,0,0,0.3);z-index:100;cursor: pointer;}
+.popconfirm .popcontent{position:absolute;width:calc(100% - 26px);top:50%;left:50%;transform: translate(-50%, -50%);background: #fff;padding:32px 0 48px;
+    box-sizing: border-box;z-index:101;}
+.popconfirm .poptips{font-size:12px;color:#646464;padding-top:20px;border-top: 1px solid #F5F5F5;margin-bottom:32px;}
+.popconfirm .popbutton{display:flex;justify-content: space-between;align-items: center;}
+.popconfirm .popbutton button{width:49%;}
 ::-webkit-scrollbar { width: 6px;height:6px;}
 /* 滚动槽 */::-webkit-scrollbar-track {-webkit-box-shadow: inset 0 0 6px #fff;border-radius: 10px;}
 /* 滚动条滑块 */::-webkit-scrollbar-thumb {border-radius: 10px;background: #c5c5c5;}
@@ -236,6 +244,17 @@ adinputic input[type='text']::-webkit-input-placeholder { color:#B8B8B8;}
     height:12px;
     width: 12px;
     margin-top:3px;
+}
+.fleximgtextc{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.fleximgtextc img{
+    flex-shrink: 0;
+    margin-right: 22px;
+    height:24px;
+    width: 24px;
 }
 /*重写foundation  css*/
 .left-off-canvas-menu{

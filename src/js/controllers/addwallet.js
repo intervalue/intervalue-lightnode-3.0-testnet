@@ -56,7 +56,7 @@ angular.module('copayApp.controllers').controller('addwalletController',
         // 定义提示框内容  结束
         self.addwordf = function ($event) {
             self.showcodeerr = false;
-            if ($event.srcElement.tagName == 'SPAN') {
+            if ($event.srcElement.tagName == 'BUTTON') {
                 self.showrandamcodes.forEach(function (item, index) {
                     if (item.id == $event.srcElement.id) {
                         self.showrandamcodes[index].chosen = true;

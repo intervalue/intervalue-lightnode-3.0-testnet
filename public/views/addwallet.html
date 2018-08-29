@@ -1,4 +1,4 @@
-<div ng-controller="addwalletController as addw" ng-init="addw.step = 'selectcode';">
+<div ng-controller="addwalletController as addw" ng-init="addw.step = 'addorimport';">
     <!--选择导入钱包还是创建钱包  start-->
     <div class="addwcontent" ng-if="addw.step == 'addorimport'">
         <div class="addwcontentin">
@@ -39,11 +39,11 @@
         <div class="addwcontentin">
             <div class="fleximgtext">
                 <img src="./img/warn.png">
-                <div translate class="addwwarntext">The password is used to protect the private key and transaction authorization, and the strength is very important!</div>
+                <div translate class="redcolor size-12">The password is used to protect the private key and transaction authorization, and the strength is very important!</div>
             </div>
             <div class="fleximgtext">
                 <img src="./img/warn.png">
-                <div translate class="addwwarntext">InterValue does not store passwords and cannot be retrieved for you. Please keep in mind!</div>
+                <div translate class="redcolor size-12">InterValue does not store passwords and cannot be retrieved for you. Please keep in mind!</div>
             </div>
             <p ng-if="addw.addwalleterr">密码不一致</p>
             <div class="adinputitem">
@@ -101,7 +101,7 @@
     </div>
     <!--显示钱包口令  end-->
     <!--选择钱包口令  start-->
-    <div class="addwcontent" ng-if="addw.step == 'selectcode'" ng-init="addw.funReg()">
+    <div class="addwcontent" ng-if="addw.step == 'selectcode'">
         <nav class="tab-bar">
             <section class="left-small">
                 <a ng-click="addw.step = 'showcode'">
@@ -124,25 +124,44 @@
                     <span ng-repeat="item in addw.chosenWords" id="{{item.id}}" >{{item.str}}</span>
                 </div>
                 <div class="wordsbox m12b" ng-click="addw.addwordf($event)">
-                    <span ng-repeat="item in addw.showrandamcodes" id="{{item.id}}" ng-show="!item.chosen">{{item.str}}</span>
+                    <button ng-repeat="item in addw.showrandamcodes" id="{{item.id}}" ng-disabled="item.chosen">{{item.str}}</button>
                 </div>
             </div>
-            <button ng-click="addw.step = 'showcode'">上一步</button>
+            <button ng-click="addw.step = 'showcode'" translate>Last step</button>
         </div>
     </div>
     <!--选择钱包口令  end-->
     <!--删除口令  start-->
     <div class="addwcontent" ng-if="addw.step == 'deletecode'">
+        <nav class="tab-bar">
+            <section class="middle tab-bar-section">
+                <h1 class="title ellipsis">
+                    Backup mnemonic
+                </h1>
+            </section>
+        </nav>
+        <div class="f9fafch"></div>
         <div class="addwcontentin">
-            <p>确认您的钱包助记词</p>
-            <button ng-click="addw.showconfirm = true;">删除助记词</button>
-            <button ng-click="addw.delteConfirm(addw.addwname, addw.addwpass, addw.mnemonic);">跳过</button>
-            <div ng-if="addw.showconfirm" class="addwcontent">
-                <div>
-                    <p>您确定要删除助记词吗？</p>
-                    <p>此操作将彻底删除应用中助记词并且不可恢复，请再次确认您已经将助记词备份到安全的地方。</p>
-                    <button ng-click="addw.delteConfirm(addw.addwname, addw.addwpass, addw.mnemonic);">确认</button>
-                    <button ng-click="addw.showconfirm = false;">取消</button>
+            <img class="warnbigimg" src="./img/warnbig.png" />
+            <p class="center redcolor m28b" translate>Confirm your mnemonic</p>
+            <div class="addwslcbox m15b">
+                <span ng-repeat="item in addw.showcodes" id="{{item.id}}" >{{item.str}}</span>
+            </div>
+            <p class="center redcolor m35b">Your password is correct. To ensure the security of your wallet, we recommend that you delete your password.</p>
+            <button class="m20b" ng-click="addw.showconfirm = true;" translate>Delete mnemonic</button>
+            <button class="awbtn" ng-click="addw.delteConfirm(addw.addwname, addw.addwpass, addw.mnemonic);" translate>Skip</button>
+            <div ng-if="addw.showconfirm" class="popconfirm">
+                <div class="popmask" ng-click="addw.showconfirm = false;"></div>
+                <div class="popcontent">
+                    <div class="fleximgtextc m20b p25h">
+                        <img src="./img/qdeletecode.png">
+                        <div translate class="size-16 redcolor">Are you sure you want to delete the mnemonic?</div>
+                    </div>
+                    <p class="poptips p25h" translate>This will completely remove the mnemonics from the app and it will not be recoverable. Please reconfirm that you have backed up your mnemonics to a safe place.</p>
+                    <div class="p25h popbutton">
+                        <button ng-click="addw.delteConfirm(addw.addwname, addw.addwpass, addw.mnemonic);">确认</button>
+                        <button class="awbtn" ng-click="addw.showconfirm = false;">取消</button>
+                    </div>
                 </div>
             </div>
         </div>
