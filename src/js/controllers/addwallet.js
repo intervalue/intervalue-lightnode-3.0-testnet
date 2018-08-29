@@ -13,6 +13,7 @@ angular.module('copayApp.controllers').controller('addwalletController',
         self.showcodeerr = false;
         self.addwalleterr = false;
         self.showconfirm = false;
+        self.showtab = 'tabcold';
         var fc = profileService.focusedClient;
         var walletClient = bwcService.getClient();
         self.ducodes = walletClient.createRandomMnemonic().split(' ');

@@ -2186,8 +2186,27 @@ msgstr "此操作将彻底删除应用中助记词并且不可恢复，请再次
 msgid "Please backup"
 msgstr "请备份"
 
+msgid "Observer Wallet"
+msgstr "观察者钱包"
 
+msgid "Wallet Seed :"
+msgstr "钱包口令："
 
+msgid "Enter your mnemonic, separated by spaces"
+msgstr "请输入您的助记词，按空格分隔"
 
+msgid "Start importing"
+msgstr "开始导入"
 
+msgid "Note: Please be patient while the wallet is recovering. Do not quit the software."
+msgstr "注意：钱包恢复过程中请耐心等待，切勿退出软件。"
+
+msgid "The hot wallet does not need to import the private key, only the wallet address, for daily viewing of accounts, transactions and acceptance notifications. The private key of large funds is recommended to use cold wallet or hardware wallet management to avoid theft and theft."
+msgstr "热钱包不需要导入私钥，只导入钱包地址，进行日常查看账户、交易和接受通知。大额资金的私钥建议使用冷钱包或硬件钱包管理，避免泄露被盗。"
+
+msgid "Scan or enter your wallet address"
+msgstr "扫描或输入钱包地址"
+
+msgid "Note: The hot wallet needs a cold wallet to match the signature when sending the transaction. You can use another idle phone, open the flight mode as a cold wallet, import the wallet private key, and match the offline signature."
+msgstr "注意：热钱包发送交易时需要冷钱包配合签名。你可以使用另一台闲置手机，开飞行模式作为冷钱包，导入钱包私钥，配合离线签名。"
 

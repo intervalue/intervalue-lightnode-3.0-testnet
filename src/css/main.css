@@ -24,6 +24,7 @@
  body {
   font-family: pfregular,Arial,"微软雅黑";
   font-size: 14px;
+   color:#323232;
 }
 
 
@@ -178,7 +179,7 @@ ul.button-group li.selected {
 body, html{
   height:100%;
   width:100%;
-  color: #2C3E50;
+  color: #323232;
   -webkit-user-select: text;
 }
 
@@ -1170,7 +1171,7 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
 }
 
 .mtab-title {
-	color: #A5B7C7;
+	color: #323232;
 	border: 1px solid #A5B7C7;
 	border-bottom-color: #8C9EB0;
   	border-width: 1px;

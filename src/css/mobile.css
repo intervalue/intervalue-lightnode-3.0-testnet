@@ -128,6 +128,9 @@ _:-ms-fullscreen, :root .main {
 .left-small a img{
   margin-left: 15px;
 }
+.right-small a img{
+  margin-right: 15px;
+}
 .bottom-bar {
   display: block;
   position: fixed;
@@ -853,19 +856,29 @@ textarea:focus
   font-weight: 500;
   display: block;
 }
-
-.tab-container:hover a {
-  color: #7A8C9E;
+.tab-container{
+  border-bottom: 1px solid #DEDEDE;
+  float: left;
+  text-align: center;
+  width: 50%;
+}
+.tab-container a {
+  font-size:14px;
+  font-weight:400;
+  color:#323232;
+  display:block;
+  width:100%;
+  height:100%;
+  padding: 15px 0 10px;
 }
 
 .tab-container.selected,
 .tab-container:active {
-  border-bottom: 3px solid #4B6178;
+  border-bottom: 2px solid #45AD8E;
 }
 
 .tab-container.selected a {
-  color: #2C3E50;
-  font-weight: 600;
+  color:#45AD8E;
 }
 
 .rn-carousel-control {
