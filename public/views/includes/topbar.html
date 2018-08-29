@@ -2,24 +2,23 @@
     <section class="left-small">
         <a ng-show="goBackToState"
            ng-click="$root.go('^', true); goBackToState = null">
-            <i class="icon-arrow-left3 icon-back"></i>
+            <img src="./img/chatbackstate.png" />
         </a>
         <a ng-show="goToWallet"
            ng-click="topbar.goWallet();goToWallet = null;index.backwallet = false;">
-            <i class="icon-arrow-left3 icon-back"></i>
+            <img src="./img/chatbackstate.png" />
         </a>
         <a ng-show="closeToHome" class="p10"
            ng-click="topbar.goHome(); closeToHome = null;index.backhome = false;">
-            <i class="icon-arrow-left3 icon-back"></i>
-            <img src="./img/" />
+            <img src="./img/chatbackstate.png" />
         </a>
         <a ng-show="goToWaname"
            ng-click="topbar.goToWaname(); goToWaname = null;index.backwaname = false;">
-            <i class="icon-arrow-left3 icon-back"></i>
+            <img src="./img/chatbackstate.png" />
         </a>
         <a ng-show="gohisback" history-back
            ng-click=" gohisback = null">
-            <i class="icon-arrow-left3 icon-back"></i>
+            <img src="./img/chatbackstate.png" />
         </a>
     </section>
 

@@ -8,12 +8,12 @@ angular.module('copayApp.controllers').controller('createShadowWalletController'
 
         this.create = function (form) {
             var form = $scope.addShadowWallet;
-            var obj = JSON.parse(form.$$element[0][0].value);
-           // var obj = {"sign":"XM7cvzIHofkCXd8VI+QjvYpDVdP2f0J+1vsYagCsPTp5EBa3VMeTwSkY+tdEpnK7gvzhFTPKyPhVEiHd4gWOMw==","xpub":"xpub6CF6k3emCLMuaaQE5MPrKUrZSAp1ZFPp44fYpsehhMQ5U1xCn8YmWS5ignuQP4XvCnXVSnajzp9G8poxf7muTekLcRatDJvzZQJGWudhUPk","addr":"KL3M65WEDDZ7VHBB2TT7PSDNBOK4TWAG","pubkey":"Au0+pcbtyca6hqmezn7oVGXhUIkTYHwpAWpwp1CLfa7p"};
+            //var obj = JSON.parse(form.$$element[0][0].value);
+            var obj = {"sign":"XM7cvzIHofkCXd8VI+QjvYpDVdP2f0J+1vsYagCsPTp5EBa3VMeTwSkY+tdEpnK7gvzhFTPKyPhVEiHd4gWOMw==","xpub":"xpub6CF6k3emCLMuaaQE5MPrKUrZSAp1ZFPp44fYpsehhMQ5U1xCn8YmWS5ignuQP4XvCnXVSnajzp9G8poxf7muTekLcRatDJvzZQJGWudhUPk","addr":"KL3M65WEDDZ7VHBB2TT7PSDNBOK4TWAG","pubkey":"Au0+pcbtyca6hqmezn7oVGXhUIkTYHwpAWpwp1CLfa7p"};
             var opts = {
                 m: 1,
                 n: 1,
-                name: "热钱包",
+                name: "SD-热钱包(新)",
                 xPubKey: obj.xpub,
                 account: 0,
                 network: 'livenet',
