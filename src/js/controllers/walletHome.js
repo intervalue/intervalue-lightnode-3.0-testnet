@@ -814,6 +814,7 @@ angular.module('copayApp.controllers')
 			});
 		};
 
+		//开始发送交易
 		this.submitPayment = function() {
 			if ($scope.index.arrBalances.length === 0)
 				return console.log('send payment: no balances yet');
@@ -1224,6 +1225,8 @@ angular.module('copayApp.controllers')
 				});
 			}, 100);
 		};
+
+		//---发送交易结束
 
 		$scope.$watch('index.assetIndex', function(newVal, oldVal) {
 			$scope.assetIndexSelectorValue = newVal;

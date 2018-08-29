@@ -5,18 +5,18 @@
 <div ng-controller="shadowDeviceControllers as shadow" class="shadowModal" ng-class="{'animated  bounceInUp':index.showshadow}">
     <!--热钱包界面-->
     <div ng-show="index.shadowstep == 'hot1'" class="text-center">
-        <qrcode size="220" version="15" data="{{index.verificationAddress}}"></qrcode>
+        <qrcode size="220"  data="{{index.verificationAddress}}"></qrcode>
     </div>
     <div ng-show="index.shadowstep == 'hot2'" class="text-center">
         <div style="text-align:center">授权签名</div>
-        <qrcode size="220" version="15" data="{{index.signatureCodeQRCode}}" ></qrcode>
+        <qrcode size="220"  data="{{index.signatureCodeQRCode}}" ></qrcode>
         <button class="button round black expand m0" ng-click="index.shadowstep = 'hot3'">
             <span translate>下一步</span>
         </button>
     </div>
 
     <div ng-show="index.shadowstep == 'hot3'" class="text-center" ng-controller="createShadowWalletController as createShadow">
-        <form name="addShadowWallet"  ng-submit="createShadow.create(addShadowWallet)" novalidate>
+        <form name="addShadowWallet"  ng-submit="createShadow.create(addShadowWallet);index.showshadow = false" novalidate>
         <section>
             完成授权
         </section>
@@ -63,7 +63,7 @@
         </button>
     </div>
     <div ng-show="index.shadowstep == 'cold2'" class="text-center">
-        <qrcode size="220" version="15" data="{{index.signatureDetlCode}}"></qrcode>
+        <qrcode size="220"  data="{{index.signatureDetlCode}}"></qrcode>
     </div>
     <!--冷钱包界面-->
 </div>
