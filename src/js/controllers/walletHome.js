@@ -819,8 +819,6 @@ angular.module('copayApp.controllers')
 			if ($scope.index.arrBalances.length === 0)
 				return console.log('send payment: no balances yet');
 			var fc = profileService.focusedClient;
-			console.log(11111111111111111);
-			console.log(fc);
 			var unitValue = this.unitValue;
 			var bbUnitValue = this.bbUnitValue;
 
