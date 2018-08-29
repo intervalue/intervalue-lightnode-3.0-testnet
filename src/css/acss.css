@@ -69,12 +69,14 @@
     font-size:10px;
     margin-right: 20px;
     flex-shrink: 0;
+    cursor: pointer;
 }
 .whlinfo .whewm{
     width:15px;
     height:15px;
     margin-right: 0;
     flex-shrink:0;
+    cursor: pointer;
 }
 .whamount{
     margin-top: 20px;
