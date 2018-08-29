@@ -582,7 +582,16 @@ API.prototype.sendMultiPayment = function (opts, cb) {
     } else {
       walletDefinedByKeys.readAddresses(self.credentials.walletId, {}, function (addresses) {
         opts.change_address = addresses[0].address;
-        Wallet.sendMultiPayment(opts, cb);
+          //opts.isHot = true
+          if(!opts.isHot)//判断是否为热钱包，如果不是，则执行普通钱包交易
+              Wallet.sendMultiPayment(opts, cb);
+          else  {//热钱包
+              var wallethot = require("intervaluecore/shadowWallet");
+              wallethot.getRradingUnit(opts,function (obj) {
+              //未签名交易数据,顯示成二維碼
+              $rootScope.$emit('Local/unsignedTransactionIfo', obj);
+              });
+          }
       });
     }
   }

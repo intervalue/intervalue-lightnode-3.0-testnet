@@ -184,7 +184,7 @@
 
             <div class="row m20t" ng-show="home.shownForm=='payment'">
                 <div class="large-12 large-centered columns">
-                    <form name="sendPaymentForm" ng-submit="home.submitPayment()" ng-disabled="home.blockUx || home.onGoingProcess" novalidate>
+                    <form name="sendPaymentForm" ng-submit="home.submitPayment(sendPaymentForm)" ng-disabled="home.blockUx || home.onGoingProcess" novalidate>
                         <div class="box-notification" ng-show="home.error" ng-click="home.resetError()">
               <span class="text-warning">
                 {{home.error|translate}}

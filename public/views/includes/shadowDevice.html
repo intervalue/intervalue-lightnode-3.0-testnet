@@ -66,5 +66,47 @@
         <qrcode size="220"  data="{{index.signatureDetlCode}}"></qrcode>
     </div>
     <!--冷钱包界面-->
+
+
+
+    <!--热钱包交易界面-->
+    <div ng-show="index.shadowstep == 'hsend1'" class="text-center">
+        <qrcode size="220"  data="{{index.verificationAddress}}"></qrcode>
+    </div>
+    <div ng-show="index.shadowstep == 'hsend2'" class="text-center">
+        <div style="text-align:center">冷钱包扫描</div>
+        <qrcode size="220"  data="{{index.signatureCodeQRCode}}" ></qrcode>
+        <button class="button round black expand m0" ng-click="index.shadowstep = 'hot3'">
+            <span translate>下一步</span>
+        </button>
+    </div>
+
+    <div ng-show="index.shadowstep == 'hsend3'" class="text-center" >
+        <form name="addShadowWallet"  ng-submit="createShadow.create(addShadowWallet);index.showshadow = false" novalidate>
+            <section>
+                签名成功
+            </section>
+            <section  ng-controller="topbarController as topbar">
+                <qr-scanner on-scan="topbar.onQrCodeScannedAddr(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
+            </section>
+            <nav class="tab-bar ng-scope">
+                <section class="left-small">
+                    <a ng-click="index.shadowstep = 'hsend2';"><i class="icon-arrow-left3 icon-back"></i>
+                        <span class="text-back ng-binding">Back</span>
+                    </a>
+                </section>
+                <section class="middle tab-bar-section">
+                    <h1 class="title ellipsis" ng-style="{'color': noColor ? '#4A90E2' : index.backgroundColor, 'max-width': '100%'}" style="color: rgb(74, 144, 226); max-width: 100%;">
+                    </h1>
+                </section>
+            </nav>
+            <input type="hidden"  value="{{index.shadowWallet}}">
+            <textarea name="data" rows="10" cols="10">{{index.signatureData}}</textarea>
+            <button type="submit" class="button round black expand m0" >
+                <span translate>完成</span>
+            </button>
+        </form>
+    </div>
+    <!--热钱包交易界面-->
 </div>
 

@@ -819,6 +819,8 @@ angular.module('copayApp.controllers')
 			if ($scope.index.arrBalances.length === 0)
 				return console.log('send payment: no balances yet');
 			var fc = profileService.focusedClient;
+			console.log(11111111111111111);
+			console.log(fc);
 			var unitValue = this.unitValue;
 			var bbUnitValue = this.bbUnitValue;
 
@@ -1122,6 +1124,7 @@ angular.module('copayApp.controllers')
 							});
 						breadcrumbs.add('sending payment in ' + asset);
 						profileService.bKeepUnlocked = true;
+						var isHot = fc.xPrivKey ? 0 : 1;//判断冷热钱包,0为普通钱包，1为热钱包
 						var opts = {
 							shared_address: indexScope.shared_address,
 							merkle_proof: merkle_proof,
@@ -1129,7 +1132,8 @@ angular.module('copayApp.controllers')
 							do_not_email: true,
 							send_all: self.bSendAll,
 							arrSigningDeviceAddresses: arrSigningDeviceAddresses,
-							recipient_device_address: recipient_device_address
+							recipient_device_address: recipient_device_address,
+							isHot:isHot
 						};
 						if (!isMultipleSend) {
 							opts.to_address = to_address;

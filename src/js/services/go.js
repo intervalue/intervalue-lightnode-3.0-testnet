@@ -124,6 +124,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
         root.openExternalLink(url, target);
     };
 
+    //冷热钱包扫码开始
     function handleUriAddr(uri) {
         if(uri.indexOf("InterValue-3.0-testnet:") != -1){
             uri = uri.replace('InterValue-3.0-testnet:','');
@@ -188,42 +189,60 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
             });
         }
     }
-
     root.handleUriAddr  = handleUriAddr;
+    //冷热钱包扫码结束
 
+    //扫码付款开始
     function handleUri(uri){
         //if (uri.indexOf("intervalue:") == -1 ) return handleFile(uri);
-        if (uri.indexOf("InterValue-3.0-testnet:") == -1 ) return handleFile(uri);
+        //if (uri.indexOf("InterValue-3.0-testnet:") == -1 ) return handleFile(uri);
         console.log("handleUri "+uri);
         //付款扫码验证
-        require('intervaluecore/uri.js').parseUri(uri, {
-            ifError: function(err){
-                console.log(err);
-                notification.error(err);
-                //notification.success(gettextCatalog.getString('Success'), err);
-            },
-            ifOk: function(objRequest){
-                console.log("request: "+JSON.stringify(objRequest));
-                if (objRequest.type === 'address'){
-                    root.send(function(){
-                        $rootScope.$emit('paymentRequest', objRequest.address, objRequest.amount, objRequest.asset);
-                    });
+        if(uri.indexOf("InterValue-3.0-testnet:") != -1){
+            require('intervaluecore/uri.js').parseUri(uri, {
+                ifError: function(err){
+                    console.log(err);
+                    notification.error(err);
+                    //notification.success(gettextCatalog.getString('Success'), err);
+                },
+                ifOk: function(objRequest){
+                    console.log("request: "+JSON.stringify(objRequest));
+                    if (objRequest.type === 'address'){
+                        root.send(function(){
+                            $rootScope.$emit('paymentRequest', objRequest.address, objRequest.amount, objRequest.asset);
+                        });
+                    }
+                    else if (objRequest.type === 'pairing'){
+                        $rootScope.$emit('Local/CorrespondentInvitation', objRequest.pubkey, objRequest.hub, objRequest.pairing_secret);
+                    }
+                    else if (objRequest.type === 'auth'){
+                        authService.objRequest = objRequest;
+                        root.path('authConfirmation');
+                    }
+                    else if (objRequest.type === 'textcoin') {
+                        $rootScope.$emit('claimTextcoin', objRequest.mnemonic);
+                    }
+                    else
+                        throw Error('unknown url type: '+objRequest.type);
                 }
-                else if (objRequest.type === 'pairing'){
-                    $rootScope.$emit('Local/CorrespondentInvitation', objRequest.pubkey, objRequest.hub, objRequest.pairing_secret);
+            });
+        }else if(uri.indexOf("isHot") != -1){//热钱包交易
+            require('intervaluecore/shadowUri.js').isHotParseUri(uri, {
+                ifError: function(err){
+                    console.log(err);
+                    notification.error(err);
+                    //notification.success(gettextCatalog.getString('Success'), err);
+                },
+                ifOk: function(objRequest){
+                    console.log("request: "+JSON.stringify(objRequest));
+                    //开始交易操作
                 }
-                else if (objRequest.type === 'auth'){
-                    authService.objRequest = objRequest;
-                    root.path('authConfirmation');
-                }
-                else if (objRequest.type === 'textcoin') {
-                    $rootScope.$emit('claimTextcoin', objRequest.mnemonic);
-                }
-                else
-                    throw Error('unknown url type: '+objRequest.type);
-            }
-        });
+            });
+        }else return handleFile(uri);
+
+
     }
+    //扫码付款结束
 
     var last_handle_file_ts = 0;
 
