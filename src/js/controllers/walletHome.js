@@ -1154,17 +1154,15 @@ angular.module('copayApp.controllers')
 						}
 						if(opts.isHot == 1){//热钱包
 							//生成未签名的交易信息
-							console.log(fc.credentials.walletId);
                             var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
                             walletDefinedByKeys.readAddresses(fc.credentials.walletId,opts, function (objAddr) {
-                            	console.log(objAddr);
                                 opts.change_address = objAddr;
                                 var shadowWallet = require('intervaluecore/shadowWallet');
                                 shadowWallet.getTradingUnit(opts,function (obj) {
                                     $rootScope.$emit('Local/unsignedTransactionIfo', obj);
                                 });
                             });
-
+							return ;
                             }
 
 							/*var shadowWallet = require('intervaluecore/wallet');

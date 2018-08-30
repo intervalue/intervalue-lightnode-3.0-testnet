@@ -143,7 +143,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                     //第一次扫码pubkey二维码后，签名生成地址
                     if(objRequest.type ==='shadow'){
                         shadowWallet.getSignatureCode(objRequest,function (signatureCode) {
-                            alert(typeof  signatureCode );
+
                             if(typeof signatureCode=="object"){
                                 $rootScope.$emit('Local/ShadowInvitation',signatureCode);
                             }else{
@@ -235,7 +235,15 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                 },
                 ifOk: function(objRequest){
                     console.log("request: "+JSON.stringify(objRequest));
-                    //开始交易操作
+                    //展示未签名交易信息
+                    if(objRequest.type == "trading"){
+                        $rootScope.$emit('Local/showUnsignedTransactionIfo', objRequest);
+
+                    }else if(objRequest.type == ""){
+                       //
+                    }
+
+
                 }
             });
         }else return handleFile(uri);
