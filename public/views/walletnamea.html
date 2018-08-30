@@ -1,26 +1,38 @@
-<div
-        class="topbar-container"
-        ng-include="'views/includes/topbar.html'"
-        ng-init="titleSection='Backup'; goToWallet = true">
-</div>
-
-<div class="content" ng-controller="walletnameaController as nameW">
+<div ng-controller="walletnameaController as nameW" class="secondcontent">
+    <div
+            class="topbar-container"
+            ng-include="'views/includes/topbar.html'"
+            ng-init="titleSection=nameW.name; goToWallet = true;walletsave = true;">
+    </div>
     <div class="adwnnumo">
         <div class="adwnnum">
-            <i class="icon-scan size-60"></i>
-            <b>{{nameW.ammount}}INVE</b>
-            <p>{{nameW.addr}}</p>
+            <div class="adwnlogo"></div>
+            <div class="adwnnumamt"><span>{{nameW.ammount}}</span>INVE</div>
+            <div class="adwnaddr">{{nameW.addr}}<img ng-click="" src="./img/lewm.png"/></div>
         </div>
-        <div class="adwnlinput">
-            <label>钱包名</label>
-            <input placeholder="{{nameW.name}}" />
-        </div>
-        <div ng-click="$root.go('walletnamea.changewalletp')">
-            修改密码
-        </div>
-        <button ng-show="nameW.mnemonic || nameW.mnemonicEncrypted" ng-click="nameW.gobackup(nameW.name, nameW.addr, nameW.ammount, nameW.walletid, nameW.mnemonic, nameW.mnemonicEncrypted);index.backwaname = true;">备份助记词</button>
-        <button>删除钱包</button>
     </div>
+    <ul class="adwnlinput">
+        <li>
 
+        </li>
+        <li>
+
+        </li>
+    </ul>
+    <div class="adwnlinput">
+        <img src="./img/winname.png" />
+        <label>钱包名</label>
+        <input placeholder="{{nameW.name}}" />
+    </div>
+    <div class="adwnlinput">
+        <img src="./img/winname.png" />
+        <label>钱包名</label>
+        <input placeholder="{{nameW.name}}" />
+    </div>
+    <div ng-click="$root.go('walletnamea.changewalletp')">
+        修改密码
+    </div>
+    <button ng-show="nameW.mnemonic || nameW.mnemonicEncrypted" ng-click="nameW.gobackup(nameW.name, nameW.addr, nameW.ammount, nameW.walletid, nameW.mnemonic, nameW.mnemonicEncrypted);index.backwaname = true;">备份助记词</button>
+    <button>删除钱包</button>
 </div>
 
