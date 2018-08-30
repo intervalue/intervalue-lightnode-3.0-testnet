@@ -249,48 +249,38 @@
         <div id="wallet" class="history tab-view">
             <nav ng-controller="topbarController as topbar" class="tab-bar">
                 <section class="right-small">
-                    <a id="hamburger" class="p10" ng-click="$root.go('preferencesGlobal')"><i class="fi-widget size-24 vm wallet-settings"></i>
+                    <a class="p10" ng-click="$root.go('preferencesGlobal')"><i class="fi-widget size-24 vm wallet-settings"></i>
                     </a>
                 </section>
 
                 <section class="middle tab-bar-section">
-                    <h1 class="title ellipsis" ng-style="{'color': noColor ? '#4A90E2' : index.backgroundColor, 'max-width': '100%'}">
-                        <span ng-if="index.arrBalances[index.assetIndex].shared === undefined && !index.shared_address || titleSection">{{(titleSection|translate) || (index.shared_address || index.alias || index.walletName)}}</span>
-                        <span ng-if="(index.arrBalances[index.assetIndex].shared !== undefined || index.shared_address) && !titleSection">
-                        <a ng-click="index.openSubwalletModal()" ng-style="{'color': noColor ? '#4A90E2' : index.backgroundColor}">
-                            <span class="ellipsis" style="max-width: calc(100% - 14px);float: left;">
-                                {{(index.shared_address || index.alias || index.walletName)}}
-                            </span>
-                            <span class="arrow-down" ng-style="{'float': 'left', 'border-top-color': index.backgroundColor}"></span>
-                        </a>
-                    </span>
-                    </h1>
+                    <h1 class="title ellipsis" translate>Wallet</h1>
                 </section>
             </nav>
 
             <div class="adwwto">
                 <div class="adwwt" ng-repeat="item in adddataw track by $index">
                     <div class="adwwtflex" ng-click="index.towalletname(item.walletName, item.addr, item.account, item.walletId, item.mnemonic, item.mnemonicEncrypted)">
-                        <i class="fi-widget size-18 vm wallet-settings"></i>
+                        <div class="adwwtlogo"></div>
                         <div class="adwwt100">
-                            <div class="adwwtname">{{item.walletName}}<span ng-show="item.mnemonic || item.mnemonicEncrypted" ng-click="$root.go('backup');index.backwallet=true">请备份</span></div>
+                            <div class="adwwtname">{{item.walletName}}
+                                <span class="whpback" ng-show="item.mnemonic || item.mnemonicEncrypted" ng-click="$root.go('backup');index.backwallet=true" translate>Please backup</span>
+                            </div>
                             <div class="adwwtaddr">{{item.addr}}</div>
                             <div class="adwwtaddr">{{item.walletId}}</div>
-                            {{item.mnemonic}}
-                            {{item.mnemonicEncrypted}}
                         </div>
-                        <i class="icon-arrow-right3 size-24"></i>
+                        <img class="moreimg" src="./img/more.png" />
                     </div>
-                    <div class="adwwtnum">
-                        {{item.account}}<span>INVE</span>
+                    <div class="adwwtnum fontbold size-20">
+                        {{item.account}}<span class="greencolor fontbold size-14">INVE</span>
                     </div>
                 </div>
                 <div ng-controller="shadowDeviceControllers as shadow">
                     <input type="button" value="testgenerateVerification" ng-click="shadow.generateVerification(index.shared_address || home.addr[index.walletId])">
                     <input type="button" value="generateSignatureDetl" ng-click="shadow.generateSignatureDetl(index.shared_address || home.addr[index.walletId])">
                 </div>
-                <button ng-click="$root.go('create')">创建钱包</button>
-                <button ng-click="$root.go('importwallet')">导入钱包</button>
+                <button class="m20b" ng-click="$root.go('create')">创建钱包</button>
+                <button class="awbtn" ng-click="$root.go('importwallet')">导入钱包</button>
                 <!--<button ng-click="index.generatePubkey(index.shared_address || home.addr[index.walletId])">冷钱包验证码</button>-->
                 <div ng-controller="createShadowWalletController  as cs"><button ng-click="cs.create()">冷钱包验证码</button></div>
             </div>

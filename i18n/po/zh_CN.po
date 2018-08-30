@@ -2186,8 +2186,8 @@ msgstr "此操作将彻底删除应用中助记词并且不可恢复，请再次
 msgid "Please backup"
 msgstr "请备份"
 
-msgid "Observer Wallet"
-msgstr "观察者钱包"
+msgid "Hot Wallet"
+msgstr "热钱包"
 
 msgid "Wallet Seed :"
 msgstr "钱包口令："

@@ -6,6 +6,10 @@ angular.module('copayApp.controllers').controller('addwalletController',
         self.addwname = '';
         self.addwpass = '';
         self.addwrpass = '';
+        self.addwipass = '';
+        self.addwiname = '';
+        self.importcode = '';
+        self.addwirpass = '';
         self.chosenWords = [];
         self.showcodes = [];
         self.showrandamcodes = [];
@@ -161,4 +165,25 @@ angular.module('copayApp.controllers').controller('addwalletController',
                 });
             }, 100);
         };
+    //import wallet
+        self.importw = function(){
+            if (self.creatingProfile)
+                return console.log('already creating profile');
+            self.creatingProfile = true;
+
+            $timeout(function () {
+                profileService.create({ walletName: self.addwiname, password: self.addwipass, mnemonic: self.importcode }, function (err) {
+                    if(err){
+                        self.creatingProfile = false;
+                        $log.warn(err);
+                        self.error = err;
+                        $timeout(function () {
+                            $scope.$apply();
+                        });
+                    }else{
+                        $rootScope.adddataw = profileService.profile.credentials;
+                    }
+                });
+            }, 100);
+        }
     });
