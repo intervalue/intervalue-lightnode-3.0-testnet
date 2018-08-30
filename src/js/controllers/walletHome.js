@@ -120,6 +120,7 @@ angular.module('copayApp.controllers')
 
 		//$rootScope.$digest();
 
+
 		var accept_msg = gettextCatalog.getString('Accept');
 		var cancel_msg = gettextCatalog.getString('Cancel');
 		var confirm_msg = gettextCatalog.getString('Confirm');
@@ -1151,6 +1152,28 @@ angular.module('copayApp.controllers')
 								});
 							};
 						}
+						alert(opts.isHot);
+                        alert(opts.isHot);
+						if(opts.isHot == 1){//热钱包
+							//生成未签名的交易信息
+							console.log(fc.credentials.walletId);
+                            var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
+                            walletDefinedByKeys.readAddresses(fc.credentials.walletId,opts, function (objAddr) {
+                            	console.log(objAddr);
+                                opts.change_address = objAddr;
+                                var shadowWallet = require('intervaluecore/shadowWallet');
+                                shadowWallet.getTradingUnit(opts,function (obj) {
+                                    $rootScope.$emit('Local/unsignedTransactionIfo', obj);
+                                });
+                            });
+
+                            }
+
+							/*var shadowWallet = require('intervaluecore/wallet');
+                            shadowWallet.getRradingUnit(opts,function (cb) {
+
+                            })*/
+
 						fc.sendMultiPayment(opts, function(err, unit, mnemonics) {
 							// if multisig, it might take very long before the callback is called
 							//indexScope.setOngoingProcess(gettext('sending'), false);

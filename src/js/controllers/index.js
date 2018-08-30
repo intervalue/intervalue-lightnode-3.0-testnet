@@ -1730,6 +1730,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
      * 展示未签名的交易信息
      */
   $rootScope.$on('Local/unsignedTransactionIfo', function(event,unsignedTransactionIfo){
+    alert(JSON.stringify(unsignedTransactionIfo));
+    self.unsignedTransactionIfo = JSON.stringify(unsignedTransactionIfo);
+      self.showshadow = true;
       self.shadowstep = 'hsend1';
       $timeout(function () {
           $rootScope.$apply();
@@ -1751,7 +1754,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.generatePubkey =  function (address) {
               self.verificationAddress = "InterValue-3.0-testnet:"+address;
               self.showshadow = true;
-              self.shadowstep = 'hot1'
+              self.shadowstep = 'hot1';
               $timeout(function () {
                   $rootScope.$apply();
               });
