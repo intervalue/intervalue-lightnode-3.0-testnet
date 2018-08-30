@@ -1701,7 +1701,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         });
     });
 
-
+    /**
+     * 冷钱包授权签名详情
+     */
   $rootScope.$on('Local/ShadowSignInvitation', function(event,signatureDetlCode){
       self.signatureDetlCodeAddr = signatureDetlCode.addr;
       self.signatureDetlCode = JSON.stringify(signatureDetlCode);
@@ -1712,6 +1714,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
       });
   });
 
+    /**
+     * 热钱包扫描授权签名详情
+     */
   $rootScope.$on('Local/generateShadowWallet', function(event,shadowWallet){
       self.signatureData = shadowWallet.sign;
       self.shadowWallet = JSON.stringify(shadowWallet);
@@ -1721,7 +1726,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
       });
   });
 
-  //展示未签名的交易信息
+    /**
+     * 展示未签名的交易信息
+     */
   $rootScope.$on('Local/unsignedTransactionIfo', function(event,unsignedTransactionIfo){
       self.shadowstep = 'hsend1';
       $timeout(function () {
