@@ -1700,7 +1700,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             });
         });
     });
-    
+
 
   $rootScope.$on('Local/ShadowSignInvitation', function(event,signatureDetlCode){
       self.signatureDetlCodeAddr = signatureDetlCode.addr;
