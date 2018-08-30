@@ -1680,24 +1680,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         });
     });
 
-    $rootScope.$on('Local/ShadowInvitation', function(event,address){
-        var shadowWallet = require('intervaluecore/shadowWallet');
-        shadowWallet.getVerificationQRCode(address,function(verificationQRCode) {
-            if(verificationQRCode){
-                self.verificationQRCode = JSON.stringify(verificationQRCode);
-                self.showshadow = true;
-                self.shadowstep = 'hot2';
-                $timeout(function () {
-                    $rootScope.$apply();
-                });
-                console.log(verificationQRCode);
-            }else{
-                self.showshadow = false;
-                alert('Please scan the cold wallet QR code or fill in the address first!!');
-            }
-        });
-    });
-
     /**
      * 生成授权签名二维码
      */
@@ -1718,15 +1700,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             });
         });
     });
-
-  $rootScope.$on('Local/ShadowInvitation', function(event,signatureCode){
-    self.signatureCode = signatureCode;
-    self.showshadow = true;
-    self.shadowstep = 'hot2';
-    $timeout(function () {
-        $rootScope.$apply();
-    });
-  });
+    
 
   $rootScope.$on('Local/ShadowSignInvitation', function(event,signatureDetlCode){
       self.signatureDetlCodeAddr = signatureDetlCode.addr;
@@ -1746,6 +1720,19 @@ angular.module('copayApp.controllers').controller('indexController', function ($
           $rootScope.$apply();
       });
   });
+
+  //展示未签名的交易信息
+  $rootScope.$on('Local/unsignedTransactionIfo', function(event,unsignedTransactionIfo){
+      self.shadowstep = 'hsend1';
+      $timeout(function () {
+          $rootScope.$apply();
+      });
+  });
+
+
+
+
+
   self.towalletname = function (name, addr, ammount, walletid, mnemonic, mnemonicEncrypted) {
     $state.go('walletnamea', { name: name, addr: addr, ammount: ammount, walletid: walletid, mnemonic: mnemonic, mnemonicEncrypted: mnemonicEncrypted});
   };

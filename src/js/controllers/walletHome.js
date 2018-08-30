@@ -917,7 +917,7 @@ angular.module('copayApp.controllers')
 				return $rootScope.$emit('Local/ShowErrorAlert', "This payment is already under way");
 			self.current_payment_key = current_payment_key;
 
-			indexScope.setOngoingProcess(gettext('sending'), true);
+			//indexScope.setOngoingProcess(gettext('sending'), true);
 			$timeout(function() {
 
 				if (!isMultipleSend && accountValidationResult.isValid) { // try to replace validation result with attested BB address
@@ -952,7 +952,7 @@ angular.module('copayApp.controllers')
 							}
 
 							delete self.current_payment_key;
-							indexScope.setOngoingProcess(gettext('sending'), false);
+							//indexScope.setOngoingProcess(gettext('sending'), false);
 							return self.setSendError('Attested account not found');
 						} else if (ValidationUtils.isValidAddress(bb_address)) {
 							original_address = address;
@@ -987,7 +987,7 @@ angular.module('copayApp.controllers')
 				profileService.requestTouchid(function(err) {
 					if (err) {
 						profileService.lockFC();
-						indexScope.setOngoingProcess(gettext('sending'), false);
+						//indexScope.setOngoingProcess(gettext('sending'), false);
 						self.error = err;
 						$timeout(function() {
 							delete self.current_payment_key;
@@ -1000,7 +1000,7 @@ angular.module('copayApp.controllers')
 					if (self.binding) {
 						if (isTextcoin) {
 							delete self.current_payment_key;
-							indexScope.setOngoingProcess(gettext('sending'), false);
+							//indexScope.setOngoingProcess(gettext('sending'), false);
 							return self.setSendError("you can send bound payments to intervalue adresses only");
 						}
 						if (!recipient_device_address)
@@ -1153,7 +1153,7 @@ angular.module('copayApp.controllers')
 						}
 						fc.sendMultiPayment(opts, function(err, unit, mnemonics) {
 							// if multisig, it might take very long before the callback is called
-							indexScope.setOngoingProcess(gettext('sending'), false);
+							//indexScope.setOngoingProcess(gettext('sending'), false);
 							breadcrumbs.add('done payment in ' + asset + ', err=' + err);
 							delete self.current_payment_key;
 							resetAddressValidation();
