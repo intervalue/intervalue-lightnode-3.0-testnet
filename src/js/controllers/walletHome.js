@@ -1152,8 +1152,6 @@ angular.module('copayApp.controllers')
 								});
 							};
 						}
-						alert(opts.isHot);
-                        alert(opts.isHot);
 						if(opts.isHot == 1){//热钱包
 							//生成未签名的交易信息
 							console.log(fc.credentials.walletId);
