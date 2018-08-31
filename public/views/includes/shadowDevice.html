@@ -2,7 +2,7 @@
 </div>
 
 
-<div ng-controller="shadowDeviceControllers as shadow" class="shadowModal" ng-class="{'animated  bounceInUp':index.showshadow}">
+<div  class="shadowModal" ng-class="{'animated  bounceInUp':index.showshadow}">
     <!--热钱包界面，开始-->
 
     <!--创建热钱包，开始-->
@@ -113,16 +113,19 @@
     <!--创建热钱包时，冷钱包验证界面，结束->
 
     <!--冷钱包交易签名验证，开始-->
-    <div ng-show="index.shadowstep == 'csend1'" class="text-center">
-        <label>0000000000</label>
-        <button class="button round black expand m0" ng-click="index.shadowstep = 'csend2'">
+
+    <div ng-show="index.shadowstep == 'csend1'" class="text-center" ng-controller="signedTransactionIfoControllers as signedTransaction">
+        <form name="signedTransactionIfo" ng-submit="signedTransaction.signedTransaction(signedTransactionIfo)">
+        <input type="hidden" value="{{index.showUnsignedTransactionIfo}}">
+        <button class="button round black expand m0" >
             <span translate>授权签名</span>
         </button>
+        </form>
     </div>
 
     <div ng-show="index.shadowstep == 'csend2'" class="text-center">
         <div>签名成功</div>
-        <qrcode size="220"  data="授权成功二维码"></qrcode>
+        <qrcode size="220"  data="{{index.signedTransactionIfo}}"></qrcode>
         <div>请用热钱包扫描二维码发出交易</div>
         <button class="button round black expand m0" ng-click="index.shadowstep = 'csend2'">
             <span translate>完成签名</span>

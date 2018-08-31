@@ -1742,7 +1742,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
      * 冷钱包扫码后，展示预览交易信息
      */
     $rootScope.$on('Local/showUnsignedTransactionIfo', function(event,showUnsignedTransactionIfo){
-        self.showUnsignedTransactionIfo = showUnsignedTransactionIfo;
+        self.showUnsignedTransactionIfo = JSON.stringify(showUnsignedTransactionIfo);
+        self.showshadow = true;
         self.shadowstep = 'csend1';
         $timeout(function () {
             $rootScope.$apply();
@@ -1753,13 +1754,14 @@ angular.module('copayApp.controllers').controller('indexController', function ($
      * 冷钱包点击授权签名后，生成对应二维码
      * @param obj
      */
-    self.authorizedSignature = function(obj){
-        var shadaowWallet = require('intervaluecore/shadowWallet');
-        shadaowWallet.signTradingUnit(obj,function (signedTransactionIfo) {
-            self.shadowstep = 'csend2';
-            self.signedTransactionIfo =JSON.stringify(signedTransactionIfo);
+    $rootScope.$on('Local/signedTransactionIfo', function(event,signedTransactionIfo){
+        self.signedTransactionIfo = JSON.stringify(signedTransactionIfo);
+        self.showshadow = true;
+        self.shadowstep = 'csend2';
+        $timeout(function () {
+            $rootScope.$apply();
         });
-    };
+    });
 
 
 
