@@ -236,11 +236,14 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                 ifOk: function(objRequest){
                     console.log("request: "+JSON.stringify(objRequest));
                     //展示未签名交易信息
+                    objRequest = JSON.parse(objRequest);
+                    alert(objRequest.type);
                     if(objRequest.type == "trading"){
+
                         $rootScope.$emit('Local/showUnsignedTransactionIfo', objRequest);
 
                     }else if(objRequest.type == ""){
-                       //
+                        alert(111111);
                     }
 
 

@@ -50,7 +50,7 @@
         <!--热钱包交易，开始-->
         <div ng-show="index.shadowstep == 'hsend1'" class="text-center">
             <div style="text-align:center">冷钱包扫描</div>
-            <qrcode size="220" version="22" data="{{index.unsignedTransactionIfo}}" ></qrcode>
+            <qrcode size="220"  data="{{index.unsignedTransactionIfo}}" ></qrcode>
             <button class="button round black expand m0" ng-click="index.shadowstep = 'hsend2'">
                 <span translate>下一步</span>
             </button>
@@ -116,6 +116,7 @@
 
     <div ng-show="index.shadowstep == 'csend1'" class="text-center" ng-controller="signedTransactionIfoControllers as signedTransaction">
         <form name="signedTransactionIfo" ng-submit="signedTransaction.signedTransaction(signedTransactionIfo)">
+        <input type="text" value="{{index.showUnsignedTransactionIfo}}">
         <input type="hidden" value="{{index.showUnsignedTransactionIfo}}">
         <button class="button round black expand m0" >
             <span translate>授权签名</span>
