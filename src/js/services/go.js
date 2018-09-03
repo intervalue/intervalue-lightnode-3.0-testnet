@@ -254,6 +254,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                             console.log("signed is error: "+objRequest);
                             throw error(objRequest);
                         }
+                    }
                 }
             });
         }else return handleFile(uri);
