@@ -837,12 +837,15 @@ angular.module('copayApp.controllers')
 				form.amount.$setValidity('validAmount', true);
 
 			var resetAddressValidation = function(){};
-			if ($scope.mtab == 2 && !isMultipleSend && !form.address.$modelValue) { // clicked 'share via message' button
-				resetAddressValidation = function() {
-					if (form && form.address)
-						form.address.$setValidity('validAddressOrAccount', false);
-				}
-				form.address.$setValidity('validAddressOrAccount', true);
+			if(typeof obj.isSignHot =="undefined"){
+                if ($scope.mtab == 2 && !isMultipleSend && !form.address.$modelValue) { // clicked 'share via message' button
+                    resetAddressValidation = function() {
+                        if (form && form.address)
+                            form.address.$setValidity('validAddressOrAccount', false);
+                    }
+
+                }
+			form.address.$setValidity('validAddressOrAccount', true);
 			}
 
 			if (form.$invalid) {
@@ -872,52 +875,54 @@ angular.module('copayApp.controllers')
 			var assetInfo = $scope.index.arrBalances[$scope.index.assetIndex];
 			var asset = assetInfo.asset;
 			console.log("asset " + asset);
+			if(typeof obj.isSignHot =="undefined"){
+                if (isMultipleSend) {
+                    if (assetInfo.is_private)
+                        return self.setSendError("private assets can not be sent to multiple addresses");
+                    var outputs = [];
+                    form.addresses.$modelValue.split('\n').forEach(function(line){
+                        var tokens = line.trim().split(/[\s,;]/);
+                        var address = tokens[0];
+                        var amount = tokens.pop();
+                        if (asset === "base")
+                            amount *= unitValue;
+                        else if (assetInfo.decimals)
+                            amount *= Math.pow(10, assetInfo.decimals);
+                        amount = Math.round(amount);
+                        outputs.push({address: address, amount: +amount});
+                    });
+                    var current_payment_key = form.addresses.$modelValue.replace(/[^a-zA-Z0-9]/g, '');
+                } else {
+                    var address = form.address.$modelValue;
+                    var recipient_device_address = assocDeviceAddressesByPaymentAddress[address];
+                    var amount = form.amount.$modelValue;
+                    // address can be [bytreball_addr, email, account, empty => social sharing]
+                    var accountValidationResult = aliasValidationService.validate(address);
+                    var isEmail = ValidationUtils.isValidEmail(address);
+                    var isTextcoin = (isEmail || !address);
 
-			if (isMultipleSend) {
-				if (assetInfo.is_private)
-					return self.setSendError("private assets can not be sent to multiple addresses");
-				var outputs = [];
-				form.addresses.$modelValue.split('\n').forEach(function(line){
-					var tokens = line.trim().split(/[\s,;]/);
-					var address = tokens[0];
-					var amount = tokens.pop();
-					if (asset === "base")
-						amount *= unitValue;
-					else if (assetInfo.decimals)
-						amount *= Math.pow(10, assetInfo.decimals);
-					amount = Math.round(amount);
-					outputs.push({address: address, amount: +amount});
-				});
-				var current_payment_key = form.addresses.$modelValue.replace(/[^a-zA-Z0-9]/g, '');
-			} else {
-				var address = form.address.$modelValue;
-				var recipient_device_address = assocDeviceAddressesByPaymentAddress[address];
-				var amount = form.amount.$modelValue;
-				// address can be [bytreball_addr, email, account, empty => social sharing]
-				var accountValidationResult = aliasValidationService.validate(address);
-				var isEmail = ValidationUtils.isValidEmail(address);
-				var isTextcoin = (isEmail || !address);
+                    var original_address;  // might be sent to email if the email address is attested
+                    if (isTextcoin)
+                        address = "textcoin:" + (address ? address : (Date.now() + "-" + amount));
+                    if (asset === "base")
+                        amount *= unitValue;
+                    else if (asset === constants.BLACKBYTES_ASSET)
+                        amount *= bbUnitValue;
+                    else if (assetInfo.decimals)
+                        amount *= Math.pow(10, assetInfo.decimals);
+                    amount = Math.round(amount);
 
-				var original_address;  // might be sent to email if the email address is attested
-				if (isTextcoin)
-					address = "textcoin:" + (address ? address : (Date.now() + "-" + amount));
-				if (asset === "base")
-					amount *= unitValue;
-				else if (asset === constants.BLACKBYTES_ASSET)
-					amount *= bbUnitValue;
-				else if (assetInfo.decimals)
-					amount *= Math.pow(10, assetInfo.decimals);
-				amount = Math.round(amount);
+                    var current_payment_key = '' + asset + address + amount;
+                }
+                var merkle_proof = '';
+                if (form.merkle_proof && form.merkle_proof.$modelValue)
+                    merkle_proof = form.merkle_proof.$modelValue.trim();
 
-				var current_payment_key = '' + asset + address + amount;
+                if (current_payment_key === self.current_payment_key)
+                    return $rootScope.$emit('Local/ShowErrorAlert', "This payment is already under way");
+                self.current_payment_key = current_payment_key;
 			}
-			var merkle_proof = '';
-			if (form.merkle_proof && form.merkle_proof.$modelValue)
-				merkle_proof = form.merkle_proof.$modelValue.trim();
 
-			if (current_payment_key === self.current_payment_key)
-				return $rootScope.$emit('Local/ShowErrorAlert', "This payment is already under way");
-			self.current_payment_key = current_payment_key;
 
 			//indexScope.setOngoingProcess(gettext('sending'), true);
 			$timeout(function() {
@@ -1124,7 +1129,7 @@ angular.module('copayApp.controllers')
                             });
                         breadcrumbs.add('sending payment in ' + asset);
                         profileService.bKeepUnlocked = true;
-                        var isHot = fc.xPrivKey ? 0 : 1;//判断冷热钱包,0为普通钱包，1为热钱包
+                        var isHot = fc.credentials.xPrivKey ? 0 : 1;//判断冷热钱包,0为普通钱包，1为热钱包
                         var opts = {
                             shared_address: indexScope.shared_address,
                             merkle_proof: merkle_proof,
@@ -1153,7 +1158,7 @@ angular.module('copayApp.controllers')
                                 });
                             };
                         }
-                        if (opts.isHot == 1 ) {//热钱包
+                        if (opts.isHot == 1 && typeof obj.isSignHot =="undefined" ) {//热钱包
                             //生成未签名的交易信息
                             var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
                             walletDefinedByKeys.readAddresses(fc.credentials.walletId, opts, function (objAddr) {
