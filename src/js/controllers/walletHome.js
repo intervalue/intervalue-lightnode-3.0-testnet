@@ -1165,7 +1165,13 @@ angular.module('copayApp.controllers')
                                 opts.change_address = objAddr;
                                 var shadowWallet = require('intervaluecore/shadowWallet');
                                 shadowWallet.getTradingUnit(opts, function (obj) {
-                                    $rootScope.$emit('Local/unsignedTransactionIfo', obj);
+                                    if(typeof obj == "object"){
+                                        $rootScope.$emit('Local/unsignedTransactionIfo', obj);
+                                    }else {
+                                        console.log("error: "+obj);
+                                        alert(obj);
+                                    }
+
                                 });
                             });
                             return;
