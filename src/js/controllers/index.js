@@ -1741,7 +1741,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     /**
      * 热钱包生成已签名的交易信息
      */
-    $rootScope.$on('Local/signedTransactionIfo', function(event,signedTransactionIfo){
+    $rootScope.$on('Local/signedTransactionIfoHot', function(event,signedTransactionIfo){
+        alert(signedTransactionIfo.signature);
         self.signatureIfo = signedTransactionIfo.signature;
         self.signedTransactionIfo = JSON.stringify(signedTransactionIfo);
         self.showshadow = true;
