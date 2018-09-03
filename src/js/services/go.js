@@ -239,7 +239,13 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                     alert(objRequest.type);
                     if(objRequest.type == "trading"){//展示未签名交易信息
                         alert("trading");
-                        $rootScope.$emit('Local/showUnsignedTransactionIfo', objRequest);
+                        if(JSON.stringify(objRequest).indexOf("not enough ") != -1){
+                            $rootScope.$emit('Local/showUnsignedTransactionIfo', objRequest);
+                        }else {
+                            console.llog("error: "+objRequest);
+                            alert(objRequest);
+                        }
+
                     }else if(objRequest.type == "sign"){//显示已签名信息
                         alert("sign");
                         alert(JSON.stringify(objRequest));
