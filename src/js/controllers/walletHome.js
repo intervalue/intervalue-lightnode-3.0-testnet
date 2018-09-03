@@ -926,7 +926,7 @@ angular.module('copayApp.controllers')
 
 			//indexScope.setOngoingProcess(gettext('sending'), true);
 			$timeout(function() {
-				if(!isSignHot){
+				if(typeof obj.isSignHot =="undefined"){
                 if (!isMultipleSend && accountValidationResult.isValid) { // try to replace validation result with attested BB address
                     var attestorKey = accountValidationResult.attestorKey;
                     var account = accountValidationResult.account;
