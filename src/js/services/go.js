@@ -242,7 +242,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                         if(JSON.stringify(objRequest).indexOf("not enough ") != -1){
                             $rootScope.$emit('Local/showUnsignedTransactionIfo', objRequest);
                         }else {
-                            console.llog("error: "+objRequest);
+                            console.log("error: "+objRequest);
                             alert(objRequest);
                         }
 
