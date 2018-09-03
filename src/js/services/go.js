@@ -239,15 +239,21 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                     objRequest = JSON.parse(objRequest);
                     alert(objRequest.type);
                     if(objRequest.type == "trading"){//展示未签名交易信息
-                        $rootScope.$emit('Local/showUnsignedTransactionIfo', objRequest);
+                        if(typeof objRequest == "object"){
+                            $rootScope.$emit('Local/showUnsignedTransactionIfo', objRequest);
+                        }else{
+                            console.log("trading is error: "+objRequest);
+                            throw error(objRequest);
+                        }
+
                     }else if(objRequest.type == "sign"){//显示已签名信息
-                        objRequest.isSignHot = true;
-                        $rootScope.$emit('Local/signedTransactionIfo', objRequest);
-                    } else {
-                        alert("error:  "+objRequest);
-                    }
-
-
+                        if(typeof  objRequest == "object"){
+                            objRequest.isSignHot = true;
+                            $rootScope.$emit('Local/signedTransactionIfo', objRequest);
+                        }else {
+                            console.log("signed is error: "+objRequest);
+                            throw error(objRequest);
+                        }
                 }
             });
         }else return handleFile(uri);
