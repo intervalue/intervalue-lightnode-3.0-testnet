@@ -62,7 +62,7 @@
                     读入签名数据
                 </section>
                 <section  ng-controller="topbarController as topbar">
-                    <qr-scanner on-scan="topbar.onQrCodeScannedAddr(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
+                    <qr-scanner on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
                 </section>
                 <div>扫描冷钱包签名数据二维码</div>
                 <nav class="tab-bar ng-scope">

@@ -234,26 +234,17 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                     //notification.success(gettextCatalog.getString('Success'), err);
                 },
                 ifOk: function(objRequest){
-                    console.log("request: "+JSON.stringify(objRequest));
-
+                    console.log("request: "+objRequest);
                     objRequest = JSON.parse(objRequest);
                     alert(objRequest.type);
                     if(objRequest.type == "trading"){//展示未签名交易信息
-                        if(typeof objRequest == "object"){
-                            $rootScope.$emit('Local/showUnsignedTransactionIfo', objRequest);
-                        }else{
-                            console.log("trading is error: "+objRequest);
-                            throw error(objRequest);
-                        }
-
+                        alert("trading");
+                        $rootScope.$emit('Local/showUnsignedTransactionIfo', objRequest);
                     }else if(objRequest.type == "sign"){//显示已签名信息
-                        if(typeof  objRequest == "object"){
-                            objRequest.isSignHot = true;
-                            $rootScope.$emit('Local/signedTransactionIfo', objRequest);
-                        }else {
-                            console.log("signed is error: "+objRequest);
-                            throw error(objRequest);
-                        }
+                        alert("sign");
+                        alert(JSON.stringify(objRequest));
+                        objRequest.isSignHot = true;
+                        $rootScope.$emit('Local/signedTransactionIfoHot', objRequest);
                     }
                 }
             });
