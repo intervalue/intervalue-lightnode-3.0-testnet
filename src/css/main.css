@@ -92,11 +92,6 @@ h4.title a {
   margin-bottom: 10px;
 }
 
-.preferences .switch {
-  top:-5px !important;
-}
-
-
 .preferences h4 {
   background: #F1F3F5;
   padding: 25px 0px 5px 20px;
@@ -110,10 +105,9 @@ h4.title a {
 
 .preferences ul {
   font-size:14px;
-  background: white;
 }
 
-.preferences ul li, ul.whopays li, ul.profile-entries li {
+ul.whopays li, ul.profile-entries li {
   padding:13px 20px;
   border-bottom: 1px solid #E9E9EC;
 }
@@ -708,7 +702,7 @@ label {
   text-transform: uppercase;
   font-weight: 700;
   font-size: 11px;
-  color: #34495E;
+  color: #030303;
   margin-bottom: 3px;
 }
 
@@ -1384,12 +1378,12 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
 
 .passModal {
   background: #FFFFFF;
-  box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.50);
-  border-radius: 5px;
+  padding: 14px 0 20px;
+  box-sizing: border-box;
   position: absolute;
   width: 90%;
   left: 5%;
-  top: 15%;
+  top: 34%;
   z-index: 1100;
 }
 
