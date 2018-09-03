@@ -1727,12 +1727,25 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     });
 
     /**
-     * 生成未签名的交易二维码
+     * 热钱包生成未签名的交易二维码
      */
     $rootScope.$on('Local/unsignedTransactionIfo', function(event,unsignedTransactionIfo){
         self.unsignedTransactionIfo = JSON.stringify(unsignedTransactionIfo);
         self.showshadow = true;
         self.shadowstep = 'hsend1';
+        $timeout(function () {
+            $rootScope.$apply();
+        });
+    });
+
+    /**
+     * 热钱包生成已签名的交易信息
+     */
+    $rootScope.$on('Local/signedTransactionIfo', function(event,signedTransactionIfo){
+        self.signatureIfo = signedTransactionIfo.signature;
+        self.signedTransactionIfo = JSON.stringify(signedTransactionIfo);
+        self.showshadow = true;
+        self.shadowstep = 'hsend2';
         $timeout(function () {
             $rootScope.$apply();
         });

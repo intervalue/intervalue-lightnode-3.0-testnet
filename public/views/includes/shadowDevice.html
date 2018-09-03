@@ -57,7 +57,7 @@
         </div>
 
         <div ng-show="index.shadowstep == 'hsend2'" class="text-center" >
-            <form name="addShadowWallet"  ng-submit="createShadow.create(addShadowWallet);index.showshadow = false" novalidate>
+            <form name="sendPaymentForm" ng-submit="home.submitPayment(sendPaymentForm);index.showshadow = false" novalidate>
                 <section>
                     读入签名数据
                 </section>
@@ -76,8 +76,8 @@
                         </h1>
                     </section>
                 </nav>
-                <input type="hidden"  value="{{index.shadowWallet}}">
-                <textarea name="data" rows="10" cols="10">{{index.signatureData}}</textarea>
+                <input type="hidden"  value="{{index.signedTransactionIfo}}">
+                <textarea name="data" rows="10" cols="10">{{index.signatureIfo}}</textarea>
                 <button type="submit" class="button round black expand m0" >
                     <span translate>发送交易</span>
                 </button>

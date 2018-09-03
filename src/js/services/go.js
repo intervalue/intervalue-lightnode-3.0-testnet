@@ -235,15 +235,15 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                 },
                 ifOk: function(objRequest){
                     console.log("request: "+JSON.stringify(objRequest));
-                    //展示未签名交易信息
+
                     objRequest = JSON.parse(objRequest);
                     alert(objRequest.type);
-                    if(objRequest.type == "trading"){
-
+                    if(objRequest.type == "trading"){//展示未签名交易信息
                         $rootScope.$emit('Local/showUnsignedTransactionIfo', objRequest);
-
-                    }else if(objRequest.type == ""){
-                        alert(111111);
+                    }else if(objRequest.type == "sign"){//显示已签名信息
+                        $rootScope.$emit('Local/signedTransactionIfo', objRequest);
+                    } else {
+                        alert("error:  "+objRequest);
                     }
 
 

@@ -817,18 +817,20 @@ angular.module('copayApp.controllers')
 
 		//开始发送交易
 		this.submitPayment = function() {
+            var form = $scope.sendPaymentForm;
+            var obj = JSON.parse(form.$$element[0][0].value);
+            if(!obj.isSignHot) {
 			if ($scope.index.arrBalances.length === 0)
 				return console.log('send payment: no balances yet');
 			var fc = profileService.focusedClient;
 			var unitValue = this.unitValue;
 			var bbUnitValue = this.bbUnitValue;
-
 			if (isCordova && this.isWindowsPhoneApp) {
 				this.hideAddress = false;
 				this.hideAmount = false;
 			}
 
-			var form = $scope.sendPaymentForm;
+
 			var isMultipleSend = !!form.addresses;
 			if (!form)
 				return console.log('form is gone');
@@ -1111,65 +1113,67 @@ angular.module('copayApp.controllers')
 
 					// compose and send
 					function composeAndSend(to_address) {
-						var arrSigningDeviceAddresses = []; // empty list means that all signatures are required (such as 2-of-2)
-						if (fc.credentials.m < fc.credentials.n)
-							$scope.index.copayers.forEach(function(copayer) {
-								if (copayer.me || copayer.signs)
-									arrSigningDeviceAddresses.push(copayer.device_address);
-							});
-						else if (indexScope.shared_address)
-							arrSigningDeviceAddresses = indexScope.copayers.map(function(copayer) {
-								return copayer.device_address;
-							});
-						breadcrumbs.add('sending payment in ' + asset);
-						profileService.bKeepUnlocked = true;
-						var isHot = fc.xPrivKey ? 0 : 1;//判断冷热钱包,0为普通钱包，1为热钱包
-						var opts = {
-							shared_address: indexScope.shared_address,
-							merkle_proof: merkle_proof,
-							asset: asset,
-							do_not_email: true,
-							send_all: self.bSendAll,
-							arrSigningDeviceAddresses: arrSigningDeviceAddresses,
-							recipient_device_address: recipient_device_address,
-							isHot:isHot
-						};
-						if (!isMultipleSend) {
-							opts.to_address = to_address;
-							opts.amount = amount;
-						} else {
-							if (asset !== "base")
-								opts.asset_outputs = outputs;
-							else
-								opts.base_outputs = outputs;
-						}
-						var filePath;
-						if (assetInfo.is_private) {
-							opts.getPrivateAssetPayloadSavePath = function(cb) {
-								self.getPrivatePayloadSavePath(function(fullPath, cordovaPathObj){
-									filePath = fullPath ? fullPath : (cordovaPathObj ? cordovaPathObj.root + cordovaPathObj.path + '/' + cordovaPathObj.fileName : null);
-									cb(fullPath, cordovaPathObj);
-								});
-							};
-						}
-						if(opts.isHot == 1){//热钱包
-							//生成未签名的交易信息
+                        var arrSigningDeviceAddresses = []; // empty list means that all signatures are required (such as 2-of-2)
+                        if (fc.credentials.m < fc.credentials.n)
+                            $scope.index.copayers.forEach(function (copayer) {
+                                if (copayer.me || copayer.signs)
+                                    arrSigningDeviceAddresses.push(copayer.device_address);
+                            });
+                        else if (indexScope.shared_address)
+                            arrSigningDeviceAddresses = indexScope.copayers.map(function (copayer) {
+                                return copayer.device_address;
+                            });
+                        breadcrumbs.add('sending payment in ' + asset);
+                        profileService.bKeepUnlocked = true;
+                        var isHot = fc.xPrivKey ? 0 : 1;//判断冷热钱包,0为普通钱包，1为热钱包
+                        var opts = {
+                            shared_address: indexScope.shared_address,
+                            merkle_proof: merkle_proof,
+                            asset: asset,
+                            do_not_email: true,
+                            send_all: self.bSendAll,
+                            arrSigningDeviceAddresses: arrSigningDeviceAddresses,
+                            recipient_device_address: recipient_device_address,
+                            isHot: isHot
+                        };
+                        if (!isMultipleSend) {
+                            opts.to_address = to_address;
+                            opts.amount = amount;
+                        } else {
+                            if (asset !== "base")
+                                opts.asset_outputs = outputs;
+                            else
+                                opts.base_outputs = outputs;
+                        }
+                        var filePath;
+                        if (assetInfo.is_private) {
+                            opts.getPrivateAssetPayloadSavePath = function (cb) {
+                                self.getPrivatePayloadSavePath(function (fullPath, cordovaPathObj) {
+                                    filePath = fullPath ? fullPath : (cordovaPathObj ? cordovaPathObj.root + cordovaPathObj.path + '/' + cordovaPathObj.fileName : null);
+                                    cb(fullPath, cordovaPathObj);
+                                });
+                            };
+                        }
+                        if (opts.isHot == 1) {//热钱包
+                            //生成未签名的交易信息
                             var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
-                            walletDefinedByKeys.readAddresses(fc.credentials.walletId,opts, function (objAddr) {
+                            walletDefinedByKeys.readAddresses(fc.credentials.walletId, opts, function (objAddr) {
                                 opts.change_address = objAddr;
                                 var shadowWallet = require('intervaluecore/shadowWallet');
-                                shadowWallet.getTradingUnit(opts,function (obj) {
+                                shadowWallet.getTradingUnit(opts, function (obj) {
                                     $rootScope.$emit('Local/unsignedTransactionIfo', obj);
                                 });
                             });
-							return ;
-                            }
+                            return;
+                        }
 
-							/*var shadowWallet = require('intervaluecore/wallet');
-                            shadowWallet.getRradingUnit(opts,function (cb) {
+                        /*var shadowWallet = require('intervaluecore/wallet');
+                        shadowWallet.getRradingUnit(opts,function (cb) {
 
-                            })*/
-
+                        })*/
+                    }else {
+						var opts = obj;//
+                    }
 						fc.sendMultiPayment(opts, function(err, unit, mnemonics) {
 							// if multisig, it might take very long before the callback is called
 							//indexScope.setOngoingProcess(gettext('sending'), false);
