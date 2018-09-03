@@ -89,17 +89,57 @@
 
 /*walletnamea start*/
 .adwnnumo{padding:18px 15px;}
-.adwnnum{padding:13px;text-align:center;margin-bottom:36px;background:#45AD8E;box-shadow:0px 11px 12px -12px #45AD8E;border-radius:3px;}
+.adwnnum{padding:13px;text-align:center;margin-bottom:18px;background:#45AD8E;box-shadow:0px 11px 12px -12px #45AD8E;border-radius:3px;}
 
 .adwnnum .adwnlogo{width:53px;height:53px;background:#dcdcdc;margin:0 auto;margin-bottom: 10px;}
 .adwnnum .adwnnumamt{font-size:14px;font-family:pfbold;font-weight:bold;color:#8CF8D8;padding-bottom: 16px;border-bottom: 1px dashed #fff;}
 .adwnnum .adwnnumamt span{margin-right: 14px;font-size:20px;font-family:pfbold;font-weight:600;color:#ffffff;}
 .adwnnum .adwnaddr{margin-top: 12px;cursor:pointer;margin-left: 20px;}
+.adwnnum .adwnaddr span{margin-right: 18px;font-size:12px;font-weight:400;color:#fff;}
+
+.adwnlinput{list-style-type: none;margin: 0;padding:0;}
+.adwnlinput li{display:flex;justify-content:space-between;align-items: center;box-sizing: border-box;border-top: 1px solid #D3D3D3;border-bottom: 1px solid #D3D3D3;width: 100%;
+    padding: 0 14px;height:46px;margin-bottom:15px;}
+.adwnlinput li:last-child{margin-bottom: 0;}
+.adwnlinput .adwninput{display: flex;justify-content: flex-start;align-items: center;}
+.adwnlinput li .ld{display: flex;justify-content: flex-start;align-items: center;}
+.adwnlinput li .rd{display: flex;justify-content: flex-end;align-items: center;}
+.adwnlinput li .limg{width: 20px;height: 20px;margin-right: 10px;}
+.adwnlinput li img{vertical-align: initial;}
+.adwnlinput li img,.adwnlinput li span{flex-shrink: 0;}
+.adwnlinput li input{width: 100%;border: none;margin:0;padding:0 20px;}
+.btngroup{position: absolute;bottom:50px;left:0;padding: 0 13px;width:100%;}
 /*walletnamea end*/
 
 /*changewalletp start*/
 
 /*changewalletp end*/
+
+
+
+/*preferencesGlobal start*/
+.preferences ul{list-style-type: none;}
+.preferences ul li:first-child{margin-top: 26px;border-top: 1px solid #DEDEDE;border-bottom: 1px solid #DEDEDE;}
+.preferences ul li{border-bottom: 1px solid #DEDEDE;background: #fff;display: flex;justify-content: space-between;align-items: center;padding:13px;}
+.preferences ul li:nth-child(2){border-top: 1px solid #DEDEDE;margin-top: 40px;}
+.preferences ul li .ld{display: flex;justify-content: flex-start;align-items: center;}
+.preferences ul li .ld span{color:#323232;}
+.preferences ul li .rd{display: flex;justify-content: flex-end;align-items: center;color:#909090;}
+.preferences ul li:first-child div{color:#909090;}
+.preferences ul li .limg{width: 20px;height: 20px;margin-right: 10px;}
+.preferences ul li img{vertical-align: sub;}
+.preferences ul li .rd img{margin-left: 10px;}
+/*preferencesGlobal end*/
+
+/*password start*/
+.addpassl{position: relative;padding-left: 16px;padding-right: 16px;border-bottom: 1px solid #F5F5F5;padding-bottom: 14px;}
+.addpassl img{position: absolute;top:7px;cursor: pointer;}
+.addpassl label{margin-bottom: 0;font-weight:400;}
+.addpassi{padding-left: 16px;padding-right: 16px;padding-top: 24px;}
+.addpassi .text-warning{
+    position: absolute;bottom:-10px;}
+.addpassi button{margin-top: 28px;}
+/*password end*/
 
 /*公共样式*/
 .awbtn{background-color:#FFFFFF;border:1px solid #3B3B3B;color:#3B3B3B;}
@@ -138,8 +178,8 @@
 .adinputic{position:relative;width:100%;height:100%;}
 .adinputic .adinputimg{width:22px;height:20px;text-align:center;position:absolute;top:10px;left:4px;}
 .adinputic .adinputimg img{vertical-align:top;}
-.adinputic input[type='text']{position:absolute;font-size:16px;top:0;padding:0 10px 0 44px;font-weight:normal;margin:0;width:100%;color:#3B3B3B;}
-.adinputic input[type='text']::-webkit-input-placeholder{color:#B8B8B8;}
+.adinputic input[type='text'],.adinputic input[type='password']{position:absolute;font-size:16px;top:0;padding:0 10px 0 44px;font-weight:normal;margin:0;width:100%;color:#3B3B3B;}
+.adinputic input[type='text']::-webkit-input-placeholder,.adinputic input[type='password']::-webkit-input-placeholder{color:#B8B8B8;}
 textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090;}
 .fleximgtext{display:flex;justify-content:flex-start;align-items:flex-start;}
 .fleximgtext img{flex-shrink:0;margin-right:10px;height:12px;width:12px;margin-top:3px;}

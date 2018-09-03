@@ -8,31 +8,32 @@
         <div class="adwnnum">
             <div class="adwnlogo"></div>
             <div class="adwnnumamt"><span>{{nameW.ammount}}</span>INVE</div>
-            <div class="adwnaddr">{{nameW.addr}}<img ng-click="" src="./img/lewm.png"/></div>
+            <div class="adwnaddr"><span>{{nameW.addr}}</span><img ng-click="" src="./img/lewm.png"/></div>
         </div>
     </div>
     <ul class="adwnlinput">
-        <li>
-
+        <li class="adwninput">
+            <div class="limg">
+                <img src="./img/winname.png" />
+            </div>
+            <span>钱包名</span>
+            <input placeholder="{{nameW.name}}" />
         </li>
-        <li>
-
+        <li ng-click="$root.go('walletnamea.changewalletp')">
+            <div class="ld">
+                <div class="limg">
+                    <img src="./img/winpass.png" />
+                </div>
+                <span>修改密码</span>
+            </div>
+            <div class="rd">
+                <img src="./img/more.png" />
+            </div>
         </li>
     </ul>
-    <div class="adwnlinput">
-        <img src="./img/winname.png" />
-        <label>钱包名</label>
-        <input placeholder="{{nameW.name}}" />
+    <div class="btngroup">
+        <button class="m20b" ng-show="nameW.mnemonic || nameW.mnemonicEncrypted" ng-click="nameW.gobackup(nameW.name, nameW.addr, nameW.ammount, nameW.walletid, nameW.mnemonic, nameW.mnemonicEncrypted);index.backwaname = true;">备份助记词</button>
+        <button class="awbtn">删除钱包</button>
     </div>
-    <div class="adwnlinput">
-        <img src="./img/winname.png" />
-        <label>钱包名</label>
-        <input placeholder="{{nameW.name}}" />
-    </div>
-    <div ng-click="$root.go('walletnamea.changewalletp')">
-        修改密码
-    </div>
-    <button ng-show="nameW.mnemonic || nameW.mnemonicEncrypted" ng-click="nameW.gobackup(nameW.name, nameW.addr, nameW.ammount, nameW.walletid, nameW.mnemonic, nameW.mnemonicEncrypted);index.backwaname = true;">备份助记词</button>
-    <button>删除钱包</button>
 </div>
 
