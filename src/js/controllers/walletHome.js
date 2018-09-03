@@ -1165,15 +1165,15 @@ angular.module('copayApp.controllers')
                                 });
                             });
                             return;
+                        }else {
+                            var opts = obj;//
                         }
 
                         /*var shadowWallet = require('intervaluecore/wallet');
                         shadowWallet.getRradingUnit(opts,function (cb) {
 
                         })*/
-                    }else {
-						var opts = obj;//
-                    }
+
 						fc.sendMultiPayment(opts, function(err, unit, mnemonics) {
 							// if multisig, it might take very long before the callback is called
 							//indexScope.setOngoingProcess(gettext('sending'), false);
