@@ -56,7 +56,7 @@
             </button>
         </div>
 
-        <div ng-show="index.shadowstep == 'hsend2'" class="text-center" >
+        <div ng-show="index.shadowstep == 'hsend2'" class="text-center" ng-controller="walletHomeController as home">
             <form name="sendPaymentForm" ng-submit="home.submitPayment(sendPaymentForm);index.showshadow = false" novalidate>
                 <section>
                     读入签名数据
