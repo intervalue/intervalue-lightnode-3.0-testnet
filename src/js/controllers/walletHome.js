@@ -819,7 +819,6 @@ angular.module('copayApp.controllers')
 		this.submitPayment = function() {
             var form = $scope.sendPaymentForm;
             var obj = JSON.parse(form.$$element[0][0].value);
-            if(!obj.isSignHot) {
 			if ($scope.index.arrBalances.length === 0)
 				return console.log('send payment: no balances yet');
 			var fc = profileService.focusedClient;
@@ -1165,8 +1164,6 @@ angular.module('copayApp.controllers')
                                 });
                             });
                             return;
-                        }else {
-                            var opts = obj;//
                         }
 
                         /*var shadowWallet = require('intervaluecore/wallet');
