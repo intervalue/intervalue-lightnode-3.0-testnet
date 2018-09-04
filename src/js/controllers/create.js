@@ -94,6 +94,7 @@ angular.module('copayApp.controllers').controller('createController',
 			self.error = gettext(error);
 		}
 
+		//界面还原钱包的入口
 		this.create = function (form) {
 			if (form && form.$invalid) {
 				this.error = gettext('Please enter the required fields');
