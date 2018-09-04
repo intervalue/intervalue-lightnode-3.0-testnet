@@ -2213,14 +2213,17 @@ msgstr "注意：热钱包发送交易时需要冷钱包配合签名。你可以
 msgid "Save"
 msgstr "保存"
 
+msgid "Small transaction free password"
+msgstr "小额交易免密码"
 
+msgid "Please enter your password"
+msgstr "请输入密码"
 
+msgid "OK"
+msgstr "确定"
 
-
-
-
-
-
+msgid "Please enter the limit on the transaction"
+msgstr "请输入交易上限额度"
 
 
 

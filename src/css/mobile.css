@@ -162,7 +162,7 @@ _:-ms-fullscreen, :root .main {
   color: #fff;
   height: 192px;
   box-sizing: border-box;
-  background:#323232;
+  background:#323232 url("../img/indexbg.png") left bottom;
 }
 
 .amount a{
