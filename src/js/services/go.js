@@ -143,12 +143,11 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                     //第一次扫码pubkey二维码后，签名生成地址
                     if(objRequest.type ==='shadow'){
                         shadowWallet.getSignatureCode(objRequest,function (signatureCode) {
-
-                            if(typeof signatureCode=="object"){
+                            if(typeof signatureCode == "object"){
                                 $rootScope.$emit('Local/ShadowInvitation',signatureCode);
                             }else{
-                                console.log("signatureCode is "+signatureCode)
-                                throw Error('signatureCode is '+signatureCode);
+                                console.log("signatureCode is "+signatureCode);
+                                notification.error('signatureCode is '+signatureCode);//需要修改弹出对话框,不能直接退出系统
                             }
                         });
                     }
@@ -168,7 +167,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                                     $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
                                 }else{
                                     console.log(" signatureDetlCode is "+signatureDetlCode)
-                                    throw Error('signatureDetlCode is '+signatureDetlCode);
+                                    notification.error('signatureDetlCode is '+signatureDetlCode);
                                 }
                             })
                         });
@@ -181,7 +180,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                                 $rootScope.$emit('Local/generateShadowWallet', shadowWallet);
                             }else {
                                 console.log("shadowWallet is  "+shadowWallet);
-                                throw Error('shadowWallet is   '+shadowWallet);
+                                notification.error('shadowWallet is   '+shadowWallet);
                             }
                         });
                     }
@@ -223,7 +222,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                         $rootScope.$emit('claimTextcoin', objRequest.mnemonic);
                     }
                     else
-                        throw Error('unknown url type: '+objRequest.type);
+                        notification.error('unknown url type: '+objRequest.type);
                 }
             });
         }else if(uri.indexOf("isHot") != -1){//热钱包交易
@@ -236,13 +235,9 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                 ifOk: function(objRequest){
                     console.log("request: "+objRequest);
                     objRequest = JSON.parse(objRequest);
-                    alert(objRequest.type);
                     if(objRequest.type == "trading"){//展示未签名交易信息
-                        alert("trading");
                         $rootScope.$emit('Local/showUnsignedTransactionIfo', objRequest);
                     }else if(objRequest.type == "sign"){//显示已签名信息
-                        alert("sign");
-                        alert(JSON.stringify(objRequest));
                         objRequest.isSignHot = true;
                         $rootScope.$emit('Local/signedTransactionIfoHot', objRequest);
                     }
