@@ -43,4 +43,14 @@ angular.module('copayApp.controllers').controller('signedTransactionIfoControlle
             }, 1);
         };
 
+        /**
+         * 冷钱包授权签名后，执行交易
+         */
+        self.sendPaymentHot = function () {
+            var form = $scope.signedTransactionIfo;
+            var opts = JSON.parse(form.$$element[0][0].value);
+            var wallet = require('intervaluecore/wallet');
+            wallet.sendMultiPayment(opts,cb);
+        }
+
     });

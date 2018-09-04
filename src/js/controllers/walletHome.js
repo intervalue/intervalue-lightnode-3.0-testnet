@@ -837,7 +837,6 @@ angular.module('copayApp.controllers')
 				form.amount.$setValidity('validAmount', true);
 
 			var resetAddressValidation = function(){};
-			if(typeof obj.isSignHot =="undefined"){
                 if ($scope.mtab == 2 && !isMultipleSend && !form.address.$modelValue) { // clicked 'share via message' button
                     resetAddressValidation = function() {
                         if (form && form.address)
@@ -846,7 +845,6 @@ angular.module('copayApp.controllers')
 
                 }
 			form.address.$setValidity('validAddressOrAccount', true);
-			}
 
 			if (form.$invalid) {
 				this.error = gettext('Unable to send transaction proposal');
@@ -875,7 +873,6 @@ angular.module('copayApp.controllers')
 			var assetInfo = $scope.index.arrBalances[$scope.index.assetIndex];
 			var asset = assetInfo.asset;
 			console.log("asset " + asset);
-			if(typeof obj.isSignHot =="undefined"){
                 if (isMultipleSend) {
                     if (assetInfo.is_private)
                         return self.setSendError("private assets can not be sent to multiple addresses");
@@ -921,12 +918,10 @@ angular.module('copayApp.controllers')
                 if (current_payment_key === self.current_payment_key)
                     return $rootScope.$emit('Local/ShowErrorAlert', "This payment is already under way");
                 self.current_payment_key = current_payment_key;
-			}
 
 
 			//indexScope.setOngoingProcess(gettext('sending'), true);
 			$timeout(function() {
-				if(typeof obj.isSignHot =="undefined"){
                 if (!isMultipleSend && accountValidationResult.isValid) { // try to replace validation result with attested BB address
                     var attestorKey = accountValidationResult.attestorKey;
                     var account = accountValidationResult.account;
@@ -990,7 +985,6 @@ angular.module('copayApp.controllers')
 
                     }
                 }
-            }
 				profileService.requestTouchid(function(err) {
 					if (err) {
 						profileService.lockFC();
@@ -1158,7 +1152,7 @@ angular.module('copayApp.controllers')
                                 });
                             };
                         }
-                        if (opts.isHot == 1 && typeof obj.isSignHot =="undefined" ) {//热钱包
+                        if (opts.isHot == 1 ) {//热钱包
                             //生成未签名的交易信息
                             var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
                             walletDefinedByKeys.readAddresses(fc.credentials.walletId, opts, function (objAddr) {
