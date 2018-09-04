@@ -82,10 +82,10 @@ angular.module('copayApp.services')
       $log.debug('Set focus:', walletId);
 
       // Set local object
-      if (walletId){
-          var device = require('intervaluecore/device');
-          device.uPMyHotDeviceAddress(walletId);
-          root.focusedClient = root.walletClients[walletId];
+      if (walletId) {
+        var device = require('intervaluecore/device');
+        device.uPMyHotDeviceAddress(walletId);
+        root.focusedClient = root.walletClients[walletId];
       }
       else
         root.focusedClient = [];
@@ -116,10 +116,10 @@ angular.module('copayApp.services')
 
       var client = bwcService.getClient(JSON.stringify(credentials));
 
-       /*client.credentials.xPrivKey = root.profile.xPrivKey;
-       client.credentials.mnemonic = root.profile.mnemonic;
-       client.credentials.xPrivKeyEncrypted = root.profile.xPrivKeyEncrypted;
-       client.credentials.mnemonicEncrypted = root.profile.mnemonicEncrypted;*/
+      /*client.credentials.xPrivKey = root.profile.xPrivKey;
+      client.credentials.mnemonic = root.profile.mnemonic;
+      client.credentials.xPrivKeyEncrypted = root.profile.xPrivKeyEncrypted;
+      client.credentials.mnemonicEncrypted = root.profile.mnemonicEncrypted;*/
 
       root.walletClients[credentials.walletId] = client;
 
@@ -323,11 +323,12 @@ angular.module('copayApp.services')
       return cb(null, walletClient);
     };
 
-
+    //初次创建钱包或还原钱包
     root._createNewProfile = function (opts, cb) {
       console.log("_createNewProfile");
       if (opts.noWallet)
         return cb(null, Profile.create());
+      //创建钱包，带有助记词和密码
       root._seedWallet(opts, function (err, walletClient) {
         if (err)
           return cb(err);
@@ -339,6 +340,7 @@ angular.module('copayApp.services')
         // initDeviceProperties sets my_device_address needed by walletClient.createWallet
         walletClient.initDeviceProperties(walletClient.credentials.xPrivKey, null, config.hub, config.deviceName);
         var walletName = opts.walletName || gettextCatalog.getString('Small Expenses Wallet');
+        //数据库中创建钱包
         walletClient.createWallet(walletName, 1, 1, {
           //	isSingleAddress: true,
           network: 'livenet'
@@ -346,6 +348,7 @@ angular.module('copayApp.services')
           if (err)
             return cb(gettext('Error creating wallet') + ": " + err);
           console.log("created wallet, client: ", JSON.stringify(walletClient));
+          //将钱包信息存入文件中
           var xPrivKey = walletClient.credentials.xPrivKey;
           var mnemonic = walletClient.credentials.mnemonic;
           console.log("mnemonic: " + mnemonic + ', xPrivKey: ' + xPrivKey);
@@ -405,29 +408,29 @@ angular.module('copayApp.services')
       });
     };
 
-      /**
-       * 创建热钱包
-       * @param opts
-       * @param addr
-       * @param cb
-       */
-      root.createHotWallet = function (opts, addr, cb) {
-          $log.debug('Creating ColdWallet:', opts);
-          var device = require('intervaluecore/device.js');
-          device.setMyHotDeviceAddress(addr);
-          var walletClient = bwcService.getClient();
-          walletClient.import(JSON.stringify(opts));
-          walletClient.createWallet(opts.name, opts.m, opts.n, {
-              network: opts.network,
-              account: opts.account,
-              cosigners: opts.cosigners
-          }, function (err) {
-              if (err)
-                  return cb(gettext('Error creating wallet') + ": " + err);
-              opts.observed = true;
-              root._addWalletClient(walletClient, opts, cb);
-          });
-      };
+    /**
+     * 创建热钱包
+     * @param opts
+     * @param addr
+     * @param cb
+     */
+    root.createHotWallet = function (opts, addr, cb) {
+      $log.debug('Creating ColdWallet:', opts);
+      var device = require('intervaluecore/device.js');
+      device.setMyHotDeviceAddress(addr);
+      var walletClient = bwcService.getClient();
+      walletClient.import(JSON.stringify(opts));
+      walletClient.createWallet(opts.name, opts.m, opts.n, {
+        network: opts.network,
+        account: opts.account,
+        cosigners: opts.cosigners
+      }, function (err) {
+        if (err)
+          return cb(gettext('Error creating wallet') + ": " + err);
+        opts.observed = true;
+        root._addWalletClient(walletClient, opts, cb);
+      });
+    };
 
     root.getClient = function (walletId) {
       return root.walletClients[walletId];
@@ -594,7 +597,7 @@ angular.module('copayApp.services')
       });
     };
 
-
+    //初次创建钱包或初次还原钱包的入口
     root.create = function (opts, cb) {
       $log.info('Creating profile', opts);
       var defaults = configService.getDefaults();
