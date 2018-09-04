@@ -115,7 +115,9 @@
 /*walletnamea end*/
 
 /*changewalletp start*/
-
+.addchan{padding:0 15px;}
+.addchan .adinputitem{padding-top:15px;height:62px;}
+.addchan a:hover{color:#45AD8E;}
 /*changewalletp end*/
 
 
@@ -153,6 +155,7 @@
 .f9fafch{background:#F9FAFC;height:20px;width:100%;}
 .redcolor{color:#D45757;}
 .greencolor{color:#45AD8E;}
+.nzcolor{color:#909090;}
 .fontbold{font-family: "pfbold";}
 .secondcontent{width: 100%;position: absolute;top: 0;bottom: 0;overflow: auto;background:#F9FAFC;}
 .popconfirm{position:fixed;width:100%;height:100%;top:0;left:0;z-index:100;}

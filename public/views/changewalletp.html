@@ -1,28 +1,35 @@
 <div
         class="topbar-container"
         ng-include="'views/includes/topbar.html'"
-        ng-init="titleSection='Backup'; goBackToState = true">
+        ng-init="titleSection='Change password'; goBackToState = true; passsave = true;">
 </div>
 
-<div class="content" ng-controller="changewalletpController as cpass">
-    <div class="adcpitem">
-        <div mdinputc class="adcpmdic">
-            <label for="curadpass">当前密码</label>
-            <input mdinput type="text" name="curadpass" ng-model="value">
+<div ng-controller="changewalletpController as cpass" class="addchan">
+    <div class="f9fafch"></div>
+    <div class="adinputitem">
+        <div class="adinputic">
+            <div class="adinputimg">
+                <img src="./img/walletpassirinput.png">
+            </div>
+            <input type="text" name="curadpass" ng-model="cpass.curadpass" ng-attr-placeholder="{{'Current password'|translate}}">
         </div>
     </div>
-    <div class="adcpitem">
-        <div mdinputc class="adcpmdic">
-            <label for="newadpass">新密码</label>
-            <input mdinput type="text" name="newadpass">
+    <div class="adinputitem">
+        <div class="adinputic">
+            <div class="adinputimg">
+                <img src="./img/walletpassinput.png">
+            </div>
+            <input type="text" name="newadpass" ng-model="cpass.newadpass" ng-attr-placeholder="{{'New password'|translate}}">
         </div>
     </div>
-    <div class="adcpitem">
-        <div mdinputc class="adcpmdic">
-            <label for="comadpass">确认密码</label>
-            <input mdinput type="text" name="comadpass">
+    <div class="adinputitem">
+        <div class="adinputic">
+            <div class="adinputimg">
+                <img src="./img/walletpassrinput.png">
+            </div>
+            <input type="text" name="comadpass" ng-model="cpass.comadpass" ng-attr-placeholder="{{'Repeat password'|translate}}">
         </div>
     </div>
-    <div>忘记密码？导入助记词可重置密码。<a>马上导入</a></div>
+    <div class="size-14 nzcolor m10t">忘记密码？导入助记词可重置密码。<a class="greencolor" ng-click="$root.go('import');">马上导入</a></div>
 </div>
 

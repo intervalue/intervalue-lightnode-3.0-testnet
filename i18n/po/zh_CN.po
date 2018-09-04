@@ -2225,6 +2225,17 @@ msgstr "确定"
 msgid "Please enter the limit on the transaction"
 msgstr "请输入交易上限额度"
 
+msgid "Change password"
+msgstr "修改密码"
+
+msgid "Current password"
+msgstr "当前密码"
+
+msgid "New password"
+msgstr "新密码"
+
+msgid "Repeat password"
+msgstr "确认密码"
 
 
 
