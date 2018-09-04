@@ -365,6 +365,7 @@ angular.module('copayApp.services')
       });
     };
 
+    //新增一个钱包或者还原钱包接口
     // create additional wallet (the first wallet is created in _createNewProfile())
     root.createWallet = function (opts, cb) {
       $log.debug('Creating Wallet:', opts);
