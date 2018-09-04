@@ -458,7 +458,7 @@ angular
           }
         }
       })
-      .state('preferencesGlobal.import', {
+      .state('import', {
         url: '/import',
         needProfile: true,
         views: {

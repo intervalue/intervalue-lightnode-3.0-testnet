@@ -128,7 +128,7 @@ _:-ms-fullscreen, :root .main {
 .left-small a img{
   margin-left: 15px;
 }
-.right-small a img{
+.right-small a img,.right-small a span{
   margin-right: 15px;
 }
 .bottom-bar {
@@ -288,14 +288,10 @@ ul.copayer-list img {
   background-color: #213140;
 }
 
-
-
 .right-small a, .left-small a {
   color: #45AD8E;
 }
-.right-small a{
-  padding-right:15px;
-}
+
 a.missing-copayers {
   bottom: -34px;
   text-align: center;

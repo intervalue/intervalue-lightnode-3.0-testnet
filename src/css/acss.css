@@ -101,7 +101,8 @@
 
 .adwnlinput{list-style-type: none;margin: 0;padding:0;}
 .adwnlinput li{display:flex;justify-content:space-between;align-items: center;box-sizing: border-box;border-top: 1px solid #D3D3D3;border-bottom: 1px solid #D3D3D3;width: 100%;
-    padding: 0 14px;height:46px;margin-bottom:15px;}
+    padding: 0 14px;height:46px;margin-bottom:15px;
+    cursor: pointer;}
 .adwnlinput li:last-child{margin-bottom: 0;}
 .adwnlinput .adwninput{display: flex;justify-content: flex-start;align-items: center;}
 .adwnlinput li .ld{display: flex;justify-content: flex-start;align-items: center;}
