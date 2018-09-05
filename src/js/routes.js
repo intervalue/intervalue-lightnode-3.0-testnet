@@ -479,11 +479,20 @@ angular
           }
         }
       })
-      .state('preferencesGlobal.preferencesAbout.disclaimer', {
-        url: '/disclaimer',
+      .state('preferencesGlobal.preferencesAbout.term', {
+        url: '/term',
         needProfile: false,
         views: {
           'main@': {
+            templateUrl: 'views/term.html',
+          }
+        }
+      })
+      .state('disclaimer', {
+        url: '/disclaimer',
+        needProfile: false,
+        views: {
+          'main': {
             templateUrl: 'views/disclaimer.html',
           }
         }
@@ -648,7 +657,7 @@ angular
               return $state.transitionTo('addwallet');
             } else if (err.message && err.message.match('NONAGREEDDISCLAIMER')) {
               $log.debug('Display disclaimer... redirecting');
-              return $state.transitionTo('preferencesGlobal.preferencesAbout.disclaimer');
+              return $state.transitionTo('disclaimer');
             } else {
               throw new Error(err.message || err); // TODO
             }
