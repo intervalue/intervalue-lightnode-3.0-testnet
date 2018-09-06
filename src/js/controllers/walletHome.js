@@ -818,7 +818,7 @@ angular.module('copayApp.controllers')
 		//开始发送交易
 		this.submitPayment = function() {
             var form = $scope.sendPaymentForm;
-            var obj = JSON.parse(form.$$element[0][0].value);
+            //var obj = JSON.parse(form.$$element[0][0].value);
 			if ($scope.index.arrBalances.length === 0)
 				return console.log('send payment: no balances yet');
 			var fc = profileService.focusedClient;
