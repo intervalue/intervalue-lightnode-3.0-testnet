@@ -170,7 +170,10 @@
 .addchan a:hover{color:#45AD8E;}
 /*changewalletp end*/
 
-
+/*destination-address start*/
+.addalist{height:calc(100vh - 134px);overflow: auto;margin-top:16px !important;}
+.addaaddr{height:calc(100vh - 60px);background-color: #fff;}
+/*destination-address end*/
 
 /*preferencesGlobal start*/
 .preferences ul{list-style-type: none;}

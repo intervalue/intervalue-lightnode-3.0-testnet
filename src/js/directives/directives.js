@@ -578,28 +578,48 @@ angular.module('copayApp.directives')
     return {
         scope: {},
         restrict: 'A',
-        require: '^mdinputc',
-        link: function(scope, elem, attrs, controllerInstance){
-            var el = angular.element(elem)
-            var self = this;
-            el
-                .on('focus', function(ev) {
-                    controllerInstance.setFocused(true);
-                    if((elem[0].value).trim() !== ''){
-                        controllerInstance.setHasValue(true);
-                    }
-                })
-                .on('blur', function(ev) {
-                    controllerInstance.setFocused(false);
-                    if((elem[0].value).trim() !== ''){
-                        controllerInstance.setHasValue(true);
-                    }
-                });
-            scope.$on('$destroy', function() {
-                controllerInstance.setFocused(false);
-                controllerInstance.setHasValue(false);
+        require: ['^mdinputc','?ngModel'],
+        link: postLink
+    }
+      function postLink(scope, elem, attrs, ctrl){
+        var el = angular.element(elem);
+        var self = this;
+        el
+            .on('focus', function(ev) {
+              ctrl[0].setFocused(true);
+                if((elem[0].value).trim() !== ''){
+                  ctrl[0].setHasValue(true);
+                }else{
+                  ctrl[0].setHasValue(false);
+                }
+            })
+            .on('blur', function(ev) {
+              ctrl[0].setFocused(false);
+                if((elem[0].value).trim() !== ''){
+                  ctrl[0].setHasValue(true);
+                }else{
+                  ctrl[0].setHasValue(false);
+                  elem[0].value = '';
+                }
             });
+        if((ctrl[1]).$modelValue !== ""){
+          scope.$watch(function(){
+            return (ctrl[1]).$modelValue + "";
+          },function(val){
+            if(val == 'undefined'){
+              console.log('ddddddddddddddddddddddddddddddddddd')
+              ctrl[0].setHasValue(false);
+            }else if(val.trim() !== ''){
+              ctrl[0].setHasValue(true);
+            }else{
+              ctrl[0].setHasValue(false);
+            }
+          })
         }
+        scope.$on('$destroy', function() {
+          ctrl[0].setFocused(false);
+          ctrl[0].setHasValue(false);
+        });
     }
   }).filter('encodeURIComponent', function() {
     return window.encodeURIComponent;
