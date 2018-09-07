@@ -171,8 +171,30 @@
 /*changewalletp end*/
 
 /*destination-address start*/
-.addalist{height:calc(100vh - 134px);overflow: auto;margin-top:16px !important;}
 .addaaddr{height:calc(100vh - 60px);background-color: #fff;}
+.addaddbook .modal-content ul li.addaliste a{padding: 14px 16px;display: flex;justify-content: space-between;align-items: center;background:#fff;
+    box-shadow:0px 0px 3px 0px rgba(160,160,160,0.32);border-radius:5px;
+}
+.addaddbook .modal-content ul li.addaliste a span{font-size:16px;
+    font-family:pfmedium;
+    font-weight:500;
+    color:#3B3B3B;
+}
+.addaddbook .modal-content ul.addalist{
+    height:calc(100vh - 140px);overflow: auto;margin-top:16px !important;
+    padding: 14px 0 0;background:#fff;box-shadow:0px 0px 3px 0px rgba(160,160,160,0.32);border-radius:5px 5px 0 0;
+    margin-bottom: 0;
+}
+.addaddbook .modal-content ul.addalist li{
+    padding: 0 16px;
+    cursor: pointer;
+    position: relative;
+}
+.addaddbook .modal-content ul.addalist li .selectAddressbook{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
 /*destination-address end*/
 
 /*preferencesGlobal start*/
