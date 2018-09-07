@@ -2237,7 +2237,8 @@ msgstr "新密码"
 msgid "Repeat password"
 msgstr "确认密码"
 
-
+msgid "Wallet address"
+msgstr "钱包地址"
 
 
 

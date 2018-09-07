@@ -411,13 +411,6 @@ ul.correspondentList li a.removeCorrespondentList {
   float: right;
 }
 
-.modal-content ul li a.selectAddressbook {
-  float: left;
-  font-size: 18px;
-  padding: 13px 14px;
-  color: red;
-  margin-right: 10px;
-}
 
 .sidebar ul.off-canvas-list li a i {
   vertical-align: middle;
@@ -662,8 +655,6 @@ to prevent collapsing during animation*/
   width: 100%;
   top: 45px;
   -webkit-transform: translate3d(0,0,0);
-  background: #F9FAFC;
-  padding:18px 15px 0;
 }
 
 body.modal-open {

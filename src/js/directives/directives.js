@@ -621,6 +621,25 @@ angular.module('copayApp.directives')
           ctrl[0].setHasValue(false);
         });
     }
+  }).directive("mdlabel",function(){
+    return {
+        scope: {},
+        restrict: 'A',
+        require: '^mdinputc',
+        link: postLink
+    }
+      function postLink(scope, elem, attrs, controllerInstance){
+        var el = angular.element(elem);
+        var self = this;
+        el
+            .on('click', function(ev) {
+              controllerInstance.setFocused(true);
+            })
+        scope.$on('$destroy', function() {
+          controllerInstance.setFocused(false);
+          controllerInstance.setHasValue(false);
+        });
+    }
   }).filter('encodeURIComponent', function() {
     return window.encodeURIComponent;
   }).filter('objectKeys', [function() {

@@ -1,47 +1,49 @@
-<nav ng-controller="topbarController as topbar" class="tab-bar">
-    <section class="left-small">
-        <a class="p10"
-           ng-click="topbar.goHome(); closeToHome = null">
-            <span class="text-close">{{'Close'|translate}}</span>
-        </a>
-    </section>
-</nav>
-<div ng-controller="walletHomeController as home">
-    <div ng-show="index.needsBackup" class="p60t row text-center">
-        <div class="large-12 columns">
-            <div class="text-warning text-bold m15b">
-                <i class="fi-alert"></i>
-                <span translate>
-              WARNING: Backup needed
-            </span>
-            </div>
-            <div class="text-gray" translate>
-                Before receiving funds, it is highly recommended you backup your wallet keys.
-            </div>
-
-            <button class="m20t button black expand round"
-                    ng-click="$root.go('preferencesGlobal.backup')" ng-style="{'background-color':index.backgroundColor}" >
-                <span translate>Backup now</span>
-            </button>
-        </div>
-    </div>
-    <div ng-show="!index.needsBackup">
-        <div class="row">
-            <!-- Address-->
+<div
+	class="topbar-container"
+	ng-include="'views/includes/topbar.html'"
+	ng-init="titleSection='receive address'; closeToHome = true; noColor = true">
+</div>
+<!-- 顶部导航栏视图 -->
+    <div ng-controller="walletHomeController as home" class="receivelr">
+        <!-- 如果需要备份，则... -->
+        <div ng-show="index.needsBackup" class="row text-center">
             <div class="large-12 columns">
-                <h2 class="text-center m10t" translate>My Byteball address</h2>
-                <div>
+                <div class="text-warning text-bold m15b">
+                    <i class="fi-alert"></i>
+                    <span translate>WARNING: Backup needed</span>
+                </div>
+                <div class="text-gray" translate>
+                    Before receiving funds, it is highly recommended you backup your wallet keys.
+                </div>
+    
+                <button class="m20t button black expand round"
+                        ng-click="$root.go('preferencesGlobal.backup')"
+                        ng-style="{'background-color':index.backgroundColor}">
+                    <span translate>Backup now</span>
+                </button>
+            </div>
+        </div>
+        <!-- 如果不需要备份，则... -->
+        <div ng-show="!index.needsBackup">
+            <div class="addreceive">
+                <!-- 我的钱包地址 -->
+                <div class="size-14 addreceiveimgpr">
+                    <div class="addreceiveimg"><img src="./img/addreceiving.png" /></div>
+                </div>
+                <div class="amounttranqrtitler" translate>My INVE address</div>
+                <!-- 地址二维码 -->
+                <div class="code size-12">
                     <div class="box-notification" ng-show="home.addrError">
-                <span class="text-warning">
-                  {{home.addrError|translate}}
-                </span>
+                        <span class="text-warning">{{home.addrError|translate}}</span>
                     </div>
-
-                    <div class="text-center" ng-click="home.copyAddress(index.shared_address || home.addr[index.walletId])" ng-show="home.addr[index.walletId] || home.generatingAddress">
-                        <qrcode size="220" data="{{home.protocol}}:{{index.shared_address || home.addr[index.walletId]}}"></qrcode>
-                        <div  ng-show="home.generatingAddress" style="position:relative; top:-226px; height:0px">
-                            <div style="height:220px; width:220px; margin:auto; background: url(img/qr.png) white">
-                                <div class="spinner" style="margin-top:80px">
+                    <div class="text-center"
+                            ng-click="home.copyAddress(index.shared_address || home.addr[index.walletId])"
+                            ng-show="home.addr[index.walletId] || home.generatingAddress">
+                        <qrcode size="185" version="15"
+                                data="{{home.protocol}}:{{(index.shared_address || home.addr[index.walletId])}}{{ (amountInSmallestUnits + asset_param) === undefined ? '':'?amount=' + amountInSmallestUnits + asset_param}}"></qrcode>
+                        <div ng-show="home.generatingAddress" class="coderect">
+                            <div class="coderectin">
+                                <div class="spinner">
                                     <div class="rect1"></div>
                                     <div class="rect2"></div>
                                     <div class="rect3"></div>
@@ -50,50 +52,41 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="m10t" >
-                            <h4 ng-class="{'enable_text_select': !index.isCordova}" class="size-12">
-                                {{index.shared_address || (home.generatingAddress ? '...' : home.addr[index.walletId])}}
-
-                            </h4>
-                        </div>
                     </div>
                 </div>
 
-                <div ng-show="home.addr[index.walletId]">
-                    <div class="m10t text-center" ng-show="index.isCordova">
-                <span class="button outline dark-gray tiny round"
-                      ng-click="home.shareAddress(home.addr[index.walletId])">
-                  <i class="fi-share"></i>
-                  <span translate>Share address</span>
-                </span>
-                    </div>
-                    <div class="line-t size-12 text-center">
-                        <span ng-if="index.shared_address" translate>This address is shared with {{index.shared_address_cosigners}}.</span>
-                        <span ng-if="!index.shared_address" translate>Share this wallet address to receive payments.</span>
-                        <span ng-if="!index.shared_address && 0" translate>To protect your privacy, new addresses are generated automatically once you use them.</span>
-                    </div>
+                <div class="text-center">
+                    <h4 ng-class="{'enable_text_select': !index.isCordova}" class="addcodeh4">
+                        {{index.shared_address || (home.generatingAddress ? '...' :
+                        home.addr[index.walletId])}}
+                    </h4>
                 </div>
+
+
             </div>
-        </div>
-        <!--<div class="row m20t" ng-if="!index.shared_address && !index.isSingleAddress">-->
-        <!--<div class="large-12 columns">-->
-        <!--<button class="button black expand round m0" ng-click="home.setAddress(true)"-->
-        <!--ng-style="{'background-color':index.backgroundColor}" ng-disabled="home.blockUx || index.isOffline ||home.generatingAddress" translate>-->
-        <!--Generate new address-->
-        <!--</button>-->
-        <!--</div>-->
-        <!--</div>-->
-        <div class="m20t text-center m30b">
-            <div class="text-center hor-link" ng-show="!home.generatingAddress && home.addr[index.walletId]" ng-style="{'max-width' : (index.shared_address ? '100%' : '45%')}">
-                <a class="size-14" ng-click="home.openCustomizedAmountModal(index.shared_address || home.addr[index.walletId])" ng-style="{'color':index.backgroundColor}">
-                    <span translate>Request a specific amount</span>
-                </a>
-            </div>
-            <div class="text-center hor-link" ng-show="!home.generatingAddress && home.addr[index.walletId]" ng-if="!index.shared_address">
-                <a class="size-14" ng-click="home.openClaimTextcoinModal(home.addr[index.walletId])" ng-style="{'color':index.backgroundColor}">
-                    <span translate>Claim funds using textcoin</span>
-                </a>
+            <div class="text-center p18h">
+    
+                <div ng-show="!agreed" >
+                    <button class="m20t" ng-click="home.copyAddress(index.shared_address || home.addr[index.walletId])" ng-disabled="loading">
+                        <span translate>Copy address</span>
+                    </button>
+                </div>
+    
+                <div ng-show="!agreed" >
+                    <button class="awbtn m20t m20b" ng-click="home.openCustomizedAmountModal(index.shared_address || home.addr[index.walletId])" ng-disabled="loading" translate>
+                        Request a specific amount
+                    </button>
+                </div>
+    
+                <!-- 要求特定金额 -->
+                <div class="text-center hor-link" ng-show="!home.generatingAddress && home.addr[index.walletId]"
+                     ng-style="{'max-width' : '100%' }">
+                    <a class="size-14"
+                       ng-click="home.openCustomizedAmountModal(index.shared_address || home.addr[index.walletId])"
+                       ng-style="{'color':index.backgroundColor}">
+                        <span translate></span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-</div>

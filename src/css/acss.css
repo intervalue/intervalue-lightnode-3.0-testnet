@@ -136,8 +136,28 @@
 .adwwt .adwwtflex .moreimg{width: 12px;height: 18px;}
 .adwwt .adwwtnum{text-align:right;font-size:20px;color:#3B3B3B;border-top:1px dashed #cccccc;padding-top:10px;}
 .adwwt .adwwtnum span{margin-left:8px;}
-
 /*walletHome-wallet-part end*/
+
+/*receive start*/
+.receivelr{position: fixed;width: 100%;height:100%;background: #F9FAFC;padding: 0 15px;overflow: auto;}
+.addreceive{background-color:#fff;margin-top: 40px;box-shadow:0px 0px 8px 0px rgba(220,220,220,0.5);border-radius: 5px;padding-bottom:16px;}
+.addreceive .addreceiveimgpr{position: relative;height:34px;}
+.addreceive .addreceiveimgpr .addreceiveimg{width: 50px;height:50px;position: absolute;top:-25px;left: 50%;transform: translateX(-50%);background: #ffffff;border-radius:50%;box-shadow:0px 0px 5px 0px rgba(179,179,179,0.5);text-align: center;
+    padding-top: 8px;box-sizing: border-box;}
+.addreceive .addreceiveimgpr .addcusamountimg{width: 50px;height:50px;position: absolute;top:-25px;left: 50%;transform: translateX(-50%);background: #ffffff;border-radius:50%;box-shadow:0px 0px 5px 0px rgba(179,179,179,0.5);text-align: center;
+    padding-top: 11px;box-sizing: border-box;}
+.addreceive .addreceiveimgpr .addcusamountimg img{width: 30px;}
+.addreceive .amounttranqrtitler{color: #999999;text-align: center;font-size:12px;}
+.addreceive .code{padding: 36px 0 32px;text-align: center;}
+.addreceive .code .coderect{position:relative; top:-226px; height:0px}
+.addreceive .code .coderectin{height:220px; width:220px; margin:auto; background: url(img/qr.png) white}
+.addreceive .code .spinner{margin-top:80px;margin-bottom: 30px}
+/*receive end*/
+
+/*customized-amount start*/
+.ammountlr{position: fixed;width: 100%;height:100%;background: #FFFFFF;padding:15px 15px 0;overflow: auto;}
+.ammountlr .adcpmdic input[type='number']{top:5px;}
+/*customized-amount end*/
 
 /*walletnamea start*/
 .adwnnumo{padding:18px 15px;}
@@ -171,7 +191,9 @@
 /*changewalletp end*/
 
 /*destination-address start*/
-.addaaddr{height:calc(100vh - 60px);background-color: #fff;}
+.addedit{  background: #F9FAFC;
+    padding:18px 15px 0;}
+.addaaddr{height:calc(100vh - 80px);background-color: #fff;}
 .addaddbook .modal-content ul li.addaliste a{padding: 14px 16px;display: flex;justify-content: space-between;align-items: center;background:#fff;
     box-shadow:0px 0px 3px 0px rgba(160,160,160,0.32);border-radius:5px;
 }
@@ -182,19 +204,29 @@
 }
 .addaddbook .modal-content ul.addalist{
     height:calc(100vh - 140px);overflow: auto;margin-top:16px !important;
-    padding: 14px 0 0;background:#fff;box-shadow:0px 0px 3px 0px rgba(160,160,160,0.32);border-radius:5px 5px 0 0;
+    padding: 0;background:#fff;box-shadow:0px 0px 3px 0px rgba(160,160,160,0.32);border-radius:5px 5px 0 0;
     margin-bottom: 0;
 }
-.addaddbook .modal-content ul.addalist li{
-    padding: 0 16px;
+.addaddbook .modal-content ul.addalist2{
+    height:calc(100vh - 64px);overflow: auto;padding: 0;background:#fff;box-shadow:0px 0px 3px 0px rgba(160,160,160,0.32);
+    margin-bottom: 0;
+}
+.addaddbook .modal-content ul.addalist li,.addaddbook .modal-content ul.addalist2 li{
+    padding: 10px 16px;
     cursor: pointer;
     position: relative;
 }
-.addaddbook .modal-content ul.addalist li .selectAddressbook{
+.addaddbook .modal-content ul.addalist2 li .selectAddressbook{
     position: absolute;
     right: 0;
-    top: 0;
+    top: 0;background:#EB6D4D;
+    padding:22px 16px;
 }
+.addaaddr .adinputitem{margin-top: 15px;}
+.addrbtn{margin-top: 40px;}
+.addrbtn button{width:49%;}
+.addrbtn button:nth-child(1){float: left;}
+.addrbtn button:nth-child(2){float: right;}
 /*destination-address end*/
 
 /*preferencesGlobal start*/
@@ -250,8 +282,8 @@
 ::-webkit-scrollbar-thumb:window-inactive{background:rgba(255,0,0,0.4);}
 .adcpitem{margin-top:30px;height:60px;}
 .adcpmdic{position:relative;width:100%;height:100%;}
-.adcpmdic input[type='text']{position:absolute;font-size:16px;top:10px;padding:0;font-weight:normal;margin:0;width:100%;}
-.adcpmdic label{position:absolute;font-size:16px;top:10px;padding:0;font-weight:normal;margin:0;white-space:nowrap;}
+.adcpmdic input[type='text'],.adcpmdic input[type='number']{position:absolute;font-size:16px;top:10px;padding:0;font-weight:normal;margin:0;width:100%;}
+.adcpmdic label{position:absolute;font-size:16px;top:10px;padding:0;font-weight:normal;margin:0;white-space:nowrap;cursor:text;}
 .md-input-focused{position:relative;height:100px;transition:all 0.2s ease-in-out;}
 .md-input-focused label,
 .md-input-has-value label{top:-10px;font-size:14px;transition:all 0.2s ease-in-out;}

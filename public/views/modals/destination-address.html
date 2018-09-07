@@ -72,49 +72,67 @@
 
       <!-- 收款地址管理 -->
       <div ng-show="!selectedWalletsOpt" >
-          <div>
-              <!-- 非添加地址页面时，显示收款地址列表 -->
-              <ul ng-show="!addAddressbookEntry" class="no-bullet m0" ng-init="listEntries()"  >
-                  <!-- 非编辑状态，则显示“添加地址”入口 -->
-                  <li ng-show="!editAddressbook" class="addaliste">
-                      <a ng-click="toggleAddAddressbookEntry()">
-                          <span class="text-close size-12"translate>Add a new entry</span>
-                          <span ng-show="!list[newAddress] && newAddress">({{newAddress}})</span>
-                          <img src="img/add.png">
-                      </a>
-                  </li>
-              </ul>
+          <div class="addedit">
+                <div>
+                    <!-- 非添加地址页面时，显示收款地址列表 -->
+                    <ul ng-show="!addAddressbookEntry" class="no-bullet m0" ng-init="listEntries()"  >
+                        <!-- 非编辑状态，则显示“添加地址”入口 -->
+                        <li ng-show="!editAddressbook" class="addaliste">
+                            <a ng-click="toggleAddAddressbookEntry()">
+                                <span class="text-close size-12"translate>Add a new entry</span>
+                                <span ng-show="!list[newAddress] && newAddress">({{newAddress}})</span>
+                                <img src="./img/add.png">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div ng-show="!addAddressbookEntry">
+                    <ul ng-show="!editAddressbook" class="no-bullet addalist">
+                        <!-- 收款地址列表 -->
+                        <li class="line-b" ng-repeat="(addr, label) in list">
+                            <div ng-click="selectAddressbook(addr)" class="size-16">
+                                {{label}}
+                                <div class="size-12 nzcolor ellipsis">{{addr}}</div>
+                            </div>
+                            <!-- 选定地址，则可以删除 -->
+                            <a ng-show="selectedAddressbook[addr]" class="removeAddressbook" ng-click="remove(addr)" translate>Remove</a>
+                            <!-- 编辑状态，则可选定地址 -->
+                            <a class="selectAddressbook" ng-show="editAddressbook"
+                                ng-click="remove(addr)" >
+                                <img src="./img/addrtrash.png">
+                            </a>
+                            <!--ng-click="toggleSelectAddressbook(addr)" style="float: right;position: relative;top: -48px;left: 21px;" >-->
+                        </li>
+                    </ul>
+                    <ul ng-show="editAddressbook" class="no-bullet addalist2">
+                        <!-- 收款地址列表 -->
+                        <li class="line-b" ng-repeat="(addr, label) in list">
+                            <div ng-click="selectAddressbook(addr)" class="size-16">
+                                {{label}}
+                                <div class="size-12 nzcolor ellipsis">{{addr}}</div>
+                            </div>
+                            <!-- 选定地址，则可以删除 -->
+                            <a ng-show="selectedAddressbook[addr]" class="removeAddressbook" ng-click="remove(addr)" translate>Remove</a>
+                            <!-- 编辑状态，则可选定地址 -->
+                            <a class="selectAddressbook" ng-show="editAddressbook"
+                                ng-click="remove(addr)" >
+                                <img src="./img/addrtrash.png">
+                            </a>
+                            <!--ng-click="toggleSelectAddressbook(addr)" style="float: right;position: relative;top: -48px;left: 21px;" >-->
+                        </li>
+                    </ul>
+                </div>
           </div>
-          <div>
-              <ul ng-show="!addAddressbookEntry" class="no-bullet addalist">
-                  <!-- 收款地址列表 -->
-                  <li class="line-b" ng-repeat="(addr, label) in list">
-                      <div ng-click="selectAddressbook(addr)" class="p14b">
-                          {{label}}
-                          <div class="size-10 text-gray ellipsis">{{addr}}</div>
-                      </div>
-                      <!-- 选定地址，则可以删除 -->
-                      <a ng-show="selectedAddressbook[addr]" class="removeAddressbook" ng-click="remove(addr)" translate>Remove</a>
-                      <!-- 编辑状态，则可选定地址 -->
-                      <a class="selectAddressbook" ng-show="editAddressbook"
-                         ng-click="remove(addr)" >
-                          <img src="img/trash.png">
-                      </a>
-                      <!--ng-click="toggleSelectAddressbook(addr)" style="float: right;position: relative;top: -48px;left: 21px;" >-->
-                  </li>
-              </ul>
-          </div>
-
-
+          
           <!-- 添加收款地址页面 -->
           <div ng-show="addAddressbookEntry" class="addaaddr">
-              <form name="addressbookForm" class="p10" no-validate>
+              <form name="addressbookForm" class="p15h" no-validate>
                   <!-- 校验及错误信息 -->
                   <div class="text-warning size-12" ng-show="error">{{error|translate}}</div>
                   <!-- 地址 -->
                   <div class="adinputitem">
                       <div mdinputc class="adcpmdic">
-                          <label translate for="address">Wallet address</label>
+                          <label translate mdlabel for="address">Wallet address</label>
                           <input mdinput type="text" id="address" name="address" maxlength="32" onkeyup="this.value=this.value.replace(/[^A-Z0-9_]/g,'')"
                                     ng-model="addressbook.address" valid-address required>
                       </div>
@@ -122,13 +140,13 @@
                   <!-- 名称 -->
                   <div class="adinputitem">
                       <div mdinputc class="adcpmdic">
-                          <label translate for="label">Name of the contact</label>
+                          <label translate mdlabel for="label">Name of the contact</label>
                           <input mdinput type="text" id="label" name="label"
                                    ng-model="addressbook.label" required>
                       </div>
                   </div>
                   <!-- 按钮 -->
-                  <div>
+                  <div class="addrbtn">
                     <button type="submit" ng-disabled="!addressbookForm.$valid"  ng-click="newAddress = ''; add(addressbook)" translate>Save</button>
                     <button type="button" ng-click="newAddress = ''; toggleAddAddressbookEntry()" translate>Cancel</button>
                   </div>
