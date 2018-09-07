@@ -602,12 +602,11 @@ angular.module('copayApp.directives')
                   elem[0].value = '';
                 }
             });
-        if((ctrl[1]).$modelValue !== ""){
+        if(ctrl[1]){
           scope.$watch(function(){
             return (ctrl[1]).$modelValue + "";
           },function(val){
             if(val == 'undefined'){
-              console.log('ddddddddddddddddddddddddddddddddddd')
               ctrl[0].setHasValue(false);
             }else if(val.trim() !== ''){
               ctrl[0].setHasValue(true);

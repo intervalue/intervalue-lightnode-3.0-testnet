@@ -1,4 +1,4 @@
-<div class="preferences" ng-controller="wordsController as wordsC">
+<div class="preferences" ng-controller="wordsController as wordbacksC">
     <div>
         <div ng-if="index.backhome">
             <div
@@ -22,97 +22,40 @@
             </div>
         </div>
     </div>
-    <h4></h4>
-
-    <div class="box-notification" ng-show="wordsC.error">
-    <span class="text-warning">
-    {{wordsC.error|translate}}
-    </span>
-    </div>
-
-
-    <div>
-        <div class="row">
-            <div class="m10t columns size-14 text-gray">
-                <span translate>Just the wallet seed is not enough.  With the seed alone, you won't be able to restore multisig wallets and private assets such as blackbytes.</span>
-                <br><br>
-                <span translate>To be able to restore everything, please create a full backup (find the option in the menu)</span><span ng-if="!wordsC.isCordova"> </span><span ng-if="!wordsC.isCordova" translate>or backup all InterValue-3.0-testnet data at</span><span ng-if="!wordsC.isCordova"> {{wordsC.appDataDir}}</span>.
-                <br><br>
-                <span translate>Better yet, use multisig wallets with redundancy, </span>
-                <span ng-if="!wordsC.isCordova" translate>e.g. 1-of-2 wallet with one key on this device and another key on your smartphone.</span>
-                <span ng-if="wordsC.isCordova" translate>e.g. 1-of-2 wallet with one key on this device and another key on your laptop computer.</span>
+    <div class="f9fafch"></div>
+    <div ng-show="!wordbacksC.mnemonicWords && wordbacksC.deleted">
+        <div class="adddbackup">
+            <div class="adddbackupimg">
+                <img src="./img/backupdelete.png"/>
             </div>
+            <div class="adddbackuptext" translate>The wallet password has been deleted</div>
         </div>
     </div>
-
-    <div class="row m20t" ng-show="wordsC.deleted">
-        <div class="columns size-14 text-gray text-center" translate>
-            Wallet seed not available.
+ 
+    <div ng-show="wordbacksC.mnemonicWords || (wordbacksC.credentialsEncrypted && !wordbacksC.deleted)">
+        <div class="addbsswicth">
+            <div class="addbsswicthd" translate ng-hide="wordbacksC.show">Show wallet seed</div>
+            <div class="addbsswicthd" translate ng-hide="!wordbacksC.show">Hide wallet seed</div>
+            <a ng-click="wordbacksC.toggle()">
+                <switch translate ng-model="show" class="green right"></switch>
+            </a>
         </div>
-    </div>
 
-    <div ng-show="wordsC.mnemonicWords || (wordsC.credentialsEncrypted && !wordsC.deleted)">
-        <div class="row">
-            <div class="m10t columns">
-                <a class="button outline light-gray expand tiny" ng-click="wordsC.toggle()">
-                    <i class="fi-widget m3r"></i>
-                    <span translate ng-hide="wordsC.show">Show the Wallet Seed Anyway</span>
-                    <span translate ng-hide="!wordsC.show">Hide the Wallet Seed</span>
-                    <i ng-if="!wordsC.show" class="icon-arrow-down4"></i>
-                    <i ng-if="wordsC.show" class="icon-arrow-up4"></i>
-                </a>
+        <div ng-show="wordbacksC.show" class="backupmain">
+            <div translate>The wallet password:</div>
+            <div translate class="m5t">It is highly recommended that you write your password on paper and have a safe place, do not take screenshots or take photos, and do not use the same password on multiple devices.Once you have written your wallet password, it is recommended to remove the password from the device.</div>
+    
+            <div class="addwslcbox nzcolor">
+                <span ng-repeat="word in wordbacksC.mnemonicWords track by $index">{{word}}</span>
             </div>
-        </div>
 
-
-        <div class="row m10t m10b" ng-show="wordsC.show">
-            <div class="small-centered  text-gray columns size-14 text-center">
-                <span translate>Your Wallet Seed:</span><br/>
-                <span translate class="text-bold">
-          Write it down and keep it somewhere safe.
-        </span>
-                <span translate class="text-bold">
-          Do not use it to clone the wallet.
-        </span>
+            <div class="fleximgtext">
+                <img src="./img/triwarn.png"/>
+                <div translate class="redcolor size-12">Once you have written your wallet password, it is recommended to remove the password from the device.</div>
             </div>
+            <button class="m30t" ng-click="wordbacksC.delete()" >
+                <span translate>Delete your wallet password</span>
+            </button>
         </div>
-
-        <div class="row" ng-show="wordsC.show">
-            <div class="columns">
-                <div class="p10" style="background:white;-webkit-user-select: text;" ng-class="{'enable_text_select': index.network == 'testnet'}">
-                    <span ng-repeat="word in wordsC.mnemonicWords track by $index"><span style="white-space:nowrap">{{word}}</span><span ng-show="wordsC.useIdeograms">&#x3000;</span> </span>
-                </div>
-            </div>
-        </div>
-
-        <div class="row m10t m20b" ng-show="wordsC.show">
-            <div class="columns" ng-show="wordsC.mnemonicHasPassphrase">
-          <span class="size-12">
-            <i class="fi-alert"></i>
-            <span translate>
-            WARNING: This seed was created with a passphrase. To recover this wallet both the mnemonic and passphrase are needed.
-            </span>
-          </span>
-            </div>
-        </div>
-
-        <div class="row" ng-show="wordsC.show">
-            <div class="m10t text-center columns">
-                <div class="size-12 text-gray">
-            <span translate>
-              Once you have written your wallet seed down, it is recommended to delete it from this device.
-            </span>
-                </div>
-                <button class="button outline m10t round dark-gray tiny" ng-click="wordsC.delete()">
-                    <i class="fi-trash"></i>
-                    <span translate>
-              DELETE WORDS
-            </span>
-                </button>
-            </div>
-        </div>
-
-    </div>
-
+  </div>
 </div>
-<div class="extra-margin-bottom"></div>

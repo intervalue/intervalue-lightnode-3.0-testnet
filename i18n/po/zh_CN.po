@@ -2240,12 +2240,17 @@ msgstr "确认密码"
 msgid "Wallet address"
 msgstr "钱包地址"
 
+msgid "The wallet password:"
+msgstr "钱包口令："
 
+msgid "It is highly recommended that you write your password on paper and have a safe place, do not take screenshots or take photos, and do not use the same password on multiple devices.Once you have written your wallet password, it is recommended to remove the password from the device."
+msgstr "强烈建议您在纸上写下密码并有一个安全的地方，不要截取屏幕截图或拍照，也不要在多个设备上使用相同的密码。一旦您编写了钱包密码，建议您删除 来自设备的密码。"
 
+msgid "Once you have written your wallet password, it is recommended to remove the password from the device."
+msgstr "编写钱包密码后，建议从设备中删除密码。"
 
-
-
-
+msgid "Delete words"
+msgstr "删除助记词"
 
 
 

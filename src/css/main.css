@@ -84,6 +84,12 @@ h4.title a {
 
 .preferences {
   background:#F9FAFC;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top:0;
+  left:0;
+  overflow: auto;
 }
 
 .preferences form {

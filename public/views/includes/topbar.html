@@ -22,15 +22,12 @@
         </a>
     </section>
 
-    <section class="right-small" ng-show="showCamera">
-        <qr-scanner ng-show="index.isComplete" on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
-    </section>
+    <section class="right-small">
+        <qr-scanner ng-show="showCamera && index.isComplete" on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
 
-    <section class="right-small" ng-show="walletsave">
-        <a ng-click="" class="greencolor size-14" translate><span>Save</span></a>
-    </section>
-    <section class="right-small" ng-show="passsave">
-        <a ng-click="" class="greencolor size-14" translate><span>Save</span></a>
+        <a ng-click="" ng-show="walletsave" class="greencolor size-14" translate><span>Save</span></a>
+
+        <a ng-click="" ng-show="passsave" class="greencolor size-14" translate><span>Save</span></a>
     </section>
     <section class="middle tab-bar-section">
         <h1 class="title ellipsis">
