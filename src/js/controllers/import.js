@@ -17,7 +17,7 @@ angular.module('copayApp.controllers').controller('importController',
             self.creatingProfile = true;
 
             $timeout(function () {
-                profileService.create({ walletName: self.addwiname, password: self.addwipass, mnemonic: self.importcode }, function (err) {
+                profileService.createWallet({  network: 'livenet', cosigners: [],n:1,m:1,name: self.addwiname, password: self.addwipass, mnemonic: self.importcode }, function (err,walletId) {
                     if(err){
                         self.creatingProfile = false;
                         $log.warn(err);
@@ -28,6 +28,7 @@ angular.module('copayApp.controllers').controller('importController',
                     }else{
                         $rootScope.adddataw = profileService.profile.credentials;
                     }
+                       $rootScope.$emit('Local/WalletImported', walletId);
                 });
             }, 100);
         }

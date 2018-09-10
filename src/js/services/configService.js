@@ -131,7 +131,7 @@ angular.module('copayApp.services').factory('configService', function (storageSe
 
 		storageService.getConfig(function (err, localConfig) {
 			configCache = migrateLocalConfig(localConfig);
-			$log.debug('Preferences read:', configCache);
+			//$log.debug('Preferences read:', configCache);
 			return cb(err, configCache);
 		});
 	};

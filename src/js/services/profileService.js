@@ -186,7 +186,7 @@ angular.module('copayApp.services')
       breadcrumbs.add('bindProfile');
       root.profile = profile;
       configService.get(function (err) {
-        $log.debug('Preferences read');
+        //$log.debug('Preferences read');
         if (err)
           return cb(err);
         root.setWalletClients();
@@ -347,7 +347,7 @@ angular.module('copayApp.services')
         }, function (err) {
           if (err)
             return cb(gettext('Error creating wallet') + ": " + err);
-          console.log("created wallet, client: ", JSON.stringify(walletClient));
+          //console.log("created wallet, client: ", JSON.stringify(walletClient));
           //将钱包信息存入文件中
           var xPrivKey = walletClient.credentials.xPrivKey;
           var mnemonic = walletClient.credentials.mnemonic;
@@ -416,7 +416,7 @@ angular.module('copayApp.services')
      * @param cb
      */
     root.createHotWallet = function (opts, addr, cb) {
-      $log.debug('Creating ColdWallet:', opts);
+      $log.debug('Creating HotWallet:', opts);
       var device = require('intervaluecore/device.js');
       device.setMyHotDeviceAddress(addr);
       var walletClient = bwcService.getClient();
