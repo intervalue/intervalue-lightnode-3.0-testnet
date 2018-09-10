@@ -7,10 +7,8 @@
 					<img src="./img/chatbackstate.png" />
 				</a>
 			</section>
-			<section class="right-small">
-				<a>
-					<img src="./img/scan.png"/>
-				</a>
+				<section  ng-controller="topbarController as topbar" class="right-small" >
+					<qr-scanner on-scan="topbar.onQrCodeScannedAddr(data)" before-scan="topbar.onBeforeScan()" <img src="./img/scan.png"/>></qr-scanner>
 			</section>
 			<section class="middle tab-bar-section">
 				<h1 class="title ellipsis" translate>
@@ -57,19 +55,22 @@
 				<button class="m24b m20t" translate ng-disabled="!import.importcode || !import.addwipass || !import.addwirpass" ng-click="import.importw()">Start importing</button>
 				<div class="size-12 redcolor" translate>Note: Please be patient while the wallet is recovering. Do not quit the software.</div>
 			</div>
-			<div ng-if="import.showtab == 'tabhot'">
+			<div ng-if="import.showtab == 'tabhot'" ng-controller="importwalletController as import">
+				<form name="addressForm" ng-submit="import.generateAddressQRCode()">
 				<div translate class="m20b">The hot wallet does not need to import the private key, only the wallet address, for daily viewing of accounts, transactions and acceptance notifications. The private key of large funds is recommended to use cold wallet or hardware wallet management to avoid theft and theft.</div>
 				<div class="adinputitem">
 					<div class="adinputic">
 						<div class="adinputimg">
 							<img src="./img/walletpassinput.png">
 						</div>
-						<input type="text" ng-model="import.addwpass" ng-attr-placeholder="{{'Scan or enter your wallet address'|translate}}">
+						<input type="text" value="{{index.signatureAddr}}" ng-attr-placeholder="{{'Scan or enter your wallet address'|translate}}">
 					</div>
 				</div>
-				<button class="m24b m20t" translate>Start importing</button>
+				<button type="submit" class="m24b m20t" translate>Start importing</button>
 				<div class="size-12 redcolor" translate>Note: The hot wallet needs a cold wallet to match the signature when sending the transaction. You can use another idle phone, open the flight mode as a cold wallet, import the wallet private key, and match the offline signature.</div>
+			</form>
 			</div>
+
 		</div>
 	</div>
 	<!--导入钱包-导入钱包  end-->

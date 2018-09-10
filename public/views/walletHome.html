@@ -100,7 +100,7 @@
                                 <span class="whpback" ng-show="index.needsBackupa" ng-click="$root.go('backup');index.backhome = true;" translate>Please backup</span>
                                 <img class="whewm" ng-click="$root.go('receive')" src="./img/lewm.png"/>
                             </div>
-                            <div class="whamount"><div>{{ (index.alias || index.walletName)}}</div> INVE</div>
+                            <div class="whamount"><div>{{ (index.alias || index.walletName)}}</div>{{}} INVE</div>
                         </div>
                         <!--former carousel end...-->
                     </div>
@@ -131,7 +131,7 @@
                 <!--
                 history
                 -->
-                <div  class="history">
+                <div  class="history" ng-init="index.updateTxHistory(index.walletId)">
                     <div class="row m20t" ng-show="!index.txHistory[0] && !index.updatingTxHistory[index.walletId]">
                     <div class="large-12 columns">
                         <div class="oh text-center">

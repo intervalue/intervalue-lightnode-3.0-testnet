@@ -129,7 +129,6 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
         if(uri.indexOf("InterValue-3.0-testnet:") != -1){
             uri = uri.replace('InterValue-3.0-testnet:','');
             if(uri.length === 32) {
-
                 $rootScope.$emit('Local/ShadowAddress',uri);
             }            //冷钱包二维码验证
         }else if(uri.indexOf("shadow") != -1){

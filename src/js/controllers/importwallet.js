@@ -23,6 +23,8 @@ angular.module('copayApp.controllers').controller('importwalletController',
             console.log(address);
             if(address && address.length == 32){
                 $rootScope.$emit('Local/ShadowAddressForm',address);
+            } else {
+                return $rootScope.$emit('Local/ShowErrorAlert', "The address: "+address+" is illegal");
             }
 
         }
