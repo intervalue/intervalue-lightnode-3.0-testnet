@@ -1208,6 +1208,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 if (walletId == profileService.focusedClient.credentials.walletId) {
                     self.completeHistory = newHistory;
                     self.txHistory = newHistory.slice(0, self.historyShowLimit);
+                    require('intervaluecore/light').findStable2(walletId,function (obj) {
+                        self.ammountTatol = obj ? obj:0;
+                    });
                     self.historyShowShowAll = newHistory.length >= self.historyShowLimit;
                 }
 

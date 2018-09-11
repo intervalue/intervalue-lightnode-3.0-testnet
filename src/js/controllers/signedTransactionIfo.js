@@ -51,6 +51,12 @@ angular.module('copayApp.controllers').controller('signedTransactionIfoControlle
             var opts = JSON.parse(form.$$element[0][0].value);
             var wallet = require('intervaluecore/wallet');
             wallet.sendMultiPayment(opts,function (cb) {
+                if(typeof cb =="object"){
+                    $rootScope.$emit('Local/SetTab', 'wallet');
+                }else {
+                    console.log("error: "+cb);
+                    return self.setSendError(cb);
+                }
             });
         }
 

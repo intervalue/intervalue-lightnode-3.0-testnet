@@ -100,7 +100,7 @@
                                 <span class="whpback" ng-show="index.needsBackupa" ng-click="$root.go('backup');index.backhome = true;" translate>Please backup</span>
                                 <img class="whewm" ng-click="$root.go('receive')" src="./img/lewm.png"/>
                             </div>
-                            <div class="whamount"><div>{{ (index.alias || index.walletName)}}</div>{{}} INVE</div>
+                            <div class="whamount"><div>{{ (index.alias || index.walletName)}}</div>{{index.ammountTatol}} INVE</div>
                         </div>
                         <!--former carousel end...-->
                     </div>
@@ -227,7 +227,7 @@
                         </div>
                     </div>
                 
-                    <div class="row m20t">
+                   <!-- <div class="row m20t">
                         <div class="large-6 medium-6 small-6 columns">
                         <button type="submit" class="button black round expand" ng-show="index.historyShowShowAll" ng-click="index.showAllHistory()" ng-style="{'background-color':index.backgroundColor}"  translate>
                             Show all
@@ -240,7 +240,7 @@
                             <span translate>Download CSV file</span>
                         </a>
                         </div>
-                    </div>
+                    </div>-->
                     </div>
                     <div class="extra-margin-bottom"></div>
                 </div> <!-- END History -->
