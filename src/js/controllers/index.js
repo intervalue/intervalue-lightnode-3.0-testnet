@@ -1210,10 +1210,12 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     self.txHistory = newHistory.slice(0, self.historyShowLimit);
                     require('intervaluecore/light').findStable2(walletId,function (obj) {
                         self.ammountTatol = obj ? obj:0;
+                        $timeout(function () {
+                            $rootScope.$apply();
+                        });
                     });
                     self.historyShowShowAll = newHistory.length >= self.historyShowLimit;
                 }
-
                 return cb();
             });
         });
