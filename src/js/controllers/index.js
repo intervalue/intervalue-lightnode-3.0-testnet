@@ -1210,9 +1210,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     self.txHistory = newHistory.slice(0, self.historyShowLimit);
                     require('intervaluecore/light').findStable2(walletId,function (obj) {
                         self.ammountTatol = profileService.formatAmount(obj ? obj:0,'bytes');
-                        $timeout(function () {
-                            $rootScope.$apply();
-                        });
                     });
                     self.historyShowShowAll = newHistory.length >= self.historyShowLimit;
                 }
@@ -1234,33 +1231,39 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     };
 
 
-    self.updateHistory = function () {
+    self.updateHistory = function (retry) {
         var fc = profileService.focusedClient;
         var walletId = fc.credentials.walletId;
-
-        if (!fc.isComplete() || self.arrBalances.length === 0) return;
+        $log.debug('starting Updating Transaction History');
+        if (!fc.isComplete() || self.arrBalances.length === 0 || self.updatingTxHistory[walletId]) {
+            $log.debug('failed Updating Transaction History');
+            if (retry) {
+                setTimeout(function () {
+                    $log.debug('restarting Updating Transaction History');
+                    self.updateHistory(retry - 1);
+                }, 3 * 1000);
+            }
+            return;
+        }
 
         $log.debug('Updating Transaction History');
         self.txHistoryError = false;
+        self.updatingTxHistory[walletId] = true;
 
-        mutex.lock(['update-history-' + walletId], function (unlock) {
-            self.updatingTxHistory[walletId] = true;
-            $timeout(function onUpdateHistoryTimeout() {
-                self.updateLocalTxHistory(fc, function (err) {
-                    self.updatingTxHistory[walletId] = false;
-                    unlock();
-                    if (err)
-                        self.txHistoryError = true;
-                    $timeout(function () {
-                        $rootScope.$apply();
-                    });
+        $timeout(function onUpdateHistoryTimeout() {
+            self.updateLocalTxHistory(fc, function (err) {
+                self.updatingTxHistory[walletId] = false;
+                if (err)
+                    self.txHistoryError = true;
+                $timeout(function () {
+                    $rootScope.$apply();
                 });
             });
         });
     };
 
-    self.updateTxHistory = lodash.debounce(function () {
-        self.updateHistory();
+    self.updateTxHistory = lodash.debounce(function (retry) {
+        self.updateHistory(retry);
     }, 1000);
 
     //  self.throttledUpdateHistory = lodash.throttle(function() {
