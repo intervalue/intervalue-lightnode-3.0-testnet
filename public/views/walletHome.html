@@ -131,11 +131,11 @@
                 <!--
                 history
                 -->
-                <div  class="history" ng-init="index.updateTxHistory(index.walletId)">
+                <div  class="history" ng-init="index.updateTxHistory(3)">
                     <div class="row m20t" ng-show="!index.txHistory[0] && !index.updatingTxHistory[index.walletId]">
                     <div class="large-12 columns">
                         <div class="oh text-center">
-                        <span ng-show="index.txHistoryError" ng-click='index.updateTxHistory()'>
+                        <span ng-show="index.txHistoryError" ng-click='index.updateTxHistory(3)'>
                             <p class="size-12 m10b db text-gray" translate>Could not fetch transaction history</p>
                             <button class="outline round light-gray tiny" translate>Tap to retry</button>
                         </span>
@@ -160,11 +160,11 @@
                         Please stand by.
                     </div>
                     <div ng-show="index.txProgress > 6" class="size-14 text-gray m20t">
-                        <b>{{index.txProgress}}</b> 
+                        <b>{{index.txProgress}}</b>
                         <span translate>Transactions<br> Downloaded</span>
                     </div>
                     </div>
-            
+
                     <div ng-show="index.txHistory[0]">
                     <div ng-repeat="btx in index.txHistory"
                         ng-click="home.openTxModal(btx)"
@@ -176,7 +176,7 @@
                         <span class="label tu light-gray radius" ng-show="btx.action == 'moved'" translate>Moved</span>
                         <span class="label tu warning radius" ng-show="btx.action == 'invalid'" translate>Invalid</span>
                         </div>
-            
+
                         <div class="large-4 medium-4 small-4 columns">
                         <span class="size-16">
                             <span ng-if="btx.action == 'received'">+</span>
@@ -204,7 +204,7 @@
                         <div class="size-14 text-gray columns m5t" ng-if="btx.message || btx.addressTo">
                         <div ng-show="btx.message"><span translate>Note</span>: {{btx.message}}</div>
                         <div ng-show="!btx.message">
-                            <span translate>To</span>: {{index.addressbook[btx.addressTo] || btx.addressTo}} 
+                            <span translate>To</span>: {{index.addressbook[btx.addressTo] || btx.addressTo}}
                         </div>
                         <span ng-show="btx.textAddress || btx.original_address" class="small-10">
                             <span>{{index.getToAddressLabel(btx.textAddress || btx.original_address)}}</span>: {{index.getAddressValue(btx.textAddress || btx.original_address)}}
@@ -214,7 +214,7 @@
                         </span>
                         </div>
                     </div>
-            
+
                     <div class="row m20t text-center" ng-show="index.historyRendering">
                         <div class="columns large-12 medium-12 small-12">
                         <div class="spinner">
@@ -226,7 +226,7 @@
                         </div>
                         </div>
                     </div>
-                
+
                    <!-- <div class="row m20t">
                         <div class="large-6 medium-6 small-6 columns">
                         <button type="submit" class="button black round expand" ng-show="index.historyShowShowAll" ng-click="index.showAllHistory()" ng-style="{'background-color':index.backgroundColor}"  translate>
