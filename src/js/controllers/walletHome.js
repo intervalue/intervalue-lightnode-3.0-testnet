@@ -892,7 +892,7 @@ angular.module('copayApp.controllers')
                 } else {
                     var address = form.address.$modelValue;
                     var recipient_device_address = assocDeviceAddressesByPaymentAddress[address];
-                    var amount = form.amount.$modelValue;
+                    var amount = form.amount.$modelValue*1e6;
                     // address can be [bytreball_addr, email, account, empty => social sharing]
                     var accountValidationResult = aliasValidationService.validate(address);
                     var isEmail = ValidationUtils.isValidEmail(address);

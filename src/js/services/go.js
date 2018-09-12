@@ -131,7 +131,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
             if(uri.length === 32) {
                 $rootScope.$emit('Local/ShadowAddress',uri);
             }            //冷钱包二维码验证
-        }else if(uri.indexOf("shadow") != -1){
+        }/*else if(uri.indexOf("shadow") != -1){
             require('intervaluecore/shadowUri.js').shadowParseUri(uri,{
                 ifError: function(err){
                     console.log(err);
@@ -146,7 +146,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                                 $rootScope.$emit('Local/ShadowInvitation',signatureCode);
                             }else{
                                 console.log("signatureCode is "+signatureCode);
-                                notification.error('signatureCode is '+signatureCode);//需要修改弹出对话框,不能直接退出系统
+                                notification.error('signatureCode is '+signatureCode);
                             }
                         });
                     }
@@ -185,7 +185,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                     }
                 }
             });
-        }
+        }*/
     }
     root.handleUriAddr  = handleUriAddr;
     //冷热钱包扫码结束
@@ -222,6 +222,60 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                     }
                     else
                         notification.error('unknown url type: '+objRequest.type);
+                }
+            });
+        }else if(uri.indexOf("shadow") != -1){
+            require('intervaluecore/shadowUri.js').shadowParseUri(uri,{
+                ifError: function(err){
+                    console.log(err);
+                },
+                ifOk: function(objRequest){
+                    objRequest = JSON.parse(objRequest.toString());
+                    var shadowWallet = require('intervaluecore/shadowWallet');
+                    //第一次扫码pubkey二维码后，签名生成地址
+                    if(objRequest.type ==='shadow'){
+                        shadowWallet.getSignatureCode(objRequest,function (signatureCode) {
+                            if(typeof signatureCode == "object"){
+                                $rootScope.$emit('Local/ShadowInvitation',signatureCode);
+                            }else{
+                                console.log("signatureCode is "+signatureCode);
+                                notification.error('signatureCode is '+signatureCode);
+                            }
+                        });
+                    }
+                    //第二次扫码授权
+                    else if(objRequest.type === 'sign'){
+                        var mnemonic;
+                        var wc = profileService.walletClients;
+                        db.query('select extended_pubkey  from extended_pubkeys as a  left join my_addresses as b on a.wallet=b.wallet where b.address=?',[objRequest.addr],function (rows) {
+                            for(var index in wc){
+                                if(rows[0].extended_pubkey == wc[index].credentials.xPubKey){
+                                    mnemonic = wc[index].credentials.mnemonic;
+                                    break;
+                                }
+                            }
+                            shadowWallet.getSignatureDetlCode(objRequest,mnemonic,function (signatureDetlCode) {
+                                if(typeof  signatureDetlCode =="object"){
+                                    $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
+                                }else{
+                                    console.log(" signatureDetlCode is "+signatureDetlCode)
+                                    notification.error('signatureDetlCode is '+signatureDetlCode);
+                                }
+                            })
+                        });
+
+                    }
+                    //第三次扫码，生成热钱包
+                    else if(objRequest.type === 'signDetl'){
+                        shadowWallet.generateShadowWallet(objRequest,function (shadowWallet) {
+                            if( typeof shadowWallet=="object"){
+                                $rootScope.$emit('Local/generateShadowWallet', shadowWallet);
+                            }else {
+                                console.log("shadowWallet is  "+shadowWallet);
+                                notification.error('shadowWallet is   '+shadowWallet);
+                            }
+                        });
+                    }
                 }
             });
         }else if(uri.indexOf("isHot") != -1){//热钱包交易

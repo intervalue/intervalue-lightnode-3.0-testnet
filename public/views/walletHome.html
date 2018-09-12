@@ -185,7 +185,7 @@
                             (possible double spend)
                             </span>
                             <span  ng-if="btx.action != 'invalid'">
-                            {{btx.amountStr}}
+                            {{btx.amountTl}} INVE
                             </span>
                         </span>
                         </div>
@@ -301,9 +301,9 @@
                                                name="amount" ng-minlength="0.00000001" ng-maxlength="10000000000" ng-model="_amount"
                                                valid-amount="{{index.arrBalances[index.assetIndex].asset}}" ng-required="!home.bSendAll && !home.send_multiple"
                                                autocomplete="off" ng-focus="home.formFocus('amount')" ng-blur="home.formFocus(false)">
-                                        <a class="postfix" ng-if="index.arrBalances.length > 0 && index.arrBalances[index.assetIndex].asset === 'base'">{{home.unitName}}</a>
-                                        <a class="postfix" ng-if="index.arrBalances.length > 0 && index.arrBalances[index.assetIndex].asset === index.BLACKBYTES_ASSET">{{home.bbUnitName}}</a>
-                                        <a class="postfix" ng-if="index.arrBalances.length > 0 && index.arrBalances[index.assetIndex].name">{{index.arrBalances[index.assetIndex].name | limitTo:16}}{{index.arrBalances[index.assetIndex].name.length>16 ? '...' : ''}}</a>
+                                        <a class="postfix" ng-if="index.arrBalances.length > 0 && index.arrBalances[index.assetIndex].asset === 'base'">INVE</a>
+                                        <a class="postfix" ng-if="index.arrBalances.length > 0 && index.arrBalances[index.assetIndex].asset === index.BLACKBYTES_ASSET">INVE</a>
+                                        <a class="postfix" ng-if="index.arrBalances.length > 0 && index.arrBalances[index.assetIndex].name">INVE</a>
                                         <a class="postfix" ng-if="index.arrBalances.length > 0 && index.arrBalances[index.assetIndex].asset !== 'base' && index.arrBalances[index.assetIndex].asset !== index.BLACKBYTES_ASSET && !index.arrBalances[index.assetIndex].name">of {{index.arrBalances[index.assetIndex].asset.substr(0,4)}}</a>
                                         <!-- <div ng-hide="sendPaymentForm.amount.$pristine && !sendPaymentForm.amount.$modelValue ">
                                             <span class="has-error right size-12" ng-if="sendPaymentForm.amount.$invalid">
@@ -355,26 +355,25 @@
 
             <div class="adwwto">
                 <div class="adwwt" ng-repeat="item in adddataw track by $index">
-                    <div class="adwwtflex" ng-click="index.towalletname(item.walletName, item.addr, item.account, item.walletId, item.mnemonic, item.mnemonicEncrypted)">
+                    <div class="adwwtflex" ng-click="index.towalletname(item.walletName, index.shared_address || (home.generatingAddress ? '...' :
+                                home.addr[index.walletId]), item.account, item.walletId, item.mnemonicEncrypted)">
                         <div class="adwwtlogo"></div>
                         <div class="adwwt100">
                             <div class="adwwtname">{{item.walletName}}
                                 <span class="whpback" ng-show="item.mnemonic || item.mnemonicEncrypted" ng-click="$root.go('backup');index.backwallet=true" translate>Please backup</span>
                             </div>
-                            <div class="adwwtaddr">{{item.addr}}</div>
-                            <div class="adwwtaddr">{{item.walletId}}</div>
+                            <div class="adwwtaddr">{{index.shared_address || (home.generatingAddress ? '...' :
+                                home.addr[index.walletId])}}</div>
                         </div>
                         <img class="moreimg" src="./img/more.png" />
                     </div>
                     <div class="adwwtnum fontbold size-20">
-                        {{item.account}}<span class="greencolor fontbold size-14">INVE</span>
+                        {{index.ammountTatol}}<span class="greencolor fontbold size-14">INVE</span>
                     </div>
                 </div>
                 <button class="m20b" ng-click="$root.go('create')">创建钱包</button>
                 <button class="awbtn" ng-click="$root.go('importwallet')">导入钱包</button>
                 <!--<button ng-click="index.generatePubkey(index.shared_address || home.addr[index.walletId])">冷钱包验证码</button>-->
-                <div ng-controller="createShadowWalletController  as cs"><button ng-click="cs.create()">冷钱包验证码</button></div>
-                <div ><button ng-click="index.showshadow = true ;index.shadowstep == 'csend1'">测试交易详情</button></div>
             </div>
         </div> <!-- END wallet -->
 

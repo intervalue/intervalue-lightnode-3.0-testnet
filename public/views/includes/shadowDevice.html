@@ -23,7 +23,7 @@
             完成授权
         </section>
         <section  ng-controller="topbarController as topbar">
-            <qr-scanner on-scan="topbar.onQrCodeScannedAddr(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
+            <qr-scanner on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
         </section>
         <nav class="tab-bar ng-scope">
             <section class="left-small">

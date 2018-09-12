@@ -80,17 +80,17 @@ angular.module('copayApp.services').factory('configService', function (storageSe
 			reconnectDelay: 5000,
 			idleDurationMin: 4,
 			singleAddress: true,
-			settings: {
-				unitName: 'bytes',
-				unitValue: 1,
-				unitDecimals: 0,
-				unitCode: 'one',
-				bbUnitName: 'blackbytes',
-				bbUnitValue: 1,
-				bbUnitDecimals: 0,
-				bbUnitCode: 'one',
-				alternativeName: 'US Dollar',
-				alternativeIsoCode: 'USD',
+                settings: {
+                    unitName: 'INVE',
+                    unitValue: 1000000,
+                    unitDecimals: 6,
+                    unitCode: 'mega',
+                    bbUnitName: 'blackbytes',
+                    bbUnitValue: 1,
+                    bbUnitDecimals: 1,
+                    bbUnitCode: 'one',
+                    alternativeName: 'US Dollar',
+                    alternativeIsoCode: 'USD',
 			}
 		},
 

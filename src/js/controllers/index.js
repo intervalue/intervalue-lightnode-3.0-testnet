@@ -1209,7 +1209,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     self.completeHistory = newHistory;
                     self.txHistory = newHistory.slice(0, self.historyShowLimit);
                     require('intervaluecore/light').findStable2(walletId,function (obj) {
-                        self.ammountTatol = obj ? obj:0;
+                        self.ammountTatol = profileService.formatAmount(obj ? obj:0,'bytes');
                         $timeout(function () {
                             $rootScope.$apply();
                         });
