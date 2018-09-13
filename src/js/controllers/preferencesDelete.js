@@ -61,8 +61,6 @@ angular.module('copayApp.controllers').controller('preferencesDeleteWalletContro
 
     //开始删除钱包
     this.deleteWallet = function(walletId,name) {
-        alert(walletId);
-        alert(name);
 	  if (profileService.profile.credentials.length === 1 || profileService.getWallets().length === 1)
 		  return $rootScope.$emit('Local/ShowErrorAlert', "Can't delete the last remaining wallet");
       if (isCordova) {

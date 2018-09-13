@@ -1213,6 +1213,27 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                                 $rootScope.$apply();
                             });
                         });
+                    require('intervaluecore/wallet').getWalletsInfo(function (obj) {
+                        let trans = [];
+                        let fc = profileService.walletClients;
+                        obj.forEach(function(tran){
+                            for(var item in fc) {
+                                if (tran.wallet == fc[item].credentials.walletId){
+                                    var walletNameIfo = fc[item].credentials.walletName
+                                }
+                            }
+                            trans.push({
+                                address : tran.address,
+                                wallet  : tran.wallet,
+                                stables  : profileService.formatAmount(tran.stables,'bytes'),
+                                walletName : walletNameIfo
+                            });
+                        });
+                        self.walletInfo = trans;
+                        $timeout(function () {
+                            $rootScope.$apply();
+                        });
+                    });
                         self.historyShowShowAll = newHistory.length >= self.historyShowLimit;
                     //}
                     return cb();
