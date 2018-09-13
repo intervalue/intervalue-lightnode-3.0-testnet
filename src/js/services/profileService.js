@@ -441,11 +441,10 @@ angular.module('copayApp.services')
       return root.walletClients[walletId];
     };
 
-    root.deleteWallet = function (opts, cb) {
-      var client = opts.client || root.focusedClient;
-      var walletId = client.credentials.walletId;
-      $log.debug('Deleting Wallet:', client.credentials.walletName);
-      breadcrumbs.add('Deleting Wallet: ' + client.credentials.walletName);
+    root.deleteWallet = function (walletId,walletName, cb) {
+
+      $log.debug('Deleting Wallet:', walletName);
+      breadcrumbs.add('Deleting Wallet: ' + walletName);
 
       root.profile.credentials = lodash.reject(root.profile.credentials, {
         walletId: walletId
