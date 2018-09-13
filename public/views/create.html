@@ -1,6 +1,6 @@
-<div ng-controller="createwalletController as create" ng-init="create.step = 'addwallet'">
+<div ng-controller="createwalletController as create" ng-init="create.step = 'createwallet'">
   <!--创建钱包-创建钱包信息  start-->
-  <div class="addwcontent" ng-if="create.step == 'addwallet'">
+  <div class="addwcontent" ng-if="create.step == 'createwallet'">
     <nav class="tab-bar">
       <section class="left-small">
         <a ng-click="$root.go('walletHome')">
@@ -23,13 +23,13 @@
         <img src="./img/warn.png">
         <div translate class="redcolor size-12">InterValue does not store passwords and cannot be retrieved for you. Please keep in mind!</div>
       </div>
-      <p ng-if="create.addwalleterr">密码不一致</p>
+      <p ng-if="create.createwalleterr">密码不一致</p>
       <div class="adinputitem">
         <div class="adinputic">
           <div class="adinputimg">
             <img src="./img/walletnameinput.png">
           </div>
-          <input type="text" ng-model="create.addwname" ng-attr-placeholder="{{'Wallet name'|translate}}">
+          <input type="text" ng-model="create.createwname" ng-attr-placeholder="{{'Wallet name'|translate}}">
         </div>
       </div>
       <div class="adinputitem">
@@ -37,7 +37,7 @@
           <div class="adinputimg">
             <img src="./img/walletpassinput.png">
           </div>
-          <input type="text" ng-model="create.addwpass" ng-attr-placeholder="{{'Password'|translate}}">
+          <input type="text" ng-model="create.createwpass" ng-attr-placeholder="{{'Password'|translate}}">
         </div>
       </div>
       <div class="adinputitem">
@@ -45,10 +45,10 @@
           <div class="adinputimg">
             <img src="./img/walletpassrinput.png">
           </div>
-          <input type="text" ng-model="create.addwrpass" ng-attr-placeholder="{{'Repeat password'|translate}}">
+          <input type="text" ng-model="create.createwrpass" ng-attr-placeholder="{{'Repeat password'|translate}}">
         </div>
       </div>
-      <button class="m40t m24b" ng-click="create.passequal()" ng-disabled="!create.addwname || !create.addwpass || !create.addwrpass" translate>Creat wallet</button>
+      <button class="m40t m24b" ng-click="create.passequal()" ng-disabled="!create.createwname || !create.createwpass || !create.createwrpass" translate>Creat wallet</button>
       <button ng-click="$root.go('import')" translate>import wallet</button>
     </div>
   </div>
@@ -57,7 +57,7 @@
   <div class="addwcontent" ng-if="create.step == 'showcode'" ng-init="create.funReg()">
     <nav class="tab-bar">
       <section class="left-small">
-        <a ng-click="create.step = 'addwallet'">
+        <a ng-click="create.step = 'createwallet'">
           <img src="./img/chatbackstate.png" />
         </a>
       </section>
@@ -102,7 +102,7 @@
         <div class="addwslcbox m24b" ng-click="create.minuswordf($event)">
           <span ng-repeat="item in create.chosenWords" id="{{item.id}}" >{{item.str}}</span>
         </div>
-        <div class="wordsbox m12b" ng-click="create.addwordf($event)">
+        <div class="wordsbox m12b" ng-click="create.createwordf($event)">
           <button ng-repeat="item in create.showrandamcodes" id="{{item.id}}" ng-disabled="item.chosen">{{item.str}}</button>
         </div>
       </div>
@@ -128,7 +128,7 @@
       </div>
       <p class="center redcolor m35b">Your password is correct. To ensure the security of your wallet, we recommend that you delete your password.</p>
       <button class="m20b" ng-click="create.showconfirm = true;" translate>Delete mnemonic</button>
-      <button class="awbtn" ng-click="create.delteConfirm(create.addwname, create.addwpass, create.mnemonic);" translate>Skip</button>
+      <button class="awbtn" ng-click="create.delteConfirm(create.createwname, create.createwpass, create.mnemonic);" translate>Skip</button>
       <div ng-if="create.showconfirm" class="popconfirm">
         <div class="popmask" ng-click="create.showconfirm = false;"></div>
         <div class="popcontent">
@@ -138,7 +138,7 @@
           </div>
           <p class="poptips p25h" translate>This will completely remove the mnemonics from the app and it will not be recoverable. Please reconfirm that you have backed up your mnemonics to a safe place.</p>
           <div class="p25h popbutton">
-            <button ng-click="create.delteConfirm(create.addwname, create.addwpass, create.mnemonic);">确认</button>
+            <button ng-click="create.delteConfirm(create.createwname, create.createwpass, create.mnemonic);">确认</button>
             <button class="awbtn" ng-click="create.showconfirm = false;">取消</button>
           </div>
         </div>
@@ -150,7 +150,7 @@
   <div class="addwcontent addwimportwallet" ng-if="create.step == 'importwallet'">
     <nav class="tab-bar">
       <section class="left-small">
-        <a ng-click="create.step = 'addorimport'">
+        <a ng-click="create.step = 'createorimport'">
           <img src="./img/chatbackstate.png" />
         </a>
       </section>
@@ -182,7 +182,7 @@
             <div class="adinputimg">
               <img src="./img/walletnameinput.png">
             </div>
-            <input type="text" ng-model="create.addwiname" ng-attr-placeholder="{{'Wallet name'|translate}}">
+            <input type="text" ng-model="create.createwiname" ng-attr-placeholder="{{'Wallet name'|translate}}">
           </div>
         </div>
         <div class="adinputitem">
@@ -190,7 +190,7 @@
             <div class="adinputimg">
               <img src="./img/walletpassirinput.png">
             </div>
-            <input type="text" ng-model="create.addwipass" ng-attr-placeholder="{{'Password'|translate}}">
+            <input type="text" ng-model="create.createwipass" ng-attr-placeholder="{{'Password'|translate}}">
           </div>
         </div>
         <div class="adinputitem">
@@ -198,20 +198,20 @@
             <div class="adinputimg">
               <img src="./img/walletpassinput.png">
             </div>
-            <input type="text" ng-model="create.addwirpass" ng-attr-placeholder="{{'Repeat password'|translate}}">
+            <input type="text" ng-model="create.createwirpass" ng-attr-placeholder="{{'Repeat password'|translate}}">
           </div>
         </div>
-        <button class="m24b m20t" translate ng-disabled="!create.importcode || !create.addwipass || !create.addwirpass" ng-click="create.importw()">Start importing</button>
+        <button class="m24b m20t" translate ng-disabled="!create.importcode || !create.createwipass || !create.createwirpass" ng-click="create.importw()">Start importing</button>
         <div class="size-12 redcolor" translate>Note: Please be patient while the wallet is recovering. Do not quit the software.</div>
       </div>
       <div ng-if="create.showtab == 'tabhot'">
-        <div translate class="m20b">The hot wallet does not need to import the private key, only the wallet address, for daily viewing of accounts, transactions and acceptance notifications. The private key of large funds is recommended to use cold wallet or hardware wallet management to avoid theft and theft.</div>
+        <div translate class="m20b">The hot wallet does not need to import the private key, only the wallet createress, for daily viewing of accounts, transactions and acceptance notifications. The private key of large funds is recommended to use cold wallet or hardware wallet management to avoid theft and theft.</div>
         <div class="adinputitem">
           <div class="adinputic">
             <div class="adinputimg">
               <img src="./img/walletpassinput.png">
             </div>
-            <input type="text" ng-model="create.addwpass" ng-attr-placeholder="{{'Scan or enter your wallet address'|translate}}">
+            <input type="text" ng-model="create.createwpass" ng-attr-placeholder="{{'Scan or enter your wallet createress'|translate}}">
           </div>
         </div>
         <button class="m24b m20t" translate>Start importing</button>

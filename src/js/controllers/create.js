@@ -3,27 +3,27 @@
 angular.module('copayApp.controllers').controller('createwalletController',
     function ($rootScope, $scope, $timeout, storageService, notification, profileService, bwcService, $log) {
         var self = this;
-        self.addwname = '';
-        self.addwpass = '';
-        self.addwrpass = '';
-        self.addwipass = '';
-        self.addwiname = '';
+        self.createwname = '';
+        self.createwpass = '';
+        self.createwrpass = '';
+        self.createwipass = '';
+        self.createwiname = '';
         self.importcode = '';
-        self.addwirpass = '';
+        self.createwirpass = '';
         self.chosenWords = [];
         self.showcodes = [];
         self.showrandamcodes = [];
         self.mnemonic = '';
         self.showcodeerr = false;
-        self.addwalleterr = false;
+        self.createwalleterr = false;
         self.showconfirm = false;
         self.showtab = 'tabcold';
         var fc = profileService.focusedClient;
         var walletClient = bwcService.getClient();
         self.ducodes = walletClient.createRandomMnemonic().split(' ');
         self.passequal = function () {
-            if (self.addwpass !== self.addwrpass) {
-                self.addwalleterr = true;
+            if (self.createwpass !== self.createwrpass) {
+                self.createwalleterr = true;
                 return false;
             } else {
                 self.step = "showcode";
@@ -59,7 +59,7 @@ angular.module('copayApp.controllers').controller('createwalletController',
             });
         };
         // 定义提示框内容  结束
-        self.addwordf = function ($event) {
+        self.createwordf = function ($event) {
             self.showcodeerr = false;
             if ($event.srcElement.tagName == 'BUTTON') {
                 self.showrandamcodes.forEach(function (item, index) {
@@ -147,7 +147,7 @@ angular.module('copayApp.controllers').controller('createwalletController',
             //	saveDeviceName();
 
             $timeout(function () {
-                profileService.createWallet({ name: walletName, password: passphrase, mnemonic: mnemonic,m:1,n:1,networkName:"livenet",cosigners:[],isSingleAddress:true }, function (err,walletId) {
+                profileService.createWallet({ name: walletName, password: passphrase, mnemonic: mnemonic,m:1,n:1,networkName:"livenet",cosigners:[],isSinglecreateress:true }, function (err,walletId) {
                     self.loading = false;
                     if (err) {
                         $log.warn(err);
@@ -160,7 +160,7 @@ angular.module('copayApp.controllers').controller('createwalletController',
 
                     else {
                         $rootScope.$emit('Local/WalletImported', walletId);
-                        profileService.setSingleAddressFlag(true);
+                        $rootScope.createdataw = profileService.profile.credentials;
                     }
                 });
             }, 100);
@@ -172,7 +172,7 @@ angular.module('copayApp.controllers').controller('createwalletController',
             self.creatingProfile = true;
 
             $timeout(function () {
-                profileService.create({ name: self.addwiname, password: self.addwipass, mnemonic: self.importcode,m:1,n:1,networkName:"livenet",cosigners:[],isSingleAddress:true }, function (err) {
+                profileService.createWallet({ name: self.createwiname, password: self.createwipass, mnemonic: self.importcode,m:1,n:1,networkName:"livenet",cosigners:[],isSinglecreateress:true }, function (err) {
                     if(err){
                         self.creatingProfile = false;
                         $log.warn(err);
@@ -181,7 +181,8 @@ angular.module('copayApp.controllers').controller('createwalletController',
                             $scope.$apply();
                         });
                     }else{
-                        $rootScope.adddataw = profileService.profile.credentials;
+                        $rootScope.$emit('Local/WalletImported', walletId);
+                        $rootScope.createdataw = profileService.profile.credentials;
                     }
                 });
             }, 100);

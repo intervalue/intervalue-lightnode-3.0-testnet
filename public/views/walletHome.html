@@ -362,13 +362,12 @@
                             <div class="adwwtname">{{item.walletName}}
                                 <span class="whpback" ng-show="item.mnemonic || item.mnemonicEncrypted" ng-click="$root.go('backup');index.backwallet=true" translate>Please backup</span>
                             </div>
-                            <div class="adwwtaddr">{{index.shared_address || (home.generatingAddress ? '...' :
-                                home.addr[index.walletId])}}</div>
+                            <div class="adwwtaddr">{{item.walletId}}</div>
                         </div>
-                        <img class="moreimg" src="./img/more.png" />
+                        <img class="moreimg" src="./img/more.png"/>
                     </div>
                     <div class="adwwtnum fontbold size-20">
-                        {{index.ammountTatol}}<span class="greencolor fontbold size-14">INVE</span>
+                        {{}}<span class="greencolor fontbold size-14">INVE</span>
                     </div>
                 </div>
                 <button class="m20b" ng-click="$root.go('create')">创建钱包</button>

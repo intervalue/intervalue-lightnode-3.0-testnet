@@ -8,7 +8,7 @@
         <div class="adwnnum">
             <div class="adwnlogo"></div>
             <div class="adwnnumamt"><span>{{nameW.ammount}}</span>INVE</div>
-            <div class="adwnaddr"><span>{{nameW.addr}}</span><img ng-click="" src="./img/lewm.png"/></div>
+            <div class="adwnaddr"><span>{{nameW.walletid}}</span><img ng-click="" src="./img/lewm.png"/></div>
         </div>
     </div>
     <ul class="adwnlinput">
@@ -31,9 +31,9 @@
             </div>
         </li>
     </ul>
-    <div class="btngroup">
+    <div class="btngroup" ng-controller="preferencesDeleteWalletController as predelte">
         <button class="m20b" ng-show="nameW.mnemonic || nameW.mnemonicEncrypted" ng-click="nameW.gobackup(nameW.name, nameW.addr, nameW.ammount, nameW.walletid, nameW.mnemonic, nameW.mnemonicEncrypted);index.backwaname = true;">备份助记词</button>
-        <button class="awbtn">删除钱包</button>
+        <button class="awbtn" ng-click="predelte.deleteWallet(nameW.walletid)">删除钱包</button>
     </div>
 </div>
 
