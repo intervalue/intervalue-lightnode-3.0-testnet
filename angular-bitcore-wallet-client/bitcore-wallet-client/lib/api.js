@@ -665,15 +665,9 @@ API.prototype.getListOfBalancesOnAddresses = function (cb) {
   });
 };
 
-API.prototype.getTxHistory = function (asset, shared_address, cb) {
+API.prototype.getTxHistory = function (asset, walletId, cb) {
   var Wallet = require('intervaluecore/wallet.js');
-  $.checkState(this.credentials && this.credentials.isComplete());
-  var opts = { asset: asset };
-  if (shared_address)
-    opts.address = shared_address;
-  else
-    opts.wallet = this.credentials.walletId;
-  Wallet.readTransactionHistory(opts, function (arrTransactions) {
+  Wallet.readTransactionHistory(walletId, function (arrTransactions) {
     cb(arrTransactions);
   });
 };

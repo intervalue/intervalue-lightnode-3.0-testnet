@@ -81,9 +81,9 @@
             <a class="opensidebara" ng-click="index.openMenu()"><i class="fi-list size-24"></i></a>
             <div style="position:absolute; width: 100%; left: 0px; top: 15px; text-align: center; color: white; z-index: 1" ng-if="home.isTestnet">{{home.testnetName}}</div>
             <div class="oh">
-                <div class="amount"  ng-swipe-right="index.suspendSwipe()">
+                <div class="amount"  ng-swipe-right="index.suspendSwipe()" ng-init="index.updateTxHistory(3)">
                     <div ng-if="!index.anyOnGoingProcess || 1">
-                        <div ng-show="index.updateError" ng-click='index.openWallet(); index.updateTxHistory()'>
+                        <div ng-show="index.updateError" ng-click='index.openWallet(); index.updateTxHistory(3)'>
                             <span class="size-12 db m10b">{{index.updateError|translate}}</span>
                             <button class="outline white tiny round" translate>Tap to retry</button>
                         </div>

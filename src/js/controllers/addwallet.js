@@ -147,7 +147,7 @@ angular.module('copayApp.controllers').controller('addwalletController',
             //	saveDeviceName();
 
             $timeout(function () {
-                profileService.create({ walletName: self.addwiname, password: self.addwipass, mnemonic: self.importcode  }, function (err) {
+                profileService.create({ walletName: walletName, password: passphrase, mnemonic: mnemonic  }, function (err) {
                     if (err) {
                         self.creatingProfile = false;
                         $log.warn(err);
