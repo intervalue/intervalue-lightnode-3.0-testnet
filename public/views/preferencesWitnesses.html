@@ -11,7 +11,8 @@
 			<div translate>Auto-update the witness list from the hub</div>
 		</li>
 	</ul>
-    <ul class="no-bullet m0" ng-class="{'autoUpdatingWitnessesList' : autoUpdWitnessesList}">
+    <!--<ul class="no-bullet m0" ng-class="{'autoUpdatingWitnessesList' : autoUpdWitnessesList}">-->
+    <ul class="no-bullet m0">
       <li ng-repeat="witness in wc.witnesses" ng-click="wc.edit(witness)">
         <i class="icon-arrow-right3 size-24 right text-gray"></i>
         {{witness}}

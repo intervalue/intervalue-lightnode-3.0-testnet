@@ -28,9 +28,10 @@ angular.module('copayApp.controllers').controller('preferencesWitnessesControlle
     var unwatchAutoUpdWitnessesList = $scope.$watch('autoUpdWitnessesList', function(val){
       autoUpdatingWitnessesList.setAutoUpdate(val);
 
-      if (val) {
-        autoUpdatingWitnessesList.checkChangeWitnesses();
-      }
+      //TODO delete
+      // if (val) {
+      //   autoUpdatingWitnessesList.checkChangeWitnesses();
+      // }
     });
 
     $scope.$on('$destroy', function(){
