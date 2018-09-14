@@ -94,13 +94,13 @@
         <div class="adcpitem">
             <div  class="adcpmdic">
                 <label>授权地址</label>
-                <input  type="text" value={{index.unsignedTransactionIfo}}>
+                <div >{{index.signatureDetlCodeAddr}}</div>
             </div>
         </div>
         <div class="adcpitem">
             <div class="adcpmdic">
                 <label>数据</label>
-                <input  type="text"  value="value">
+                <div >{{index.sinatureRandom}}</div>
             </div>
         </div>
         <button class="button round black expand m0" ng-click="index.shadowstep = 'cold2'">
@@ -116,8 +116,13 @@
 
     <div ng-show="index.shadowstep == 'csend1'" class="text-center" ng-controller="signedTransactionIfoControllers as signedTransaction">
         <form name="signedTransactionIfo" ng-submit="signedTransaction.signedTransaction(signedTransactionIfo)">
-        <input type="text" value="{{index.showUnsignedTransactionIfo}}">
         <input type="hidden" value="{{index.showUnsignedTransactionIfo}}">
+        <div>来自：{{showUnsignedTransactionIfoObj.fromAddress}}</div>
+        <div>到：{{showUnsignedTransactionIfoObj.toAddress}}</div>
+        <div>日期：{{showUnsignedTransactionIfoObj.timestamp}}</div>
+        <div>费用：{{showUnsignedTransactionIfoObj.fee}}</div>
+        <div>Unit：{{}}</div>
+        <div>状态：等待签名</div>
         <button class="button round black expand m0" >
             <span translate>授权签名</span>
         </button>
@@ -125,11 +130,11 @@
     </div>
 
     <div ng-show="index.shadowstep == 'csend2'" class="text-center">
-        <div>签名成功</div>
+        <div>授权成功</div>
         <qrcode size="220"  data="{{index.signedTransactionIfo}}"></qrcode>
         <div>请用热钱包扫描二维码发出交易</div>
         <button class="button round black expand m0" ng-click="index.shadowstep = 'csend2'">
-            <span translate>完成签名</span>
+            <span translate>完成</span>
         </button>
     </div>
 

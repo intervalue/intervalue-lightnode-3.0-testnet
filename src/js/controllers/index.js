@@ -1738,6 +1738,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
      */
     $rootScope.$on('Local/ShadowSignInvitation', function(event,signatureDetlCode){
         self.signatureDetlCodeAddr = signatureDetlCode.addr;
+        self.sinatureRandom = signatureDetlCode.random;
         self.signatureDetlCode = JSON.stringify(signatureDetlCode);
         self.showshadow = true;
         self.shadowstep = 'cold1';
@@ -1787,6 +1788,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
      * 冷钱包扫码后，展示预览交易信息
      */
     $rootScope.$on('Local/showUnsignedTransactionIfo', function(event,showUnsignedTransactionIfo){
+        self.showUnsignedTransactionIfoObj = showUnsignedTransactionIfo;
         self.showUnsignedTransactionIfo = JSON.stringify(showUnsignedTransactionIfo);
         self.showshadow = true;
         self.shadowstep = 'csend1';
