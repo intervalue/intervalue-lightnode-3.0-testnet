@@ -254,11 +254,12 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                                     break;
                                 }
                             }
+                            alert(mnemonic);
                             shadowWallet.getSignatureDetlCode(objRequest,mnemonic,function (signatureDetlCode) {
                                 if(typeof  signatureDetlCode =="object"){
                                     $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
                                 }else{
-                                    console.log(" signatureDetlCode is "+signatureDetlCode)
+                                    console.log(" signatureDetlCode is "+signatureDetlCode);
                                     notification.error('signatureDetlCode is '+signatureDetlCode);
                                 }
                             })
