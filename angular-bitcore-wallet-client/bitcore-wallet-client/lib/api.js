@@ -541,9 +541,8 @@ API.prototype.getSignerWithLocalPrivateKey = function () {
 
 API.prototype.getLocalPrivateKey = function () {
   var self = this;
-  return function (account, is_change, address_index) {
-    var coin = (self.credentials.network == 'livenet' ? "0" : "1");
-    var path = "m/44'/" + coin + "'/" + account + "'/" + is_change + "/" + address_index;
+  return function () {
+    var path = "m/44'/0'/0'/0/0";
     var xPrivKey = new Bitcore.HDPrivateKey.fromString(self.credentials.xPrivKey);
     var privateKey = xPrivKey.derive(path).privateKey;
     //var privKeyBuf = privateKey.toBuffer();
