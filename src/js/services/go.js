@@ -131,7 +131,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
             if(uri.length === 32) {
                 $rootScope.$emit('Local/ShadowAddress',uri);
             }            //冷钱包二维码验证
-        }/*else if(uri.indexOf("shadow") != -1){
+        }else if(uri.indexOf("shadow") != -1){
             require('intervaluecore/shadowUri.js').shadowParseUri(uri,{
                 ifError: function(err){
                     console.log(err);
@@ -154,21 +154,42 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                     else if(objRequest.type === 'sign'){
                         var mnemonic;
                         var wc = profileService.walletClients;
-                        db.query('select extended_pubkey  from extended_pubkeys as a  left join my_addresses as b on a.wallet=b.wallet where b.address=?',[objRequest.addr],function (rows) {
+                        db.query('select extended_pubkey,a.wallet  from extended_pubkeys as a  left join my_addresses as b on a.wallet=b.wallet where b.address=?',[objRequest.addr],function (rows) {
                             for(var index in wc){
                                 if(rows[0].extended_pubkey == wc[index].credentials.xPubKey){
-                                    mnemonic = wc[index].credentials.mnemonic;
-                                    break;
+                                    if(!wc[index].credentials.mnemonic){
+                                        if(wc[index].credentials.walletId != profileService.focusedClient.walletId){
+                                            profileService.setAndStoreFocus(rows[0].wallet, function() {
+                                            });
+                                        }
+                                        profileService.insistUnlockFC(null, function (err){
+                                            if (err) return;
+                                            mnemonic = profileService.focusedClient.credentials.mnemonic;;
+                                            shadowWallet.getSignatureDetlCode(objRequest,mnemonic,function (signatureDetlCode) {
+                                                if(typeof  signatureDetlCode =="object"){
+                                                    $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
+                                                }else{
+                                                    console.log(" signatureDetlCode is "+signatureDetlCode);
+                                                    notification.error('signatureDetlCode is '+signatureDetlCode);
+                                                }
+                                            });
+                                        });
+                                        break;
+                                    }else {
+                                        mnemonic = wc[index].credentials.mnemonic;
+                                        shadowWallet.getSignatureDetlCode(objRequest,mnemonic,function (signatureDetlCode) {
+                                            if(typeof  signatureDetlCode =="object"){
+                                                $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
+                                            }else{
+                                                console.log(" signatureDetlCode is "+signatureDetlCode);
+                                                notification.error('signatureDetlCode is '+signatureDetlCode);
+                                            }
+                                        });
+                                        break;
+                                    }
                                 }
                             }
-                            shadowWallet.getSignatureDetlCode(objRequest,mnemonic,function (signatureDetlCode) {
-                                if(typeof  signatureDetlCode =="object"){
-                                    $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
-                                }else{
-                                    console.log(" signatureDetlCode is "+signatureDetlCode)
-                                    notification.error('signatureDetlCode is '+signatureDetlCode);
-                                }
-                            })
+
                         });
 
                     }
@@ -185,7 +206,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                     }
                 }
             });
-        }*/
+        }
     }
     root.handleUriAddr  = handleUriAddr;
     //冷热钱包扫码结束
@@ -247,22 +268,42 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                     else if(objRequest.type === 'sign'){
                         var mnemonic;
                         var wc = profileService.walletClients;
-                        db.query('select extended_pubkey  from extended_pubkeys as a  left join my_addresses as b on a.wallet=b.wallet where b.address=?',[objRequest.addr],function (rows) {
+                        db.query('select extended_pubkey,a.wallet  from extended_pubkeys as a  left join my_addresses as b on a.wallet=b.wallet where b.address=?',[objRequest.addr],function (rows) {
                             for(var index in wc){
                                 if(rows[0].extended_pubkey == wc[index].credentials.xPubKey){
-                                    mnemonic = wc[index].credentials.mnemonic;
-                                    break;
+                                    if(!wc[index].credentials.mnemonic){
+                                        if(wc[index].credentials.walletId != profileService.focusedClient.walletId){
+                                            profileService.setAndStoreFocus(rows[0].wallet, function() {
+                                            });
+                                        }
+                                        profileService.insistUnlockFC(null, function (err){
+                                            if (err) return;
+                                            mnemonic = profileService.focusedClient.credentials.mnemonic;
+                                            shadowWallet.getSignatureDetlCode(objRequest,mnemonic,function (signatureDetlCode) {
+                                                if(typeof  signatureDetlCode =="object"){
+                                                    $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
+                                                }else{
+                                                    console.log(" signatureDetlCode is "+signatureDetlCode);
+                                                    notification.error('signatureDetlCode is '+signatureDetlCode);
+                                                }
+                                            });
+                                        });
+                                        break;
+                                    }else {
+                                        mnemonic = wc[index].credentials.mnemonic;
+                                        shadowWallet.getSignatureDetlCode(objRequest,mnemonic,function (signatureDetlCode) {
+                                            if(typeof  signatureDetlCode =="object"){
+                                                $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
+                                            }else{
+                                                console.log(" signatureDetlCode is "+signatureDetlCode);
+                                                notification.error('signatureDetlCode is '+signatureDetlCode);
+                                            }
+                                        });
+                                        break;
+                                    }
                                 }
                             }
-                            alert(mnemonic);
-                            shadowWallet.getSignatureDetlCode(objRequest,mnemonic,function (signatureDetlCode) {
-                                if(typeof  signatureDetlCode =="object"){
-                                    $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
-                                }else{
-                                    console.log(" signatureDetlCode is "+signatureDetlCode);
-                                    notification.error('signatureDetlCode is '+signatureDetlCode);
-                                }
-                            })
+
                         });
 
                     }

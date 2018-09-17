@@ -1,14 +1,14 @@
 <div ng-controller="importController as import">
 	<!--导入钱包-导入钱包  start-->
 	<div class="addwcontent addwimportwallet" ng-init="import.showtab = 'tabcold'">
-		<nav class="tab-bar">
+		<nav class="tab-bar" ng-controller="topbarController as topbar">
 			<section class="left-small">
 				<a ng-click="$root.go('walletHome')">
 					<img src="./img/chatbackstate.png" />
 				</a>
 			</section>
-				<section  ng-controller="topbarController as topbar" class="right-small" >
-					<qr-scanner on-scan="topbar.onQrCodeScannedddr(data)" before-scan="topbar.onBeforeScan()" <img src="./img/scan.png"/>></qr-scanner>
+			<section class="right-small">
+				<qr-scanner ng-show="index.isComplete" on-scan="topbar.onQrCodeScannedAddr(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
 			</section>
 			<section class="middle tab-bar-section">
 				<h1 class="title ellipsis" translate>
@@ -63,10 +63,10 @@
 						<div class="adinputimg">
 							<img src="./img/walletpassinput.png">
 						</div>
-						<input type="text" value="{{index.signatureAddr}}" ng-attr-placeholder="{{'Scan or enter your wallet address'|translate}}">
+						<input type="text" name="address"  ng-model=index.signatureAddr ng-attr-placeholder="{{'Scan or enter your wallet address'|translate}}" ng-required valid-address-or-account>
 					</div>
 				</div>
-				<button type="submit" class="m24b m20t" translate>Start importing</button>
+				<button type="submit" class="m24b m20t" ng-disabled="addressForm.$invalid" translate>Start importing</button>
 				<div class="size-12 redcolor" translate>Note: The hot wallet needs a cold wallet to match the signature when sending the transaction. You can use another idle phone, open the flight mode as a cold wallet, import the wallet private key, and match the offline signature.</div>
 			</form>
 			</div>

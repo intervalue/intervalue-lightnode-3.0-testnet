@@ -548,7 +548,7 @@ angular
           }
       })
       .state('importwallet', {
-          url: '/import',
+          url: '/importwallet',
           needProfile: true,
           views: {
               'main': {
@@ -556,6 +556,7 @@ angular
               }
           }
       })
+
       .state('backup', {
           url: '/backup?name&addr&ammount&walletid&mnemonic&mnemonicEncrypted',
           templateUrl: 'views/backup.html',

@@ -29,7 +29,6 @@ function isValidAddress(value) {
   if (arrMatches) {
     return ValidationUtils.isValidAddress(arrMatches[1]);
   }
-
   return ValidationUtils.isValidAddress(value);
 }
 
@@ -53,6 +52,7 @@ angular.module('copayApp.directives')
   ])
 .directive('validAddressOrAccount', ['$rootScope', 'profileService', 'aliasValidationService',
     function($rootScope, profileService, aliasValidationService) {
+
       return {
         require: 'ngModel',
         link: function(scope, elem, attrs, ctrl) {

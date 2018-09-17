@@ -27,7 +27,7 @@
         <div class="text-center"
             ng-click="home.copyAddress(index.shared_address || home.addr[index.walletId])"
             ng-show="home.addr[index.walletId] || home.generatingAddress">
-          <qrcode size="185" version="15"
+          <qrcode size="220"
               data="{{home.protocol}}:{{index.shared_address || home.addr[index.walletId] + '?amount=' + amountInSmallestUnits + asset_param}}"></qrcode>
           <div ng-show="home.generatingAddress" class="coderect">
             <div class="coderectin">
