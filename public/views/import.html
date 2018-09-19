@@ -21,7 +21,7 @@
 				<a href ng-click="import.showtab = 'tabcold'" translate>Plain Wallet</a>
 			</div>
 			<div class="tab-container" ng-class="{'selected': import.showtab == 'tabhot'}">
-				<a href ng-click="import.showtab = 'tabhot'" translate>Hot Wallet</a>
+				<a href ng-click="import.showtab = 'tabhot';index.signatureAddr = ''" translate>Hot Wallet</a>
 			</div>
 		</div>
 		<div class="addwcontentin">
@@ -66,7 +66,7 @@
 						<input type="text" name="address"  ng-model=index.signatureAddr ng-attr-placeholder="{{'Scan or enter your wallet address'|translate}}" ng-required valid-address-or-account>
 					</div>
 				</div>
-				<button type="submit" class="m24b m20t" ng-disabled="addressForm.$invalid" translate>Start importing</button>
+				<button type="submit" class="m24b m20t" ng-disabled="addressForm.$invalid || !index.signatureAddr" translate>Start importing</button>
 				<div class="size-12 redcolor" translate>Note: The hot wallet needs a cold wallet to match the signature when sending the transaction. You can use another idle phone, open the flight mode as a cold wallet, import the wallet private key, and match the offline signature.</div>
 			</form>
 			</div>

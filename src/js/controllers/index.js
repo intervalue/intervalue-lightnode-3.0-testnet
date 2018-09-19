@@ -1727,7 +1727,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 console.log(signatureCodeQRCode);
             }else{
                 self.showshadow = false;
-                alert(signatureCodeQRCode);
             }
             $timeout(function () {
                 $rootScope.$apply();

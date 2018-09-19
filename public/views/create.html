@@ -16,7 +16,7 @@
               Creat Wallet
           </button>
           <!-- 恢复 -->
-          <button ng-click="create.step = 'importwallet'" class="awbtn m15t" translate>
+          <button ng-click="create.step = 'importwallet';index.signatureAddr = ''" class="awbtn m15t" translate>
               Restore Wallet
           </button>
       </div> 
@@ -170,7 +170,7 @@
   </div>
   <!--创建钱包-删除口令  end-->
   <!--导入钱包-导入钱包  start-->
-  <div class="addwcontent addwimportwallet" ng-if="create.step == 'importwallet'">
+  <div class="addwcontent addwimportwallet" ng-if="create.step == 'importwallet'" >
     <nav class="tab-bar" ng-controller="topbarController as topbar">
       <section class="left-small">
         <a ng-click="create.step = 'addorimport'">
@@ -191,7 +191,7 @@
         <a href ng-click="create.showtab = 'tabcold'" translate>Plain Wallet</a>
       </div>
       <div class="tab-container" ng-class="{'selected': create.showtab == 'tabhot'}">
-        <a href ng-click="create.showtab = 'tabhot'" translate>Hot Wallet</a>
+        <a href ng-click="create.showtab = 'tabhot';index.signatureAddr = ''" translate>Hot Wallet</a>
       </div>
     </div>
     <div class="addwcontentin">
@@ -225,18 +225,20 @@
         <button class="m24b m20t" translate ng-disabled="!create.importcode || !create.createwipass || !create.createwirpass" ng-click="create.importw()">Start importing</button>
         <div class="size-12 redcolor" translate>Note: Please be patient while the wallet is recovering. Do not quit the software.</div>
       </div>
-      <div ng-if="create.showtab == 'tabhot'">
+      <div ng-if="create.showtab == 'tabhot'" ng-controller="importwalletController as import">
+        <form name="addressForm" ng-submit="import.generateAddressQRCode()">
         <div translate class="m20b">The hot wallet does not need to import the private key, only the wallet address, for daily viewing of accounts, transactions and acceptance notifications. The private key of large funds is recommended to use cold wallet or hardware wallet management to avoid theft and theft.</div>
         <div class="adinputitem">
           <div class="adinputic">
             <div class="adinputimg">
               <img src="./img/walletpassinput.png">
             </div>
-            <input type="text" ng-model=index.signatureAddr ng-attr-placeholder="{{'Scan or enter your wallet address'|translate}}">
+            <input type="text" name="address"  ng-model=index.signatureAddr ng-attr-placeholder="{{'Scan or enter your wallet address'|translate}}" >
           </div>
         </div>
-        <button class="m24b m20t" translate>Start importing</button>
+          <button type="submit" class="m24b m20t" ng-disabled="!index.signatureAddr" translate>Start importing</button>
         <div class="size-12 redcolor" translate>Note: The hot wallet needs a cold wallet to match the signature when sending the transaction. You can use another idle phone, open the flight mode as a cold wallet, import the wallet private key, and match the offline signature.</div>
+        </form>
       </div>
     </div>
   </div>
