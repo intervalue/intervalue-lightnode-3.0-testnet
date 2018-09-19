@@ -1,24 +1,25 @@
 <div ng-controller="createwalletController as create" ng-init="create.step = 'addorimport';">
   <!--选择导入钱包还是创建钱包  start-->
-  <div class="addwcontent" ng-if="create.step == 'addorimport'">
-    <div class="addwcontentin">
-      <ul class="no-bullet manage size-12">
-        <li>
-          <a title="Create new wallet" ng-click="create.step = 'addwallet'">
-            <i class="fi-plus circle plus-fixed"></i>
-            <i class="icon-arrow-right3 size-18 right m20t"></i>
-            <span translate>Create new wallet</span>
-          </a>
-        </li>
-        <li>
-          <a title="Import wallet" ng-click="create.step = 'importwallet'">
-            <i class="icon-download circle"></i>
-            <i class="icon-arrow-right3 size-18 right m20t"></i>
-            <span translate>Import wallet </span>
-          </a>
-        </li>
-      </ul>
-    </div>
+  <div class="welcomepage" ng-if="create.step == 'addorimport'">
+      <!-- 图标 -->
+      <div class="welcometext">
+          <img src="./img/welcomeinve.png" >
+          <div>
+            <p class="size-13 m0 text-white" translate>Your wallet will be created on this device,</p>
+            <p class="size-13 m0 text-white" translate>keep it safe.  See your backup options in the Settings menu.</p>
+            <p class="size-13 m0 text-white" translate>Also in the Settings menu, you will find security options such as setting a password.</p>
+          </div>
+      </div>
+      <div class="twowayin">
+          <!-- 创建 -->
+          <button ng-click="create.step = 'addwallet'" translate>
+              Creat Wallet
+          </button>
+          <!-- 恢复 -->
+          <button ng-click="create.step = 'importwallet'" class="awbtn m15t" translate>
+              Restore Wallet
+          </button>
+      </div> 
   </div>
   <!--选择导入钱包还是创建钱包  end-->
   <!--创建钱包-创建钱包信息  start-->
