@@ -23,7 +23,7 @@ angular.module('copayApp.services').factory('txFormatService', function (profile
 
   root.processTx = function (tx) {
     if (!tx) return;
-    console.log(JSON.stringify(tx));
+    //console.log(JSON.stringify(tx));
     var outputs = tx.outputs ? tx.outputs.length : 0;
     if (outputs > 1 && tx.action != 'received') {
       tx.hasMultiplesOutputs = true;

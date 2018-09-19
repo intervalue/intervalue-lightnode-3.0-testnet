@@ -100,7 +100,7 @@
                                 <span class="whpback" ng-show="index.needsBackupa" ng-click="$root.go('backup');index.backhome = true;" translate>Please backup</span>
                                 <img class="whewm" ng-click="$root.go('receive')" src="./img/lewm.png"/>
                             </div>
-                            <div class="whamount"><div>{{ (index.alias || index.walletName)}}</div>{{index.ammountTatol}} INVE</div>
+                            <div class="whamount"><div></div>{{index.ammountTatol}} INVE</div>
                         </div>
                         <!--former carousel end...-->
                     </div>
@@ -369,7 +369,7 @@
                         {{item.stables}}<span class="greencolor fontbold size-14">INVE</span>
                     </div>
                 </div>
-                <button class="m20b" ng-click="$root.go('create')">创建钱包</button>
+                <button class="m20b" ng-click="$root.go('addwallet')">创建钱包</button>
                 <button class="awbtn" ng-click="$root.go('import')">导入钱包</button>
                 <!--<button ng-click="index.generatePubkey(index.shared_address || home.addr[index.walletId])">冷钱包验证码</button>-->
             </div>

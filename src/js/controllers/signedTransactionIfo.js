@@ -4,7 +4,7 @@ var shadowWallet = require('intervaluecore/shadowWallet');
 angular.module('copayApp.controllers').controller('signedTransactionIfoControllers',
     function($scope, $rootScope, $timeout,go,profileService) {
         var self = this;
-        var mnemonic ;
+        var xPrivKey ;
 
         /**
          * 冷钱包完成授权签名
@@ -17,22 +17,43 @@ angular.module('copayApp.controllers').controller('signedTransactionIfoControlle
                 if(rows.length > 0){
                     for(var index in wc){
                         if(rows[0].extended_pubkey == wc[index].credentials.xPubKey){
-                            mnemonic = wc[index].credentials.mnemonic;
-                            break;
+                            if(!wc[index].credentials.mnemonic){
+                                if(wc[index].credentials.walletId != profileService.focusedClient.walletId){
+                                    profileService.setAndStoreFocus(rows[0].wallet, function() {
+                                    });
+                                }
+                                profileService.insistUnlockFC(null, function (err){
+                                    if (err) return;
+                                    xPrivKey = profileService.focusedClient.credentials.xPrivKey;
+                                    shadowWallet.signTradingUnit(obj,xPrivKey,function (objrequest) {
+                                        if(typeof objrequest == "object"){
+                                            $rootScope.$emit('Local/signedTransactionIfo', objrequest);
+                                        }else {
+                                            console.log("error: "+objrequest);
+                                            return self.setSendError(objrequest);
+                                        }
+                                    });
+                                });
+                                break;
+                            }else {
+                                xPrivKey = wc[index].credentials.xPrivKey;
+                                shadowWallet.signTradingUnit(obj,xPrivKey,function (objrequest) {
+                                    if(typeof objrequest == "object"){
+                                        $rootScope.$emit('Local/signedTransactionIfo', objrequest);
+                                    }else {
+                                        console.log("error: "+objrequest);
+                                        return self.setSendError(objrequest);
+                                    }
+                                });
+                                break;
+                            }
                         }
                     }
                 }else {
                     console.log("error not find address ");
                     return self.setSendError("error not find address");
                 }
-                shadowWallet.signTradingUnit(obj,mnemonic,function (objrequest) {
-                    if(typeof objrequest == "object"){
-                        $rootScope.$emit('Local/signedTransactionIfo', objrequest);
-                    }else {
-                        console.log("error: "+objrequest);
-                        return self.setSendError(objrequest);
-                    }
-                });
+
             });
         };
 

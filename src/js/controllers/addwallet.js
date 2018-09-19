@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('addwalletController',
-    function ($rootScope, $scope, $timeout, storageService, notification, profileService, bwcService, $log) {
+    function ($rootScope, $scope, $timeout, storageService, notification, profileService, bwcService, $log,gettext,go) {
         var self = this;
+        var successMsg = gettext('Backup words deleted');
         self.addwname = '';
         self.addwpass = '';
         self.addwrpass = '';
@@ -139,7 +140,7 @@ angular.module('copayApp.controllers').controller('addwalletController',
 
         };
         // 删除口令 修改后
-        self.delteConfirm = function (walletName, passphrase, mnemonic) {
+        self.addWallet = function (walletName, passphrase, mnemonic,del) {
             mnemonic = mnemonic.trim();
             if (self.creatingProfile)
                 return console.log('already creating profile');
@@ -147,7 +148,7 @@ angular.module('copayApp.controllers').controller('addwalletController',
             //	saveDeviceName();
 
             $timeout(function () {
-                profileService.create({ walletName: walletName, password: passphrase, mnemonic: mnemonic  }, function (err) {
+                profileService.createWallet({ name: walletName, password: passphrase, mnemonic: mnemonic,m:1,n:1,networkName:"livenet",cosigners:[],isSinglecreateress:true  }, function (err,walletId) {
                     if (err) {
                         self.creatingProfile = false;
                         $log.warn(err);
@@ -159,20 +160,30 @@ angular.module('copayApp.controllers').controller('addwalletController',
                             self.create(noWallet);
                         }, 3000);*/
                     }
-                    else {
-                        $rootScope.adddataw = profileService.profile.credentials;
+                else if(del){
+                        //$rootScope.$emit('Local/WalletImported', walletId);
+                        var fc = profileService.focusedClient;
+                        fc.clearMnemonic();
+                        profileService.clearMnemonic(function() {
+                            self.deleted = true;
+                            notification.success(successMsg);
+                            go.walletHome();
+                        });
+
+                    }else{
+                        $rootScope.$emit('Local/WalletImported', walletId);
                     }
                 });
             }, 100);
         };
-    //import wallet
+        //import wallet
         self.importw = function(){
             if (self.creatingProfile)
                 return console.log('already creating profile');
             self.creatingProfile = true;
 
             $timeout(function () {
-                profileService.create({ walletName: self.addwiname, password: self.addwipass, mnemonic: self.importcode }, function (err) {
+                profileService.createWallet({ name: self.addwiname, password: self.addwipass, mnemonic: self.importcode,m:1,n:1,networkName:"livenet",cosigners:[],isSinglecreateress:true }, function (err,walletId) {
                     if(err){
                         self.creatingProfile = false;
                         $log.warn(err);
@@ -181,7 +192,7 @@ angular.module('copayApp.controllers').controller('addwalletController',
                             $scope.$apply();
                         });
                     }else{
-                        $rootScope.adddataw = profileService.profile.credentials;
+                        $rootScope.$emit('Local/WalletImported', walletId);
                     }
                 });
             }, 100);

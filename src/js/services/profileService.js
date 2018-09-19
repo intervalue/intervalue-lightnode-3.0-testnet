@@ -119,7 +119,15 @@ angular.module('copayApp.services')
         return;
 
       var client = bwcService.getClient(JSON.stringify(credentials));
-
+        for(let item in root.profile.credentials){
+          if(root.profile.credentials[item].walletId ==client.credentials.walletId ){
+              client.credentials.xPrivKey = root.profile.credentials[item].xPrivKey;
+              client.credentials.mnemonic = root.profile.credentials[item].mnemonic;
+              client.credentials.xPrivKeyEncrypted = root.profile.credentials[item].xPrivKeyEncrypted;
+              client.credentials.mnemonicEncrypted = root.profile.credentials[item].mnemonicEncrypted;
+              break;
+          }
+        }
       /*client.credentials.xPrivKey = root.profile.xPrivKey;
       client.credentials.mnemonic = root.profile.mnemonic;
       client.credentials.xPrivKeyEncrypted = root.profile.xPrivKeyEncrypted;
@@ -635,10 +643,15 @@ angular.module('copayApp.services')
     };
 
     root.clearMnemonic = function (cb) {
+      console.log(root.profile);
       delete root.profile.mnemonic;
       delete root.profile.mnemonicEncrypted;
-      for (var wid in root.walletClients)
+      for(let item in root.profile.credentials)
+          delete  root.profile.credentials[item].mnemonicEncrypted
+      for (var wid in root.walletClients){}
         root.walletClients[wid].clearMnemonic();
+      console.log("tttttttttttttttttttttttttt");
+      console.log(root.profile);
       storageService.storeProfile(root.profile, cb);
     };
 

@@ -28,7 +28,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.verificationQRCode = '';
     self.signatureAddr = '';
     self.shadowstep = 'hot1';
-    self.needsBackupa = true;
+    self.needsBackupa = false;
     self.backwallet = false;
     self.backhome = false;
     self.backwaname = false;
@@ -1195,6 +1195,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     self.updateLocalTxHistory = function (client, cb) {
         var walletId = client.credentials.walletId;
+        if(client.credentials.mnemonicEncrypted || client.credentials.mnemonic){
+            self.needsBackupa = true;
+        }else {
+            self.needsBackupa = false;
+        }
         if (self.arrBalances.length === 0)
             return console.log('updateLocalTxHistory: no balances yet');
         breadcrumbs.add('index: ' + self.assetIndex + '; balances: ' + JSON.stringify(self.arrBalances));

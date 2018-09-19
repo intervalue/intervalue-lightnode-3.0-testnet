@@ -86,6 +86,15 @@ angular
           }
         }
       })
+        .state('create', {
+            url: '/create',
+            needProfile: false,
+            views: {
+                'main': {
+                    templateUrl: 'views/create.html'
+                }
+            }
+        })
       .state('addwallet', {
           url: '/addwallet.html',
           needProfile: false,
@@ -119,17 +128,7 @@ angular
         }
       })
 
-      .state('create', {
-        url: '/create',
-        templateUrl: 'views/create.html',
-        needProfile: true,
-        modal: true,
-        views: {
-          'main': {
-            templateUrl: 'views/create.html'
-          }
-        }
-      })
+
       .state('copayers', {
         url: '/copayers',
         needProfile: true,
@@ -655,7 +654,7 @@ angular
           if (err) {
             if (err.message && err.message.match('NOPROFILE')) {
               $log.debug('No profile... redirecting');
-              return $state.transitionTo('addwallet');
+              return $state.transitionTo('create');
             } else if (err.message && err.message.match('NONAGREEDDISCLAIMER')) {
               $log.debug('Display disclaimer... redirecting');
               return $state.transitionTo('disclaimer');
@@ -664,8 +663,7 @@ angular
             }
           } else {
             $log.debug('Profile loaded ... Starting UX.');
-            console.log(JSON.stringify((profileService.profile.credentials)));
-            $rootScope.adddataw = profileService.profile.credentials;
+            $rootScope.createdataw = profileService.profile.credentials;
             return $state.transitionTo(toState.name || toState, toParams);
           }
         });

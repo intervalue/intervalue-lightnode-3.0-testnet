@@ -1,31 +1,9 @@
-<div ng-controller="addwalletController as addw" ng-init="addw.step = 'addorimport';">
-    <!--选择导入钱包还是创建钱包  start-->
-    <div class="addwcontent" ng-if="addw.step == 'addorimport'">
-        <div class="addwcontentin">
-            <ul class="no-bullet manage size-12">
-                <li>
-                    <a title="Create new wallet" ng-click="addw.step = 'addwallet'">
-                        <i class="fi-plus circle plus-fixed"></i>
-                        <i class="icon-arrow-right3 size-18 right m20t"></i>
-                        <span translate>Create new wallet</span>
-                    </a>
-                </li>
-                <li>
-                    <a title="Import wallet" ng-click="addw.step = 'importwallet'">
-                        <i class="icon-download circle"></i>
-                        <i class="icon-arrow-right3 size-18 right m20t"></i>
-                        <span translate>Import wallet </span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <!--选择导入钱包还是创建钱包  end-->
+<div ng-controller="addwalletController as addw" ng-init="addw.step = 'addwallet'">
     <!--创建钱包-创建钱包信息  start-->
     <div class="addwcontent" ng-if="addw.step == 'addwallet'">
         <nav class="tab-bar">
             <section class="left-small">
-                <a ng-click="addw.step = 'addorimport'">
+                <a ng-click="$root.go('walletHome')">
                     <img src="./img/chatbackstate.png" />
                 </a>
             </section>
@@ -70,7 +48,7 @@
                     <input type="text" ng-model="addw.addwrpass" ng-attr-placeholder="{{'Repeat password'|translate}}">
                 </div>
             </div>
-            <button class="m40t" ng-click="addw.passequal()" ng-disabled="!addw.addwname || !addw.addwpass || !addw.addwrpass" translate>Next</button>
+            <button class="m40t m24b" ng-click="addw.passequal()" ng-disabled="!addw.addwname || !addw.addwpass || !addw.addwrpass" translate>Creat wallet</button>
         </div>
     </div>
     <!--创建钱包-创建钱包信息  end-->
@@ -149,7 +127,7 @@
             </div>
             <p class="center redcolor m35b">Your password is correct. To ensure the security of your wallet, we recommend that you delete your password.</p>
             <button class="m20b" ng-click="addw.showconfirm = true;" translate>Delete mnemonic</button>
-            <button class="awbtn" ng-click="addw.delteConfirm(addw.addwname, addw.addwpass, addw.mnemonic);" translate>Skip</button>
+            <button class="awbtn" ng-click="addw.addWallet(addw.addwname, addw.addwpass, addw.mnemonic);" translate>Skip</button>
             <div ng-if="addw.showconfirm" class="popconfirm">
                 <div class="popmask" ng-click="addw.showconfirm = false;"></div>
                 <div class="popcontent">
@@ -159,87 +137,13 @@
                     </div>
                     <p class="poptips p25h" translate>This will completely remove the mnemonics from the app and it will not be recoverable. Please reconfirm that you have backed up your mnemonics to a safe place.</p>
                     <div class="p25h popbutton">
-                        <button ng-click="addw.delteConfirm(addw.addwname, addw.addwpass, addw.mnemonic);">确认</button>
-                        <button class="awbtn" ng-click="addw.showconfirm = false;">取消</button>
+                        <button ng-click="addw.addWallet(addw.addwname, addw.addwpass, addw.mnemonic,true);">确认</button>
+                        <button class="awbtn" ng-click="addw.addWallet(addw.addwname, addw.addwpass, addw.mnemonic);">取消</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!--创建钱包-删除口令  end-->
-    <!--导入钱包-导入钱包  start-->
-    <div class="addwcontent addwimportwallet" ng-if="addw.step == 'importwallet'">
-        <nav class="tab-bar">
-            <section class="left-small">
-                <a ng-click="addw.step = 'addorimport'">
-                    <img src="./img/chatbackstate.png" />
-                </a>
-            </section>
-            <section class="right-small">
-                <a>
-                    <img src="./img/scan.png"/>
-                </a>
-            </section>
-            <section class="middle tab-bar-section">
-                <h1 class="title ellipsis" translate>
-                    Import wallet
-                </h1>
-            </section>
-        </nav>
-        <div class="importtab">
-            <div class="tab-container" ng-class="{'selected': addw.showtab == 'tabcold'}">
-                <a href ng-click="addw.showtab = 'tabcold'" translate>Plain Wallet</a>
-            </div>
-            <div class="tab-container" ng-class="{'selected': addw.showtab == 'tabhot'}">
-                <a href ng-click="addw.showtab = 'tabhot'" translate>Hot Wallet</a>
-            </div>
-        </div>
-        <div class="addwcontentin">
-            <div ng-if="addw.showtab == 'tabcold'">
-                <div translate>Wallet Seed :</div>
-                <textarea placeholder="{{'Enter your mnemonic, separated by spaces'|translate}}" ng-model="addw.importcode"></textarea>
-                <div class="adinputitem">
-                    <div class="adinputic">
-                        <div class="adinputimg">
-                            <img src="./img/walletnameinput.png">
-                        </div>
-                        <input type="text" ng-model="addw.addwiname" ng-attr-placeholder="{{'Wallet name'|translate}}">
-                    </div>
-                </div>
-                <div class="adinputitem">
-                    <div class="adinputic">
-                        <div class="adinputimg">
-                            <img src="./img/walletpassirinput.png">
-                        </div>
-                        <input type="text" ng-model="addw.addwipass" ng-attr-placeholder="{{'Password'|translate}}">
-                    </div>
-                </div>
-                <div class="adinputitem">
-                    <div class="adinputic">
-                        <div class="adinputimg">
-                            <img src="./img/walletpassinput.png">
-                        </div>
-                        <input type="text" ng-model="addw.addwirpass" ng-attr-placeholder="{{'Repeat password'|translate}}">
-                    </div>
-                </div>
-                <button class="m24b m20t" translate ng-disabled="!addw.importcode || !addw.addwipass || !addw.addwirpass" ng-click="addw.importw()">Start importing</button>
-                <div class="size-12 redcolor" translate>Note: Please be patient while the wallet is recovering. Do not quit the software.</div>
-            </div>
-            <div ng-if="addw.showtab == 'tabhot'">
-                <div translate class="m20b">The hot wallet does not need to import the private key, only the wallet address, for daily viewing of accounts, transactions and acceptance notifications. The private key of large funds is recommended to use cold wallet or hardware wallet management to avoid theft and theft.</div>
-                <div class="adinputitem">
-                    <div class="adinputic">
-                        <div class="adinputimg">
-                            <img src="./img/walletpassinput.png">
-                        </div>
-                        <input type="text" ng-model="addw.addwpass" ng-attr-placeholder="{{'Scan or enter your wallet address'|translate}}">
-                    </div>
-                </div>
-                <button class="m24b m20t" translate>Start importing</button>
-                <div class="size-12 redcolor" translate>Note: The hot wallet needs a cold wallet to match the signature when sending the transaction. You can use another idle phone, open the flight mode as a cold wallet, import the wallet private key, and match the offline signature.</div>
-            </div>
-        </div>
-    </div>
-    <!--导入钱包-导入钱包  end-->
 </div>
 
