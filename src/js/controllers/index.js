@@ -1712,9 +1712,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
      */
     $rootScope.$on('Local/ShadowAddress', function(event,address){
         self.signatureAddr = address;
-        $timeout(function () {
-            $rootScope.$apply();
-        });
     });
 
     /**

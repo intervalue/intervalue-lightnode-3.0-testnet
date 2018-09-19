@@ -72,7 +72,7 @@
             <p class="center redcolor m28b" translate>Please do not take a screenshot and copy your wallet password.</p>
             <p class="center size-11" translate>The password is used to restore the wallet, write it accurately on paper, and save it where you only know it.</p>
             <div class="addwscbox m28b">
-                <span ng-repeat="item in addw.showcodes">{{item.str}}</span>
+                <span ng-repeat="item in addw.showcodes track by $index">{{item.str}}</span>
             </div>
             <button ng-click="addw.step = 'selectcode'">下一步</button>
         </div>
@@ -99,10 +99,10 @@
             <p ng-show="addw.showcodeerr">口令不正确</p>
             <div>
                 <div class="addwslcbox m24b" ng-click="addw.minuswordf($event)">
-                    <span ng-repeat="item in addw.chosenWords" id="{{item.id}}" >{{item.str}}</span>
+                    <span ng-repeat="item in addw.chosenWords track by $index" id="{{item.id}}" >{{item.str}}</span>
                 </div>
                 <div class="wordsbox m12b" ng-click="addw.addwordf($event)">
-                    <button ng-repeat="item in addw.showrandamcodes" id="{{item.id}}" ng-disabled="item.chosen">{{item.str}}</button>
+                    <button ng-repeat="item in addw.showrandamcodes track by $index" id="{{item.id}}" ng-disabled="item.chosen">{{item.str}}</button>
                 </div>
             </div>
             <button ng-click="addw.step = 'showcode'" translate>Last step</button>
@@ -123,7 +123,7 @@
             <img class="warnbigimg" src="./img/warnbig.png" />
             <p class="center redcolor m28b" translate>Confirm your mnemonic</p>
             <div class="addwslcbox m15b">
-                <span ng-repeat="item in addw.showcodes" id="{{item.id}}" >{{item.str}}</span>
+                <span ng-repeat="item in addw.showcodes track by $index" id="{{item.id}}" >{{item.str}}</span>
             </div>
             <p class="center redcolor m35b">Your password is correct. To ensure the security of your wallet, we recommend that you delete your password.</p>
             <button class="m20b" ng-click="addw.showconfirm = true;" translate>Delete mnemonic</button>

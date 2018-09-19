@@ -126,7 +126,6 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
 
     //冷热钱包扫码开始
     function handleUriAddr(uri) {
-        alert(uri);
         if(uri.indexOf("InterValue-3.0-testnet:") != -1){
             uri = uri.replace('InterValue-3.0-testnet:','');
             if(uri.length === 32) {

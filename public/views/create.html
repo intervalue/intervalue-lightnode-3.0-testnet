@@ -96,7 +96,7 @@
       <p class="center redcolor m28b" translate>Please do not take a screenshot and copy your wallet password.</p>
       <p class="center size-11" translate>The password is used to restore the wallet, write it accurately on paper, and save it where you only know it.</p>
       <div class="addwscbox m28b">
-        <span ng-repeat="item in create.showcodes">{{item.str}}</span>
+        <span ng-repeat="item in create.showcodes track by $index">{{item.str}}</span>
       </div>
       <button ng-click="create.step = 'selectcode'">下一步</button>
     </div>
@@ -123,10 +123,10 @@
       <p ng-show="create.showcodeerr">口令不正确</p>
       <div>
         <div class="addwslcbox m24b" ng-click="create.minuswordf($event)">
-          <span ng-repeat="item in create.chosenWords" id="{{item.id}}" >{{item.str}}</span>
+          <span ng-repeat="item in create.chosenWords track by $index" id="{{item.id}}" >{{item.str}}</span>
         </div>
         <div class="wordsbox m12b" ng-click="create.createwordf($event)">
-          <button ng-repeat="item in create.showrandamcodes" id="{{item.id}}" ng-disabled="item.chosen">{{item.str}}</button>
+          <button ng-repeat="item in create.showrandamcodes track by $index" id="{{item.id}}" ng-disabled="item.chosen">{{item.str}}</button>
         </div>
       </div>
       <button ng-click="create.step = 'showcode'" translate>Last step</button>
@@ -147,7 +147,7 @@
       <img class="warnbigimg" src="./img/warnbig.png" />
       <p class="center redcolor m28b" translate>Confirm your mnemonic</p>
       <div class="addwslcbox m15b">
-        <span ng-repeat="item in create.showcodes" id="{{item.id}}" >{{item.str}}</span>
+        <span ng-repeat="item in create.showcodes track by $index" id="{{item.id}}" >{{item.str}}</span>
       </div>
       <p class="center redcolor m35b">Your password is correct. To ensure the security of your wallet, we recommend that you delete your password.</p>
       <button class="m20b" ng-click="create.showconfirm = true;" translate>Delete mnemonic</button>
@@ -173,12 +173,12 @@
   <div class="addwcontent addwimportwallet" ng-if="create.step == 'importwallet'">
     <nav class="tab-bar" ng-controller="topbarController as topbar">
       <section class="left-small">
-        <a ng-click="$root.go('create')">
+        <a ng-click="create.step = 'addorimport'">
           <img src="./img/chatbackstate.png" />
         </a>
       </section>
       <section class="right-small">
-        <qr-scanner ng-show="index.isComplete" on-scan="topbar.onQrCodeScannedAddr(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
+        <qr-scanner  on-scan="topbar.onQrCodeScannedAddr(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
       </section>
       <section class="middle tab-bar-section">
         <h1 class="title ellipsis" translate>
@@ -232,7 +232,7 @@
             <div class="adinputimg">
               <img src="./img/walletpassinput.png">
             </div>
-            <input type="text" ng-model="create.createwpass" ng-attr-placeholder="{{'Scan or enter your wallet address'|translate}}">
+            <input type="text" ng-model=index.signatureAddr ng-attr-placeholder="{{'Scan or enter your wallet address'|translate}}">
           </div>
         </div>
         <button class="m24b m20t" translate>Start importing</button>
