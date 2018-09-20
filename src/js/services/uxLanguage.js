@@ -6,7 +6,7 @@ angular.module('copayApp.services')
     root.availableLanguages = [{
       name: 'English',
       isoCode: 'en',
-    }, {
+   /* }, {
       name: 'Français',
       isoCode: 'fr_FR',
     }, {
@@ -63,12 +63,12 @@ angular.module('copayApp.services')
     }, {
       name: '日本語',
       isoCode: 'ja_jp',
-      useIdeograms: true,
+      useIdeograms: true,*/
     }, {
       name: '中文',
       isoCode: 'zh_CN',
       useIdeograms: true,
-    }, {
+    /*}, {
       name: '한국어',
       isoCode: 'ko_KR',
     }, {
@@ -79,7 +79,7 @@ angular.module('copayApp.services')
       isoCode: 'id_ID',
     }, {
       name: 'Türk',
-      isoCode: 'tr_TR',
+      isoCode: 'tr_TR',*/
     }];
 
     root.currentLanguage = null;
