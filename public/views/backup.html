@@ -57,5 +57,19 @@
                 <span translate>Delete your wallet password</span>
             </button>
         </div>
-  </div>
+    </div>
+    <div ng-if="wordbacksC.showconfirm" class="popconfirm">
+        <div class="popmask" ng-click="wordbacksC.showconfirm = false;"></div>
+        <div class="popcontent">
+            <div class="fleximgtextc m20b p25h">
+                <img src="./img/qdeletecode.png">
+                <div translate class="size-16 redcolor">Are you sure you want to delete the mnemonic?</div>
+            </div>
+            <p class="poptips p25h" translate>This will completely remove the mnemonics from the app and it will not be recoverable. Please reconfirm that you have backed up your mnemonics to a safe place.</p>
+            <div class="p25h popbutton">
+                <button ng-click="wordbacksC.deleteyes();">确认</button>
+                <button class="awbtn" ng-click="wordbacksC.showconfirm = false;">取消</button>
+            </div>
+        </div>
+    </div>
 </div>

@@ -48,7 +48,8 @@
                     <input type="text" ng-model="addw.addwrpass" ng-attr-placeholder="{{'Repeat password'|translate}}">
                 </div>
             </div>
-            <button class="m40t m24b" ng-click="addw.passequal()" ng-disabled="!addw.addwname || !addw.addwpass || !addw.addwrpass" translate>Creat wallet</button>
+            <button class="m40t m15b" ng-click="addw.passequal()" ng-disabled="!addw.addwname || !addw.addwpass || !addw.addwrpass" translate>Creat wallet</button>
+            <button class="awbtn m15b" ng-click="$root.go('import');index.signatureAddr = '';">导入钱包</button>
         </div>
     </div>
     <!--创建钱包-创建钱包信息  end-->
