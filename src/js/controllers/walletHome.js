@@ -1200,13 +1200,13 @@ angular.module('copayApp.controllers')
 							}
 							var binding = self.binding;
 							self.resetForm();
-							$rootScope.$emit("NewOutgoingTx");
-							if (original_address){
+							//$rootScope.$emit("NewOutgoingTx");
+							/*if (original_address){
 								var db = require('intervaluecore/db.js');
 								db.query("INSERT INTO original_addresses (unit, address, original_address) VALUES(?,?,?)", 
 									[unit, to_address, original_address]);
-							}
-							if (recipient_device_address) { // show payment in chat window
+							}*/
+							/*if (recipient_device_address) { // show payment in chat window
 								eventBus.emit('sent_payment', recipient_device_address, amount || 'all', asset, !!binding);
 								if (binding && binding.reverseAmount) { // create a request for reverse payment
 									if (!my_address)
@@ -1223,17 +1223,18 @@ angular.module('copayApp.controllers')
 									// issue next address to avoid reusing the reverse payment address
 									if (!fc.isSingleAddress) walletDefinedByKeys.issueNextAddress(fc.credentials.walletId, 0, function() {});
 								}
-							}
-							else if (Object.keys(mnemonics).length) {
+							}*/
+							/*else if (Object.keys(mnemonics).length) {
 								var mnemonic = mnemonics[to_address];
 								if (opts.send_all && asset === "base")
 									amount = assetInfo.stable;
 
 								self.openShareTextcoinModal(isEmail ? address.slice("textcoin:".length) : null, mnemonic, amount, asset, false, filePath);
 								$rootScope.$emit('Local/SetTab', 'history');
-							}
-							else // redirect to history
-								$rootScope.$emit('Local/SetTab', 'history');
+							}*/
+							//else  redirect to history
+							$rootScope.$emit('Local/paymentDone');
+                            //$rootScope.$emit('Local/TabChanged', 'history');
 						});
 
 					}
