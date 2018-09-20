@@ -643,15 +643,19 @@ angular.module('copayApp.services')
     };
 
     root.clearMnemonic = function (cb) {
-      console.log(root.profile);
       delete root.profile.mnemonic;
       delete root.profile.mnemonicEncrypted;
-      for(let item in root.profile.credentials)
-          delete  root.profile.credentials[item].mnemonicEncrypted
-      for (var wid in root.walletClients){}
-        root.walletClients[wid].clearMnemonic();
-      console.log("tttttttttttttttttttttttttt");
-      console.log(root.profile);
+      for(let item in root.profile.credentials){
+        if(root.focusedClient.credentials.walletId == root.profile.credentials[item].walletId){
+            delete  root.profile.credentials[item].mnemonicEncrypted;
+        }
+
+      }
+      /*for (var wid in root.walletClients){
+        alert(wid);
+          root.walletClients[wid].clearMnemonic();
+      }*/
+
       storageService.storeProfile(root.profile, cb);
     };
 
