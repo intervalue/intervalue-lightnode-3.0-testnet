@@ -556,7 +556,6 @@ API.prototype.sendMultiPayment = function (opts, cb) {
   var self = this;
   var Wallet = require('intervaluecore/wallet.js');
   var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
-
   if(!opts.isHot){
       opts.signWithLocalPrivateKey = this.getSignerWithLocalPrivateKey();
       opts.getLocalPrivateKey = this.getLocalPrivateKey();

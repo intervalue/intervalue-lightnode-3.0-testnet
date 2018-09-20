@@ -1049,7 +1049,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         if (!self.shared_address)
             self.arrMainWalletBalances = self.arrBalances;
         if (isCordova) wallet.showCompleteClient();
-        console.log('========= setBalance done, balances: ' + JSON.stringify(self.arrBalances));
+        //console.log('========= setBalance done, balances: ' + JSON.stringify(self.arrBalances));
         breadcrumbs.add('setBalance done, balances: ' + JSON.stringify(self.arrBalances));
 
         /*
@@ -1294,6 +1294,15 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.updateTxHistory = lodash.debounce(function (retry) {
         self.updateHistory(retry);
     }, 1000);
+
+    /**
+     * 交易完成后跳转首页
+     * @param obj
+     */
+    $rootScope.$on('Local/paymentDone', function(event){
+        self.updateHistory(3);
+        $rootScope.$emit('Local/SetTab', 'walletHome');
+    });
 
     //  self.throttledUpdateHistory = lodash.throttle(function() {
     //    self.updateHistory();
