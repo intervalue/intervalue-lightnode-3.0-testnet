@@ -100,7 +100,7 @@
                                 <span class="whpback" ng-show="index.needsBackupa" ng-click="$root.go('backup');index.backhome = true;" translate>Please backup</span>
                                 <img class="whewm" ng-click="$root.go('receive')" src="./img/lewm.png"/>
                             </div>
-                            <div class="whamount"><div></div>{{index.ammountTatol}} INVE</div>
+                            <div class="whamount"><div>{{index.ammountTatol}}</div> INVE</div>
                         </div>
                         <!--former carousel end...-->
                     </div>
@@ -132,18 +132,17 @@
                 history
                 -->
                 <div  class="history" ng-init="index.updateTxHistory(3)">
-                    <div class="row m20t" ng-show="!index.txHistory[0] && !index.updatingTxHistory[index.walletId]">
-                    <div class="large-12 columns">
-                        <div class="oh text-center">
-                        <span ng-show="index.txHistoryError" ng-click='index.updateTxHistory(3)'>
-                            <p class="size-12 m10b db text-gray" translate>Could not fetch transaction history</p>
-                            <button class="outline round light-gray tiny" translate>Tap to retry</button>
-                        </span>
-                        <span ng-if="!index.txHistoryError" translate>
-                            No transactions yet
-                        </span>
+                    <div ng-show="!index.txHistory[0] && !index.updatingTxHistory[index.walletId]">
+                        <div class="text-center">
+                            <div class="p15h m24t" ng-show="index.txHistoryError" ng-click='index.updateTxHistory(3)'>
+                                <p class="graytext m40b" translate>Could not fetch transaction history</p>
+                                <button translate>Tap to retry</button>
+                            </div>
+                            <div class="m40t" ng-if="!index.txHistoryError" translate>
+                                <img src="./img/notx.png" />
+                                <div class="graytext m24t">No transactions yet</div>
+                            </div>
                         </div>
-                    </div>
                     </div>
                     <div class="row m20t text-center" ng-show="index.updatingTxHistory[index.walletId]">
                     <div class="columns large-12 medium-12 small-12">
@@ -243,7 +242,6 @@
                         </div>
                     </div>-->
                     </div>
-                    <div class="extra-margin-bottom"></div>
                 </div> <!-- END History -->
         </div> <!-- END WalletHome -->
 
