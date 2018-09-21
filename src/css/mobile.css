@@ -348,7 +348,6 @@ a.missing-copayers {
 }
 
 .sidebar .avatar-wallet, .payment-uri .avatar-wallet, .modal-content .avatar-wallet {
-  background-color: #2C3E50;
   color: #fff;
   font-size: 1.4rem;
   font-weight: 700;

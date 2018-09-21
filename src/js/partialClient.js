@@ -134,7 +134,6 @@ function initWallet() {
 		var selectedWalletId = root.focusedClient.credentials.walletId;
 		var colors = root.config.colorFor;
 		var html = '';
-
 		for (var key in root.walletClients) {
 			var credentials = root.walletClients[key].credentials;
 			var walletId = credentials.walletId;

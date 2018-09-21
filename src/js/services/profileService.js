@@ -5,7 +5,6 @@ var constants = require('intervaluecore/constants.js');
 
 angular.module('copayApp.services')
   .factory('profileService', function profileServiceFactory($rootScope, $location, $timeout, $filter, $log, lodash, storageService, bwcService, configService, pushNotificationsService, isCordova, gettext, gettextCatalog, nodeWebkit, uxLanguage) {
-
     var root = {};
 
     root.profile = null;
@@ -136,7 +135,6 @@ angular.module('copayApp.services')
       root.walletClients[credentials.walletId] = client;
 
       root.walletClients[credentials.walletId].started = true;
-
       client.initialize({}, function (err) {
         if (err) {
           // impossible
@@ -506,8 +504,11 @@ angular.module('copayApp.services')
 
       // assign wallet color based on first character of walletId
       var color = configService.colorOpts[walletId.charCodeAt(0) % configService.colorOpts.length];
-      var configOpts = { colorFor: {} };
+      var configOpts = { colorFor: {},imageFor: {} };
       configOpts.colorFor[walletId] = color;
+      //添加图标
+      var image = configService.imageOpts[walletId.charCodeAt(0) % configService.imageOpts.length];
+      configOpts.imageFor[walletId] = image;
       configService.set(configOpts, function (err) {
         root.setAndStoreFocus(walletId, function () {
           storageService.storeProfile(root.profile, function (err) {
@@ -787,7 +788,6 @@ angular.module('copayApp.services')
 
     root.getWallets = function (network) {
       if (!root.profile) return [];
-
       var config = configService.getSync();
       config.colorFor = config.colorFor || {};
       config.aliasFor = config.aliasFor || {};
@@ -799,7 +799,8 @@ angular.module('copayApp.services')
           name: config.aliasFor[c.walletId] || c.walletName,
           id: c.walletId,
           network: c.network,
-          color: config.colorFor[c.walletId] || '#2C3E50'
+          color: config.colorFor[c.walletId] || '#2C3E50',
+          image: config.imageFor[c.walletId] || './img/rimg/1.png'
         };
       });
       ret = lodash.filter(ret, function (w) {

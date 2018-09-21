@@ -526,12 +526,12 @@ API.prototype.sendPayment = function(asset, to_address, amount, arrSigningDevice
 }*/
 
 
-API.prototype.getSignerWithLocalPrivateKey = function () {
+API.prototype.getSignerWithLocalPrivateKey = function (xPrivKey) {
   var self = this;
   return function (wallet_id, account, is_change, address_index, text_to_sign, handleSig) {
     var coin = (self.credentials.network == 'livenet' ? "0" : "1");
     var path = "m/44'/" + coin + "'/" + account + "'/" + is_change + "/" + address_index;
-    var xPrivKey = new Bitcore.HDPrivateKey.fromString(self.credentials.xPrivKey);
+    var xPrivKey = new Bitcore.HDPrivateKey.fromString(xPrivKey);
     var privateKey = xPrivKey.derive(path).privateKey;
     //var privKeyBuf = privateKey.toBuffer();
     var privKeyBuf = privateKey.bn.toBuffer({ size: 32 }); // https://github.com/bitpay/bitcore-lib/issues/47
@@ -539,11 +539,11 @@ API.prototype.getSignerWithLocalPrivateKey = function () {
   };
 };
 
-API.prototype.getLocalPrivateKey = function () {
+API.prototype.getLocalPrivateKey = function (xPrivKey) {
   var self = this;
   return function () {
     var path = "m/44'/0'/0'/0/0";
-    var xPrivKey = new Bitcore.HDPrivateKey.fromString(self.credentials.xPrivKey);
+    var xPrivKey = new Bitcore.HDPrivateKey.fromString(xPrivKey);
     var privateKey = xPrivKey.derive(path).privateKey;
     //var privKeyBuf = privateKey.toBuffer();
     var privKeyBuf = privateKey.bn.toBuffer({ size: 32 }); // https://github.com/bitpay/bitcore-lib/issues/47
@@ -557,8 +557,8 @@ API.prototype.sendMultiPayment = function (opts, cb) {
   var Wallet = require('intervaluecore/wallet.js');
   var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
   if(!opts.isHot){
-      opts.signWithLocalPrivateKey = this.getSignerWithLocalPrivateKey();
-      opts.getLocalPrivateKey = this.getLocalPrivateKey();
+      opts.signWithLocalPrivateKey = this.getSignerWithLocalPrivateKey(opts.xPrivKey);
+      opts.getLocalPrivateKey = this.getLocalPrivateKey(opts.xPrivKey);
   }
 
   if (opts.shared_address) {

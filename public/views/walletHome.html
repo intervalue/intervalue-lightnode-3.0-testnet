@@ -95,7 +95,7 @@
                         <!--former carousel start...-->
                         <div>
                             <div class="whlinfo">
-                                <img class="whlogo" src="./img/rimg/1.png"/>
+                                <img class="whlogo" src="{{index.image}}"/>
                                 <span class="whname">{{ (index.alias || index.walletName)}}</span>
                                 <span class="whpback" ng-show="index.needsBackupa" ng-click="$root.go('backup');index.backhome = true;" translate>Please backup</span>
                                 <img class="whewm" ng-click="$root.go('receive')" src="./img/lewm.png"/>
@@ -354,8 +354,8 @@
 
             <div class="adwwto">
                 <div class="adwwt" ng-repeat="item in index.walletInfo track by $index">
-                    <div class="adwwtflex" ng-click="index.towalletname(item.walletName, item.address, item.stables, item.wallet, item.mnemonicEncrypted)">
-                        <div class="adwwtlogo"></div>
+                    <div class="adwwtflex" ng-click="index.towalletname(item.image, item.walletName, item.address, item.stables, item.wallet, item.mnemonicEncrypted)">
+                        <div class="adwwtlogo"><img src="{{item.image}}"></div>
                         <div class="adwwt100">
                             <div class="adwwtname">{{item.walletName}}
                                 <span class="whpback" ng-show="item.mnemonic || item.mnemonicEncrypted" ng-click="$root.go('backup');index.backwallet=true" translate>Please backup</span>

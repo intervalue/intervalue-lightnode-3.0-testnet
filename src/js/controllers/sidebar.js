@@ -40,10 +40,12 @@ angular.module('copayApp.controllers').controller('sidebarController',
     };
 
     self.setWallets = function() {
+
       if (!profileService.profile) return;
       var config = configService.getSync();
       config.colorFor = config.colorFor || {};
       config.aliasFor = config.aliasFor || {};
+      config.imageFor = config.imageFor || {};
       var ret = lodash.map(profileService.profile.credentials, function(c) {
         return {
           m: c.m,
@@ -51,11 +53,11 @@ angular.module('copayApp.controllers').controller('sidebarController',
           name: config.aliasFor[c.walletId] || c.walletName,
           id: c.walletId,
           color: config.colorFor[c.walletId] || '#4A90E2',
+          image: config.imageFor[c.walletId] || "./img/rimg/1.png"
         };
       });
-      self.wallets = lodash.sortBy(ret, 'name');
+            self.wallets = lodash.sortBy(ret, 'name');
     };
-
     self.setWallets();
 
   });

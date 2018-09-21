@@ -115,10 +115,10 @@
     <li ng-if="btx.time" class="line-b p10 oh">
     <span class="text-gray" translate>Finality</span>:
     <span class="right" >
-      <span class="text-warning" ng-show="!btx.confirmations || btx.confirmations == 0" translate>
+      <span class="text-warning" ng-show="!btx.confirmations || btx.confirmations == 0 || btx.confirmations == 'pending'" translate>
         Unconfirmed
       </span>
-      <span class="label gray radius" ng-show="btx.confirmations" translate>
+      <span class="label gray radius" ng-show="btx.confirmations != 'pending'" translate>
         Confirmed
       </span>
  

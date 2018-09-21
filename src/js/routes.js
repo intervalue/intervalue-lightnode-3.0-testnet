@@ -529,7 +529,7 @@ angular
       })
 
       .state('walletnamea', {
-        url: '/walletname?name&addr&ammount&walletid&mnemonic&mnemonicEncrypted',
+        url: '/walletname?image?name&addr&ammount&walletid&mnemonic&mnemonicEncrypted',
         needProfile: true,
         views: {
             'main@': {

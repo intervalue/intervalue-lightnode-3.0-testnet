@@ -1010,7 +1010,7 @@ angular.module('copayApp.controllers')
 						var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
 						var my_address;
 						// never reuse addresses as the required output could be already present
-						useOrIssueNextAddress(fc.credentials.walletId, 0, function(addressInfo) {
+						/*useOrIssueNextAddress(fc.credentials.walletId, 0, function(addressInfo) {
 							my_address = addressInfo.address;
 							if (self.binding.type === 'reverse_payment') {
 								var arrSeenCondition = ['seen', {
@@ -1104,7 +1104,7 @@ angular.module('copayApp.controllers')
 									composeAndSend(shared_address);
 								}
 							});
-						});
+						});*/
 					}
 					else
 						composeAndSend(address);
@@ -1132,7 +1132,8 @@ angular.module('copayApp.controllers')
                             send_all: self.bSendAll,
                             arrSigningDeviceAddresses: arrSigningDeviceAddresses,
                             recipient_device_address: recipient_device_address,
-                            isHot: isHot
+                            isHot: isHot,
+                            xPrivKey: fc.credentials.xPrivKey
                         };
                         if (!isMultipleSend) {
                             opts.to_address = to_address;
@@ -1239,7 +1240,7 @@ angular.module('copayApp.controllers')
 
 					}
 
-					function useOrIssueNextAddress(wallet, is_change, handleAddress) {
+					/*function useOrIssueNextAddress(wallet, is_change, handleAddress) {
 						if (fc.isSingleAddress) {
 							addressService.getAddress(fc.credentials.walletId, false, function(err, addr) {
 								handleAddress({
@@ -1248,7 +1249,7 @@ angular.module('copayApp.controllers')
 							});
 						}
 						else walletDefinedByKeys.issueNextAddress(wallet, is_change, handleAddress);
-					}
+					}*/
 
 				});
 			}, 100);
