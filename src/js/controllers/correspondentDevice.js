@@ -296,7 +296,8 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
 						return;
 					}
 					
-					var fnReadMyAddress = (contract.peer_pays_to === 'contract') ? readMyPaymentAddress : issueNextAddress;
+					//var fnReadMyAddress = (contract.peer_pays_to === 'contract') ? readMyPaymentAddress : issueNextAddress;
+                    var fnReadMyAddress = readMyPaymentAddress;
 					fnReadMyAddress(function(my_address){
 						var arrSeenCondition = ['seen', {
 							what: 'output', 
@@ -418,8 +419,8 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
 							var body = correspondentListService.formatOutgoingMessage(paymentRequestText);
 							correspondentListService.addMessageEvent(false, correspondent.device_address, body);
 							if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(correspondent.device_address, body, 0, 'html');
-							if (contract.peer_pays_to === 'me')
-								issueNextAddress(); // make sure the address is not reused
+							// if (contract.peer_pays_to === 'me')
+							// 	issueNextAddress(); // make sure the address is not reused
 						});
 						$modalInstance.dismiss('cancel');
 					}
@@ -1098,7 +1099,8 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
 			cb(address);
 		});
 	}
-	
+
+	//todo delete
 	function issueNextAddress(cb){
 		var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
 		walletDefinedByKeys.issueNextAddress(profileService.focusedClient.credentials.walletId, 0, function(addressInfo){
