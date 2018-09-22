@@ -569,22 +569,24 @@ API.prototype.sendMultiPayment = function (opts, cb) {
     Wallet.sendMultiPayment(opts, cb);
   }
   else {
-    if (!opts.paying_addresses)
-      opts.wallet = self.credentials.walletId;
-    if (opts.change_address)
-      return Wallet.sendMultiPayment(opts, cb);
-    // create a new change address or select first unused one
-    if (!self.isSingleAddress) {
-      walletDefinedByKeys.issueOrSelectNextChangeAddress(self.credentials.walletId, function (objAddr) {
-        opts.change_address = objAddr.address;
-        Wallet.sendMultiPayment(opts, cb);
-      });
-    } else {
-      walletDefinedByKeys.readAddresses(self.credentials.walletId, {}, function (addresses) {
-        opts.change_address = addresses[0].address;
-              Wallet.sendMultiPayment(opts, cb);
-      });
-    }
+    alert("the shared_address is wrong : " + opts.shared_address);
+    //todo delete
+    // if (!opts.paying_addresses)
+    //   opts.wallet = self.credentials.walletId;
+    // if (opts.change_address)
+    //   return Wallet.sendMultiPayment(opts, cb);
+    // // create a new change address or select first unused one
+    // if (!self.isSingleAddress) {
+    //   walletDefinedByKeys.issueOrSelectNextChangeAddress(self.credentials.walletId, function (objAddr) {
+    //     opts.change_address = objAddr.address;
+    //     Wallet.sendMultiPayment(opts, cb);
+    //   });
+    // } else {
+    //   walletDefinedByKeys.readAddresses(self.credentials.walletId, {}, function (addresses) {
+    //     opts.change_address = addresses[0].address;
+    //           Wallet.sendMultiPayment(opts, cb);
+    //   });
+    // }
   }
 };
 
