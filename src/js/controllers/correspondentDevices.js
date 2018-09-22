@@ -6,7 +6,8 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 	var self = this;
 	
 	var wallet = require('intervaluecore/wallet.js');
-	var bots = require('intervaluecore/bots.js');
+	//todo delete
+	// var bots = require('intervaluecore/bots.js');
 	var mutex = require('intervaluecore/mutex.js');
 	$scope.editCorrespondentList = false;
 	$scope.selectedCorrespondentList = {};
@@ -84,13 +85,14 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 		
 			$scope.list = ab;
 
-			bots.load(function(err, rows){
-				if (err) $scope.botsError = err.toString();
-				$scope.bots = rows;
-				$timeout(function(){
-					$scope.$digest();
-				});
-			});
+			//todo delete
+			// bots.load(function(err, rows){
+			// 	if (err) $scope.botsError = err.toString();
+			// 	$scope.bots = rows;
+			// 	$timeout(function(){
+			// 		$scope.$digest();
+			// 	});
+			// });
 		});
 	};
 	
