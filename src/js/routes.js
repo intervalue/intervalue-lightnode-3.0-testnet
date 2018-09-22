@@ -537,12 +537,12 @@ angular
             }
         }
       })
-      .state('walletnamea.changewalletp', {
-          url: '/changepass',
+      .state('changeWalletPassWord', {
+          url: '/changeWalletPassWord?walletId',
           needProfile: true,
           views: {
               'main@': {
-                  templateUrl: 'views/changewalletp.html'
+                  templateUrl: 'views/changeWalletPassWord.html'
               }
           }
       })
