@@ -318,164 +318,167 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     // if there are more than one addresses to sign from, we won't pop up confirmation dialog for each address, instead we'll use the already obtained approval
     var assocChoicesByUnit = {};
 
+    //todo delete
     // objAddress is local wallet address, top_address is the address that requested the signature,
     // it may be different from objAddress if it is a shared address
-    eventBus.on("signing_request", function (objAddress, top_address, objUnit, assocPrivatePayloads, from_address, signing_path) {
-
-        function createAndSendSignature() {
-            var coin = "0";
-            var path = "m/44'/" + coin + "'/" + objAddress.account + "'/" + objAddress.is_change + "/" + objAddress.address_index;
-            console.log("path " + path);
-            // focused client might be different from the wallet this signature is for, but it doesn't matter as we have a single key for all wallets
-            if (profileService.focusedClient.isPrivKeyEncrypted()) {
-                console.log("priv key is encrypted, will be back after password request");
-                return profileService.insistUnlockFC(null, function () {
-                    createAndSendSignature();
-                });
-            }
-            var xPrivKey = new Bitcore.HDPrivateKey.fromString(profileService.focusedClient.credentials.xPrivKey);
-            var privateKey = xPrivKey.derive(path).privateKey;
-            console.log("priv key:", privateKey);
-            //var privKeyBuf = privateKey.toBuffer();
-            var privKeyBuf = privateKey.bn.toBuffer({ size: 32 }); // https://github.com/bitpay/bitcore-lib/issues/47
-            console.log("priv key buf:", privKeyBuf);
-            var buf_to_sign = objectHash.getUnitHashToSign(objUnit);
-            var signature = ecdsaSig.sign(buf_to_sign, privKeyBuf);
-            bbWallet.sendSignature(from_address, buf_to_sign.toString("base64"), signature, signing_path, top_address);
-            console.log("sent signature " + signature);
-        }
-
-        function refuseSignature() {
-            var buf_to_sign = objectHash.getUnitHashToSign(objUnit);
-            bbWallet.sendSignature(from_address, buf_to_sign.toString("base64"), "[refused]", signing_path, top_address);
-            console.log("refused signature");
-        }
-
-        var bbWallet = require('intervaluecore/wallet.js');
-        var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
-        var unit = objUnit.unit;
-        var credentials = lodash.find(profileService.profile.credentials, { walletId: objAddress.wallet });
-        mutex.lock(["signing_request-" + unit], function (unlock) {
-
-            // apply the previously obtained decision.
-            // Unless the priv key is encrypted in which case the password request would have appeared from nowhere
-            if (assocChoicesByUnit[unit] && !profileService.focusedClient.isPrivKeyEncrypted()) {
-                if (assocChoicesByUnit[unit] === "approve")
-                    createAndSendSignature();
-                else if (assocChoicesByUnit[unit] === "refuse")
-                    refuseSignature();
-                return unlock();
-            }
-
-            if (objUnit.signed_message) {
-                var question = gettextCatalog.getString('Sign message "' + objUnit.signed_message + '" by address ' + objAddress.address + '?');
-                requestApproval(question, {
-                    ifYes: function () {
-                        createAndSendSignature();
-                        unlock();
-                    },
-                    ifNo: function () {
-                        // do nothing
-                        console.log("===== NO CLICKED");
-                        refuseSignature();
-                        unlock();
-                    }
-                });
-                return;
-            }
-
-            walletDefinedByKeys.readChangeAddresses(objAddress.wallet, function (arrChangeAddressInfos) {
-                var arrAuthorAddresses = objUnit.authors.map(function (author) { return author.address; });
-                var arrChangeAddresses = arrChangeAddressInfos.map(function (info) { return info.address; });
-                arrChangeAddresses = arrChangeAddresses.concat(arrAuthorAddresses);
-                arrChangeAddresses.push(top_address);
-                var arrPaymentMessages = objUnit.messages.filter(function (objMessage) { return (objMessage.app === "payment"); });
-                if (arrPaymentMessages.length === 0)
-                    throw Error("no payment message found");
-                var assocAmountByAssetAndAddress = {};
-                // exclude outputs paying to my change addresses
-                async.eachSeries(
-                    arrPaymentMessages,
-                    function (objMessage, cb) {
-                        var payload = objMessage.payload;
-                        if (!payload)
-                            payload = assocPrivatePayloads[objMessage.payload_hash];
-                        if (!payload)
-                            throw Error("no inline payload and no private payload either, message=" + JSON.stringify(objMessage));
-                        var asset = payload.asset || "base";
-                        if (!payload.outputs)
-                            throw Error("no outputs");
-                        if (!assocAmountByAssetAndAddress[asset])
-                            assocAmountByAssetAndAddress[asset] = {};
-                        payload.outputs.forEach(function (output) {
-                            if (arrChangeAddresses.indexOf(output.address) === -1) {
-                                if (!assocAmountByAssetAndAddress[asset][output.address])
-                                    assocAmountByAssetAndAddress[asset][output.address] = 0;
-                                assocAmountByAssetAndAddress[asset][output.address] += output.amount;
-                            }
-                        });
-                        cb();
-                    },
-                    function () {
-                        var config = configService.getSync().wallet.settings;
-
-                        var arrDestinations = [];
-                        for (var asset in assocAmountByAssetAndAddress) {
-                            var formatted_asset = isCordova ? asset : ("<span class='small'>" + asset + '</span><br/>');
-                            var currency = "of asset " + formatted_asset;
-                            var assetInfo = profileService.assetMetadata[asset];
-                            if (asset === 'base')
-                                currency = config.unitName;
-                            else if (asset === constants.BLACKBYTES_ASSET)
-                                currency = config.bbUnitName;
-                            else if (assetInfo && assetInfo.name)
-                                currency = assetInfo.name;
-                            for (var address in assocAmountByAssetAndAddress[asset]) {
-                                var formatted_amount = profileService.formatAmount(assocAmountByAssetAndAddress[asset][address], asset);
-                                arrDestinations.push(formatted_amount + " " + currency + " to " + address);
-                            }
-                        }
-                        function getQuestion() {
-                            if (arrDestinations.length === 0) {
-                                var arrDataMessages = objUnit.messages.filter(function (objMessage) { return (objMessage.app === "profile" || objMessage.app === "attestation" || objMessage.app === "data" || objMessage.app === 'data_feed'); });
-                                if (arrDataMessages.length > 0) {
-                                    var message = arrDataMessages[0]; // can be only one
-                                    var payload = message.payload;
-                                    var obj = (message.app === 'attestation') ? payload.profile : payload;
-                                    var arrPairs = [];
-                                    for (var field in obj)
-                                        arrPairs.push(field + ": " + obj[field]);
-                                    var nl = isCordova ? "\n" : "<br>";
-                                    var list = arrPairs.join(nl) + nl;
-                                    if (message.app === 'profile' || message.app === 'data' || message.app === 'data_feed')
-                                        return 'Sign ' + message.app.replace('_', ' ') + ' ' + nl + list + 'from wallet ' + credentials.walletName + '?';
-                                    if (message.app === 'attestation')
-                                        return 'Sign transaction attesting ' + payload.address + ' as ' + nl + list + 'from wallet ' + credentials.walletName + '?';
-                                }
-                            }
-                            var dest = (arrDestinations.length > 0) ? arrDestinations.join(", ") : "to myself";
-                            return 'Sign transaction spending ' + dest + ' from wallet ' + credentials.walletName + '?';
-                        }
-                        var question = getQuestion();
-                        requestApproval(question, {
-                            ifYes: function () {
-                                createAndSendSignature();
-                                assocChoicesByUnit[unit] = "approve";
-                                unlock();
-                            },
-                            ifNo: function () {
-                                // do nothing
-                                console.log("===== NO CLICKED");
-                                refuseSignature();
-                                assocChoicesByUnit[unit] = "refuse";
-                                unlock();
-                            }
-                        });
-                    }
-                ); // eachSeries
-            });
-        });
-    });
+    // eventBus.on("signing_request", function (objAddress, top_address, objUnit, assocPrivatePayloads, from_address, signing_path) {
+    //
+    //     function createAndSendSignature() {
+    //         var coin = "0";
+    //         var path = "m/44'/" + coin + "'/" + objAddress.account + "'/" + objAddress.is_change + "/" + objAddress.address_index;
+    //         console.log("path " + path);
+    //         // focused client might be different from the wallet this signature is for, but it doesn't matter as we have a single key for all wallets
+    //         if (profileService.focusedClient.isPrivKeyEncrypted()) {
+    //             console.log("priv key is encrypted, will be back after password request");
+    //             return profileService.insistUnlockFC(null, function () {
+    //                 createAndSendSignature();
+    //             });
+    //         }
+    //         var xPrivKey = new Bitcore.HDPrivateKey.fromString(profileService.focusedClient.credentials.xPrivKey);
+    //         var privateKey = xPrivKey.derive(path).privateKey;
+    //         console.log("priv key:", privateKey);
+    //         //var privKeyBuf = privateKey.toBuffer();
+    //         var privKeyBuf = privateKey.bn.toBuffer({ size: 32 }); // https://github.com/bitpay/bitcore-lib/issues/47
+    //         console.log("priv key buf:", privKeyBuf);
+    //         var buf_to_sign = objectHash.getUnitHashToSign(objUnit);
+    //         var signature = ecdsaSig.sign(buf_to_sign, privKeyBuf);
+    //         //todo delete
+    //         // bbWallet.sendSignature(from_address, buf_to_sign.toString("base64"), signature, signing_path, top_address);
+    //         console.log("sent signature " + signature);
+    //     }
+    //
+    //     function refuseSignature() {
+    //         var buf_to_sign = objectHash.getUnitHashToSign(objUnit);
+    //         /todo delete
+    //         // bbWallet.sendSignature(from_address, buf_to_sign.toString("base64"), "[refused]", signing_path, top_address);
+    //         console.log("refused signature");
+    //     }
+    //
+    //     var bbWallet = require('intervaluecore/wallet.js');
+    //     var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
+    //     var unit = objUnit.unit;
+    //     var credentials = lodash.find(profileService.profile.credentials, { walletId: objAddress.wallet });
+    //     mutex.lock(["signing_request-" + unit], function (unlock) {
+    //
+    //         // apply the previously obtained decision.
+    //         // Unless the priv key is encrypted in which case the password request would have appeared from nowhere
+    //         if (assocChoicesByUnit[unit] && !profileService.focusedClient.isPrivKeyEncrypted()) {
+    //             if (assocChoicesByUnit[unit] === "approve")
+    //                 createAndSendSignature();
+    //             else if (assocChoicesByUnit[unit] === "refuse")
+    //                 refuseSignature();
+    //             return unlock();
+    //         }
+    //
+    //         if (objUnit.signed_message) {
+    //             var question = gettextCatalog.getString('Sign message "' + objUnit.signed_message + '" by address ' + objAddress.address + '?');
+    //             requestApproval(question, {
+    //                 ifYes: function () {
+    //                     createAndSendSignature();
+    //                     unlock();
+    //                 },
+    //                 ifNo: function () {
+    //                     // do nothing
+    //                     console.log("===== NO CLICKED");
+    //                     refuseSignature();
+    //                     unlock();
+    //                 }
+    //             });
+    //             return;
+    //         }
+    //
+    //         walletDefinedByKeys.readChangeAddresses(objAddress.wallet, function (arrChangeAddressInfos) {
+    //             var arrAuthorAddresses = objUnit.authors.map(function (author) { return author.address; });
+    //             var arrChangeAddresses = arrChangeAddressInfos.map(function (info) { return info.address; });
+    //             arrChangeAddresses = arrChangeAddresses.concat(arrAuthorAddresses);
+    //             arrChangeAddresses.push(top_address);
+    //             var arrPaymentMessages = objUnit.messages.filter(function (objMessage) { return (objMessage.app === "payment"); });
+    //             if (arrPaymentMessages.length === 0)
+    //                 throw Error("no payment message found");
+    //             var assocAmountByAssetAndAddress = {};
+    //             // exclude outputs paying to my change addresses
+    //             async.eachSeries(
+    //                 arrPaymentMessages,
+    //                 function (objMessage, cb) {
+    //                     var payload = objMessage.payload;
+    //                     if (!payload)
+    //                         payload = assocPrivatePayloads[objMessage.payload_hash];
+    //                     if (!payload)
+    //                         throw Error("no inline payload and no private payload either, message=" + JSON.stringify(objMessage));
+    //                     var asset = payload.asset || "base";
+    //                     if (!payload.outputs)
+    //                         throw Error("no outputs");
+    //                     if (!assocAmountByAssetAndAddress[asset])
+    //                         assocAmountByAssetAndAddress[asset] = {};
+    //                     payload.outputs.forEach(function (output) {
+    //                         if (arrChangeAddresses.indexOf(output.address) === -1) {
+    //                             if (!assocAmountByAssetAndAddress[asset][output.address])
+    //                                 assocAmountByAssetAndAddress[asset][output.address] = 0;
+    //                             assocAmountByAssetAndAddress[asset][output.address] += output.amount;
+    //                         }
+    //                     });
+    //                     cb();
+    //                 },
+    //                 function () {
+    //                     var config = configService.getSync().wallet.settings;
+    //
+    //                     var arrDestinations = [];
+    //                     for (var asset in assocAmountByAssetAndAddress) {
+    //                         var formatted_asset = isCordova ? asset : ("<span class='small'>" + asset + '</span><br/>');
+    //                         var currency = "of asset " + formatted_asset;
+    //                         var assetInfo = profileService.assetMetadata[asset];
+    //                         if (asset === 'base')
+    //                             currency = config.unitName;
+    //                         else if (asset === constants.BLACKBYTES_ASSET)
+    //                             currency = config.bbUnitName;
+    //                         else if (assetInfo && assetInfo.name)
+    //                             currency = assetInfo.name;
+    //                         for (var address in assocAmountByAssetAndAddress[asset]) {
+    //                             var formatted_amount = profileService.formatAmount(assocAmountByAssetAndAddress[asset][address], asset);
+    //                             arrDestinations.push(formatted_amount + " " + currency + " to " + address);
+    //                         }
+    //                     }
+    //                     function getQuestion() {
+    //                         if (arrDestinations.length === 0) {
+    //                             var arrDataMessages = objUnit.messages.filter(function (objMessage) { return (objMessage.app === "profile" || objMessage.app === "attestation" || objMessage.app === "data" || objMessage.app === 'data_feed'); });
+    //                             if (arrDataMessages.length > 0) {
+    //                                 var message = arrDataMessages[0]; // can be only one
+    //                                 var payload = message.payload;
+    //                                 var obj = (message.app === 'attestation') ? payload.profile : payload;
+    //                                 var arrPairs = [];
+    //                                 for (var field in obj)
+    //                                     arrPairs.push(field + ": " + obj[field]);
+    //                                 var nl = isCordova ? "\n" : "<br>";
+    //                                 var list = arrPairs.join(nl) + nl;
+    //                                 if (message.app === 'profile' || message.app === 'data' || message.app === 'data_feed')
+    //                                     return 'Sign ' + message.app.replace('_', ' ') + ' ' + nl + list + 'from wallet ' + credentials.walletName + '?';
+    //                                 if (message.app === 'attestation')
+    //                                     return 'Sign transaction attesting ' + payload.address + ' as ' + nl + list + 'from wallet ' + credentials.walletName + '?';
+    //                             }
+    //                         }
+    //                         var dest = (arrDestinations.length > 0) ? arrDestinations.join(", ") : "to myself";
+    //                         return 'Sign transaction spending ' + dest + ' from wallet ' + credentials.walletName + '?';
+    //                     }
+    //                     var question = getQuestion();
+    //                     requestApproval(question, {
+    //                         ifYes: function () {
+    //                             createAndSendSignature();
+    //                             assocChoicesByUnit[unit] = "approve";
+    //                             unlock();
+    //                         },
+    //                         ifNo: function () {
+    //                             // do nothing
+    //                             console.log("===== NO CLICKED");
+    //                             refuseSignature();
+    //                             assocChoicesByUnit[unit] = "refuse";
+    //                             unlock();
+    //                         }
+    //                     });
+    //                 }
+    //             ); // eachSeries
+    //         });
+    //     });
+    // });
 
 
     var accept_msg = gettextCatalog.getString('Yes');
@@ -881,7 +884,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
              if (!opts.quiet)
                self.setOngoingProcess('updatingStatus', false);*/
 
-
+            //todo 许切换成新的方法
             fc.getBalance(self.shared_address, function (err, assocBalances, assocSharedBalances) {
                 if (err)
                     throw "impossible getBal";
@@ -919,13 +922,14 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         $timeout(function () {
             /*self.setOngoingProcess('updatingBalance', true);*/
             $log.debug('Updating Balance');
-            fc.getBalance(self.shared_address, function (err, assocBalances, assocSharedBalances) {
-                /*self.setOngoingProcess('updatingBalance', false);*/
-                if (err)
-                    throw "impossible error from getBalance";
-                $log.debug('updateBalance Wallet Balance:', assocBalances, assocSharedBalances);
-                self.setBalance(assocBalances, assocSharedBalances);
-            });
+            //todo delete 需要切换成新的方法
+            // fc.getBalance(self.shared_address, function (err, assocBalances, assocSharedBalances) {
+            //     /*self.setOngoingProcess('updatingBalance', false);*/
+            //     if (err)
+            //         throw "impossible error from getBalance";
+            //     $log.debug('updateBalance Wallet Balance:', assocBalances, assocSharedBalances);
+            //     self.setBalance(assocBalances, assocSharedBalances);
+            // });
         });
     };
 

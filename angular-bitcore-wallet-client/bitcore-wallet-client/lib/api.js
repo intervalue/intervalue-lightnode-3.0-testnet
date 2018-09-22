@@ -645,25 +645,26 @@ API.prototype.getBalance = function (shared_address, cb) {
           arrAssets.push(asset);
       if (arrAssets.length === 0)
         return cb(null, assocBalances, assocSharedBalances);
-      // Wallet.readAssetMetadata(arrAssets, function (assocAssetMetadata) {
-      //   for (var asset in assocAssetMetadata) {
-      //     var objAssetMetadata = assocAssetMetadata[asset];
-      //     for (var key in objAssetMetadata)
-      //       assocBalances[asset][key] = objAssetMetadata[key];
-      //   }
-      //   cb(null, assocBalances, assocSharedBalances);
-      // });
+      Wallet.readAssetMetadata(arrAssets, function (assocAssetMetadata) {
+        for (var asset in assocAssetMetadata) {
+          var objAssetMetadata = assocAssetMetadata[asset];
+          for (var key in objAssetMetadata)
+            assocBalances[asset][key] = objAssetMetadata[key];
+        }
+        cb(null, assocBalances, assocSharedBalances);
+      });
     });
   });
 };
 
+//todo delete 可以删除
 API.prototype.getListOfBalancesOnAddresses = function (cb) {
   var Wallet = require('intervaluecore/wallet.js');
   $.checkState(this.credentials && this.credentials.isComplete());
   var walletId = this.credentials.walletId;
-  Wallet.readBalancesOnAddresses(walletId, function (assocBalances) {
-    cb(assocBalances);
-  });
+  // Wallet.readBalancesOnAddresses(walletId, function (assocBalances) {
+  //   cb(assocBalances);
+  // });
 };
 
 API.prototype.getTxHistory = function (asset, walletId, cb) {
