@@ -530,36 +530,37 @@ angular.module('copayApp.controllers')
 		function claimTextCoin(mnemonic, addr) {
 			var wallet = require('intervaluecore/wallet.js');
 			$rootScope.$emit('process_status_change', 'claiming', true);
-			wallet.receiveTextCoin(mnemonic, addr, function(err, unit, asset) {
-				$timeout(function() {
-					$rootScope.$emit('closeModal');
-					if (err) {
-						if (err.indexOf("not confirmed") !== -1) {
-							store_mnemonic_back();
-						}
-						$rootScope.$emit('process_status_change', 'claiming', false);
-						return $rootScope.$emit('Local/ShowErrorAlert', err);
-					}
-					if (asset) {
-						var disableBalanceListener = $rootScope.$on('Local/BalanceUpdated', function(assocBalances) {
-							var assetIndex = lodash.findIndex(indexScope.arrBalances, {
-								asset: asset
-							});
-							indexScope.assetIndex = assetIndex;
-							indexScope.updateTxHistory();
-							$rootScope.$emit('Local/SetTab', 'history', null, true);
-							disableBalanceListener();
-						});
-						indexScope.updateAll();
-					} else {
-						indexScope.assetIndex = 0;
-						indexScope.updateAll({triggerTxUpdate: true});
-						$rootScope.$emit('Local/SetTab', 'history', null, true);
-					}
-					$scope.$digest();
-					$rootScope.$emit('process_status_change', 'claiming', false);
-				});
-			});
+			//todo delete
+			// wallet.receiveTextCoin(mnemonic, addr, function(err, unit, asset) {
+			// 	$timeout(function() {
+			// 		$rootScope.$emit('closeModal');
+			// 		if (err) {
+			// 			if (err.indexOf("not confirmed") !== -1) {
+			// 				store_mnemonic_back();
+			// 			}
+			// 			$rootScope.$emit('process_status_change', 'claiming', false);
+			// 			return $rootScope.$emit('Local/ShowErrorAlert', err);
+			// 		}
+			// 		if (asset) {
+			// 			var disableBalanceListener = $rootScope.$on('Local/BalanceUpdated', function(assocBalances) {
+			// 				var assetIndex = lodash.findIndex(indexScope.arrBalances, {
+			// 					asset: asset
+			// 				});
+			// 				indexScope.assetIndex = assetIndex;
+			// 				indexScope.updateTxHistory();
+			// 				$rootScope.$emit('Local/SetTab', 'history', null, true);
+			// 				disableBalanceListener();
+			// 			});
+			// 			indexScope.updateAll();
+			// 		} else {
+			// 			indexScope.assetIndex = 0;
+			// 			indexScope.updateAll({triggerTxUpdate: true});
+			// 			$rootScope.$emit('Local/SetTab', 'history', null, true);
+			// 		}
+			// 		$scope.$digest();
+			// 		$rootScope.$emit('process_status_change', 'claiming', false);
+			// 	});
+			// });
 		}
 	
 		var disableClaimTextcoinListener = $rootScope.$on('claimTextcoin', function(event, mnemonic) {
