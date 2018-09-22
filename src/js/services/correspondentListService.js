@@ -394,7 +394,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 			return amount + ' ' + profileService.assetMetadata[asset].name;
 		}
 		else{
-			wallet.readAssetMetadata([asset], function(){});
+			// wallet.readAssetMetadata([asset], function(){});
 			return amount + ' of ' + asset;
 		}
 	}

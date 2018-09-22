@@ -616,6 +616,7 @@ API.prototype.getAddresses = function (opts, cb) {
  *
  * @param {Callback} cb
  */
+//TODO delete可以删除
 API.prototype.getBalance = function (shared_address, cb) {
   var Wallet = require('intervaluecore/wallet.js');
   $.checkState(this.credentials && this.credentials.isComplete());
@@ -644,14 +645,14 @@ API.prototype.getBalance = function (shared_address, cb) {
           arrAssets.push(asset);
       if (arrAssets.length === 0)
         return cb(null, assocBalances, assocSharedBalances);
-      Wallet.readAssetMetadata(arrAssets, function (assocAssetMetadata) {
-        for (var asset in assocAssetMetadata) {
-          var objAssetMetadata = assocAssetMetadata[asset];
-          for (var key in objAssetMetadata)
-            assocBalances[asset][key] = objAssetMetadata[key];
-        }
-        cb(null, assocBalances, assocSharedBalances);
-      });
+      // Wallet.readAssetMetadata(arrAssets, function (assocAssetMetadata) {
+      //   for (var asset in assocAssetMetadata) {
+      //     var objAssetMetadata = assocAssetMetadata[asset];
+      //     for (var key in objAssetMetadata)
+      //       assocBalances[asset][key] = objAssetMetadata[key];
+      //   }
+      //   cb(null, assocBalances, assocSharedBalances);
+      // });
     });
   });
 };

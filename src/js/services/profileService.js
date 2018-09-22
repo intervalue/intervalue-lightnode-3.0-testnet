@@ -227,12 +227,12 @@ angular.module('copayApp.services')
             var prevTempDeviceKey = profile.prevTempDeviceKey ? Buffer.from(profile.prevTempDeviceKey, 'base64') : null;
             device.setTempKeys(tempDeviceKey, prevTempDeviceKey, saveTempKeys);
             $rootScope.$emit('Local/ProfileBound');
-            Wallet.readAssetMetadata(null, function (assocAssetMetadata) {
-              for (var asset in assocAssetMetadata) {
-                if (!root.assetMetadata[asset])
-                  root.assetMetadata[asset] = assocAssetMetadata[asset];
-              }
-            });
+            // Wallet.readAssetMetadata(null, function (assocAssetMetadata) {
+            //   for (var asset in assocAssetMetadata) {
+            //     if (!root.assetMetadata[asset])
+            //       root.assetMetadata[asset] = assocAssetMetadata[asset];
+            //   }
+            // });
             return cb();
           });
         });
