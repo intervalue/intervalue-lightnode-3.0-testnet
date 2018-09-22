@@ -11,13 +11,14 @@ angular.module('copayApp.controllers').controller('botController',
 	
 	var id = $stateParams.id;
 
-	bots.getBotByID(id, function(bot){
-		bot.description = correspondentListService.escapeHtmlAndInsertBr(bot.description);
-		$scope.bot = bot;
-		$timeout(function(){
-			$scope.$digest();
-		});
-	})
+	//todo delete
+	// bots.getBotByID(id, function(bot){
+	// 	bot.description = correspondentListService.escapeHtmlAndInsertBr(bot.description);
+	// 	$scope.bot = bot;
+	// 	$timeout(function(){
+	// 		$scope.$digest();
+	// 	});
+	// })
 
 	$scope.pair = function(bot) {
 		var matches = bot.pairing_code.match(/^([\w\/+]+)@([\w.:\/-]+)#([\w\/+-]+)$/);
