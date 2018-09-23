@@ -920,7 +920,6 @@ angular.module('copayApp.controllers')
                     return $rootScope.$emit('Local/ShowErrorAlert', "This payment is already under way");
                 self.current_payment_key = current_payment_key;
 
-
 			//indexScope.setOngoingProcess(gettext('sending'), true);
 			$timeout(function() {
                 if (!isMultipleSend && accountValidationResult.isValid) { // try to replace validation result with attested BB address
@@ -1126,7 +1125,7 @@ angular.module('copayApp.controllers')
                         profileService.bKeepUnlocked = true;
                         var isHot = fc.credentials.xPrivKey ? 0 : 1;//判断冷热钱包,0为普通钱包，1为热钱包
                         var opts = {
-                            shared_address: indexScope.shared_address,
+                            shared_address: indexScope.walletInfo[0].address,
                             merkle_proof: merkle_proof,
                             asset: asset,
                             do_not_email: true,
@@ -1177,7 +1176,6 @@ angular.module('copayApp.controllers')
                         shadowWallet.getRradingUnit(opts,function (cb) {
 
                         })*/
-
 						fc.sendMultiPayment(opts, function(err, unit, mnemonics) {
 							// if multisig, it might take very long before the callback is called
 							//indexScope.setOngoingProcess(gettext('sending'), false);
