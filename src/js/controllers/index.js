@@ -1354,8 +1354,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             if (self.assetIndex !== self.oldAssetIndex) // it was a swipe
                 return console.log("== swipe");
             console.log('== updateHistoryFromNetwork');
-            var lightWallet = require('intervaluecore/light_wallet.js');
-            lightWallet.refreshLightClientHistory();
+            //todo delete
+            // var lightWallet = require('intervaluecore/light_wallet.js');
+            // lightWallet.refreshLightClientHistory();
         }, 500);
     }, 5000);
 
@@ -1587,8 +1588,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     $rootScope.$on('Local/Resume', function (event) {
         $log.debug('### Resume event');
-        var lightWallet = require('intervaluecore/light_wallet.js');
-        lightWallet.refreshLightClientHistory();
+        //todo delete
+        // var lightWallet = require('intervaluecore/light_wallet.js');
+        // lightWallet.refreshLightClientHistory();
         //self.debouncedUpdate();
     });
 

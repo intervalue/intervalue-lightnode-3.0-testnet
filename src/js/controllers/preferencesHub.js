@@ -12,9 +12,10 @@ angular.module('copayApp.controllers').controller('preferencesHubController',
     this.save = function() {
       var self = this;
 	  var device = require('intervaluecore/device.js');
-	  var lightWallet = require('intervaluecore/light_wallet.js');
+	  // var lightWallet = require('intervaluecore/light_wallet.js');
 	  self.hub = self.hub.replace(/^wss?:\/\//i, '').replace(/^https?:\/\//i, '');
-      lightWallet.setLightVendorHost(self.hub);
+      //todo delete
+	  // lightWallet.setLightVendorHost(self.hub);
       var opts = {hub: self.hub};
 
       configService.set(opts, function(err) {

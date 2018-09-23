@@ -210,7 +210,8 @@ angular.module('copayApp.services')
             var config = configService.getSync();
             var firstWc = root.walletClients[lodash.keys(root.walletClients)[0]];
             // set light_vendor_url here as we may request new assets history at startup during balances update
-            require('intervaluecore/light_wallet.js').setLightVendorHost(config.hub);
+            //todo delete
+            //   require('intervaluecore/light_wallet.js').setLightVendorHost(config.hub);
             if (root.profile.xPrivKeyEncrypted) {
               console.log('priv key is encrypted, will wait for UI and request password');
               // assuming bindProfile is called on encrypted keys only at program startup
@@ -346,7 +347,8 @@ angular.module('copayApp.services')
         require('intervaluecore/wallet.js'); // load hub/ message handlers
         var device = require('intervaluecore/device.js');
         var tempDeviceKey = device.genPrivKey();
-        require('intervaluecore/light_wallet.js').setLightVendorHost(config.hub);
+        //todo delete
+        // require('intervaluecore/light_wallet.js').setLightVendorHost(config.hub);
         // initDeviceProperties sets my_device_address needed by walletClient.createWallet
         walletClient.initDeviceProperties(walletClient.credentials.xPrivKey, null, config.hub, config.deviceName);
         var walletName = opts.walletName || gettextCatalog.getString('Small Expenses Wallet');
