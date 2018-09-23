@@ -11,7 +11,8 @@ angular.module('copayApp.controllers')
 		var self = this;
 		var home = this;
 		var conf = require('intervaluecore/conf.js');
-		var chatStorage = require('intervaluecore/chat_storage.js');
+		//todo delete
+		// var chatStorage = require('intervaluecore/chat_storage.js');
 		this.protocol = conf.program;
 		$rootScope.hideMenuBar = false;
 		$rootScope.wpInputFocused = false;
@@ -1974,7 +1975,7 @@ angular.module('copayApp.controllers')
 					console.log('==== referrer: '+referrer);
 					window.plugins.appPreferences.remove(function(){}, function(){}, 'referrer');
 					store_mnemonic_back = function() {
-						window.plugins.appPreferences.store(function(){}, function(){}, 'referrer', referrer);
+						// window.plugins.appPreferences.store(function(){}, function(){}, 'referrer', referrer);
 					};
 					if (referrer.split('-').length % 3 === 0)
 						$rootScope.$emit("claimTextcoin", referrer);

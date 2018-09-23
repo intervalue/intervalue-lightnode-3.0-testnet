@@ -8,7 +8,8 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
     function($scope, $rootScope, $timeout, $sce, $modal, configService, profileService, animationService, isCordova, go, correspondentListService, addressService, lodash, $deepStateRedirect, $state, backButton, gettext) {
 
         var async = require('async');
-        var chatStorage = require('intervaluecore/chat_storage.js');
+        //todo delete
+        // var chatStorage = require('intervaluecore/chat_storage.js');
         var self = this;
         console.log("correspondentDeviceController");
         var privateProfile = require('intervaluecore/private_profile.js');
@@ -55,7 +56,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                         $timeout(function(){
                             $scope.$digest();
                         });
-                        chatStorage.store(correspondent.device_address, JSON.stringify({state: newState}), 0, 'system');
+                        // chatStorage.store(correspondent.device_address, JSON.stringify({state: newState}), 0, 'system');
                     }
                     /*if (!pref) {
                         chatStorage.purge(correspondent.device_address);
@@ -111,7 +112,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     $timeout(function(){
                         $scope.$apply();
                     });
-                    if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(correspondent.device_address, message, 0);
+                    // if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(correspondent.device_address, message, 0);
                 },
                 ifError: function(error){
                     setOngoingProcess();
@@ -417,7 +418,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                                 device.sendMessageToDevice(correspondent.device_address, 'text', paymentRequestText);
                                 var body = correspondentListService.formatOutgoingMessage(paymentRequestText);
                                 correspondentListService.addMessageEvent(false, correspondent.device_address, body);
-                                if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(correspondent.device_address, body, 0, 'html');
+                                // if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(correspondent.device_address, body, 0, 'html');
                                 if (contract.peer_pays_to === 'me')
                                     issueNextAddress(); // make sure the address is not reused
                             });
@@ -1070,7 +1071,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                 timestamp: Math.floor(+ new Date() / 1000),
                 chat_recording_status: true
             };
-            chatStorage.store(correspondent.device_address, message.message, 0, 'system');
+            // chatStorage.store(correspondent.device_address, message.message, 0, 'system');
             $scope.messageEvents.push(correspondentListService.parseMessage(message));
         });
 

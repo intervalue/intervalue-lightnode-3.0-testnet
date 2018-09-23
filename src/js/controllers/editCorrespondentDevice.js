@@ -50,8 +50,9 @@ angular.module('copayApp.controllers').controller('editCorrespondentDeviceContro
 
       modalInstance.result.then(function(ok) {
         if (ok) {
-          	var chatStorage = require('intervaluecore/chat_storage.js');
-			chatStorage.purge(correspondent.device_address);
+            //todo delete
+          	// var chatStorage = require('intervaluecore/chat_storage.js');
+			// chatStorage.purge(correspondent.device_address);
 			correspondentListService.messageEventsByCorrespondent[correspondent.device_address] = [];
         }
         
