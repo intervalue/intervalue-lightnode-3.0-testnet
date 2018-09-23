@@ -41,7 +41,8 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             var device = require('intervaluecore/device.js');
             device.sendMessageToDevice(correspondent.device_address, "chat_recording_pref", pref, {
                 ifOk: function(){
-                    device.updateCorrespondentProps(correspondent);
+                    //todo delete
+                    // device.updateCorrespondentProps(correspondent);
                     var oldState = (correspondent.peer_record_pref && !correspondent.my_record_pref);
                     var newState = (correspondent.peer_record_pref && correspondent.my_record_pref);
                     if (newState != oldState) {

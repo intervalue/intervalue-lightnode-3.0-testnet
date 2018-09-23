@@ -196,9 +196,10 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     eventBus.on("refused_to_sign", function (device_address) {
         var device = require('intervaluecore/device.js');
-        device.readCorrespondent(device_address, function (correspondent) {
-            notification.success(gettextCatalog.getString('Refused'), correspondent.name + " refused to sign the transaction");
-        });
+        //todo delete
+        // device.readCorrespondent(device_address, function (correspondent) {
+        //     notification.success(gettextCatalog.getString('Refused'), correspondent.name + " refused to sign the transaction");
+        // });
     });
 
 
@@ -228,9 +229,10 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         var walletName = client.credentials.walletName;
         updatePublicKeyRing(client);
         var device = require('intervaluecore/device.js');
-        device.readCorrespondent(device_address, function (correspondent) {
-            notification.success(gettextCatalog.getString('Success'), "Wallet " + walletName + " approved by " + correspondent.name);
-        });
+        //todo delete
+        // device.readCorrespondent(device_address, function (correspondent) {
+        //     notification.success(gettextCatalog.getString('Success'), "Wallet " + walletName + " approved by " + correspondent.name);
+        // });
     });
 
     eventBus.on("wallet_declined", function (walletId, device_address) {
@@ -239,9 +241,10 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             return;
         var walletName = client.credentials.walletName;
         var device = require('intervaluecore/device.js');
-        device.readCorrespondent(device_address, function (correspondent) {
-            notification.info(gettextCatalog.getString('Declined'), "Wallet " + walletName + " declined by " + (correspondent ? correspondent.name : 'peer'));
-        });
+        //todo delete
+        // device.readCorrespondent(device_address, function (correspondent) {
+        //     notification.info(gettextCatalog.getString('Declined'), "Wallet " + walletName + " declined by " + (correspondent ? correspondent.name : 'peer'));
+        // });
         profileService.deleteWallet({ client: client }, function (err) {
             if (err)
                 console.log(err);

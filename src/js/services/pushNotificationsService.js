@@ -60,35 +60,36 @@ angular.module('copayApp.services')
 		if (!usePushNotifications) return;
 		
 		var device = require('intervaluecore/device.js');
-		device.readCorrespondents(function(devices){
-			if (devices.length == 0)
-				return;
-
-			var errorHandler = function(e) {
-				console.warn("push notification register failed", e);
-				usePushNotifications = false;
-			}
-			if (isMobile.Android()) {
-				window.plugins.pushNotification.register(function(data) {}, errorHandler,
-					{
-						"senderID": projectNumber,
-						"ecb": "onNotification"
-					}
-				);
-			} else if (isMobile.iOS()) {
-				window.plugins.pushNotification.register(function(token) {
-					storageService.setPushInfo(projectNumber, token, true, function() {
-						sendRequestEnableNotification(_ws, token);
-					});
-				}, errorHandler,
-					{"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"}
-				);
-			}
-			
-			configService.set({pushNotifications: {enabled: true}}, function(err) {
-				if (err) $log.debug(err);
-			});
-		});
+		//todo delete
+		// device.readCorrespondents(function(devices){
+		// 	if (devices.length == 0)
+		// 		return;
+		//
+		// 	var errorHandler = function(e) {
+		// 		console.warn("push notification register failed", e);
+		// 		usePushNotifications = false;
+		// 	}
+		// 	if (isMobile.Android()) {
+		// 		window.plugins.pushNotification.register(function(data) {}, errorHandler,
+		// 			{
+		// 				"senderID": projectNumber,
+		// 				"ecb": "onNotification"
+		// 			}
+		// 		);
+		// 	} else if (isMobile.iOS()) {
+		// 		window.plugins.pushNotification.register(function(token) {
+		// 			storageService.setPushInfo(projectNumber, token, true, function() {
+		// 				sendRequestEnableNotification(_ws, token);
+		// 			});
+		// 		}, errorHandler,
+		// 			{"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"}
+		// 		);
+		// 	}
+		//
+		// 	configService.set({pushNotifications: {enabled: true}}, function(err) {
+		// 		if (err) $log.debug(err);
+		// 	});
+		// });
 	};
 	
 	function disable_notification() {
