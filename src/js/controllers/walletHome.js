@@ -1737,20 +1737,21 @@ angular.module('copayApp.controllers')
 
 				$scope.shareAgain = function() {
 					if ($scope.isPrivate) {
-						var indivisible_asset = require('intervaluecore/indivisible_asset');
+						// var indivisible_asset = require('intervaluecore/indivisible_asset');
 						var wallet = require('intervaluecore/wallet.js');
-						indivisible_asset.restorePrivateChains(btx.asset, btx.unit, btx.addressTo, function(arrRecipientChains, arrCosignerChains){
-							self.getPrivatePayloadSavePath(function(fullPath, cordovaPathObj){
-								if (!fullPath && !cordovaPathObj)
-									return;
-								var filePath = fullPath ? fullPath : (cordovaPathObj.root + cordovaPathObj.path + '/' + cordovaPathObj.fileName);
-								wallet.storePrivateAssetPayload(fullPath, cordovaPathObj, btx.mnemonic, arrRecipientChains, function(err) {
-									if (err)
-										throw Error(err);
-									self.openShareTextcoinModal(btx.textAddress, btx.mnemonic, btx.amount, btx.asset, true, filePath);
-								});
-							});
-						});
+						//todo delete
+						// indivisible_asset.restorePrivateChains(btx.asset, btx.unit, btx.addressTo, function(arrRecipientChains, arrCosignerChains){
+						// 	self.getPrivatePayloadSavePath(function(fullPath, cordovaPathObj){
+						// 		if (!fullPath && !cordovaPathObj)
+						// 			return;
+						// 		var filePath = fullPath ? fullPath : (cordovaPathObj.root + cordovaPathObj.path + '/' + cordovaPathObj.fileName);
+						// 		wallet.storePrivateAssetPayload(fullPath, cordovaPathObj, btx.mnemonic, arrRecipientChains, function(err) {
+						// 			if (err)
+						// 				throw Error(err);
+						// 			self.openShareTextcoinModal(btx.textAddress, btx.mnemonic, btx.amount, btx.asset, true, filePath);
+						// 		});
+						// 	});
+						// });
 					} else
 						self.openShareTextcoinModal(btx.textAddress, btx.mnemonic, btx.amount, btx.asset, true);
 				}
@@ -1826,7 +1827,7 @@ angular.module('copayApp.controllers')
 				};
 
 				$scope.reSendPrivateMultiSigPayment = function() {
-					var indivisible_asset = require('intervaluecore/indivisible_asset');
+					// var indivisible_asset = require('intervaluecore/indivisible_asset');
 					var wallet_defined_by_keys = require('intervaluecore/wallet_defined_by_keys');
 					var walletDefinedByAddresses = require('intervaluecore/wallet_defined_by_addresses');
 					var fc = profileService.focusedClient;
@@ -1837,14 +1838,15 @@ angular.module('copayApp.controllers')
 						});
 					}
 
-					indivisible_asset.restorePrivateChains(btx.asset, btx.unit, btx.addressTo, function(arrRecipientChains, arrCosignerChains) {
-						if (indexScope.shared_address) {
-							walletDefinedByAddresses.forwardPrivateChainsToOtherMembersOfAddresses(arrCosignerChains, [indexScope.shared_address], null, success);
-						}
-						else {
-							wallet_defined_by_keys.forwardPrivateChainsToOtherMembersOfWallets(arrCosignerChains, [fc.credentials.walletId], null, success);
-						}
-					});
+                    //todo delete
+					// indivisible_asset.restorePrivateChains(btx.asset, btx.unit, btx.addressTo, function(arrRecipientChains, arrCosignerChains) {
+					// 	if (indexScope.shared_address) {
+					// 		walletDefinedByAddresses.forwardPrivateChainsToOtherMembersOfAddresses(arrCosignerChains, [indexScope.shared_address], null, success);
+					// 	}
+					// 	else {
+					// 		wallet_defined_by_keys.forwardPrivateChainsToOtherMembersOfWallets(arrCosignerChains, [fc.credentials.walletId], null, success);
+					// 	}
+					// });
 				};
 
 				$scope.cancel = function() {
@@ -1902,17 +1904,18 @@ angular.module('copayApp.controllers')
 				};
 
 				$scope.sendPrivatePayments = function(correspondent) {
-					var indivisible_asset = require('intervaluecore/indivisible_asset');
+					// var indivisible_asset = require('intervaluecore/indivisible_asset');
 					var wallet_general = require('intervaluecore/wallet_general');
-					indivisible_asset.restorePrivateChains(btx.asset, btx.unit, btx.addressTo, function(arrRecipientChains, arrCosignerChains) {
-						wallet_general.sendPrivatePayments(correspondent.device_address, arrRecipientChains, true, null, function() {
-							modalInstance.dismiss('cancel');
-							go.history();
-							$timeout(function() {
-								notification.success(gettextCatalog.getString('Success'), gettextCatalog.getString('Private payloads sent', {}));
-							});
-						});
-					});
+					//todo delete
+					// indivisible_asset.restorePrivateChains(btx.asset, btx.unit, btx.addressTo, function(arrRecipientChains, arrCosignerChains) {
+					// 	wallet_general.sendPrivatePayments(correspondent.device_address, arrRecipientChains, true, null, function() {
+					// 		modalInstance.dismiss('cancel');
+					// 		go.history();
+					// 		$timeout(function() {
+					// 			notification.success(gettextCatalog.getString('Success'), gettextCatalog.getString('Private payloads sent', {}));
+					// 		});
+					// 	});
+					// });
 
 				};
 
