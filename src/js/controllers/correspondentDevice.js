@@ -934,20 +934,21 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                         }
                         indexScope.current_message_signing_key = current_message_signing_key;
                         var recipient_device_address = lodash.clone(correspondent.device_address);
-                        fc.signMessage($scope.address, message_to_sign, getSigningDeviceAddresses(fc), function(err, objSignedMessage){
-                            delete indexScope.current_message_signing_key;
-                            if (err){
-                                if (chatScope){
-                                    setError(err);
-                                    $timeout(function() {
-                                        chatScope.$apply();
-                                    });
-                                }
-                                return;
-                            }
-                            var signedMessageBase64 = Buffer.from(JSON.stringify(objSignedMessage)).toString('base64');
-                            appendText('[Signed message](signed-message:' + signedMessageBase64 + ')');
-                        });
+                        //todo delete
+                        // fc.signMessage($scope.address, message_to_sign, getSigningDeviceAddresses(fc), function(err, objSignedMessage){
+                        //     delete indexScope.current_message_signing_key;
+                        //     if (err){
+                        //         if (chatScope){
+                        //             setError(err);
+                        //             $timeout(function() {
+                        //                 chatScope.$apply();
+                        //             });
+                        //         }
+                        //         return;
+                        //     }
+                        //     var signedMessageBase64 = Buffer.from(JSON.stringify(objSignedMessage)).toString('base64');
+                        //     appendText('[Signed message](signed-message:' + signedMessageBase64 + ')');
+                        // });
                         $modalInstance.dismiss('cancel');
                     });
                 }; // signMessage

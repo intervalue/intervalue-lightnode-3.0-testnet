@@ -1780,8 +1780,9 @@ angular.module('copayApp.controllers')
 							$scope.ok = function() {
 								$scope.loading = true;
 								$modalInstance.close(gettextCatalog.getString('Confirm'));
-								
-								wallet.eraseTextcoin(btx.unit, btx.addressTo);
+
+								//todo delete
+								// wallet.eraseTextcoin(btx.unit, btx.addressTo);
 								
 								indexScope.updateTxHistory();
 								$rootScope.$emit('Local/SetTab', 'history');

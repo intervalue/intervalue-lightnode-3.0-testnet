@@ -372,13 +372,15 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
         if (uri.indexOf("content:") !== -1) {
             window.plugins.intent.readFileFromContentUrl(uri.replace(/#/g,'%23'), function (content) {
                 breadcrumbs.add("handleFile - content url");
-                require('intervaluecore/wallet.js').handlePrivatePaymentFile(null, content, cb);
+                //todo delete
+                // require('intervaluecore/wallet.js').handlePrivatePaymentFile(null, content, cb);
             }, function (err) {throw err});
             return checkDoubleClaim();
         }
         if (uri.indexOf("." + configService.privateTextcoinExt) != -1) {
             breadcrumbs.add("handleFile - file path url");
-            require('intervaluecore/wallet.js').handlePrivatePaymentFile(uri, null, cb);
+            //todo delete
+            // require('intervaluecore/wallet.js').handlePrivatePaymentFile(uri, null, cb);
             return checkDoubleClaim();
         }
         $rootScope.$emit('process_status_change', 'claiming', false);
