@@ -1234,87 +1234,89 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             }
         }
 
-        $scope.acceptPrivateProfile = function(privateProfileJsonBase64){
-            $rootScope.modalOpened = true;
-            var objPrivateProfile = privateProfile.getPrivateProfileFromJsonBase64(privateProfileJsonBase64);
-            if (!objPrivateProfile)
-                throw Error('failed to parse the already validated base64 private profile '+privateProfileJsonBase64);
-            var fc = profileService.focusedClient;
-            var ModalInstanceCtrl = function($scope, $modalInstance) {
-                $scope.color = fc.backgroundColor;
-                var openProfile = {};
-                for (var field in objPrivateProfile.src_profile)
-                    if (Array.isArray(objPrivateProfile.src_profile[field]))
-                        openProfile[field] = objPrivateProfile.src_profile[field][0];
-                $scope.openProfile = openProfile;
-                $scope.bDisabled = true;
-                $scope.buttonLabel = gettext('Verifying the profile...');
-                privateProfile.parseAndValidatePrivateProfile(objPrivateProfile, function(error, address, attestor_address, bMyAddress){
-                    if (!$scope)
-                        return;
-                    if (error){
-                        $scope.error = error;
-                        $scope.buttonLabel = gettext('Bad profile');
-                        $timeout(function() {
-                            $rootScope.$apply();
-                        });
-                        return;
-                    }
-                    $scope.address = address;
-                    $scope.attestor_address = attestor_address;
-                    $scope.bMyAddress = bMyAddress;
-                    if (!bMyAddress)
-                        return $timeout(function() {
-                            $rootScope.$apply();
-                        });
-                    checkIfPrivateProfileExists(objPrivateProfile, function(bExists){
-                        if (bExists)
-                            $scope.buttonLabel = gettext('Already saved');
-                        else{
-                            $scope.buttonLabel = gettext('Store');
-                            $scope.bDisabled = false;
-                        }
-                        $timeout(function() {
-                            $rootScope.$apply();
-                        });
-                    });
-                });
 
-                $scope.getDisplayField = getDisplayField;
-
-                $scope.store = function() {
-                    if (!$scope.bMyAddress)
-                        throw Error("not my address");
-                    privateProfile.savePrivateProfile(objPrivateProfile, $scope.address, $scope.attestor_address, function(){
-                        $timeout(function(){
-                            $modalInstance.dismiss('cancel');
-                        });
-                    });
-                };
-
-                $scope.cancel = function() {
-                    $modalInstance.dismiss('cancel');
-                };
-            };
-
-            var modalInstance = $modal.open({
-                templateUrl: 'views/modals/accept-profile.html',
-                windowClass: animationService.modalAnimated.slideUp,
-                controller: ModalInstanceCtrl,
-                scope: $scope
-            });
-
-            var disableCloseModal = $rootScope.$on('closeModal', function() {
-                modalInstance.dismiss('cancel');
-            });
-
-            modalInstance.result.finally(function() {
-                $rootScope.modalOpened = false;
-                disableCloseModal();
-                var m = angular.element(document.getElementsByClassName('reveal-modal'));
-                m.addClass(animationService.modalAnimated.slideOutDown);
-            });
-        };
+        //todo delete
+        // $scope.acceptPrivateProfile = function(privateProfileJsonBase64){
+        //     $rootScope.modalOpened = true;
+        //     var objPrivateProfile = privateProfile.getPrivateProfileFromJsonBase64(privateProfileJsonBase64);
+        //     if (!objPrivateProfile)
+        //         throw Error('failed to parse the already validated base64 private profile '+privateProfileJsonBase64);
+        //     var fc = profileService.focusedClient;
+        //     var ModalInstanceCtrl = function($scope, $modalInstance) {
+        //         $scope.color = fc.backgroundColor;
+        //         var openProfile = {};
+        //         for (var field in objPrivateProfile.src_profile)
+        //             if (Array.isArray(objPrivateProfile.src_profile[field]))
+        //                 openProfile[field] = objPrivateProfile.src_profile[field][0];
+        //         $scope.openProfile = openProfile;
+        //         $scope.bDisabled = true;
+        //         $scope.buttonLabel = gettext('Verifying the profile...');
+        //         privateProfile.parseAndValidatePrivateProfile(objPrivateProfile, function(error, address, attestor_address, bMyAddress){
+        //             if (!$scope)
+        //                 return;
+        //             if (error){
+        //                 $scope.error = error;
+        //                 $scope.buttonLabel = gettext('Bad profile');
+        //                 $timeout(function() {
+        //                     $rootScope.$apply();
+        //                 });
+        //                 return;
+        //             }
+        //             $scope.address = address;
+        //             $scope.attestor_address = attestor_address;
+        //             $scope.bMyAddress = bMyAddress;
+        //             if (!bMyAddress)
+        //                 return $timeout(function() {
+        //                     $rootScope.$apply();
+        //                 });
+        //             checkIfPrivateProfileExists(objPrivateProfile, function(bExists){
+        //                 if (bExists)
+        //                     $scope.buttonLabel = gettext('Already saved');
+        //                 else{
+        //                     $scope.buttonLabel = gettext('Store');
+        //                     $scope.bDisabled = false;
+        //                 }
+        //                 $timeout(function() {
+        //                     $rootScope.$apply();
+        //                 });
+        //             });
+        //         });
+        //
+        //         $scope.getDisplayField = getDisplayField;
+        //
+        //         $scope.store = function() {
+        //             if (!$scope.bMyAddress)
+        //                 throw Error("not my address");
+        //             privateProfile.savePrivateProfile(objPrivateProfile, $scope.address, $scope.attestor_address, function(){
+        //                 $timeout(function(){
+        //                     $modalInstance.dismiss('cancel');
+        //                 });
+        //             });
+        //         };
+        //
+        //         $scope.cancel = function() {
+        //             $modalInstance.dismiss('cancel');
+        //         };
+        //     };
+        //
+        //     var modalInstance = $modal.open({
+        //         templateUrl: 'views/modals/accept-profile.html',
+        //         windowClass: animationService.modalAnimated.slideUp,
+        //         controller: ModalInstanceCtrl,
+        //         scope: $scope
+        //     });
+        //
+        //     var disableCloseModal = $rootScope.$on('closeModal', function() {
+        //         modalInstance.dismiss('cancel');
+        //     });
+        //
+        //     modalInstance.result.finally(function() {
+        //         $rootScope.modalOpened = false;
+        //         disableCloseModal();
+        //         var m = angular.element(document.getElementsByClassName('reveal-modal'));
+        //         m.addClass(animationService.modalAnimated.slideOutDown);
+        //     });
+        // };
 
 
 

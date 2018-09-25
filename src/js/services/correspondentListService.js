@@ -213,8 +213,9 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	}
 	
 	function getPrivateProfileFromJsonBase64(privateProfileJsonBase64){
-		var privateProfile = require('intervaluecore/private_profile.js');
-		var objPrivateProfile = privateProfile.getPrivateProfileFromJsonBase64(privateProfileJsonBase64);
+		// var privateProfile = require('intervaluecore/private_profile.js');
+		//todo delete
+		var objPrivateProfile = null;
 		if (!objPrivateProfile)
 			return null;
 		var arrFirstFields = [];
