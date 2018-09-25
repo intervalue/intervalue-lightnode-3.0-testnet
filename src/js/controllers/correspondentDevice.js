@@ -358,18 +358,19 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                                         device_address: device.getMyDeviceAddress()
                                     }
                                 };
-                                walletDefinedByAddresses.createNewSharedAddress(arrDefinition, assocSignersByPath, {
-                                    ifError: function(err){
-                                        $scope.bWorking = false;
-                                        $scope.error = err;
-                                        $timeout(function(){
-                                            $scope.$digest();
-                                        });
-                                    },
-                                    ifOk: function(shared_address){
-                                        composeAndSend(shared_address, arrDefinition, assocSignersByPath, my_address);
-                                    }
-                                });
+                                //todo delete
+                                // walletDefinedByAddresses.createNewSharedAddress(arrDefinition, assocSignersByPath, {
+                                //     ifError: function(err){
+                                //         $scope.bWorking = false;
+                                //         $scope.error = err;
+                                //         $timeout(function(){
+                                //             $scope.$digest();
+                                //         });
+                                //     },
+                                //     ifOk: function(shared_address){
+                                //         composeAndSend(shared_address, arrDefinition, assocSignersByPath, my_address);
+                                //     }
+                                // });
                             });
                         });
 
@@ -493,7 +494,8 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                         assocMemberAddressesByDestAddress[destinationAddress] = arrMemberAddresses;
                         arrAllMemberAddresses = arrAllMemberAddresses.concat(arrMemberAddresses);
                         arrFuncs.push(function(cb){
-                            walletDefinedByAddresses.validateAddressDefinition(arrDefinition, cb);
+                            //todo delete
+                            // walletDefinedByAddresses.validateAddressDefinition(arrDefinition, cb);
                         });
                     }
                     arrAllMemberAddresses = lodash.uniq(arrAllMemberAddresses);
@@ -517,9 +519,10 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                                 for (var destinationAddress in objMultiPaymentRequest.definitions){
                                     var arrDefinition = objMultiPaymentRequest.definitions[destinationAddress].definition;
                                     var assocSignersByPath = objMultiPaymentRequest.definitions[destinationAddress].signers;
-                                    var arrPeerAddresses = walletDefinedByAddresses.getPeerAddressesFromSigners(assocSignersByPath);
-                                    if (lodash.difference(arrPeerAddresses, arrAllMemberAddresses).length !== 0)
-                                        throw Error("inconsistent peer addresses");
+                                    //todo delete
+                                    // var arrPeerAddresses = walletDefinedByAddresses.getPeerAddressesFromSigners(assocSignersByPath);
+                                    // if (lodash.difference(arrPeerAddresses, arrAllMemberAddresses).length !== 0)
+                                    //     throw Error("inconsistent peer addresses");
                                     $scope.arrHumanReadableDefinitions.push({
                                         destinationAddress: destinationAddress,
                                         humanReadableDefinition: correspondentListService.getHumanReadableDefinition(arrDefinition, arrMyAddresses, [], arrPeerAddresses)
@@ -562,12 +565,13 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                             console.log('shared address '+shared_address+' already known');
                             return cb();
                         }
-                        walletDefinedByAddresses.handleNewSharedAddress({address: shared_address, definition: arrDefinition, signers: signers}, {
-                            ifOk: cb,
-                            ifError: function(err){
-                                throw Error('failed to create shared address '+shared_address+': '+err);
-                            }
-                        });
+                        //todo delete
+                        // walletDefinedByAddresses.handleNewSharedAddress({address: shared_address, definition: arrDefinition, signers: signers}, {
+                        //     ifOk: cb,
+                        //     ifError: function(err){
+                        //         throw Error('failed to create shared address '+shared_address+': '+err);
+                        //     }
+                        // });
                     });
                 }
 
