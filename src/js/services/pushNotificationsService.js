@@ -8,12 +8,13 @@ angular.module('copayApp.services')
 	var _ws;
 	
 	var eventBus = require('intervaluecore/event_bus.js');
-	
+
+	//todo delete
 	function sendRequestEnableNotification(ws, registrationId) {
-		var network = require('intervaluecore/network.js');
-		network.sendRequest(ws, 'hub/enable_notification', {registrationId: registrationId, platform: isMobile.iOS() ? 'ios' : 'android'}, false, function(ws, request, response) {
-			if (!response || (response && response !== 'ok')) return $log.error('Error sending push info');
-		});
+		// var network = require('intervaluecore/network.js');
+		// network.sendRequest(ws, 'hub/enable_notification', {registrationId: registrationId, platform: isMobile.iOS() ? 'ios' : 'android'}, false, function(ws, request, response) {
+		// 	if (!response || (response && response !== 'ok')) return $log.error('Error sending push info');
+		// });
 	}
 	
 	window.onNotification = function(data) {
@@ -91,14 +92,15 @@ angular.module('copayApp.services')
 		// 	});
 		// });
 	};
-	
+
+	//todo delete
 	function disable_notification() {
 		storageService.getPushInfo(function(err, pushInfo) {
 			storageService.removePushInfo(function() {
-				var network = require('intervaluecore/network.js');
-				network.sendRequest(_ws, 'hub/disable_notification', pushInfo.registrationId, false, function(ws, request, response) {
-					if (!response || (response && response !== 'ok')) return $log.error('Error sending push info');
-				});
+				// var network = require('intervaluecore/network.js');
+				// network.sendRequest(_ws, 'hub/disable_notification', pushInfo.registrationId, false, function(ws, request, response) {
+				// 	if (!response || (response && response !== 'ok')) return $log.error('Error sending push info');
+				// });
 			});
 		});
 		configService.set({pushNotifications: {enabled: false}}, function(err) {

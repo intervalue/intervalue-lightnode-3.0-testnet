@@ -744,13 +744,14 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                         if (rows.length === 0){
                             if (conf.bLight && bFirstAttempt){
                                 $scope.question = '[Fetching the question...]';
-                                network.requestProofsOfJointsIfNewOrUnstable([objVote.poll_unit], function(err){
-                                    if (err){
-                                        $scope.error = err;
-                                        return scopeApply();
-                                    }
-                                    setPollQuestion();
-                                });
+                                //todo delete
+                                // network.requestProofsOfJointsIfNewOrUnstable([objVote.poll_unit], function(err){
+                                //     if (err){
+                                //         $scope.error = err;
+                                //         return scopeApply();
+                                //     }
+                                //     setPollQuestion();
+                                // });
                             }
                             else
                                 $scope.question = '[No such poll: '+objVote.poll_unit+']';
@@ -1081,11 +1082,13 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             $scope.error = error;
         }
 
+        //todo delete
         function readLastMainChainIndex(cb){
             if (conf.bLight){
-                network.requestFromLightVendor('get_last_mci', null, function(ws, request, response){
-                    response.error ? cb(response.error) : cb(null, response);
-                });
+
+                // network.requestFromLightVendor('get_last_mci', null, function(ws, request, response){
+                //     response.error ? cb(response.error) : cb(null, response);
+                // });
             }
             else
                 storage.readLastMainChainIndex(function(last_mci){

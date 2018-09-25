@@ -144,24 +144,25 @@ angular.module('copayApp.services').factory('aliasValidationService', function($
 				// light
 				var network = require('intervaluecore/network.js');
 				var params = {attestor_address: attestorAddress, field: obj.dbKey, value: value};
-				network.requestFromLightVendor('light/get_attestation', params, function (ws, request, response) {
-					if (response.error) {
-						return setResult('unknown');
-					}
-
-					var attestation_unit = response;
-					if (attestation_unit === "") {// no attestation
-						return setResult('none');
-					}
-
-					network.requestHistoryFor([attestation_unit], [], function (err) {
-						if (err) {
-							return setResult('unknown');
-						}
-						// now attestation_unit is in the db (stable or unstable)
-						root.resolveValueToBbAddress(attestorKey, value, callback);
-					});
-				});
+				//todod delete
+				// network.requestFromLightVendor('light/get_attestation', params, function (ws, request, response) {
+				// 	if (response.error) {
+				// 		return setResult('unknown');
+				// 	}
+				//
+				// 	var attestation_unit = response;
+				// 	if (attestation_unit === "") {// no attestation
+				// 		return setResult('none');
+				// 	}
+				//
+				// 	network.requestHistoryFor([attestation_unit], [], function (err) {
+				// 		if (err) {
+				// 			return setResult('unknown');
+				// 		}
+				// 		// now attestation_unit is in the db (stable or unstable)
+				// 		root.resolveValueToBbAddress(attestorKey, value, callback);
+				// 	});
+				// });
 			}
 		);
 	};
