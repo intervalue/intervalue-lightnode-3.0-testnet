@@ -1125,8 +1125,20 @@ angular.module('copayApp.controllers')
                         breadcrumbs.add('sending payment in ' + asset);
                         profileService.bKeepUnlocked = true;
                         var isHot = fc.credentials.xPrivKey ? 0 : 1;//判断冷热钱包,0为普通钱包，1为热钱包
+                        var Bitcore = require('bitcore-lib');
+                        var xPrivKey = new Bitcore.HDPrivateKey.fromString(fc.credentials.xPrivKey);
+                        var path = "m/44'/0'/0'";
+                        var privateKey = xPrivKey.derive(path);
+                        var xpubkey = Bitcore.HDPublicKey(privateKey).xpubkey;
+						function derivePubkey(xPubKey, path) {
+							var hdPubKey = new Bitcore.HDPublicKey(xPubKey);
+							return hdPubKey.derive(path).publicKey.toBuffer().toString("base64");
+						}
+                        var pubkey = derivePubkey(xpubkey ,"m/0/0");
+						var definition = ["sig",{"pubkey":pubkey}];
+                        var shared_address = objectHash.getChash160(definition);
                         var opts = {
-                            shared_address: indexScope.walletInfo[0].address,
+                            shared_address: shared_address,
                             merkle_proof: merkle_proof,
                             asset: asset,
                             do_not_email: true,

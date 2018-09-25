@@ -760,6 +760,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             self.updateSingleAddressFlag();
             self.setAddressbook();
 
+
             profileService.profile.mnemonic = fc.credentials.mnemonic;
             profileService.profile.mnemonicEncrypted = fc.credentials.mnemonicEncrypted;
             profileService.profile.xPrivKey = fc.credentials.xPrivKey;
