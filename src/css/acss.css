@@ -159,7 +159,7 @@
 /*walletHome-wallet-part end*/
 
 /*receive start*/
-.receivelr{position: fixed;width: 100%;height:100%;background: #F9FAFC;padding: 0 15px;overflow: auto;}
+.receivelr{position: fixed;width: 100%;height:100%;background: #F9FAFC;padding: 0 15px;overflow: scroll;}
 .addreceive{background-color:#fff;margin-top: 40px;box-shadow:0px 0px 8px 0px rgba(220,220,220,0.5);border-radius: 5px;padding-bottom:16px;}
 .addreceive .addreceiveimgpr{position: relative;height:34px;}
 .addreceive .addreceiveimgpr .addreceiveimg{width: 50px;height:50px;position: absolute;top:-25px;left: 50%;transform: translateX(-50%);background: #ffffff;border-radius:50%;box-shadow:0px 0px 5px 0px rgba(179,179,179,0.5);text-align: center;
@@ -197,7 +197,7 @@ padding: 20px 15px 0;}
 .adwnnumo{padding:18px 15px;}
 .adwnnum{padding:13px;text-align:center;margin-bottom:18px;background:#45AD8E;box-shadow:0px 11px 12px -12px #45AD8E;border-radius:3px;}
 
-.adwnnum .adwnlogo{width:53px;height:53px;background:#dcdcdc;margin:0 auto;margin-bottom: 10px;}
+.adwnnum .adwnlogo{width:53px;height:53px;margin:0 auto;margin-bottom: 10px;}
 .adwnnum .adwnnumamt{font-size:14px;font-family:pfbold;font-weight:bold;color:#8CF8D8;padding-bottom: 16px;border-bottom: 1px dashed #fff;}
 .adwnnum .adwnnumamt span{margin-right: 14px;font-size:20px;font-family:pfbold;font-weight:600;color:#ffffff;}
 .adwnnum .adwnaddr{margin-top: 12px;cursor:pointer;margin-left: 20px;}

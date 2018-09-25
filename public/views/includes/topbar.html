@@ -16,6 +16,10 @@
            ng-click="topbar.goToWaname(); goToWaname = null;index.backwaname = false;">
             <img src="./img/chatbackstate.png" />
         </a>
+        <a ng-show="passgoToWaname"
+           ng-click="topbar.passgoToWaname(); passgoToWaname = null;index.backwaname = false;">
+            <img src="./img/chatbackstate.png" />
+        </a>
         <a ng-show="gohisback" history-back
            ng-click=" gohisback = null">
             <img src="./img/chatbackstate.png" />

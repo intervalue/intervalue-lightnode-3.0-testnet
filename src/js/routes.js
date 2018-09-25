@@ -538,7 +538,7 @@ angular
         }
       })
       .state('changeWalletPassWord', {
-          url: '/changeWalletPassWord?walletId',
+          url: '/changeWalletPassWord?walletid&addr&name&image&ammount',
           needProfile: true,
           views: {
               'main@': {
