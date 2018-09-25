@@ -471,6 +471,7 @@ ul.manage li {
 .size-24 { font-size: 24px; }
 .size-36 { font-size: 36px; }
 .size-42 { font-size: 42px; }
+.size-45 { font-size: 45px; }
 .size-48 { font-size: 48px; }
 .size-60 { font-size: 60px; }
 .size-72 { font-size: 72px; }
@@ -621,12 +622,6 @@ input[type=number]::-webkit-outer-spin-button {
 
 .tx-proposal i.active {
   background-color: #A02F23;
-}
-
-.header-modal {
-  width: 100%;
-  padding: 0.8rem;
-  position: relative;
 }
 
 .label {

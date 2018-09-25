@@ -1668,6 +1668,10 @@ msgstr "共同签署者总数"
 msgid "Transaction"
 msgstr "交易"
 
+#: public/views/modals/tx-details.html:9
+msgid "Transaction Details"
+msgstr "交易详情"
+
 #: public/views/walletHome.html:646
 msgid "Transactions<br> Downloaded"
 msgstr "交易历史<br>下载完毕"
