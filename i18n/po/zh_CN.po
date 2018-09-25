@@ -2252,7 +2252,44 @@ msgstr "编写钱包密码后，建议从设备中删除密码。"
 msgid "Delete words"
 msgstr "删除助记词"
 
+msgid "Authorized Signature"
+msgstr "授权签名"
 
+msgid "Please use the cold wallet of this address to scan the QR code to authorize observation."
+msgstr "请用此地址的冷钱包扫描二维码授权观察"
+
+msgid "Please use the hot wallet to scan the QR code to issue a transaction."
+msgstr "请用热钱包扫描二维码发出交易"
+
+msgid "Authorized address"
+msgstr "授权地址"
+
+msgid "Data"
+msgstr "数据"
+
+msgid "Authorized success"
+msgstr "授权成功"
+
+msgid "Complete authorization"
+msgstr "完成授权"
+
+msgid "Scan the QR code of the authorized wallet page and import the signature"
+msgstr "扫描授权钱包页面的二维码，导入签名"
+
+msgid "Import the signature"
+msgstr "导入签名"
+
+msgid "Cold wallet scanning"
+msgstr "冷钱包扫描"
+
+msgid "Read in signature data"
+msgstr "读入签名数据"
+
+msgid "Scan cold wallet signature data QR code"
+msgstr "扫描冷钱包签名数据二维码"
+
+msgid "Send transaction"
+msgstr "发送交易"
 
 
 
