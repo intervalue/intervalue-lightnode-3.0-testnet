@@ -992,13 +992,14 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                 $scope.color = fc.backgroundColor;
                 $scope.signed_message = objSignedMessage.signed_message;
                 $scope.address = objSignedMessage.authors[0].address;
-                var validation = require('intervaluecore/validation.js');
-                validation.validateSignedMessage(objSignedMessage, function(err){
-                    $scope.bValid = !err;
-                    if (err)
-                        console.log("validateSignedMessage: "+err);
-                    scopeApply();
-                });
+                //todo delete
+                // var validation = require('intervaluecore/validation.js');
+                // validation.validateSignedMessage(objSignedMessage, function(err){
+                //     $scope.bValid = !err;
+                //     if (err)
+                //         console.log("validateSignedMessage: "+err);
+                //     scopeApply();
+                // });
 
                 function scopeApply(){
                     $timeout(function(){
