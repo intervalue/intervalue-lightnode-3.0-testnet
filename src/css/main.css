@@ -365,9 +365,9 @@ ul.tx-copayers {
 }
 
 .last-transactions-content {
-  padding: 1.5rem 1rem;
+  padding: 20px 0;
   cursor:pointer;
-  border-bottom: 1px solid #E4E8EC;
+  border-bottom: 1px solid #DEDEDE;
 }
 
 .sign-action {

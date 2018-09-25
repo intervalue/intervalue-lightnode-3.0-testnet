@@ -105,6 +105,18 @@
 .siderbarb a span{white-space: nowrap;font-size:12px;font-weight:400;color:#fff;line-height:17px;float:left;}
 /*sidebar end*/
 
+/*walletHome-history-part start*/
+.histxdetail{background: #f9fafc;padding:0 15px;height: calc(100vh - 240px);overflow: scroll;}
+.histop{display: flex;justify-content: space-between;align-items: center;margin-bottom: 6px;}
+.histopl img{margin-right: 20px;}
+.histopl span{color: #323232;font-size: 14px;font-weight: 400;}
+.histopr time{font-size: 12px;color: #909090;}
+.hisbottom{text-align: right;}
+.hisbramount{color: #45AD8E;font-size: 18px;font-weight: 500;font-family: pfmedium;text-align: right;}
+.hisbsamount{color: #D45757;font-size: 18px;font-weight: 500;font-family: pfmedium;text-align: right;}
+.hisunit{font-size: 14px;color: #646464;font-weight: 500;font-family: pfmedium;margin-left: 6px;}
+/*walletHome-history-part end*/
+
 /*walletHome-send-part start*/
 #send{background: #F9FAFC;}
 #send .sendform{padding: 12px 15px 0;}
