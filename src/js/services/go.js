@@ -152,7 +152,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                     }
                     //第二次扫码授权
                     else if(objRequest.type === 'sign'){
-                        var mnemonic;
+                        var xPrivKey;
                         var wc = profileService.walletClients;
                         db.query('select extended_pubkey,a.wallet  from extended_pubkeys as a  left join my_addresses as b on a.wallet=b.wallet where b.address=?',[objRequest.addr],function (rows) {
                             for(var index in wc){
@@ -164,8 +164,8 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                                         }
                                         profileService.insistUnlockFC(null, function (err){
                                             if (err) return;
-                                            mnemonic = profileService.focusedClient.credentials.mnemonic;;
-                                            shadowWallet.getSignatureDetlCode(objRequest,mnemonic,function (signatureDetlCode) {
+                                            xPrivKey = profileService.focusedClient.credentials.xPrivKey;
+                                            shadowWallet.getSignatureDetlCode(objRequest,xPrivKey,function (signatureDetlCode) {
                                                 if(typeof  signatureDetlCode =="object"){
                                                     $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
                                                 }else{
@@ -176,8 +176,8 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                                         });
                                         break;
                                     }else {
-                                        mnemonic = wc[index].credentials.mnemonic;
-                                        shadowWallet.getSignatureDetlCode(objRequest,mnemonic,function (signatureDetlCode) {
+                                        xPrivKey = wc[index].credentials.xPrivKey;
+                                        shadowWallet.getSignatureDetlCode(objRequest,xPrivKey,function (signatureDetlCode) {
                                             if(typeof  signatureDetlCode =="object"){
                                                 $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
                                             }else{

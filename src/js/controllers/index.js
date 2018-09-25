@@ -1770,7 +1770,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 self.shadowstep = 'hot2';
                 console.log(signatureCodeQRCode);
             }else{
-                self.showshadow = false;
+                $rootScope.$emit('Local/ShowErrorAlert', "The address: "+signatureCodeQRCode);
             }
             $timeout(function () {
                 $rootScope.$apply();
