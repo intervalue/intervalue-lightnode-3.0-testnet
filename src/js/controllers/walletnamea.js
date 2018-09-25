@@ -25,7 +25,6 @@ angular.module('copayApp.controllers').controller('walletnameaController',
         self.changeWalletName = function (walletId) {
             var form = $scope.changeName;
             var newWalletName = form.name.$modelValue;
-            alert(newWalletName);
             storageService.getProfile(function (err, profile) {
                 if (err) {
                     $rootScope.$emit('Local/DeviceError', err);
@@ -45,12 +44,15 @@ angular.module('copayApp.controllers').controller('walletnameaController',
                     storageService.storeProfile(profile, function (err) {
                         if(err)
                         $rootScope.$emit('Local/ShowErrorAlert', +walletId+":    "+err);
-                    });
-                    profileService.setWalletClients();
-                    profileService.setAndStoreFocus(walletId,function (err) {
+                        profileService.setWalletClients();
+                        $rootScope.$emit('Local/ShowAlert', "The  wallet was update name successfully, please restart the app", 'fi-check', function() {
+                            if (navigator && navigator.app)
+                                navigator.app.exitApp();
+                            else if (process.exit)
+                                process.exit();
+                        });
                     });
                 }
-
             });
 
         }
