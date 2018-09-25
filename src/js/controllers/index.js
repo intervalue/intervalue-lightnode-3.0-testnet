@@ -25,6 +25,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.$state = $state;
     self.usePushNotifications = isCordova && !isMobile.Windows();
     self.showshadow= false;
+    self.showshadow100= false;
     self.verificationQRCode = '';
     self.signatureAddr = '';
     self.shadowstep = 'hot1';
@@ -569,12 +570,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             async.eachSeries(
                 arrSharedWallets,
                 function (objSharedWallet, cb) {
-                    //todo delete
-                    // walletDefinedByAddresses.readSharedAddressCosigners(objSharedWallet.shared_address, function (cosigners) {
-                    //     objSharedWallet.shared_address_cosigners = cosigners.map(function (cosigner) { return cosigner.name; }).join(", ");
-                    //     objSharedWallet.creation_ts = cosigners[0].creation_ts;
-                    //     cb();
-                    // });
+                    walletDefinedByAddresses.readSharedAddressCosigners(objSharedWallet.shared_address, function (cosigners) {
+                        objSharedWallet.shared_address_cosigners = cosigners.map(function (cosigner) { return cosigner.name; }).join(", ");
+                        objSharedWallet.creation_ts = cosigners[0].creation_ts;
+                        cb();
+                    });
                 },
                 function () {
                     arrSharedWallets.sort(function (o1, o2) { return (o2.creation_ts - o1.creation_ts); });
@@ -592,16 +592,15 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             $scope.selectSubwallet = function (shared_address) {
                 self.shared_address = shared_address;
                 if (shared_address) {
-                    // walletDefinedByAddresses.determineIfHasMerkle(shared_address, function (bHasMerkle) {
-                    //     self.bHasMerkle = bHasMerkle;
-                        //todo delete
-                        // walletDefinedByAddresses.readSharedAddressCosigners(shared_address, function (cosigners) {
-                        //     self.shared_address_cosigners = cosigners.map(function (cosigner) { return cosigner.name; }).join(", ");
-                        //     $timeout(function () {
-                        //         $rootScope.$apply();
-                        //     });
-                        // });
-                    // });
+                    walletDefinedByAddresses.determineIfHasMerkle(shared_address, function (bHasMerkle) {
+                        self.bHasMerkle = bHasMerkle;
+                        walletDefinedByAddresses.readSharedAddressCosigners(shared_address, function (cosigners) {
+                            self.shared_address_cosigners = cosigners.map(function (cosigner) { return cosigner.name; }).join(", ");
+                            $timeout(function () {
+                                $rootScope.$apply();
+                            });
+                        });
+                    });
                 }
                 else
                     self.bHasMerkle = false;
@@ -1839,6 +1838,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         self.showUnsignedTransactionIfoObj = showUnsignedTransactionIfo;
         self.showUnsignedTransactionIfo = JSON.stringify(showUnsignedTransactionIfo);
         self.showshadow = true;
+        self.showshadow100 = true;
         self.shadowstep = 'csend1';
         $timeout(function () {
             $rootScope.$apply();

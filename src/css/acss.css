@@ -322,6 +322,19 @@ padding: 20px 15px 0;}
 .scanpop .scanin .item img{flex-shrink: 0;margin-right: 16px;}
 .scanpop .scanin .item .itemin label{font-size: 14px;color: #323232;}
 .scanpop .scanin .item .itemin div{word-break: break-all;font-size: 12px;color: #909090;}
+.csend1{background:#F9FAFC;padding: 20px 13px 0;}
+.csend1head{background:#45AD8E;
+    box-shadow:0px 11px 9px -7px rgba(87,193,123,0.62);
+    border-radius:3px;height: 90px;color: #fff;text-align: center;font-weight: 600;font-family: pfbold;margin-bottom: 18px;padding: 0 10px;}
+.csend1head div{padding: 4px 0;}
+.csendunit{border-top: 1px dashed #fff;}
+.csend1 form{background:#fff;
+    box-shadow:0px 0px 3px 0px rgba(0,0,0,0.12);
+    border-radius:3px 3px 0px 0px;height:calc(100vh - 174px);overflow: auto;padding:0 0 20px;}
+.sdflex{display: flex;justify-content: space-between;align-items: center;padding: 16px 10px;border-bottom: 1px solid #DEDEDE;
+    font-size: 12px;color: #909090;}
+.sdflex .sdtitle{font-size: 12px;color: #909090;flex-shrink: 0;}
+.sdflex .sdinfo{font-size: 12px;color: #323232;word-break: break-all;margin-left: 20px;width: 100%;}
 /*shadowDevice end*/
 
 /*公共样式*/
