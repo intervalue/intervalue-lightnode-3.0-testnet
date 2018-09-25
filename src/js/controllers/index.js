@@ -995,6 +995,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         config.colorFor = config.colorFor || {};
         config.imageFor = config.imageFor || {};
         for(let item in fc){
+            if(!fc[item].image) fc[item].image = './img/rimg/1.png';
         for(let cf in config.imageFor){
             if(item == cf){
                 fc[item].image = config.imageFor[cf];
@@ -1909,6 +1910,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             }
         }, false);
     })();
-
+console.log(profileService.walletClients);
 
 });
