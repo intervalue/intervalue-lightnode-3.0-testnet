@@ -18,36 +18,40 @@ angular.module('copayApp.controllers').controller('changeWalletPassWordControlle
                     $rootScope.$emit('Local/ShowErrorAlert', "Two password entries are inconsistent");
                     return;
             }
-            var fc = profileService.focusedClient;
-            if (!fc) return;
 
-            if (comadpass && !fc.hasPrivKeyEncrypted()) {
-                $rootScope.$emit('Local/NeedsPassword', true, null, function(err, comadpass) {
-                    if (err || !comadpass) {
-                        return;
-                    }
-                    profileService.setPrivateKeyEncryptionFC(comadpass, function() {
-                        $rootScope.$emit('Local/NewEncryptionSetting');
-                    });
-                });
-            } else {
-                if ( fc.hasPrivKeyEncrypted())  {
-                    profileService.unlockFC(null, function(err){
-                        if (err) {
-                            return;
-                        }
-                        profileService.disablePrivateKeyEncryptionFC(function(err) {
-                            $rootScope.$emit('Local/NewEncryptionSetting');
-                            if (err) {
-                                $log.error(err);
+
+                profileService.setAndStoreFocus(walletId, function() {
+                    var fc = profileService.focusedClient;
+                    if (!fc) return;
+                    if (comadpass && !fc.hasPrivKeyEncrypted()) {
+                        $rootScope.$emit('Local/NeedsPassword', true, null, function(err, comadpass) {
+                            if (err || !comadpass) {
+                                return;
                             }
                             profileService.setPrivateKeyEncryptionFC(comadpass, function() {
                                 $rootScope.$emit('Local/NewEncryptionSetting');
-                                $rootScope.$emit('Local/ShowErrorAlert', "Password reset complete");
                             });
                         });
-                    });
-                }
-            }
+                    } else {
+                        if ( fc.hasPrivKeyEncrypted())  {
+                            profileService.unlockFC(null, function(err){
+                                if (err) {
+                                    return;
+                                }
+                                profileService.disablePrivateKeyEncryptionFC(function(err) {
+                                    $rootScope.$emit('Local/NewEncryptionSetting');
+                                    if (err) {
+                                        $log.error(err);
+                                    }
+                                    profileService.setPrivateKeyEncryptionFC(comadpass, function() {
+                                        $rootScope.$emit('Local/NewEncryptionSetting');
+                                        $rootScope.$emit('Local/ShowErrorAlert', "Password reset complete");
+                                    });
+                                });
+                            });
+                        }
+                    }
+                });
+
         }
     });
