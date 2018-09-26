@@ -995,21 +995,24 @@ angular.module('copayApp.controllers').controller('indexController', function ($
      * 设置钱包对应头像
      */
     setTimeout(function () {
+        self.updateImage();
+    });
+
+    self.updateImage = function(){
         var config = configService.getSync();
         var fc = profileService.walletClients;
         config.colorFor = config.colorFor || {};
         config.imageFor = config.imageFor || {};
         for(let item in fc){
             if(!fc[item].image) fc[item].image = './img/rimg/1.png';
-        for(let cf in config.imageFor){
-            if(item == cf){
-                fc[item].image = config.imageFor[cf];
-                break;
+            for(let cf in config.imageFor){
+                if(item == cf){
+                    fc[item].image = config.imageFor[cf];
+                    break;
                 }
             }
         }
-
-    });
+    }
     self.updateColor = function () {
         var config = configService.getSync();
         config.colorFor = config.colorFor || {};
@@ -1252,14 +1255,15 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                             });
                         });
                     require('intervaluecore/wallet').getWalletsInfo(function (obj) {
+                        self.updateImage();
                         let trans = [];
                         let fc = profileService.walletClients;
-                        console.log(profileService.profile.walletClients);
                         obj.forEach(function(tran){
                             for(var item in fc) {
                                 if (tran.wallet == fc[item].credentials.walletId){
                                     var walletNameIfo = fc[item].credentials.walletName;
                                     var imageIfo = fc[item].image;
+                                    break;
                                 }
                             }
                             trans.push({

@@ -114,16 +114,17 @@ angular.module('copayApp.services')
     };
 
     root.setWalletClient = function (credentials) {
-      if (root.walletClients[credentials.walletId] && root.walletClients[credentials.walletId].started)
-        return;
-
+     /* if (root.walletClients[credentials.walletId] && root.walletClients[credentials.walletId].started)
+        return;*/
       var client = bwcService.getClient(JSON.stringify(credentials));
+
         for(let item in root.profile.credentials){
           if(root.profile.credentials[item].walletId ==client.credentials.walletId ){
               client.credentials.xPrivKey = root.profile.credentials[item].xPrivKey;
               client.credentials.mnemonic = root.profile.credentials[item].mnemonic;
               client.credentials.xPrivKeyEncrypted = root.profile.credentials[item].xPrivKeyEncrypted;
               client.credentials.mnemonicEncrypted = root.profile.credentials[item].mnemonicEncrypted;
+              client.credentials.walletName = root.profile.credentials[item].walletName;
               break;
           }
         }
@@ -133,7 +134,6 @@ angular.module('copayApp.services')
       client.credentials.mnemonicEncrypted = root.profile.mnemonicEncrypted;*/
 
       root.walletClients[credentials.walletId] = client;
-
       root.walletClients[credentials.walletId].started = true;
       client.initialize({}, function (err) {
         if (err) {
@@ -257,6 +257,7 @@ angular.module('copayApp.services')
               return cb(new Error('NOPROFILE: No profile'));
             } else {
               $log.debug('Profile read');
+                console.log(profile);
               return root.bindProfile(profile, cb);
             }
 
