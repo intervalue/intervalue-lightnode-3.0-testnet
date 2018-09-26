@@ -45,14 +45,13 @@ angular.module('copayApp.controllers').controller('walletnameaController',
                     storageService.storeProfile(profile, function (err) {
                         if(err)
                         $rootScope.$emit('Local/ShowErrorAlert', +walletId+":    "+err);
-                    });
+                        profileService.loadAndBindProfile(function () {
+                            profileService.setAndStoreFocus(walletId,function () {
 
+                            })
+                        });
+                    });
                 }
-            });
-            profileService.loadAndBindProfile(function () {
-                profileService.setAndStoreFocus(walletId,function () {
-                    
-                })
             });
         }
     });
