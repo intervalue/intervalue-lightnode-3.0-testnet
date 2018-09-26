@@ -146,7 +146,7 @@ msgstr "此外在设置菜单中，你可以找到安全选项，例如密码设
 
 #: public/views/includes/password.html:42
 msgid "Also, don't forget to delete your seed"
-msgstr "此外，不要忘记删除你的口令私钥"
+msgstr "此外，不要忘记删除你的助记词"
 
 #: public/views/includes/output.html:6
 #: public/views/modals/customized-amount.html:38
@@ -230,7 +230,7 @@ msgstr "立即备份"
 
 #: public/views/preferencesGlobal.html:104
 msgid "Backup wallet seed"
-msgstr "备份钱包口令私匙"
+msgstr "备份钱包助记词"
 
 #: src/js/controllers/backup.js:7
 msgid "Backup words deleted"
@@ -250,7 +250,7 @@ msgstr "地址余额"
 
 #: public/views/walletHome.html:241
 msgid "Before receiving funds, it is highly recommended you backup your wallet keys."
-msgstr "接收资金之前，强烈建议您备份钱包口令密匙。"
+msgstr "接收资金之前，强烈建议您备份钱包助记词。"
 
 #: public/views/backup.html:26
 msgid "Better yet, use multisig wallets with redundancy,"
@@ -467,7 +467,7 @@ msgstr "无法使用指定的扩展公钥创建"
 
 #: src/js/services/profileService.js:272
 msgid "Could not create: Invalid wallet seed"
-msgstr "无法创建：无效的钱包口令私匙"
+msgstr "无法创建：无效的钱包助记词"
 
 #: src/js/controllers/backup.js:81
 msgid "Could not decrypt"
@@ -617,7 +617,7 @@ msgstr "与您通信的其他设备可以看到此设备名称。"
 
 #: public/views/recoveryFromSeed.html:43
 msgid "Do not clone wallets, stop using the original wallet with this seed."
-msgstr "不要复制钱包，停止在原始钱包上使用这个口令私匙。"
+msgstr "不要复制钱包，停止在原始钱包上使用这个助记词。"
 
 #: public/views/backup.html:59
 msgid "Do not use it to clone the wallet."
@@ -1210,7 +1210,7 @@ msgstr "恢复"
 
 #: public/views/preferencesGlobal.html:113
 msgid "Recovery from seed"
-msgstr "使用口令恢复钱包"
+msgstr "使用助记词恢复钱包"
 
 #: public/views/walletHome.html:80
 msgid "Recreating Wallet..."
@@ -1421,7 +1421,7 @@ msgstr "显示所有"
 
 #: public/views/backup.html:44
 msgid "Show the Wallet Seed Anyway"
-msgstr "无论如何显示钱包口令私匙"
+msgstr "无论如何显示钱包助记词"
 
 #: public/views/modals/sign-message.html:46
 msgid "Sign"
@@ -1460,7 +1460,7 @@ msgstr "小额钱包"
 
 #: src/js/controllers/create.js:32
 msgid "Specify Seed..."
-msgstr "指定口令…"
+msgstr "指定助记词…"
 
 #: public/views/preferences.html:63
 #: public/views/preferencesGlobal.html:86
@@ -1751,7 +1751,7 @@ msgstr "注意：有必要进行备份"
 
 #: public/views/backup.html:77
 msgid "WARNING: This seed was created with a passphrase. To recover this wallet both the mnemonic and passphrase are needed."
-msgstr "注意：这个种子是由密码创建的。要恢复这个钱包，需要恢复口令和密码。"
+msgstr "注意：这个种子是由密码创建的。要恢复这个钱包，需要助记词和密码。"
 
 #: public/views/import.html:55
 #: public/views/recoveryFromSeed.html:37
@@ -1805,7 +1805,7 @@ msgstr "钱包名称"
 
 #: public/views/backup.html:34
 msgid "Wallet seed not available."
-msgstr "钱包口令不可用。"
+msgstr "钱包助记词不可用。"
 
 #: public/views/modals/destination-address.html:15
 #: public/views/modals/destination-address.html:29
@@ -1878,7 +1878,7 @@ msgstr ""
 #: public/views/backup.html:55
 #: public/views/recoveryFromSeed.html:31
 msgid "Your Wallet Seed:"
-msgstr "你的钱包口令："
+msgstr "你的钱包助记词："
 
 #: public/views/export.html:33
 msgid "Your export password"
@@ -2173,10 +2173,10 @@ msgid "InterValue does not store passwords and cannot be retrieved for you. Plea
 msgstr "InterValue不存储密码，也无法帮您找回，请务必牢记！"
 
 msgid "Please do not take a screenshot and copy your wallet password."
-msgstr "请勿截图，抄写下您的钱包口令"
+msgstr "请勿截图，抄写下您的钱包助记词"
 
 msgid "The password is used to restore the wallet, write it accurately on paper, and save it where you only know it."
-msgstr "口令用于恢复钱包，将它准确地写在纸上，并保存在只有你知道的地方"
+msgstr "助记词用于恢复钱包，将它准确地写在纸上，并保存在只有你知道的地方"
 
 msgid "Confirm your mnemonic"
 msgstr "确认您的助记词"
@@ -2185,7 +2185,7 @@ msgid "Are you sure you want to delete the mnemonic?"
 msgstr "您确定要删除助记词吗？"
 
 msgid "Your password is correct. To ensure the security of your wallet, we recommend that you delete your password."
-msgstr "您的口令正确，为了保证您的钱包安全，建议您删掉口令。"
+msgstr "您的助记词正确，为了保证您的钱包安全，建议您删掉助记词。"
 
 msgid "This will completely remove the mnemonics from the app and it will not be recoverable. Please reconfirm that you have backed up your mnemonics to a safe place."
 msgstr "此操作将彻底删除应用中助记词并且不可恢复，请再次确认您已经将助记词备份到安全的地方。"
@@ -2197,7 +2197,7 @@ msgid "Hot Wallet"
 msgstr "热钱包"
 
 msgid "Wallet Seed :"
-msgstr "钱包口令："
+msgstr "钱包助记词："
 
 msgid "Enter your mnemonic, separated by spaces"
 msgstr "请输入您的助记词，按空格分隔"
@@ -2248,7 +2248,7 @@ msgid "Wallet address"
 msgstr "钱包地址"
 
 msgid "The wallet password:"
-msgstr "钱包口令："
+msgstr "钱包助记词："
 
 msgid "It is highly recommended that you write your password on paper and have a safe place, do not take screenshots or take photos, and do not use the same password on multiple devices.Once you have written your wallet password, it is recommended to remove the password from the device."
 msgstr "强烈建议您在纸上写下密码并有一个安全的地方，不要截取屏幕截图或拍照，也不要在多个设备上使用相同的密码。一旦您编写了钱包密码，建议您删除 来自设备的密码。"
