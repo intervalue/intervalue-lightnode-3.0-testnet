@@ -215,8 +215,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     eventBus.on("my_transactions_became_stable", function () {
         breadcrumbs.add('my_transactions_became_stable');
-        self.updateAll();
-        self.updateTxHistory();
+        //self.updateAll();
+        self.updateTxHistory(3);
     });
 
     eventBus.on("maybe_new_transactions", function () {
