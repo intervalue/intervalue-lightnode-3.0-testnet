@@ -212,7 +212,7 @@
                                 <div class="histopl" ng-show="btx.action == 'received'">
                                     <img src="./img/received.png"><span translate>Received</span>
                                 </div>
-                                <div class="histopl" ng-show="btx.action == 'sent'">
+                                <div class="histopl" ng-show="btx.action == 'sent'&& btx.confirmations != 'pending'">
                                     <img src="./img/sent.png"><span translate>Sent</span>
                                 </div>
                                 <div class="histopl" ng-show="btx.action == 'moved'">
