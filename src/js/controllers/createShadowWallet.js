@@ -39,13 +39,6 @@ angular.module('copayApp.controllers').controller('createShadowWalletController'
                 });
 
             }, 100);
-            $rootScope.$emit('Local/ShowAlert', "The hot wallet was created successfully, please restart the app", 'fi-check', function() {
-                if (navigator && navigator.app)
-                    navigator.app.exitApp();
-                else if (process.exit)
-                    process.exit();
-            });
-
         };
 
 
