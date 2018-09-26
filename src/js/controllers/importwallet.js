@@ -19,10 +19,13 @@ angular.module('copayApp.controllers').controller('importwalletController',
         self.generateAddressQRCode = function () {
             var form = $scope.addressForm;
             console.log(form);
-            var address = form.$$element[0][0].value;
+            //var address = form.$$element[0][0].value;
+            var address = form.address.$modelValue;
             console.log(address);
             if(address && address.length == 32){
                 $rootScope.$emit('Local/ShadowAddressForm',address);
+            } else {
+                return $rootScope.$emit('Local/ShowErrorAlert', "The address: "+address+" is illegal");
             }
 
         }

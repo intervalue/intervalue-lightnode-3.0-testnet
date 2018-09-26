@@ -120,6 +120,7 @@ angular.module('copayApp.controllers')
 
 		//$rootScope.$digest();
 
+
 		var accept_msg = gettextCatalog.getString('Accept');
 		var cancel_msg = gettextCatalog.getString('Cancel');
 		var confirm_msg = gettextCatalog.getString('Confirm');
@@ -816,18 +817,19 @@ angular.module('copayApp.controllers')
 
 		//开始发送交易
 		this.submitPayment = function() {
+            var form = $scope.sendPaymentForm;
+            //var obj = JSON.parse(form.$$element[0][0].value);
 			if ($scope.index.arrBalances.length === 0)
 				return console.log('send payment: no balances yet');
 			var fc = profileService.focusedClient;
 			var unitValue = this.unitValue;
 			var bbUnitValue = this.bbUnitValue;
-
 			if (isCordova && this.isWindowsPhoneApp) {
 				this.hideAddress = false;
 				this.hideAmount = false;
 			}
 
-			var form = $scope.sendPaymentForm;
+
 			var isMultipleSend = !!form.addresses;
 			if (!form)
 				return console.log('form is gone');
@@ -835,13 +837,14 @@ angular.module('copayApp.controllers')
 				form.amount.$setValidity('validAmount', true);
 
 			var resetAddressValidation = function(){};
-			if ($scope.mtab == 2 && !isMultipleSend && !form.address.$modelValue) { // clicked 'share via message' button
-				resetAddressValidation = function() {
-					if (form && form.address)
-						form.address.$setValidity('validAddressOrAccount', false);
-				}
-				form.address.$setValidity('validAddressOrAccount', true);
-			}
+                if ($scope.mtab == 2 && !isMultipleSend && !form.address.$modelValue) { // clicked 'share via message' button
+                    resetAddressValidation = function() {
+                        if (form && form.address)
+                            form.address.$setValidity('validAddressOrAccount', false);
+                    }
+
+                }
+			form.address.$setValidity('validAddressOrAccount', true);
 
 			if (form.$invalid) {
 				this.error = gettext('Unable to send transaction proposal');
@@ -856,7 +859,7 @@ angular.module('copayApp.controllers')
 				});
 				return;
 			}
-
+/*
 			var comment = form.comment.$modelValue;
 
 			// ToDo: use a credential's (or fc's) function for this
@@ -864,130 +867,128 @@ angular.module('copayApp.controllers')
 				var msg = 'Could not add message to imported wallet without shared encrypting key';
 				$log.warn(msg);
 				return self.setSendError(gettext(msg));
-			}
+			}*/
 
 			var wallet = require('intervaluecore/wallet.js');
 			var assetInfo = $scope.index.arrBalances[$scope.index.assetIndex];
 			var asset = assetInfo.asset;
 			console.log("asset " + asset);
+                if (isMultipleSend) {
+                    if (assetInfo.is_private)
+                        return self.setSendError("private assets can not be sent to multiple addresses");
+                    var outputs = [];
+                    form.addresses.$modelValue.split('\n').forEach(function(line){
+                        var tokens = line.trim().split(/[\s,;]/);
+                        var address = tokens[0];
+                        var amount = tokens.pop();
+                        if (asset === "base")
+                            amount *= unitValue;
+                        else if (assetInfo.decimals)
+                            amount *= Math.pow(10, assetInfo.decimals);
+                        amount = Math.round(amount);
+                        outputs.push({address: address, amount: +amount});
+                    });
+                    var current_payment_key = form.addresses.$modelValue.replace(/[^a-zA-Z0-9]/g, '');
+                } else {
+                    var address = form.address.$modelValue;
+                    var recipient_device_address = assocDeviceAddressesByPaymentAddress[address];
+                    var amount = form.amount.$modelValue;
+                    // address can be [bytreball_addr, email, account, empty => social sharing]
+                    var accountValidationResult = aliasValidationService.validate(address);
+                    var isEmail = ValidationUtils.isValidEmail(address);
+                    var isTextcoin = (isEmail || !address);
 
-			if (isMultipleSend) {
-				if (assetInfo.is_private)
-					return self.setSendError("private assets can not be sent to multiple addresses");
-				var outputs = [];
-				form.addresses.$modelValue.split('\n').forEach(function(line){
-					var tokens = line.trim().split(/[\s,;]/);
-					var address = tokens[0];
-					var amount = tokens.pop();
-					if (asset === "base")
-						amount *= unitValue;
-					else if (assetInfo.decimals)
-						amount *= Math.pow(10, assetInfo.decimals);
-					amount = Math.round(amount);
-					outputs.push({address: address, amount: +amount});
-				});
-				var current_payment_key = form.addresses.$modelValue.replace(/[^a-zA-Z0-9]/g, '');
-			} else {
-				var address = form.address.$modelValue;
-				var recipient_device_address = assocDeviceAddressesByPaymentAddress[address];
-				var amount = form.amount.$modelValue;
-				// address can be [bytreball_addr, email, account, empty => social sharing]
-				var accountValidationResult = aliasValidationService.validate(address);
-				var isEmail = ValidationUtils.isValidEmail(address);
-				var isTextcoin = (isEmail || !address);
+                    var original_address;  // might be sent to email if the email address is attested
+                    if (isTextcoin)
+                        address = "textcoin:" + (address ? address : (Date.now() + "-" + amount));
+                    if (asset === "base")
+                        amount *= unitValue;
+                    else if (asset === constants.BLACKBYTES_ASSET)
+                        amount *= bbUnitValue;
+                    else if (assetInfo.decimals)
+                        amount *= Math.pow(10, assetInfo.decimals);
+                    amount = Math.round(amount);
 
-				var original_address;  // might be sent to email if the email address is attested
-				if (isTextcoin)
-					address = "textcoin:" + (address ? address : (Date.now() + "-" + amount));
-				if (asset === "base")
-					amount *= unitValue;
-				else if (asset === constants.BLACKBYTES_ASSET)
-					amount *= bbUnitValue;
-				else if (assetInfo.decimals)
-					amount *= Math.pow(10, assetInfo.decimals);
-				amount = Math.round(amount);
+                    var current_payment_key = '' + asset + address + amount;
+                }
+                var merkle_proof = '';
+                if (form.merkle_proof && form.merkle_proof.$modelValue)
+                    merkle_proof = form.merkle_proof.$modelValue.trim();
 
-				var current_payment_key = '' + asset + address + amount;
-			}
-			var merkle_proof = '';
-			if (form.merkle_proof && form.merkle_proof.$modelValue)
-				merkle_proof = form.merkle_proof.$modelValue.trim();
+                if (current_payment_key === self.current_payment_key)
+                    return $rootScope.$emit('Local/ShowErrorAlert', "This payment is already under way");
+                self.current_payment_key = current_payment_key;
 
-			if (current_payment_key === self.current_payment_key)
-				return $rootScope.$emit('Local/ShowErrorAlert', "This payment is already under way");
-			self.current_payment_key = current_payment_key;
 
-			indexScope.setOngoingProcess(gettext('sending'), true);
+			//indexScope.setOngoingProcess(gettext('sending'), true);
 			$timeout(function() {
+                if (!isMultipleSend && accountValidationResult.isValid) { // try to replace validation result with attested BB address
+                    var attestorKey = accountValidationResult.attestorKey;
+                    var account = accountValidationResult.account;
+                    var bb_address = aliasValidationService.getBbAddress(
+                        attestorKey,
+                        account
+                    );
+                    console.log('attestorKey=' + attestorKey + ' : account=' + account + ' : bb_address=' + bb_address);
 
-				if (!isMultipleSend && accountValidationResult.isValid) { // try to replace validation result with attested BB address
-					var attestorKey = accountValidationResult.attestorKey;
-					var account = accountValidationResult.account;
-					var bb_address = aliasValidationService.getBbAddress(
-						attestorKey,
-						account
-					);
-					console.log('attestorKey='+attestorKey+' : account='+account+' : bb_address='+bb_address);
+                    if (!bb_address) {
+                        return aliasValidationService.resolveValueToBbAddress(
+                            attestorKey,
+                            account,
+                            function () {
+                                // assocBbAddresses in aliasValidationService is now filled
+                                delete self.current_payment_key;
+                                self.submitPayment();
+                            }
+                        );
+                    }
 
-					if (!bb_address) {
-						return aliasValidationService.resolveValueToBbAddress(
-							attestorKey,
-							account,
-							function () {
-								// assocBbAddresses in aliasValidationService is now filled
-								delete self.current_payment_key;
-								self.submitPayment();
-							}
-						);
-					}
+                    if (!isEmail) {
 
-					if (!isEmail) {
+                        if (bb_address === 'unknown' || bb_address === 'none') {
+                            if (bb_address === 'unknown') {
+                                aliasValidationService.deleteAssocBbAddress(
+                                    attestorKey,
+                                    account
+                                );
+                            }
 
-						if (bb_address === 'unknown' || bb_address === 'none') {
-							if (bb_address === 'unknown') {
-								aliasValidationService.deleteAssocBbAddress(
-									attestorKey,
-									account
-								);
-							}
+                            delete self.current_payment_key;
+                            //indexScope.setOngoingProcess(gettext('sending'), false);
+                            return self.setSendError('Attested account not found');
+                        } else if (ValidationUtils.isValidAddress(bb_address)) {
+                            original_address = address;
+                            address = bb_address;
+                            isEmail = false;
+                            isTextcoin = false;
+                        } else {
+                            throw Error("unrecognized bb_address: " + bb_address);
+                        }
 
-							delete self.current_payment_key;
-							indexScope.setOngoingProcess(gettext('sending'), false);
-							return self.setSendError('Attested account not found');
-						} else if (ValidationUtils.isValidAddress(bb_address)) {
-							original_address = address;
-							address = bb_address;
-							isEmail = false;
-							isTextcoin = false;
-						} else {
-							throw Error("unrecognized bb_address: "+bb_address);
-						}
+                    } else {
 
-					} else {
+                        if (bb_address === 'unknown') {
+                            aliasValidationService.deleteAssocBbAddress(
+                                attestorKey,
+                                account
+                            ); // send textcoin now but retry next time
+                        } else if (bb_address === 'none') {
+                            // go on to send textcoin
+                        } else if (ValidationUtils.isValidAddress(bb_address)) {
+                            original_address = account;
+                            address = bb_address;
+                            isEmail = false;
+                            isTextcoin = false;
+                        } else {
+                            throw Error("unrecognized bb_address: " + bb_address);
+                        }
 
-						if (bb_address === 'unknown') {
-							aliasValidationService.deleteAssocBbAddress(
-								attestorKey,
-								account
-							); // send textcoin now but retry next time
-						} else if (bb_address === 'none') {
-							// go on to send textcoin
-						} else if (ValidationUtils.isValidAddress(bb_address)) {
-							original_address = account;
-							address = bb_address;
-							isEmail = false;
-							isTextcoin = false;
-						} else {
-							throw Error("unrecognized bb_address: "+bb_address);
-						}
-
-					}
-				}
-
+                    }
+                }
 				profileService.requestTouchid(function(err) {
 					if (err) {
 						profileService.lockFC();
-						indexScope.setOngoingProcess(gettext('sending'), false);
+						//indexScope.setOngoingProcess(gettext('sending'), false);
 						self.error = err;
 						$timeout(function() {
 							delete self.current_payment_key;
@@ -1000,7 +1001,7 @@ angular.module('copayApp.controllers')
 					if (self.binding) {
 						if (isTextcoin) {
 							delete self.current_payment_key;
-							indexScope.setOngoingProcess(gettext('sending'), false);
+							//indexScope.setOngoingProcess(gettext('sending'), false);
 							return self.setSendError("you can send bound payments to intervalue adresses only");
 						}
 						if (!recipient_device_address)
@@ -1009,7 +1010,7 @@ angular.module('copayApp.controllers')
 						var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
 						var my_address;
 						// never reuse addresses as the required output could be already present
-						useOrIssueNextAddress(fc.credentials.walletId, 0, function(addressInfo) {
+						/*useOrIssueNextAddress(fc.credentials.walletId, 0, function(addressInfo) {
 							my_address = addressInfo.address;
 							if (self.binding.type === 'reverse_payment') {
 								var arrSeenCondition = ['seen', {
@@ -1103,55 +1104,82 @@ angular.module('copayApp.controllers')
 									composeAndSend(shared_address);
 								}
 							});
-						});
+						});*/
 					}
 					else
 						composeAndSend(address);
 
 					// compose and send
 					function composeAndSend(to_address) {
-						var arrSigningDeviceAddresses = []; // empty list means that all signatures are required (such as 2-of-2)
-						if (fc.credentials.m < fc.credentials.n)
-							$scope.index.copayers.forEach(function(copayer) {
-								if (copayer.me || copayer.signs)
-									arrSigningDeviceAddresses.push(copayer.device_address);
-							});
-						else if (indexScope.shared_address)
-							arrSigningDeviceAddresses = indexScope.copayers.map(function(copayer) {
-								return copayer.device_address;
-							});
-						breadcrumbs.add('sending payment in ' + asset);
-						profileService.bKeepUnlocked = true;
-						var opts = {
-							shared_address: indexScope.shared_address,
-							merkle_proof: merkle_proof,
-							asset: asset,
-							do_not_email: true,
-							send_all: self.bSendAll,
-							arrSigningDeviceAddresses: arrSigningDeviceAddresses,
-							recipient_device_address: recipient_device_address
-						};
-						if (!isMultipleSend) {
-							opts.to_address = to_address;
-							opts.amount = amount;
-						} else {
-							if (asset !== "base")
-								opts.asset_outputs = outputs;
-							else
-								opts.base_outputs = outputs;
-						}
-						var filePath;
-						if (assetInfo.is_private) {
-							opts.getPrivateAssetPayloadSavePath = function(cb) {
-								self.getPrivatePayloadSavePath(function(fullPath, cordovaPathObj){
-									filePath = fullPath ? fullPath : (cordovaPathObj ? cordovaPathObj.root + cordovaPathObj.path + '/' + cordovaPathObj.fileName : null);
-									cb(fullPath, cordovaPathObj);
-								});
-							};
-						}
+                        var arrSigningDeviceAddresses = []; // empty list means that all signatures are required (such as 2-of-2)
+                        if (fc.credentials.m < fc.credentials.n)
+                            $scope.index.copayers.forEach(function (copayer) {
+                                if (copayer.me || copayer.signs)
+                                    arrSigningDeviceAddresses.push(copayer.device_address);
+                            });
+                        else if (indexScope.shared_address)
+                            arrSigningDeviceAddresses = indexScope.copayers.map(function (copayer) {
+                                return copayer.device_address;
+                            });
+                        breadcrumbs.add('sending payment in ' + asset);
+                        profileService.bKeepUnlocked = true;
+                        var isHot = fc.credentials.xPrivKey ? 0 : 1;//判断冷热钱包,0为普通钱包，1为热钱包
+                        var opts = {
+                            shared_address: indexScope.shared_address,
+                            merkle_proof: merkle_proof,
+                            asset: asset,
+                            do_not_email: true,
+                            send_all: self.bSendAll,
+                            arrSigningDeviceAddresses: arrSigningDeviceAddresses,
+                            recipient_device_address: recipient_device_address,
+                            isHot: isHot,
+                            xPrivKey: fc.credentials.xPrivKey
+                        };
+                        if (!isMultipleSend) {
+                            opts.to_address = to_address;
+                            opts.amount = amount;
+                        } else {
+                            if (asset !== "base")
+                                opts.asset_outputs = outputs;
+                            else
+                                opts.base_outputs = outputs;
+                        }
+                        var filePath;
+                        if (assetInfo.is_private) {
+                            opts.getPrivateAssetPayloadSavePath = function (cb) {
+                                self.getPrivatePayloadSavePath(function (fullPath, cordovaPathObj) {
+                                    filePath = fullPath ? fullPath : (cordovaPathObj ? cordovaPathObj.root + cordovaPathObj.path + '/' + cordovaPathObj.fileName : null);
+                                    cb(fullPath, cordovaPathObj);
+                                });
+                            };
+                        }
+                        if (opts.isHot == 1 ) {//热钱包
+                            //生成未签名的交易信息
+                            var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
+                            walletDefinedByKeys.readAddresses(fc.credentials.walletId, opts, function (objAddr) {
+                                opts.change_address = objAddr;
+                                var shadowWallet = require('intervaluecore/shadowWallet');
+                                shadowWallet.getTradingUnit(opts, function (obj) {
+                                    if(typeof obj == "object"){
+                                        $rootScope.$emit('Local/unsignedTransactionIfo', obj);
+                                    }else {
+                                        console.log("error: "+obj);
+                                        return self.setSendError(obj);
+                                    }
+
+                                });
+                            });
+                            return;
+                        }
+
+                        /*var shadowWallet = require('intervaluecore/wallet');
+                        shadowWallet.getRradingUnit(opts,function (cb) {
+
+                        })*/
+
 						fc.sendMultiPayment(opts, function(err, unit, mnemonics) {
 							// if multisig, it might take very long before the callback is called
-							indexScope.setOngoingProcess(gettext('sending'), false);
+							//indexScope.setOngoingProcess(gettext('sending'), false);
 							breadcrumbs.add('done payment in ' + asset + ', err=' + err);
 							delete self.current_payment_key;
 							resetAddressValidation();
@@ -1173,13 +1201,13 @@ angular.module('copayApp.controllers')
 							}
 							var binding = self.binding;
 							self.resetForm();
-							$rootScope.$emit("NewOutgoingTx");
-							if (original_address){
+							//$rootScope.$emit("NewOutgoingTx");
+							/*if (original_address){
 								var db = require('intervaluecore/db.js');
 								db.query("INSERT INTO original_addresses (unit, address, original_address) VALUES(?,?,?)", 
 									[unit, to_address, original_address]);
-							}
-							if (recipient_device_address) { // show payment in chat window
+							}*/
+							/*if (recipient_device_address) { // show payment in chat window
 								eventBus.emit('sent_payment', recipient_device_address, amount || 'all', asset, !!binding);
 								if (binding && binding.reverseAmount) { // create a request for reverse payment
 									if (!my_address)
@@ -1196,22 +1224,23 @@ angular.module('copayApp.controllers')
 									// issue next address to avoid reusing the reverse payment address
 									if (!fc.isSingleAddress) walletDefinedByKeys.issueNextAddress(fc.credentials.walletId, 0, function() {});
 								}
-							}
-							else if (Object.keys(mnemonics).length) {
+							}*/
+							/*else if (Object.keys(mnemonics).length) {
 								var mnemonic = mnemonics[to_address];
 								if (opts.send_all && asset === "base")
 									amount = assetInfo.stable;
 
 								self.openShareTextcoinModal(isEmail ? address.slice("textcoin:".length) : null, mnemonic, amount, asset, false, filePath);
 								$rootScope.$emit('Local/SetTab', 'history');
-							}
-							else // redirect to history
-								$rootScope.$emit('Local/SetTab', 'history');
+							}*/
+							//else  redirect to history
+							$rootScope.$emit('Local/paymentDone');
+                            //$rootScope.$emit('Local/TabChanged', 'history');
 						});
 
 					}
 
-					function useOrIssueNextAddress(wallet, is_change, handleAddress) {
+					/*function useOrIssueNextAddress(wallet, is_change, handleAddress) {
 						if (fc.isSingleAddress) {
 							addressService.getAddress(fc.credentials.walletId, false, function(err, addr) {
 								handleAddress({
@@ -1220,7 +1249,7 @@ angular.module('copayApp.controllers')
 							});
 						}
 						else walletDefinedByKeys.issueNextAddress(wallet, is_change, handleAddress);
-					}
+					}*/
 
 				});
 			}, 100);

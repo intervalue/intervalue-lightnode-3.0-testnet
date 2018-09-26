@@ -1,9 +1,11 @@
 <div class="shadowModalMask" ng-click="index.showshadow = false">
 </div>
 
-<!--热钱包界面-->
-<div ng-controller="shadowDeviceControllers as shadow" class="shadowModal" ng-class="{'animated  bounceInUp':index.showshadow}">
-    <!--热钱包界面-->
+
+<div  class="shadowModal" ng-class="{'animated  bounceInUp':index.showshadow}">
+    <!--热钱包界面，开始-->
+
+    <!--创建热钱包，开始-->
     <div ng-show="index.shadowstep == 'hot1'" class="text-center">
         <qrcode size="220"  data="{{index.verificationAddress}}"></qrcode>
     </div>
@@ -21,7 +23,7 @@
             完成授权
         </section>
         <section  ng-controller="topbarController as topbar">
-            <qr-scanner on-scan="topbar.onQrCodeScannedAddr(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
+            <qr-scanner on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
         </section>
         <nav class="tab-bar ng-scope">
             <section class="left-small">
@@ -41,21 +43,64 @@
         </button>
         </form>
     </div>
-    <!--热钱包界面-->
+        <!--创建热钱包，结束-->
 
 
-    <!--冷钱包界面-->
+
+        <!--热钱包交易，开始-->
+        <div ng-show="index.shadowstep == 'hsend1'" class="text-center">
+            <div style="text-align:center">冷钱包扫描</div>
+            <qrcode size="220"  data="{{index.unsignedTransactionIfo}}" ></qrcode>
+            <button class="button round black expand m0" ng-click="index.shadowstep = 'hsend2'">
+                <span translate>下一步</span>
+            </button>
+        </div>
+
+        <div ng-show="index.shadowstep == 'hsend2'" class="text-center" ng-controller="signedTransactionIfoControllers as stx">
+            <form name="signedTransactionIfo" ng-submit="stx.sendPaymentHot(signedTransactionIfo);index.showshadow = false" novalidate>
+                <section>
+                    读入签名数据
+                </section>
+                <section  ng-controller="topbarController as topbar">
+                    <qr-scanner on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
+                </section>
+                <div>扫描冷钱包签名数据二维码</div>
+                <nav class="tab-bar ng-scope">
+                    <section class="left-small">
+                        <a ng-click="index.shadowstep = 'hsend1';"><i class="icon-arrow-left3 icon-back"></i>
+                            <span class="text-back ng-binding">Back</span>
+                        </a>
+                    </section>
+                    <section class="middle tab-bar-section">
+                        <h1 class="title ellipsis" ng-style="{'color': noColor ? '#4A90E2' : index.backgroundColor, 'max-width': '100%'}" style="color: rgb(74, 144, 226); max-width: 100%;">
+                        </h1>
+                    </section>
+                </nav>
+                <input type="hidden"  value="{{index.signedTransactionIfo}}">
+                <textarea name="data" rows="10" cols="10">{{index.signatureIfo}}</textarea>
+                <button type="submit" class="button round black expand m0" >
+                    <span translate>发送交易</span>
+                </button>
+            </form>
+        </div>
+        <!--热钱包交易，结束-->
+
+    <!--热钱包界面，结束-->
+
+
+    <!--冷钱包，开始-->
+    <!--创建热钱包时，冷钱包验证界面，开始-->
     <div ng-show="index.shadowstep == 'cold1'" class="text-center">
         <div class="adcpitem">
             <div  class="adcpmdic">
                 <label>授权地址</label>
-                <input  type="text" value={{index.signatureDetlCodeAddr}}>
+                <div >{{index.signatureDetlCodeAddr}}</div>
             </div>
         </div>
         <div class="adcpitem">
             <div class="adcpmdic">
                 <label>数据</label>
-                <input  type="text"  value="value">
+                <div >{{index.sinatureRandom}}</div>
             </div>
         </div>
         <button class="button round black expand m0" ng-click="index.shadowstep = 'cold2'">
@@ -65,6 +110,39 @@
     <div ng-show="index.shadowstep == 'cold2'" class="text-center">
         <qrcode size="220"  data="{{index.signatureDetlCode}}"></qrcode>
     </div>
-    <!--冷钱包界面-->
-</div>
+    <!--创建热钱包时，冷钱包验证界面，结束->
 
+    <!--冷钱包交易签名验证，开始-->
+
+    <div ng-show="index.shadowstep == 'csend1'" class="text-center" ng-controller="signedTransactionIfoControllers as signedTransaction">
+        <form name="signedTransactionIfo" ng-submit="signedTransaction.signedTransaction(signedTransactionIfo)">
+        <input type="hidden" value="{{index.showUnsignedTransactionIfo}}">
+        <div>来自：{{showUnsignedTransactionIfoObj.fromAddress}}</div>
+        <div>到：{{showUnsignedTransactionIfoObj.toAddress}}</div>
+        <div>日期：{{showUnsignedTransactionIfoObj.timestamp}}</div>
+        <div>费用：{{showUnsignedTransactionIfoObj.fee}}</div>
+        <div>Unit：{{}}</div>
+        <div>状态：等待签名</div>
+        <button class="button round black expand m0" >
+            <span translate>授权签名</span>
+        </button>
+        </form>
+    </div>
+
+    <div ng-show="index.shadowstep == 'csend2'" class="text-center">
+        <div>授权成功</div>
+        <qrcode size="220"  data="{{index.signedTransactionIfo}}"></qrcode>
+        <div>请用热钱包扫描二维码发出交易</div>
+        <button class="button round black expand m0" ng-click="index.shadowstep = 'csend2'">
+            <span translate>完成</span>
+        </button>
+    </div>
+
+    <!--冷钱包交易签名验证，结束-->
+
+    <!--冷钱包，结束-->
+
+
+
+
+</div>

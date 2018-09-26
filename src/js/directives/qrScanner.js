@@ -177,7 +177,7 @@ angular.module('copayApp.directives')
           },
           controller: controller,
           replace: true,
-          template: '<a id="camera-icon" class="p10" ng-click="openScanner()"><i class="icon-scan size-21"></i></a>'
+          template: '<a id="camera-icon" ng-click="openScanner()"><img src="./img/scan.png" /></a>'
         }
       }
     ]);

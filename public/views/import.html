@@ -1,50 +1,77 @@
-<div
-		class="topbar-container"
-		ng-include="'views/includes/topbar.html'"
-		ng-init="titleSection='Restore from full backup';  goBackToState = true; noColor = true">
-</div>
-
-<div class="content preferences" ng-controller="importController as import">
-	<h4></h4>
-
-	<div class="onGoingProcess" ng-show="import.importing">
-		<div class="onGoingProcess-content" ng-style="{'background-color':index.backgroundColor}">
-			<div class="spinner">
-				<div class="rect1"></div>
-				<div class="rect2"></div>
-				<div class="rect3"></div>
-				<div class="rect4"></div>
-				<div class="rect5"></div>
+<div ng-controller="importController as import">
+	<!--导入钱包-导入钱包  start-->
+	<div class="addwcontent addwimportwallet" ng-init="import.showtab = 'tabcold'">
+		<nav class="tab-bar" ng-controller="topbarController as topbar">
+			<section class="left-small">
+				<a ng-click="$root.go('walletHome')">
+					<img src="./img/chatbackstate.png" />
+				</a>
+			</section>
+			<section class="right-small">
+				<qr-scanner ng-show="index.isComplete" on-scan="topbar.onQrCodeScannedAddr(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
+			</section>
+			<section class="middle tab-bar-section">
+				<h1 class="title ellipsis" translate>
+					Import wallet
+				</h1>
+			</section>
+		</nav>
+		<div class="importtab">
+			<div class="tab-container" ng-class="{'selected': import.showtab == 'tabcold'}">
+				<a href ng-click="import.showtab = 'tabcold'" translate>Plain Wallet</a>
 			</div>
-			<span translate> Importing wallet... </span>
+			<div class="tab-container" ng-class="{'selected': import.showtab == 'tabhot'}">
+				<a href ng-click="import.showtab = 'tabhot';index.signatureAddr = ''" translate>Hot Wallet</a>
+			</div>
+		</div>
+		<div class="addwcontentin">
+			<div ng-if="import.showtab == 'tabcold'">
+				<div translate>Wallet Seed :</div>
+				<textarea placeholder="{{'Enter your mnemonic, separated by spaces'|translate}}" ng-model="import.importcode"></textarea>
+				<div class="adinputitem">
+					<div class="adinputic">
+						<div class="adinputimg">
+							<img src="./img/walletnameinput.png">
+						</div>
+						<input type="text" ng-model="import.addwiname" ng-attr-placeholder="{{'Wallet name'|translate}}">
+					</div>
+				</div>
+				<div class="adinputitem">
+					<div class="adinputic">
+						<div class="adinputimg">
+							<img src="./img/walletpassirinput.png">
+						</div>
+						<input type="text" ng-model="import.addwipass" ng-attr-placeholder="{{'Password'|translate}}">
+					</div>
+				</div>
+				<div class="adinputitem">
+					<div class="adinputic">
+						<div class="adinputimg">
+							<img src="./img/walletpassinput.png">
+						</div>
+						<input type="text" ng-model="import.addwirpass" ng-attr-placeholder="{{'Repeat password'|translate}}">
+					</div>
+				</div>
+				<button class="m24b m20t" translate ng-disabled="!import.importcode || !import.addwipass || !import.addwirpass" ng-click="import.importw()">Start importing</button>
+				<div class="size-12 redcolor" translate>Note: Please be patient while the wallet is recovering. Do not quit the software.</div>
+			</div>
+			<div ng-if="import.showtab == 'tabhot'" ng-controller="importwalletController as import">
+				<form name="addressForm" ng-submit="import.generateAddressQRCode()">
+				<div translate class="m20b">The hot wallet does not need to import the private key, only the wallet address, for daily viewing of accounts, transactions and acceptance notifications. The private key of large funds is recommended to use cold wallet or hardware wallet management to avoid theft and theft.</div>
+				<div class="adinputitem">
+					<div class="adinputic">
+						<div class="adinputimg">
+							<img src="./img/walletpassinput.png">
+						</div>
+						<input type="text" name="address"  ng-model=index.signatureAddr ng-attr-placeholder="{{'Scan or enter your wallet address'|translate}}" ng-required valid-address-or-account>
+					</div>
+				</div>
+				<button type="submit" class="m24b m20t" ng-disabled="addressForm.$invalid || !index.signatureAddr" translate>Start importing</button>
+				<div class="size-12 redcolor" translate>Note: The hot wallet needs a cold wallet to match the signature when sending the transaction. You can use another idle phone, open the flight mode as a cold wallet, import the wallet private key, and match the offline signature.</div>
+			</form>
+			</div>
+
 		</div>
 	</div>
-
-	<div class="box-notification" ng-show="import.error">
-	<span class="text-warning">
-		{{import.error}}
-	</span>
-	</div>
-
-	<div>
-		<form class="columns" ng-submit="import.walletImport()">
-			<label><span translate>Your wallet file:</span></label>
-			<div ng-show="import.android && import.androidVersion < 5">
-				<button ng-click="import.oldAndroidInputFileClick()" class="button small black round" translate>Choose File</button>
-				{{import.oldAndroidFileName}}
-			</div>
-			<input ng-show="!import.android || import.androidVersion>=5" type="file" ng-file-select>
-			<input type="password" placeholder="Password" ng-model="import.password">
-			<input ng-disabled="import.importing || import.password == '' || (!file && !import.oldAndroidFilePath)" type="submit"
-				   class="button expand black round"
-				   value="{{'Import'|translate}}" ng-style="{'background-color':index.backgroundColor}">
-		</form>
-	</div>
-	<div class="text-alert size-12 columns">
-		<span translate>WARNINGS:</span>
-		<ul class="warnings">
-			<li translate>This will permanently delete all your existing wallets!</li>
-			<li translate>If you have moved this backup from another device, stop using it on the original one immediately after creating the backup.  Never clone wallets.  If you need access from several devices, use multisig.</li>
-		</ul>
-	</div>
+	<!--导入钱包-导入钱包  end-->
 </div>

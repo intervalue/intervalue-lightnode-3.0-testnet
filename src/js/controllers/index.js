@@ -33,7 +33,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.backhome = false;
     self.backwaname = false;
 
-
     function updatePublicKeyRing(walletClient, onDone) {
         var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
         walletDefinedByKeys.readCosigners(walletClient.credentials.walletId, function (arrCosigners) {
@@ -980,12 +979,33 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         fc.alias = self.alias;
     };
 
+    /**
+     * 设置钱包对应头像
+     */
+    setTimeout(function () {
+        var config = configService.getSync();
+        var fc = profileService.walletClients;
+        config.colorFor = config.colorFor || {};
+        config.imageFor = config.imageFor || {};
+        for(let item in fc){
+        for(let cf in config.imageFor){
+            if(item == cf){
+                fc[item].image = config.imageFor[cf];
+                break;
+                }
+            }
+        }
+
+    });
     self.updateColor = function () {
         var config = configService.getSync();
         config.colorFor = config.colorFor || {};
+        config.imageFor = config.imageFor || {};
         self.backgroundColor = config.colorFor[self.walletId] || '#4A90E2';
+        self.image = config.imageFor[self.walletId] || './img/rimg/1.png';
         var fc = profileService.focusedClient;
         fc.backgroundColor = self.backgroundColor;
+        fc.image = self.image;
     };
 
     self.updateSingleAddressFlag = function () {
@@ -1205,45 +1225,48 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         breadcrumbs.add('index: ' + self.assetIndex + '; balances: ' + JSON.stringify(self.arrBalances));
         if (!client.isComplete())
             return console.log('fc incomplete yet');
-        client.getTxHistory('base', walletId, function onGotTxHistory(txs) {
-            $timeout(function () {
-                var newHistory = self.processNewTxs(txs);
-                $log.debug('Tx History synced. Total Txs: ' + newHistory.length);
-                //if (walletId == profileService.focusedClient.credentials.walletId) {
-                self.completeHistory = newHistory;
-                self.txHistory = newHistory.slice(0, self.historyShowLimit);
-                require('intervaluecore/light').findStable2(walletId,function (obj) {
-                    self.ammountTatol = profileService.formatAmount(obj,'bytes');
-                    $timeout(function () {
-                        $rootScope.$apply();
-                    });
-                });
-                require('intervaluecore/wallet').getWalletsInfo(function (obj) {
-                    let trans = [];
-                    let fc = profileService.walletClients;
-                    obj.forEach(function(tran){
-                        for(var item in fc) {
-                            if (tran.wallet == fc[item].credentials.walletId){
-                                var walletNameIfo = fc[item].credentials.walletName
+            client.getTxHistory('base', walletId, function onGotTxHistory(txs) {
+                $timeout(function () {
+                    var newHistory = self.processNewTxs(txs);
+                    $log.debug('Tx History synced. Total Txs: ' + newHistory.length);
+                    //if (walletId == profileService.focusedClient.credentials.walletId) {
+                        self.completeHistory = newHistory;
+                        self.txHistory = newHistory.slice(0, self.historyShowLimit);
+                        require('intervaluecore/light').findStable2(walletId,function (obj) {
+                            self.ammountTatol = profileService.formatAmount(obj,'bytes');
+                            $timeout(function () {
+                                $rootScope.$apply();
+                            });
+                        });
+                    require('intervaluecore/wallet').getWalletsInfo(function (obj) {
+                        let trans = [];
+                        let fc = profileService.walletClients;
+                        console.log(profileService.profile.walletClients);
+                        obj.forEach(function(tran){
+                            for(var item in fc) {
+                                if (tran.wallet == fc[item].credentials.walletId){
+                                    var walletNameIfo = fc[item].credentials.walletName;
+                                    var imageIfo = fc[item].image;
+                                }
                             }
-                        }
-                        trans.push({
-                            address : tran.address,
-                            wallet  : tran.wallet,
-                            stables  : profileService.formatAmount(tran.stables,'bytes'),
-                            walletName : walletNameIfo
+                            trans.push({
+                                address : tran.address,
+                                wallet  : tran.wallet,
+                                stables  : profileService.formatAmount(tran.stables,'bytes'),
+                                walletName : walletNameIfo,
+                                image : imageIfo
+                            });
+                        });
+                        self.walletInfo = trans;
+                        $timeout(function () {
+                            $rootScope.$apply();
                         });
                     });
-                    self.walletInfo = trans;
-                    $timeout(function () {
-                        $rootScope.$apply();
-                    });
+                        self.historyShowShowAll = newHistory.length >= self.historyShowLimit;
+                    //}
+                    return cb();
                 });
-                self.historyShowShowAll = newHistory.length >= self.historyShowLimit;
-                //}
-                return cb();
             });
-        });
 
     };
 
@@ -1480,7 +1503,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
         return value;
     };
-    console.log(profileService.walletClients);
     $rootScope.$on('Local/ClearHistory', function (event) {
         $log.debug('The wallet transaction history has been deleted');
         self.txHistory = self.completeHistory = [];
@@ -1824,8 +1846,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
 
 
-    self.towalletname = function (name, addr, ammount, walletid, mnemonic, mnemonicEncrypted) {
-        $state.go('walletnamea', { name: name, addr: addr, ammount: ammount, walletid: walletid, mnemonic: mnemonic, mnemonicEncrypted: mnemonicEncrypted});
+    self.towalletname = function (image, name, addr, ammount, walletid, mnemonic, mnemonicEncrypted) {
+        $state.go('walletnamea', { image: image, name: name, addr: addr, ammount: ammount, walletid: walletid, mnemonic: mnemonic, mnemonicEncrypted: mnemonicEncrypted});
     };
 
     /**

@@ -8,7 +8,7 @@ angular.module('copayApp.controllers').controller('wordsController',
     var self = this;
     self.show = false;
     var fc = profileService.focusedClient;
-	
+    var showconfirm = false;
 	if (!isCordova){
 		var desktopApp = require('intervaluecore/desktop_app.js'+'');
 		self.appDataDir = desktopApp.getAppDataDir();
@@ -42,16 +42,25 @@ angular.module('copayApp.controllers').controller('wordsController',
 
     self.delete = function() {
       self.needsBackupa = false;
-      confirmDialog.show(msg, function(ok) {
-        if (ok) {
-          fc.clearMnemonic();
-          profileService.clearMnemonic(function() {
-            self.deleted = true;
-            notification.success(successMsg);
-            go.walletHome();
-          });
-        }
-      });
+      self.showconfirm = true;
+      // confirmDialog.show(msg, function(ok) {
+      //   if (ok) {
+      //     fc.clearMnemonic();
+      //     profileService.clearMnemonic(function() {
+      //       self.deleted = true;
+      //       notification.success(successMsg);
+      //       go.walletHome();
+      //     });
+      //   }
+      // });
+    };
+
+    self.deleteyes = function() {
+        fc.clearMnemonic();
+        profileService.clearMnemonic(function() {
+          self.deleted = true;
+          go.walletHome();
+        });
     };
 
     $scope.$on('$destroy', function() {

@@ -87,12 +87,12 @@ if [ ! -d $PROJECT ]; then
 
 	if [ $CURRENT_OS == "IOS" ]; then
 	    cordova plugin add https://github.com/FRD49/iOS-ExitApp.git
-		cordova plugin add https://github.com/phonegap/phonegap-plugin-barcodescanner.git#v7.0.4
-	else
-		cordova plugin add cordova-plugin-android-support-v4-jar
-		checkOK
-
 		cordova plugin add https://github.com/ylwhlhp/phonegap-plugin-barcodescanner.git
+	else
+		#cordova plugin add cordova-plugin-android-support-v4-jar
+		#checkOK
+
+		cordova plugin add https://github.com/phonegap/phonegap-plugin-barcodescanner.git
 	fi
 	checkOK
 
@@ -129,7 +129,7 @@ if [ ! -d $PROJECT ]; then
 # 	cordova plugin add cordova-plugin-uniquedeviceid
 # 	checkOK
 
-	cordova plugin add cordova-plugin-file@4.3.3
+	cordova plugin add cordova-plugin-file
 	checkOK
 
 	cordova plugin add cordova-plugin-touch-id && cordova prepare
@@ -148,18 +148,15 @@ if [ ! -d $PROJECT ]; then
 	checkOK
 
 	if [ $CURRENT_OS == "ANDROID" ]; then
-		cordova plugin add https://github.com/phonegap-build/PushPlugin.git
-		checkOK
-
-		cordova plugin add https://github.com/8zrealestate/android-referrer-plugin
+		cordova plugin add https://github.com/ylwhlhp/PushPlugin.git
 		checkOK
 	fi
 
-	cordova plugin add https://github.com/xJeneKx/MFileChooser.git
+	cordova plugin add https://github.com/ylwhlhp/MFileChooser.git
 	checkOK
 
-	cordova plugin add cordova-plugin-app-preferences
-	checkOK
+    cordova plugin add cordova-plugin-app-preferences
+    checkOK
 fi
 
 if $DBGJS; then
@@ -211,8 +208,8 @@ if [ $CURRENT_OS == "ANDROID" ]; then
 	cp android/build-extras.gradle $PROJECT/platforms/android/build-extras.gradle
 	checkOK
 
-	cp android/project.properties $PROJECT/platforms/android/project.properties
-	checkOK
+	#cp android/project.properties $PROJECT/platforms/android/project.properties
+	#checkOK
 
 	cp -R android/res/* $PROJECT/platforms/android/res
 	checkOK

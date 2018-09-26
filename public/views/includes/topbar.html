@@ -8,7 +8,7 @@
            ng-click="topbar.goWallet();goToWallet = null;index.backwallet = false;">
             <img src="./img/chatbackstate.png" />
         </a>
-        <a ng-show="closeToHome" class="p10"
+        <a ng-show="closeToHome"
            ng-click="topbar.goHome(); closeToHome = null;index.backhome = false;">
             <img src="./img/chatbackstate.png" />
         </a>
@@ -22,21 +22,24 @@
         </a>
     </section>
 
-  <section class="right-small" ng-show="showCamera">
-    <qr-scanner ng-show="index.isComplete" on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
-  </section>
+    <section class="right-small">
+        <qr-scanner ng-show="showCamera && index.isComplete" on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
 
-  <section class="middle tab-bar-section">
-    <h1 class="title ellipsis" ng-style="{'color': noColor ? '#4A90E2' : index.backgroundColor, 'max-width': '100%'}">
-		<span ng-if="index.arrBalances[index.assetIndex].shared === undefined && !index.shared_address || titleSection">{{(titleSection|translate) || (index.shared_address || index.alias || index.walletName)}}</span>
-		<span ng-if="(index.arrBalances[index.assetIndex].shared !== undefined || index.shared_address) && !titleSection">
-			<a ng-click="index.openSubwalletModal()" ng-style="{'color': noColor ? '#4A90E2' : index.backgroundColor}">
-				<span class="ellipsis" style="max-width: calc(100% - 14px);float: left;">
-					{{(index.shared_address || index.alias || index.walletName)}}
-				</span>
-				<span class="arrow-down" ng-style="{'float': 'left', 'border-top-color': index.backgroundColor}"></span>
-			</a>
-		</span>
-    </h1>
-  </section>
+        <a ng-click="" ng-show="walletsave" class="greencolor size-14" translate><span>Save</span></a>
+
+        <a ng-click="" ng-show="passsave" class="greencolor size-14" translate><span>Save</span></a>
+    </section>
+    <section class="middle tab-bar-section">
+        <h1 class="title ellipsis">
+            <span ng-if="index.arrBalances[index.assetIndex].shared === undefined && !index.shared_address || titleSection">{{(titleSection|translate) || (index.shared_address || index.alias || index.walletName)}}</span>
+            <span ng-if="(index.arrBalances[index.assetIndex].shared !== undefined || index.shared_address) && !titleSection">
+                <a ng-click="index.openSubwalletModal()" ng-style="{'color': noColor ? '#4A90E2' : index.backgroundColor}">
+                    <span class="ellipsis" style="max-width: calc(100% - 14px);float: left;">
+                        {{(index.shared_address || index.alias || index.walletName)}}
+                    </span>
+                    <span class="arrow-down" ng-style="{'float': 'left', 'border-top-color': index.backgroundColor}"></span>
+                </a>
+            </span>
+        </h1>
+    </section>
 </nav>

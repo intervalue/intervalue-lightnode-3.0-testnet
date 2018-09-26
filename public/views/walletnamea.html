@@ -1,26 +1,39 @@
-<div
-        class="topbar-container"
-        ng-include="'views/includes/topbar.html'"
-        ng-init="titleSection='Backup'; goToWallet = true">
-</div>
-
-<div class="content" ng-controller="walletnameaController as nameW">
+<div ng-controller="walletnameaController as nameW" class="secondcontent">
+    <div
+            class="topbar-container"
+            ng-include="'views/includes/topbar.html'"
+            ng-init="titleSection=nameW.name; goToWallet = true;walletsave = true;">
+    </div>
     <div class="adwnnumo">
         <div class="adwnnum">
-            <i class="icon-scan size-60"></i>
-            <b>{{nameW.ammount}}INVE</b>
-            <p>{{nameW.addr}}</p>
+            <div class="adwnlogo"><img src="{{nameW.image}}"></div>
+            <div class="adwnnumamt"><span>{{nameW.ammount}}</span>INVE</div>
+            <div class="adwnaddr"><span>{{nameW.addr}}</span></div>
         </div>
-        <div class="adwnlinput">
-            <label>钱包名</label>
-            <input placeholder="{{nameW.name}}" />
-        </div>
-        <div ng-click="$root.go('walletnamea.changewalletp')">
-            修改密码
-        </div>
-        <button ng-show="nameW.mnemonic || nameW.mnemonicEncrypted" ng-click="nameW.gobackup(nameW.name, nameW.addr, nameW.ammount, nameW.walletid, nameW.mnemonic, nameW.mnemonicEncrypted);index.backwaname = true;">备份助记词</button>
-        <button>删除钱包</button>
     </div>
-
+    <ul class="adwnlinput">
+        <li class="adwninput">
+            <div class="limg">
+                <img src="./img/winname.png" />
+            </div>
+            <span>钱包名</span>
+            <input placeholder="{{nameW.name}}" />
+        </li>
+        <li ng-click="nameW.goChangeWalletpassWord(nameW.walletid)">
+            <div class="ld">
+                <div class="limg">
+                    <img src="./img/winpass.png" />
+                </div>
+                <span>修改密码</span>
+            </div>
+            <div class="rd">
+                <img src="./img/more.png" />
+            </div>
+        </li>
+    </ul>
+    <div class="btngroup" ng-controller="preferencesDeleteWalletController as predelte">
+        <button class="m20b" ng-show="nameW.mnemonic || nameW.mnemonicEncrypted" ng-click="nameW.gobackup(nameW.name, nameW.addr, nameW.ammount, nameW.walletid, nameW.mnemonic, nameW.mnemonicEncrypted);index.backwaname = true;">备份助记词</button>
+        <button class="awbtn" ng-click="predelte.deleteWallet(nameW.walletid,nameW.name)">删除钱包</button>
+    </div>
 </div>
 

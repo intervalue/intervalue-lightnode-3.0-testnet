@@ -1,35 +1,14 @@
 <nav class="sidebar left-off-canvas-menu" ng-controller="sidebarController as sidebar">
   <ul class="off-canvas-list">
     <li ng-show="sidebar.wallets[0]"
-    ng-repeat="item in sidebar.wallets track by $index"
-    ng-class="{'selected': item.id == index.walletId}"
+    ng-repeat="item in index.walletInfo track by $index"
+    ng-class="{'selected': item.wallet == index.wallet}"
     class="nav-item">
-    <a ng-click="sidebar.switchWallet(item.id, index.walletId)" class="oh">
-      <div class="avatar-wallet"
-        ng-style="{'background-color':item.color}">{{(item.name || item.id) | limitTo: 1}}</div>
-      <div class="name-wallet" ng-class="{'m8t':item.n == 1}">{{item.name || item.id}}</div>
+    <a ng-click="sidebar.switchWallet(item.wallet, index.wallet);index.updateTxHistory(3)" class="oh">
+      <div class="avatar-wallet"><img src="{{item.image}}"></div>
+      <div class="name-wallet" ng-class="{'m8t':item.n == 1}">{{item.walletName || item.wallet}}</div>
       <div class="size-12" ng-show="item.n > 1" translate>{{item.m}}-of-{{item.n}}</div>
     </a>
-    </li>
-    <li>
-      <a ng-click="$root.go('create')" class="oh">
-        <i class="icon-arrow-right3 size-18 right m10t"></i>
-        <i class="fi-plus size-24 icon"></i>
-        <div class="tu text-bold">
-          <span class="size-12" translate>Add wallet</span>
-        </div>
-        <div translate>Create a new wallet</div>
-      </a>
-    </li>
-    <li>
-      <a ng-click="$root.go('create')" class="oh">
-        <i class="icon-arrow-right3 size-18 right m10t"></i>
-        <i class="icon-scan size-24 icon"></i>
-        <div class="tu text-bold">
-          <span class="size-12" translate>Scan</span>
-        </div>
-        <div translate>Scan</div>
-      </a>
     </li>
     <!--<li>-->
       <!--<a ng-click="$root.go('correspondentDevices'); index.tab='chat'" class="oh">-->
@@ -52,4 +31,14 @@
       <!--</a>-->
     <!--</li>-->
   </ul>
+  <div class="siderbarb">
+      <a ng-click="$root.go('addwallet')">
+          <div><img src="./img/creat.png"/></div>
+          <span translate>Create a new wallet</span>
+      </a>
+      <a ng-click="$root.go('addwallet')">
+        <div><img src="./img/sidescan.png"/></div>
+        <span translate>Scan</span>
+      </a>
+  </div>
 </nav>

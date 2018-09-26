@@ -10,7 +10,7 @@ angular.module('copayApp.controllers').controller('preferencesDeleteWalletContro
     var cancel_msg = gettextCatalog.getString('Cancel');
     var confirm_msg = gettextCatalog.getString('Confirm');
 
-    var _modalDeleteWallet = function() {
+    var _modalDeleteWallet = function(walletId,name) {
       var ModalInstanceCtrl = function($scope, $modalInstance, $sce, gettext) {
         $scope.title = $sce.trustAsHtml(delete_msg);
         $scope.loading = false;
@@ -38,18 +38,17 @@ angular.module('copayApp.controllers').controller('preferencesDeleteWalletContro
 
       modalInstance.result.then(function(ok) {
         if (ok) {
-          _deleteWallet();
+          _deleteWallet(walletId,name);
         }
       });
     };
 
-    var _deleteWallet = function() {
+    var _deleteWallet = function(walletId,name) {
       var fc = profileService.focusedClient;
-      var name = fc.credentials.walletName;
       var walletName = (fc.alias || '') + ' [' + name + ']';
       var self = this;
 
-      profileService.deleteWallet({}, function(err) {
+      profileService.deleteWallet(walletId,name, function(err) {
         if (err) {
           self.error = err.message || err;
         } else {
@@ -60,7 +59,8 @@ angular.module('copayApp.controllers').controller('preferencesDeleteWalletContro
       });
     };
 
-    this.deleteWallet = function() {
+    //开始删除钱包
+    this.deleteWallet = function(walletId,name) {
 	  if (profileService.profile.credentials.length === 1 || profileService.getWallets().length === 1)
 		  return $rootScope.$emit('Local/ShowErrorAlert', "Can't delete the last remaining wallet");
       if (isCordova) {
@@ -68,13 +68,13 @@ angular.module('copayApp.controllers').controller('preferencesDeleteWalletContro
           delete_msg,
           function(buttonIndex) {
             if (buttonIndex == 1) {
-              _deleteWallet();
+              _deleteWallet(walletId,name);
             }
           },
           confirm_msg, [accept_msg, cancel_msg]
         );
       } else {
-        _modalDeleteWallet();
+        _modalDeleteWallet(walletId,name);
       }
     };
   });

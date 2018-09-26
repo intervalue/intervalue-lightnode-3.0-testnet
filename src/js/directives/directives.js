@@ -29,7 +29,6 @@ function isValidAddress(value) {
   if (arrMatches) {
     return ValidationUtils.isValidAddress(arrMatches[1]);
   }
-
   return ValidationUtils.isValidAddress(value);
 }
 
@@ -53,6 +52,7 @@ angular.module('copayApp.directives')
   ])
 .directive('validAddressOrAccount', ['$rootScope', 'profileService', 'aliasValidationService',
     function($rootScope, profileService, aliasValidationService) {
+
       return {
         require: 'ngModel',
         link: function(scope, elem, attrs, ctrl) {
@@ -578,28 +578,66 @@ angular.module('copayApp.directives')
     return {
         scope: {},
         restrict: 'A',
-        require: '^mdinputc',
-        link: function(scope, elem, attrs, controllerInstance){
-            var el = angular.element(elem)
-            var self = this;
-            el
-                .on('focus', function(ev) {
-                    controllerInstance.setFocused(true);
-                    if((elem[0].value).trim() !== ''){
-                        controllerInstance.setHasValue(true);
-                    }
-                })
-                .on('blur', function(ev) {
-                    controllerInstance.setFocused(false);
-                    if((elem[0].value).trim() !== ''){
-                        controllerInstance.setHasValue(true);
-                    }
-                });
-            scope.$on('$destroy', function() {
-                controllerInstance.setFocused(false);
-                controllerInstance.setHasValue(false);
+        require: ['^mdinputc','?ngModel'],
+        link: postLink
+    }
+      function postLink(scope, elem, attrs, ctrl){
+        var el = angular.element(elem);
+        var self = this;
+        el
+            .on('focus', function(ev) {
+              ctrl[0].setFocused(true);
+                if((elem[0].value).trim() !== ''){
+                  ctrl[0].setHasValue(true);
+                }else{
+                  ctrl[0].setHasValue(false);
+                }
+            })
+            .on('blur', function(ev) {
+              ctrl[0].setFocused(false);
+                if((elem[0].value).trim() !== ''){
+                  ctrl[0].setHasValue(true);
+                }else{
+                  ctrl[0].setHasValue(false);
+                  elem[0].value = '';
+                }
             });
+        if(ctrl[1]){
+          scope.$watch(function(){
+            return (ctrl[1]).$modelValue + "";
+          },function(val){
+            if(val == 'undefined'){
+              ctrl[0].setHasValue(false);
+            }else if(val.trim() !== ''){
+              ctrl[0].setHasValue(true);
+            }else{
+              ctrl[0].setHasValue(false);
+            }
+          })
         }
+        scope.$on('$destroy', function() {
+          ctrl[0].setFocused(false);
+          ctrl[0].setHasValue(false);
+        });
+    }
+  }).directive("mdlabel",function(){
+    return {
+        scope: {},
+        restrict: 'A',
+        require: '^mdinputc',
+        link: postLink
+    }
+      function postLink(scope, elem, attrs, controllerInstance){
+        var el = angular.element(elem);
+        var self = this;
+        el
+            .on('click', function(ev) {
+              controllerInstance.setFocused(true);
+            })
+        scope.$on('$destroy', function() {
+          controllerInstance.setFocused(false);
+          controllerInstance.setHasValue(false);
+        });
     }
   }).filter('encodeURIComponent', function() {
     return window.encodeURIComponent;

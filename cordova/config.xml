@@ -12,27 +12,31 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
-    <preference name="AndroidPersistentFileLocation" value="Internal" />
-    <preference name="iosPersistentFileLocation" value="Library" />
+    <preference name="AndroidPersistentFileLocation" value="Internal"/>
+    <preference name="iosPersistentFileLocation" value="Library"/>
     <preference name="DisallowOverscroll" value="true"/>
     <preference name="HideKeyboardFormAccessoryBar" value="true"/>
-    <preference name="SplashScreen" value="copayscreen" />
-    <preference name="ShowSplashScreenSpinner" value="false" /> 
-    <preference name="AutoHideSplashScreen" value="false" />
-    <preference name="FadeSplashScreen" value="true" />  
-    <preference name="FadeSplashScreenDuration" value="1000" />
-    <preference name="SplashMaintainAspectRatio" value="true" />
-    <preference name="BackgroundColor" value="#2C3E50" />
-    <preference name="StatusBarOverlaysWebView" value="false" />
-    <preference name="StatusBarBackgroundColor" value="#2C3E50" />
-    <preference name="StatusBarStyle" value="lightcontent" />
+    <preference name="SplashScreen" value="copayscreen"/>
+    <preference name="ShowSplashScreenSpinner" value="false"/>
+    <preference name="AutoHideSplashScreen" value="false"/>
+    <preference name="FadeSplashScreen" value="true"/>
+    <preference name="FadeSplashScreenDuration" value="1000"/>
+    <preference name="SplashMaintainAspectRatio" value="true"/>
+    <preference name="BackgroundColor" value="#FAFAFA"/>
+    <preference name="StatusBarOverlaysWebView" value="false"/>
+
+    <!--更改手机状态栏背景色-->
+    <preference name="StatusBarBackgroundColor" value="#12172e"/>
+    <preference name="StatusBarStyle" value="lightcontent"/>
     <preference name="BackupWebStorage" value="none"/>
     <preference name="windows-target-version" value="8.1"/>
-    <preference name="Orientation" value="portrait" />
-	<preference name="KeepRunning" value="false"/>
-	<preference name="android-minSdkVersion" value="19" />
-	<preference name="deployment-target" value="9.0" />
-	<preference name="AndroidLaunchMode" value="singleTask" />
+    <preference name="Orientation" value="portrait"/>
+    <preference name="KeepRunning" value="false"/>
+    <preference name="android-minSdkVersion" value="19"/>
+    <preference name="deployment-target" value="9.0"/>
+    <preference name="AndroidLaunchMode" value="singleTask"/>
+    <preference name="KeyboardDisplayRequiresUserAction" value="true" />
+    <preference name="orientation" value="portrait" />
 <!-- 增加android桌面图标-->
     <platform name="android">
         <icon density="ldpi" src="res/icon/android/drawable-ldpi/icon.png" />
@@ -87,7 +91,12 @@
       <splash src="../ios/splash/Default-736h@3x~iphone6plus.png" width="1242" height="2208"/>
       <splash src="../ios/splash/Default-812h@3x.png" width="1125" height="2436"/>
     </platform>
-    <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
+    <!--<edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
         <string>To scan barcodes</string>
-    </edit-config>
+    </edit-config>-->
+
+    <config-file overwrite="true" parent="NSCameraUsageDescription" platform="ios"
+                 target="*-Info.plist">
+        <string>To scan barcodes</string> 
+    </config-file>
 </widget>

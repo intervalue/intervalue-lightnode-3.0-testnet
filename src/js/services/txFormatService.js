@@ -12,6 +12,10 @@ angular.module('copayApp.services').factory('txFormatService', function (profile
     return profileService.formatAmountWithUnit(amount, asset);
   };
 
+  var formatAmount = function (amount, asset) {
+      return profileService.formatAmountUnit(amount, asset);
+  };
+
   var formatFeeStr = function (fee) {
     if (!fee) return;
     return fee + ' bytes';
@@ -19,7 +23,7 @@ angular.module('copayApp.services').factory('txFormatService', function (profile
 
   root.processTx = function (tx) {
     if (!tx) return;
-
+    //console.log(JSON.stringify(tx));
     var outputs = tx.outputs ? tx.outputs.length : 0;
     if (outputs > 1 && tx.action != 'received') {
       tx.hasMultiplesOutputs = true;
@@ -31,11 +35,12 @@ angular.module('copayApp.services').factory('txFormatService', function (profile
     }
     tx.my_address = tx.addressFrom;
     tx.asset = 'base';
-    tx.confirmations = tx.isStable;
+    tx.confirmations = tx.result;
     tx.time = tx.creation_date;
     tx.amountStr = formatAmountStr(tx.amount, tx.asset);
+    tx.amountTl = formatAmount(tx.amount, tx.asset);//
     tx.feeStr = formatFeeStr(tx.fee || tx.fees);
-
+    tx.addressFrom = tx.addressFrom;
     return tx;
   };
 

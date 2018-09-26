@@ -86,6 +86,15 @@ angular
           }
         }
       })
+        .state('create', {
+            url: '/create',
+            needProfile: false,
+            views: {
+                'main': {
+                    templateUrl: 'views/create.html'
+                }
+            }
+        })
       .state('addwallet', {
           url: '/addwallet.html',
           needProfile: false,
@@ -119,17 +128,7 @@ angular
         }
       })
 
-      .state('create', {
-        url: '/create',
-        templateUrl: 'views/create.html',
-        needProfile: true,
-        modal: true,
-        views: {
-          'main': {
-            templateUrl: 'views/create.html'
-          }
-        }
-      })
+
       .state('copayers', {
         url: '/copayers',
         needProfile: true,
@@ -458,7 +457,7 @@ angular
           }
         }
       })
-      .state('preferencesGlobal.import', {
+      .state('import', {
         url: '/import',
         needProfile: true,
         views: {
@@ -479,11 +478,20 @@ angular
           }
         }
       })
-      .state('preferencesGlobal.preferencesAbout.disclaimer', {
-        url: '/disclaimer',
+      .state('preferencesGlobal.preferencesAbout.term', {
+        url: '/term',
         needProfile: false,
         views: {
           'main@': {
+            templateUrl: 'views/term.html',
+          }
+        }
+      })
+      .state('disclaimer', {
+        url: '/disclaimer',
+        needProfile: false,
+        views: {
+          'main': {
             templateUrl: 'views/disclaimer.html',
           }
         }
@@ -521,7 +529,7 @@ angular
       })
 
       .state('walletnamea', {
-        url: '/walletname?name&addr&ammount&walletid&mnemonic&mnemonicEncrypted',
+        url: '/walletname?image?name&addr&ammount&walletid&mnemonic&mnemonicEncrypted',
         needProfile: true,
         views: {
             'main@': {
@@ -529,17 +537,17 @@ angular
             }
         }
       })
-      .state('walletnamea.changewalletp', {
-          url: '/changepass',
+      .state('changeWalletPassWord', {
+          url: '/changeWalletPassWord?walletId',
           needProfile: true,
           views: {
               'main@': {
-                  templateUrl: 'views/changewalletp.html'
+                  templateUrl: 'views/changeWalletPassWord.html'
               }
           }
       })
       .state('importwallet', {
-          url: '/import',
+          url: '/importwallet',
           needProfile: true,
           views: {
               'main': {
@@ -547,6 +555,7 @@ angular
               }
           }
       })
+
       .state('backup', {
           url: '/backup?name&addr&ammount&walletid&mnemonic&mnemonicEncrypted',
           templateUrl: 'views/backup.html',
@@ -645,17 +654,16 @@ angular
           if (err) {
             if (err.message && err.message.match('NOPROFILE')) {
               $log.debug('No profile... redirecting');
-              return $state.transitionTo('addwallet');
+              return $state.transitionTo('create');
             } else if (err.message && err.message.match('NONAGREEDDISCLAIMER')) {
               $log.debug('Display disclaimer... redirecting');
-              return $state.transitionTo('preferencesGlobal.preferencesAbout.disclaimer');
+              return $state.transitionTo('disclaimer');
             } else {
               throw new Error(err.message || err); // TODO
             }
           } else {
             $log.debug('Profile loaded ... Starting UX.');
-            console.log(JSON.stringify((profileService.profile.credentials)));
-            $rootScope.adddataw = profileService.profile.credentials;
+            $rootScope.createdataw = profileService.profile.credentials;
             return $state.transitionTo(toState.name || toState, toParams);
           }
         });

@@ -526,12 +526,12 @@ API.prototype.sendPayment = function(asset, to_address, amount, arrSigningDevice
 }*/
 
 
-API.prototype.getSignerWithLocalPrivateKey = function () {
+API.prototype.getSignerWithLocalPrivateKey = function (xPrivKey) {
   var self = this;
   return function (wallet_id, account, is_change, address_index, text_to_sign, handleSig) {
     var coin = (self.credentials.network == 'livenet' ? "0" : "1");
     var path = "m/44'/" + coin + "'/" + account + "'/" + is_change + "/" + address_index;
-    var xPrivKey = new Bitcore.HDPrivateKey.fromString(self.credentials.xPrivKey);
+    var xPrivKey = new Bitcore.HDPrivateKey.fromString(xPrivKey);
     var privateKey = xPrivKey.derive(path).privateKey;
     //var privKeyBuf = privateKey.toBuffer();
     var privKeyBuf = privateKey.bn.toBuffer({ size: 32 }); // https://github.com/bitpay/bitcore-lib/issues/47
@@ -539,12 +539,11 @@ API.prototype.getSignerWithLocalPrivateKey = function () {
   };
 };
 
-API.prototype.getLocalPrivateKey = function () {
+API.prototype.getLocalPrivateKey = function (xPrivKey) {
   var self = this;
-  return function (account, is_change, address_index) {
-    var coin = (self.credentials.network == 'livenet' ? "0" : "1");
-    var path = "m/44'/" + coin + "'/" + account + "'/" + is_change + "/" + address_index;
-    var xPrivKey = new Bitcore.HDPrivateKey.fromString(self.credentials.xPrivKey);
+  return function () {
+    var path = "m/44'/0'/0'/0/0";
+    var xPrivKey = new Bitcore.HDPrivateKey.fromString(xPrivKey);
     var privateKey = xPrivKey.derive(path).privateKey;
     //var privKeyBuf = privateKey.toBuffer();
     var privKeyBuf = privateKey.bn.toBuffer({ size: 32 }); // https://github.com/bitpay/bitcore-lib/issues/47
@@ -557,9 +556,10 @@ API.prototype.sendMultiPayment = function (opts, cb) {
   var self = this;
   var Wallet = require('intervaluecore/wallet.js');
   var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
-
-  opts.signWithLocalPrivateKey = this.getSignerWithLocalPrivateKey();
-  opts.getLocalPrivateKey = this.getLocalPrivateKey();
+  if(!opts.isHot){
+      opts.signWithLocalPrivateKey = this.getSignerWithLocalPrivateKey(opts.xPrivKey);
+      opts.getLocalPrivateKey = this.getLocalPrivateKey(opts.xPrivKey);
+  }
 
   if (opts.shared_address) {
     opts.paying_addresses = [opts.shared_address];
@@ -582,7 +582,7 @@ API.prototype.sendMultiPayment = function (opts, cb) {
     } else {
       walletDefinedByKeys.readAddresses(self.credentials.walletId, {}, function (addresses) {
         opts.change_address = addresses[0].address;
-        Wallet.sendMultiPayment(opts, cb);
+              Wallet.sendMultiPayment(opts, cb);
       });
     }
   }
@@ -663,15 +663,9 @@ API.prototype.getListOfBalancesOnAddresses = function (cb) {
   });
 };
 
-API.prototype.getTxHistory = function (asset, shared_address, cb) {
+API.prototype.getTxHistory = function (asset, walletId, cb) {
   var Wallet = require('intervaluecore/wallet.js');
-  $.checkState(this.credentials && this.credentials.isComplete());
-  var opts = { asset: asset };
-  if (shared_address)
-    opts.address = shared_address;
-  else
-    opts.wallet = this.credentials.walletId;
-  Wallet.readTransactionHistory(opts, function (arrTransactions) {
+  Wallet.readTransactionHistory(walletId, function (arrTransactions) {
     cb(arrTransactions);
   });
 };
@@ -682,7 +676,6 @@ API.prototype.initDeviceProperties = function (xPrivKey, device_address, hub, de
   if (device_address)
     device.setDeviceAddress(device_address);
   device.setDeviceName(deviceName);
-  device.setDeviceHub(hub);
   //device.setDevicePrivateKey(Bitcore.HDPrivateKey.fromString(xPrivKey).derive("m/1'").privateKey.toBuffer());
 
   // since this is executed at app launch, give in to allow other startup tasks to complete

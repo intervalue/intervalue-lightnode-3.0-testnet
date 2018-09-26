@@ -124,11 +124,11 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
         root.openExternalLink(url, target);
     };
 
+    //冷热钱包扫码开始
     function handleUriAddr(uri) {
         if(uri.indexOf("InterValue-3.0-testnet:") != -1){
             uri = uri.replace('InterValue-3.0-testnet:','');
             if(uri.length === 32) {
-
                 $rootScope.$emit('Local/ShadowAddress',uri);
             }            //冷钱包二维码验证
         }else if(uri.indexOf("shadow") != -1){
@@ -142,12 +142,11 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                     //第一次扫码pubkey二维码后，签名生成地址
                     if(objRequest.type ==='shadow'){
                         shadowWallet.getSignatureCode(objRequest,function (signatureCode) {
-                            alert(typeof  signatureCode );
-                            if(typeof signatureCode=="object"){
+                            if(typeof signatureCode == "object"){
                                 $rootScope.$emit('Local/ShadowInvitation',signatureCode);
                             }else{
-                                console.log("signatureCode is "+signatureCode)
-                                throw Error('signatureCode is '+signatureCode);
+                                console.log("signatureCode is "+signatureCode);
+                                notification.error('signatureCode is '+signatureCode);
                             }
                         });
                     }
@@ -155,21 +154,42 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                     else if(objRequest.type === 'sign'){
                         var mnemonic;
                         var wc = profileService.walletClients;
-                        db.query('select extended_pubkey  from extended_pubkeys as a  left join my_addresses as b on a.wallet=b.wallet where b.address=?',[objRequest.addr],function (rows) {
+                        db.query('select extended_pubkey,a.wallet  from extended_pubkeys as a  left join my_addresses as b on a.wallet=b.wallet where b.address=?',[objRequest.addr],function (rows) {
                             for(var index in wc){
                                 if(rows[0].extended_pubkey == wc[index].credentials.xPubKey){
-                                    mnemonic = wc[index].credentials.mnemonic;
-                                    break;
+                                    if(!wc[index].credentials.mnemonic){
+                                        if(wc[index].credentials.walletId != profileService.focusedClient.walletId){
+                                            profileService.setAndStoreFocus(rows[0].wallet, function() {
+                                            });
+                                        }
+                                        profileService.insistUnlockFC(null, function (err){
+                                            if (err) return;
+                                            mnemonic = profileService.focusedClient.credentials.mnemonic;;
+                                            shadowWallet.getSignatureDetlCode(objRequest,mnemonic,function (signatureDetlCode) {
+                                                if(typeof  signatureDetlCode =="object"){
+                                                    $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
+                                                }else{
+                                                    console.log(" signatureDetlCode is "+signatureDetlCode);
+                                                    notification.error('signatureDetlCode is '+signatureDetlCode);
+                                                }
+                                            });
+                                        });
+                                        break;
+                                    }else {
+                                        mnemonic = wc[index].credentials.mnemonic;
+                                        shadowWallet.getSignatureDetlCode(objRequest,mnemonic,function (signatureDetlCode) {
+                                            if(typeof  signatureDetlCode =="object"){
+                                                $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
+                                            }else{
+                                                console.log(" signatureDetlCode is "+signatureDetlCode);
+                                                notification.error('signatureDetlCode is '+signatureDetlCode);
+                                            }
+                                        });
+                                        break;
+                                    }
                                 }
                             }
-                            shadowWallet.getSignatureDetlCode(objRequest,mnemonic,function (signatureDetlCode) {
-                                if(typeof  signatureDetlCode =="object"){
-                                    $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
-                                }else{
-                                    console.log(" signatureDetlCode is "+signatureDetlCode)
-                                    throw Error('signatureDetlCode is '+signatureDetlCode);
-                                }
-                            })
+
                         });
 
                     }
@@ -180,7 +200,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                                 $rootScope.$emit('Local/generateShadowWallet', shadowWallet);
                             }else {
                                 console.log("shadowWallet is  "+shadowWallet);
-                                throw Error('shadowWallet is   '+shadowWallet);
+                                notification.error('shadowWallet is   '+shadowWallet);
                             }
                         });
                     }
@@ -188,42 +208,141 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
             });
         }
     }
-
     root.handleUriAddr  = handleUriAddr;
+    //冷热钱包扫码结束
 
+    //扫码付款开始
     function handleUri(uri){
         //if (uri.indexOf("intervalue:") == -1 ) return handleFile(uri);
-        if (uri.indexOf("InterValue-3.0-testnet:") == -1 ) return handleFile(uri);
+        //if (uri.indexOf("InterValue-3.0-testnet:") == -1 ) return handleFile(uri);
         console.log("handleUri "+uri);
         //付款扫码验证
-        require('intervaluecore/uri.js').parseUri(uri, {
-            ifError: function(err){
-                console.log(err);
-                notification.error(err);
-                //notification.success(gettextCatalog.getString('Success'), err);
-            },
-            ifOk: function(objRequest){
-                console.log("request: "+JSON.stringify(objRequest));
-                if (objRequest.type === 'address'){
-                    root.send(function(){
-                        $rootScope.$emit('paymentRequest', objRequest.address, objRequest.amount, objRequest.asset);
-                    });
+        if(uri.indexOf("InterValue-3.0-testnet:") != -1){
+            require('intervaluecore/uri.js').parseUri(uri, {
+                ifError: function(err){
+                    console.log(err);
+                    notification.error(err);
+                    //notification.success(gettextCatalog.getString('Success'), err);
+                },
+                ifOk: function(objRequest){
+                    console.log("request: "+JSON.stringify(objRequest));
+                    if (objRequest.type === 'address'){
+                        root.send(function(){
+                            $rootScope.$emit('paymentRequest', objRequest.address, objRequest.amount, objRequest.asset);
+                        });
+                    }
+                    else if (objRequest.type === 'pairing'){
+                        $rootScope.$emit('Local/CorrespondentInvitation', objRequest.pubkey, objRequest.hub, objRequest.pairing_secret);
+                    }
+                    else if (objRequest.type === 'auth'){
+                        authService.objRequest = objRequest;
+                        root.path('authConfirmation');
+                    }
+                    else if (objRequest.type === 'textcoin') {
+                        $rootScope.$emit('claimTextcoin', objRequest.mnemonic);
+                    }
+                    else
+                        notification.error('unknown url type: '+objRequest.type);
                 }
-                else if (objRequest.type === 'pairing'){
-                    $rootScope.$emit('Local/CorrespondentInvitation', objRequest.pubkey, objRequest.hub, objRequest.pairing_secret);
+            });
+        }else if(uri.indexOf("shadow") != -1){
+            require('intervaluecore/shadowUri.js').shadowParseUri(uri,{
+                ifError: function(err){
+                    console.log(err);
+                },
+                ifOk: function(objRequest){
+                    objRequest = JSON.parse(objRequest.toString());
+                    var shadowWallet = require('intervaluecore/shadowWallet');
+                    //第一次扫码pubkey二维码后，签名生成地址
+                    if(objRequest.type ==='shadow'){
+                        shadowWallet.getSignatureCode(objRequest,function (signatureCode) {
+                            if(typeof signatureCode == "object"){
+                                $rootScope.$emit('Local/ShadowInvitation',signatureCode);
+                            }else{
+                                console.log("signatureCode is "+signatureCode);
+                                notification.error('signatureCode is '+signatureCode);
+                            }
+                        });
+                    }
+                    //第二次扫码授权
+                    else if(objRequest.type === 'sign'){
+                        var xPrivKey;
+                        var wc = profileService.walletClients;
+                        db.query('select extended_pubkey,a.wallet  from extended_pubkeys as a  left join my_addresses as b on a.wallet=b.wallet where b.address=?',[objRequest.addr],function (rows) {
+                            for(var index in wc){
+                                if(rows[0].extended_pubkey == wc[index].credentials.xPubKey){
+                                    if(!wc[index].credentials.mnemonic){
+                                        if(wc[index].credentials.walletId != profileService.focusedClient.walletId){
+                                            profileService.setAndStoreFocus(rows[0].wallet, function() {
+                                            });
+                                        }
+                                        profileService.insistUnlockFC(null, function (err){
+                                            if (err) return;
+                                            xPrivKey = profileService.focusedClient.credentials.xPrivKey;
+                                            shadowWallet.getSignatureDetlCode(objRequest,xPrivKey,function (signatureDetlCode) {
+                                                if(typeof  signatureDetlCode =="object"){
+                                                    $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
+                                                }else{
+                                                    console.log(" signatureDetlCode is "+signatureDetlCode);
+                                                    notification.error('signatureDetlCode is '+signatureDetlCode);
+                                                }
+                                            });
+                                        });
+                                        break;
+                                    }else {
+                                        xPrivKey = wc[index].credentials.xPrivKey;
+                                        shadowWallet.getSignatureDetlCode(objRequest,xPrivKey,function (signatureDetlCode) {
+                                            if(typeof  signatureDetlCode =="object"){
+                                                $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
+                                            }else{
+                                                console.log(" signatureDetlCode is "+signatureDetlCode);
+                                                notification.error('signatureDetlCode is '+signatureDetlCode);
+                                            }
+                                        });
+                                        break;
+                                    }
+                                }
+                            }
+
+                        });
+
+                    }
+                    //第三次扫码，生成热钱包
+                    else if(objRequest.type === 'signDetl'){
+                        shadowWallet.generateShadowWallet(objRequest,function (shadowWallet) {
+                            if( typeof shadowWallet=="object"){
+                                $rootScope.$emit('Local/generateShadowWallet', shadowWallet);
+                            }else {
+                                console.log("shadowWallet is  "+shadowWallet);
+                                notification.error('shadowWallet is   '+shadowWallet);
+                            }
+                        });
+                    }
                 }
-                else if (objRequest.type === 'auth'){
-                    authService.objRequest = objRequest;
-                    root.path('authConfirmation');
+            });
+        }else if(uri.indexOf("isHot") != -1){//热钱包交易
+            require('intervaluecore/shadowUri.js').isHotParseUri(uri, {
+                ifError: function(err){
+                    console.log(err);
+                    notification.error(err);
+                    //notification.success(gettextCatalog.getString('Success'), err);
+                },
+                ifOk: function(objRequest){
+                    console.log("request: "+objRequest);
+                    objRequest = JSON.parse(objRequest);
+                    if(objRequest.type == "trading"){//展示未签名交易信息
+                        $rootScope.$emit('Local/showUnsignedTransactionIfo', objRequest);
+                    }else if(objRequest.type == "sign"){//显示已签名信息
+                        objRequest.isSignHot = true;
+                        $rootScope.$emit('Local/signedTransactionIfoHot', objRequest);
+                    }
                 }
-                else if (objRequest.type === 'textcoin') {
-                    $rootScope.$emit('claimTextcoin', objRequest.mnemonic);
-                }
-                else
-                    throw Error('unknown url type: '+objRequest.type);
-            }
-        });
+            });
+        }else return handleFile(uri);
+
+
     }
+    //扫码付款结束
 
     var last_handle_file_ts = 0;
 

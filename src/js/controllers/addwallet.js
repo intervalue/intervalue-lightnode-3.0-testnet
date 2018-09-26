@@ -1,11 +1,16 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('addwalletController',
-    function ($rootScope, $scope, $timeout, storageService, notification, profileService, bwcService, $log) {
+    function ($rootScope, $scope, $timeout, storageService, notification, profileService, bwcService, $log,gettext,go) {
         var self = this;
+        var successMsg = gettext('Backup words deleted');
         self.addwname = '';
         self.addwpass = '';
         self.addwrpass = '';
+        self.addwipass = '';
+        self.addwiname = '';
+        self.importcode = '';
+        self.addwirpass = '';
         self.chosenWords = [];
         self.showcodes = [];
         self.showrandamcodes = [];
@@ -13,6 +18,7 @@ angular.module('copayApp.controllers').controller('addwalletController',
         self.showcodeerr = false;
         self.addwalleterr = false;
         self.showconfirm = false;
+        self.showtab = 'tabcold';
         var fc = profileService.focusedClient;
         var walletClient = bwcService.getClient();
         self.ducodes = walletClient.createRandomMnemonic().split(' ');
@@ -56,7 +62,7 @@ angular.module('copayApp.controllers').controller('addwalletController',
         // 定义提示框内容  结束
         self.addwordf = function ($event) {
             self.showcodeerr = false;
-            if ($event.srcElement.tagName == 'SPAN') {
+            if ($event.srcElement.tagName == 'BUTTON') {
                 self.showrandamcodes.forEach(function (item, index) {
                     if (item.id == $event.srcElement.id) {
                         self.showrandamcodes[index].chosen = true;
@@ -134,7 +140,7 @@ angular.module('copayApp.controllers').controller('addwalletController',
 
         };
         // 删除口令 修改后
-        self.delteConfirm = function (walletName, passphrase, mnemonic) {
+        self.addWallet = function (walletName, passphrase, mnemonic,del) {
             mnemonic = mnemonic.trim();
             if (self.creatingProfile)
                 return console.log('already creating profile');
@@ -142,7 +148,7 @@ angular.module('copayApp.controllers').controller('addwalletController',
             //	saveDeviceName();
 
             $timeout(function () {
-                profileService.create({ walletName: walletName, password: passphrase, mnemonic: mnemonic }, function (err) {
+                profileService.createWallet({ name: walletName, password: passphrase, mnemonic: mnemonic,m:1,n:1,networkName:"livenet",cosigners:[],isSinglecreateress:true  }, function (err,walletId) {
                     if (err) {
                         self.creatingProfile = false;
                         $log.warn(err);
@@ -154,10 +160,40 @@ angular.module('copayApp.controllers').controller('addwalletController',
                             self.create(noWallet);
                         }, 3000);*/
                     }
-                    else {
-                        $rootScope.adddataw = profileService.profile.credentials;
+                else if(del){
+                        //$rootScope.$emit('Local/WalletImported', walletId);
+                        var fc = profileService.focusedClient;
+                        fc.clearMnemonic();
+                        profileService.clearMnemonic(function() {
+                            self.deleted = true;
+                            notification.success(successMsg);
+                            go.walletHome();
+                        });
+                    }else{
+                        $rootScope.$emit('Local/WalletImported', walletId);
                     }
                 });
             }, 100);
         };
+        //import wallet
+        self.importw = function(){
+            if (self.creatingProfile)
+                return console.log('already creating profile');
+            self.creatingProfile = true;
+
+            $timeout(function () {
+                profileService.createWallet({ name: self.addwiname, password: self.addwipass, mnemonic: self.importcode,m:1,n:1,networkName:"livenet",cosigners:[],isSinglecreateress:true }, function (err,walletId) {
+                    if(err){
+                        self.creatingProfile = false;
+                        $log.warn(err);
+                        self.error = err;
+                        $timeout(function () {
+                            $scope.$apply();
+                        });
+                    }else{
+                        $rootScope.$emit('Local/WalletImported', walletId);
+                    }
+                });
+            }, 100);
+        }
     });

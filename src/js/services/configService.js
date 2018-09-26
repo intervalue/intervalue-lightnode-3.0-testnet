@@ -18,6 +18,19 @@ angular.module('copayApp.services').factory('configService', function (storageSe
 		'#7A8C9E',
 	];
 
+	root.imageOpts = [
+		'./img/rimg/1.png',
+        './img/rimg/2.png',
+        './img/rimg/3.png',
+        './img/rimg/4.png',
+        './img/rimg/5.png',
+        './img/rimg/6.png',
+        './img/rimg/7.png',
+        './img/rimg/8.png',
+        './img/rimg/9.png',
+        './img/rimg/10.png',
+	];
+
 	var constants = require('intervaluecore/constants.js');
 	var isTestnet = constants.version.match(/t$/);
 	root.TIMESTAMPER_ADDRESS = isTestnet ? 'OPNUXBRSSQQGHKQNEPD2GLWQYEUY5XLD' : 'I2ADHGP4HL6J37NQAD73J7E5SKFIXJOT';
@@ -80,17 +93,17 @@ angular.module('copayApp.services').factory('configService', function (storageSe
 			reconnectDelay: 5000,
 			idleDurationMin: 4,
 			singleAddress: true,
-			settings: {
-				unitName: 'bytes',
-				unitValue: 1,
-				unitDecimals: 0,
-				unitCode: 'one',
-				bbUnitName: 'blackbytes',
-				bbUnitValue: 1,
-				bbUnitDecimals: 0,
-				bbUnitCode: 'one',
-				alternativeName: 'US Dollar',
-				alternativeIsoCode: 'USD',
+                settings: {
+                    unitName: 'INVE',
+                    unitValue: 1000000,
+                    unitDecimals: 6,
+                    unitCode: 'mega',
+                    bbUnitName: 'blackbytes',
+                    bbUnitValue: 1,
+                    bbUnitDecimals: 1,
+                    bbUnitCode: 'one',
+                    alternativeName: 'US Dollar',
+                    alternativeIsoCode: 'USD',
 			}
 		},
 
@@ -128,10 +141,9 @@ angular.module('copayApp.services').factory('configService', function (storageSe
 	};
 
 	root.get = function (cb) {
-
 		storageService.getConfig(function (err, localConfig) {
 			configCache = migrateLocalConfig(localConfig);
-			$log.debug('Preferences read:', configCache);
+			//$log.debug('Preferences read:', configCache);
 			return cb(err, configCache);
 		});
 	};
@@ -151,7 +163,6 @@ angular.module('copayApp.services').factory('configService', function (storageSe
 			lodash.merge(config, oldOpts, newOpts);
 			checkAndReplaceOldUnitCode(config.wallet.settings);
 			configCache = config;
-
 			storageService.storeConfig(JSON.stringify(config), cb);
 		});
 	};

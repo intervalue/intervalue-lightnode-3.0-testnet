@@ -53,7 +53,7 @@
                         <span translate>开始导入fgff</span>
                     </button>
                     <section  ng-controller="topbarController as topbar">
-                        <qr-scanner on-scan="topbar.onQrCodeScannedAddr(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
+                        <qr-scanner on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
                     </section>
                 </div>
             </form>
