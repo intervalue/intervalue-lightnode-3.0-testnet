@@ -15,7 +15,6 @@ angular.module('copayApp.controllers').controller('walletnameaController',
             $state.go('backup', { image:image, name: name, addr: addr, ammount: ammount, walletid: walletid, mnemonic: mnemonic, mnemonicEncrypted: mnemonicEncrypted});
         };
         self.goChangeWalletpassWord = function ( walletId, addr, name, image, ammount) {
-            alert(walletId);
             $state.go('changeWalletPassWord', {  walletId: walletId, addr: addr, name: name, image: image, ammount:ammount});
         };
 
