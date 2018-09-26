@@ -1,6 +1,6 @@
 <div class="shadowModalMask" ng-click="index.showshadow = false" ng-show="index.showshadow && !index.showshadow100">
 </div>
-<div  class="shadowModal" ng-class="{'animated  bounceInUp':{{index.showshadow && !index.showshadow100}}}" ng-init="index.shadowstep = 'cold1'">
+<div  class="shadowModal" ng-class="{'animated  bounceInUp':{{index.showshadow && !index.showshadow100}}}" >
     <!--热钱包界面，开始-->
     <!--创建热钱包，开始-->
         <div ng-show="index.shadowstep == 'hot1'" class="scanpop">
@@ -70,14 +70,14 @@
                 <img src="./img/auaddr.png" />
                 <div  class="itemin">
                     <label translate>Authorized address</label>
-                    <div>{{index.signatureDetlCodeAddr}}111111111111111111111</div>
+                    <div>{{index.signatureDetlCodeAddr}}</div>
                 </div>
             </div>
             <div class="item">
                 <img src="./img/audata.png" />
                 <div  class="itemin">
                     <label translate>Data</label>
-                    <div>{{index.sinatureRandom}}22222222222222222222</div>
+                    <div>{{index.sinatureRandom}}</div>
                 </div>
             </div>
             <button ng-click="index.shadowstep = 'cold2'">
