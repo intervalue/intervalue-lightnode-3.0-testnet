@@ -244,12 +244,13 @@ angular.module('copayApp.services').factory('correspondentListService', function
 			objSignedMessage: objSignedMessage,
 			bValid: undefined
 		};
-		var validation = require('intervaluecore/validation.js');
-		validation.validateSignedMessage(objSignedMessage, function(err){
-			info.bValid = !err;
-			if (err)
-				console.log("validateSignedMessage: "+err);
-		});
+		//todo delete
+		// var validation = require('intervaluecore/validation.js');
+		// validation.validateSignedMessage(objSignedMessage, function(err){
+		// 	info.bValid = !err;
+		// 	if (err)
+		// 		console.log("validateSignedMessage: "+err);
+		// });
 		return info;
 	}
 	

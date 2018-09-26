@@ -592,7 +592,8 @@ API.prototype.sendMultiPayment = function (opts, cb) {
 
 API.prototype.signMessage = function (from_address, message, arrSigningDeviceAddresses, cb) {
   var Wallet = require('intervaluecore/wallet.js');
-  Wallet.signMessage(from_address, message, arrSigningDeviceAddresses, this.getSignerWithLocalPrivateKey(), cb);
+  //todo delete
+  // Wallet.signMessage(from_address, message, arrSigningDeviceAddresses, this.getSignerWithLocalPrivateKey(), cb);
 };
 
 API.prototype.getAddresses = function (opts, cb) {

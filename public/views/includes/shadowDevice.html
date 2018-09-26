@@ -1,12 +1,9 @@
-<div class="shadowModalMask" ng-click="index.showshadow = false">
+<div class="shadowModalMask" ng-click="index.showshadow = false" ng-show="index.showshadow && !index.showshadow100">
 </div>
-
-
-<div  class="shadowModal" ng-class="{'animated  bounceInUp':index.showshadow}" ng-init="index.shadowstep = 'csend1'">
+<div  class="shadowModal" ng-class="{'animated  bounceInUp':{{index.showshadow && !index.showshadow100}}}" ng-init="index.shadowstep = 'cold1'">
     <!--热钱包界面，开始-->
-
     <!--创建热钱包，开始-->
-        <div ng-show="index.shadowstep == 'hot1'" class="text-center">
+        <div ng-show="index.shadowstep == 'hot1'" class="scanpop">
             <qrcode size="220"  data="{{index.verificationAddress}}"></qrcode>
         </div>
         <div ng-show="index.shadowstep == 'hot2'" class="scanpop">
@@ -19,7 +16,6 @@
                 </button>
             </div>
         </div>
-
         <div ng-show="index.shadowstep == 'hot3'" class="scanpop" ng-controller="createShadowWalletController as createShadow">
             <form name="addShadowWallet"  ng-submit="createShadow.create(addShadowWallet);index.showshadow = false" novalidate>
                 <div class="title"><img src="./img/chatbackstate.png" class="scanclose" ng-click="index.shadowstep = 'hot2';"><span translate>Complete authorization</span></div>
@@ -37,9 +33,6 @@
             </form>
         </div>
     <!--创建热钱包，结束-->
-
-
-
         <!--热钱包交易，开始-->
         <div ng-show="index.shadowstep == 'hsend1'" class="scanpop">
             <div class="title"><img src="./img/close.png" class="scanclose" ng-click="index.showshadow = false;"><span translate>Cold wallet scanning</span></div>
@@ -67,26 +60,24 @@
             </form>
         </div>
         <!--热钱包交易，结束-->
-
     <!--热钱包界面，结束-->
-
-
     <!--冷钱包，开始-->
     <!--创建热钱包时，冷钱包验证界面，开始-->
     <div ng-show="index.shadowstep == 'cold1'" class="scanpop">
+        <div class="title"><img src="./img/chatbackstate.png" class="scanclose" ng-click=""><span translate>Authorized signature details</span></div>
         <div class="scanin">
             <div class="item">
                 <img src="./img/auaddr.png" />
                 <div  class="itemin">
                     <label translate>Authorized address</label>
-                    <div>{{index.signatureDetlCodeAddr}}</div>
+                    <div>{{index.signatureDetlCodeAddr}}111111111111111111111</div>
                 </div>
             </div>
             <div class="item">
                 <img src="./img/audata.png" />
                 <div  class="itemin">
                     <label translate>Data</label>
-                    <div>{{index.sinatureRandom}}</div>
+                    <div>{{index.sinatureRandom}}22222222222222222222</div>
                 </div>
             </div>
             <button ng-click="index.shadowstep = 'cold2'">
@@ -94,27 +85,12 @@
             </button>
         </div>
     </div>
-    <div ng-show="index.shadowstep == 'cold2'" class="text-center">
-        <qrcode size="220"  data="{{index.signatureDetlCode}}"></qrcode>
+    <div ng-show="index.shadowstep == 'cold2'" class="scanpop">
+        <qrcode size="190"  data="{{index.signatureDetlCode}}"></qrcode>
     </div>
     <!--创建热钱包时，冷钱包验证界面，结束-->
-
     <!--冷钱包交易签名验证，开始-->
-
-    <div ng-show="index.shadowstep == 'csend1'" class="scanpop" ng-controller="signedTransactionIfoControllers as signedTransaction">
-        <form name="signedTransactionIfo" ng-submit="signedTransaction.signedTransaction(signedTransactionIfo)">
-            <input type="hidden" value="{{index.showUnsignedTransactionIfo}}">
-            <div>来自：{{showUnsignedTransactionIfoObj.fromAddress}}</div>
-            <div>到：{{showUnsignedTransactionIfoObj.toAddress}}</div>
-            <div>日期：{{showUnsignedTransactionIfoObj.timestamp}}</div>
-            <div>费用：{{showUnsignedTransactionIfoObj.fee}}</div>
-            <div>Unit：{{}}</div>
-            <div>状态：等待签名</div>
-            <button>
-                <span translate>Authorized Signature</span>
-            </button>
-        </form>
-    </div>
+    
     
     <div ng-show="index.shadowstep == 'csend2'" class="scanpop">
         <div class="title"><img src="./img/close.png" class="scanclose" ng-click="index.showshadow = false;"><span translate>Authorized success</span></div>
@@ -127,10 +103,40 @@
         </div>
     </div>
     <!--冷钱包交易签名验证，结束-->
-
     <!--冷钱包，结束-->
-
-
-
-
+</div>
+<div ng-show="index.showshadow && index.showshadow100" class="shadowModal100" >
+     <!--冷钱包交易签名验证，开始-->
+    <div>
+        <nav ng-controller="topbarController as topbar" class="tab-bar">
+            <section class="left-small">
+                <a ng-click="index.showshadow = false;index.showshadow100 = false;">
+                        <img src="./img/chatbackstate.png" />
+                    </a>
+            </section>
+            <section class="middle tab-bar-section">
+                <h1 class="title ellipsis" translate>Transaction preview</h1>
+            </section>
+        </nav>
+        <div class="csend1" ng-controller="signedTransactionIfoControllers as signedTransaction">
+            <div class="csend1head">
+                <div class="size-30">10</div>
+                <div class="csendunit">INVE</div>
+            </div>
+            <form name="signedTransactionIfo" ng-submit="signedTransaction.signedTransaction(signedTransactionIfo)">
+                <input type="hidden" value="{{index.showUnsignedTransactionIfo}}">
+                <div class="sdflex"><span class="sdtitle" translate>Amount</span>：<span class="sdinfo">{{showUnsignedTransactionIfoObj.fromAddress}}</span></div>
+                <div class="sdflex"><span class="sdtitle" translate>From</span>：<span class="sdinfo">{{showUnsignedTransactionIfoObj.fromAddress}}</span></div>
+                <div class="sdflex"><span class="sdtitle" translate>To</span>：<span class="sdinfo">{{showUnsignedTransactionIfoObj.toAddress}}</span></div>
+                <div class="sdflex"><span class="sdtitle" translate>Date</span>：<span class="sdinfo">{{showUnsignedTransactionIfoObj.timestamp}}</span></div>
+                <div class="sdflex"><span class="sdtitle" translate>Fee</span>：<span class="sdinfo">{{showUnsignedTransactionIfoObj.fee}}</span></div>
+                <div class="sdflex"><span class="sdtitle" translate>Unit</span：><span class="sdinfo">{{}}</span></div>
+                <div class="sdflex"><span class="sdtitle" translate>Status</span>：<span class="sdinfo">等待签名</span></div>
+                <button class="m60t">
+                    <span translate>Authorized Signature</span>
+                </button>
+            </form>
+        </div>
+    </div>
+    <!--冷钱包交易签名验证，结束-->
 </div>

@@ -25,6 +25,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.$state = $state;
     self.usePushNotifications = isCordova && !isMobile.Windows();
     self.showshadow= false;
+    self.showshadow100= false;
     self.verificationQRCode = '';
     self.signatureAddr = '';
     self.shadowstep = 'hot1';
@@ -1837,6 +1838,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         self.showUnsignedTransactionIfoObj = showUnsignedTransactionIfo;
         self.showUnsignedTransactionIfo = JSON.stringify(showUnsignedTransactionIfo);
         self.showshadow = true;
+        self.showshadow100 = true;
         self.shadowstep = 'csend1';
         $timeout(function () {
             $rootScope.$apply();

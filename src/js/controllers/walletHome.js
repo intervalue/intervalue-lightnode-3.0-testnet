@@ -293,15 +293,16 @@ angular.module('copayApp.controllers')
 				var walletGeneral = require('intervaluecore/wallet_general.js');
 				var walletDefinedByAddresses = require('intervaluecore/wallet_defined_by_addresses.js');
 				walletGeneral.readMyAddresses(function(arrMyAddresses) {
-					walletDefinedByAddresses.readSharedAddressDefinition(address, function(arrDefinition, creation_ts) {
-						walletDefinedByAddresses.readSharedAddressPeerAddresses(address, function(arrPeerAddresses) {
-							$scope.humanReadableDefinition = correspondentListService.getHumanReadableDefinition(arrDefinition, arrMyAddresses, [], arrPeerAddresses, true);
-							$scope.creation_ts = creation_ts;
-							$timeout(function() {
-								$scope.$apply();
-							});
-						});
-					});
+					//todo delete
+					// walletDefinedByAddresses.readSharedAddressDefinition(address, function(arrDefinition, creation_ts) {
+						// walletDefinedByAddresses.readSharedAddressPeerAddresses(address, function(arrPeerAddresses) {
+						// 	$scope.humanReadableDefinition = correspondentListService.getHumanReadableDefinition(arrDefinition, arrMyAddresses, [], arrPeerAddresses, true);
+						// 	$scope.creation_ts = creation_ts;
+						// 	$timeout(function() {
+						// 		$scope.$apply();
+						// 	});
+						// });
+					// });
 				});
 
 				// clicked a link in the definition
@@ -1780,8 +1781,9 @@ angular.module('copayApp.controllers')
 							$scope.ok = function() {
 								$scope.loading = true;
 								$modalInstance.close(gettextCatalog.getString('Confirm'));
-								
-								wallet.eraseTextcoin(btx.unit, btx.addressTo);
+
+								//todo delete
+								// wallet.eraseTextcoin(btx.unit, btx.addressTo);
 								
 								indexScope.updateTxHistory();
 								$rootScope.$emit('Local/SetTab', 'history');

@@ -1910,6 +1910,9 @@ msgstr "[添加新的多钱包设备]"
 msgid "amount"
 msgstr "金额"
 
+msgid "Amount"
+msgstr "金额"
+
 #: public/views/modals/bind.html:31
 msgid "an event is posted by an oracle"
 msgstr "事件是由 oracle 发布："
@@ -2294,6 +2297,19 @@ msgstr "扫描冷钱包签名数据二维码"
 
 msgid "Send transaction"
 msgstr "发送交易"
+
+msgid "Status"
+msgstr "状态"
+
+msgid "Unit"
+msgstr "单位"
+
+msgid "Transaction preview"
+msgstr "交易预览"
+
+msgid "Authorized signature details"
+msgstr "授权签名详情"
+
 
 
 

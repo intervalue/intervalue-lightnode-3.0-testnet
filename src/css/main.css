@@ -469,6 +469,7 @@ ul.manage li {
 .size-20 { font-size: 20px; }
 .size-21 { font-size: 21px; }
 .size-24 { font-size: 24px; }
+.size-30 { font-size: 30px; }
 .size-36 { font-size: 36px; }
 .size-42 { font-size: 42px; }
 .size-45 { font-size: 45px; }
@@ -1408,6 +1409,7 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
   z-index: 1099;
   opacity:0.1;
   background: black;
+  cursor: pointer;
 }
 
 .shadowModal {
@@ -1419,6 +1421,16 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
   left: 0;
   bottom: 0;
   z-index: 1100;
+}
+.shadowModal100 {
+  background: #F9FAFC;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  bottom: 0;
+  z-index: 1100;
+  overflow: auto;
 }
 .tx-details-blockchain li {
   cursor: pointer !important;
