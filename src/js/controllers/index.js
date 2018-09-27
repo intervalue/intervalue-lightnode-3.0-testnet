@@ -1263,6 +1263,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                                 if (tran.wallet == fc[item].credentials.walletId){
                                     var walletNameIfo = fc[item].credentials.walletName;
                                     var imageIfo = fc[item].image;
+                                    var mnemonicEncryptedIfo = fc[item].credentials.mnemonicEncrypted;
                                     break;
                                 }
                             }
@@ -1271,7 +1272,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                                 wallet  : tran.wallet,
                                 stables  : profileService.formatAmount(tran.stables,'bytes'),
                                 walletName : walletNameIfo,
-                                image : imageIfo
+                                image : imageIfo,
+                                mnemonicEncrypted: mnemonicEncryptedIfo
                             });
                         });
                         self.walletInfo = trans;
@@ -1867,8 +1869,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
 
 
-    self.towalletname = function (image, name, addr, ammount, walletid, mnemonic, mnemonicEncrypted) {
-        $state.go('walletnamea', { image: image, name: name, addr: addr, ammount: ammount, walletid: walletid, mnemonic: mnemonic, mnemonicEncrypted: mnemonicEncrypted});
+    self.towalletname = function (image, name, addr, ammount, walletId, mnemonic, mnemonicEncrypted) {
+        $state.go('walletnamea', { image: image, name: name, addr: addr, ammount: ammount, walletid: walletId, mnemonic: mnemonic, mnemonicEncrypted: mnemonicEncrypted});
     };
 
     /**
