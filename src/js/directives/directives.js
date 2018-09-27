@@ -561,7 +561,8 @@ angular.module('copayApp.directives')
             });
         }
     }
-  }]).directive("mdinputc", function(){
+  }])
+  .directive("mdinputc", function(){
     return {
         scope: {},
         restrict: 'A',
@@ -637,6 +638,45 @@ angular.module('copayApp.directives')
         scope.$on('$destroy', function() {
           controllerInstance.setFocused(false);
           controllerInstance.setHasValue(false);
+        });
+    }
+  }).directive("mdinputvalidc", function(){
+    return {
+        scope: {},
+        restrict: 'A',
+        controller: function($scope, $element){
+            this.setErrori = function(isFocused) {
+                $element.toggleClass('md-input-error', !!isFocused);
+            };
+        }
+    }
+  }).directive("mdinputpass",function(){
+    return {
+        scope: {},
+        restrict: 'A',
+        require: ['^mdinputvalidc','?ngModel'],
+        link: postLink
+    }
+      function postLink(scope, elem, attrs, ctrl){
+        var el = angular.element(elem);
+        var self = this;
+        el.on('keydown', function(ev) {
+              ctrl[0].setErrori(false);
+            });
+        if(ctrl[1]){
+          scope.$watch(function(){
+            return (ctrl[1]).$modelValue + "";
+          },function(val){
+            var trimExp=/\s+/g;//
+            if(val == 'undefined'){
+              ctrl[0].setErrori(true);
+            }else if(trimExp.test(val)){
+              ctrl[0].setErrori(true);
+            }
+          })
+        }
+        scope.$on('$destroy', function() {
+          ctrl[0].setErrori(false);
         });
     }
   }).filter('encodeURIComponent', function() {

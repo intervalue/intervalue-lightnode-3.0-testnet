@@ -54,6 +54,16 @@
 /*addwallet part start*/
 .addwcontentin .fleximgtext{margin-bottom:12px;}
 .addwcontentin .fleximgtext:nth-child(2){margin-bottom:36px;}
+/* start page */
+.addwname{background: url(../img/walletnameinput.png) center no-repeat;z-index: 2;}
+.addwpass{background: url(../img/walletpassinput.png) center no-repeat;z-index: 2;}
+.addwrpass{background: url(../img/walletpassrinput.png) center no-repeat;z-index: 2;}
+.md-input-error .addwname{background: url(../img/walletnameinput.png) center no-repeat;z-index: 2;}
+.md-input-error .addwpass{background: url(../img/walletpassinputer.png) center no-repeat;z-index: 2;}
+.md-input-error .addwrpass{background: url(../img/walletpassrinputer.png) center no-repeat;z-index: 2;}
+.adinputic .adinputp{display: none;color: #D45757;position: absolute;top:40px;left: 0;}
+.md-input-error.adinputic .adinputp{display: block;}
+.md-input-error.adinputic input[type='text'], .md-input-error.adinputic input[type='password']{border-bottom: 1px solid #D45757;}
 /*addwallet part end*/
 
 /*showcode part start*/
@@ -366,7 +376,7 @@ padding: 20px 15px 0;}
 ::-webkit-scrollbar-thumb{border-radius:10px;background:#c5c5c5;}
 ::-webkit-scrollbar-thumb:window-inactive{background:rgba(255,0,0,0.4);}
 .adcpitem{margin-top:30px;height:60px;}
-.adcpmdic{position:relative;width:100%;height:100%;}
+.adcpmdic{position:relative;width:100%;height:44px;}
 .adcpmdic input[type='text'],.adcpmdic input[type='number']{position:absolute;font-size:16px;top:10px;padding:0;font-weight:normal;margin:0;width:100%;}
 .adcpmdic label{position:absolute;font-size:16px;top:10px;padding:0;font-weight:normal;margin:0;white-space:nowrap;cursor:text;}
 .md-input-focused{position:relative;height:100px;transition:all 0.2s ease-in-out;}
