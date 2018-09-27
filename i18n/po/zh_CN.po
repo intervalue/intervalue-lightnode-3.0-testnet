@@ -2310,7 +2310,8 @@ msgstr "交易预览"
 msgid "Authorized signature details"
 msgstr "授权签名详情"
 
-
+msgid "*Inconsistent password"
+msgstr "*密码不一致"
 
 
 

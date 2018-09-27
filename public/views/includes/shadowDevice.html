@@ -86,7 +86,14 @@
         </div>
     </div>
     <div ng-show="index.shadowstep == 'cold2'" class="scanpop">
-        <qrcode size="190"  data="{{index.signatureDetlCode}}"></qrcode>
+        <div class="title"><img src="./img/close.png" class="scanclose" ng-click="index.showshadow = false;"><span translate>Authorized success</span></div>
+        <div class="scanin">
+            <qrcode size="190"  data="{{index.signatureDetlCode}}"></qrcode>
+            <div class="scannote" translate>Please use the hot wallet to scan the QR code to issue a transaction.</div>
+            <button ng-click="index.showshadow = false;">
+                <span translate>Done</span>
+            </button>
+        </div>
     </div>
     <!--创建热钱包时，冷钱包验证界面，结束-->
     <!--冷钱包交易签名验证，开始-->
