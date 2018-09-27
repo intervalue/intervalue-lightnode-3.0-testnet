@@ -371,8 +371,8 @@
                                     </div>
                                 </div>
                                 <label for="amount" class="sendinfo">
-                                    <span translate ng-if="!home.send_multiple">Amount</span>
-                                    <span translate ng-if="home.send_multiple">Total amount</span>
+                                    <span translate ng-if="!home.send_multiple">Amount: {{index.ammountTatol}}</span>
+                                    <span translate ng-if="home.send_multiple">Total amount: {{index.ammountTatol}}</span>
                                     <a ng-click="home.setSendAll()" ng-show="!home.bSendAll && !home.lockAmount" translate>Send all</a>
                                 </label>
                                 <div ng-show="!home.onGoingProcess" class="m30t">
