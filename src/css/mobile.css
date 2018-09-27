@@ -340,7 +340,6 @@ a.missing-copayers {
 
 .sidebar li {
   overflow: hidden;
-  border-bottom: 1px solid #384B5F;
 }
 
 .sidebar li.nav-item.selected {
@@ -959,7 +958,7 @@ input.inline.ng-dirty.ng-valid {
 touch-action: manipulation; /* IE11+ */
 
 #splash{
-  background-color: #283c4f;
+  background-color: #323232;
   position: absolute;
   left: 0;
   top: 0;
