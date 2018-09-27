@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('wordsController',
-  function($rootScope, $scope, $timeout, $stateParams, profileService, go, gettext, confirmDialog, notification, $log, isCordova) {
+  function($rootScope, $scope, $timeout, $stateParams, profileService, go, gettext, confirmDialog, notification, $log, isCordova,$state) {
       var self = this;
       self.walletId = $stateParams.walletId;
       self.name = $stateParams.name;
@@ -10,12 +10,19 @@ angular.module('copayApp.controllers').controller('wordsController',
       self.ammount = $stateParams.ammount;
       self.mnemonic = $stateParams.mnemonic;
       self.mnemonicEncrypted = $stateParams.mnemonicEncrypted;
-      alert(self.walletId);
     var msg = gettext('Are you sure you want to delete the backup words?');
     var successMsg = gettext('Backup words deleted');
     var self = this;
     self.show = false;
     var fc = profileService.focusedClient;
+    if(self.walletId && fc.credentials.walletId != self.walletId){
+        profileService.setAndStoreFocus(self.walletId, function() {
+            fc = profileService.focusedClient;
+            $state.go('backup');
+        });
+
+
+    }
     var showconfirm = false;
 	if (!isCordova){
 		var desktopApp = require('intervaluecore/desktop_app.js'+'');
