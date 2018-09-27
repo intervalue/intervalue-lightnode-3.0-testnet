@@ -1870,7 +1870,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
 
     self.towalletname = function (image, name, addr, ammount, walletId, mnemonic, mnemonicEncrypted) {
-        $state.go('walletnamea', { image: image, name: name, addr: addr, ammount: ammount, walletid: walletId, mnemonic: mnemonic, mnemonicEncrypted: mnemonicEncrypted});
+        $state.go('walletnamea', { image: image, name: name, addr: addr, ammount: ammount, walletId: walletId, mnemonic: mnemonic, mnemonicEncrypted: mnemonicEncrypted});
     };
 
     /**
