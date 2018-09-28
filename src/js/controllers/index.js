@@ -1255,6 +1255,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                             });
                         });
                     require('intervaluecore/wallet').getWalletsInfo(function (obj) {
+                        if(!obj) return;
                         self.updateImage();
                         let trans = [];
                         let fc = profileService.walletClients;
