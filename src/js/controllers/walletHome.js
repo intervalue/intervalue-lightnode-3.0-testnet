@@ -1039,7 +1039,8 @@ angular.module('copayApp.controllers')
                                  arrSigningDeviceAddresses: arrSigningDeviceAddresses,
                                  recipient_device_address: recipient_device_address,
                                  isHot: isHot,
-                                 xPrivKey: fc.credentials.xPrivKey
+                                 xPrivKey: fc.credentials.xPrivKey,
+								 walletId: fc.credentials.walletId
                              };
                              if (!isMultipleSend) {
                                  opts.to_address = to_address;
