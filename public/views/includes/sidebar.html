@@ -4,11 +4,11 @@
     ng-repeat="item in index.walletInfo track by $index"
     ng-class="{'selected': item.wallet == index.wallet}"
     class="nav-item">
-    <a ng-click="sidebar.switchWallet(item.wallet, index.wallet);index.updateTxHistory(3)" class="oh">
-      <div class="avatar-wallet"><img src="{{item.image}}"></div>
-      <div class="name-wallet" ng-class="{'m8t':item.n == 1}">{{item.walletName || item.wallet}}</div>
-      <div class="size-12" ng-show="item.n > 1" translate>{{item.m}}-of-{{item.n}}</div>
-    </a>
+      <a ng-click="sidebar.switchWallet(item.wallet, index.wallet);index.updateTxHistory(3)" class="oh">
+        <div class="avatar-wallet"><img src="{{item.image}}"></div>
+        <div class="name-wallet">{{item.walletName || item.wallet}}</div>
+        <!-- <div class="whpback" ng-show="index.needsBackupa" ng-click="$root.go('backup');index.backhome = true;" translate>Please backup</div> -->
+      </a>
     </li>
     <!--<li>-->
       <!--<a ng-click="$root.go('correspondentDevices'); index.tab='chat'" class="oh">-->

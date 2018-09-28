@@ -561,13 +561,26 @@ ul.manage li {
 .line-b {
   border-bottom: 1px solid #E9E9EC;
 }
-
+.sidebar ul.off-canvas-list li a{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+ul.off-canvas-list .avatar-wallet{
+  flex-shrink: 0;
+}
 .name-wallet {
   font-size: 14px;
   font-weight: 400;
-  padding-top: 0 !important;
+  font-weight:600;
+  color: #fff;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-
+ul.off-canvas-list .whpback{
+  padding:0 8px;border:1px solid #8CF8D8;border-radius:18px;font-size:10px;margin-right:20px;flex-shrink:0;cursor:pointer;color: #8CF8D8;
+}
 .tab-bar h1, .tab-bar h2, .tab-bar h3, .tab-bar h4, .tab-bar h5, .tab-bar h6 {
   /*line-height: 2.7rem;*/
   line-height: 3rem; /* tested on mac and win */
