@@ -229,7 +229,7 @@ angular.module('copayApp.services')
               var prevTempDeviceKey = profile.prevTempDeviceKey ? Buffer.from(profile.prevTempDeviceKey, 'base64') : null;
               device.setTempKeys(tempDeviceKey, prevTempDeviceKey, saveTempKeys);
               }
-            
+
             $rootScope.$emit('Local/ProfileBound');
             // Wallet.readAssetMetadata(null, function (assocAssetMetadata) {
             //   for (var asset in assocAssetMetadata) {
@@ -442,6 +442,7 @@ angular.module('copayApp.services')
         if(!root.profile){
             Profile.create();
             var walletClient = bwcService.getClient();
+            walletClient.import(JSON.stringify(opts));
             walletClient.createWallet(opts.name, opts.m, opts.n, {
                 network: opts.network,
                 account: opts.account,
@@ -455,15 +456,11 @@ angular.module('copayApp.services')
                     my_device_address: addr
                 });
                 console.log(p);
-                alert(1);
                 root.profile = p;
                 configService.get(function (err) {
                     root.bindProfile(p, function (err) {
-                        alert(3);
                         storageService.storeNewProfile(p, function (err) {
-                            alert(4);
                             root.setSingleAddressFlag(true);
-                            alert(5);
                             return cb(err);
                         });
                     });
