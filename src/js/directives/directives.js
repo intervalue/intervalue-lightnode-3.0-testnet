@@ -640,14 +640,23 @@ angular.module('copayApp.directives')
           controllerInstance.setHasValue(false);
         });
     }
-  }).directive("mdinputvalidc", function(){
+  }).directive("mdinputvalidc", function(gettextCatalog){
     return {
         scope: {},
         restrict: 'A',
-        controller: function($scope, $element){
-            this.setErrori = function(isFocused) {
-                $element.toggleClass('md-input-error', !!isFocused);
-            };
+        controller: function($scope, $element, gettextCatalog){
+          this.setErrorexp = function(isFocused, errpass) {
+            console.log(errpass)
+            var errtext = '';
+            if (errpass.match(/regerror/))
+               errtext = 'Not less than 8 characters, it is recommended to mix uppercase and lowercase letters, numbers, special characters!';
+            else if (errpass.match(/lengthrror/))
+                errtext = 'Password cannot exceed 18 digits!';
+            else if (errpass.match(/easyerror/))
+                errtext = 'The password is too simple, it is recommended to mix uppercase and lowercase letters, numbers, special characters!';
+            $element[0].children[1].innerHTML = gettextCatalog.getString(errtext);
+            $element.toggleClass('setErrorexp', !!isFocused);
+          };
         }
     }
   }).directive("mdinputpass",function(){
@@ -661,23 +670,30 @@ angular.module('copayApp.directives')
         var el = angular.element(elem);
         var self = this;
         el.on('keydown', function(ev) {
-              ctrl[0].setErrori(false);
+              ctrl[0].setErrorexp(false, 'noerror');
             });
         if(ctrl[1]){
           scope.$watch(function(){
             return (ctrl[1]).$modelValue + "";
           },function(val){
-            var trimExp=/\s+/g;//
+            var trimExp=/^[a-zA-Z0-9\W_]{8,}$/;
+            var trimeasyExp=/^([a-z]|[A-Z]|[0-9]){8,18}$/;
             if(val == 'undefined'){
-              ctrl[0].setErrori(true);
-            }else if(trimExp.test(val)){
-              ctrl[0].setErrori(true);
+              ctrl[0].setErrorexp(true, 'noerror');
+            }else if(val == ''){
+              ctrl[0].setErrorexp(false, 'noerror');
+            }else if(!trimExp.test(val)){
+              ctrl[0].setErrorexp(true, 'regerror');
+            }else if(val.length > 18){
+              ctrl[0].setErrorexp(true, 'lengthrror');
+            }else if(trimeasyExp.test(val)){
+              ctrl[0].setErrorexp(true, 'easyerror');
             }
-          })
+          })  
         }
-        scope.$on('$destroy', function() {
-          ctrl[0].setErrori(false);
-        });
+        // scope.$on('$destroy', function() {
+        //   ctrl[0].setErrorexp(false);
+        // });
     }
   }).filter('encodeURIComponent', function() {
     return window.encodeURIComponent;

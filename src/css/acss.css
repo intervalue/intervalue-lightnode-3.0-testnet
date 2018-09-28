@@ -58,12 +58,12 @@
 .addwname{background: url(../img/walletnameinput.png) center no-repeat;z-index: 2;}
 .addwpass{background: url(../img/walletpassinput.png) center no-repeat;z-index: 2;}
 .addwrpass{background: url(../img/walletpassrinput.png) center no-repeat;z-index: 2;}
-.md-input-error .addwname{background: url(../img/walletnameinput.png) center no-repeat;z-index: 2;}
-.md-input-error .addwpass{background: url(../img/walletpassinputer.png) center no-repeat;z-index: 2;}
-.md-input-error .addwrpass{background: url(../img/walletpassrinputer.png) center no-repeat;z-index: 2;}
-.adinputitem .adinputp{display: none;color: #D45757;position: absolute;top:40px;left: 0;}
-.md-input-error.adinputitem .adinputp{display: block;}
-.md-input-error.adinputitem .adinputic{border-bottom: 1px solid #D45757;}
+.adinputitem .adinputp{display: none;color: #D45757;font-size: 10px;margin: 0;margin-top: 4px;}
+.setErrorexp .addwname{background: url(../img/walletnameinput.png) center no-repeat;z-index: 2;}
+.setErrorexp .addwpass{background: url(../img/walletpassinputer.png) center no-repeat;z-index: 2;}
+.setErrorexp .addwrpass{background: url(../img/walletpassrinputer.png) center no-repeat;z-index: 2;}
+.setErrorexp.adinputitem .adinputp{display: block;}
+.setErrorexp.adinputitem .adinputic{border-bottom: 1px solid #D45757;}
 /* another error */
 
 /*addwallet part end*/
