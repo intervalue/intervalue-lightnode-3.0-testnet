@@ -376,12 +376,13 @@
                                     <a ng-click="home.setSendAll()" ng-show="!home.bSendAll && !home.lockAmount" translate>Send all</a>
                                 </label>
                                 <div ng-show="!home.onGoingProcess" class="m30t">
-                                    <a class="sendcancel" ng-click="home.resetForm(sendPaymentForm)"
-                                    ng-show="!home.blockUx && !home.send_multiple && (home.lockAddress || home.lockAmount || home.bSendAll)" translate>Cancel</a>
+                                    
                                     <button type="submit" class="m20t" ng-if="mtab == 1" ng-disabled="home.current_payment_key || sendPaymentForm.$invalid || home.blockUx || index.isOffline || !index.isEnoughSignersSelected()"
                                             ng-style="{'background-color':index.backgroundColor}"  translate>
                                         Send
                                     </button>
+                                    <a class="sendcancel" ng-click="home.resetForm(sendPaymentForm)"
+                                    ng-show="!home.blockUx && !home.send_multiple && (home.lockAddress || home.lockAmount || home.bSendAll)" translate>Cancel</a>
                                 </div>
                             </div>
                         </div>
