@@ -25,8 +25,8 @@ Profile.create = function(opts) {
 	if (!opts.mnemonic && !opts.mnemonicEncrypted)
 		//throw Error("no mnemonic, even encrypted");
         opts.xPrivKey = null;
-	if (!opts.tempDeviceKey)
-		throw Error("no tempDeviceKey");
+	// if (!opts.tempDeviceKey)
+	// 	throw Error("no tempDeviceKey");
 	x.xPrivKey = opts.xPrivKey;
 	x.mnemonic = opts.mnemonic;
 	x.xPrivKeyEncrypted = opts.xPrivKeyEncrypted;
@@ -55,8 +55,8 @@ Profile.fromObj = function(obj) {
     }
 //	if (!obj.mnemonic && !obj.mnemonicEncrypted)
 //		throw Error("no mnemonic, even encrypted");
-	if (!obj.tempDeviceKey)
-		throw Error("no tempDeviceKey");
+// 	if (!obj.tempDeviceKey)
+// 		throw Error("no tempDeviceKey");
 	x.xPrivKey = obj.xPrivKey;
 	x.mnemonic = obj.mnemonic;
 	x.xPrivKeyEncrypted = obj.xPrivKeyEncrypted;

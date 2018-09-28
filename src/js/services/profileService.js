@@ -224,9 +224,12 @@ angular.module('copayApp.services')
               throw Error("neither xPrivKey nor xPrivKeyEncrypted");*/
             //var tempDeviceKey = device.genPrivKey();
             //saveTempKeys(tempDeviceKey, null, function(){});
-            var tempDeviceKey = Buffer.from(profile.tempDeviceKey, 'base64');
-            var prevTempDeviceKey = profile.prevTempDeviceKey ? Buffer.from(profile.prevTempDeviceKey, 'base64') : null;
-            device.setTempKeys(tempDeviceKey, prevTempDeviceKey, saveTempKeys);
+              if(profile.tempDeviceKey){
+              var tempDeviceKey = Buffer.from(profile.tempDeviceKey, 'base64');
+              var prevTempDeviceKey = profile.prevTempDeviceKey ? Buffer.from(profile.prevTempDeviceKey, 'base64') : null;
+              device.setTempKeys(tempDeviceKey, prevTempDeviceKey, saveTempKeys);
+              }
+            
             $rootScope.$emit('Local/ProfileBound');
             // Wallet.readAssetMetadata(null, function (assocAssetMetadata) {
             //   for (var asset in assocAssetMetadata) {
@@ -436,17 +439,50 @@ angular.module('copayApp.services')
       var device = require('intervaluecore/device.js');
       device.setMyHotDeviceAddress(addr);
       var walletClient = bwcService.getClient();
-      walletClient.import(JSON.stringify(opts));
-      walletClient.createWallet(opts.name, opts.m, opts.n, {
-        network: opts.network,
-        account: opts.account,
-        cosigners: opts.cosigners
-      }, function (err) {
-        if (err)
-          return cb(gettext('Error creating wallet') + ": " + err);
-        opts.observed = true;
-        root._addWalletClient(walletClient, opts, cb);
-      });
+        if(!root.profile){
+            Profile.create();
+            var walletClient = bwcService.getClient();
+            walletClient.createWallet(opts.name, opts.m, opts.n, {
+                network: opts.network,
+                account: opts.account,
+                cosigners: opts.cosigners
+            }, function (err) {
+                if (err)
+                    return cb(gettext('Error creating wallet') + ": " + err);
+                var p = Profile.create({
+                    credentials: [JSON.parse(walletClient.export())],
+                    tempDeviceKey: null,
+                    my_device_address: addr
+                });
+                console.log(p);
+                alert(1);
+                root.profile = p;
+                configService.get(function (err) {
+                    root.bindProfile(p, function (err) {
+                        alert(3);
+                        storageService.storeNewProfile(p, function (err) {
+                            alert(4);
+                            root.setSingleAddressFlag(true);
+                            alert(5);
+                            return cb(err);
+                        });
+                    });
+                });
+            });
+
+        }else {
+            walletClient.import(JSON.stringify(opts));
+            walletClient.createWallet(opts.name, opts.m, opts.n, {
+                network: opts.network,
+                account: opts.account,
+                cosigners: opts.cosigners
+            }, function (err) {
+                if (err)
+                    return cb(gettext('Error creating wallet') + ": " + err);
+                opts.observed = true;
+                root._addWalletClient(walletClient, opts, cb);
+            });
+        }
     };
 
     root.getClient = function (walletId) {
