@@ -386,11 +386,11 @@ padding: 20px 15px 0;}
 .md-input-focused label,
 .md-input-has-value label{top:-10px;font-size:14px;transition:all 0.2s ease-in-out;}
 .md-input-focused input[type='text']{background:blue;position:absolute;top:10px;transition:all 0.2s ease-in-out;}
-.adinputitem{height:50px;}
-.adinputic{position:relative;width:100%;height:100%;}
-.adinputic .adinputimg{width:22px;height:20px;text-align:center;position:absolute;top:10px;left:4px;}
-.adinputic .adinputimg img{vertical-align:top;}
-.adinputic input[type='text'],.adinputic input[type='password']{position:absolute;font-size:16px;top:0;padding:0 10px 0 44px;font-weight:normal;margin:0;width:100%;color:#3B3B3B;}
+.adinputitem{margin-bottom: 10px;}
+.adinputic{width:100%;display: flex;align-items: center;justify-content: flex-start;border-bottom: 1px solid #909090;padding:0 4px;}
+.adinputic .adinputimg{width:24px;height:20px;text-align:center;}
+.adinputic input[type='text'],.adinputic input[type='password']{font-size:16px;padding:0 10px 0 20px;font-weight:normal;margin:0;width:100%;
+    color:#3B3B3B;border: none;}
 .adinputic input[type='text']::-webkit-input-placeholder,.adinputic input[type='password']::-webkit-input-placeholder{color:#B8B8B8;}
 textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090;}
 .fleximgtext{display:flex;justify-content:flex-start;align-items:flex-start;}
