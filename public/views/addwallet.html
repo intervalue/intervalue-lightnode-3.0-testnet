@@ -96,7 +96,7 @@
                 <p ng-show="addw.showcodeerr">口令不正确</p>
                 <div>
                     <div class="addwslcbox m24b" ng-click="addw.minuswordf($event)">
-                        <span ng-repeat="item in addw.chosenWords track by $index" id="{{item.id}}" >{{item.str}}<img src="./img/minusimg.png" /></span>
+                        <span ng-repeat="item in addw.chosenWords track by $index" id="{{item.id}}" >{{item.str}}</span>
                     </div>
                     <div class="wordsbox m12b" ng-click="addw.addwordf($event)">
                         <button ng-repeat="item in addw.showrandamcodes track by $index" id="{{item.id}}" ng-disabled="item.chosen">{{item.str}}</button>

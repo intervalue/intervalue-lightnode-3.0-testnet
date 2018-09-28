@@ -75,8 +75,8 @@
 /*selectcode part start*/
 .addwslcbox{border-radius:3px;border:1px solid #D6D6D6;padding:12px 4px 4px 12px;height:68px;}
 .addwslcbox:after{display:block;overflow:hidden;clear:both;content:'';}
-.addwslcbox span{margin-right:8px;margin-bottom:8px;float:left;font-size:12px;cursor: pointer;}
-.addwslcbox img{margin-left: 4px;}
+.addwslcbox span{margin-right:8px;margin-bottom:8px;float:left;font-size:12px;cursor: pointer;padding-right:12px;
+    background: url(../img/minusimg.png) right center;background-repeat: no-repeat;}
 .wordsbox{display:flex;justify-content:space-between;flex-wrap:wrap;}
 .wordsbox button{font-size:12px;border-radius:3px;border:1px solid #D6D6D6;background:#fff;display:block;width:23%;text-align:center;cursor:pointer;margin-bottom:12px;height:30px;line-height:30px;color:#323232;text-transform:lowercase;}
 .wordsbox button:disabled{background:#D6D6D6;border:1px solid #D6D6D6;}
