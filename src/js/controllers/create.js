@@ -159,7 +159,7 @@ angular.module('copayApp.controllers').controller('createwalletController',
                         return;
                     }
                     else if(del){
-                        $rootScope.createdataw = profileService.profile.credentials;
+                        $scope.index.updateTxHistory(3);
                         var fc = profileService.focusedClient;
                         fc.clearMnemonic();
                         profileService.clearMnemonic(function() {
@@ -169,7 +169,7 @@ angular.module('copayApp.controllers').controller('createwalletController',
                         });
 
                     }else{
-                        $rootScope.createdataw = profileService.profile.credentials;
+                        $scope.index.updateTxHistory(3);
                     }
                 });
             }, 100);
@@ -190,7 +190,7 @@ angular.module('copayApp.controllers').controller('createwalletController',
                             $scope.$apply();
                         });
                     }else{
-                        $rootScope.createdataw = profileService.profile.credentials;
+                        $scope.index.updateTxHistory(3);
                     }
                 });
             }, 100);
