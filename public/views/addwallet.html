@@ -24,23 +24,23 @@
                     <div translate class="redcolor size-12">InterValue does not store passwords and cannot be retrieved for you. Please keep in mind!</div>
                 </div>
                 <form name="creatwform" novalidate>
-                    <div class="adinputitem">
+                    <div class="adinputitem" mdinputvalidc>
                         <div class="adinputic">
                             <div class="adinputimg addwname"></div>
                             <input type="text" ng-model="addw.addwname" ng-attr-placeholder="{{'Wallet name'|translate}}" autocomplete="off">
                         </div>
+                        <p class="adinputp" translate>*Inconsistent password</p>
                     </div>
-                    <div class="adinputitem">
-                        <div class="adinputic" mdinputvalidc>
+                    <div class="adinputitem" mdinputvalidc>
+                        <div class="adinputic">
                             <div class="adinputimg addwpass"></div>
                             <input type="password" name="addwpass" ng-model="addw.addwpass" mdinputpass ng-attr-placeholder="{{'Password'|translate}}" autocomplete="off">
                         </div>
                     </div>
-                    <div class="adinputitem">
-                        <div class="adinputic" mdinputvalidc>
+                    <div class="adinputitem" mdinputvalidc>
+                        <div class="adinputic">
                             <div class="adinputimg addwrpass"></div>
                             <input type="password" name="addwrpass" ng-model="addw.addwrpass" mdinputpass ng-attr-placeholder="{{'Repeat password'|translate}}" autocomplete="off">
-                            <p class="adinputp" translate>*Inconsistent password</p>
                         </div>
                     </div>
                     <button class="m40t m15b" ng-click="addw.passequal()" ng-disabled="!addw.addwname || !addw.addwpass || !addw.addwrpass" translate>Creat wallet</button>

@@ -61,9 +61,11 @@
 .md-input-error .addwname{background: url(../img/walletnameinput.png) center no-repeat;z-index: 2;}
 .md-input-error .addwpass{background: url(../img/walletpassinputer.png) center no-repeat;z-index: 2;}
 .md-input-error .addwrpass{background: url(../img/walletpassrinputer.png) center no-repeat;z-index: 2;}
-.adinputic .adinputp{display: none;color: #D45757;position: absolute;top:40px;left: 0;}
-.md-input-error.adinputic .adinputp{display: block;}
-.md-input-error.adinputic input[type='text'], .md-input-error.adinputic input[type='password']{border-bottom: 1px solid #D45757;}
+.adinputitem .adinputp{display: none;color: #D45757;position: absolute;top:40px;left: 0;}
+.md-input-error.adinputitem .adinputp{display: block;}
+.md-input-error.adinputitem .adinputic{border-bottom: 1px solid #D45757;}
+/* another error */
+
 /*addwallet part end*/
 
 /*showcode part start*/
