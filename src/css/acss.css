@@ -75,10 +75,15 @@
 /*showcode part end*/
 
 /*selectcode part start*/
-.addwslcbox{border-radius:3px;border:1px solid #D6D6D6;padding:12px 4px 4px 12px;height:68px;}
+.addwslcbox{border-radius:3px;border:1px solid #D6D6D6;padding:12px 4px 4px 12px;display: flex;
+    align-items: center;justify-content: flex-start;flex-wrap: wrap;min-height: 68px;}
 .addwslcbox:after{display:block;overflow:hidden;clear:both;content:'';}
-.addwslcbox span{margin-right:8px;margin-bottom:8px;float:left;font-size:12px;cursor: pointer;padding-right:12px;
+.addwslcbox span{margin-right:8px;margin-bottom:8px;font-size:12px;cursor: pointer;padding-right:12px;
     background: url(../img/minusimg.png) right center;background-repeat: no-repeat;}
+.backslcbox{border-radius:3px;border:1px solid #D6D6D6;padding:12px 4px 4px 12px;display: flex;
+    align-items: center;justify-content: flex-start;flex-wrap: wrap;min-height: 68px;}
+.backslcbox:after{display:block;overflow:hidden;clear:both;content:'';}
+.backslcbox span{margin-right:8px;margin-bottom:8px;float:left;font-size:12px;cursor: pointer;}
 .wordsbox{display:flex;justify-content:space-between;flex-wrap:wrap;}
 .wordsbox button{font-size:12px;border-radius:3px;border:1px solid #D6D6D6;background:#fff;display:block;width:23%;text-align:center;cursor:pointer;margin-bottom:12px;height:30px;line-height:30px;color:#323232;text-transform:lowercase;}
 .wordsbox button:disabled{background:#D6D6D6;border:1px solid #D6D6D6;}
@@ -227,7 +232,7 @@
 padding: 20px 15px 0;}
 .addbsswicth{background: #FFFFFF;border:0px;width: 100%;display:flex;padding: 10px 15px 4px;}
 .addbsswicth .addbsswicthd{font-size: 16px;width:100%;}
-.backupmain .addwslcbox{margin-top: 15px;margin-bottom: 12px;}
+.backupmain .backslcbox{margin-top: 15px;margin-bottom: 12px;}
 /*backup end*/
 
 /*walletnamea start*/
@@ -319,8 +324,7 @@ padding: 20px 15px 0;}
 .addpassl img{position: absolute;top:7px;cursor: pointer;}
 .addpassl label{margin-bottom: 0;font-weight:400;}
 .addpassi{padding-left: 16px;padding-right: 16px;padding-top: 24px;}
-.addpassi .text-warning{
-    position: absolute;bottom:-10px;}
+.addpassi .text-warning{    color: #D45757;font-size: 10px;margin: 0;margin-top: 4px;}
 .addpassi button{margin-top: 28px;}
 /*password end*/
 

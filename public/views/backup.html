@@ -45,7 +45,7 @@
             <div translate>The wallet password:</div>
             <div translate class="m5t">It is highly recommended that you write your password on paper and have a safe place, do not take screenshots or take photos, and do not use the same password on multiple devices.Once you have written your wallet password, it is recommended to remove the password from the device.</div>
     
-            <div class="addwslcbox nzcolor">
+            <div class="backslcbox nzcolor">
                 <span ng-repeat="word in wordbacksC.mnemonicWords track by $index">{{word}}</span>
             </div>
 
@@ -54,7 +54,7 @@
                 <div translate class="redcolor size-12">Once you have written your wallet password, it is recommended to remove the password from the device.</div>
             </div>
             <button class="m30t" ng-click="wordbacksC.delete()" >
-                <span translate>Delete your wallet password</span>
+                <span translate>Delete the wallet code</span>
             </button>
         </div>
     </div>

@@ -42,8 +42,8 @@ msgid "12 words separated by dashes"
 msgstr "用破折号隔开的12个单词"
 
 #: public/views/preferencesGlobal.html:139
-msgid "About Intervalue"
-msgstr "关于ByteBall"
+msgid "About InterValue-3.0-testnet"
+msgstr "关于InterValue-3.0测试链"
 
 #: src/js/controllers/copayers.js:8
 #: src/js/controllers/preferencesDelete.js:9
@@ -2342,5 +2342,62 @@ msgstr "收款地址"
 
 msgid "No transactions yet"
 msgstr "没有交易记录"
+
+msgid "The software you are about to use functions as a free, open source, and multi-signature digital wallet."
+msgstr "您即将使用的软件可用作免费，开源和多签名的数字钱包。"
+
+msgid "The software does not constitute an account where the developer of this software or other third parties serve as financial intermediaries or custodians of your bytes or other valuables."
+msgstr "本软件不构成本软件开发人员或其他第三方作为您的字节或其他贵重物品的金融中介或托管人的帐户。"
+
+msgid "While the software has undergone beta testing and continues to be improved by feedback from the open-source user and developer community, we cannot guarantee that there will be no bugs in the software."
+msgstr "虽然该软件已经过beta测试，并且继续通过开源用户和开发人员社区的反馈进行改进，但我们无法保证软件中不会出现任何错误。"
+
+msgid "You acknowledge that your use of this software is at your own discretion and in compliance with all applicable laws."
+msgstr "您承认您使用本软件的行为由您自行决定并符合所有适用法律。"
+
+msgid "You are responsible for safekeeping your passwords, private key pairs, PINs and any other codes you use to access the software."
+msgstr "您有责任妥善保管密码，私钥对，PIN以及用于访问软件的任何其他代码。"
+
+msgid "IF YOU LOSE ACCESS TO YOUR INTERVALUE WALLET, YOU ACKNOWLEDGE AND AGREE THAT ANY BYTES OR OTHER VALUABLES YOU HAVE ASSOCIATED WITH THAT INTERVALUE WALLET WILL BECOME INACCESSIBLE."
+msgstr "如果您失去了对您的间隔钱包的访问权限，您承认并同意您与间隔钱包相关的任何字节或其他价值将成为不可接受的。"
+
+msgid "All transaction requests are irreversible."
+msgstr "所有交易请求都是不可逆转的。"
+
+msgid "The authors of the software cannot retrieve your private keys or passwords if you lose or forget them and cannot guarantee transaction confirmation as they do not have control over the InterValue-3.0-testnet network."
+msgstr "如果您丢失或忘记了私钥或密码，则该软件的作者无法检索您的私钥或密码，并且无法保证交易确认，因为他们无法控制InterValue-3.0-testnet网络。"
+
+msgid "To the fullest extent permitted by law, this software is provided “as is” and no representations or warranties can be made of any kind, express or implied, including but not limited to the warranties of merchantability, fitness or a particular purpose and noninfringement."
+msgstr "在法律允许的最大范围内，本软件“按原样”提供，不得作出任何明示或暗示的陈述或保证，包括但不限于适销性，适用性或特定用途和不侵权的保证。"
+
+msgid "You assume any and all risks associated with the use of the software."
+msgstr "您承担与使用该软件相关的任何和所有风险。"
+
+msgid "In no event shall the authors of the software be held liable for any claim, damages or other liability, whether in an action of contract, tort, or otherwise, arising from, out of or in connection with the software."
+msgstr "在任何情况下，软件的作者均不对任何索赔，损害赔偿或其他责任承担责任，无论是在合同，侵权或其他方面，由软件引起，引起或与软件有关。"
+
+msgid "We reserve the right to modify this disclaimer from time to time."
+msgstr "我们保留随时修改此免责声明的权利。"
+
+msgid "Show wallet seed"
+msgstr "显示钱包助记词"
+
+msgid "Hide wallet seed"
+msgstr "隐藏钱包助记词"
+
+msgid "Backup"
+msgstr "备份"
+
+msgid "Delete the wallet code"
+msgstr "删除此钱包助记词"
+
+
+
+
+
+
+
+
+
 
 
