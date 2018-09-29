@@ -646,14 +646,15 @@ angular.module('copayApp.directives')
         restrict: 'A',
         controller: function($scope, $element, gettextCatalog){
           this.setErrorexp = function(isFocused, errpass) {
-            console.log(errpass)
             var errtext = '';
             if (errpass.match(/regerror/))
-               errtext = 'Not less than 8 characters, it is recommended to mix uppercase and lowercase letters, numbers, special characters!';
+               errtext = '*Not less than 8 characters, it is recommended to mix uppercase and lowercase letters, numbers, special characters!';
             else if (errpass.match(/lengthrror/))
-                errtext = 'Password cannot exceed 18 digits!';
+                errtext = '*Password cannot exceed 18 digits!';
             else if (errpass.match(/easyerror/))
-                errtext = 'The password is too simple, it is recommended to mix uppercase and lowercase letters, numbers, special characters!';
+                errtext = '*The password is too simple, it is recommended to mix uppercase and lowercase letters, numbers, special characters!';
+            else if (errpass.match(/nomatch/))
+                errtext = '*Inconsistent password';
             $element[0].children[1].innerHTML = gettextCatalog.getString(errtext);
             $element.toggleClass('setErrorexp', !!isFocused);
           };
@@ -676,24 +677,63 @@ angular.module('copayApp.directives')
           scope.$watch(function(){
             return (ctrl[1]).$modelValue + "";
           },function(val){
-            var trimExp=/^[a-zA-Z0-9\W_]{8,}$/;
-            var trimeasyExp=/^([a-z]|[A-Z]|[0-9]){8,18}$/;
-            if(val == 'undefined'){
-              ctrl[0].setErrorexp(true, 'noerror');
+            var trimExp=/^[a-zA-Z0-9-\.!@#\$%&\^\*\(\)\+\?><]{8,}$/;
+            var trimeasyExp=/^(([a-z]){8,18}|([A-Z]){8,18}|([0-9]){8,18})$/;
+            if(typeof(val) == 'undefined'){
+              ctrl[0].setErrorexp(false, 'noerror');
+              ctrl[1].$setValidity('mdinputpass', false);
             }else if(val == ''){
               ctrl[0].setErrorexp(false, 'noerror');
+              ctrl[1].$setValidity('mdinputpass', false);
             }else if(!trimExp.test(val)){
               ctrl[0].setErrorexp(true, 'regerror');
+              ctrl[1].$setValidity('mdinputpass', false);
             }else if(val.length > 18){
               ctrl[0].setErrorexp(true, 'lengthrror');
+              ctrl[1].$setValidity('mdinputpass', false);
             }else if(trimeasyExp.test(val)){
               ctrl[0].setErrorexp(true, 'easyerror');
+              ctrl[1].$setValidity('mdinputpass', false);
+            }else{
+              ctrl[0].setErrorexp(false, 'noerror');
+              ctrl[1].$setValidity('mdinputpass', true);
             }
           })  
         }
-        // scope.$on('$destroy', function() {
-        //   ctrl[0].setErrorexp(false);
-        // });
+    }
+  }).directive("mdinputpassr",function(){
+    return {
+        scope: {},
+        restrict: 'A',
+        require: ['^mdinputvalidc','?ngModel'],
+        link: postLink
+    }
+      function postLink(scope, elem, attrs, ctrl){
+        var el = angular.element(elem);
+        var self = this;
+        el.on('keydown', function(ev) {
+              ctrl[0].setErrorexp(false, 'noerror');
+        });
+        var isSame = function(value) {
+          var anotherValue = attrs.mdinputpassr;
+          return value === anotherValue;
+        };
+        if(ctrl[1]){
+          scope.$watch(function() {
+            return (ctrl[1]).$modelValue + "";
+          }, function(val) {
+            if(typeof(val) == 'undefined'){
+              ctrl[0].setErrorexp(false, 'noerror');
+              ctrl[1].$setValidity('mdinputpassr', false);
+            }else if(val == ''){
+              ctrl[0].setErrorexp(false, 'noerror');
+              ctrl[1].$setValidity('mdinputpassr', false);
+            }else{
+              ctrl[0].setErrorexp(!(isSame(val)), 'nomatch');
+              ctrl[1].$setValidity('mdinputpassr', isSame(val));
+            }
+          });
+        }
     }
   }).filter('encodeURIComponent', function() {
     return window.encodeURIComponent;
