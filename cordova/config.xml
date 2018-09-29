@@ -2,7 +2,7 @@
 <widget id="org.intervalue.wallet"
   version="1.0.1"
   android-versionCode="1062"
-  ios-CFBundleVersion="1.0.1">
+  ios-CFBundleVersion="1.0.2">
     <name>InterValue-3.0-testnet</name>
     <description>
       InterValue-3.0-testnet wallet for testnet.
