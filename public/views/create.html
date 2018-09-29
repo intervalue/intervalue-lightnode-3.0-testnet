@@ -100,7 +100,7 @@
       <div class="addwscbox m28b">
         <span ng-repeat="item in create.showcodes track by $index">{{item.str}}</span>
       </div>
-      <button ng-click="create.step = 'selectcode'">下一步</button>
+      <button ng-click="create.step = 'selectcode'" translate>Next</button>
     </div>
   </div>
   <!--创建钱包-显示钱包口令  end-->
@@ -163,8 +163,8 @@
           </div>
           <p class="poptips p25h" translate>This will completely remove the mnemonics from the app and it will not be recoverable. Please reconfirm that you have backed up your mnemonics to a safe place.</p>
           <div class="p25h popbutton">
-            <button ng-click="create.createWallet(create.createwname, create.createwpass, create.mnemonic,true);">确认</button>
-            <button class="awbtn" ng-click="create.createWallet(create.createwname, create.createwpass, create.mnemonic);">取消</button>
+            <button ng-click="create.createWallet(create.createwname, create.createwpass, create.mnemonic,true);" translate>Confirm</button>
+            <button class="awbtn" ng-click="create.createWallet(create.createwname, create.createwpass, create.mnemonic);" translate>Cancel</button>
           </div>
         </div>
       </div>

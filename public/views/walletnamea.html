@@ -1,9 +1,24 @@
 <div ng-controller="walletnameaController as nameW" class="secondcontent">
-    <div
+    <!-- header start -->
+    <!-- <div
             class="topbar-container"
             ng-include="'views/includes/topbar.html'"
             ng-init="titleSection=nameW.name; goToWallet = true;walletsave = true;">
-    </div>
+    </div> -->
+    <nav ng-controller="topbarController as topbar" class="tab-bar">
+        <section class="right-small">
+            <a ng-click="nameW.changeWalletName(nameW.walletId)" class="greencolor size-14"><span translate>Save</span></a>
+        </section>
+        <section class="left-small">
+            <a  ng-click="topbar.goWallet();goToWallet = null;index.backwallet = false;">
+                 <img src="./img/chatbackstate.png" />
+             </a>
+        </section>
+        <section class="middle tab-bar-section">
+            <h1 class="title ellipsis" translate>{{nameW.name}}</h1>
+        </section>
+    </nav>
+    <!-- header end -->
     <div class="adwnnumo">
         <div class="adwnnum">
             <div class="adwnlogo"><img src="{{nameW.image}}"></div>
@@ -11,32 +26,31 @@
             <div class="adwnaddr"><span>{{nameW.addr}}</span></div>
         </div>
     </div>
-    <form name="changeName" ng-submit="nameW.changeWalletName(nameW.walletId)">
-    <ul class="adwnlinput">
-        <li class="adwninput">
-            <div class="limg">
-                <img src="./img/winname.png" />
-            </div>
-            <span>钱包名</span>
-            <input name="name" ng-model=nameW.name />
-        </li>
-        <li ng-click="nameW.goChangeWalletpassWord(nameW.walletId, nameW.addr, nameW.name, nameW.image, nameW.ammount)">
-            <div class="ld">
+    <form name="changeName">
+        <ul class="adwnlinput">
+            <li class="adwninput">
                 <div class="limg">
-                    <img src="./img/winpass.png" />
+                    <img src="./img/winname.png" />
                 </div>
-                <span>修改密码</span>
-            </div>
-            <div class="rd">
-                <img src="./img/more.png" />
-            </div>
-        </li>
-    </ul>
-        <button type="submit">修改名称</button>
+                <span translate>Wallet name</span>
+                <input name="name" ng-model=nameW.name />
+            </li>
+            <li ng-click="nameW.goChangeWalletpassWord(nameW.walletId, nameW.addr, nameW.name, nameW.image, nameW.ammount)">
+                <div class="ld">
+                    <div class="limg">
+                        <img src="./img/winpass.png" />
+                    </div>
+                    <span translate>Change password</span>
+                </div>
+                <div class="rd">
+                    <img src="./img/more.png" />
+                </div>
+            </li>
+        </ul>
     </form>
     <div class="btngroup" ng-controller="preferencesDeleteWalletController as predelte">
-        <button class="m20b" ng-show="nameW.mnemonic || nameW.mnemonicEncrypted" ng-click="nameW.gobackup(nameW.image, nameW.name, nameW.addr, nameW.ammount, nameW.walletId, nameW.mnemonic, nameW.mnemonicEncrypted);index.backwaname = true;">备份助记词</button>
-        <button class="awbtn" ng-click="predelte.deleteWallet(nameW.walletId,nameW.name)">删除钱包</button>
+        <button class="m20b" ng-show="nameW.mnemonic || nameW.mnemonicEncrypted" ng-click="nameW.gobackup(nameW.image, nameW.name, nameW.addr, nameW.ammount, nameW.walletId, nameW.mnemonic, nameW.mnemonicEncrypted);index.backwaname = true;" translate>Backup mnemonic</button>
+        <button class="awbtn" ng-click="predelte.deleteWallet(nameW.walletId,nameW.name)" translate>Delete wallet</button>
     </div>
 </div>
 

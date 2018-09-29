@@ -580,10 +580,6 @@ msgstr "智能地址的定义"
 msgid "Definitions of addresses"
 msgstr "地址的定义"
 
-#: public/views/preferencesAdvanced.html:31
-msgid "Delete Wallet"
-msgstr "删除钱包"
-
 #: public/views/preferencesDeleteWallet.html:23
 msgid "Delete wallet"
 msgstr "删除钱包"
@@ -2235,6 +2231,9 @@ msgstr "请输入交易上限额度"
 msgid "Change password"
 msgstr "修改密码"
 
+msgid "Change wallet name"
+msgstr "修改名称"
+
 msgid "Current password"
 msgstr "当前密码"
 
@@ -2390,6 +2389,16 @@ msgstr "备份"
 
 msgid "Delete the wallet code"
 msgstr "删除此钱包助记词"
+
+msgid "Forget password? Import mnemonics to reset your password."
+msgstr "忘记密码？导入助记词可重置密码。"
+
+msgid "Import now"
+msgstr "马上导入"
+
+
+
+
 
 
 
