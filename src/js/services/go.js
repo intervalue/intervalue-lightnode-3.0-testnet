@@ -155,7 +155,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                         var xPrivKey;
                         var wc = profileService.walletClients;
                         db.query('select extended_pubkey,a.wallet  from extended_pubkeys as a  left join my_addresses as b on a.wallet=b.wallet where b.address=?',[objRequest.addr],function (rows) {
-                            if(rows.length){
+                            if(rows.length >0 ){
                             for(var index in wc){
                                 if(rows[0].extended_pubkey == wc[index].credentials.xPubKey){
                                     if(!wc[index].credentials.mnemonic){
@@ -172,6 +172,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                                                 }else{
                                                     console.log(" signatureDetlCode is "+signatureDetlCode);
                                                     notification.error('signatureDetlCode is '+signatureDetlCode);
+                                                    $rootScope.$emit('Local/NeedFreshHistory');
                                                 }
                                             });
                                         });
@@ -184,6 +185,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                                             }else{
                                                 console.log(" signatureDetlCode is "+signatureDetlCode);
                                                 notification.error('signatureDetlCode is '+signatureDetlCode);
+                                                $rootScope.$emit('Local/NeedFreshHistory');
                                             }
                                         });
                                         break;

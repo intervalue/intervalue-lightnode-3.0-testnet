@@ -1580,7 +1580,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     $rootScope.$on('Local/NeedFreshHistory', function (event) {
         breadcrumbs.add('NeedFreshHistory');
-        self.updateHistory();
+        self.updateHistory(3);
     });
 
 

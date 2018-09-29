@@ -27,7 +27,6 @@ angular.module('copayApp.controllers').controller('signedTransactionIfoControlle
                                 profileService.insistUnlockFC(null, function (err){
                                     if (err) return;
                                     xPrivKey = profileService.focusedClient.credentials.xPrivKey;
-                                    alert(xPrivKey);
                                     shadowWallet.signTradingUnit(obj,xPrivKey,function (objrequest) {
                                         if(typeof objrequest == "object"){
                                             $rootScope.$emit('Local/signedTransactionIfo', objrequest);
@@ -40,7 +39,6 @@ angular.module('copayApp.controllers').controller('signedTransactionIfoControlle
                                 break;
                             }else {
                                 xPrivKey = wc[index].credentials.xPrivKey;
-                                alert(xPrivKey);
                                 shadowWallet.signTradingUnit(obj,xPrivKey,function (objrequest) {
                                     if(typeof objrequest == "object"){
                                         $rootScope.$emit('Local/signedTransactionIfo', objrequest);
@@ -77,7 +75,7 @@ angular.module('copayApp.controllers').controller('signedTransactionIfoControlle
             var wallet = require('intervaluecore/wallet');
             wallet.sendMultiPayment(opts,function (cb) {
                 if(typeof cb =="object"){
-                    $rootScope.$emit('Local/SetTab', 'wallet');
+                    $rootScope.$emit('Local/paymentDone');
                 }else {
                     console.log("error: "+cb);
                     return $rootScope.$emit('Local/ShowErrorAlert', "sendPaymentHot :"+cb);
