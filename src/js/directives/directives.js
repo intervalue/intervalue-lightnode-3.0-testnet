@@ -652,7 +652,7 @@ angular.module('copayApp.directives')
             else if (errpass.match(/lengtherror/))
                 errtext = '*Password cannot exceed 18 digits!';
             else if (errpass.match(/lengthnameerror/))
-                errtext = '*Wallet name is 5 to 20 characters!';
+                errtext = '*Characters exceed the 5-20 limit!';
             else if (errpass.match(/easyerror/))
                 errtext = '*The password is too simple, it is recommended to mix uppercase and lowercase letters, numbers, special characters!';
             else if (errpass.match(/nomatch/))

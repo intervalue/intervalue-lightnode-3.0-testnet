@@ -2319,8 +2319,8 @@ msgstr "*不少于8位字符，建议混合大小写字母、数字、特殊字�
 msgid "*Password cannot exceed 18 digits!"
 msgstr "*密码不能超过18位！"
 
-msgid "*Wallet name is 5 to 20 characters!"
-msgstr "*钱包名称为5到20位的字符！"
+msgid "*Characters exceed the 5-20 limit!"
+msgstr "*字符超出5-20限制范围！"
 
 msgid "*The password is too simple, it is recommended to mix uppercase and lowercase letters, numbers, special characters!"
 msgstr "*密码太简单，建议混合大小写字母、数字、特殊字符！"

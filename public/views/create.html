@@ -47,6 +47,35 @@
         <div translate class="redcolor size-12">InterValue does not store passwords and cannot be retrieved for you. Please keep in mind!</div>
       </div>
       <p ng-if="create.createwalleterr">密码不一致</p>
+      <form name="creatwform" novalidate>
+        <div class="adinputitem" mdinputvalidc>
+            <div class="adinputic">
+                <div class="adinputimg addwname"></div>
+                <input type="text" ng-model="addw.addwname" mdinputname ng-attr-placeholder="{{'Wallet name'|translate}}" autocomplete="off" 
+                ng-minlength="1" ng-maxlength="20" />
+            </div>
+            <p class="adinputp" translate></p>
+        </div>
+        <div class="adinputitem" mdinputvalidc>
+            <div class="adinputic">
+                <div class="adinputimg addwpass"></div>
+                <input type="password" name="addwpass" ng-model="addw.addwpass" mdinputpass ng-attr-placeholder="{{'Password'|translate}}" 
+                autocomplete="off" ng-minlength="1" ng-maxlength="20" />
+            </div>
+            <p class="adinputp" translate></p>
+        </div>
+        <div class="adinputitem" mdinputvalidc>
+            <div class="adinputic">
+                <div class="adinputimg addwrpass"></div>
+                <input type="password" name="addwrpass" ng-model="addw.addwrpass" mdinputpassr="{{addw.addwpass}}" 
+                ng-attr-placeholder="{{'Repeat password'|translate}}" autocomplete="off" ng-minlength="1" ng-maxlength="20"
+                />
+            </div>
+            <p class="adinputp" translate></p>
+        </div>
+        <button class="m40t m15b" ng-click="addw.passequal()" ng-disabled="!addw.addwname || !addw.addwpass || !addw.addwrpass || creatwform.$invalid" translate>Creat wallet</button>
+        <button class="awbtn m15b" ng-click="$root.go('import');index.signatureAddr = '';">Import wallet</button>
+      </form>
       <div class="adinputitem">
         <div class="adinputic">
           <div class="adinputimg">
