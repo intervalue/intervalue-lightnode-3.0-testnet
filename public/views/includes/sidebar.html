@@ -31,7 +31,7 @@
       <!--</a>-->
     <!--</li>-->
   </ul>
-  <div class="siderbarb">
+  <div class="siderbarb" ng-show="index.isCordova">
       <a ng-click="$root.go('addwallet')">
           <div><img src="./img/creat.png"/></div>
           <span translate>Create a new wallet</span>
@@ -39,6 +39,12 @@
       <a ng-click="$root.go('addwallet')">
         <div><img src="./img/sidescan.png"/></div>
         <span translate>Scan</span>
+      </a>
+  </div>
+  <div class="siderbarbn" ng-show="!index.isCordova">
+      <a ng-click="$root.go('addwallet')">
+          <div><img src="./img/creat.png"/></div>
+          <span translate>Create a new wallet</span>
       </a>
   </div>
 </nav>

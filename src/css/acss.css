@@ -121,6 +121,14 @@
 .siderbarb a:first-child{margin-bottom: 10px;}
 .siderbarb a div{width: 25px;height:22px;text-align: left;float:left;margin-right: 14px;}
 .siderbarb a span{white-space: nowrap;font-size:12px;font-weight:400;color:#fff;line-height:17px;float:left;}
+
+
+.siderbarbn{position:absolute;bottom:0;left:0;border-top:1px dashed #979797;width:100%;box-sizing:border-box;padding:16px 0;height:64px;}
+.siderbarbn:before{position:absolute;width:14px;height:14px;display:block;content:'';border-radius:50%;background:#a7a8a9;left:-7px;bottom:57px;}
+.siderbarbn a{display:flex;width: 100%;justify-content: flex-start;align-items: center;padding:4px 18px;}
+.siderbarbn a:first-child{margin-bottom: 10px;}
+.siderbarbn a div{width: 25px;height:22px;text-align: left;float:left;margin-right: 14px;}
+.siderbarbn a span{white-space: nowrap;font-size:12px;font-weight:400;color:#fff;line-height:17px;float:left;}
 /*sidebar end*/
 
 /*walletHome-history-part start*/
@@ -277,6 +285,11 @@ padding: 20px 15px 0;}
     font-family:pfmedium;
     font-weight:500;
     color:#3B3B3B;
+    word-break: break-all;
+}
+.addaddbook .modal-content ul li.addaliste a span.text-close{
+    flex-shrink: 0;
+    margin-right: 10px;
 }
 .addaddbook .modal-content ul.addalist{
     height:calc(100vh - 140px);overflow: auto;margin-top:16px !important;
