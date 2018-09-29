@@ -1893,7 +1893,10 @@ msgid "Your wallet key will be encrypted. Password cannot be recovered. Be sure 
 msgstr "您的钱包密码将被加密，密码无法被恢复，一定要记下来。"
 
 #: public/views/splash.html:90
-msgid "Your wallet will be created on this device, keep it safe.  See your backup options in the Settings menu."
+msgid "Your wallet will be created on this device,"
+msgstr "你的钱包将被创建在此设备上"
+
+msgid "keep it safe.  See your backup options in the Settings menu."
 msgstr "你的钱包将被创建在此设备上，请确保其是安全的。请在设备菜单中查看备份选项。"
 
 #: public/views/create.html:94
@@ -2396,12 +2399,14 @@ msgstr "忘记密码？导入助记词可重置密码。"
 msgid "Import now"
 msgstr "马上导入"
 
+msgid "Entry already exist"
+msgstr "钱包地址已存在"
 
+msgid "Can't delete the last remaining wallet"
+msgstr "无法删除最后一个的钱包"
 
-
-
-
-
+msgid "shadowWallet is random failed"
+msgstr "shadowWallet随机失败"
 
 
 

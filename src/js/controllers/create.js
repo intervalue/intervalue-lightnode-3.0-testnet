@@ -168,6 +168,9 @@ angular.module('copayApp.controllers').controller('createwalletController',
         };
         //import wallet
         self.importw = function(){
+            if (self.creatingProfile)
+                return console.log('already creating profile');
+            self.creatingProfile = true;
 
             $timeout(function () {
                 profileService.create({ walletName: self.createwiname, password: self.createwipass, mnemonic: self.importcode }, function (err) {

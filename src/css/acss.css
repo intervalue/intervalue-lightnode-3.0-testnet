@@ -214,7 +214,7 @@
 
 /*tx-details start*/
 .ammountlr{position: fixed;width: 100%;height:100%;background: #FFFFFF;padding:0 15px 0;overflow: auto;}
-.ammountlr .adcpmdic input[type='number']{top:5px;}
+.ammountlr .adcpmdic input[type='number']{top:5px;padding-right: 60px; }
 /*tx-details end*/
 
 /*customized-amount start*/

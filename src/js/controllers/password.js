@@ -4,7 +4,7 @@ angular.module('copayApp.controllers').controller('passwordController',
   function($rootScope, $scope, $timeout, profileService, notification, go, gettext) {
 
     var self = this;
-
+    self.password = '';
     var pass1;
 
     self.isVerification = false;

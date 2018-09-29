@@ -371,7 +371,7 @@
                                     </div>
                                 </div>
                                 <label for="amount" class="sendinfo">
-                                    <span translate ng-if="!home.send_multiple">Amount: {{index.ammountTatol}}</span>
+                                    <span translate ng-if="!home.send_multiple"><span translate>Amount</span>: {{index.ammountTatol}}</span>
                                     <span translate ng-if="home.send_multiple">Total amount: {{index.ammountTatol}}</span>
                                     <a ng-click="home.setSendAll()" ng-show="!home.bSendAll && !home.lockAmount" translate>Send all</a>
                                 </label>
@@ -381,7 +381,7 @@
                                                      <!--ng-style="{'background-color':index.backgroundColor}"  translate>-->
                                     <!--Send-->
                                 <!--</button>-->
-                                    <button type="submit" class="m20t" ng-if="mtab == 1" ng-disabled="sendPaymentForm.$invalid"
+                                    <button type="submit" class="m20t m20b" ng-if="mtab == 1" ng-disabled="sendPaymentForm.$invalid"
                                             ng-style="{'background-color':index.backgroundColor}"  translate>
                                         Send
                                     </button>
