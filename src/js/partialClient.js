@@ -10,13 +10,6 @@ window.onerror = function (message) {
 	wallet.loadCompleteClient(true);
 };
 
-window.handleOpenURL = function(url) {
-	setTimeout(function(){
-		console.log("saving open url "+url);
-		window.open_url = url;
-	},0);
-}
-
 function initWallet() {
 	var root = {};
 	root.profile = null;
@@ -50,11 +43,7 @@ function initWallet() {
 			throw ("credentials should be an object");
 
 		if (!profile.xPrivKey && !profile.xPrivKeyEncrypted)
-			//throw Error("no xPrivKey, even encrypted");
-        {
-            profile.xPrivKey = null;
-            profile.xPrivKeyEncrypted = null;
-        }
+			throw Error("no xPrivKey, even encrypted");
 		if (!profile.tempDeviceKey)
 			throw Error("no tempDeviceKey");
 		Profile.xPrivKey = profile.xPrivKey;
@@ -97,57 +86,41 @@ function initWallet() {
 
 	function setWalletNameAndColor(walletName) {
 		if(completeClientLoaded) return;
-		var color = root.config.colorFor ? root.config.colorFor[root.focusedClient.credentials.walletId] : '#4A90E2';
-		if(!color) color = '#4A90E2';
-		getFromId('name1Color').style.color = color;
-		getFromId('name1').innerHTML = walletName;
-		getFromId('name2').innerHTML = walletName;
-		getFromId('spinnerBg').style.backgroundColor = color;
-		getFromId('amountBg').style.backgroundColor = color;
-		var subStrName = getFromId('subStrName');
-		subStrName.style.backgroundColor = color;
-		subStrName.innerHTML = walletName.substr(0, 1);
+		var color = root.config.colorFor ? root.config.colorFor[root.focusedClient.credentials.walletId] : '#246D98';
+		if(!color) color = '#246D98';
+		// getFromId('name1Color').style.color = color;
+		// getFromId('name1').innerHTML = walletName;
+		// getFromId('name2').innerHTML = walletName;
+		// getFromId('spinnerBg').style.backgroundColor = color;
+		// getFromId('amountBg').style.backgroundColor = color;
+		// var subStrName = getFromId('subStrName');
+		// subStrName.style.backgroundColor = color;
+		// subStrName.innerHTML = walletName.substr(0, 1);
 		document.getElementsByClassName('page')[1].style.display = 'block';
 	}
 
-	function setBalancesAndPages(balances) {
-		if(completeClientLoaded) return;
-		var htmlBalances = '';
-		var htmlPages = '';
-		var slideNumber = 0;
+	// function setBalancesAndPages(balances) {
+	// 	if(completeClientLoaded) return;
+	// 	var htmlBalances = '';
+	// 	var htmlPages = '';
+	// 	var slideNumber = 0;
 
-		function addHtml(asset, amount, slideNumber) {
-			var firstPage = slideNumber === 0;
-			htmlBalances += '<li id="balance' + slideNumber + '" style="display: ' + ( firstPage ? 'inline-block' : 'none') + ';"><div><strong class="size-36">' + formatAmount(amount, asset) + '</strong></div></li>';
-			htmlPages += '<span id="page' + slideNumber + '" ' + (firstPage ? 'class="active"' : '') + '>●</span>';
-		}
+	// 	function addHtml(asset, amount, slideNumber) {
+	// 		var firstPage = slideNumber === 0;
+	// 		htmlBalances += '<li id="balance' + slideNumber + '" style="display: ' + ( firstPage ? 'inline-block' : 'none') + ';"><div><strong class="size-36">' + formatAmount(amount, asset) + '</strong></div></li>';
+	// 		htmlPages += '<span id="page' + slideNumber + '" ' + (firstPage ? 'class="active"' : '') + '>●</span>';
+	// 	}
 
-		for (var asset in balances) {
-			addHtml(asset, balances[asset].stable, slideNumber++);
-		}
-		getFromId('balances').innerHTML = htmlBalances;
-		getFromId('pages').innerHTML = htmlPages;
-	}
+	// 	for (var asset in balances) {
+	// 		addHtml(asset, balances[asset].stable, slideNumber++);
+	// 	}
+	// 	getFromId('balances').innerHTML = htmlBalances;
+	// 	getFromId('pages').innerHTML = htmlPages;
+	// }
 
-	function setWalletsInMenu() {
-		if(completeClientLoaded) return;
-		var selectedWalletId = root.focusedClient.credentials.walletId;
-		var colors = root.config.colorFor;
-		var html = '';
-		for (var key in root.walletClients) {
-			var credentials = root.walletClients[key].credentials;
-			var walletId = credentials.walletId;
-
-			html += '<li onclick="wallet.selectWallet(\'' + walletId + '\')" id="w' + walletId + '" class="nav-item ' + (walletId === selectedWalletId ? 'selected' : '') + '">' +
-				'<a class="oh"><div class="avatar-wallet " style="background-color: ' + (colors && colors[walletId] ? colors[walletId] : '#4A90E2') + '">' + credentials.walletName.substr(0, 1) + ' </div>' +
-				'<div class="name-wallet m8t">' + credentials.walletName + '</div></a></li>';
-		}
-
-		getFromId('walletList').innerHTML = html;
-	}
 
 	function loadCompleteClient(showClient) {
-		self._bIntervalueCoreLoaded = false; //"fix" : Looks like you are loading multiple copies of intervalue core, which is not supported. Running 'npm dedupe' might help.
+		self._bInterValueCoreLoaded = false; //"fix" : Looks like you are loading multiple copies of intervalue core, which is not supported. Running 'npm dedupe' might help.
 		var body = document.body;
 		var page = document.createElement('div');
 
@@ -186,7 +159,7 @@ function initWallet() {
 				for (var asset in assocSharedBalances)
 					if (!assocBalances[asset])
 						assocBalances[asset] = {stable: 0, pending: 0};
-				setBalancesAndPages(assocBalances);
+				// setBalancesAndPages(assocBalances);
 				setSlider(assocBalances);
 				cb();
 			});
@@ -225,7 +198,6 @@ function initWallet() {
 					root.focusedClient = root.walletClients[Object.keys(root.walletClients)[0]];
 				initFocusedWallet(function() {
 					console.log('partial client load end');
-					setWalletsInMenu();
 					loadCompleteClient();
 				});
 			});
@@ -273,12 +245,6 @@ document.addEventListener("deviceready", function() {
 	wallet.loadProfile();
 });
 
-setTimeout(function () {
-	var divTextDbLock = getFromId('textDbLock');
-	if(divTextDbLock){
-		divTextDbLock.style.display = 'inline-block';
-	}
-}, 15000);
 
 
 //slider
