@@ -172,9 +172,9 @@ angular.module('copayApp.controllers').controller('addwalletController',
         };
         //import wallet
         self.importw = function(){
-            if (self.creatingProfile)
+            /*if (self.creatingProfile)
                 return console.log('already creating profile');
-            self.creatingProfile = true;
+            self.creatingProfile = true;*/
 
             $timeout(function () {
                 profileService.createWallet({ name: self.addwiname, password: self.addwipass, mnemonic: self.importcode,m:1,n:1,networkName:"livenet",cosigners:[],isSinglecreateress:true }, function (err,walletId) {
