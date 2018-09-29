@@ -155,6 +155,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                         var xPrivKey;
                         var wc = profileService.walletClients;
                         db.query('select extended_pubkey,a.wallet  from extended_pubkeys as a  left join my_addresses as b on a.wallet=b.wallet where b.address=?',[objRequest.addr],function (rows) {
+                            if(rows.length){
                             for(var index in wc){
                                 if(rows[0].extended_pubkey == wc[index].credentials.xPubKey){
                                     if(!wc[index].credentials.mnemonic){
@@ -189,7 +190,9 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                                     }
                                 }
                             }
-
+                        }else {
+                            notification.error(objRequest.addr+'is not found ,please try agin ');
+                        }
                         });
 
                     }
@@ -269,40 +272,44 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                         var xPrivKey;
                         var wc = profileService.walletClients;
                         db.query('select extended_pubkey,a.wallet  from extended_pubkeys as a  left join my_addresses as b on a.wallet=b.wallet where b.address=?',[objRequest.addr],function (rows) {
-                            for(var index in wc){
-                                if(rows[0].extended_pubkey == wc[index].credentials.xPubKey){
-                                    if(!wc[index].credentials.mnemonic){
-                                        if(wc[index].credentials.walletId != profileService.focusedClient.walletId){
-                                            profileService.setAndStoreFocus(rows[0].wallet, function() {
-                                            });
-                                        }
-                                        profileService.insistUnlockFC(null, function (err){
-                                            if (err) return;
-                                            xPrivKey = profileService.focusedClient.credentials.xPrivKey;
-                                            shadowWallet.getSignatureDetlCode(objRequest,xPrivKey,function (signatureDetlCode) {
-                                                if(typeof  signatureDetlCode =="object"){
-                                                    $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
-                                                }else{
-                                                    console.log(" signatureDetlCode is "+signatureDetlCode);
-                                                    notification.error('signatureDetlCode is '+signatureDetlCode);
+                                if(rows.length > 0) {
+                                    for (var index in wc) {
+                                        if (rows[0].extended_pubkey == wc[index].credentials.xPubKey) {
+                                            if (!wc[index].credentials.mnemonic) {
+                                                if (wc[index].credentials.walletId != profileService.focusedClient.walletId) {
+                                                    profileService.setAndStoreFocus(rows[0].wallet, function () {
+                                                    });
                                                 }
-                                            });
-                                        });
-                                        break;
-                                    }else {
-                                        xPrivKey = wc[index].credentials.xPrivKey;
-                                        shadowWallet.getSignatureDetlCode(objRequest,xPrivKey,function (signatureDetlCode) {
-                                            if(typeof  signatureDetlCode =="object"){
-                                                $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
-                                            }else{
-                                                console.log(" signatureDetlCode is "+signatureDetlCode);
-                                                notification.error('signatureDetlCode is '+signatureDetlCode);
+                                                profileService.insistUnlockFC(null, function (err) {
+                                                    if (err) return;
+                                                    xPrivKey = profileService.focusedClient.credentials.xPrivKey;
+                                                    shadowWallet.getSignatureDetlCode(objRequest, xPrivKey, function (signatureDetlCode) {
+                                                        if (typeof  signatureDetlCode == "object") {
+                                                            $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
+                                                        } else {
+                                                            console.log(" signatureDetlCode is " + signatureDetlCode);
+                                                            notification.error('signatureDetlCode is ' + signatureDetlCode);
+                                                        }
+                                                    });
+                                                });
+                                                break;
+                                            } else {
+                                                xPrivKey = wc[index].credentials.xPrivKey;
+                                                shadowWallet.getSignatureDetlCode(objRequest, xPrivKey, function (signatureDetlCode) {
+                                                    if (typeof  signatureDetlCode == "object") {
+                                                        $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
+                                                    } else {
+                                                        console.log(" signatureDetlCode is " + signatureDetlCode);
+                                                        notification.error('signatureDetlCode is ' + signatureDetlCode);
+                                                    }
+                                                });
+                                                break;
                                             }
-                                        });
-                                        break;
+                                        }
                                     }
+                                }else {
+                                    notification.error(objRequest.addr+'is not found ,please try agin ');
                                 }
-                            }
 
                         });
 

@@ -51,7 +51,7 @@
                         <qr-scanner on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
                     </section>
                     <div class="scannote" translate>Scan cold wallet signature data QR code</div>
-                    <input type="hidden"  value="{{index.signedTransactionIfo}}">
+                    <input type="hidden" name="txStIfo"  ng-model=index.signedTransactionIfo>
                     <textarea name="data" rows="10" cols="10">{{index.signatureIfo}}</textarea>
                     <button type="submit">
                         <span translate>Send transaction</span>
