@@ -49,8 +49,8 @@
                         </div>
                         <p class="adinputp" translate></p>
                     </div>
-                    <button class="m40t m15b" ng-click="addw.passequal()" ng-disabled="!addw.addwname || !addw.addwpass || !addw.addwrpass || creatwform.$invalid" translate>Creat wallet</button>
-                    <button class="awbtn m15b" ng-click="$root.go('import');index.signatureAddr = '';">Import wallet</button>
+                    <button class="m40t m15b" ng-click="addw.step = 'showcode';" ng-disabled="!addw.addwname || !addw.addwpass || !addw.addwrpass || creatwform.$invalid" translate>Creat wallet</button>
+                    <button class="awbtn m15b" ng-click="$root.go('import');index.signatureAddr = '';" translate>Import wallet</button>
                 </form>
             </div>
         </div>

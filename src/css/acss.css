@@ -59,7 +59,7 @@
 .addwpass{background: url(../img/walletpassinput.png) center no-repeat;z-index: 2;}
 .addwrpass{background: url(../img/walletpassrinput.png) center no-repeat;z-index: 2;}
 .adinputitem .adinputp{display: none;color: #D45757;font-size: 10px;margin: 0;margin-top: 4px;}
-.setErrorexp .addwname{background: url(../img/walletnameinput.png) center no-repeat;z-index: 2;}
+.setErrorexp .addwname{background: url(../img/walletnameinputer.png) center no-repeat;z-index: 2;}
 .setErrorexp .addwpass{background: url(../img/walletpassinputer.png) center no-repeat;z-index: 2;}
 .setErrorexp .addwrpass{background: url(../img/walletpassrinputer.png) center no-repeat;z-index: 2;}
 .setErrorexp.adinputitem .adinputp{display: block;}
@@ -200,7 +200,7 @@
 /*receive end*/
 
 /*tx-details start*/
-.ammountlr{position: fixed;width: 100%;height:100%;background: #FFFFFF;padding:15px 15px 0;overflow: auto;}
+.ammountlr{position: fixed;width: 100%;height:100%;background: #FFFFFF;padding:0 15px 0;overflow: auto;}
 .ammountlr .adcpmdic input[type='number']{top:5px;}
 /*tx-details end*/
 

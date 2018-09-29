@@ -2325,6 +2325,22 @@ msgstr "*字符超出5-20限制范围！"
 msgid "*The password is too simple, it is recommended to mix uppercase and lowercase letters, numbers, special characters!"
 msgstr "*密码太简单，建议混合大小写字母、数字、特殊字符！"
 
+msgid "Creat wallet"
+msgstr "创建钱包"
 
+msgid "Import wallet"
+msgstr "导入钱包"
+
+msgid "My INVE address"
+msgstr "我的INVE地址"
+
+msgid "Copy address"
+msgstr "复制地址"
+
+msgid "receive address"
+msgstr "收款地址"
+
+msgid "No transactions yet"
+msgstr "没有交易记录"
 
 

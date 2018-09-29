@@ -22,14 +22,6 @@ angular.module('copayApp.controllers').controller('createwalletController',
         var fc = profileService.focusedClient;
         var walletClient = bwcService.getClient();
         self.ducodes = walletClient.createRandomMnemonic().split(' ');
-        self.passequal = function () {
-            if (self.createwpass !== self.createwrpass) {
-                self.createwalleterr = true;
-                return false;
-            } else {
-                self.step = "showcode";
-            }
-        }
         //乱序
         self.shuffle = function (v) {
             for (var j, x, i = v.length; i; j = parseInt(Math.random() * i), x = v[--i], v[i] = v[j], v[j] = x);

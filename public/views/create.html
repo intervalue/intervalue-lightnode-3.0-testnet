@@ -51,7 +51,7 @@
         <div class="adinputitem" mdinputvalidc>
             <div class="adinputic">
                 <div class="adinputimg addwname"></div>
-                <input type="text" ng-model="addw.addwname" mdinputname ng-attr-placeholder="{{'Wallet name'|translate}}" autocomplete="off" 
+                <input type="text" ng-model="create.createwname" mdinputname ng-attr-placeholder="{{'Wallet name'|translate}}" autocomplete="off" 
                 ng-minlength="1" ng-maxlength="20" />
             </div>
             <p class="adinputp" translate></p>
@@ -59,7 +59,7 @@
         <div class="adinputitem" mdinputvalidc>
             <div class="adinputic">
                 <div class="adinputimg addwpass"></div>
-                <input type="password" name="addwpass" ng-model="addw.addwpass" mdinputpass ng-attr-placeholder="{{'Password'|translate}}" 
+                <input type="password" name="addwpass" ng-model="create.createwpass" mdinputpass ng-attr-placeholder="{{'Password'|translate}}" 
                 autocomplete="off" ng-minlength="1" ng-maxlength="20" />
             </div>
             <p class="adinputp" translate></p>
@@ -67,41 +67,14 @@
         <div class="adinputitem" mdinputvalidc>
             <div class="adinputic">
                 <div class="adinputimg addwrpass"></div>
-                <input type="password" name="addwrpass" ng-model="addw.addwrpass" mdinputpassr="{{addw.addwpass}}" 
+                <input type="password" name="addwrpass" ng-model="create.createwrpass" mdinputpassr="{{create.createwpass}}" 
                 ng-attr-placeholder="{{'Repeat password'|translate}}" autocomplete="off" ng-minlength="1" ng-maxlength="20"
                 />
             </div>
             <p class="adinputp" translate></p>
         </div>
-        <button class="m40t m15b" ng-click="addw.passequal()" ng-disabled="!addw.addwname || !addw.addwpass || !addw.addwrpass || creatwform.$invalid" translate>Creat wallet</button>
-        <button class="awbtn m15b" ng-click="$root.go('import');index.signatureAddr = '';">Import wallet</button>
+        <button class="m40t m15b" ng-click="create.step = 'showcode'" ng-disabled=" !create.createwname || !create.createwpass || !create.createwrpass || creatwform.$invalid" translate>Creat wallet</button>
       </form>
-      <div class="adinputitem">
-        <div class="adinputic">
-          <div class="adinputimg">
-            <img src="./img/walletnameinput.png">
-          </div>
-          <input type="text" ng-model="create.createwname" ng-attr-placeholder="{{'Wallet name'|translate}}">
-        </div>
-      </div>
-      <div class="adinputitem">
-        <div class="adinputic">
-          <div class="adinputimg">
-            <img src="./img/walletpassinput.png">
-          </div>
-          <input type="text" ng-model="create.createwpass" ng-attr-placeholder="{{'Password'|translate}}">
-        </div>
-      </div>
-      <div class="adinputitem">
-        <div class="adinputic">
-          <div class="adinputimg">
-            <img src="./img/walletpassrinput.png">
-          </div>
-          <input type="text" ng-model="create.createwrpass" ng-attr-placeholder="{{'Repeat password'|translate}}">
-        </div>
-      </div>
-      <button class="m40t" ng-click="create.passequal()" ng-disabled="!create.createwname || !create.createwpass || !create.createwrpass" translate>Next</button>
-      <!--<button class="m40t" ng-click="create.createWallet()" ng-disabled="!create.createwname || !create.createwpass || !create.createwrpass" translate>Next</button>-->
     </div>
   </div>
   <!--创建钱包-创建钱包信息  end-->
