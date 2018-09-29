@@ -1392,8 +1392,9 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
   position: absolute;
   width: 90%;
   left: 5%;
-  top: 15%;
+  top: 32%;
   z-index: 1100;
+  padding: 20px 0;
 }
 
 .passModal {
