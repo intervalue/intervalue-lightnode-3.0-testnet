@@ -182,6 +182,7 @@ angular.module('copayApp.controllers').controller('addwalletController',
                         self.creatingProfile = false;
                         $log.warn(err);
                         self.error = err;
+                        alert(err);
                         $timeout(function () {
                             $scope.$apply();
                         });

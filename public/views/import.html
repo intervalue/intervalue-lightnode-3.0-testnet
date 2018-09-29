@@ -25,14 +25,14 @@
 			</div>
 		</div>
 		<div class="addwcontentin">
-			<div ng-if="import.showtab == 'tabcold'">
+			<div ng-if="import.showtab == 'tabcold'" ng-controller="addwalletController as add">
 				<div translate>Wallet Seed :</div>
-				<textarea placeholder="{{'Enter your mnemonic, separated by spaces'|translate}}" ng-model="import.importcode"></textarea>
-				<form name="creatwform" novalidate>
+				<textarea placeholder="{{'Enter your mnemonic, separated by spaces'|translate}}" ng-model="add.importcode"></textarea>
+				<form name="creatwform"  novalidate>
 					<div class="adinputitem" mdinputvalidc>
 						<div class="adinputic">
 							<div class="adinputimg addwname"></div>
-							<input type="text" ng-model="import.addwiname" mdinputname ng-attr-placeholder="{{'Wallet name'|translate}}" autocomplete="off" 
+							<input type="text" ng-model="add.addwiname" mdinputname ng-attr-placeholder="{{'Wallet name'|translate}}" autocomplete="off"
 							ng-minlength="1" ng-maxlength="20" />
 						</div>
 						<p class="adinputp" translate></p>
@@ -40,7 +40,7 @@
 					<div class="adinputitem" mdinputvalidc>
 						<div class="adinputic">
 							<div class="adinputimg addwpass"></div>
-							<input type="password" name="addwpass" ng-model="import.addwipass" mdinputpass ng-attr-placeholder="{{'Password'|translate}}" 
+							<input type="password" name="addwpass" ng-model="add.addwipass" mdinputpass ng-attr-placeholder="{{'Password'|translate}}"
 							autocomplete="off" ng-minlength="1" ng-maxlength="20" />
 						</div>
 						<p class="adinputp" translate></p>
@@ -48,13 +48,13 @@
 					<div class="adinputitem" mdinputvalidc>
 						<div class="adinputic">
 							<div class="adinputimg addwrpass"></div>
-							<input type="password" name="addwrpass" ng-model="import.addwirpass" mdinputpassr="{{import.addwipass}}" 
+							<input type="password" name="addwrpass" ng-model="add.addwirpass" mdinputpassr="{{add.addwipass}}"
 							ng-attr-placeholder="{{'Repeat password'|translate}}" autocomplete="off" ng-minlength="1" ng-maxlength="20"
 							/>
 						</div>
 						<p class="adinputp" translate></p>
 					</div>
-					<button class="m40t m15b" ng-click="create.step = 'showcode'" ng-disabled="!import.importcode || !import.addwipass || !import.addwirpass || creatwform.$invalid" translate>Start importing</button>
+					<button class="m40t m15b" ng-click="add.importw()" ng-disabled="!add.importcode || !add.addwipass || !add.addwirpass || add.$invalid" translate>Start importing</button>
 					<div class="size-12 redcolor" translate>Note: Please be patient while the wallet is recovering. Do not quit the software.</div>
 				</form>
 			</div>
