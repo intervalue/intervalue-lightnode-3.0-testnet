@@ -2314,13 +2314,16 @@ msgid "*Inconsistent password"
 msgstr "*密码不一致"
 
 msgid "*Not less than 8 characters, it is recommended to mix uppercase and lowercase letters, numbers, special characters!"
-msgstr "不少于8位字符，建议混合大小写字母、数字、特殊字符！"
+msgstr "*不少于8位字符，建议混合大小写字母、数字、特殊字符！"
 
 msgid "*Password cannot exceed 18 digits!"
-msgstr "密码不能超过18位！"
+msgstr "*密码不能超过18位！"
+
+msgid "*Wallet name is 5 to 20 characters!"
+msgstr "*钱包名称为5到20位的字符！"
 
 msgid "*The password is too simple, it is recommended to mix uppercase and lowercase letters, numbers, special characters!"
-msgstr "密码太简单，建议混合大小写字母、数字、特殊字符！"
+msgstr "*密码太简单，建议混合大小写字母、数字、特殊字符！"
 
 
 

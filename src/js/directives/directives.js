@@ -649,8 +649,10 @@ angular.module('copayApp.directives')
             var errtext = '';
             if (errpass.match(/regerror/))
                errtext = '*Not less than 8 characters, it is recommended to mix uppercase and lowercase letters, numbers, special characters!';
-            else if (errpass.match(/lengthrror/))
+            else if (errpass.match(/lengtherror/))
                 errtext = '*Password cannot exceed 18 digits!';
+            else if (errpass.match(/lengthnameerror/))
+                errtext = '*Wallet name is 5 to 20 characters!';
             else if (errpass.match(/easyerror/))
                 errtext = '*The password is too simple, it is recommended to mix uppercase and lowercase letters, numbers, special characters!';
             else if (errpass.match(/nomatch/))
@@ -658,6 +660,34 @@ angular.module('copayApp.directives')
             $element[0].children[1].innerHTML = gettextCatalog.getString(errtext);
             $element.toggleClass('setErrorexp', !!isFocused);
           };
+        }
+    }
+  }).directive("mdinputname",function(){
+    return {
+        scope: {},
+        restrict: 'A',
+        require: ['^mdinputvalidc','?ngModel'],
+        link: postLink
+    }
+      function postLink(scope, elem, attrs, ctrl){
+        if(ctrl[1]){
+          scope.$watch(function(){
+            return (ctrl[1]).$modelValue + "";
+          },function(val){
+            if(typeof(val) == 'undefined'){
+              ctrl[0].setErrorexp(false, 'noerror');
+              ctrl[1].$setValidity('mdinputname', false);
+            }else if(val == ''){
+              ctrl[0].setErrorexp(false, 'noerror');
+              ctrl[1].$setValidity('mdinputname', false);
+            }else if(val.length < 5 || val.length > 20){
+              ctrl[0].setErrorexp(true, 'lengthnameerror');
+              ctrl[1].$setValidity('mdinputname', false);
+            }else{
+              ctrl[0].setErrorexp(false, 'noerror');
+              ctrl[1].$setValidity('mdinputname', true);
+            }
+          })  
         }
     }
   }).directive("mdinputpass",function(){
@@ -668,11 +698,6 @@ angular.module('copayApp.directives')
         link: postLink
     }
       function postLink(scope, elem, attrs, ctrl){
-        var el = angular.element(elem);
-        var self = this;
-        el.on('keydown', function(ev) {
-              ctrl[0].setErrorexp(false, 'noerror');
-            });
         if(ctrl[1]){
           scope.$watch(function(){
             return (ctrl[1]).$modelValue + "";
@@ -689,7 +714,7 @@ angular.module('copayApp.directives')
               ctrl[0].setErrorexp(true, 'regerror');
               ctrl[1].$setValidity('mdinputpass', false);
             }else if(val.length > 18){
-              ctrl[0].setErrorexp(true, 'lengthrror');
+              ctrl[0].setErrorexp(true, 'lengtherror');
               ctrl[1].$setValidity('mdinputpass', false);
             }else if(trimeasyExp.test(val)){
               ctrl[0].setErrorexp(true, 'easyerror');
@@ -709,11 +734,6 @@ angular.module('copayApp.directives')
         link: postLink
     }
       function postLink(scope, elem, attrs, ctrl){
-        var el = angular.element(elem);
-        var self = this;
-        el.on('keydown', function(ev) {
-              ctrl[0].setErrorexp(false, 'noerror');
-        });
         var isSame = function(value) {
           var anotherValue = attrs.mdinputpassr;
           return value === anotherValue;

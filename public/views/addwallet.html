@@ -27,8 +27,8 @@
                     <div class="adinputitem" mdinputvalidc>
                         <div class="adinputic">
                             <div class="adinputimg addwname"></div>
-                            <input type="text" ng-model="addw.addwname" ng-attr-placeholder="{{'Wallet name'|translate}}" autocomplete="off" 
-                            />
+                            <input type="text" ng-model="addw.addwname" mdinputname ng-attr-placeholder="{{'Wallet name'|translate}}" autocomplete="off" 
+                            ng-minlength="1" ng-maxlength="20" />
                         </div>
                         <p class="adinputp" translate></p>
                     </div>
@@ -36,7 +36,7 @@
                         <div class="adinputic">
                             <div class="adinputimg addwpass"></div>
                             <input type="password" name="addwpass" ng-model="addw.addwpass" mdinputpass ng-attr-placeholder="{{'Password'|translate}}" 
-                            autocomplete="off"  />
+                            autocomplete="off" ng-minlength="1" ng-maxlength="20" />
                         </div>
                         <p class="adinputp" translate></p>
                     </div>
@@ -44,7 +44,7 @@
                         <div class="adinputic">
                             <div class="adinputimg addwrpass"></div>
                             <input type="password" name="addwrpass" ng-model="addw.addwrpass" mdinputpassr="{{addw.addwpass}}" 
-                            ng-attr-placeholder="{{'Repeat password'|translate}}" autocomplete="off"
+                            ng-attr-placeholder="{{'Repeat password'|translate}}" autocomplete="off" ng-minlength="1" ng-maxlength="20"
                             />
                         </div>
                         <p class="adinputp" translate></p>
