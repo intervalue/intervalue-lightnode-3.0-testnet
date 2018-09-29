@@ -11,38 +11,55 @@ angular.module('copayApp.controllers').controller('signedTransactionIfoControlle
          */
         self.signedTransaction = function () {
             var form = $scope.signedTransactionIfo;
-            var obj = JSON.parse(form.$$element[0][0].value);
+            alert(form.transactioninfo.$modelValue);
+            var obj = JSON.parse(form.transactioninfo.$modelValue);
+
+            //var obj = JSON.parse(form.$$element[0][0].value);
             var wc = profileService.walletClients;
-            db.query('select extended_pubkey  from extended_pubkeys as a  left join my_addresses as b on a.wallet=b.wallet where b.address=?',[obj.from[0].address],function (rows) {
+            db.query('select extended_pubkey,a.wallet   from extended_pubkeys as a  left join my_addresses as b on a.wallet=b.wallet where b.address=?',[obj.fromAddress],function (rows) {
                 if(rows.length > 0){
                     for(var index in wc){
+                        alert(rows[0].extended_pubkey);
                         if(rows[0].extended_pubkey == wc[index].credentials.xPubKey){
                             if(!wc[index].credentials.mnemonic){
                                 if(wc[index].credentials.walletId != profileService.focusedClient.walletId){
                                     profileService.setAndStoreFocus(rows[0].wallet, function() {
                                     });
+                                    break;
                                 }
                                 profileService.insistUnlockFC(null, function (err){
                                     if (err) return;
                                     xPrivKey = profileService.focusedClient.credentials.xPrivKey;
+                                    alert(JSON.stringify(
+                                        obj
+
+                                    ));
+                                    alert(xPrivKey);
                                     shadowWallet.signTradingUnit(obj,xPrivKey,function (objrequest) {
                                         if(typeof objrequest == "object"){
+                                            $scope.index.showshadow = true;
+                                            $scope.index.showshadow100 = true;
+                                            $scope.index.shadowstep = 'csend1';
                                             $rootScope.$emit('Local/signedTransactionIfo', objrequest);
                                         }else {
                                             console.log("error: "+objrequest);
-                                            return self.setSendError(objrequest);
+                                            return $rootScope.$emit('Local/ShowErrorAlert', objrequest);
                                         }
                                     });
                                 });
                                 break;
                             }else {
                                 xPrivKey = wc[index].credentials.xPrivKey;
+                                alert(xPrivKey);
                                 shadowWallet.signTradingUnit(obj,xPrivKey,function (objrequest) {
                                     if(typeof objrequest == "object"){
+                                        $scope.index.showshadow = true;
+                                        $scope.index.showshadow100 = true;
+                                        $scope.index.shadowstep = 'csend1';
                                         $rootScope.$emit('Local/signedTransactionIfo', objrequest);
                                     }else {
                                         console.log("error: "+objrequest);
-                                        return self.setSendError(objrequest);
+                                        return $rootScope.$emit('Local/ShowErrorAlert', objrequest);
                                     }
                                 });
                                 break;
@@ -51,7 +68,7 @@ angular.module('copayApp.controllers').controller('signedTransactionIfoControlle
                     }
                 }else {
                     console.log("error not find address ");
-                    return self.setSendError("error not find address");
+                    return $rootScope.$emit('Local/ShowErrorAlert', "error not find address : "+obj.fromAddress);
                 }
 
             });

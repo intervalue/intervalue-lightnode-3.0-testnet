@@ -1844,7 +1844,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
      */
     $rootScope.$on('Local/showUnsignedTransactionIfo', function(event,showUnsignedTransactionIfo){
         self.showUnsignedTransactionIfoObj = showUnsignedTransactionIfo;
-        self.showUnsignedTransactionIfo = JSON.stringify(showUnsignedTransactionIfo);
+        self.showUnsignedTransactionInfo = JSON.stringify(showUnsignedTransactionIfo);
+        self.ShowAmount = profileService.formatAmount(parseInt(showUnsignedTransactionIfo.amount),'bytes');
         self.showshadow = true;
         self.showshadow100 = true;
         self.shadowstep = 'csend1';

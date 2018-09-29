@@ -11,7 +11,7 @@
             <div class="scanin">
                 <qrcode size="190"  data="{{index.signatureCodeQRCode}}" ></qrcode>
                 <div class="scannote" translate>Please use the cold wallet of this address to scan the QR code to authorize observation.</div>
-                <button ng-click="index.shadowstep = 'hot3'">
+                <button ng-click="index.shadowstep = 'hot3';index.signatureData=''">
                     <span translate>Next</span>
                 </button>
             </div>
@@ -102,7 +102,7 @@
     <div ng-show="index.shadowstep == 'csend2'" class="scanpop">
         <div class="title"><img src="./img/close.png" class="scanclose" ng-click="index.showshadow = false;"><span translate>Authorized success</span></div>
         <div class="scanin">
-            <qrcode size="190"  data="{{index.signedTransactionIfo}}" ></qrcode>
+            <qrcode size="190" version="15"  data="{{index.signedTransactionIfo}}" ></qrcode>
             <div class="scannote" translate>Please use the hot wallet to scan the QR code to issue a transaction.</div>
             <button ng-click="index.shadowstep = 'csend2'">
                 <span translate>Done</span>
@@ -112,7 +112,7 @@
     <!--冷钱包交易签名验证，结束-->
     <!--冷钱包，结束-->
 </div>
-<div ng-show="index.showshadow && index.showshadow100" class="shadowModal100" >
+<div ng-show="index.showshadow && index.showshadow100 && index.shadowstep == 'csend1';" class="shadowModal100" >
      <!--冷钱包交易签名验证，开始-->
     <div>
         <nav ng-controller="topbarController as topbar" class="tab-bar">
@@ -127,19 +127,18 @@
         </nav>
         <div class="csend1" ng-controller="signedTransactionIfoControllers as signedTransaction">
             <div class="csend1head">
-                <div class="size-30">10</div>
+                <div class="size-30">{{index.ShowAmount}}</div>
                 <div class="csendunit">INVE</div>
             </div>
-            <form name="signedTransactionIfo" ng-submit="signedTransaction.signedTransaction(signedTransactionIfo)">
-                <input type="hidden" value="{{index.showUnsignedTransactionIfo}}">
-                <div class="sdflex"><span class="sdtitle" translate>Amount</span>：<span class="sdinfo">{{showUnsignedTransactionIfoObj.fromAddress}}</span></div>
-                <div class="sdflex"><span class="sdtitle" translate>From</span>：<span class="sdinfo">{{showUnsignedTransactionIfoObj.fromAddress}}</span></div>
-                <div class="sdflex"><span class="sdtitle" translate>To</span>：<span class="sdinfo">{{showUnsignedTransactionIfoObj.toAddress}}</span></div>
-                <div class="sdflex"><span class="sdtitle" translate>Date</span>：<span class="sdinfo">{{showUnsignedTransactionIfoObj.timestamp}}</span></div>
-                <div class="sdflex"><span class="sdtitle" translate>Fee</span>：<span class="sdinfo">{{showUnsignedTransactionIfoObj.fee}}</span></div>
-                <div class="sdflex"><span class="sdtitle" translate>Unit</span：><span class="sdinfo">{{}}</span></div>
+            <form name="signedTransactionIfo" ng-submit="signedTransaction.signedTransaction(signedTransactionIfo);index.showshadow = false">
+                <input type="hidden" name ="transactioninfo" ng-model=index.showUnsignedTransactionInfo>
+                <div class="sdflex"><span class="sdtitle" translate>From</span>：<span class="sdinfo">{{index.showUnsignedTransactionIfoObj.fromAddress}}</span></div>
+                <div class="sdflex"><span class="sdtitle" translate>To</span>：<span class="sdinfo">{{index.showUnsignedTransactionIfoObj.toAddress}}</span></div>
+                <div class="sdflex"><span class="sdtitle" translate>Date</span>：<span class="sdinfo">{{index.showUnsignedTransactionIfoObj.timestamp * 1000 | amDateFormat:'MM/DD/YYYY HH:mm a'}} {{index.showUnsignedTransactionIfoObj.timestamp * 1000 | amTimeAgo}}</span></div>
+                <div class="sdflex"><span class="sdtitle" translate>Fee</span>：<span class="sdinfo">{{index.showUnsignedTransactionIfoObj.fee}}</span></div>
+                <div class="sdflex"><span class="sdtitle" translate>Unit</span>：<span class="sdinfo">{{}}</span></div>
                 <div class="sdflex"><span class="sdtitle" translate>Status</span>：<span class="sdinfo">等待签名</span></div>
-                <button class="m60t">
+                <button class="m60t" type="submit">
                     <span translate>Authorized Signature</span>
                 </button>
             </form>

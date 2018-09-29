@@ -328,7 +328,7 @@
             </nav>
 
             <div ng-show="home.shownForm=='payment'">
-                <form class="sendform" name="sendPaymentForm" ng-submit="home.submitPayment(sendPaymentForm)" ng-disabled="home.blockUx || home.onGoingProcess" novalidate>
+                <form class="sendform" name="sendPaymentForm" ng-submit="home.submitPayment(sendPaymentForm)"  novalidate>
                     <div class="box-notification" ng-show="home.error" ng-click="home.resetError()">
                       <span class="text-warning">
                         {{home.error|translate}}
@@ -377,7 +377,11 @@
                                 </label>
                                 <div ng-show="!home.onGoingProcess" class="m30t">
                                     
-                                    <button type="submit" class="m20t" ng-if="mtab == 1" ng-disabled="home.current_payment_key || sendPaymentForm.$invalid || home.blockUx || index.isOffline || !index.isEnoughSignersSelected()"
+                                    <!--<button type="submit" class="m20t" ng-if="mtab == 1" ng-disabled="home.current_payment_key || sendPaymentForm.$invalid || home.blockUx || index.isOffline || !index.isEnoughSignersSelected()"-->
+                                                     <!--ng-style="{'background-color':index.backgroundColor}"  translate>-->
+                                    <!--Send-->
+                                <!--</button>-->
+                                    <button type="submit" class="m20t" ng-if="mtab == 1" ng-disabled="sendPaymentForm.$invalid"
                                             ng-style="{'background-color':index.backgroundColor}"  translate>
                                         Send
                                     </button>
