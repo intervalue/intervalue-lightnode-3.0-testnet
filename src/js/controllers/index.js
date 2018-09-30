@@ -210,7 +210,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     eventBus.on("new_my_transactions", function () {
         breadcrumbs.add('new_my_transactions');
         self.updateAll();
-        self.updateTxHistory();
+        self.updateTxHistory(3);
     });
 
     eventBus.on("my_transactions_became_stable", function () {
@@ -222,7 +222,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     eventBus.on("maybe_new_transactions", function () {
         breadcrumbs.add('maybe_new_transactions');
         self.updateAll();
-        self.updateTxHistory();
+        self.updateTxHistory(3);
     });
 
     eventBus.on("wallet_approved", function (walletId, device_address) {
@@ -605,7 +605,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 else
                     self.bHasMerkle = false;
                 self.updateAll();
-                self.updateTxHistory();
+                self.updateTxHistory(3);
                 $modalInstance.close();
             };
         };
@@ -914,7 +914,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             if (opts.triggerTxUpdate) {
                 $timeout(function () {
                     breadcrumbs.add('triggerTxUpdate');
-                    self.updateTxHistory();
+                    self.updateTxHistory(3);
                 }, 1);
             }
         });
@@ -1575,7 +1575,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     $rootScope.$on('Local/UnitSettingUpdated', function (event) {
         breadcrumbs.add('UnitSettingUpdated');
         self.updateAll();
-        self.updateTxHistory();
+        self.updateTxHistory(3);
     });
 
     $rootScope.$on('Local/NeedFreshHistory', function (event) {
@@ -1593,7 +1593,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     //    self.updateAll({
     //      quiet: true
     //    });
-    //    self.updateTxHistory();
+    //    self.updateTxHistory(3);
     //  }, 4000, {
     //    leading: false,
     //    trailing: true
@@ -1693,7 +1693,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     $rootScope.$on('Local/NewFocusedWallet', function (event, cb) {
         console.log('on Local/NewFocusedWallet');
         self.setFocusedWallet(cb);
-        //self.updateTxHistory();
+        //self.updateTxHistory(3);
         go.walletHome();
     });
 
