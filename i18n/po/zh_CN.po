@@ -2426,7 +2426,8 @@ msgstr "待确认"
 msgid "Incorrect password"
 msgstr "口令不正确"
 
-
+msgid "wallet exists"
+msgstr "钱包已存在"
 
 
 

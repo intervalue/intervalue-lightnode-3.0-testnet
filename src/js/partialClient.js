@@ -95,6 +95,23 @@ function initWallet() {
 		});
 	}
 
+	function setWalletNameAndColor(walletName) {
+		if(completeClientLoaded) return;
+		document.getElementsByClassName('page')[1].style.display = 'block';
+	}
+
+
+	function setWalletsInMenu() {
+		if(completeClientLoaded) return;
+		var selectedWalletId = root.focusedClient.credentials.walletId;
+		var colors = root.config.colorFor;
+		var html = '';
+		for (var key in root.walletClients) {
+			var credentials = root.walletClients[key].credentials;
+			var walletId = credentials.walletId;
+		}
+	}
+
 	function loadCompleteClient(showClient) {
 		self._bIntervalueCoreLoaded = false; //"fix" : Looks like you are loading multiple copies of intervalue core, which is not supported. Running 'npm dedupe' might help.
 		var body = document.body;
@@ -117,6 +134,13 @@ function initWallet() {
 
 	function showCompleteClient() {
 		getFromId('splash').style.display = 'none';
+		swipeListener.close();
+		var pages = document.getElementsByClassName('page');
+		if (pages.length === 2) {
+			document.getElementsByClassName('page')[1].remove();
+			document.getElementsByClassName('page')[0].style.display = 'block';
+			completeClientLoaded = true;
+		}
 	}
 
 	function initFocusedWallet(cb) {
@@ -128,7 +152,6 @@ function initWallet() {
 				for (var asset in assocSharedBalances)
 					if (!assocBalances[asset])
 						assocBalances[asset] = {stable: 0, pending: 0};
-				setBalancesAndPages(assocBalances);
 				cb();
 			});
 		})
@@ -166,6 +189,7 @@ function initWallet() {
 					root.focusedClient = root.walletClients[Object.keys(root.walletClients)[0]];
 				initFocusedWallet(function() {
 					console.log('partial client load end');
+					setWalletsInMenu();
 					loadCompleteClient();
 				});
 			});
@@ -211,6 +235,7 @@ window.wallet = new initWallet();
 document.addEventListener("deviceready", function() {
 	wallet.loadProfile();
 });
+
 
 
 //other
