@@ -2420,8 +2420,11 @@ msgstr "无法创建：无效的钱包助记词。"
 msgid "to_address and from_address is same"
 msgstr "不能发给自己。"
 
+msgid "Pending"
+msgstr "待确认"
 
-
+msgid "Incorrect password"
+msgstr "口令不正确"
 
 
 

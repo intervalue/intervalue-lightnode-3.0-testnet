@@ -222,7 +222,7 @@
                                     <img src="./img/sent.png"><span translate>Invalid</span>
                                 </div>
                                 <div class="histopl" ng-show="btx.confirmations == 'pending' && btx.action == 'sent' " >
-                                    <img src="./img/sent.png"><span translate>pending</span>
+                                    <img src="./img/sent.png"><span translate>Pending</span>
                                 </div>
                                 <div class="histopr">
                                     <time ng-if="btx.time">{{btx.time * 1000 | amTimeAgo}}</time>
@@ -343,7 +343,7 @@
                                         <label translate>Address</label>
                                         <input mdinput type="text" id="address" name="address" ng-disabled="home.blockUx || home.lockAddress || index.arrBalances[index.assetIndex].is_private"
                                                ng-model="_address" ng-required valid-address-or-account ng-focus="home.formFocus('address')" ng-blur="home.formFocus(false)">
-                                        <a class="postfix size-12 m0 text-gray" ng-hide="home.blockUx || home.lockAddress || home.send_multiple" ng-click="openDestinationAddressModal(index.otherWallets, _address)">
+                                        <a class="postfix size-12 m0 text-gray" ng-click="openDestinationAddressModal(index.otherWallets, _address)">
                                             <img src="./img/address.png" />
                                         </a>
                                     </div>
