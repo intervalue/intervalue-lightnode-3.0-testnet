@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('changeWalletPassWordController',
-    function($rootScope, $scope, $timeout, profileService, go, gettext, $state, $stateParams, storageService,lodash,$log) {
+    function($rootScope, $scope, $timeout, profileService, go, gettext, $state, $stateParams, storageService,lodash,$log,gettextCatalog) {
 
         var self = this;
         self.walletId = $stateParams.walletId;
@@ -35,8 +35,9 @@ angular.module('copayApp.controllers').controller('changeWalletPassWordControlle
                         });
                     } else {
                         if ( fc.hasPrivKeyEncrypted())  {
-                            profileService.unlockFC(null, function(err){
+                            profileService.unlockFC(null, function (err){
                                 if (err) {
+                                    $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('Wrong password'));
                                     return;
                                 }
                                 profileService.disablePrivateKeyEncryptionFC(function(err) {

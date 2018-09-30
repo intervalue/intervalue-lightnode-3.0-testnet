@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('wordsController',
-  function($rootScope, $scope, $timeout, $stateParams, profileService, go, gettext, confirmDialog, notification, $log, isCordova,$state) {
+  function($rootScope, $scope, $timeout, $stateParams, profileService, go, gettext, confirmDialog, notification, $log, isCordova,$state,gettextCatalog) {
       var self = this;
       self.walletId = $stateParams.walletId;
       self.name = $stateParams.name;
@@ -103,6 +103,7 @@ angular.module('copayApp.controllers').controller('wordsController',
 
           profileService.unlockFC(null, function(err) {
             if (err) {
+               $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('Could not decrypt') +': '+ err.message);
               self.error = gettext('Could not decrypt') +': '+ err.message;
               $log.warn('Error decrypting credentials:', self.error); //TODO
               return;
