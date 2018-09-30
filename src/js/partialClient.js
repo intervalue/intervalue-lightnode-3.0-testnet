@@ -134,7 +134,6 @@ function initWallet() {
 
 	function showCompleteClient() {
 		getFromId('splash').style.display = 'none';
-		swipeListener.close();
 		var pages = document.getElementsByClassName('page');
 		if (pages.length === 2) {
 			document.getElementsByClassName('page')[1].remove();

@@ -142,7 +142,8 @@
                       <div mdinputc class="adcpmdic">
                           <label translate mdlabel for="label">Name of the contact</label>
                           <input mdinput type="text" id="label" name="label"
-                                   ng-model="addressbook.label" required>
+                                   ng-model="addressbook.label" required ng-minlength="1" ng-maxlength="20"
+                                   minlength="1" maxlength="20">
                       </div>
                   </div>
                   <!-- 按钮 -->
