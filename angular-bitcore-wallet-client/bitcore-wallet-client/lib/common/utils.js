@@ -35,7 +35,10 @@ Utils.formatAmount = function(bytes, unitCode, opts) {
 			return x0 + x2;
 		}
     else {
-		return parseFloat(x0).toLocaleString([], {maximumFractionDigits: 20})+"."+x1;
+        if(x1){
+            return parseFloat(x0).toLocaleString([], {maximumFractionDigits: 20})+"."+x1;
+        }else
+        return parseFloat(x0).toLocaleString([], {maximumFractionDigits: 20});
 		}
   }
 
