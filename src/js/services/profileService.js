@@ -290,7 +290,7 @@ angular.module('copayApp.services')
 
         } catch (ex) {
           $log.info(ex);
-            $rootScope.$emit('Local/ShowAlert', " Could not create: Invalid wallet seed.", 'fi-check', function () {
+            $rootScope.$emit('Local/ShowAlert', gettextCatalog.getString(' Could not create: Invalid wallet seed.'), 'fi-check', function () {
             });
           return;
           //return cb(gettext('Could not create: Invalid wallet seed'));

@@ -381,6 +381,8 @@ a.missing-copayers {
 
 .sidebar ul.off-canvas-list {
   margin-bottom: 30px;
+  height: calc(100% - 100px);
+    overflow: auto;
 }
 
 .sidebar ul.off-canvas-list li a,  .modal-content ul:not(.f-dropdown) li a {

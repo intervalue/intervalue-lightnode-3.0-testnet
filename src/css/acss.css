@@ -214,7 +214,7 @@
 
 /*tx-details start*/
 .ammountlr{position: fixed;width: 100%;height:100%;background: #FFFFFF;padding:0 15px 0;overflow: auto;}
-.ammountlr .adcpmdic input[type='number']{top:5px;padding-right: 60px; }
+.ammountlr .adcpmdic input[type='number'], .ammountlr .adcpmdic input[type='text']{top:5px;padding-right: 60px; }
 /*tx-details end*/
 
 /*customized-amount start*/
@@ -399,7 +399,7 @@ padding: 20px 15px 0;}
 .adcpitem{margin-top:30px;height:60px;}
 .adcpmdic{position:relative;width:100%;height:44px;}
 .adcpmdic input[type='text'],.adcpmdic input[type='number']{position:absolute;font-size:16px;top:10px;padding:0;font-weight:normal;margin:0;width:100%;}
-.adcpmdic label{position:absolute;font-size:16px;top:10px;padding:0;font-weight:normal;margin:0;white-space:nowrap;cursor:text;}
+.adcpmdic label{position:absolute;font-size:16px;top:10px;padding:0;font-weight:normal;margin:0;white-space:nowrap;cursor:text;z-index: 10;}
 .md-input-focused{position:relative;transition:all 0.2s ease-in-out;}
 .md-input-focused label,
 .md-input-has-value label{top:-10px;font-size:14px;transition:all 0.2s ease-in-out;}

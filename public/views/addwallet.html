@@ -28,7 +28,7 @@
                         <div class="adinputic">
                             <div class="adinputimg addwname"></div>
                             <input type="text" ng-model="addw.addwname" mdinputname ng-attr-placeholder="{{'Wallet name'|translate}}" autocomplete="off" 
-                            ng-minlength="1" ng-maxlength="20" />
+                            ng-minlength="1" ng-maxlength="20" minlength="1" maxlength="20" />
                         </div>
                         <p class="adinputp" translate></p>
                     </div>
@@ -36,7 +36,7 @@
                         <div class="adinputic">
                             <div class="adinputimg addwpass"></div>
                             <input type="password" name="addwpass" ng-model="addw.addwpass" mdinputpass ng-attr-placeholder="{{'Password'|translate}}" 
-                            autocomplete="off" ng-minlength="1" ng-maxlength="20" />
+                            autocomplete="off" ng-minlength="1" ng-maxlength="18" minlength="1" maxlength="18" />
                         </div>
                         <p class="adinputp" translate></p>
                     </div>
@@ -44,7 +44,8 @@
                         <div class="adinputic">
                             <div class="adinputimg addwrpass"></div>
                             <input type="password" name="addwrpass" ng-model="addw.addwrpass" mdinputpassr="{{addw.addwpass}}" 
-                            ng-attr-placeholder="{{'Repeat password'|translate}}" autocomplete="off" ng-minlength="1" ng-maxlength="20"
+                            ng-attr-placeholder="{{'Repeat password'|translate}}" autocomplete="off" ng-minlength="1" ng-maxlength="18"
+                            minlength="1" maxlength="18"
                             />
                         </div>
                         <p class="adinputp" translate></p>
@@ -99,7 +100,7 @@
             <div class="addwcontentin">
                 <img class="warnbigimg" src="./img/warnbig.png" />
                 <p class="center redcolor m28b" translate>Confirm your mnemonic</p>
-                <p ng-show="addw.showcodeerr">口令不正确</p>
+                <p ng-show="addw.showcodeerr" translate>Incorrect password</p>
                 <div>
                     <div class="addwslcbox m24b" ng-click="addw.minuswordf($event)">
                         <span ng-repeat="item in addw.chosenWords track by $index" id="{{item.id}}" >{{item.str}}</span>

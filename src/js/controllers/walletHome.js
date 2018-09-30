@@ -1087,18 +1087,20 @@ angular.module('copayApp.controllers')
                                  resetAddressValidation();
                                  profileService.bKeepUnlocked = false;
                                  if (err) {
-                                     if (typeof err === 'object') {
+                                    if (typeof err === 'object') {
                                          err = JSON.stringify(err);
                                          eventBus.emit('nonfatal_error', "error object from sendMultiPayment: " + err, new Error());
                                      }
-                                     else if (err.match(/device address/))
+                                    else if (err.match(/device address/))
                                          err = "This is a private asset, please send it only by clicking links from chat";
-                                     else if (err.match(/no funded/))
+                                    else if (err.match(/no funded/))
                                          err = "Not enough spendable funds, make sure all your funds are confirmed";
-                                     else if (err.match(/authentifier verification failed/))
+                                    else if (err.match(/authentifier verification failed/))
                                          err = "Check that smart contract conditions are satisfied and signatures are correct";
-                                     else if (err.match(/precommit/))
-                                         err = err.replace('precommit callback failed: ', '');
+									else if (err.match(/precommit/))
+										 err = err.replace('precommit callback failed: ', '');
+									else if (err.match(/is same/))
+                                         err = gettextCatalog.getString("to_address and from_address is same");
                                      return self.setSendError(err);
                                  }
                                  var binding = self.binding;
