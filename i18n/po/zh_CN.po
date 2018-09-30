@@ -975,7 +975,7 @@ msgstr "否"
 
 #: src/js/controllers/password.js:18
 msgid "No password given"
-msgstr "没有设置密码"
+msgstr "没有输入密码"
 
 #: public/views/modals/choose-profile.html:67
 msgid "No profiles matching the requested criteria."
