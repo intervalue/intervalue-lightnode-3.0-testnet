@@ -9,7 +9,8 @@ angular.module('copayApp.controllers').controller('changeWalletPassWordControlle
         self.name = $stateParams.name;
         self.image = $stateParams.image;
         self.ammount = $stateParams.ammount;
-
+        self.newadpass = '';
+        self.comadpass = '';
         self.changePassWord = function (walletId) {
             var form = $scope.changepassW;
             var newadpass = form.newadpass.$modelValue;
