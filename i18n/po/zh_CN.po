@@ -2408,6 +2408,22 @@ msgstr "无法删除最后一个的钱包"
 msgid "shadowWallet is random failed"
 msgstr "shadowWallet随机失败"
 
+msgid "to_address and"
+msgstr "shadowWallet随机失败"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

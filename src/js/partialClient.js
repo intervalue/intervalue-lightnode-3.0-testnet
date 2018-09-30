@@ -10,6 +10,13 @@ window.onerror = function (message) {
 	wallet.loadCompleteClient(true);
 };
 
+window.handleOpenURL = function(url) {
+	setTimeout(function(){
+		console.log("saving open url "+url);
+		window.open_url = url;
+	},0);
+}
+
 function initWallet() {
 	var root = {};
 	root.profile = null;
@@ -43,7 +50,11 @@ function initWallet() {
 			throw ("credentials should be an object");
 
 		if (!profile.xPrivKey && !profile.xPrivKeyEncrypted)
-			throw Error("no xPrivKey, even encrypted");
+			//throw Error("no xPrivKey, even encrypted");
+        {
+            profile.xPrivKey = null;
+            profile.xPrivKeyEncrypted = null;
+        }
 		if (!profile.tempDeviceKey)
 			throw Error("no tempDeviceKey");
 		Profile.xPrivKey = profile.xPrivKey;
@@ -84,43 +95,8 @@ function initWallet() {
 		});
 	}
 
-	function setWalletNameAndColor(walletName) {
-		if(completeClientLoaded) return;
-		var color = root.config.colorFor ? root.config.colorFor[root.focusedClient.credentials.walletId] : '#246D98';
-		if(!color) color = '#246D98';
-		// getFromId('name1Color').style.color = color;
-		// getFromId('name1').innerHTML = walletName;
-		// getFromId('name2').innerHTML = walletName;
-		// getFromId('spinnerBg').style.backgroundColor = color;
-		// getFromId('amountBg').style.backgroundColor = color;
-		// var subStrName = getFromId('subStrName');
-		// subStrName.style.backgroundColor = color;
-		// subStrName.innerHTML = walletName.substr(0, 1);
-		document.getElementsByClassName('page')[1].style.display = 'block';
-	}
-
-	// function setBalancesAndPages(balances) {
-	// 	if(completeClientLoaded) return;
-	// 	var htmlBalances = '';
-	// 	var htmlPages = '';
-	// 	var slideNumber = 0;
-
-	// 	function addHtml(asset, amount, slideNumber) {
-	// 		var firstPage = slideNumber === 0;
-	// 		htmlBalances += '<li id="balance' + slideNumber + '" style="display: ' + ( firstPage ? 'inline-block' : 'none') + ';"><div><strong class="size-36">' + formatAmount(amount, asset) + '</strong></div></li>';
-	// 		htmlPages += '<span id="page' + slideNumber + '" ' + (firstPage ? 'class="active"' : '') + '>●</span>';
-	// 	}
-
-	// 	for (var asset in balances) {
-	// 		addHtml(asset, balances[asset].stable, slideNumber++);
-	// 	}
-	// 	getFromId('balances').innerHTML = htmlBalances;
-	// 	getFromId('pages').innerHTML = htmlPages;
-	// }
-
-
 	function loadCompleteClient(showClient) {
-		self._bInterValueCoreLoaded = false; //"fix" : Looks like you are loading multiple copies of intervalue core, which is not supported. Running 'npm dedupe' might help.
+		self._bIntervalueCoreLoaded = false; //"fix" : Looks like you are loading multiple copies of intervalue core, which is not supported. Running 'npm dedupe' might help.
 		var body = document.body;
 		var page = document.createElement('div');
 
@@ -141,13 +117,6 @@ function initWallet() {
 
 	function showCompleteClient() {
 		getFromId('splash').style.display = 'none';
-		swipeListener.close();
-		var pages = document.getElementsByClassName('page');
-		if (pages.length === 2) {
-			document.getElementsByClassName('page')[1].remove();
-			document.getElementsByClassName('page')[0].style.display = 'block';
-			completeClientLoaded = true;
-		}
 	}
 
 	function initFocusedWallet(cb) {
@@ -159,8 +128,7 @@ function initWallet() {
 				for (var asset in assocSharedBalances)
 					if (!assocBalances[asset])
 						assocBalances[asset] = {stable: 0, pending: 0};
-				// setBalancesAndPages(assocBalances);
-				setSlider(assocBalances);
+				setBalancesAndPages(assocBalances);
 				cb();
 			});
 		})
@@ -212,7 +180,6 @@ function initWallet() {
 		root.focusedClient = root.walletClients[walletId];
 		fileSystem.set('focusedWalletId', walletId, function() {});
 		initFocusedWallet(function() {});
-		openOrCloseMenu();
 	}
 	
 	function formatAmount(bytes, asset) {
@@ -245,136 +212,6 @@ document.addEventListener("deviceready", function() {
 	wallet.loadProfile();
 });
 
-
-
-//slider
-function _slider(assocBalances) {
-	var self = {};
-	self.n = 0;
-	self.numberOfSlides = Object.keys(assocBalances).length - 1;
-
-	function setPage(prev, next) {
-		if(completeClientLoaded) return;
-		getFromId('balance' + prev).style.display = 'none';
-		getFromId('balance' + next).style.display = 'block';
-		getFromId('page' + prev).className = '';
-		getFromId('page' + next).className = 'active';
-	}
-
-	self.next = function() {
-		if (self.n < self.numberOfSlides) {
-			setPage(self.n, ++self.n);
-		}
-	};
-
-	self.prev = function() {
-		if (self.n > 0) {
-			setPage(self.n, --self.n);
-		}
-	};
-	return self;
-}
-
-function setSlider(assocBalances) {
-	window.slider = new _slider(assocBalances);
-}
-
-//menu
-var menuAnimated = false;
-window.openOrCloseMenu = function() {
-	if(completeClientLoaded) return;
-	if (menuAnimated) return;
-	var menuDiv = document.getElementsByClassName('off-canvas-wrap')[1];
-	if (menuDiv) {
-		menuAnimated = true;
-		if (menuDiv.className.indexOf('move-right') === -1) {
-			menuDiv.className = menuDiv.className.trim() + ' move-right';
-			setTimeout(function() {
-				menuAnimated = false;
-			}, 200);
-		} else {
-			menuDiv.className = menuDiv.className.replace('move-right', '').trim();
-			setTimeout(function() {
-				menuAnimated = false;
-			}, 200);
-		}
-	}
-};
-
-window.menuIsOpen = function() {
-	return document.getElementsByClassName('off-canvas-wrap')[1] && document.getElementsByClassName('off-canvas-wrap')[1].className.indexOf('move-right') !== -1;
-};
-
-
-//swipe
-function _swipeListener() {
-	document.addEventListener('touchstart', handleTouchStart, false);
-	document.addEventListener('touchmove', handleTouchMove, false);
-	
-	var root = {};
-	var xDown = null;
-	var yDown = null;
-	var focusOnAmountBg = false;
-
-	function handleTouchStart(evt) {
-		focusOnAmountBg = false;
-		if(evt.path) {
-			for (var i = 0, l = evt.path.length; i < l; i++) {
-				if (evt.path[i].id === 'amountBg') {
-					focusOnAmountBg = true;
-					break;
-				}
-			}
-		}
-		xDown = evt.touches[0].clientX;
-		yDown = evt.touches[0].clientY;
-	}
-
-	function handleTouchMove(evt) {
-		if (!xDown || !yDown) return;
-
-		var xUp = evt.touches[0].clientX;
-		var yUp = evt.touches[0].clientY;
-
-		var xDiff = xDown - xUp;
-		var yDiff = yDown - yUp;
-
-		if (Math.abs(xDiff) > Math.abs(yDiff)) {
-			if (xDiff > 0) {
-				listen('left');
-			} else {
-				listen('right');
-			}
-		}
-
-		xDown = null;
-		yDown = null;
-		
-	}
-	function listen(direction) {
-		if(direction === 'left'){
-			if(focusOnAmountBg){
-				slider.next();
-			}else if(menuIsOpen()){
-				openOrCloseMenu();
-			}
-		}else if(direction === 'right'){
-			if(focusOnAmountBg){
-				slider.prev();
-			}else if(!menuIsOpen()){
-				openOrCloseMenu();
-			}
-		}
-	}
-	root.close = function() {
-		document.removeEventListener('touchstart', handleTouchStart, false);
-		document.removeEventListener('touchmove', handleTouchMove, false);
-	};
-	
-	return root;
-}
-
-var swipeListener = new _swipeListener();
 
 //other
 function getFromId(id) {

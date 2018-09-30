@@ -265,7 +265,8 @@ padding: 20px 15px 0;}
 .adwnlinput li img{vertical-align: initial;}
 .adwnlinput li img,.adwnlinput li span{flex-shrink: 0;}
 .adwnlinput li input{width: 100%;border: none;margin:0;padding:0 20px;}
-.btngroup{position: absolute;bottom:50px;left:0;padding: 0 13px;width:100%;}
+/* .btngroup{position: absolute;bottom:50px;left:0;padding: 0 13px;width:100%;} */
+.btngroup{padding: 0 13px;width:100%;margin-top: 40px;}
 /*walletnamea end*/
 
 /*changewalletp start*/
@@ -423,7 +424,27 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 /*重写foundation  css end*/
 
 
+/*启动页面的样式  有文字不能删*/
+/*.qdpageone{display: block;background-color:#ffffff !important;width:100%;height:100%;}*/
+/*.qdpagetwo{background-color:#ffffff !important;color:#8d8d8d;position:absolute;top:0;left:0;width:100%;height:100%;}*/
+/*.qdpagetwo > div{margin-top:0 !important;}*/
+/*.qdpageonetr{display: block;text-align: center;color:white;font-size: 32px;padding-top: 150px;}*/
+/*.qdpageoneimg{width:200px;height:76px;margin: 0 auto;}*/
+/*.qdpageonetext{color:#8d8d8d;margin-top:2px;font-size:20px;text-aPlease choose how much data to store in your walletlign: center;}*/
+/*.qdbggrey{background-color: #ffffff;width: 100%;height:100%;position: fixed;top: 0;left: 0;z-index: -1;}*/
+/*.qdpageonefix{position:fixed;bottom:0;left: 0;width:100%;background-color:#eceff6;height:268px;}*/
+/*.qdpageonerbg{height: 50px;width: 100%;background-color:#ffffff;position: absolute;top:0;left: 0;}*/
+/*.qdpageonerdiu{background-color:#ffffff;border-radius: 50%;height:100px;width: 100%;}*/
+/*.qdpageonebtext{padding-top:58px;background-color:#eceff6;color:#335c72;text-align:center;font-size:18px;height:150px;padding-left: 10px;padding-right: 10px;}*/
 
+/*启动页面的样式  没文字*/
+.qdpageone{display: block;background-color:#eceff5 !important;width:100%;height:100%;}
+.qdpagetwo{background-color:#eceff5 !important;color:#8d8d8d;position:absolute;top:0;left:0;width:100%;height:100%;}
+.qdpagetwo > div{margin-top:0 !important;}
+.qdpageonetr{display: block;text-align: center;color:white;font-size: 32px;padding-top: 168px;}
+.qdpageoneimg{width:108px;margin: 0 auto;}
+.qdpageonetext{color:#454545;margin-top:2px;font-size:38px;text-align: center;}
+.qdbggrey{background-color: #eceff5;width: 100%;height:100%;position: fixed;top: 0;left: 0;z-index: -1;}
 
 
 
