@@ -640,6 +640,30 @@ angular.module('copayApp.directives')
           controllerInstance.setHasValue(false);
         });
     }
+  }).directive("mdchangename",function(){
+    return {
+        scope: {},
+        restrict: 'A',
+        require: ['?ngModel'],
+        link: postLink
+    }
+      function postLink(scope, elem, attrs, ctrl){
+        if(ctrl){
+          scope.$watch(function(){
+            return (ctrl).$modelValue + "";
+          },function(val){
+            if(typeof(val) == 'undefined'){
+              ctrl.$setValidity('mdchangename', false);
+            }else if(val == ''){
+              ctrl.$setValidity('mdchangename', false);
+            }else if(val.length < 5 || val.length > 20){
+              ctrl.$setValidity('mdchangename', false);
+            }else{
+              ctrl.$setValidity('mdchangename', true);
+            }
+          })  
+        }
+    }
   }).directive("mdinputvalidc", function(gettextCatalog){
     return {
         scope: {},
