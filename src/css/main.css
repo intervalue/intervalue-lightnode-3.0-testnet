@@ -792,7 +792,17 @@ table tbody tr:last-child td {
 .right-small a:hover, .left-small a:hover {
   color: #45AD8E;
 }
-
+.right-small button, .right-small button.disabled, .right-small button[disabled], .right-small .button.disabled, .right-small .button[disabled]{
+  background: #fff !important;
+  background-color: #fff !important;
+  color: #babfc3 !important;
+  opacity: 1;
+  text-align: right;
+  padding-right: 15px;
+}
+.right-small button{
+  color:#45AD8E !important;
+}
 /*////////////////////////////  BUTTON OUTLINE  ////////////////////////////*/
 
 .button.outline,
