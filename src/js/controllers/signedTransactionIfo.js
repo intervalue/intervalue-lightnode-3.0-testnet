@@ -2,7 +2,7 @@
 var db = require('intervaluecore/db');
 var shadowWallet = require('intervaluecore/shadowWallet');
 angular.module('copayApp.controllers').controller('signedTransactionIfoControllers',
-    function($scope, $rootScope, $timeout,go,profileService) {
+    function($scope, $rootScope, $timeout,go,profileService,gettext, gettextCatalog) {
         var self = this;
         var xPrivKey ;
 
@@ -24,8 +24,11 @@ angular.module('copayApp.controllers').controller('signedTransactionIfoControlle
                                     profileService.setAndStoreFocus(rows[0].wallet, function() {
                                     });
                                 }
-                                profileService.insistUnlockFC(null, function (err){
-                                    if (err) return;
+                                profileService.unlockFC(null, function (err){
+                                    if (err) {
+                                        $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('Wrong password'));
+                                        return;
+                                    }
                                     xPrivKey = profileService.focusedClient.credentials.xPrivKey;
                                     shadowWallet.signTradingUnit(obj,xPrivKey,function (objrequest) {
                                         if(typeof objrequest == "object"){

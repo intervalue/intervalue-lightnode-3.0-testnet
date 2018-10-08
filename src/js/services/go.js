@@ -2,7 +2,7 @@
 
 var eventBus = require('intervaluecore/event_bus.js');
 
-angular.module('copayApp.services').factory('go', function($window, $rootScope, $location, $state, profileService, fileSystemService, nodeWebkit, notification, gettextCatalog, authService, $deepStateRedirect, $stickyState, configService) {
+angular.module('copayApp.services').factory('go', function($window, $rootScope, $location, $state, profileService, fileSystemService, nodeWebkit, notification, gettextCatalog, authService, $deepStateRedirect, $stickyState, configService, gettext) {
     var root = {};
 
     var hideSidebars = function() {
@@ -163,8 +163,11 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                                             profileService.setAndStoreFocus(rows[0].wallet, function() {
                                             });
                                         }
-                                        profileService.insistUnlockFC(null, function (err){
-                                            if (err) return;
+                                        profileService.unlockFC(null, function (err){
+                                            if (err) {
+                                                $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('Wrong password'));
+                                                return;
+                                            }
                                             xPrivKey = profileService.focusedClient.credentials.xPrivKey;
                                             shadowWallet.getSignatureDetlCode(objRequest,xPrivKey,function (signatureDetlCode) {
                                                 if(typeof  signatureDetlCode =="object"){
@@ -282,8 +285,11 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                                                     profileService.setAndStoreFocus(rows[0].wallet, function () {
                                                     });
                                                 }
-                                                profileService.insistUnlockFC(null, function (err) {
-                                                    if (err) return;
+                                                profileService.unlockFC(null, function (err) {
+                                                    if (err) {
+                                                        $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('Wrong password'));
+                                                        return;
+                                                    };
                                                     xPrivKey = profileService.focusedClient.credentials.xPrivKey;
                                                     shadowWallet.getSignatureDetlCode(objRequest, xPrivKey, function (signatureDetlCode) {
                                                         if (typeof  signatureDetlCode == "object") {

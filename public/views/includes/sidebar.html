@@ -31,17 +31,17 @@
       <!--</a>-->
     <!--</li>-->
   </ul>
-  <div class="siderbarb" ng-show="index.isCordova">
+  <!-- <div class="siderbarb" ng-show="!index.isCordova">
       <a ng-click="$root.go('addwallet')">
           <div><img src="./img/creat.png"/></div>
           <span translate>Create a new wallet</span>
       </a>
-      <a ng-click="$root.go('addwallet')">
-        <div><img src="./img/sidescan.png"/></div>
+      <div ng-controller="topbarController as topbar" class="scansidebar">
+        <qr-scanner on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
         <span translate>Scan</span>
-      </a>
-  </div>
-  <div class="siderbarbn" ng-show="!index.isCordova">
+      </div>
+  </div> -->
+  <div class="siderbarbn">
       <a ng-click="$root.go('addwallet')">
           <div><img src="./img/creat.png"/></div>
           <span translate>Create a new wallet</span>

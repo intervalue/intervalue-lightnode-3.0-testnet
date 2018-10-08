@@ -15,6 +15,7 @@ angular.module('copayApp.controllers').controller('passwordController',
     document.getElementById("passwordInput").focus();
 
     self.close = function(cb) {
+        $scope.index.askPassword = false;
       return cb(gettextCatalog.getString('No password given'));
     };
 
