@@ -1250,9 +1250,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                         self.txHistory = newHistory.slice(0, self.historyShowLimit);
                         require('intervaluecore/light').findStable2(walletId,function (obj) {
                             self.ammountTatol = profileService.formatAmount(obj,'bytes');
-                            $timeout(function () {
-                                $rootScope.$apply();
-                            });
                         });
                     require('intervaluecore/wallet').getWalletsInfo(function (obj) {
                         if(!obj) return;
@@ -1278,9 +1275,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                             });
                         });
                         self.walletInfo = trans;
-                        $timeout(function () {
-                            $rootScope.$apply();
-                        });
                     });
                         self.historyShowShowAll = newHistory.length >= self.historyShowLimit;
                     //}
@@ -1294,7 +1288,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         self.historyShowShowAll = false;
         self.historyRendering = true;
         $timeout(function () {
-            $rootScope.$apply();
+            if(!$rootScope.$$phase) $rootScope.$apply();
             $timeout(function () {
                 self.historyRendering = false;
                 self.txHistory = self.completeHistory;
@@ -1328,7 +1322,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 if (err)
                     self.txHistoryError = true;
                 $timeout(function () {
-                    $rootScope.$apply();
+                    if(!$rootScope.$$phase) $rootScope.$apply();
                 });
             });
         });

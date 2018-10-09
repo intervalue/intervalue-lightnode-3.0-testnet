@@ -2429,7 +2429,8 @@ msgstr "口令不正确"
 msgid "wallet exists"
 msgstr "钱包已存在"
 
-
+msgid "Hot wallet verification failed"
+msgstr "热钱包验证失败"
 
 
 

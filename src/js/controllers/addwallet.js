@@ -91,11 +91,11 @@ angular.module('copayApp.controllers').controller('addwalletController',
             if (self.chosenWords.length > 11) {
                 var chostr = '';
                 for (var i = 0; i < self.chosenWords.length; i++) {
-                    chostr += self.chosenWords[i].id;
+                    chostr += self.chosenWords[i].str;
                 }
                 var showstr = '';
                 for (var i = 0; i < self.showcodes.length; i++) {
-                    showstr += self.showcodes[i].id;
+                    showstr += self.showcodes[i].str;
                 }
                 if (chostr == showstr) {
                     for (var i = 0; i < self.showcodes.length; i++) {
