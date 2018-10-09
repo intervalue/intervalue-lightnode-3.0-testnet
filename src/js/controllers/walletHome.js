@@ -159,8 +159,8 @@ angular.module('copayApp.controllers')
 							form.address.$isValid = true;
 							form.address.$render();
 						}
-						
-						$scope.$apply();
+
+                        if(!$rootScope.$$phase) $scope.$apply();
 					}, 100);
 				};
 
@@ -210,7 +210,7 @@ angular.module('copayApp.controllers')
 							$scope.list = ab;
 							$scope.editAddressbook = true;
 							$scope.toggleEditAddressbook();
-							$scope.$apply();
+                            if(!$rootScope.$$phase) $scope.$apply();
 						});
 					}, 100);
 				};
@@ -225,7 +225,7 @@ angular.module('copayApp.controllers')
 							}
 							$rootScope.$emit('Local/AddressbookUpdated', ab);
 							$scope.list = ab;
-							$scope.$apply();
+                            if(!$rootScope.$$phase) $scope.$apply();
 						});
 					}, 100);
 				};
@@ -383,7 +383,7 @@ angular.module('copayApp.controllers')
 					}
 
 					$timeout(function() {
-						$scope.$apply();
+                        if(!$rootScope.$$phase) $scope.$apply();
 					});
 				});
 			});
@@ -578,7 +578,7 @@ angular.module('copayApp.controllers')
 					}
 
 					$timeout(function() {
-						$scope.$apply();
+                        if(!$rootScope.$$phase) $scope.$apply();
 					});
 				});
 			}
@@ -633,7 +633,7 @@ angular.module('copayApp.controllers')
 				$rootScope.hideMenuBar = false;
 			}
 			$timeout(function(){
-				$rootScope.$apply();
+                if(!$rootScope.$$phase) $rootScope.$apply();
 			});
 		}, 100);
 
@@ -658,7 +658,7 @@ angular.module('copayApp.controllers')
 				}
 			}
 			$timeout(function() {
-				$rootScope.$apply();
+                if(!$rootScope.$$phase) $rootScope.$apply();
 			}, 1);
 		};
 
@@ -707,7 +707,7 @@ angular.module('copayApp.controllers')
 			console.log(this.error);
 
 			$timeout(function() {
-				$scope.$apply();
+                if(!$rootScope.$$phase) $scope.$apply();
 			}, 1);
 		};
 
@@ -727,7 +727,7 @@ angular.module('copayApp.controllers')
 			else {
 				self.onGoingProcess = name;
 				$timeout(function() {
-					$rootScope.$apply();
+                    if(!$rootScope.$$phase) $rootScope.$apply();
 				});
 			};
 		};
@@ -994,7 +994,7 @@ angular.module('copayApp.controllers')
 						self.error = err;
 						$timeout(function() {
 							delete self.current_payment_key;
-							$scope.$apply();
+                            if(!$rootScope.$$phase) $scope.$apply();
 						}, 1);
 						return;
 					}
@@ -1188,7 +1188,7 @@ angular.module('copayApp.controllers')
 					indexScope.setOngoingProcess(gettext('sending'), false);
 					self.error = err;
 					$timeout(function() {
-						$scope.$apply();
+                        if(!$rootScope.$$phase) $scope.$apply();
 					}, 1);
 					return;
 				}
@@ -1240,7 +1240,7 @@ angular.module('copayApp.controllers')
 			this.resetError();
 			$scope.home.feedvaluespairs = [{}];
 			$timeout(function() {
-				$rootScope.$apply();
+                if(!$rootScope.$$phase) $rootScope.$apply();
 			}, 1);
 		};
 
@@ -1747,7 +1747,7 @@ angular.module('copayApp.controllers')
 						}
 						$scope.list = ab;
 						$timeout(function(){
-							$scope.$apply();
+                            if(!$rootScope.$$phase) $scope.$apply();
 						});
 					});
 				};

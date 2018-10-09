@@ -1288,7 +1288,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         self.historyShowShowAll = false;
         self.historyRendering = true;
         $timeout(function () {
-            $rootScope.$apply();
+            if(!$rootScope.$$phase) $rootScope.$apply();
             $timeout(function () {
                 self.historyRendering = false;
                 self.txHistory = self.completeHistory;
