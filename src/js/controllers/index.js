@@ -1322,7 +1322,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 if (err)
                     self.txHistoryError = true;
                 $timeout(function () {
-                    $rootScope.$apply();
+                    if(!$rootScope.$$phase) $rootScope.$apply();
                 });
             });
         });
