@@ -35,7 +35,7 @@
                     <div class="adinputitem" mdinputvalidc>
                         <div class="adinputic">
                             <div class="adinputimg addwpass"></div>
-                            <input type="password" name="addwpass" ng-model="addw.addwpass" mdinputpass ng-attr-placeholder="{{'Password'|translate}}" 
+                            <input type="password" name="addwpass" ng-model="addw.addwpass" mdinputpass ng-attr-placeholder="{{'Password'|translate}}"
                             autocomplete="off" ng-minlength="1" ng-maxlength="18" minlength="1" maxlength="18" />
                         </div>
                         <p class="adinputp" translate></p>
@@ -43,7 +43,7 @@
                     <div class="adinputitem" mdinputvalidc>
                         <div class="adinputic">
                             <div class="adinputimg addwrpass"></div>
-                            <input type="password" name="addwrpass" ng-model="addw.addwrpass" mdinputpassr="{{addw.addwpass}}" 
+                            <input type="password" name="addwrpass" ng-model="addw.addwrpass" mdinputpassr="{{addw.addwpass}}"
                             ng-attr-placeholder="{{'Repeat password'|translate}}" autocomplete="off" ng-minlength="1" ng-maxlength="18"
                             minlength="1" maxlength="18"
                             />
@@ -131,7 +131,7 @@
                 </div>
                 <p class="center redcolor m35b">Your password is correct. To ensure the security of your wallet, we recommend that you delete your password.</p>
                 <button class="m20b" ng-click="addw.showconfirm = true;" translate>Delete mnemonic</button>
-                <button class="awbtn" ng-click="addw.addWallet(addw.addwname, addw.addwpass, addw.mnemonic);" translate>Skip</button>
+                <button class="awbtn" ng-click="addw.addWallet(addw.addwname, addw.addwpass, addw.addwrpass, addw.mnemonic);" translate>Skip</button>
                 <div ng-if="addw.showconfirm" class="popconfirm">
                     <div class="popmask" ng-click="addw.showconfirm = false;"></div>
                     <div class="popcontent">
@@ -141,8 +141,8 @@
                         </div>
                         <p class="poptips p25h" translate>This will completely remove the mnemonics from the app and it will not be recoverable. Please reconfirm that you have backed up your mnemonics to a safe place.</p>
                         <div class="p25h popbutton">
-                            <button ng-click="addw.addWallet(addw.addwname, addw.addwpass, addw.mnemonic,true);" translate>Confirm</button>
-                            <button class="awbtn" ng-click="addw.addWallet(addw.addwname, addw.addwpass, addw.mnemonic);" translate>Cancel</button>
+                            <button ng-click="addw.addWallet(addw.addwname, addw.addwpass, addw.addwrpass, addw.mnemonic,true);" translate>Confirm</button>
+                            <button class="awbtn" ng-click="addw.addWallet(addw.addwname, addw.addwpass, addw.addwrpass, addw.mnemonic);" translate>Cancel</button>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('createwalletController',
-    function ($rootScope, $scope, $timeout, storageService, notification, profileService, bwcService, $log,gettext,go) {
+    function ($rootScope, $scope, $timeout, storageService, notification, profileService, bwcService, $log,gettext,go,gettextCatalog) {
         var self = this;
         var successMsg = gettext('Backup words deleted');
         self.createwname = '';
@@ -132,7 +132,11 @@ angular.module('copayApp.controllers').controller('createwalletController',
 
         };
         // 删除口令 修改后
-        self.createWallet= function (walletName, passphrase, mnemonic,del) {
+        self.createWallet= function (walletName, password, passphrase, mnemonic,del) {
+            if(password !== passphrase){
+                $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('*Inconsistent password'));
+                return;
+            }
             mnemonic = mnemonic.trim();
             if (self.creatingProfile)
                 return console.log('already creating profile');
@@ -168,6 +172,10 @@ angular.module('copayApp.controllers').controller('createwalletController',
         };
         //import wallet
         self.importw = function(){
+            if(self.addwipass !== self.addwirpass){
+                $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('*Inconsistent password'));
+                return;
+            }
             $timeout(function () {
                 profileService.create({ walletName: self.createwiname, password: self.createwipass, mnemonic: self.importcode }, function (err) {
                     if(err){
