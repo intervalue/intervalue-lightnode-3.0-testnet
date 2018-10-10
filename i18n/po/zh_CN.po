@@ -2313,7 +2313,7 @@ msgid "Authorized signature details"
 msgstr "授权签名详情"
 
 msgid "*Inconsistent password"
-msgstr "*密码不一致"
+msgstr "*两次输入密码不一致"
 
 msgid "*Not less than 8 characters, it is recommended to mix uppercase and lowercase letters, numbers, special characters!"
 msgstr "*不少于8位字符，建议混合大小写字母、数字、特殊字符！"
