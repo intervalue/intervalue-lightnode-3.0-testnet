@@ -499,7 +499,9 @@ angular.module('copayApp.directives')
           var li = angular.element(this);
           elem.html(li.find('a').find('span').eq(0).html());
           scope.bindObj[scope.bindProp] = li.attr('data-value');
-          if(!$rootScope.$$phase) $rootScope.$digest();
+            $timeout(function () {
+                if(!$rootScope.$$phase) $rootScope.$digest();
+            },1);
         });
         scope.$watch(function(scope){return scope.bindObj[scope.bindProp]}, function(newValue, oldValue) {
           angular.forEach(dropdown.find('li'), function(element){
