@@ -278,32 +278,33 @@
                                 </div>
         
                             </div>
-                            <!-- <div class="row m20t">
-            
+                            <button type="submit" ng-show="index.historyShowShowAll" ng-click="index.showAllHistory()" translate>
+
+                                Show all
+
+                            </button>
+                             <!--<div class="row m20t">
+
                                     <div class="large-6 medium-6 small-6 columns">
-            
-                                    <button type="submit" class="button black round expand" ng-show="index.historyShowShowAll" ng-click="index.showAllHistory()" ng-style="{'background-color':index.backgroundColor}"  translate>
-            
-                                        Show all
-            
-                                    </button>
-            
+
+
+
                                     </div>
-            
+
                                     <div class="large-6 medium-6 small-6 columns" ng-show="!index.isCordova">
-            
+
                                     <input id="export_file" type="file" nwsaveas="Byteball-{{index.alias || index.walletName}}.csv" accept=".csv" style="display:none">
-            
+
                                     <a class="button outline dark-gray round" ng-click="index.csvHistory();">
-            
+
                                         <i class="fi-page-export-csv"></i>
-            
+
                                         <span translate>Download CSV file</span>
-            
+
                                     </a>
-            
+
                                     </div>
-            
+
                                 </div>-->
                         </div>
     
@@ -371,7 +372,7 @@
                                     </div>
                                 </div>
                                 <label for="amount" class="sendinfo">
-                                    <span translate ng-if="!home.send_multiple"><span translate>Amount</span>: {{index.ammountTatol}}</span>
+                                    <span translate ng-if="!home.send_multiple"><span translate>Available amount</span>: {{index.ammountTatol}}</span>
                                     <span translate ng-if="home.send_multiple">Total amount: {{index.ammountTatol}}</span>
                                     <a ng-click="home.setSendAll()" ng-show="!home.bSendAll && !home.lockAmount" translate>Send all</a>
                                 </label>

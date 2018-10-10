@@ -49,9 +49,23 @@
             </li>
         </ul>
     </form>
-    <div class="btngroup" ng-controller="preferencesDeleteWalletController as predelte">
+    <div class="btngroup">
         <button class="m20b" ng-show="nameW.mnemonic || nameW.mnemonicEncrypted" ng-click="nameW.gobackup(nameW.image, nameW.name, nameW.addr, nameW.ammount, nameW.walletId, nameW.mnemonic, nameW.mnemonicEncrypted);index.backwaname = true;" translate>Backup mnemonic</button>
-        <button class="awbtn" ng-click="predelte.deleteWallet(nameW.walletId,nameW.name)" translate>Delete wallet</button>
+        <button class="awbtn" ng-click="nameW.deleteWallet(nameW.walletId,nameW.name)" translate>Delete wallet</button>
+    </div>
+    <div ng-if="nameW.showconfirm" class="popconfirm">
+        <div class="popmask" ng-click="nameW.showconfirm = false;"></div>
+        <div class="popcontent">
+            <div class="fleximgtextc m20b p25h">
+                <img src="./img/qdeletecode.png">
+                <div translate class="size-16 redcolor">Are you sure you want to delete the wallet?</div>
+            </div>
+            <p class="poptips p25h" translate>After the wallet is deleted, it must be logged by mnemonic to ensure that the mnemonic has been backed up. Do you want to continue deleting?</p>
+            <div class="p25h popbutton">
+                <button ng-click="nameW.truedeleteWallet(nameW.walletId, nameW.name);" translate>Confirm</button>
+                <button class="awbtn" ng-click="nameW.showconfirm = false;" translate>Cancel</button>
+            </div>
+        </div>
     </div>
 </div>
 
