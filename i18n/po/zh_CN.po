@@ -2441,6 +2441,9 @@ msgstr "收到付款： "
 msgid "Available amount"
 msgstr "可用余额"
 
+msgid "After the wallet is deleted, it must be logged by mnemonic to ensure that the mnemonic has been backed up. Do you want to continue deleting?"
+msgstr "钱包删除后必须通过助记词才能恢复，请确保助记词已备份。是否继续删除？"
+
 
 
 
