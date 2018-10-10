@@ -2438,6 +2438,8 @@ msgstr "有一笔新的交易"
 msgid "Payment received:"
 msgstr "收到付款： "
 
+msgid "Available amount"
+msgstr "可用余额"
 
 
 
