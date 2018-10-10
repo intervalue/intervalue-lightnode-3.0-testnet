@@ -10,6 +10,8 @@ angular.module('copayApp.controllers').controller('addwalletController',
         self.addwipass = '';
         self.addwiname = '';
         self.importcode = '';
+        self.importcode1 = '';
+        self.importcode2 = '';
         self.addwirpass = '';
         self.chosenWords = [];
         self.showcodes = [];
@@ -180,8 +182,10 @@ angular.module('copayApp.controllers').controller('addwalletController',
                 $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('*Inconsistent password'));
                 return;
             }
+            self.importcode1 = self.importcode.replace(/^\s+/, '').replace(/\s+$/, '');
+            self.importcode2 = self.importcode1.replace(/\s+/g, ' ');
             $timeout(function () {
-                profileService.createWallet({ name: self.addwiname, password: self.addwipass, mnemonic: self.importcode,m:1,n:1,networkName:"livenet",cosigners:[],isSinglecreateress:true }, function (err,walletId) {
+                profileService.createWallet({ name: self.addwiname, password: self.addwipass, mnemonic: self.importcode2,m:1,n:1,networkName:"livenet",cosigners:[],isSinglecreateress:true }, function (err,walletId) {
                     if(err){
                         self.creatingProfile = false;
                         $log.warn(err);
@@ -198,7 +202,4 @@ angular.module('copayApp.controllers').controller('addwalletController',
                 });
             }, 100);
         }
-
-    //密码验证
-
     });
