@@ -43,7 +43,7 @@ msgstr "用破折号隔开的12个单词"
 
 #: public/views/preferencesGlobal.html:139
 msgid "About InterValue-3.0-testnet"
-msgstr "关于InterValue-3.0测试链"
+msgstr "关于InterValue-3.0"
 
 #: src/js/controllers/copayers.js:8
 #: src/js/controllers/preferencesDelete.js:9
@@ -2443,6 +2443,8 @@ msgstr "可用余额"
 
 msgid "After the wallet is deleted, it must be logged by mnemonic to ensure that the mnemonic has been backed up. Do you want to continue deleting?"
 msgstr "钱包删除后必须通过助记词才能恢复，请确保助记词已备份。是否继续删除？"
+
+
 
 
 
