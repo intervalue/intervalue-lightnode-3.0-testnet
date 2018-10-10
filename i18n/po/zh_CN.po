@@ -2423,7 +2423,7 @@ msgstr "不能发给自己。"
 msgid "Pending"
 msgstr "待确认"
 
-msgid "Incorrect password"
+msgid "Incorrect mnemonic"
 msgstr "口令不正确"
 
 msgid "wallet exists"
