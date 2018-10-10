@@ -20,7 +20,9 @@
       </section>
 
       <!-- 右区：编辑、完成、二维码 -->
-      <section class="right-small" ng-show="!selectedWalletsOpt" >
+      <section class="right-small"
+               <!--ng-show="!selectedWalletsOpt" -->
+      >
           <!-- 非编辑状态且不是添加地址时，显示编辑功能 -->
           <a ng-show="!editAddressbook && !addAddressbookEntry"  ng-click="toggleEditAddressbook()">
               <img src="./img/tranedit.png">

@@ -48,9 +48,9 @@
                             minlength="1" maxlength="18"
                             />
                         </div>
-                        <p class="adinputpass" translate ng-show="creatwform.addwpass.$valid && add.addwirpass !== add.addwipass">*Inconsistent password</p>
+                        <p class="adinputpass" translate ng-show="creatwform.addwpass.$valid && addw.addwpass !== addw.addwrpass">*Inconsistent password</p>
                     </div>
-                    <button class="m40t m15b" ng-click="addw.step = 'showcode';" ng-disabled="!addw.addwname || !addw.addwpass || !addw.addwrpass || creatwform.$invalid || add.addwirpass !== add.addwipass" translate>Creat wallet</button>
+                    <button class="m40t m15b" ng-click="addw.step = 'showcode';" ng-disabled="!addw.addwname || !addw.addwpass || !addw.addwrpass || creatwform.$invalid || addw.addwpass !== addw.addwrpass" translate>Creat wallet</button>
                     <button class="awbtn m15b" ng-click="$root.go('import');index.signatureAddr = '';" translate>Import wallet</button>
                 </form>
             </div>
