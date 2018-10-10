@@ -67,14 +67,14 @@
           <div class="adinputitem" mdinputvalidc>
               <div class="adinputic">
                   <div class="adinputimg addwrpass"></div>
-                  <input type="password" name="addwrpass" ng-model="create.createwrpass" mdinputpassr="{{create.createwpass}}" 
+                  <input type="password" name="addwrpass" ng-model="create.createwrpass"
                   ng-attr-placeholder="{{'Repeat password'|translate}}" autocomplete="off"
                    ng-minlength="1" ng-maxlength="18" minlength="1" maxlength="18"
                   />
               </div>
-              <p class="adinputp" translate></p>
+              <p class="adinputpass" translate ng-show="creatwform.addwpass.$valid && create.createwpass !== create.createwrpass">*Inconsistent password</p>
           </div>
-          <button class="m40t m15b" ng-click="create.step = 'showcode'" ng-disabled=" !create.createwname || !create.createwpass || !create.createwrpass || creatwform.$invalid" translate>Creat wallet</button>
+          <button class="m40t m15b" ng-click="create.step = 'showcode'" ng-disabled=" !create.createwname || !create.createwpass || !create.createwrpass || creatwform.$invalid &&  create.createwpass !== create.createwrpass" translate>Creat wallet</button>
         </form>
       </div>
     </div>
@@ -221,14 +221,14 @@
             <div class="adinputitem" mdinputvalidc>
                 <div class="adinputic">
                     <div class="adinputimg addwrpass"></div>
-                    <input type="password" name="addwrpass" ng-model="create.createwirpass" mdinputpassr="{{create.createwipass}}" 
+                    <input type="password" name="addwrpass" ng-model="create.createwirpass"
                     ng-attr-placeholder="{{'Repeat password'|translate}}" autocomplete="off" 
                     ng-minlength="1" ng-maxlength="18" minlength="1" maxlength="18"
                     />
                 </div>
-                <p class="adinputp" translate></p>
+                <p class="adinputpass" translate ng-show="creatwform.addwpass.$valid && create.createwipass !== create.createwirpass">*Inconsistent password</p>
             </div>
-            <button class="m40t m15b" ng-click="create.importw()" ng-disabled=" !create.importcode || !create.createwipass || !create.createwirpass || creatwiform.$invalid" translate>Start importing</button>
+            <button class="m40t m15b" ng-click="create.importw()" ng-disabled=" !create.importcode || !create.createwipass || !create.createwirpass || creatwiform.$invalid || create.createwipass !== create.createwirpass" translate>Start importing</button>
             <div class="size-12 redcolor" translate>Note: Please be patient while the wallet is recovering. Do not quit the software.</div>
           </form>
         </div>

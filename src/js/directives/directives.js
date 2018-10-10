@@ -750,36 +750,38 @@ angular.module('copayApp.directives')
           })  
         }
     }
-  }).directive("mdinputpassr",function(){
-    return {
-        scope: {},
-        restrict: 'A',
-        require: ['^mdinputvalidc','?ngModel'],
-        link: postLink
-    }
-      function postLink(scope, elem, attrs, ctrl){
-        var isSame = function(value) {
-          var anotherValue = attrs.mdinputpassr;
-          return value === anotherValue;
-        };
-        if(ctrl[1]){
-          scope.$watch(function() {
-            return (ctrl[1]).$modelValue + "";
-          }, function(val) {
-            if(typeof(val) == 'undefined'){
-              ctrl[0].setErrorexp(false, 'noerror');
-              ctrl[1].$setValidity('mdinputpassr', false);
-            }else if(val == ''){
-              ctrl[0].setErrorexp(false, 'noerror');
-              ctrl[1].$setValidity('mdinputpassr', false);
-            }else{
-              ctrl[0].setErrorexp(!(isSame(val)), 'nomatch');
-              ctrl[1].$setValidity('mdinputpassr', isSame(val));
-            }
-          });
-        }
-    }
-  }).filter('encodeURIComponent', function() {
+  })
+  //   .directive("mdinputpassr",function(){
+  //   return {
+  //       scope: {},
+  //       restrict: 'A',
+  //       require: ['^mdinputvalidc','?ngModel'],
+  //       link: postLink
+  //   }
+  //     function postLink(scope, elem, attrs, ctrl){
+  //       var isSame = function(value) {
+  //         var anotherValue = attrs.mdinputpassr;
+  //         return value === anotherValue;
+  //       };
+  //       if(ctrl[1]){
+  //         scope.$watch(function() {
+  //           return (ctrl[1]).$modelValue + "";
+  //         }, function(val) {
+  //           if(typeof(val) == 'undefined'){
+  //             ctrl[0].setErrorexp(false, 'noerror');
+  //             ctrl[1].$setValidity('mdinputpassr', false);
+  //           }else if(val == ''){
+  //             ctrl[0].setErrorexp(false, 'noerror');
+  //             ctrl[1].$setValidity('mdinputpassr', false);
+  //           }else{
+  //             ctrl[0].setErrorexp(!(isSame(val)), 'nomatch');
+  //             ctrl[1].$setValidity('mdinputpassr', isSame(val));
+  //           }
+  //         });
+  //       }
+  //   }
+  // })
+    .filter('encodeURIComponent', function() {
     return window.encodeURIComponent;
   }).filter('objectKeys', [function() {
     return function(item) {

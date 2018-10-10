@@ -2432,7 +2432,11 @@ msgstr "钱包已存在"
 msgid "Hot wallet verification failed"
 msgstr "热钱包验证失败"
 
+msgid "There is a new deal."
+msgstr "有一笔新的交易"
 
+msgid "Payment received:"
+msgstr "收到付款： "
 
 
 

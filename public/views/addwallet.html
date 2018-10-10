@@ -43,14 +43,14 @@
                     <div class="adinputitem" mdinputvalidc>
                         <div class="adinputic">
                             <div class="adinputimg addwrpass"></div>
-                            <input type="password" name="addwrpass" ng-model="addw.addwrpass" mdinputpassr="{{addw.addwpass}}"
+                            <input type="password" name="addwrpass" ng-model="addw.addwrpass"
                             ng-attr-placeholder="{{'Repeat password'|translate}}" autocomplete="off" ng-minlength="1" ng-maxlength="18"
                             minlength="1" maxlength="18"
                             />
                         </div>
-                        <p class="adinputp" translate></p>
+                        <p class="adinputpass" translate ng-show="creatwform.addwpass.$valid && add.addwirpass !== add.addwipass">*Inconsistent password</p>
                     </div>
-                    <button class="m40t m15b" ng-click="addw.step = 'showcode';" ng-disabled="!addw.addwname || !addw.addwpass || !addw.addwrpass || creatwform.$invalid" translate>Creat wallet</button>
+                    <button class="m40t m15b" ng-click="addw.step = 'showcode';" ng-disabled="!addw.addwname || !addw.addwpass || !addw.addwrpass || creatwform.$invalid || add.addwirpass !== add.addwipass" translate>Creat wallet</button>
                     <button class="awbtn m15b" ng-click="$root.go('import');index.signatureAddr = '';" translate>Import wallet</button>
                 </form>
             </div>

@@ -198,4 +198,7 @@ angular.module('copayApp.controllers').controller('addwalletController',
                 });
             }, 100);
         }
+
+    //密码验证
+
     });
