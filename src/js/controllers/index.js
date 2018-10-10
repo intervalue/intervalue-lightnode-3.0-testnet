@@ -1250,6 +1250,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                         self.txHistory = newHistory.slice(0, self.historyShowLimit);
                         require('intervaluecore/light').findStable2(walletId,function (obj) {
                             self.ammountTatol = profileService.formatAmount(obj,'bytes');
+                            if(!$rootScope.$$phase) $rootScope.$apply();
                         });
                     require('intervaluecore/wallet').getWalletsInfo(function (obj) {
                         if(!obj) return;
@@ -1865,7 +1866,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     eventBus.on('newtransaction',function(event){
         cordova.plugins.notification.local.schedule({
             title: gettextCatalog.getString('There is a new deal'),
-            text: gettextCatalog.getString('Payment received:')+(parseInt(event.amount))/1000000
+            text: gettextCatalog.getString('Payment received:')+(parseInt(event.amount))/1000000,
+            foreground: true
         });
     });
 
