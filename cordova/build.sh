@@ -99,6 +99,9 @@ if [ ! -d $PROJECT ]; then
 	cordova plugin add cordova-plugin-statusbar
 	checkOK
 
+    cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications.git
+    checkOK
+
 	cordova plugin add cordova-plugin-customurlscheme --variable URL_SCHEME=intervalue
 	checkOK
 

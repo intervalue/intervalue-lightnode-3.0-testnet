@@ -1862,7 +1862,12 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     });
 
 
-
+    eventBus.on('newtransaction',function(event){
+        cordova.plugins.notification.local.schedule({
+            title: gettextCatalog.getString('There is a new deal'),
+            text: gettextCatalog.getString('Payment received:')+(parseInt(event.amount))/1000000
+        });
+    });
 
 
     self.towalletname = function (image, name, addr, ammount, walletId, mnemonic, mnemonicEncrypted) {
