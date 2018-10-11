@@ -411,6 +411,12 @@ angular.module('copayApp.services')
         root._seedWallet(opts, function (err, walletClient) {
           if (err)
             return cb(err);
+        var xPubKey = walletClient.credentials.xPubKey;
+
+        // check if exists
+        var w = lodash.find(root.profile.credentials, { 'xPubKey': xPubKey });
+        if (w)
+            return cb(gettext('Wallet already in Intervalue' + ": "));
 
           walletClient.createWallet(opts.name, opts.m, opts.n, {
             network: opts.networkName,
