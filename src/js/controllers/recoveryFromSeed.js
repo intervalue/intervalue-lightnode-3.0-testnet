@@ -13,10 +13,9 @@ angular.module('copayApp.controllers').controller('recoveryFromSeed',
 		catch (e) {
 			var ecdsa = require('intervaluecore/node_modules/secp256k1' + '');
 		}
-		var Mnemonic = require('bitcore-mnemonic');
-		var Bitcore = require('bitcore-lib');
-		var db = require('intervaluecore/db.js');
-		var network = require('intervaluecore/network');
+		let Mnemonic = require('bitcore-mnemonic');
+		let Bitcore = require('bitcore-lib');
+		let db = require('intervaluecore/db.js');
 		// var myWitnesses = require('intervaluecore/my_witnesses');
 
 		var self = this;
