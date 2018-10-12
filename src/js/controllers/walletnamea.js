@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('walletnameaController',
-    function($rootScope, $scope, $timeout, profileService, go, gettext, gettextCatalog, $state, $stateParams, isCordova, notification, profileService, storageService,lodash,$log) {
+    function($rootScope, $scope, $timeout, profileService, go, gettext, gettextCatalog, $state, $stateParams, isCordova, notification, storageService,lodash,$log) {
 
         var self = this;
         self.showconfirm = false;
@@ -62,7 +62,7 @@ angular.module('copayApp.controllers').controller('walletnameaController',
         //开始删除钱包
         self.deleteWallet = function(walletId,name) {
             if (profileService.profile.credentials.length === 1 || profileService.getWallets().length === 1)
-                return $rootScope.$emit('Local/ShowErrorAlert', "Can't delete the last remaining wallet");
+                return $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString("Can't delete the last remaining wallet"));
             if (isCordova) {
                 navigator.notification.confirm(
                     delete_msg,
