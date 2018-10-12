@@ -150,6 +150,7 @@
 #send .sendform{padding: 12px 15px 0;}
 .sendform .adcpitem{height:44px;margin-top: 32px;}
 .sendform .adcpmdic input[type='text']{border-bottom: 1px solid #CACACA;top:5px;padding-right: 30px;}
+.sendform .adcpmdic #amount{padding-right: 52px;}
 .sendform .adcpmdic input[type="text"][disabled]{
     background-color: #F9FAFC;
 }

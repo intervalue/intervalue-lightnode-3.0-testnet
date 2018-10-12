@@ -45,7 +45,6 @@
           <img src="./img/warn.png">
           <div translate class="redcolor size-12">InterValue does not store passwords and cannot be retrieved for you. Please keep in mind!</div>
         </div>
-        <p ng-if="create.createwalleterr">密码不一致</p>
         <form name="creatwform" novalidate>
           <div class="adinputitem" mdinputvalidc>
               <div class="adinputic">
@@ -122,7 +121,7 @@
       <div class="addwcontentin">
         <img class="warnbigimg" src="./img/warnbig.png" />
         <p class="center redcolor m28b" translate>Confirm your mnemonic</p>
-        <p ng-show="create.showcodeerr" translate>Incorrect password</p>
+        <p ng-show="create.showcodeerr" translate>Incorrect mnemonic</p>
         <div>
           <div class="addwslcbox m24b" ng-click="create.minuswordf($event)">
             <span ng-repeat="item in create.chosenWords track by $index" id="{{item.id}}" >{{item.str}}</span>
@@ -225,7 +224,7 @@
                     ng-minlength="1" ng-maxlength="18" minlength="1" maxlength="18"
                     />
                 </div>
-                <p class="adinputpass" translate ng-show="creatwform.addwpass.$valid && create.createwipass !== create.createwirpass">*Inconsistent password</p>
+                <p class="adinputpass" translate ng-show="creatwiform.addwpass.$valid && create.createwipass !== create.createwirpass">*Inconsistent password</p>
             </div>
             <button class="m40t m15b" ng-click="create.importw()" ng-disabled=" !create.importcode || !create.createwipass || !create.createwirpass || creatwiform.$invalid || create.createwipass !== create.createwirpass" translate>Start importing</button>
             <div class="size-12 redcolor" translate>Note: Please be patient while the wallet is recovering. Do not quit the software.</div>

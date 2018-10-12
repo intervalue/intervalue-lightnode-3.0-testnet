@@ -728,7 +728,7 @@ angular.module('copayApp.directives')
           scope.$watch(function(){
             return (ctrl[1]).$modelValue + "";
           },function(val){
-            var trimExp=/^[a-zA-Z0-9-\.!@#\$%&\^\*\(\)\+\?><]{8,}$/;
+            var trimExp=/^[a-zA-Z0-9-\.!@#\$%&~\\\{\}\[\]\_\$\^\*\(\)\+\?><]{8,}$/;
             var trimeasyExp=/^(([a-z]){8,18}|([A-Z]){8,18}|([0-9]){8,18})$/;
             if(typeof(val) == 'undefined'){
               ctrl[0].setErrorexp(false, 'noerror');
