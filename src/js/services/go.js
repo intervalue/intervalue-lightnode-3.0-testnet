@@ -329,7 +329,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                                 $rootScope.$emit('Local/generateShadowWallet', shadowWallet);
                             }else {
                                 console.log("shadowWallet is  "+shadowWallet);
-                                notification.error('shadowWallet is   '+shadowWallet);
+                                notification.error(gettextCatalog.getString('shadowWallet is   '+shadowWallet));
                             }
                         });
                     }

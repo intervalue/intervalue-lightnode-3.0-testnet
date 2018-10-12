@@ -2444,6 +2444,18 @@ msgstr "可用余额"
 msgid "After the wallet is deleted, it must be logged by mnemonic to ensure that the mnemonic has been backed up. Do you want to continue deleting?"
 msgstr "钱包删除后必须通过助记词才能恢复，请确保助记词已备份。是否继续删除？"
 
+msgid "network error,please try again."
+msgstr "网络异常，请重试。"
+
+msgid "shadowWallet is random failed"
+msgstr "验证码校验失败"
+
+msgid "not enough spendable"
+msgstr "此地址余额不足。"
+
+msgid "Are you sure you want to delete the wallet?"
+msgstr "您确定要删除钱包吗"
+
 
 
 

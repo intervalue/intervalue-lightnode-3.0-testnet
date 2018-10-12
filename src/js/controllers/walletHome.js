@@ -1109,6 +1109,10 @@ angular.module('copayApp.controllers')
 										 err = err.replace('precommit callback failed: ', '');
 									else if (err.match(/is same/))
                                          err = gettextCatalog.getString("to_address and from_address is same");
+                                    else if (err.match(/network error/))
+                                        err = gettextCatalog.getString("network error,please try again.");
+                                    else if (err.match(/not enough spendable/))
+                                        err = gettextCatalog.getString("not enough spendable");
                                      return self.setSendError(err);
                                  }
                                  var binding = self.binding;

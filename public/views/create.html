@@ -73,7 +73,7 @@
               </div>
               <p class="adinputpass" translate ng-show="creatwform.addwpass.$valid && create.createwpass !== create.createwrpass">*Inconsistent password</p>
           </div>
-          <button class="m40t m15b" ng-click="create.step = 'showcode'" ng-disabled=" !create.createwname || !create.createwpass || !create.createwrpass || creatwform.$invalid &&  create.createwpass !== create.createwrpass" translate>Creat wallet</button>
+          <button class="m40t m15b" ng-click="create.step = 'showcode'" ng-disabled=" !create.createwname || !create.createwpass || !create.createwrpass || creatwform.$invalid || create.createwpass !== create.createwrpass" translate>Creat wallet</button>
         </form>
       </div>
     </div>
@@ -151,7 +151,7 @@
         <div class="backslcbox m15b">
           <span ng-repeat="item in create.showcodes track by $index" id="{{item.id}}" >{{item.str}}</span>
         </div>
-        <p class="center redcolor m35b">Your password is correct. To ensure the security of your wallet, we recommend that you delete your password.</p>
+        <p class="center redcolor m35b" translate>Your password is correct. To ensure the security of your wallet, we recommend that you delete your password.</p>
         <button class="m20b" ng-click="create.showconfirm = true;" translate>Delete mnemonic</button>
         <button class="awbtn" ng-click="create.createWallet(create.createwname, create.createwpass, create.createwrpass, create.mnemonic);" translate>Skip</button>
         <div ng-if="create.showconfirm" class="popconfirm">
