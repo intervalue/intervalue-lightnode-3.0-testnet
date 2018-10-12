@@ -317,7 +317,7 @@
         send
 
         -->
-        <div id="send" class="send tab-view tab-out" ng-init="assetIndexSelectorValue=0;home.shownForm='payment'">
+        <div id="send" class="send tab-view" ng-init="assetIndexSelectorValue=0;home.shownForm='payment'">
             <nav ng-controller="topbarController as topbar" class="tab-bar">
                 <section class="right-small">
                     <qr-scanner ng-show="index.isComplete" on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
@@ -399,7 +399,7 @@
         Wallet
 
         -->
-        <div id="wallet" class="history tab-view tab-out">
+        <div id="wallet" class="history tab-view">
             <nav ng-controller="topbarController as topbar" class="tab-bar">
                 <section class="right-small">
                     <a ng-click="$root.go('preferencesGlobal')">
