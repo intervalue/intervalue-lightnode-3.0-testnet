@@ -31,11 +31,6 @@
           <a ng-show="editAddressbook && !addAddressbookEntry"  ng-click="toggleEditAddressbook()">
               <span translate>Done</span>
           </a>
-          <!-- 添加地址页面时，显示扫一扫功能 -->
-          <a ng-show="addAddressbookEntry">
-              <qr-scanner on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()" >
-              </qr-scanner>
-          </a>
       </section>
   </nav>
 

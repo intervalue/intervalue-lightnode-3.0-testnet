@@ -320,7 +320,7 @@
         <div id="send" class="send tab-view" ng-init="assetIndexSelectorValue=0;home.shownForm='payment'">
             <nav ng-controller="topbarController as topbar" class="tab-bar">
                 <section class="right-small">
-                    <qr-scanner ng-show="index.isComplete" on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
+                    <qr-scanner ng-show="index.cordova && index.isComplete" on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
                 </section>
 
                 <section class="middle tab-bar-section">
@@ -343,7 +343,7 @@
                                     <div mdinputc class="adcpmdic">
                                         <label translate>Address</label>
                                         <input mdinput type="text" id="address" name="address" ng-disabled="home.blockUx || home.lockAddress || index.arrBalances[index.assetIndex].is_private"
-                                               ng-model="_address" ng-required valid-address-or-account ng-focus="home.formFocus('address')" ng-blur="home.formFocus(false)">
+                                               ng-model="_address" maxlength="32" ng-required valid-address-or-account ng-focus="home.formFocus('address')" ng-blur="home.formFocus(false)">
                                         <a class="postfix size-12 m0 text-gray" ng-click="openDestinationAddressModal(index.otherWallets, _address)">
                                             <img src="./img/address.png" />
                                         </a>
@@ -353,7 +353,7 @@
                                     <div mdinputc class="adcpmdic">
                                         <label translate>Amount</label>
                                         <input mdinput type="text" type="number" id="amount" ng-disabled="home.blockUx || home.lockAmount || home.bSendAll"
-                                               name="amount" ng-minlength="0.00000001" ng-maxlength="10000000000" ng-model="_amount"
+                                               name="amount" maxlength="18" ng-model="_amount"
                                                valid-amount="{{index.arrBalances[index.assetIndex].asset}}" ng-required="!home.bSendAll && !home.send_multiple"
                                                autocomplete="off" ng-focus="home.formFocus('amount')" ng-blur="home.formFocus(false)">
                                         <a class="postfix" ng-if="index.arrBalances.length > 0 && index.arrBalances[index.assetIndex].asset === 'base'">INVE</a>

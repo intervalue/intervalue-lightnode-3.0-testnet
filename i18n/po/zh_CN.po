@@ -45,6 +45,10 @@ msgstr "用破折号隔开的12个单词"
 msgid "About InterValue"
 msgstr "关于InterValue"
 
+#: public/views/preferencesGlobal.html:139
+msgid "About InterValue-3.0-testnet"
+msgstr "关于InterValue3.0测试链"
+
 #: src/js/controllers/copayers.js:8
 #: src/js/controllers/preferencesDelete.js:9
 #: src/js/controllers/walletHome.js:123
