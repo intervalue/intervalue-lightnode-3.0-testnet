@@ -175,7 +175,6 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                                                 }else{
                                                     console.log(" signatureDetlCode is "+signatureDetlCode);
                                                     notification.error('signatureDetlCode is '+signatureDetlCode);
-                                                    $rootScope.$emit('Local/NeedFreshHistory');
                                                 }
                                             });
                                         });
@@ -188,7 +187,6 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                                             }else{
                                                 console.log(" signatureDetlCode is "+signatureDetlCode);
                                                 notification.error('signatureDetlCode is '+signatureDetlCode);
-                                                $rootScope.$emit('Local/NeedFreshHistory');
                                             }
                                         });
                                         break;
@@ -198,6 +196,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                         }else {
                             notification.error(objRequest.addr+'is not found ,please try agin ');
                         }
+                            $rootScope.$emit('Local/NeedFreshHistory');
                         });
 
                     }
@@ -318,6 +317,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                                 }else {
                                     notification.error(objRequest.addr+'is not found ,please try agin ');
                                 }
+                                 $rootScope.$emit('Local/NeedFreshHistory');
 
                         });
 

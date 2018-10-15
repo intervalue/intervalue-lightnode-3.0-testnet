@@ -58,7 +58,7 @@ angular.module('copayApp.controllers').controller('signedTransactionIfoControlle
                     console.log("error not find address ");
                     return $rootScope.$emit('Local/ShowErrorAlert', "error not find address : "+obj.fromAddress);
                 }
-
+                $rootScope.$emit('Local/NeedFreshHistory');
             });
         };
 
