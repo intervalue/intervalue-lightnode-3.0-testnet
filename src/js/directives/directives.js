@@ -219,6 +219,7 @@ angular.module('copayApp.directives')
 
             if (typeof value == 'undefined' || value == 0) {
               ctrl.$pristine = true;
+              ctrl.$setValidity('validAmount', false);
               return value;
             }
 
@@ -227,9 +228,13 @@ angular.module('copayApp.directives')
               var str_value = ('' + value).substring(sep_index + 1);
               if (sep_index > 0 && str_value.length > decimals) {
                   ctrl.$setValidity('validAmount', false);
-              } else {
+              }else if(sep_index == 0){
+                  ctrl.$setValidity('validAmount', false);
+              }else if(str_value == 0){
+                  ctrl.$setValidity('validAmount', false);
+              }else {
                   ctrl.$setValidity('validAmount', true);
-               }
+              }
             } else {
               ctrl.$setValidity('validAmount', false);
             }
