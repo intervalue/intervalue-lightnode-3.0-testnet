@@ -547,7 +547,7 @@ angular
           }
       })
       .state('importwallet', {
-          url: '/importwallet',
+          url: '/importwallet?walletId&name',
           needProfile: true,
           views: {
               'main': {

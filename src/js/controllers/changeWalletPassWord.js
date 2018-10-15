@@ -56,4 +56,8 @@ angular.module('copayApp.controllers').controller('changeWalletPassWordControlle
                     }
                 });
         }
+
+        self.goimport = function (walletId, name){
+            $state.go('importwallet', {  walletId: walletId, name: name});
+        }
     });

@@ -2,14 +2,15 @@
 
 
 angular.module('copayApp.controllers').controller('importController',
-    function ($rootScope, $scope, $timeout, storageService, notification, profileService, bwcService, $log) {
+    function ($rootScope, $scope, $timeout, storageService, notification, profileService, bwcService, $log, $stateParams) {
         var self = this;
         self.addwalleterr = false;
         self.importcode = '';
         self.addwipass = '';
         self.addwiname = '';
         self.addwirpass = '';
-
+        self.walletId = $stateParams.walletId;
+        self.name = $stateParams.name;
         //import wallet
         self.importw = function(){
             if (self.creatingProfile)

@@ -329,7 +329,10 @@ padding: 20px 15px 0;}
 .preferences ul{list-style-type: none;}
 .preferences ul li:first-child{margin-top: 26px;border-top: 1px solid #DEDEDE;border-bottom: 1px solid #DEDEDE;}
 .preferences ul li{border-bottom: 1px solid #DEDEDE;background: #fff;display: flex;justify-content: space-between;align-items: center;padding:13px;}
-.preferences ul li.preflitwo{border-top: 1px solid #DEDEDE;margin-top: 40px;}
+.preferences ul li.preflitwo{border-top: 1px solid #DEDEDE;
+    /*margin-top: 40px;*/
+margin-top: 18px;
+}
 .preferences ul li .ld{display: flex;justify-content: flex-start;align-items: center;}
 .preferences ul li .ld span{color:#323232;}
 .preferences ul li .rd{display: flex;justify-content: flex-end;align-items: center;color:#909090;}
