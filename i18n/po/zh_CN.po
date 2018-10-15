@@ -2454,6 +2454,13 @@ msgstr "此地址余额不足。"
 msgid "Are you sure you want to delete the wallet?"
 msgstr "您确定要删除钱包吗"
 
+msgid "Password reset complete"
+msgstr "密码重置完成"
+
+msgid "wallets recovered, please restart the application to finish."
+msgstr "钱包恢复，请重新启动应用程序完成。"
+
+
 
 
 

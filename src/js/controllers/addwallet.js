@@ -166,11 +166,9 @@ angular.module('copayApp.controllers').controller('addwalletController',
                             self.deleted = true;
                             notification.success(successMsg);
                             go.walletHome();
-                            $scope.index.updateTxHistory(3);
                             $rootScope.$emit('Local/WalletImported', walletId);
                         });
                     }else{
-                        $scope.index.updateTxHistory(3);
                         $rootScope.$emit('Local/WalletImported', walletId);
                     }
                 });
@@ -195,9 +193,7 @@ angular.module('copayApp.controllers').controller('addwalletController',
                             $scope.$apply();
                         });
                     }else{
-                        $scope.index.updateTxHistory(3);
                         $rootScope.$emit('Local/WalletImported', walletId);
-
                     }
                 });
             }, 100);

@@ -309,6 +309,7 @@ angular.module('copayApp.services')
     };
 
 
+
     root._seedWallet = function (opts, cb) {
       opts = opts || {};
 
