@@ -243,6 +243,45 @@ angular.module('copayApp.services')
       });
     };
 
+      root.bindProfileOld = function (profile, cb) {
+          breadcrumbs.add('bindProfile');
+          root.profile = profile;
+          configService.get(function (err) {
+              //$log.debug('Preferences read');
+              if (err)
+                  return cb(err);
+              root.setWalletClients();
+              storageService.getFocusedWalletId(function (err, focusedWalletId) {
+                  if (err)
+                      return cb(err);
+                  root._setFocus(focusedWalletId, function () {
+                      console.log("focusedWalletId", focusedWalletId);
+                      var Wallet = require('intervaluecore/wallet.js');
+                      var device = require('intervaluecore/device.js');
+                      var config = configService.getSync();
+                      var firstWc = root.walletClients[lodash.keys(root.walletClients)[0]];
+                      // set light_vendor_url here as we may request new assets history at startup during balances update
+                      //todo delete
+                      //   require('intervaluecore/light_wallet.js').setLightVendorHost(config.hub);
+                      if (root.profile.xPrivKeyEncrypted) {
+                          console.log('priv key is encrypted, will wait for UI and request password');
+                          device.setDeviceAddress(root.profile.my_device_address);
+                      }
+                      else if (root.profile.xPrivKey)
+                          root.focusedClient.initDeviceProperties(profile.xPrivKey, root.profile.my_device_address, config.hub, config.deviceName);
+                      if(profile.tempDeviceKey){
+                          var tempDeviceKey = Buffer.from(profile.tempDeviceKey, 'base64');
+                          var prevTempDeviceKey = profile.prevTempDeviceKey ? Buffer.from(profile.prevTempDeviceKey, 'base64') : null;
+                          device.setTempKeys(tempDeviceKey, prevTempDeviceKey, saveTempKeys);
+                      }
+
+                      $rootScope.$emit('Local/ProfileBound');
+                      return cb();
+                  });
+              });
+          });
+      };
+
     root.loadAndBindProfile = function (cb) {
       breadcrumbs.add('loadAndBindProfile');
       storageService.getDisclaimerFlag(function (err, val) {

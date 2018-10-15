@@ -46,13 +46,21 @@ angular.module('copayApp.controllers').controller('walletnameaController',
                             break;
                         }
                     }
-                    storageService.storeProfile(profile, function (err) {
-                        if(err)
-                        $rootScope.$emit('Local/ShowErrorAlert', +walletId+":    "+err);
-                        profileService.loadAndBindProfile(function () {
-                            profileService.setAndStoreFocus(walletId,function () {
+                    profileService.unlockFC(null, function (err) {
+                        if (err) {
+                            $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('Wrong password'));
+                            return;
+                        }
+                        storageService.storeProfile(profile, function (err) {
+                            if (err)
+                                $rootScope.$emit('Local/ShowErrorAlert', +walletId + ":    " + err);
+                            profileService.bindProfileOld(profile, function () {
+                                
+                            });
+                                /*profileService.setAndStoreFocus(walletId, function () {
 
-                            })
+                                })*/
+                            //});
                         });
                     });
                 }

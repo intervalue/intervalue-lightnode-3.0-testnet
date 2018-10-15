@@ -33,6 +33,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.backwallet = false;
     self.backhome = false;
     self.backwaname = false;
+    self.changePD = false;
 
     function updatePublicKeyRing(walletClient, onDone) {
         var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
@@ -1743,6 +1744,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     $rootScope.$on('Local/NewEncryptionSetting', function () {
         var fc = profileService.focusedClient;
         self.isPrivKeyEncrypted = fc.isPrivKeyEncrypted();
+        $scope.index.changePD = false;
         $timeout(function () {
             $rootScope.$apply();
         });

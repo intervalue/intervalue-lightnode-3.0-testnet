@@ -12,6 +12,7 @@ angular.module('copayApp.controllers').controller('changeWalletPassWordControlle
         self.newadpass = '';
         self.comadpass = '';
         self.changePassWord = function (walletId) {
+            $scope.index.changePD = true;
             var form = $scope.changepassW;
             var newadpass = form.newadpass.$modelValue;
             var comadpass = form.comadpass.$modelValue;
@@ -54,6 +55,5 @@ angular.module('copayApp.controllers').controller('changeWalletPassWordControlle
                         }
                     }
                 });
-
         }
     });
