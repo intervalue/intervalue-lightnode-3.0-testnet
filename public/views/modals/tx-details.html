@@ -32,15 +32,15 @@
   
           <div class="txheader txreceive" ng-if="btx.action == 'received'">
   
-            <span>+</span>{{btx.amountTl}}
+            <div class="ellisamout"><span>+</span>{{btx.amountTl}}</div>
   
             <div class="txunit">INVE</div>
   
           </div>
   
           <div class="txheader txsent" ng-if="btx.action == 'sent'">
-  
-            <span>-</span>{{btx.amountTl}}
+
+            <div class="ellisamout"><span>-</span>{{btx.amountTl}}</div>
   
             <div class="txunit">INVE</div>
   
@@ -70,9 +70,15 @@
   
   
   
-    <ul class="no-bullet size-12 m0 txul enable_text_select"> 
-  
-  
+    <ul class="no-bullet size-12 m0 txul enable_text_select">
+
+      <li class="txli">
+
+        <span class="ultitle" translate>Amount</span>
+
+        <div class="txulinfo">{{btx.amountTl}}</div>
+
+      </li>
   
       <li ng-if="!btx.hasMultiplesOutputs && btx.addressTo && btx.addressTo != 'N/A'" class="txli" ng-click="copyAddress(btx.addressTo)">
   
