@@ -38,7 +38,7 @@
             <div class="title"><img src="./img/close.png" class="scanclose" ng-click="index.showshadow = false;"><span translate>Cold wallet scanning</span></div>
             <div class="scanin">
                 <qrcode size="190"  data="{{index.unsignedTransactionIfo}}" ></qrcode>
-                <button ng-click="index.shadowstep = 'hsend2'">
+                <button ng-click="index.shadowstep = 'hsend2';index.signatureIfo=''">
                     <span translate>Next</span>
                 </button>
             </div>
