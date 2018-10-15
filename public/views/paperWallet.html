@@ -36,7 +36,7 @@
             <label for="passphrase">
               <span translate>Passphrase</span>
             </label>
-            <input id="passphrase" type="password" name="passphrase" placeholder="{{'Passphrase'|translate}}" ng-model="passphrase">
+            <input id="passphrase" type="password" autocomplete="new-password" name="passphrase" placeholder="{{'Passphrase'|translate}}" ng-model="passphrase">
             <p ng-show="index.isCordova" translate class="size-12 text-gray">
               Decrypting a paper wallet could take around 5 minutes on this device. please be patient and keep the app open.
             </p>
