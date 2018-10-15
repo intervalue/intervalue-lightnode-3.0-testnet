@@ -152,15 +152,6 @@ msgstr "此外在设置菜单中，你可以找到安全选项，例如密码设
 msgid "Also, don't forget to delete your seed"
 msgstr "此外，不要忘记删除你的助记词"
 
-#: public/views/includes/output.html:6
-#: public/views/modals/customized-amount.html:38
-#: public/views/modals/customized-amount.html:59
-#: public/views/modals/customized-amount.html:62
-#: public/views/paymentUri.html:16
-#: public/views/walletHome.html:378
-msgid "Amount"
-msgstr "数额"
-
 #: public/views/modals/vote.html:22
 msgid "Answer:"
 msgstr "答案："
