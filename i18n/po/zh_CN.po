@@ -2460,7 +2460,11 @@ msgstr "密码重置完成"
 msgid "wallets recovered, please restart the application to finish."
 msgstr "钱包恢复，请重新启动应用程序完成。"
 
+msgid "There is a new deal"
+msgstr "有一笔新的交易"
 
+msgid "Payment received:"
+msgstr "已收到付款："
 
 
 
