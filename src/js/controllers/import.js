@@ -73,7 +73,7 @@ angular.module('copayApp.controllers').controller('importController',
                                 });
                             }else{
                                 $rootScope.$emit('Local/ShowAlertdirs', gettextCatalog.getString(" wallets recovered, please restart the application to finish."), 'fi-check', function () {
-                                    if (navigator && navigator.app) // android
+                                    if (navigator && navigator.app) // android.ios
                                         navigator.app.exitApp();
                                     else if (process.exit) // nwjs
                                         process.exit();
