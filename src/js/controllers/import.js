@@ -72,14 +72,11 @@ angular.module('copayApp.controllers').controller('importController',
                                     $scope.$apply();
                                 });
                             }else{
-                                $timeout(function () {
-                                    $rootScope.$emit('Local/ShowAlertdirs', gettextCatalog.getString(" wallets recovered, please restart the application to finish."), 'fi-check', function () {
-                                        if (navigator && navigator.app) // android
-                                            navigator.app.exitApp();
-                                        else if (process.exit) // nwjs
-                                            process.exit();
-                                        $rootScope.$apply();
-                                    });
+                                $rootScope.$emit('Local/ShowAlertdirs', gettextCatalog.getString(" wallets recovered, please restart the application to finish."), 'fi-check', function () {
+                                    if (navigator && navigator.app) // android
+                                        navigator.app.exitApp();
+                                    else if (process.exit) // nwjs
+                                        process.exit();
                                 });
                             }
                         });
