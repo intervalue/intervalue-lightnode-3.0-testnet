@@ -667,6 +667,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         'imgid': 'walletHome',
         'link': 'walletHome'
     }, {
+        'title': gettext('News'),
+        'img': 'mmtabsend',
+        'imgid': 'send',
+        'link': 'news'
+    },{
         'title': gettext('Transaction'),
         'img': 'mmtabsend',
         'imgid': 'send',
