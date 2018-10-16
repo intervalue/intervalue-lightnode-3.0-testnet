@@ -2422,7 +2422,7 @@ msgid "Pending"
 msgstr "待确认"
 
 msgid "Incorrect mnemonic"
-msgstr "口令不正确"
+msgstr "助记词不正确"
 
 msgid "wallet exists"
 msgstr "钱包已存在"
