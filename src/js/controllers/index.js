@@ -799,6 +799,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
 
     self.setTab = function (tab, reset, tries, switchState) {
+        FastClick.attach(document.body);
         console.log("setTab", tab, reset, tries, switchState);
         tries = tries || 0;
 
