@@ -455,8 +455,11 @@ angular.module('copayApp.services')
 
         // check if exists
         var w = lodash.find(root.profile.credentials, { 'xPubKey': xPubKey });
-        if (w)
-            return cb(gettext('Wallet already in Intervalue' + ": "));
+        if (w){
+            $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('wallet already exist'));
+            return;
+        }
+
 
           walletClient.createWallet(opts.name, opts.m, opts.n, {
             network: opts.networkName,
