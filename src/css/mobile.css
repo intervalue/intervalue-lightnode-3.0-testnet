@@ -127,6 +127,7 @@ _:-ms-fullscreen, :root .main {
 }
 .left-small a img{
   margin-left: 15px;
+  width: 10px;
 }
 .right-small a img,.right-small a span{
   margin-right: 15px;
