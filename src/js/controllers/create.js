@@ -155,19 +155,17 @@ angular.module('copayApp.controllers').controller('createwalletController',
                         return;
                     }
                     else if(del){
-                        $scope.index.updateTxHistory(3);
-                        var fc = profileService.focusedClient;
-                        fc.clearMnemonic();
-                        profileService.clearMnemonic(function() {
-                            self.deleted = true;
-                            notification.success(successMsg);
-                            go.walletHome();
-                        });
+                    var fc = profileService.focusedClient;
+                    fc.clearMnemonic();
+                    profileService.clearMnemonic(function() {
+                        self.deleted = true;
+                        notification.success(successMsg);
+                        go.walletHome();
+                    });
 
-                    }else{
-                        $scope.index.updateTxHistory(3);
                     }
                 });
+                $scope.index.updateHistory(3);
             }, 100);
         };
         //import wallet
