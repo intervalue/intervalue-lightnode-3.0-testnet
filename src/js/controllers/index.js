@@ -1280,6 +1280,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                             });
                         });
                         self.walletInfo = trans;
+                        $timeout(function () {
+                            $rootScope.$apply();
+                        },1);
                     });
                         self.historyShowShowAll = newHistory.length >= self.historyShowLimit;
                     //}
