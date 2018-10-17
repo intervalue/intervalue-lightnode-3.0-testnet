@@ -200,7 +200,7 @@ angular.module('copayApp.controllers')
 					});
 				};
 
-				$scope.add = function(addressbook) {
+				$scope.add = lodash.debounce(function(addressbook) {
 					$scope.error = null;
 					$timeout(function() {
 						addressbookService.add(addressbook, function(err, ab) {
@@ -215,10 +215,10 @@ angular.module('copayApp.controllers')
 							$timeout(function () {
                                 if(!$rootScope.$$phase) $scope.$apply();
                             },1);
-
 						});
+                        $scope.$apply();
 					}, 100);
-				};
+				}, 150);
 
 				$scope.remove = function(addr) {
 					$scope.error = null;
