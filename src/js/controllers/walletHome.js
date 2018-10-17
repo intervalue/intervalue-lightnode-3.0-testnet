@@ -6,7 +6,7 @@ var breadcrumbs = require('intervaluecore/breadcrumbs.js');
 var ValidationUtils = require('intervaluecore/validation_utils.js');
 
 angular.module('copayApp.controllers')
-	.controller('walletHomeController', function($scope, $rootScope, $timeout, $filter, $modal, $log, notification, isCordova, profileService, lodash, configService, storageService, gettext, gettextCatalog, nodeWebkit, addressService, confirmDialog, animationService, addressbookService, correspondentListService, newVersion, autoUpdatingWitnessesList, go, aliasValidationService) {
+	.controller('walletHomeController', function($http, $scope, $rootScope, $timeout, $filter, $modal, $log, notification, isCordova, profileService, lodash, configService, storageService, gettext, gettextCatalog, nodeWebkit, addressService, confirmDialog, animationService, addressbookService, correspondentListService, newVersion, autoUpdatingWitnessesList, go, aliasValidationService) {
 
 		var self = this;
 		var home = this;
@@ -1849,4 +1849,52 @@ angular.module('copayApp.controllers')
 				}
 			}, function(){}, "referrer");
 		}
+
+
+		let news = require("intervaluecore/newsServers");
+
+		self.currencyData = function () {
+            news.getCurrencyData(function(res) {
+                res = JSON.parse(res);
+                if(res != null) {
+                    console.log(res);
+                }else
+                    console.error("error~!");
+			});
+        };
+
+
+
+
+        self.quickData = function () {
+            news.getQuickData(6,null,null,function(res) {
+                res = JSON.parse(res);
+                if(res.code == 0) {
+                    console.log(res.page.list);
+                }else
+                    console.error("error~!");
+            });
+        };
+
+        self.newsData = function () {
+            news.getNewsData(6,1,null,function(res) {
+                res = JSON.parse(res);
+                if(res.code == 0) {
+                    console.log(res.page.list);
+                }else
+                    console.error("error~!");
+			})
+        };
+
+        self.newsInfoData = function (id) {
+        	id = 30985;
+        	news.getNewsInfo(id,function (res) {
+                res = JSON.parse(res);
+                if(res.code == 0) {
+                    console.log(res.article);
+                }else
+                    console.error("error~!");
+            })
+        }
+
 	});
