@@ -59,7 +59,7 @@ angular.module('copayApp.controllers').controller('importController',
                     // check if exists
                     var w = lodash.find(profileService.profile.credentials, { 'xPubKey': xPubKey });
                     if (!w){
-                        $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('Wallet not already in Intervalue'));
+                        $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('wallet already exist'));
                         return ;
                     }
                         profileService.setAndStoreFocus(walletId, function() {
