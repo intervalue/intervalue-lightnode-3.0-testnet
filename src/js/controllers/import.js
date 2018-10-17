@@ -86,41 +86,34 @@ angular.module('copayApp.controllers').controller('importController',
                                     });
                                     $rootScope.$emit('Local/ShowAlertdirs', "Password reset complete");
                                 });
-                                storageService.getProfile(function (err, profile) {
-                                    if (err) {
-                                        $rootScope.$emit('Local/DeviceError', err);
-                                        return;
-                                    }
-                                    if (!profile) {
-                                        breadcrumbs.add('no profile');
-                                        return cb(new Error('NOPROFILE: No profile'));
-                                    } else {
-                                        var profile = profile;
-                                        for(let item in profile.credentials) {
-                                            if(profile.credentials[item].walletId == walletId){
-                                                profile.credentials[item].walletName = self.addwiname;
-                                                break;
-                                            }
+                                $timeout(function () {
+                                    storageService.getProfile(function (err, profile) {
+                                        if (err) {
+                                            $rootScope.$emit('Local/DeviceError', err);
+                                            return;
                                         }
-                                       // profileService.unlockFC(null, function (err) {
-                                           /* if (err) {
-                                                $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('Wrong password'));
-                                                return;
-                                            }*/
+                                        if (!profile) {
+                                            breadcrumbs.add('no profile');
+                                            return cb(new Error('NOPROFILE: No profile'));
+                                        } else {
+                                            var profile = profile;
+                                            for(let item in profile.credentials) {
+                                                if(profile.credentials[item].walletId == walletId){
+                                                    profile.credentials[item].walletName = self.addwiname;
+                                                    break;
+                                                }
+                                            }
                                             storageService.storeProfile(profile, function (err) {
                                                 if (err)
                                                     $rootScope.$emit('Local/ShowErrorAlert', +walletId + ":    " + err);
                                                 profileService.bindProfileOld(profile, function () {
 
                                                 });
-                                                /*profileService.setAndStoreFocus(walletId, function () {
 
-                                                })*/
-                                                //});
                                             });
-                                       // });
-                                    }
-                                });
+                                        }
+                                    });
+                                },500);
                             });
                         });
                 });
