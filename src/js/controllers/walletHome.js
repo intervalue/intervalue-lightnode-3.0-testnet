@@ -191,13 +191,16 @@ angular.module('copayApp.controllers')
 
 				$scope.listEntries = function() {
 					$scope.error = null;
-					addressbookService.list(function(err, ab) {
-						if (err) {
-							$scope.error = err;
-							return;
-						}
-						$scope.list = ab;
-					});
+					$timeout(function(){
+                        addressbookService.list(function(err, ab) {
+                            if (err) {
+                                $scope.error = err;
+                                return;
+                            }
+                            $scope.list = ab;
+                        });
+                        $scope.$apply();
+					},100)
 				};
 
 				$scope.add = lodash.debounce(function(addressbook) {
@@ -216,7 +219,6 @@ angular.module('copayApp.controllers')
                                 if(!$rootScope.$$phase) $scope.$apply();
                             },1);
 						});
-                        $scope.$apply();
 					}, 100);
 				}, 150);
 
