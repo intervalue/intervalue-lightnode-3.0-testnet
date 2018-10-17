@@ -879,6 +879,7 @@ angular.module('copayApp.services')
       var config = configService.getSync();
       config.colorFor = config.colorFor || {};
       config.aliasFor = config.aliasFor || {};
+      config.imageFor = config.imageFor || {};
       var ret = lodash.map(root.profile.credentials, function (c) {
         return {
           m: c.m,
