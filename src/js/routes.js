@@ -424,6 +424,17 @@ angular
           }
         }
       })
+      .state('preferencesGlobal.backup', {
+        url: '/backup',
+        templateUrl: 'views/backup.html',
+        walletShouldBeComplete: true,
+        needProfile: true,
+        views: {
+          'main@': {
+            templateUrl: 'views/backup.html'
+          }
+        }
+      })
       .state('preferencesGlobal.recoveryFromSeed', {
         url: '/recoveryFromSeed',
         templateUrl: 'views/recoveryFromSeed.html',
@@ -518,7 +529,7 @@ angular
       })
 
       .state('walletnamea', {
-        url: '/walletname?name&addr&ammount&walletId&image&mnemonic&mnemonicEncrypted',
+        url: '/walletname?image&name&addr&ammount&walletId&mnemonic&mnemonicEncrypted',
         needProfile: true,
         views: {
             'main@': {
@@ -527,7 +538,7 @@ angular
         }
       })
       .state('changeWalletPassWord', {
-          url: '/changeWalletPassWord?name&addr&ammount&walletId&image&mnemonic&mnemonicEncrypted',
+          url: '/changeWalletPassWord?walletId&addr&name&image&ammount',
           needProfile: true,
           views: {
               'main@': {
@@ -546,7 +557,7 @@ angular
       })
 
       .state('backup', {
-          url: '/backup?name&addr&ammount&walletId&image&mnemonic&mnemonicEncrypted',
+          url: '/backup?name&addr&ammount&walletId&mnemonic&mnemonicEncrypted',
           templateUrl: 'views/backup.html',
           walletShouldBeComplete: true,
           needProfile: true,
@@ -600,7 +611,7 @@ angular
       });
   })
   .run(function ($rootScope, $state, $log, uriHandler, isCordova, profileService, $timeout, nodeWebkit, uxLanguage, animationService) {
-     FastClick.attach(document.body);
+    // FastClick.attach(document.body);
 
     uxLanguage.init();
 
