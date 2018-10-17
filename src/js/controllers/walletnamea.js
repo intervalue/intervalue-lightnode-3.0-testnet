@@ -71,19 +71,20 @@ angular.module('copayApp.controllers').controller('walletnameaController',
         self.deleteWallet = function(walletId,name) {
             if (profileService.profile.credentials.length === 1 || profileService.getWallets().length === 1)
                 return $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString("Can't delete the last remaining wallet"));
-            if (isCordova) {
-                navigator.notification.confirm(
-                    delete_msg,
-                    function(buttonIndex) {
-                        if (buttonIndex == 1) {
-                            self.truedeleteWallet(walletId,name);
-                        }
-                    },
-                    confirm_msg, [accept_msg, cancel_msg]
-                );
-            } else {
-                self.showconfirm = true;
-            }
+            // if (isCordova) {
+            //     navigator.notification.confirm(
+            //         delete_msg,
+            //         function(buttonIndex) {
+            //             if (buttonIndex == 1) {
+            //                 self.truedeleteWallet(walletId,name);
+            //             }
+            //         },
+            //         confirm_msg, [accept_msg, cancel_msg]
+            //     );
+            // } else {
+            //     self.showconfirm = true;
+            // }
+            self.showconfirm = true;
         };
 
         self.truedeleteWallet = function(walletId,name) {
