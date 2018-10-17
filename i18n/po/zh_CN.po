@@ -2403,8 +2403,6 @@ msgstr "钱包地址已存在"
 msgid "Can't delete the last remaining wallet"
 msgstr "无法删除最后一个的钱包"
 
-msgid "shadowWallet is random failed"
-msgstr "shadowWallet随机失败"
 
 msgid "The address: "
 msgstr "地址: "

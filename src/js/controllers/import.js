@@ -62,59 +62,67 @@ angular.module('copayApp.controllers').controller('importController',
                         $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('Wallet not already in Intervalue'));
                         return ;
                     }
-                    if(fc.length > 1){
-                        profileService.deleteWallet(walletId,name, function(err) {
-                            if (err) {
-                                self.error = err.message || err;
-                            }
-                            $timeout(function () {
-                                profileService.createWallet({  network: 'livenet', cosigners: [],n:1,m:1,name: self.addwiname, password: self.addwipass, mnemonic: self.importcode }, function (err,walletId) {
-                                    if(err){
-                                        self.creatingProfile = false;
-                                        $log.warn(err);
-                                        self.error = err;
-                                        $timeout(function () {
-                                            $scope.$apply();
-                                        });
-                                    }else{
-                                        $rootScope.$emit('Local/ShowAlertdirs', gettextCatalog.getString(" wallets recovered, please restart the application to finish."), 'fi-check', function () {
-                                            if (navigator && navigator.app) // android.ios
-                                                navigator.app.exitApp();
-                                            else if (process.exit) // nwjs
-                                                process.exit();
-                                        });
+                        profileService.setAndStoreFocus(walletId, function() {
+                            let wc = profileService.focusedClient;
+                            let Mnemonic = require('bitcore-mnemonic');
+                            let mn = new Mnemonic(self.importcode);
+                            wc.credentials.xPrivKey = mn.toHDPrivateKey("").xprivkey;
+                            wc.credentials.mnemonic = self.importcode;
+                           /* for(let item in profile.credentials) {
+                                if(profile.credentials[item].walletId == walletId){
+                                    profile.credentials[item].walletName = self.addwiname;
+                                    break;
+                                }
+                            }*/
+                            profileService.disablePrivateKeyEncryptionFC(function(err) {
+                                $rootScope.$emit('Local/NewEncryptionSetting');
+                                if (err) {
+                                    $log.error(err);
+                                }
+                                profileService.setPrivateKeyEncryptionFC(self.addwipass, function() {
+
+                                    $rootScope.$emit('Local/NewEncryptionSetting');
+                                    profileService.setAndStoreFocus(walletId, function() {
+                                    });
+                                    $rootScope.$emit('Local/ShowAlertdirs', "Password reset complete");
+                                });
+                                storageService.getProfile(function (err, profile) {
+                                    if (err) {
+                                        $rootScope.$emit('Local/DeviceError', err);
+                                        return;
+                                    }
+                                    if (!profile) {
+                                        breadcrumbs.add('no profile');
+                                        return cb(new Error('NOPROFILE: No profile'));
+                                    } else {
+                                        var profile = profile;
+                                        for(let item in profile.credentials) {
+                                            if(profile.credentials[item].walletId == walletId){
+                                                profile.credentials[item].walletName = self.addwiname;
+                                                break;
+                                            }
+                                        }
+                                       // profileService.unlockFC(null, function (err) {
+                                           /* if (err) {
+                                                $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('Wrong password'));
+                                                return;
+                                            }*/
+                                            storageService.storeProfile(profile, function (err) {
+                                                if (err)
+                                                    $rootScope.$emit('Local/ShowErrorAlert', +walletId + ":    " + err);
+                                                profileService.bindProfileOld(profile, function () {
+
+                                                });
+                                                /*profileService.setAndStoreFocus(walletId, function () {
+
+                                                })*/
+                                                //});
+                                            });
+                                       // });
                                     }
                                 });
-
-                            },1000);
-                        });
-                    } else {
-                        let wc = profileService.focusedClient;
-                        let Mnemonic = require('bitcore-mnemonic');
-                        let mn = new Mnemonic(self.importcode);
-                        wc.credentials.xPrivKey = mn.toHDPrivateKey("").xprivkey;
-                        wc.credentials.mnemonic = self.importcode;
-                        for(let item in profile.credentials) profile.credentials[item].walletName = self.addwiname;
-                        profileService.disablePrivateKeyEncryptionFC(function(err) {
-                            $rootScope.$emit('Local/NewEncryptionSetting');
-                            if (err) {
-                                $log.error(err);
-                            }
-                            profileService.setPrivateKeyEncryptionFC(self.addwipass, function() {
-                                storageService.storeProfile(profile, function (err) {
-                                    if (err)
-                                        $rootScope.$emit('Local/ShowErrorAlert', +walletId + ":    " + err);
-                                    profileService.bindProfileOld(profile, function () {
-
-                                    });
-                                });
-                                go.walletHome();
-                                $rootScope.$emit('Local/NewEncryptionSetting');
-                                $rootScope.$emit('Local/ShowErrorAlert', "Password reset complete");
                             });
                         });
-                    }
-
                 });
             });
 
