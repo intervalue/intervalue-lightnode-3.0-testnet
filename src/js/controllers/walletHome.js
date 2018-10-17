@@ -204,11 +204,13 @@ angular.module('copayApp.controllers')
 
 				};
 
-				$scope.add = lodash.debounce(function(addressbook) {
+                $scope.add = function(addressbook) {
 					$scope.error = null;
 						addressbookService.add(addressbook, function(err, ab) {
 							if (err) {
-								$scope.error = err;
+								$timeout(function () {
+                                    $scope.error = err;
+                                });
 								return;
 							}
 							$rootScope.$emit('Local/AddressbookUpdated', ab);
@@ -219,7 +221,7 @@ angular.module('copayApp.controllers')
                                 if(!$rootScope.$$phase) $scope.$apply();
                             },1);
 						});
-				}, 150);
+				}
 
 				$scope.remove = function(addr) {
 					$scope.error = null;
