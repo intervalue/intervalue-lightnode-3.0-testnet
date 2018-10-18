@@ -165,9 +165,6 @@ angular.module('copayApp.controllers').controller('createwalletController',
 
                     }
                 });
-                /*$timeout(function () {
-                    $scope.index.updateHistory(3);
-                },500);*/
             }, 100);
         };
         //import wallet
@@ -185,8 +182,6 @@ angular.module('copayApp.controllers').controller('createwalletController',
                         $timeout(function () {
                             $scope.$apply();
                         });
-                    }else{
-                        $scope.index.updateTxHistory(3);
                     }
                 });
             }, 100);

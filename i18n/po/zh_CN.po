@@ -2467,7 +2467,7 @@ msgstr "已收到付款："
 msgid "wallet already exist"
 msgstr "钱包已存在"
 
-msgid "wallet already not exist"
+msgid "wallet does not exist"
 msgstr "钱包不存在"
 
 msgid "Please enter the mnemonic corresponding to the wallet"
