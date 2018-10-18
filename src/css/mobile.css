@@ -850,6 +850,7 @@ textarea:focus
   float: left;
   text-align: center;
   width: 50%;
+  position: relative;
 }
 .tab-container a {
   font-size:14px;
@@ -863,7 +864,18 @@ textarea:focus
 
 .tab-container.selected,
 .tab-container:active {
-  border-bottom: 2px solid #45AD8E;
+  /*border-bottom: 2px solid #45AD8E;*/
+}
+.tab-container.selected:after,
+.tab-container:active:after {
+  content: '';
+  display: block;
+  position:absolute;
+  width: 100%;
+  height: 2px;
+  background: #45AD8E;
+  left: 0;
+  bottom: -1px;
 }
 
 .tab-container.selected a {
