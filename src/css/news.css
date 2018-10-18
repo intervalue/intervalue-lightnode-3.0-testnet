@@ -7,7 +7,7 @@
 
 .newsinc .title{
     font-size:20px;
-    font-family:PingFangSC-Semibold;
+    font-family:pfbold;
     font-weight:600;
     color:rgba(50,50,50,1);
     line-height:28px;
@@ -15,7 +15,6 @@
 
 .newsinc .details1{
     font-size:13px;
-    font-family:PingFangSC-Regular;
     font-weight:400;
     color:rgba(50,50,50,1);
     line-height:22px;
@@ -28,7 +27,6 @@
 
 .newsinc .details2{
     font-size:13px;
-    font-family:PingFangSC-Regular;
     font-weight:400;
     color:rgba(50,50,50,1);
     line-height:22px;
@@ -41,7 +39,6 @@
 
 .newsinc .details3{
     font-size:13px;
-    font-family:PingFangSC-Regular;
     font-weight:400;
     color:rgba(50,50,50,1);
     line-height:18px;

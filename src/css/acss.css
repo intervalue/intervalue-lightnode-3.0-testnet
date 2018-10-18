@@ -465,20 +465,121 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .addwcontent{
     top: 90px;
     z-index: -1;
+    height: calc(100vh - 138px);
 }
+/*最新*/
 .news .newslist .item{
     height: 100px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 15px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #EEEEEE;
 }
-
-
-
-
-
-
-
-
-
-
+.news .newslist .item:last-child{
+    border-bottom: none;
+}
+.news .newslist .item img{
+    width: 100px;height: 65px;margin-right:10px;
+}
+.news .newslist .item .title{
+    font-size:14px;
+    color:#323232;
+    height: 40px;
+    line-height:20px;
+    margin-bottom: 10px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+}
+.news .newslist .item .litinfo{
+    font-size:10px;
+    color:#909090;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.news .newslist .item .litinfo span{
+    color: #45AD8E;
+}
+/*快讯*/
+.news .letterlist .datenow{
+    text-align: left;
+    padding: 0 18px;
+    font-size:10px;
+    color:#909090;
+    background: #f9fafc;
+    height: 26px;
+    line-height: 26px;
+    position: fixed;
+    left: 0;
+    top:90px;
+    width: 100%;
+    z-index:5;
+}
+.news .letterlist .itemin .date{
+    text-align: left;
+    padding: 0 18px;
+    font-size:10px;
+    color:#909090;
+    background: #f9fafc;
+    height: 26px;
+    line-height: 26px;
+}
+.news .letterlist .itemin .itemlr{
+    padding: 0 27px 0 18px;
+}
+.news .letterlist .itemin .item{
+    border-left: 1px solid #DEDEDE;
+    padding: 14px 0 14px 16px;
+}
+.news .letterlist .itemin .item:nth-child(1){
+    padding-top: 28px;
+}
+.news .letterlist .itemin .item:last-child{
+    padding-bottom: 28px;
+}
+.news .letterlist .itemin .item .time{
+    display: inline-block;
+    font-size:10px;
+    font-family:pfbold;
+    font-weight:600;
+    color:#45AD8E;
+    border-radius:10px;
+    border:1px solid #45AD8E;
+    padding: 0 8px;
+    position: relative;
+    margin-bottom: 12px;
+}
+.news .letterlist .itemin .item .time:before{
+    display: block;
+    content: '';
+    position: absolute;
+    z-index: 1;
+    width: 13px;
+    height: 13px;
+    background: #45AD8E;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    left: -24px;
+    top: 1px;
+}
+.news .letterlist .itemin .item .title{
+    font-size:14px;
+    font-family:pfbold;
+    font-weight:600;
+    color:#323232;
+    margin-bottom: 6px;
+}
+.news .letterlist .itemin .item .desc{
+    font-size:12px;
+    font-weight:400;
+    color:#646464;
+}
+/*行情*/
 
 
 
