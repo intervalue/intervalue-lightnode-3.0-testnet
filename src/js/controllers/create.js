@@ -157,7 +157,7 @@ angular.module('copayApp.controllers').controller('createwalletController',
                     else if(del){
                     var fc = profileService.focusedClient;
                     fc.clearMnemonic();
-                    profileService.clearMnemonic(function() {
+                    profileService.clearMnemonic(function()  {
                         self.deleted = true;
                         notification.success(successMsg);
                         go.walletHome();
@@ -165,9 +165,9 @@ angular.module('copayApp.controllers').controller('createwalletController',
 
                     }
                 });
-                $timeout(function () {
+                /*$timeout(function () {
                     $scope.index.updateHistory(3);
-                },500);
+                },500);*/
             }, 100);
         };
         //import wallet
