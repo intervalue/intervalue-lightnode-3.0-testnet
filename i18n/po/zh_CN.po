@@ -650,7 +650,7 @@ msgstr "输入从其他设备接收的配对码，或使用相机（右上角的
 
 #: public/views/includes/password.html:13
 msgid "Enter your password"
-msgstr "输入您的密码"
+msgstr "请输入密码"
 
 msgid "Enter your old password"
 msgstr "输入您的原始密码"
