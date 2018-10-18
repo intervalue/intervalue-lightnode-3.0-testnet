@@ -1082,7 +1082,7 @@ angular.module('copayApp.controllers')
                                              $rootScope.$emit('Local/unsignedTransactionIfo', obj);
                                          }else {
                                              console.log("error: "+obj);
-                                             return self.setSendError(obj);
+                                             return self.setSendError(gettextCatalog.getString(obj));
                                          }
 
                                      });
