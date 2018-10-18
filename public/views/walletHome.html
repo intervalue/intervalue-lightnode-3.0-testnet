@@ -321,10 +321,39 @@
 
 
         <div id="news" class="news tab-view">
-            <div style="font-size:14px; width:100px; height:20px; border:1px solid #999; line-height:20px; color:#F00;" ng-click="home.currencyData()">currencyData</div>
-            <div style="font-size:14px; width:100px; height:20px; border:1px solid #999; line-height:20px; color:#F00;" ng-click="home.quickData()">quickData</div>
-            <div style="font-size:14px; width:100px; height:20px; border:1px solid #999; line-height:20px; color:#F00;" ng-click="home.newsData()">newsData</div>
-            <div style="font-size:14px; width:100px; height:20px; border:1px solid #999; line-height:20px; color:#F00;" ng-click="home.newsInfoData()">newsInfoData</div>
+            <nav ng-controller="topbarController as topbar" class="tab-bar">
+                <section class="middle tab-bar-section">
+                    <h1 class="title ellipsis" translate>News</h1>
+                </section>
+            </nav>
+            <div class="tabclicktitle">
+                <div class="tab-container" ng-class="{'selected': home.showtab == 'new1'}">
+                    <a ng-click="home.showtab = 'new1'" translate>Newest</a>
+                </div>
+                <div class="tab-container" ng-class="{'selected': home.showtab == 'new2'}">
+                    <a ng-click="home.showtab = 'new2'" translate>Newsletter</a>
+                </div>
+                <div class="tab-container" ng-class="{'selected': home.showtab == 'new3'}">
+                    <a ng-click="home.showtab = 'new3'" translate>Quotes</a>
+                </div>
+            </div>
+            <div class="addwcontent" ng-if="home.showtab == 'new1'">
+                <div class="newslist">
+                    <div class="item">
+                        <img src="./img/add.png" />
+                        <div class="info">
+                            <div class="title"></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="addwcontent" ng-if="home.showtab == 'new2'">222</div>
+            <div class="addwcontent" ng-if="home.showtab == 'new3'">333</div>
+            <!--<div style="font-size:14px; width:100px; height:20px; border:1px solid #999; line-height:20px; color:#F00;" ng-click="home.currencyData()">currencyData</div>-->
+            <!--<div style="font-size:14px; width:100px; height:20px; border:1px solid #999; line-height:20px; color:#F00;" ng-click="home.quickData()">quickData</div>-->
+            <!--<div style="font-size:14px; width:100px; height:20px; border:1px solid #999; line-height:20px; color:#F00;" ng-click="home.newsData()">newsData</div>-->
+            <!--<div style="font-size:14px; width:100px; height:20px; border:1px solid #999; line-height:20px; color:#F00;" ng-click="home.newsInfoData()">newsInfoData</div>-->
         </div>
 
         <!-- END news -->

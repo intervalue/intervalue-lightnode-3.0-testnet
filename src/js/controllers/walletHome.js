@@ -10,6 +10,7 @@ angular.module('copayApp.controllers')
 
 		var self = this;
 		var home = this;
+        self.showtab = 'new1';
 		var conf = require('intervaluecore/conf.js');
 		//todo delete
 		// var chatStorage = require('intervaluecore/chat_storage.js');

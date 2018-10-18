@@ -187,12 +187,12 @@
           </h1>
         </section>
       </nav>
-      <div class="importtab">
+      <div class="tabclicktitle">
         <div class="tab-container" ng-class="{'selected': create.showtab == 'tabcold'}">
-          <a href ng-click="create.showtab = 'tabcold'" translate>Plain Wallet</a>
+          <a ng-click="create.showtab = 'tabcold'" translate>Plain Wallet</a>
         </div>
         <div class="tab-container" ng-class="{'selected': create.showtab == 'tabhot'}">
-          <a href ng-click="create.showtab = 'tabhot';index.signatureAddr = ''" translate>Hot Wallet</a>
+          <a ng-click="create.showtab = 'tabhot';index.signatureAddr = ''" translate>Hot Wallet</a>
         </div>
       </div>
       <div class="addwcontentin">

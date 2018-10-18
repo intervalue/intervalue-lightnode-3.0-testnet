@@ -2463,8 +2463,14 @@ msgstr "钱包恢复，请重新启动应用程序完成。"
 msgid "News"
 msgstr "资讯"
 
+msgid "Newest"
+msgstr "最新"
 
+msgid "Newsletter"
+msgstr "快讯"
 
+msgid "Quotes"
+msgstr "行情"
 
 
 

@@ -96,7 +96,7 @@
 /*addwallet start*/
 
 /*importwallet start*/
-.importtab{background:#FAFAFA;height:45px;width:100%;}
+.tabclicktitle{background:#FAFAFA;height:45px;width:100%;}
 .addwimportwallet .addwcontentin{padding-top:20px;}
 .addwcontent textarea{padding:12px;height:105px;box-sizing:border-box;border-radius:3px;border:1px solid #D6D6D6;resize:none;color:#323232;font-size:12px;margin-top:10px;margin-bottom:30px;}
 /*importwallet end*/
@@ -455,9 +455,20 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .qdpageonetext{color:#454545;margin-top:2px;font-size:38px;text-align: center;}
 .qdbggrey{background-color: #eceff5;width: 100%;height:100%;position: fixed;top: 0;left: 0;z-index: -1;}
 
-
-
-
+/*资讯*/
+.news .tab-container{
+    width:33.3%;
+}
+.news .tabclicktitle{
+    background: #FDFEFF;
+}
+.news .addwcontent{
+    top: 90px;
+    z-index: -1;
+}
+.news .newslist .item{
+    height: 100px;
+}
 
 
 
