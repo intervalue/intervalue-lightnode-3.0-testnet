@@ -2470,6 +2470,9 @@ msgstr "钱包已存在"
 msgid "wallet already not exist"
 msgstr "钱包不存在"
 
+msgid "Please enter the mnemonic corresponding to the wallet"
+msgstr "请输入钱包对应的助记词"
+
 
 
 

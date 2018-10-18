@@ -56,10 +56,16 @@ angular.module('copayApp.controllers').controller('importController',
                 profileService._seedWallet(opts, function (err, walletClient) {
                     if (err) return;
                     var xPubKey = walletClient.credentials.xPubKey;
+                    let  crypto = require('crypto');
+                    let wallet = crypto.createHash("sha256").update(xPubKey, "utf8").digest("base64");
                     // check if exists
                     var w = lodash.find(profileService.profile.credentials, { 'xPubKey': xPubKey });
                     if (!w){
                         $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('wallet does not exist'));
+                        return ;
+                    }
+                    if(wallet != walletId){
+                        $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('Please enter the mnemonic corresponding to the wallet'));
                         return ;
                     }
                         profileService.setAndStoreFocus(walletId, function() {
@@ -67,6 +73,7 @@ angular.module('copayApp.controllers').controller('importController',
                             let Mnemonic = require('bitcore-mnemonic');
                             let mn = new Mnemonic(self.importcode);
                             wc.credentials.xPrivKey = mn.toHDPrivateKey("").xprivkey;
+
                             wc.credentials.mnemonic = self.importcode;
                            /* for(let item in profile.credentials) {
                                 if(profile.credentials[item].walletId == walletId){
