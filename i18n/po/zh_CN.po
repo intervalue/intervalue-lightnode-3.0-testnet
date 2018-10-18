@@ -2472,6 +2472,16 @@ msgstr "快讯"
 msgid "Quotes"
 msgstr "行情"
 
+msgid "Market value"
+msgstr "市值"
+
+msgid "Price"
+msgstr "价格"
+
+msgid "Latest gains"
+msgstr "最新涨幅"
+
+
 
 
 

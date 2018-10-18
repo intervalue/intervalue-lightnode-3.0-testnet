@@ -344,7 +344,7 @@
                         <div class="info">
                             <div class="title">{{item.title}}</div>
                             <div class="litinfo">
-                                <div class="time">{{item.type}}<span>{{item.publishTime}}</span></div>
+                                <div class="time">{{item.type}} <span>{{item.publishTime}}</span></div>
                                 <div class="browse">{{item.pageviews}} <span>浏览</span></div>
                             </div>
                         </div>
@@ -461,46 +461,24 @@
                     </div>
                 </div>
             </div>
-            <div class="addwcontent" ng-if="home.showtab == 'new3'">
+            <div class="addwcontent" ng-if="home.showtab == 'new3'" ng-init="home.currencyData()">
                 <div class="quotelist">
                     <div class="titlelabel">
-                        <div class="numall">市值</div>
-                        <div class="price">价格</div>
-                        <div class="gains">最新涨幅</div>
+                        <div class="numall" translate>Market value</div>
+                        <div class="price" translate>Price</div>
+                        <div class="gains" translate>Latest gains</div>
                     </div>
-                    <div class="itemin">
+                    <div class="itemin" ng-repeat="item in home.coinlist">
                         <div class="item">
                             <div class="leftcoininfo">
                                 <div class="coinimg">
-                                    <img src="./img/coinbtn.png" />
-                                    <span class="nameshort">BTC</span>
+                                    <img src="{{item.iconUrl}}" />
+                                    <span class="nameshort">{{item.currency}}</span>
                                 </div>
                                 <div class="numallin">市值：¥ <span>176.78</span>亿 <span class="name">瑞波币</span></div>
                             </div>
-                            <div class="pricein priceblue">¥46,789</div>
-                            <div class="gainsin priceblue"><div class="gainsinfo"><span>+</span>7.89%</div></div>
-                        </div>
-                        <div class="item">
-                            <div class="leftcoininfo">
-                                <div class="coinimg">
-                                    <img src="./img/coinbtn.png" />
-                                    <span class="nameshort">BTC</span>
-                                </div>
-                                <div class="numallin">市值：¥ <span>176.78</span>亿 <span class="name">瑞波币</span></div>
-                            </div>
-                            <div class="pricein">¥46,789</div>
-                            <div class="gainsin"><div class="gainsinfo"><span></span>0.00%</div></div>
-                        </div>
-                        <div class="item">
-                            <div class="leftcoininfo">
-                                <div class="coinimg">
-                                    <img src="./img/coinbtn.png" />
-                                    <span class="nameshort">BTC</span>
-                                </div>
-                                <div class="numallin">市值：¥ <span>176.78</span>亿 <span class="name">瑞波币</span></div>
-                            </div>
-                            <div class="pricein pricered">¥46,789</div>
-                            <div class="gainsin pricered"><div class="gainsinfo"><span>-</span>7.89%</div></div>
+                            <div class="pricein" ng-class="{ 'priceblue': item.change > 0, 'pricered': item.change < 0}">¥{{item.price}}</div>
+                            <div class="gainsin" ng-class="{ 'priceblue': item.change > 0, 'pricered': item.change < 0}"><div class="gainsinfo"><span>{{item.change}}</span></div></div>
                         </div>
                     </div>
                 </div>
