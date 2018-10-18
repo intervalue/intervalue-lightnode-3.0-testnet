@@ -478,7 +478,9 @@
                                 <div class="numallin">市值：¥ <span>176.78</span>亿 <span class="name">瑞波币</span></div>
                             </div>
                             <div class="pricein" ng-class="{ 'priceblue': item.change > 0, 'pricered': item.change < 0}">¥{{item.price}}</div>
-                            <div class="gainsin" ng-class="{ 'priceblue': item.change > 0, 'pricered': item.change < 0}"><div class="gainsinfo"><span>{{item.change}}</span></div></div>
+                            <div class="gainsin" ng-if="item.change == 0"><div class="gainsinfo"><span>{{item.change}}</span></div></div>
+                            <div class="gainsin priceblue" ng-if="item.change > 0"><div class="gainsinfo"><span>{{item.change}}</span></div></div>
+                            <div class="gainsin pricered" ng-if="item.change < 0"><div class="gainsinfo"><span>{{item.change}}</span></div></div>
                         </div>
                     </div>
                 </div>

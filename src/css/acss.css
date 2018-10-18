@@ -484,6 +484,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .newslist .item img{
     width: 100px;height: 65px;margin-right:10px;
     display: inline-block;flex-shrink:0;
+    cursor:pointer;
 }
 .news .newslist .item .info{
     width:100%;
@@ -499,6 +500,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     text-overflow: ellipsis;
     overflow: hidden;
     display: -webkit-box;
+    cursor:pointer;
 }
 .news .newslist .item .litinfo{
     font-size:10px;
