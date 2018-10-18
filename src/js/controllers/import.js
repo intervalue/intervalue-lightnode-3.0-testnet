@@ -114,18 +114,20 @@ angular.module('copayApp.controllers').controller('importController',
                                                 if (err)
                                                     $rootScope.$emit('Local/ShowErrorAlert', +walletId + ":    " + err);
                                                 profileService.bindProfileOld(profile, function () {
-
+                                                    $timeout(function() {
+                                                        profileService.lockFC();
+                                                        console.log('time to auto-lock wallet', profileService.focusedClient.credentials);
+                                                    },30 * 1000);
                                                 });
-
                                             });
                                         }
                                     });
                                 },500);
+
                             });
                         });
                 });
             });
-
 
         }
 
