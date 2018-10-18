@@ -11,6 +11,7 @@ angular.module('copayApp.controllers')
 		var self = this;
 		var home = this;
         self.showtab = 'new1';
+        self.newslist = '';
 		var conf = require('intervaluecore/conf.js');
 		//todo delete
 		// var chatStorage = require('intervaluecore/chat_storage.js');
@@ -1881,6 +1882,11 @@ angular.module('copayApp.controllers')
             news.getNewsData(6,1,null,function(res) {
                 res = JSON.parse(res);
                 if(res.code == 0) {
+                	$timeout(function(){
+                        self.newslist = res.page.list
+
+					},10)
+                    $scope.$apply();
                     console.log(res.page.list);
                 }else
                     console.error("error~!");

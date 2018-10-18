@@ -337,95 +337,15 @@
                     <a ng-click="home.showtab = 'new3'" translate>Quotes</a>
                 </div>
             </div>
-            <div class="addwcontent" ng-if="home.showtab == 'new1'">
+            <div class="addwcontent" ng-if="home.showtab == 'new1'" ng-init="home.newsData()">
                 <div class="newslist">
-                    <div class="item">
-                        <img src="./img/warnbig.png" />
+                    <div class="item" ng-repeat="item in home.newslist">
+                        <img src="{{item.coverPath}}" />
                         <div class="info">
-                            <div class="title">第二季d全球ICO市场报告：季度表现虽然</div>
+                            <div class="title">{{item.title}}</div>
                             <div class="litinfo">
-                                <div class="time">前瞻网<span>·59分钟前</span></div>
-                                <div class="browse">348<span>浏览</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="./img/warnbig.png" />
-                        <div class="info">
-                            <div class="title">第二季d全球ICO市场报告：季度表现虽然</div>
-                            <div class="litinfo">
-                                <div class="time">前瞻网<span>·59分钟前</span></div>
-                                <div class="browse">348<span>浏览</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="./img/warnbig.png" />
-                        <div class="info">
-                            <div class="title">第二季d全球ICO市场报告：季度表现虽然</div>
-                            <div class="litinfo">
-                                <div class="time">前瞻网<span>·59分钟前</span></div>
-                                <div class="browse">348<span>浏览</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="./img/warnbig.png" />
-                        <div class="info">
-                            <div class="title">第二季d全球ICO市场报告：季度表现虽然</div>
-                            <div class="litinfo">
-                                <div class="time">前瞻网<span>·59分钟前</span></div>
-                                <div class="browse">348<span>浏览</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="./img/warnbig.png" />
-                        <div class="info">
-                            <div class="title">第二季d全球ICO市场报告：季度表现虽然</div>
-                            <div class="litinfo">
-                                <div class="time">前瞻网<span>·59分钟前</span></div>
-                                <div class="browse">348<span>浏览</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="./img/warnbig.png" />
-                        <div class="info">
-                            <div class="title">第二季d全球ICO市场报告：季度表现虽然</div>
-                            <div class="litinfo">
-                                <div class="time">前瞻网<span>·59分钟前</span></div>
-                                <div class="browse">348<span>浏览</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="./img/warnbig.png" />
-                        <div class="info">
-                            <div class="title">第二季d全球ICO市场报告：季度表现虽然</div>
-                            <div class="litinfo">
-                                <div class="time">前瞻网<span>·59分钟前</span></div>
-                                <div class="browse">348<span>浏览</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="./img/warnbig.png" />
-                        <div class="info">
-                            <div class="title">第二季d全球ICO市场报告：季度表现虽然</div>
-                            <div class="litinfo">
-                                <div class="time">前瞻网<span>·59分钟前</span></div>
-                                <div class="browse">348<span>浏览</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="./img/warnbig.png" />
-                        <div class="info">
-                            <div class="title">第二季d全球ICO市场报告：季度表现虽然</div>
-                            <div class="litinfo">
-                                <div class="time">前瞻网<span>·59分钟前</span></div>
-                                <div class="browse">348<span>浏览</span></div>
+                                <div class="time">{{item.type}}<span>{{item.publishTime}}</span></div>
+                                <div class="browse">{{item.pageviews}} <span>浏览</span></div>
                             </div>
                         </div>
                     </div>

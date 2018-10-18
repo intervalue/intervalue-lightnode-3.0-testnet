@@ -483,6 +483,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 }
 .news .newslist .item img{
     width: 100px;height: 65px;margin-right:10px;
+    display: inline-block;flex-shrink:0;
 }
 .news .newslist .item .title{
     font-size:14px;
