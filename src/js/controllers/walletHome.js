@@ -13,6 +13,8 @@ angular.module('copayApp.controllers')
         self.showtab = 'new1';
         self.newslist = '';
         self.coinlist = '';
+        self.quicklistmake = '';
+        self.quicklist = [];
 		var conf = require('intervaluecore/conf.js');
 		//todo delete
 		// var chatStorage = require('intervaluecore/chat_storage.js');
@@ -1930,7 +1932,7 @@ angular.module('copayApp.controllers')
         };
 
         self.quickData = function () {
-            news.getQuickData(6,null,null,function(res) {
+            news.getQuickData(100,null,null,function(res) {
                 res = JSON.parse(res);
                 if(res.code == 0) {
                     lodash.forEach(res.page.list, function(value, key){
@@ -1939,9 +1941,18 @@ angular.module('copayApp.controllers')
                         value.graydate = self.getDateNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
                         value.greentime = self.getTimeFromNow(value.createTime);
                     })
-                    console.log(res.page.list);
                     self.quicklistmake = res.page.list;
-
+                    for(var i = 0; i < self.quicklistmake.length; i++) {
+                        if(!self.quicklist[self.quicklistmake[i].graydate]) {
+                            var arr = [];
+                            arr.push(self.quicklistmake[i]);
+                            self.quicklist[self.quicklistmake[i].graydate] = arr;
+                        }else {
+                            self.quicklist[self.quicklistmake[i].graydate].push(self.quicklistmake[i])
+                        }
+                    }
+                    console.log(self.quicklistmake);
+                    console.log(self.quicklist);
                 }else
                     console.error("error~!");
             });
