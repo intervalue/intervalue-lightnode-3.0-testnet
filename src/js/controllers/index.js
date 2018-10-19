@@ -1888,7 +1888,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         });
     });
 
-    var id = 0;
+    /*var id = 0;
     eventBus.on('newtransaction',function(event){
             id++;
         cordova.plugins.notification.local.schedule({
@@ -1898,7 +1898,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             foreground: true,
             wakeup:true
         });
-    });
+    });*/
 
 
     self.towalletname = function (image, name, addr, ammount, walletId, mnemonic, mnemonicEncrypted) {
