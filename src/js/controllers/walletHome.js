@@ -13,7 +13,6 @@ angular.module('copayApp.controllers')
         self.showtab = 'new1';
         self.newslist = '';
         self.coinlist = '';
-        self.quicklistmake = '';
         self.quicklist = [];
 		var conf = require('intervaluecore/conf.js');
 		//todo delete
@@ -1926,7 +1925,7 @@ angular.module('copayApp.controllers')
         self.getDateNow =  function(datestr){
             if(datestr){
                 let qdatearr = datestr.split('-');
-                return qdatearr[0]+qdatearr[1]+qdatearr[2];
+                return qdatearr[0] + '-' + qdatearr[1] + '-' + qdatearr[2];
             }
             return null
         };
@@ -1934,24 +1933,25 @@ angular.module('copayApp.controllers')
         self.quickData = function () {
             news.getQuickData(100,null,null,function(res) {
                 res = JSON.parse(res);
+                var list = [];
+                var showlist = [];
                 if(res.code == 0) {
                     lodash.forEach(res.page.list, function(value, key){
-                        console.log(value.createTime);
                         value.grayweek = self.getWeekNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
                         value.graydate = self.getDateNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
                         value.greentime = self.getTimeFromNow(value.createTime);
                     })
-                    self.quicklistmake = res.page.list;
-                    for(var i = 0; i < self.quicklistmake.length; i++) {
-                        if(!self.quicklist[self.quicklistmake[i].graydate]) {
+                    list = res.page.list;
+                    for(var i = 0; i < list.length; i++) {
+                        if(!showlist[list[i].graydate]) {
                             var arr = [];
-                            arr.push(self.quicklistmake[i]);
-                            self.quicklist[self.quicklistmake[i].graydate] = arr;
+                            arr.push(list[i]);
+                            showlist[list[i].graydate] = arr;
                         }else {
-                            self.quicklist[self.quicklistmake[i].graydate].push(self.quicklistmake[i])
+                            showlist[list[i].graydate].push(list[i])
                         }
                     }
-                    console.log(self.quicklistmake);
+                    self.quicklist = showlist;
                     console.log(self.quicklist);
                 }else
                     console.error("error~!");
