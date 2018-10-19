@@ -424,17 +424,6 @@ angular
           }
         }
       })
-      .state('preferencesGlobal.backup', {
-        url: '/backup',
-        templateUrl: 'views/backup.html',
-        walletShouldBeComplete: true,
-        needProfile: true,
-        views: {
-          'main@': {
-            templateUrl: 'views/backup.html'
-          }
-        }
-      })
       .state('preferencesGlobal.recoveryFromSeed', {
         url: '/recoveryFromSeed',
         templateUrl: 'views/recoveryFromSeed.html',
@@ -557,7 +546,7 @@ angular
       })
 
       .state('backup', {
-          url: '/backup?name&addr&ammount&walletId&mnemonic&mnemonicEncrypted',
+          url: '/backup?name&addr&ammount&walletid&image&mnemonic&mnemonicEncrypted',
           templateUrl: 'views/backup.html',
           walletShouldBeComplete: true,
           needProfile: true,
