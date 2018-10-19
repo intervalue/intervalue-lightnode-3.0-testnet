@@ -1865,11 +1865,11 @@ angular.module('copayApp.controllers')
             news.getCurrencyData(function(res) {
                 res = JSON.parse(res);
                 if(res != null) {
+					self.coinlist = res;
                     $timeout(function(){
-                        self.coinlist = res;
+                        $scope.$apply();
+                    });
 
-                    },10)
-                    $scope.$apply();
                     console.log(res);
                 }else
                     console.error("error~!");
@@ -1934,10 +1934,8 @@ angular.module('copayApp.controllers')
             news.getQuickData(100,null,null,function(res) {
                 res = JSON.parse(res);
                 var list = [];
-                var showlist = [];
+                var showlist = {};
                 if(res.code == 0) {
-                    $timeout(function(){
-                        $scope.$apply();
                         lodash.forEach(res.page.list, function(value, key){
                             value.grayweek = self.getWeekNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
                             value.graydate = self.getDateNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
@@ -1945,18 +1943,20 @@ angular.module('copayApp.controllers')
                         })
                         list = res.page.list;
                         for(var i = 0; i < list.length; i++) {
-                            if(!showlist[list[i].graydate]) {
+                            if(!showlist[list[i].grayweek]) {
                                 var arr = [];
-                                arr.push(list[i]);
-                                showlist[list[i].graydate] = arr;
+                                arr.push({"ll":list[i]});
+                                showlist[list[i].grayweek] = arr;
                             }else {
-                                showlist[list[i].graydate].push(list[i])
+                                showlist[list[i].grayweek].push(list[i])
                             }
                         }
                         self.quicklist = showlist;
                         console.log(self.quicklist);
-                    },10)
-                    $scope.$apply();
+                    $timeout(function () {
+                        $scope.$apply();
+                    });
+
                 }else
                     console.error("error~!");
             });
