@@ -339,13 +339,13 @@
             </div>
             <div class="addwcontent" ng-if="home.showtab == 'new1'" ng-init="home.newsData()">
                 <div class="newslist">
-                    <div class="item" ng-repeat="item in home.newslist">
+                    <div class="item" ng-repeat="item in home.newslist track by $index">
                         <img src="{{item.coverPath}}" />
                         <div class="info">
                             <div class="title">{{item.title}}</div>
                             <div class="litinfo">
                                 <div class="time">{{item.type}} <span>{{item.publishTime}}</span></div>
-                                <div class="browse">{{item.pageviews}} <span>浏览</span></div>
+                                <div class="browse">{{item.pageviews}} <span translate>views</span></div>
                             </div>
                         </div>
                     </div>
@@ -354,71 +354,47 @@
             <div class="addwcontent" ng-if="home.showtab == 'new2'" ng-init="home.quickData()">
                 <div class="letterlist">
                     <div class="datenow">今天 10/17 星期三</div>
-                    <!--<div class="itemin" ng-repeat="item in quicklist track by $index">-->
-                    <!--<div class="date">今天 10/17 星期三</div>-->
-                    <!--<div class="itemlr" ng-repeat="itemin in item track by $index">-->
-                    <!--<div class="item">-->
-                    <!--<div class="time">{{itemin.greentime}}</div>-->
-                    <!--<div class="info">-->
-                    <!--<div class="title">{{itemin.title}}</div>-->
-                    <!--<div class="desc">-->
-                    <!--{{itemin.content}}-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-
-                    <!--</div>-->
-                    <!--</div>-->
-                    <div class="itemin">
-                        <div class="date">昨天 10/16 星期二</div>
-                        <div class="itemlr">
+                    home.quicklist
+                    <div class="itemin" ng-repeat="item in home.quicklist track by $index">
+                        <!--<div class="date">{{item.key}}</div>-->
+                        {{item}}
+                        <div class="itemlr" ng-repeat="itemin in item">
                             <div class="item">
-                                <div class="time">59分钟前</div>
+                                <div class="time">{{itemin.greentime}}</div>
                                 <div class="info">
-                                    <div class="title">现场| 火币集团品牌公关VP：本轮下跌原因是行业发展过程中矛盾体现</div>
+                                    <div class="title">{{itemin.title}}</div>
                                     <div class="desc">
-                                        在被问到关于近期担任拼多多独立董事的问题时，陆奇回应称，从个人角度来说，他会适当的和一些高科技企业合作，比如担任独立董事，
-                                        前提是他确认自己可以帮助企业长期发展。他现在的重心放在Ycombinator上，但如果其他企业有这样的机会，他会考虑参与。（新浪）
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="time">59分钟前</div>
-                                <div class="info">
-                                    <div class="title">现场| 火币集团品牌公关VP：本轮下跌原因是行业发展过程中矛盾体现</div>
-                                    <div class="desc">
-                                        在被问到关于近期担任拼多多独立董事的问题时，陆奇回应称，从个人角度来说，他会适当的和一些高科技企业合作，比如担任独立董事，
-                                        前提是他确认自己可以帮助企业长期发展。他现在的重心放在Ycombinator上，但如果其他企业有这样的机会，他会考虑参与。（新浪）
+                                    {{itemin.content}}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="itemin">
-                        <div class="date">昨天 10/16 星期二</div>
-                        <div class="itemlr">
-                            <div class="item">
-                                <div class="time">59分钟前</div>
-                                <div class="info">
-                                    <div class="title">现场| 火币集团品牌公关VP：本轮下跌原因是行业发展过程中矛盾体现</div>
-                                    <div class="desc">
-                                        在被问到关于近期担任拼多多独立董事的问题时，陆奇回应称，从个人角度来说，他会适当的和一些高科技企业合作，比如担任独立董事，
-                                        前提是他确认自己可以帮助企业长期发展。他现在的重心放在Ycombinator上，但如果其他企业有这样的机会，他会考虑参与。（新浪）
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="time">59分钟前</div>
-                                <div class="info">
-                                    <div class="title">现场| 火币集团品牌公关VP：本轮下跌原因是行业发展过程中矛盾体现</div>
-                                    <div class="desc">
-                                        在被问到关于近期担任拼多多独立董事的问题时，陆奇回应称，从个人角度来说，他会适当的和一些高科技企业合作，比如担任独立董事，
-                                        前提是他确认自己可以帮助企业长期发展。他现在的重心放在Ycombinator上，但如果其他企业有这样的机会，他会考虑参与。（新浪）
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!--<div class="itemin">-->
+                        <!--<div class="date">昨天 10/16 星期二</div>-->
+                        <!--<div class="itemlr">-->
+                            <!--<div class="item">-->
+                                <!--<div class="time">59分钟前</div>-->
+                                <!--<div class="info">-->
+                                    <!--<div class="title">现场| 火币集团品牌公关VP：本轮下跌原因是行业发展过程中矛盾体现</div>-->
+                                    <!--<div class="desc">-->
+                                        <!--在被问到关于近期担任拼多多独立董事的问题时，陆奇回应称，从个人角度来说，他会适当的和一些高科技企业合作，比如担任独立董事，-->
+                                        <!--前提是他确认自己可以帮助企业长期发展。他现在的重心放在Ycombinator上，但如果其他企业有这样的机会，他会考虑参与。（新浪）-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="item">-->
+                                <!--<div class="time">59分钟前</div>-->
+                                <!--<div class="info">-->
+                                    <!--<div class="title">现场| 火币集团品牌公关VP：本轮下跌原因是行业发展过程中矛盾体现</div>-->
+                                    <!--<div class="desc">-->
+                                        <!--在被问到关于近期担任拼多多独立董事的问题时，陆奇回应称，从个人角度来说，他会适当的和一些高科技企业合作，比如担任独立董事，-->
+                                        <!--前提是他确认自己可以帮助企业长期发展。他现在的重心放在Ycombinator上，但如果其他企业有这样的机会，他会考虑参与。（新浪）-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </div>
             </div>
             <div class="addwcontent" ng-if="home.showtab == 'new3'" ng-init="home.currencyData()">
@@ -428,7 +404,7 @@
                         <div class="price" translate>Price</div>
                         <div class="gains" translate>Latest gains</div>
                     </div>
-                    <div class="itemin" ng-repeat="item in home.coinlist">
+                    <div class="itemin" ng-repeat="item in home.coinlist track by $index">
                         <div class="item">
                             <div class="leftcoininfo">
                                 <div class="coinimg">

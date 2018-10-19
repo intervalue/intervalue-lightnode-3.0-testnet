@@ -1936,23 +1936,27 @@ angular.module('copayApp.controllers')
                 var list = [];
                 var showlist = [];
                 if(res.code == 0) {
-                    lodash.forEach(res.page.list, function(value, key){
-                        value.grayweek = self.getWeekNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
-                        value.graydate = self.getDateNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
-                        value.greentime = self.getTimeFromNow(value.createTime);
-                    })
-                    list = res.page.list;
-                    for(var i = 0; i < list.length; i++) {
-                        if(!showlist[list[i].graydate]) {
-                            var arr = [];
-                            arr.push(list[i]);
-                            showlist[list[i].graydate] = arr;
-                        }else {
-                            showlist[list[i].graydate].push(list[i])
+                    $timeout(function(){
+                        $scope.$apply();
+                        lodash.forEach(res.page.list, function(value, key){
+                            value.grayweek = self.getWeekNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
+                            value.graydate = self.getDateNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
+                            value.greentime = self.getTimeFromNow(value.createTime);
+                        })
+                        list = res.page.list;
+                        for(var i = 0; i < list.length; i++) {
+                            if(!showlist[list[i].graydate]) {
+                                var arr = [];
+                                arr.push(list[i]);
+                                showlist[list[i].graydate] = arr;
+                            }else {
+                                showlist[list[i].graydate].push(list[i])
+                            }
                         }
-                    }
-                    self.quicklist = showlist;
-                    console.log(self.quicklist);
+                        self.quicklist = showlist;
+                        console.log(self.quicklist);
+                    },10)
+                    $scope.$apply();
                 }else
                     console.error("error~!");
             });
