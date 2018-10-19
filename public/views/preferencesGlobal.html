@@ -12,6 +12,7 @@
       <div translate>Small transaction free password</div>
       <switch id="network-name" name="encrypt" ng-model="encrypt" class="green right"></switch>
     </li>
+
     <li ng-click="$root.go('preferencesGlobal.preferencesLanguage')" class="preflitwo">
       <div class="ld">
         <div class="limg">
@@ -24,6 +25,20 @@
         <img src="./img/more.png" />
       </div>
     </li>
+
+    <li ng-click="$root.go('preferencesGlobal.preferencesCurrency')" >
+      <div class="ld">
+        <div class="limg">
+          <img src="./img/settinglg.png" />
+        </div>
+        <span translate>Currency</span>
+      </div>
+      <div class="rd">
+        {{prefGlobal.currentCurrencyName|translate}}
+        <img src="./img/more.png" />
+      </div>
+    </li>
+
     <li ng-click="$root.go('preferencesGlobal.preferencesAbout')">
       <div class="ld">
         <div class="limg">
@@ -35,6 +50,10 @@
         <img src="./img/more.png" />
       </div>
     </li>
+
+
+
+
   </ul>
     <!--<li  ng-click="$root.go('preferencesGlobal.preferencesDeviceName')">-->
       <!--<div class="right text-gray">-->

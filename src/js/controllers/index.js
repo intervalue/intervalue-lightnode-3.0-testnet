@@ -10,7 +10,7 @@ var breadcrumbs = require('intervaluecore/breadcrumbs.js');
 var Bitcore = require('bitcore-lib');
 var EventEmitter = require('events').EventEmitter;
 
-angular.module('copayApp.controllers').controller('indexController', function ($rootScope, $scope, $log, $filter, $timeout, lodash, go, profileService, configService, isCordova, storageService, addressService, gettext, gettextCatalog, amMoment, nodeWebkit, addonManager, txFormatService, uxLanguage, $state, isMobile, addressbookService, notification, animationService, $modal, bwcService, backButton, pushNotificationsService, aliasValidationService) {
+angular.module('copayApp.controllers').controller('indexController', function ($rootScope, $scope, $log, $filter, $timeout, lodash, go, profileService, configService, isCordova, storageService, addressService, gettext, gettextCatalog, amMoment, nodeWebkit, addonManager, txFormatService, uxLanguage,uxCurrency, $state, isMobile, addressbookService, notification, animationService, $modal, bwcService, backButton, pushNotificationsService, aliasValidationService) {
     breadcrumbs.add('index.js');
     var self = this;
     self.BLACKBYTES_ASSET = constants.BLACKBYTES_ASSET;
@@ -1475,6 +1475,12 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         self.defaultLanguageName = uxLanguage.getName(userLang);
     };
 
+    self.setUxCurrency = function () {
+        var userLang = uxCurrency.update();
+        self.defaultCurrencyIsoCode = userLang;
+        self.defaultCurrencyName = uxCurrency.getName(userLang);
+    };
+
 
 
     self.setAddressbook = function (ab) {
@@ -1573,11 +1579,18 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     $rootScope.$on('Local/NewFocusedWallet', function () {
         self.setUxLanguage();
+        self.setUxCurrency();
     });
 
     $rootScope.$on('Local/LanguageSettingUpdated', function () {
         self.setUxLanguage();
+        self.setUxCurrency();
     });
+
+    $rootScope.$on('Local/CurrencySettingUpdated', function () {
+        self.setUxCurrency();
+    });
+
 
     $rootScope.$on('Local/UnitSettingUpdated', function (event) {
         breadcrumbs.add('UnitSettingUpdated');

@@ -349,6 +349,16 @@ angular
           }
         }
       })
+      .state('preferencesGlobal.preferencesCurrency', {
+          url: '/currency',
+          walletShouldBeComplete: true,
+          needProfile: true,
+          views: {
+              'main@': {
+                  templateUrl: 'views/preferencesCurrency.html'
+              }
+          }
+      })
       .state('preferencesGlobal.preferencesAttestorAddresses', {
         url: '/attestorAddresses',
         walletShouldBeComplete: true,
@@ -610,11 +620,11 @@ angular
         needProfile: false
       });
   })
-  .run(function ($rootScope, $state, $log, uriHandler, isCordova, profileService, $timeout, nodeWebkit, uxLanguage, animationService) {
+  .run(function ($rootScope, $state, $log, uriHandler, isCordova, profileService, $timeout, nodeWebkit, uxLanguage ,uxCurrency, animationService) {
      FastClick.attach(document.body);
 
     uxLanguage.init();
-
+    uxCurrency.init();
     // Register URI handler, not for mobileApp
     if (!isCordova) {
       uriHandler.register();

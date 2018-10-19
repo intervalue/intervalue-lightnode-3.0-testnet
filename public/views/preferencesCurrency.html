@@ -1,0 +1,21 @@
+<div
+        class="topbar-container"
+        ng-include="'views/includes/topbar.html'"
+        ng-init="titleSection='Currency'; goBackToState = true; noColor = true">
+</div>
+
+
+
+<div class="content preferences" ng-controller="preferencesCurrencyController as prefLang">
+    <ul class="no-bullet m0 ">
+        <li
+                ng-repeat="currency in prefLang.availableCurrenry"
+                ng-click="prefLang.save(currency.isoCode)" class="line-b p20 size-14">
+            <span>{{currency.name}}</span>
+            <!--<span>{{index.defaultCurrencyIsoCode}}111</span>-->
+            <!--<span>{{currency.isoCode}}222</span>-->
+            <i class="fi-check size-16 right" ng-show="index.defaultCurrencyIsoCode == currency.isoCode"></i>
+        </li>
+    </ul>
+</div>
+<div class="extra-margin-bottom"></div>
