@@ -650,7 +650,7 @@ msgstr "输入从其他设备接收的配对码，或使用相机（右上角的
 
 #: public/views/includes/password.html:13
 msgid "Enter your password"
-msgstr "输入您的密码"
+msgstr "请输入密码"
 
 msgid "Enter your old password"
 msgstr "输入您的原始密码"
@@ -2364,8 +2364,8 @@ msgstr "如果您失去了对您的间隔钱包的访问权限，您承认并同
 msgid "All transaction requests are irreversible."
 msgstr "所有交易请求都是不可逆转的。"
 
-msgid "The authors of the software cannot retrieve your private keys or passwords if you lose or forget them and cannot guarantee transaction confirmation as they do not have control over the InterValue-3.0-testnet network."
-msgstr "如果您丢失或忘记了私钥或密码，则该软件的作者无法检索您的私钥或密码，并且无法保证交易确认，因为他们无法控制InterValue-3.0-testnet网络。"
+msgid "The authors of the software cannot retrieve your private keys or passwords if you lose or forget them and cannot guarantee transaction confirmation as they do not have control over the InterValue network."
+msgstr "如果您丢失或忘记了私钥或密码，则该软件的作者无法检索您的私钥或密码，并且无法保证交易确认，因为他们无法控制InterValue网络。"
 
 msgid "To the fullest extent permitted by law, this software is provided “as is” and no representations or warranties can be made of any kind, express or implied, including but not limited to the warranties of merchantability, fitness or a particular purpose and noninfringement."
 msgstr "在法律允许的最大范围内，本软件“按原样”提供，不得作出任何明示或暗示的陈述或保证，包括但不限于适销性，适用性或特定用途和不侵权的保证。"
@@ -2403,8 +2403,6 @@ msgstr "钱包地址已存在"
 msgid "Can't delete the last remaining wallet"
 msgstr "无法删除最后一个的钱包"
 
-msgid "shadowWallet is random failed"
-msgstr "shadowWallet随机失败"
 
 msgid "The address: "
 msgstr "地址: "
@@ -2422,7 +2420,7 @@ msgid "Pending"
 msgstr "待确认"
 
 msgid "Incorrect mnemonic"
-msgstr "口令不正确"
+msgstr "助记词不正确"
 
 msgid "wallet exists"
 msgstr "钱包已存在"
@@ -2460,26 +2458,22 @@ msgstr "密码重置完成"
 msgid "wallets recovered, please restart the application to finish."
 msgstr "钱包恢复，请重新启动应用程序完成。"
 
-msgid "News"
-msgstr "资讯"
+msgid "There is a new deal"
+msgstr "有一笔新的交易"
 
-msgid "Newest"
-msgstr "最新"
+msgid "Payment received:"
+msgstr "已收到付款："
 
-msgid "Newsletter"
-msgstr "快讯"
+msgid "wallet already exist"
+msgstr "钱包已存在"
 
-msgid "Quotes"
-msgstr "行情"
+msgid "wallet does not exist"
+msgstr "钱包不存在"
 
-msgid "Market value"
-msgstr "市值"
+msgid "Please enter the mnemonic corresponding to the wallet"
+msgstr "请输入钱包对应的助记词"
 
-msgid "Price"
-msgstr "价格"
 
-msgid "Latest gains"
-msgstr "最新涨幅"
 
 
 

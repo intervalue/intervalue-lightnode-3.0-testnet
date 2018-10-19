@@ -155,17 +155,14 @@ angular.module('copayApp.controllers').controller('createwalletController',
                         return;
                     }
                     else if(del){
-                        $scope.index.updateTxHistory(3);
-                        var fc = profileService.focusedClient;
-                        fc.clearMnemonic();
-                        profileService.clearMnemonic(function() {
-                            self.deleted = true;
-                            notification.success(successMsg);
-                            go.walletHome();
-                        });
+                    var fc = profileService.focusedClient;
+                    fc.clearMnemonic();
+                    profileService.clearMnemonic(function()  {
+                        self.deleted = true;
+                        notification.success(successMsg);
+                        go.walletHome();
+                    });
 
-                    }else{
-                        $scope.index.updateTxHistory(3);
                     }
                 });
             }, 100);
@@ -185,8 +182,6 @@ angular.module('copayApp.controllers').controller('createwalletController',
                         $timeout(function () {
                             $scope.$apply();
                         });
-                    }else{
-                        $scope.index.updateTxHistory(3);
                     }
                 });
             }, 100);

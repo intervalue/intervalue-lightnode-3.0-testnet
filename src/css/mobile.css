@@ -15,11 +15,11 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-input {
-  -webkit-user-select: auto !important;
-  -khtml-user-select: auto !important;
-  -ms-user-select: auto !important;
-  user-select: auto !important;
+input,textarea {
+  -webkit-user-select: text !important;
+  -khtml-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
 }
 
 * {
@@ -127,6 +127,7 @@ _:-ms-fullscreen, :root .main {
 }
 .left-small a img{
   margin-left: 15px;
+  width: 10px;
 }
 .right-small a img,.right-small a span{
   margin-right: 15px;

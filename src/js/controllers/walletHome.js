@@ -194,21 +194,26 @@ angular.module('copayApp.controllers')
 
 				$scope.listEntries = function() {
 					$scope.error = null;
-					addressbookService.list(function(err, ab) {
-						if (err) {
-							$scope.error = err;
-							return;
-						}
-						$scope.list = ab;
-					});
+                        addressbookService.list(function(err, ab) {
+                            if (err) {
+                                $scope.error = err;
+                                return;
+                            }
+                            $scope.list = ab;
+                            $timeout(function(){
+                                $scope.$apply();
+                            },100)
+                        });
+
 				};
 
-				$scope.add = function(addressbook) {
+                $scope.add = lodash.debounce(function(addressbook) {
 					$scope.error = null;
-					$timeout(function() {
 						addressbookService.add(addressbook, function(err, ab) {
 							if (err) {
-								$scope.error = err;
+								$timeout(function () {
+                                    $scope.error = err;
+                                });
 								return;
 							}
 							$rootScope.$emit('Local/AddressbookUpdated', ab);
@@ -218,10 +223,8 @@ angular.module('copayApp.controllers')
 							$timeout(function () {
                                 if(!$rootScope.$$phase) $scope.$apply();
                             },1);
-
 						});
-					}, 100);
-				};
+				},1000);
 
 				$scope.remove = function(addr) {
 					$scope.error = null;
@@ -1082,7 +1085,7 @@ angular.module('copayApp.controllers')
                                              $rootScope.$emit('Local/unsignedTransactionIfo', obj);
                                          }else {
                                              console.log("error: "+obj);
-                                             return self.setSendError(obj);
+                                             return self.setSendError(gettextCatalog.getString(obj));
                                          }
 
                                      });
@@ -1459,6 +1462,7 @@ angular.module('copayApp.controllers')
 			this.lockAmount = false;
 			this.hideAdvSend = true;
 			this.send_multiple = false;
+			this.current_payment_key = '';
 			$scope.currentSpendUnconfirmed = configService.getSync()
 				.wallet.spendUnconfirmed;
 

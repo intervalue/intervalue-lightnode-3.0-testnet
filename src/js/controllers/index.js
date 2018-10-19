@@ -804,6 +804,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
 
     self.setTab = function (tab, reset, tries, switchState) {
+        FastClick.attach(document.body);
         console.log("setTab", tab, reset, tries, switchState);
         tries = tries || 0;
 
@@ -1284,6 +1285,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                             });
                         });
                         self.walletInfo = trans;
+                        $timeout(function () {
+                            $rootScope.$apply();
+                        },1);
                     });
                         self.historyShowShowAll = newHistory.length >= self.historyShowLimit;
                     //}

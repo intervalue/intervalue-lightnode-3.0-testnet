@@ -100,7 +100,7 @@
             <div class="addwcontentin">
                 <img class="warnbigimg" src="./img/warnbig.png" />
                 <p class="center redcolor m28b" translate>Confirm your mnemonic</p>
-                <p ng-show="addw.showcodeerr" translate>Incorrect password</p>
+                <p ng-show="addw.showcodeerr" translate>Incorrect mnemonic</p>
                 <div>
                     <div class="addwslcbox m24b" ng-click="addw.minuswordf($event)">
                         <span ng-repeat="item in addw.chosenWords track by $index" id="{{item.id}}" >{{item.str}}</span>
@@ -129,7 +129,7 @@
                 <div class="backslcbox m15b">
                     <span ng-repeat="item in addw.showcodes track by $index" id="{{item.id}}" >{{item.str}}</span>
                 </div>
-                <p class="center redcolor m35b">Your password is correct. To ensure the security of your wallet, we recommend that you delete your password.</p>
+                <p class="center redcolor m35b" translate>Your password is correct. To ensure the security of your wallet, we recommend that you delete your password.</p>
                 <button class="m20b" ng-click="addw.showconfirm = true;" translate>Delete mnemonic</button>
                 <button class="awbtn" ng-click="addw.addWallet(addw.addwname, addw.addwpass, addw.addwrpass, addw.mnemonic);" translate>Skip</button>
                 <div ng-if="addw.showconfirm" class="popconfirm">
