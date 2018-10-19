@@ -1900,6 +1900,22 @@ angular.module('copayApp.controllers')
             return null
         };
 
+        self.getWeeksingle =  function(){
+                //当前年月日
+                var date = new Date();
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1;
+                var day = date.getDate();
+                var comprared = year + '-' + month + '-' + day;
+                //计算星期几
+                let qdatearr = comprared.split('-');
+                let qdatearr2 = new Date(qdatearr[0], parseInt(qdatearr[1] - 1), qdatearr[2]);
+                let qweeknow = String(qdatearr2.getDay()).replace("0","日").replace("1","一").replace("2","二").replace("3","三").replace("4","四").replace("5","五").replace("6","六");
+                let qdatenow = "星期" + qweeknow;
+                return '今天'+ ' ' +qdatearr[1] + '/' + qdatearr[2] + ' '+ qdatenow;
+        };
+        self.getweekginglee = self.getWeeksingle();
+        
         self.getWeekNow =  function(datestr){
             if(datestr){
                 //当前年月日

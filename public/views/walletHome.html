@@ -353,7 +353,7 @@
             </div>
             <div class="addwcontent" ng-if="home.showtab == 'new2'" ng-init="home.quickData()">
                 <div class="letterlist">
-                    <!--<div class="datenow">今天 10/17 星期三  </div>-->
+                    <div class="datenow">{{home.getweekginglee}}</div>
                     <div class="itemin" ng-repeat="(key,item) in home.quicklist track by $index">
                         <div class="date">{{key}}</div>
                         <div class="itemlr" ng-repeat="itemin in item">
