@@ -1860,7 +1860,7 @@ angular.module('copayApp.controllers')
 
 		let news = require("intervaluecore/newsServers");
 
-		self.currencyData = function () {
+        self.currencyData = function () {
             news.getCurrencyData(function(res) {
                 res = JSON.parse(res);
                 if(res != null) {
@@ -1872,17 +1872,76 @@ angular.module('copayApp.controllers')
                     console.log(res);
                 }else
                     console.error("error~!");
-			});
+            });
         };
 
 
+        self.getTimeFromNow =  function(datestr){
+            if(datestr){
+                let aa = new Date(Date.parse(datestr.replace(/-/g,"/")))
+                let now = new Date()
+                let hour = (now.getTime() - aa.getTime())/(1000*60*60)
+                let showtime = null
+                if(hour < 0){
+                    return "1分钟前"
+                }
+                if(hour < 1 ){
+                    showtime = Math.floor(hour*60)
+                    return showtime+"分钟前"
+                }else if(hour >= 1 && hour <=23){
+                    showtime = Math.floor(hour)
+                    return showtime+"小时前"
+                }else{
+                    showtime = (datestr.split(" "))[0]
+                    return showtime
+                }
+            }
+            return null
+        };
 
+        self.getWeekNow =  function(datestr){
+            if(datestr){
+                //当前年月日
+                var date = new Date();
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1;
+                var day = date.getDate();
+                var comprared = year + '-' + month + '-' + day;
+                //计算星期几
+                let qdatearr = datestr.split('-');
+                let qdatearr2 = new Date(qdatearr[0], parseInt(qdatearr[1] - 1), qdatearr[2]);
+                let qweeknow = String(qdatearr2.getDay()).replace("0","日").replace("1","一").replace("2","二").replace("3","三").replace("4","四").replace("5","五").replace("6","六");
+                let qdatenow = "星期" + qweeknow;
+                if (datestr ==  comprared) {
+                    return '今天'+ ' ' +qdatearr[1] + '/' + qdatearr[2] + ' '+ qdatenow;
+                }else{
+                    return qdatearr[1] + '/' + qdatearr[2] + ' '+ qdatenow;
+                }
+            }
+            return null
+        };
+
+        self.getDateNow =  function(datestr){
+            if(datestr){
+                let qdatearr = datestr.split('-');
+                return qdatearr[0]+qdatearr[1]+qdatearr[2];
+            }
+            return null
+        };
 
         self.quickData = function () {
             news.getQuickData(6,null,null,function(res) {
                 res = JSON.parse(res);
                 if(res.code == 0) {
+                    lodash.forEach(res.page.list, function(value, key){
+                        console.log(value.createTime);
+                        value.grayweek = self.getWeekNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
+                        value.graydate = self.getDateNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
+                        value.greentime = self.getTimeFromNow(value.createTime);
+                    })
                     console.log(res.page.list);
+                    self.quicklistmake = res.page.list;
+
                 }else
                     console.error("error~!");
             });
@@ -1892,20 +1951,19 @@ angular.module('copayApp.controllers')
             news.getNewsData(6,1,null,function(res) {
                 res = JSON.parse(res);
                 if(res.code == 0) {
-                	$timeout(function(){
+                    $timeout(function(){
                         self.newslist = res.page.list
-
-					},10)
+                    },10)
                     $scope.$apply();
                     console.log(res.page.list);
                 }else
                     console.error("error~!");
-			})
+            })
         };
 
         self.newsInfoData = function (id) {
-        	id = 30985;
-        	news.getNewsInfo(id,function (res) {
+            id = 30985;
+            news.getNewsInfo(id,function (res) {
                 res = JSON.parse(res);
                 if(res.code == 0) {
                     console.log(res.article);

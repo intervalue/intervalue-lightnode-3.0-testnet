@@ -46,8 +46,8 @@
 }
 .twowayin{
     background-color: #fff;background:rgba(255,255,255,1);
-      box-shadow:0px 0px 4px 0px rgba(0,0,0,0.12);
-      border-radius:15px 15px 0 0;padding: 30px 15px 24px;
+    box-shadow:0px 0px 4px 0px rgba(0,0,0,0.12);
+    border-radius:15px 15px 0 0;padding: 30px 15px 24px;
 }
 /*welcome part end*/
 
@@ -243,7 +243,7 @@
 .adddbackup .adddbackupimg i {font-size: 68px;color: #226d97;}
 .adddbackup .adddbackuptext{color:#6A7D90;margin-top: 56px;font-size:18px;text-align: center;}
 .backupmain{height: calc(100vh - 135px);position: fixed;bottom:0;left: 0;z-index: 1;width: 100%;background: #FFFFFF;color: #EB6F50;font-size: 14px;
-padding: 20px 15px 0;}
+    padding: 20px 15px 0;}
 .addbsswicth{background: #FFFFFF;border:0px;width: 100%;display:flex;padding: 10px 15px 4px;}
 .addbsswicth .addbsswicthd{font-size: 16px;width:100%;}
 .backupmain .backslcbox{margin-top: 15px;margin-bottom: 12px;}
@@ -331,7 +331,7 @@ padding: 20px 15px 0;}
 .preferences ul li{border-bottom: 1px solid #DEDEDE;background: #fff;display: flex;justify-content: space-between;align-items: center;padding:13px;}
 .preferences ul li.preflitwo{border-top: 1px solid #DEDEDE;
     /*margin-top: 40px;*/
-margin-top: 18px;
+    margin-top: 18px;
 }
 .preferences ul li .ld{display: flex;justify-content: flex-start;align-items: center;}
 .preferences ul li .ld span{color:#323232;}
@@ -353,7 +353,7 @@ margin-top: 18px;
 
 /*shadowDevice start*/
 .scanpop .title{height: 45px;line-height: 45px;border-bottom: 1px solid #F5F5F5;position: relative;font-size: 16px;
-        color: #030303;text-align: center;}
+    color: #030303;text-align: center;}
 .scanpop .title .scanclose{position: absolute;top:18px;left: 20px;cursor: pointer;}
 .scanpop .scanin{padding: 24px 13px 32px;text-align: center}
 .scanpop .scanin .scannote{font-size: 12px;color: #323232;padding: 15px 0;}
@@ -413,7 +413,7 @@ margin-top: 18px;
 .md-input-focused{position:relative;transition:all 0.2s ease-in-out;}
 .md-input-focused label,
 .md-input-has-value label{top:-10px;font-size:14px;transition:all 0.2s ease-in-out;}
-.md-input-focused input[type='text']{position:absolute;top:10px;transition:all 0.2s ease-in-out;}
+.md-input-focused input[type='text']{background:blue;position:absolute;top:10px;transition:all 0.2s ease-in-out;}
 .adinputitem{margin-bottom: 10px;}
 .adinputic{width:100%;display: flex;align-items: center;justify-content: flex-start;border-bottom: 1px solid #909090;padding:0 4px;}
 .adinputic .adinputimg{width:24px;height:20px;text-align:center;}
@@ -631,7 +631,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     border-bottom: 1px solid #DEDEDE;
 }
 /*.news .quotelist .itemin .item:last-child{*/
-    /*border-bottom: none;*/
+/*border-bottom: none;*/
 /*}*/
 .news .quotelist .itemin .item .leftcoininfo{
     width: calc(100% - 175px);
@@ -691,6 +691,9 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .quotelist .itemin .item .gainsin.pricered .gainsinfo{
     background: #D45757;
 }
+
+
+
 
 
 
