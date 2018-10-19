@@ -6,7 +6,7 @@ var breadcrumbs = require('intervaluecore/breadcrumbs.js');
 var ValidationUtils = require('intervaluecore/validation_utils.js');
 
 angular.module('copayApp.controllers')
-	.controller('walletHomeController', function($http, $scope, $rootScope, $timeout, $filter, $modal, $log, notification, isCordova, profileService, lodash, configService, storageService, gettext, gettextCatalog, nodeWebkit, addressService, confirmDialog, animationService, addressbookService, correspondentListService, newVersion, autoUpdatingWitnessesList, go, aliasValidationService) {
+	.controller('walletHomeController', function($http, $scope, $rootScope, $timeout, $state, $stateParams, $filter, $modal, $log, notification, isCordova, profileService, lodash, configService, storageService, gettext, gettextCatalog, nodeWebkit, addressService, confirmDialog, animationService, addressbookService, correspondentListService, newVersion, autoUpdatingWitnessesList, go, aliasValidationService) {
 
 		var self = this;
 		var home = this;
@@ -1992,24 +1992,8 @@ angular.module('copayApp.controllers')
             })
         };
 
-        self.newsInfoData = function (id) {
-            id = 30985;
-            news.getNewsInfo(id,function (res) {
-                res = JSON.parse(res);
-                if(res.code == 0) {
-                    console.log(res.article);
-                }else
-                    console.error("error~!");
-            })
-        };
-
-
-        //inve行情信息
-        self.inveData = function() {
-            news.getInveData(function (res) {
-            	if(res != null)
-					console.log(res);
-            });
+        self.gonewsin = function(id){
+            $state.go('newsin',{ id: id});
 		};
 
 

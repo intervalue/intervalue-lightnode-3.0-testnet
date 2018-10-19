@@ -590,6 +590,15 @@ angular
               }
           }
       })
+
+      .state('newsin', {
+            url: '/article?id',
+            views: {
+                'main': {
+                    templateUrl: 'views/newsin.html'
+                }
+            }
+      })
       .state('cordova', { // never used
         url: '/cordova/:status/:isHome',
         views: {
