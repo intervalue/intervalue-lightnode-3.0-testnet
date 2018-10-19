@@ -2001,6 +2001,16 @@ angular.module('copayApp.controllers')
                 }else
                     console.error("error~!");
             })
-        }
+        };
+
+
+        //inve行情信息
+        self.inveData = function() {
+            news.getInveData(function (res) {
+            	if(res != null)
+					console.log(res);
+            });
+		};
+
 
 	});
