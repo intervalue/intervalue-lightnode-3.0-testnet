@@ -76,27 +76,42 @@ angular.module('copayApp.controllers').controller('walletnameaController',
         };
 
         self.truedeleteWallet = function(walletId,name) {
-            var fc = profileService.focusedClient;
-            var walletName = (fc.alias || '') + ' [' + name + ']';
-            var self = this;
+            var walletName = name;
             profileService.setAndStoreFocus(walletId, function () {
-                profileService.unlockFC(null, function (err) {
-                    if (err) {
-                        $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('Wrong password'));
-                        return;
-                    };
-                    profileService.deleteWallet(walletId,name, function(err) {
-                        if (err) {
-                            self.error = err.message || err;
-                        } else {
-                            notification.success(gettextCatalog.getString('Success'), gettextCatalog.getString('The wallet "{{walletName}}" was deleted', {
-                                walletName: walletName
-                            }));
-                            $scope.index.updateHistory(3);
+                let wc = profileService.walletClients;
+                for(let item in wc){
+                    if(walletId == item){
+                        if(wc[item].credentials.xPrivKeyEncrypted && !wc[item].credentials.xPrivKey){
+                            profileService.unlockFC(null, function (err) {
+                                if (err) {
+                                    $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('Wrong password'));
+                                    return;
+                                };
+                                profileService.deleteWallet(walletId,name, function(err) {
+                                    if (err) {
+                                        self.error = err.message || err;
+                                    } else {
+                                        notification.success(gettextCatalog.getString('Success'), gettextCatalog.getString('The wallet "{{walletName}}" was deleted', {
+                                            walletName: walletName
+                                        }));
+                                        $scope.index.updateHistory(3);
+                                    }
+                                });
+                            });
+                        }else {
+                            profileService.deleteWallet(walletId,name, function(err) {
+                                if (err) {
+                                    self.error = err.message || err;
+                                } else {
+                                    notification.success(gettextCatalog.getString('Success'), gettextCatalog.getString('The wallet "{{walletName}}" was deleted', {
+                                        walletName: walletName
+                                    }));
+                                    $scope.index.updateHistory(3);
+                                }
+                            });
                         }
-                    });
-                });
+                    }
+                }
             });
-
         };
     });
