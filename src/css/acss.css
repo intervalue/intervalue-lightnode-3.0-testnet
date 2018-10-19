@@ -541,12 +541,15 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 }
 .news .letterlist .itemin .item{
     border-left: 1px solid #DEDEDE;
-    padding: 14px 0 14px 16px;
+    padding: 14px 0 0 16px;
 }
 .news .letterlist .itemin .item:nth-child(1){
     padding-top: 28px;
 }
-.news .letterlist .itemin .item:last-child{
+/*.news .letterlist .itemin .item:last-child{*/
+    /*padding-bottom: 28px;*/
+/*}*/
+.news .letterlist .itemin .itemlr:last-child .item:last-child{
     padding-bottom: 28px;
 }
 .news .letterlist .itemin .item .time{

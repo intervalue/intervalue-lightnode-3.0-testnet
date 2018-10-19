@@ -1945,7 +1945,7 @@ angular.module('copayApp.controllers')
                         for(var i = 0; i < list.length; i++) {
                             if(!showlist[list[i].grayweek]) {
                                 var arr = [];
-                                arr.push({"ll":list[i]});
+                                arr.push(list[i]);
                                 showlist[list[i].grayweek] = arr;
                             }else {
                                 showlist[list[i].grayweek].push(list[i])

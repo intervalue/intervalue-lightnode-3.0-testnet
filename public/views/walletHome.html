@@ -354,8 +354,8 @@
             <div class="addwcontent" ng-if="home.showtab == 'new2'" ng-init="home.quickData()">
                 <div class="letterlist">
                     <!--<div class="datenow">今天 10/17 星期三  </div>-->
-                    <div class="itemin" ng-repeat="item in home.quicklist track by $index">
-                        <div class="date">{{}}</div>
+                    <div class="itemin" ng-repeat="(key,item) in home.quicklist track by $index">
+                        <div class="date">{{key}}</div>
                         <div class="itemlr" ng-repeat="itemin in item">
                             <div class="item">
                                 <div class="time">{{itemin.greentime}}</div>
@@ -371,16 +371,6 @@
                     <!--<div class="itemin">-->
                         <!--<div class="date">昨天 10/16 星期二</div>-->
                         <!--<div class="itemlr">-->
-                            <!--<div class="item">-->
-                                <!--<div class="time">59分钟前</div>-->
-                                <!--<div class="info">-->
-                                    <!--<div class="title">现场| 火币集团品牌公关VP：本轮下跌原因是行业发展过程中矛盾体现</div>-->
-                                    <!--<div class="desc">-->
-                                        <!--在被问到关于近期担任拼多多独立董事的问题时，陆奇回应称，从个人角度来说，他会适当的和一些高科技企业合作，比如担任独立董事，-->
-                                        <!--前提是他确认自己可以帮助企业长期发展。他现在的重心放在Ycombinator上，但如果其他企业有这样的机会，他会考虑参与。（新浪）-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
                             <!--<div class="item">-->
                                 <!--<div class="time">59分钟前</div>-->
                                 <!--<div class="info">-->
