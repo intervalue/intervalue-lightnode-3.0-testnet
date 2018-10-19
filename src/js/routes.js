@@ -529,7 +529,7 @@ angular
       })
 
       .state('walletnamea', {
-        url: '/walletname?image&name&addr&ammount&walletId&mnemonic&mnemonicEncrypted',
+        url: '/walletname?name&addr&ammount&walletid&image&mnemonic&mnemonicEncrypted',
         needProfile: true,
         views: {
             'main@': {
@@ -538,7 +538,7 @@ angular
         }
       })
       .state('changeWalletPassWord', {
-          url: '/changeWalletPassWord?walletId&addr&name&image&ammount',
+          url: '/changeWalletPassWord?name&addr&ammount&walletid&image&mnemonic&mnemonicEncrypted',
           needProfile: true,
           views: {
               'main@': {
