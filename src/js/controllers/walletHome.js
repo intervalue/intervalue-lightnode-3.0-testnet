@@ -1986,17 +1986,119 @@ angular.module('copayApp.controllers')
         };
 
         self.newsData = function () {
-            news.getNewsData(6,1,null,function(res) {
-                res = JSON.parse(res);
-                if(res.code == 0) {
-                    $timeout(function(){
-                        self.newslist = res.page.list
-                    },10)
-                    $scope.$apply();
-                    console.log(res.page.list);
-                }else
-                    console.error("error~!");
-            })
+            self.newslist = [
+				{
+                    "author" : "区块链大本营",
+                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
+                    "createTime" : "2018-09-14 17:48:31",
+                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+                    "id" : 10,
+                    "publishTime" : "2018-10-19 17:58:33",
+                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+                    "updateTime" : "2018-10-20 09:51:26"
+				},{
+                	"author" : "区块链大本营",
+                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
+                    "createTime" : "2018-09-14 17:48:31",
+                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+                    "id" : 10,
+                    "publishTime" : "2018-10-19 17:58:33",
+                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+                    "updateTime" : "2018-10-20 09:51:26"
+				},{
+                	"author" : "区块链大本营",
+                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
+                    "createTime" : "2018-09-14 17:48:31",
+                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+                    "id" : 10,
+                    "publishTime" : "2018-10-19 17:58:33",
+                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+                    "updateTime" : "2018-10-20 09:51:26"
+				},{
+                	"author" : "区块链大本营",
+                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
+                    "createTime" : "2018-09-14 17:48:31",
+                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+                    "id" : 10,
+                    "publishTime" : "2018-10-19 17:58:33",
+                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+                    "updateTime" : "2018-10-20 09:51:26"
+				},{
+                	"author" : "区块链大本营",
+                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
+                    "createTime" : "2018-09-14 17:48:31",
+                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+                    "id" : 10,
+                    "publishTime" : "2018-10-19 17:58:33",
+                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+                    "updateTime" : "2018-10-20 09:51:26"
+				},{
+               		"author" : "区块链大本营",
+                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
+                    "createTime" : "2018-09-14 17:48:31",
+                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+                    "id" : 10,
+                    "publishTime" : "2018-10-19 17:58:33",
+                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+                    "updateTime" : "2018-10-20 09:51:26"
+				},{
+                	"author" : "区块链大本营",
+                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
+                    "createTime" : "2018-09-14 17:48:31",
+                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+                    "id" : 10,
+                    "publishTime" : "2018-10-19 17:58:33",
+                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+                    "updateTime" : "2018-10-20 09:51:26"
+				},{
+                	"author" : "区块链大本营",
+                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
+                    "createTime" : "2018-09-14 17:48:31",
+                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+                    "id" : 10,
+                    "publishTime" : "2018-10-19 17:58:33",
+                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+                    "updateTime" : "2018-10-20 09:51:26"
+				},{
+                	"author" : "区块链大本营",
+                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
+                    "createTime" : "2018-09-14 17:48:31",
+                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+                    "id" : 10,
+                    "publishTime" : "2018-10-19 17:58:33",
+                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+                    "updateTime" : "2018-10-20 09:51:26"
+				},{
+                	"author" : "区块链大本营",
+                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
+                    "createTime" : "2018-09-14 17:48:31",
+                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+                    "id" : 10,
+                    "publishTime" : "2018-10-19 17:58:33",
+                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+                    "updateTime" : "2018-10-20 09:51:26"
+				},{
+                	"author" : "区块链大本营",
+                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
+                    "createTime" : "2018-09-14 17:48:31",
+                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+                    "id" : 10,
+                    "publishTime" : "2018-10-19 17:58:33",
+                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+                    "updateTime" : "2018-10-20 09:51:26"
+				}
+			]
+            // news.getNewsData(6,1,null,function(res) {
+            //     res = JSON.parse(res);
+            //     if(res.code == 0) {
+            //         $timeout(function(){
+            //             self.newslist = res.page.list
+            //         },10)
+            //         $scope.$apply();
+            //         console.log(res.page.list);
+            //     }else
+            //         console.error("error~!");
+            // })
         };
 
         self.gonewsin = function(id){

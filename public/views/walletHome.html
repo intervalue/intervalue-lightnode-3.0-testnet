@@ -339,7 +339,7 @@
             </div>
             <div class="addwcontent" ng-if="home.showtab == 'new1'" ng-init="home.newsData()">
                 <div class="newslist">
-                    <div class="item" ng-repeat="item in home.newslist track by $index">
+                    <div class="item Foundation fadeInUpBig animated" ng-repeat="item in home.newslist track by $index">
                         <img src="{{item.coverPath}}" ng-click="home.gonewsin(item.id)" />
                         <div class="info">
                             <div class="title" ng-click="home.gonewsin(item.id)" >{{item.title}}</div>
@@ -409,12 +409,6 @@
                     </div>
                 </div>
             </div>
-            <!--<div style="margin-top:50px;text-align: center;">-->
-                <!--<div style="font-size:14px; width:100px; height:20px; border:1px solid #999; line-height:20px; color:#F00;margin:5px auto;" ng-click="home.currencyData()">currencyData</div>-->
-                <!--<div style="font-size:14px; width:100px; height:20px; border:1px solid #999; line-height:20px; color:#F00;margin:5px auto;" ng-click="home.quickData()">quickData</div>-->
-                <!--<div style="font-size:14px; width:100px; height:20px; border:1px solid #999; line-height:20px; color:#F00;margin:5px auto;" ng-click="home.newsData()">newsData</div>-->
-                <!--<div style="font-size:14px; width:100px; height:20px; border:1px solid #999; line-height:20px; color:#F00;margin:5px auto;" ng-click="home.newsInfoData()">newsInfoData</div>-->
-            <!--</div>-->
         </div>
 
         <!-- END news -->
