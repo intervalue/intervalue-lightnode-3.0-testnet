@@ -26,10 +26,14 @@ angular.module('copayApp.controllers').controller('topbarController', function($
         go.wallet();
     };
 
+    this.goArticle = function() {
+        go.news();
+    };
+
     this.goToWaname = function() {
-        $state.go('walletnamea',{ name: $stateParams.name, addr: $stateParams.addr, ammount: $stateParams.ammount, walletid: $stateParams.walletid, mnemonic: $stateParams.mnemonic, mnemonicEncrypted: $stateParams.mnemonicEncrypted});
+        $state.go('walletnamea',{ name: $stateParams.name, addr: $stateParams.addr, ammount: $stateParams.ammount, walletid: $stateParams.walletid, image: $stateParams.image, mnemonic: $stateParams.mnemonic, mnemonicEncrypted: $stateParams.mnemonicEncrypted});
     };
     this.passgoToWaname = function() {
-        $state.go('walletnamea',{ name: $stateParams.name, addr: $stateParams.addr, ammount: $stateParams.ammount, walletid: $stateParams.walletid, image: $stateParams.image});
+        $state.go('walletnamea',{ name: $stateParams.name, addr: $stateParams.addr, ammount: $stateParams.ammount, walletid: $stateParams.walletid, image: $stateParams.image, mnemonic: $stateParams.mnemonic, mnemonicEncrypted: $stateParams.mnemonicEncrypted});
     };
 });

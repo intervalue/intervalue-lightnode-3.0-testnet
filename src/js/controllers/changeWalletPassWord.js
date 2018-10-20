@@ -5,10 +5,12 @@ angular.module('copayApp.controllers').controller('changeWalletPassWordControlle
 
         var self = this;
         self.walletId = $stateParams.walletId;
-        self.addr = $stateParams.addr;
         self.name = $stateParams.name;
         self.image = $stateParams.image;
+        self.addr = $stateParams.addr;
         self.ammount = $stateParams.ammount;
+        self.mnemonic = $stateParams.mnemonic;
+        self.mnemonicEncrypted = $stateParams.mnemonicEncrypted;
         self.newadpass = '';
         self.comadpass = '';
         self.changePassWord = function (walletId) {

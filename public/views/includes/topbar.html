@@ -8,6 +8,10 @@
            ng-click="topbar.goWallet();goToWallet = null;index.backwallet = false;">
             <img src="./img/chatbackstate.png" />
         </a>
+        <a ng-show="goToNews"
+           ng-click="topbar.goArticle();goToNews = null;index.backwallet = false;">
+            <img src="./img/chatbackstate.png" />
+        </a>
         <a ng-show="closeToHome"
            ng-click="topbar.goHome(); closeToHome = null;index.backhome = false;">
             <img src="./img/chatbackstate.png" />

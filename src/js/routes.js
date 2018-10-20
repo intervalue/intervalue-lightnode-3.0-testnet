@@ -434,17 +434,6 @@ angular
           }
         }
       })
-      .state('preferencesGlobal.backup', {
-        url: '/backup',
-        templateUrl: 'views/backup.html',
-        walletShouldBeComplete: true,
-        needProfile: true,
-        views: {
-          'main@': {
-            templateUrl: 'views/backup.html'
-          }
-        }
-      })
       .state('preferencesGlobal.recoveryFromSeed', {
         url: '/recoveryFromSeed',
         templateUrl: 'views/recoveryFromSeed.html',
@@ -539,7 +528,7 @@ angular
       })
 
       .state('walletnamea', {
-        url: '/walletname?image&name&addr&ammount&walletId&mnemonic&mnemonicEncrypted',
+        url: '/walletname?name&addr&ammount&walletid&image&mnemonic&mnemonicEncrypted',
         needProfile: true,
         views: {
             'main@': {
@@ -548,7 +537,7 @@ angular
         }
       })
       .state('changeWalletPassWord', {
-          url: '/changeWalletPassWord?walletId&addr&name&image&ammount',
+          url: '/changeWalletPassWord?name&addr&ammount&walletid&image&mnemonic&mnemonicEncrypted',
           needProfile: true,
           views: {
               'main@': {
@@ -567,7 +556,7 @@ angular
       })
 
       .state('backup', {
-          url: '/backup?name&addr&ammount&walletId&mnemonic&mnemonicEncrypted',
+          url: '/backup?name&addr&ammount&walletid&image&mnemonic&mnemonicEncrypted',
           templateUrl: 'views/backup.html',
           walletShouldBeComplete: true,
           needProfile: true,
@@ -589,6 +578,15 @@ angular
 
               }
           }
+      })
+
+      .state('newsin', {
+            url: '/article?id',
+            views: {
+                'main': {
+                    templateUrl: 'views/newsin.html'
+                }
+            }
       })
       .state('cordova', { // never used
         url: '/cordova/:status/:isHome',
