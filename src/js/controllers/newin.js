@@ -1,10 +1,11 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('newsinController', function($scope, $rootScope, go, $state, $stateParams) {
+angular.module('copayApp.controllers').controller('newsinController', function($scope, $rootScope, $timeout, go, $state, $stateParams) {
 
     var self = this;
     self.id = $stateParams.id;
-    self.newsin = '';
+    self.newstitle = '';
+    self.newscontent = '';
     console.log(self.id)
     let news = require("intervaluecore/newsServers");
     self.newsInfoData = function () {
@@ -12,7 +13,11 @@ angular.module('copayApp.controllers').controller('newsinController', function($
             res = JSON.parse(res);
             if(res.code == 0) {
                 console.log(res.article);
-                self.newsin = res.article;
+                self.newstitle = res.article.title;
+                self.newscontent = res.article.content;
+                $timeout(function(){
+                    $scope.$apply();
+                });
             }else
                 console.error("error~!");
         })
