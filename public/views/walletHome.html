@@ -337,12 +337,12 @@
                     <a ng-click="home.showtab = 'new3'" translate>Quotes</a>
                 </div>
             </div>
-            <div class="addwcontent" ng-if="home.showtab == 'new1'" ng-init="home.newsData()">
+            <div class="addwcontent" ng-if="home.showtab == 'new1'" id="new1tab" ng-init="home.loadmore('new1tab', 'new1tablist')">
                 <div ng-if="home.newslist == ''">
                     空的
                 </div>
-                <div class="newslist" ng-if="home.newslist !== ''">
-                    <div class="item Foundation fadeInUpBig animated" ng-repeat="item in home.newslist track by $index">
+                <div class="newslist" ng-if="home.newslist !== ''" id="new1tablist">
+                    <div class="item fadeInUpBig animated" ng-repeat="item in home.newslist track by $index">
                         <img src="{{item.coverPath}}" ng-click="home.gonewsin(item.id)" />
                         <div class="info">
                             <div class="title" ng-click="home.gonewsin(item.id)" >{{item.title}}</div>
@@ -353,14 +353,15 @@
                         </div>
                     </div>
                 </div>
+                <div ng-show="home.infinite_isCmp">加载动画</div>
             </div>
-            <div class="addwcontent" ng-if="home.showtab == 'new2'" ng-init="home.quickData()">
+            <div class="addwcontent" ng-if="home.showtab == 'new2'" id="new2tab" ng-init="home.loadmore('new2tab', 'new2tablist')">
                 <div ng-if="home.quicklistshow == ''">
                     空的
                 </div>
-                <div class="letterlist" ng-if="home.quicklistshow !== ''">
-                    <div class="datenow">{{home.getweekginglee}}</div>
-                    <div class="itemin" ng-repeat="(key,item) in home.quicklist track by $index">
+                <div class="letterlist" ng-if="home.quicklistshow !== ''" id="new2tablist">
+                    <div class="datenow Foundation fadeInUpBig animated">{{home.getweekginglee}}</div>
+                    <div class="itemin Foundation fadeInUpBig animated" ng-repeat="(key,item) in home.quicklist track by $index">
                         <div class="date">{{key}}</div>
                         <div class="itemlr" ng-repeat="itemin in item">
                             <div class="item">
@@ -390,12 +391,13 @@
                         <!--</div>-->
                     <!--</div>-->
                 </div>
+                <div ng-show="home.infinite_isCmp">加载动画</div>
             </div>
-            <div class="addwcontent" ng-if="home.showtab == 'new3'" ng-init="home.currencyData()">
+            <div class="addwcontent" ng-if="home.showtab == 'new3'" id="new3tab" ng-init="home.loadmore('new3tab', 'new3tablist')">
                 <div ng-if="home.coinlist == ''">
                     空的
                 </div>
-                <div class="quotelist" ng-if="home.coinlist !== ''">
+                <div class="quotelist" ng-if="home.coinlist !== ''" id="new3tablist">
                     <div class="titlelabel">
                         <div class="numall" translate>Market value</div>
                         <div class="price" translate>Price</div>
@@ -417,6 +419,7 @@
                         </div>
                     </div>
                 </div>
+                <div ng-show="home.infinite_isCmp">加载动画</div>
             </div>
         </div>
 

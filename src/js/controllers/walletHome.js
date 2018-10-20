@@ -6,7 +6,7 @@ var breadcrumbs = require('intervaluecore/breadcrumbs.js');
 var ValidationUtils = require('intervaluecore/validation_utils.js');
 
 angular.module('copayApp.controllers')
-	.controller('walletHomeController', function($http, $scope, $rootScope, $timeout, $state, $stateParams, $filter, $modal, $log, notification, isCordova, profileService, lodash, configService, storageService, gettext, gettextCatalog, nodeWebkit, addressService, confirmDialog, animationService, addressbookService, correspondentListService, newVersion, autoUpdatingWitnessesList, go, aliasValidationService) {
+	.controller('walletHomeController', function($http, $scope, $rootScope, $timeout, $window, $state, $stateParams, $filter, $modal, $log, notification, isCordova, profileService, lodash, configService, storageService, gettext, gettextCatalog, nodeWebkit, addressService, confirmDialog, animationService, addressbookService, correspondentListService, newVersion, autoUpdatingWitnessesList, go, aliasValidationService) {
 
 
 
@@ -25,6 +25,7 @@ angular.module('copayApp.controllers')
         self.coinlist = '';
         self.quicklist = [];
         self.quicklistshow = '';
+        self.infinite_isCmp = false;
 		var conf = require('intervaluecore/conf.js');
 		//todo delete
 		// var chatStorage = require('intervaluecore/chat_storage.js');
@@ -1879,22 +1880,6 @@ angular.module('copayApp.controllers')
 
 		let news = require("intervaluecore/newsServers");
 
-        self.currencyData = function () {
-            news.getCurrencyData(function(res) {
-                res = JSON.parse(res);
-                if(res != null) {
-					self.coinlist = res;
-                    $timeout(function(){
-                        $scope.$apply();
-                    });
-
-                    console.log(res);
-                }else
-                    console.error("error~!");
-            });
-        };
-
-
         self.getTimeFromNow =  function(datestr){
             if(datestr){
                 let aa = new Date(Date.parse(datestr.replace(/-/g,"/")))
@@ -1964,30 +1949,100 @@ angular.module('copayApp.controllers')
             return null
         };
 
+        self.newsData = function () {
+            // self.newslist = [
+            // 	{
+            //         "author" : "区块链大本营",
+            //         "coverPath" : "https://img.jinse.com/1094427_image3.png",
+            //         "createTime" : "2018-09-14 17:48:31",
+            //         "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+            //         "id" : 10,
+            //         "publishTime" : "2018-10-19 17:58:33",
+            //         "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+            //         "updateTime" : "2018-10-20 09:51:26"
+            // 	},{
+            //     	"author" : "区块链大本营",
+            //         "coverPath" : "https://img.jinse.com/1094427_image3.png",
+            //         "createTime" : "2018-09-14 17:48:31",
+            //         "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+            //         "id" : 10,
+            //         "publishTime" : "2018-10-19 17:58:33",
+            //         "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+            //         "updateTime" : "2018-10-20 09:51:26"
+            // 	},{
+            //     	"author" : "区块链大本营",
+            //         "coverPath" : "https://img.jinse.com/1094427_image3.png",
+            //         "createTime" : "2018-09-14 17:48:31",
+            //         "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+            //         "id" : 10,
+            //         "publishTime" : "2018-10-19 17:58:33",
+            //         "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+            //         "updateTime" : "2018-10-20 09:51:26"
+            // 	},{
+            //     	"author" : "区块链大本营",
+            //         "coverPath" : "https://img.jinse.com/1094427_image3.png",
+            //         "createTime" : "2018-09-14 17:48:31",
+            //         "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+            //         "id" : 10,
+            //         "publishTime" : "2018-10-19 17:58:33",
+            //         "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+            //         "updateTime" : "2018-10-20 09:51:26"
+            // 	},{
+            //     	"author" : "区块链大本营",
+            //         "coverPath" : "https://img.jinse.com/1094427_image3.png",
+            //         "createTime" : "2018-09-14 17:48:31",
+            //         "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+            //         "id" : 10,
+            //         "publishTime" : "2018-10-19 17:58:33",
+            //         "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+            //         "updateTime" : "2018-10-20 09:51:26"
+            // 	},{
+            //    		"author" : "区块链大本营",
+            //         "coverPath" : "https://img.jinse.com/1094427_image3.png",
+            //         "createTime" : "2018-09-14 17:48:31",
+            //         "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+            //         "id" : 10,
+            //         "publishTime" : "2018-10-19 17:58:33",
+            //         "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+            //         "updateTime" : "2018-10-20 09:51:26"
+            // 	}
+            // ]
+            news.getNewsData(6,1,null,function(res) {
+                if(!!res && res.code == 0) {
+                    $timeout(function(){
+                        self.newslist = res.page.list
+                    },10)
+                    $scope.$apply();
+                    console.log(res.page.list);
+                }else
+                    console.error("error~!");
+            })
+        };
+
         self.quickData = function () {
             news.getQuickData(100,null,null,function(res) {
-                res = JSON.parse(res);
+
                 var list = [];
                 var showlist = {};
-                if(res.code == 0) {
-                        lodash.forEach(res.page.list, function(value, key){
-                            value.grayweek = self.getWeekNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
-                            value.graydate = self.getDateNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
-                            value.greentime = self.getTimeFromNow(value.createTime);
-                        })
-                        list = res.page.list;
-                        for(var i = 0; i < list.length; i++) {
-                            if(!showlist[list[i].grayweek]) {
-                                var arr = [];
-                                arr.push(list[i]);
-                                showlist[list[i].grayweek] = arr;
-                            }else {
-                                showlist[list[i].grayweek].push(list[i])
-                            }
+                if(!!res && res.code == 0) {
+                    lodash.forEach(res.page.list, function(value, key){
+                        value.grayweek = self.getWeekNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
+                        value.graydate = self.getDateNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
+                        value.greentime = self.getTimeFromNow(value.createTime);
+                    })
+                    list = res.page.list;
+                    for(var i = 0; i < list.length; i++) {
+                        if(!showlist[list[i].grayweek]) {
+                            var arr = [];
+                            arr.push(list[i]);
+                            showlist[list[i].grayweek] = arr;
+                        }else {
+                            showlist[list[i].grayweek].push(list[i])
                         }
-                    	self.quicklistshow = res.page.list;
-                        self.quicklist = showlist;
-                        console.log(self.quicklist);
+                    }
+                    self.quicklistshow = res.page.list;
+                    self.quicklist = showlist;
+                    console.log(self.quicklist);
                     $timeout(function () {
                         $scope.$apply();
                     });
@@ -1997,125 +2052,65 @@ angular.module('copayApp.controllers')
             });
         };
 
-        self.newsData = function () {
-            self.newslist = [
-				{
-                    "author" : "区块链大本营",
-                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
-                    "createTime" : "2018-09-14 17:48:31",
-                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
-                    "id" : 10,
-                    "publishTime" : "2018-10-19 17:58:33",
-                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
-                    "updateTime" : "2018-10-20 09:51:26"
-				},{
-                	"author" : "区块链大本营",
-                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
-                    "createTime" : "2018-09-14 17:48:31",
-                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
-                    "id" : 10,
-                    "publishTime" : "2018-10-19 17:58:33",
-                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
-                    "updateTime" : "2018-10-20 09:51:26"
-				},{
-                	"author" : "区块链大本营",
-                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
-                    "createTime" : "2018-09-14 17:48:31",
-                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
-                    "id" : 10,
-                    "publishTime" : "2018-10-19 17:58:33",
-                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
-                    "updateTime" : "2018-10-20 09:51:26"
-				},{
-                	"author" : "区块链大本营",
-                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
-                    "createTime" : "2018-09-14 17:48:31",
-                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
-                    "id" : 10,
-                    "publishTime" : "2018-10-19 17:58:33",
-                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
-                    "updateTime" : "2018-10-20 09:51:26"
-				},{
-                	"author" : "区块链大本营",
-                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
-                    "createTime" : "2018-09-14 17:48:31",
-                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
-                    "id" : 10,
-                    "publishTime" : "2018-10-19 17:58:33",
-                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
-                    "updateTime" : "2018-10-20 09:51:26"
-				},{
-               		"author" : "区块链大本营",
-                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
-                    "createTime" : "2018-09-14 17:48:31",
-                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
-                    "id" : 10,
-                    "publishTime" : "2018-10-19 17:58:33",
-                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
-                    "updateTime" : "2018-10-20 09:51:26"
-				},{
-                	"author" : "区块链大本营",
-                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
-                    "createTime" : "2018-09-14 17:48:31",
-                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
-                    "id" : 10,
-                    "publishTime" : "2018-10-19 17:58:33",
-                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
-                    "updateTime" : "2018-10-20 09:51:26"
-				},{
-                	"author" : "区块链大本营",
-                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
-                    "createTime" : "2018-09-14 17:48:31",
-                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
-                    "id" : 10,
-                    "publishTime" : "2018-10-19 17:58:33",
-                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
-                    "updateTime" : "2018-10-20 09:51:26"
-				},{
-                	"author" : "区块链大本营",
-                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
-                    "createTime" : "2018-09-14 17:48:31",
-                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
-                    "id" : 10,
-                    "publishTime" : "2018-10-19 17:58:33",
-                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
-                    "updateTime" : "2018-10-20 09:51:26"
-				},{
-                	"author" : "区块链大本营",
-                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
-                    "createTime" : "2018-09-14 17:48:31",
-                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
-                    "id" : 10,
-                    "publishTime" : "2018-10-19 17:58:33",
-                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
-                    "updateTime" : "2018-10-20 09:51:26"
-				},{
-                	"author" : "区块链大本营",
-                    "coverPath" : "https://img.jinse.com/1094427_image3.png",
-                    "createTime" : "2018-09-14 17:48:31",
-                    "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
-                    "id" : 10,
-                    "publishTime" : "2018-10-19 17:58:33",
-                    "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
-                    "updateTime" : "2018-10-20 09:51:26"
-				}
-			]
-            // news.getNewsData(6,1,null,function(res) {
-            //     res = JSON.parse(res);
-            //     if(res.code == 0) {
-            //         $timeout(function(){
-            //             self.newslist = res.page.list
-            //         },10)
-            //         $scope.$apply();
-            //         console.log(res.page.list);
-            //     }else
-            //         console.error("error~!");
-            // })
+        self.currencyData = function () {
+            news.getCurrencyData(function(res) {
+
+                if(res != null) {
+                    self.coinlist = res;
+                    $timeout(function(){
+                        $scope.$apply();
+                    });
+
+                    console.log(res);
+                }else
+                    console.error("error~!");
+            });
         };
 
         self.gonewsin = function(id){
             $state.go('newsin',{ id: id});
 		};
+	//	加载更多
+		self.loadmore = function(outlr, inlr, num){
+			if(outlr == 'new1tab'){
+                self.newsData();
+			}else if(outlr == 'new2tab'){
+                self.quickData();
+			}else if(outlr == 'new3tab'){
+                self.currencyData();
+            }
 
+            // //获得元素
+            // var isBottom = false;
+            // var wai = $window.document.getElementById("外层滚动容器wai");
+            // var content = $window.document.getElementById("承载内容列表content");
+			//
+            // //监听滚动
+            // wai.onscroll = function () {
+            //     var scrollTop = wai.scrollTop,
+            //         viewHeight = wai.clientHeight,
+            //         height = content.offsetHeight;
+			//
+            //     //判断是否滚动到底部
+            //     if (((scrollTop + viewHeight) >= height) && !isBottom)
+            //     {
+            //         isBottom = true;
+            //         console.log("到底了");
+            //         $scope.infinite_isCmp = true;
+            //         $scope.$apply();
+            //         $rootScope.requireCount+=10;
+			//
+            //         //模拟请求延时,将第二次延时2s后
+            //         $timeout(function () {
+            //             aaa.require().success(function (data) {
+            //                 $scope.model = data;
+            //                 isBottom = false;
+            //                 $scope.infinite_isCmp = false;
+            //             });
+            //         },2000);
+            //     }
+            // }
+
+		}
 
 	});
