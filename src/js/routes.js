@@ -611,7 +611,7 @@ angular
       });
   })
   .run(function ($rootScope, $state, $log, uriHandler, isCordova, profileService, $timeout, nodeWebkit, uxLanguage, animationService) {
-    // FastClick.attach(document.body);
+    FastClick.attach(document.body);
 
     uxLanguage.init();
 
