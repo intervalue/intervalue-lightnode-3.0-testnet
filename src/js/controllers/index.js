@@ -681,6 +681,13 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         'img': 'mmtabwallet',
         'imgid': 'wallet',
         'link': 'wallet'
+    }, {
+        'title': gettext('Message'),
+        'icon': 'icon-duihua',
+        'img': 'mmtabchat',
+        'imgid': 'chat',
+        'new_state': 'correspondentDevices',
+        'link': 'chat'
     }];
     self.addonViews = addonManager.addonViews();
     self.menu = self.menu.concat(addonManager.addonMenuItems());
