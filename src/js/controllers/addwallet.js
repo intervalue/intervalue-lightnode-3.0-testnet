@@ -193,7 +193,9 @@ angular.module('copayApp.controllers').controller('addwalletController',
                             $scope.$apply();
                         });
                     }else{
+                    $timeout(function () {
                         $rootScope.$emit('Local/WalletImported', walletId);
+                    },1000);
                     }
                 });
             }, 100);
