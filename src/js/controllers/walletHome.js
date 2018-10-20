@@ -14,6 +14,7 @@ angular.module('copayApp.controllers')
         self.newslist = '';
         self.coinlist = '';
         self.quicklist = [];
+        self.quicklistshow = '';
 		var conf = require('intervaluecore/conf.js');
 		//todo delete
 		// var chatStorage = require('intervaluecore/chat_storage.js');
@@ -1974,6 +1975,7 @@ angular.module('copayApp.controllers')
                                 showlist[list[i].grayweek].push(list[i])
                             }
                         }
+                    	self.quicklistshow = res.page.list;
                         self.quicklist = showlist;
                         console.log(self.quicklist);
                     $timeout(function () {
