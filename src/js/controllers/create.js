@@ -162,8 +162,10 @@ angular.module('copayApp.controllers').controller('createwalletController',
                         notification.success(successMsg);
                         go.walletHome();
                     });
-
                     }
+                    $timeout(function () {
+                      $scope.index.updateHistory(3);
+                    })
                 });
             }, 100);
         };
