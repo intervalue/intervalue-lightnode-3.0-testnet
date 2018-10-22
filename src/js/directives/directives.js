@@ -758,18 +758,17 @@ angular.module('copayApp.directives')
         }
     }
   })
-    .directive('homescrolled', function($timeout) {
+    .directive('homescrolled', ['$timeout', function($timeout) {
         return function(scope, elm, attr) {
             var raw = elm[0];
 
             elm.bind('scroll', function() {
                 if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
-                  console.log(attr.homescrolled)
-                    eval(attr.homescrolled);
+                    scope.$apply(attr.homescrolled);
                 };
             });
         };
-    })
+    }])
   //   .directive("mdinputpassr",function(){
   //   return {
   //       scope: {},

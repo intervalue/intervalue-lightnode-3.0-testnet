@@ -2025,11 +2025,12 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         //         "updateTime" : "2018-10-20 09:51:26"
         // 	}
         // ]
-
-        news.getNewsData(6,self.newsPage,null,function(res) {
+        news.getNewsData(6,self.newspage,null,function(res) {
+            console.log('111111111111');
             if(!!res && res.code == 0) {
+                console.log('dddddddddd')
                 self.shownewsloading = false;
-                self.newsPage += 6;
+                self.newspage += 6;
                 $timeout(function(){
                     self.newslist = res.page.list
                 },10)
@@ -2039,7 +2040,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 console.error("error~!");
         })
     };
-    // var showlist = {};
+
     self.quickData = function () {
         news.getQuickData(6,null,null,function(res) {
             var list = [];
@@ -2088,14 +2089,10 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         });
     };
 
-    self.gonewsin = function(id){
-        $state.go('newsin',{ id: id});
-    };
     //	加载更多
     self.loadmore = function(outlr, inlr, num){
         self.shownewsloading = true;
         if(outlr == 'new1tab'){
-            console.log(111111);
             self.newsData();
         }else if(outlr == 'new2tab'){
             self.quickData();
