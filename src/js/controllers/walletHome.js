@@ -1089,6 +1089,13 @@ angular.module('copayApp.controllers')
                                          }
 
                                      });
+                                     $timeout(function () {
+                                         delete self.current_payment_key;
+                                         resetAddressValidation();
+                                         profileService.bKeepUnlocked = false;
+                                         self.resetForm();
+                                     },1000);
+
                                  });
                                  return;
                              }

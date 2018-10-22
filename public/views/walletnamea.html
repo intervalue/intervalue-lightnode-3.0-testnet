@@ -36,7 +36,7 @@
                 <span translate>Wallet name</span>
                 <input name="name" ng-model="nameW.name" ng-minlength="1" ng-maxlength="20" minlength="1" maxlength="20"/>
             </li>
-            <li ng-click="nameW.goChangeWalletpassWord(nameW.walletId, nameW.addr, nameW.name, nameW.image, nameW.ammount)">
+            <li ng-click="nameW.goChangeWalletpassWord(nameW.walletId, nameW.addr, nameW.name, nameW.image, nameW.ammount, nameW.mnemonic, nameW.mnemonicEncrypted)">
                 <div class="ld">
                     <div class="limg">
                         <img src="./img/winpass.png" />
@@ -50,7 +50,7 @@
         </ul>
     </form>
     <div class="btngroup">
-        <button class="m20b" ng-show="nameW.mnemonic || nameW.mnemonicEncrypted" ng-click="nameW.gobackup(nameW.image, nameW.name, nameW.addr, nameW.ammount, nameW.walletId, nameW.mnemonic, nameW.mnemonicEncrypted);index.backwaname = true;" translate>Backup mnemonic</button>
+        <!--<button class="m20b" ng-show="nameW.mnemonic || nameW.mnemonicEncrypted" ng-click="nameW.gobackup(nameW.walletId, nameW.addr, nameW.name, nameW.image, nameW.ammount, nameW.mnemonic, nameW.mnemonicEncrypted);index.backwaname = true;index.backwallet = false;index.backhome = false;" translate>Backup mnemonic</button>-->
         <button class="awbtn" ng-click="nameW.deleteWallet(nameW.walletId,nameW.name)" translate>Delete wallet</button>
     </div>
     <div ng-if="nameW.showconfirm" class="popconfirm">
