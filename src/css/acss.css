@@ -455,13 +455,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .qdpageoneimg{width:108px;margin: 0 auto;}
 .qdpageonetext{color:#454545;margin-top:2px;font-size:38px;text-align: center;}
 .qdbggrey{background-color: #eceff5;width: 100%;height:100%;position: fixed;top: 0;left: 0;z-index: -1;}
-.shownewsloading{
-    position: fixed;
-    bottom: 50px;
-    left: 0;
-    text-align: center;
 
-}
 /*资讯*/
 .news .tab-container{
     width:33.3%;
@@ -473,6 +467,43 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     top: 90px;
     z-index: -1;
     height: calc(100vh - 138px);
+}
+.shownewsloading{
+    position: fixed;
+    bottom: 50px;
+    left: 0;
+    text-align: center;
+    background: #000;
+    color: #fff;
+    width: 100%;
+    height: 100px;
+    z-index: 1000;
+}
+.nonews{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background: #fff;
+    z-index: 1001;
+}
+.nonewsin{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    text-align: center;
+    width:100%;
+}
+.nonewsin img{
+    margin-bottom: 20px;
+}
+.nonewsintext{
+    font-size:12px;
+    font-weight:400;
+    color:#909090;
+    text-align: center;
 }
 /*最新*/
 .news .newslist .item{
@@ -553,7 +584,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     padding-top: 28px;
 }
 /*.news .letterlist .itemin .item:last-child{*/
-    /*padding-bottom: 28px;*/
+/*padding-bottom: 28px;*/
 /*}*/
 .news .letterlist .itemin .itemlr:last-child .item:last-child{
     padding-bottom: 28px;

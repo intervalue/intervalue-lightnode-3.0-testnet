@@ -41,10 +41,12 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.quicklistshow = '';
     self.newslists = [];
     self.quicklists = {};
+    self.coinlists = [];
     self.newsanimate = 1;
     self.quickanimate = 1;
     self.coinanimate = 1;
     self.newspage = 1;
+    self.quickpage = 1;
     function updatePublicKeyRing(walletClient, onDone) {
         var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
         walletDefinedByKeys.readCosigners(walletClient.credentials.walletId, function (arrCosigners) {
@@ -2027,31 +2029,38 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         // 	}
         // ]
         news.getNewsData(6,self.newspage,null,function(res) {
-
+            console.log('11111111111111111111111111111111111111')
+            console.log(res);
             if(!!res && res.code == 0) {
                 self.shownewsloading = false;
-                self.newspage += 6;
                 if(JSON.stringify(self.newslists) == '[]'){
                     self.newslists = res.page.list;
+                    $timeout(function(){
+                        self.newslist = res.page.list;
+                        self.newspage += 1;
+                    },10)
+                    $scope.$apply();
                 }else{
-
+                    $timeout(function(){
+                        self.newslist = self.newslists.concat(res.page.list);
+                        console.log('6666666666666666666666666666666666666666666666666666')
+                        console.log(self.newslist);
+                        self.newspage += 1;
+                    },10)
+                    $scope.$apply();
                 }
-                $timeout(function(){
-                    self.newslist = (self.newslists).concat(res.page.list);
-                },10)
-                $scope.$apply();
-                console.log(res.page.list);
             }else
                 console.error("error~!");
         })
     };
 
     self.quickData = function () {
-        news.getQuickData(6,null,null,function(res) {
+        news.getQuickData(6,self.quickpage,null,function(res) {
             var list = [];
             var showlist = {};
             if(!!res && res.code == 0) {
                 self.shownewsloading = false;
+                self.quickpage += 1;
                 //给返回对象加字段
                 lodash.forEach(res.page.list, function(value, key){
                     value.grayweek = self.getWeekNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
@@ -2071,39 +2080,48 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 }
                 if(JSON.stringify(self.quicklists) == '{}'){
                     self.quicklists = showlist;
+                    self.quicklistshow = res.page.list;
+                    self.quicklist = showlist;
+                    $timeout(function () {
+                        $scope.$apply();
+                    });
                 }else{
-
+                    self.quicklists = Object.assign(self.quicklists, showlist);
+                    self.quicklistshow = res.page.list;
+                    self.quicklist = self.quicklists;
+                    $timeout(function () {
+                        $scope.$apply();
+                    });
                 }
-                self.quicklists = Object.assign(self.quicklists, showlist);
-                self.quicklistshow = res.page.list;
-                self.quicklist = self.quicklists;
-                console.log(self.quicklist);
-                $timeout(function () {
-                    $scope.$apply();
-                });
-
             }else
                 console.error("error~!");
         });
     };
 
     self.currencyData = function () {
-        news.getCurrencyData(function(res) {
+        news.getCurrencyData(function(res) {coinlists
             if(res != null) {
                 self.shownewsloading = false;
-                self.coinlist = res;
+                if(JSON.stringify(self.coinlists) == '[]'){
+                    self.coinlists = res;
+                }else{
+
+                }
+                $timeout(function(){
+                    self.coinlist = self.coinlists.concat(res);
+                },10)
                 $timeout(function(){
                     $scope.$apply();
                 });
-                console.log(res);
             }else
                 console.error("error~!");
         });
     };
 
     //	加载更多
-    self.loadmore = lodash.debounce(function(outlr, inlr, num){
+    self.loadmore = function(outlr, inlr, num){
         self.shownewsloading = true;
+        console.log('00000000000000000000000000000000000000000000000000000000000000000000000000000000')
         if(outlr == 'new1tab'){
             self.newsData();
         }else if(outlr == 'new2tab'){
@@ -2111,7 +2129,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         }else if(outlr == 'new3tab'){
             self.currencyData();
         }
-    },2000)
+    }
 
     var id = 0;
     eventBus.on('newtransaction',function(event){

@@ -128,187 +128,187 @@
                     <b>{{index.lockedBalanceStr}} </b>
                 </div>
             </div>
-                <!--
+            <!--
 
-                history
+            history
 
-                -->
+            -->
 
-                <div  class="history" ng-init="index.updateTxHistory(3)">
+            <div  class="history" ng-init="index.updateTxHistory(3)">
 
-                        <div ng-show="!index.txHistory[0] && !index.updatingTxHistory[index.walletId]">
-    
-                            <div class="text-center">
-    
-                                <div class="p15h m24t" ng-show="index.txHistoryError" ng-click='index.updateTxHistory(3)'>
-    
-                                    <p class="graytext m40b" translate>Could not fetch transaction history</p>
-    
-                                    <button translate>Tap to retry</button>
-    
-                                </div>
-    
-                                <div class="m40t" ng-if="!index.txHistoryError" translate>
-    
-                                    <img src="./img/notx.png" />
-    
-                                    <div class="graytext m24t" translate>No transactions yet</div>
-    
-                                </div>
-    
-                            </div>
-    
+                <div ng-show="!index.txHistory[0] && !index.updatingTxHistory[index.walletId]">
+
+                    <div class="text-center">
+
+                        <div class="p15h m24t" ng-show="index.txHistoryError" ng-click='index.updateTxHistory(3)'>
+
+                            <p class="graytext m40b" translate>Could not fetch transaction history</p>
+
+                            <button translate>Tap to retry</button>
+
                         </div>
-    
-                        <!-- <div class="row m20t text-center" ng-show="index.updatingTxHistory[index.walletId]">
-    
-                            <div class="columns large-12 medium-12 small-12">
-        
-                                <div class="spinner">
-        
-                                <div class="rect1"></div>
-        
-                                <div class="rect2"></div>
-        
-                                <div class="rect3"></div>
-        
-                                <div class="rect4"></div>
-        
-                                <div class="rect5"></div>
-        
-                                </div>
-        
+
+                        <div class="m40t" ng-if="!index.txHistoryError" translate>
+
+                            <img src="./img/notx.png" />
+
+                            <div class="graytext m24t" translate>No transactions yet</div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- <div class="row m20t text-center" ng-show="index.updatingTxHistory[index.walletId]">
+
+                    <div class="columns large-12 medium-12 small-12">
+
+                        <div class="spinner">
+
+                        <div class="rect1"></div>
+
+                        <div class="rect2"></div>
+
+                        <div class="rect3"></div>
+
+                        <div class="rect4"></div>
+
+                        <div class="rect5"></div>
+
+                        </div>
+
+                    </div>
+
+                    <div ng-show="index.txProgress > 6" translate class="size-12 text-gray m20t">
+
+                        Initial transaction history synchronization can take some minutes for wallets with many transactions.<br/>
+
+                        Please stand by.
+
+                    </div>
+
+                    <div ng-show="index.txProgress > 6" class="size-14 text-gray m20t">
+
+                        <b>{{index.txProgress}}</b>
+
+                        <span translate>Transactions<br> Downloaded</span>
+
+                    </div>
+
+                </div> -->
+
+
+
+                <div class="histxdetail" ng-show="index.txHistory[0]">
+
+                    <div ng-repeat="btx in index.txHistory"
+
+                         ng-click="home.openTxModal(btx)"
+
+                         class="last-transactions-content">
+
+                        <div class="histop">
+                            <div class="histopl" ng-show="btx.action == 'received'">
+                                <img src="./img/received.png"><span translate>Received</span>
                             </div>
-        
-                            <div ng-show="index.txProgress > 6" translate class="size-12 text-gray m20t">
-        
-                                Initial transaction history synchronization can take some minutes for wallets with many transactions.<br/>
-        
-                                Please stand by.
-        
+                            <div class="histopl" ng-show="btx.action == 'sent'&& btx.confirmations != 'pending'">
+                                <img src="./img/sent.png"><span translate>Sent</span>
                             </div>
-        
-                            <div ng-show="index.txProgress > 6" class="size-14 text-gray m20t">
-        
-                                <b>{{index.txProgress}}</b>
-        
-                                <span translate>Transactions<br> Downloaded</span>
-        
+                            <div class="histopl" ng-show="btx.action == 'moved'">
+                                <img src="./img/sent.png"><span translate>Moved</span>
                             </div>
-    
-                        </div> -->
-    
-    
-    
-                        <div class="histxdetail" ng-show="index.txHistory[0]">
-    
-                            <div ng-repeat="btx in index.txHistory"
-        
-                                ng-click="home.openTxModal(btx)"
-        
-                                class="last-transactions-content">
-                                
-                                <div class="histop">
-                                <div class="histopl" ng-show="btx.action == 'received'">
-                                    <img src="./img/received.png"><span translate>Received</span>
-                                </div>
-                                <div class="histopl" ng-show="btx.action == 'sent'&& btx.confirmations != 'pending'">
-                                    <img src="./img/sent.png"><span translate>Sent</span>
-                                </div>
-                                <div class="histopl" ng-show="btx.action == 'moved'">
-                                    <img src="./img/sent.png"><span translate>Moved</span>
-                                </div>
-                                <div class="histopl" ng-show="btx.action == 'invalid'">
-                                    <img src="./img/sent.png"><span translate>Invalid</span>
-                                </div>
-                                <div class="histopl" ng-show="btx.confirmations == 'pending' && btx.action == 'sent' " >
-                                    <img src="./img/sent.png"><span translate>Pending</span>
-                                </div>
-                                <div class="histopr">
-                                    <time ng-if="btx.time">{{btx.time * 1000 | amTimeAgo}}</time>
-                                    <span translate class="text-warning" ng-show="!btx.time && (!btx.confirmations || btx.confirmations == 0)">
+                            <div class="histopl" ng-show="btx.action == 'invalid'">
+                                <img src="./img/sent.png"><span translate>Invalid</span>
+                            </div>
+                            <div class="histopl" ng-show="btx.confirmations == 'pending' && btx.action == 'sent' " >
+                                <img src="./img/sent.png"><span translate>Pending</span>
+                            </div>
+                            <div class="histopr">
+                                <time ng-if="btx.time">{{btx.time * 1000 | amTimeAgo}}</time>
+                                <span translate class="text-warning" ng-show="!btx.time && (!btx.confirmations || btx.confirmations == 0)">
                                         Unconfirmed
                                     </span>
-                                </div>
-                                </div>
-                                <div class="hisbottom">
-                                <span class="hisbramount" ng-if="btx.action == 'received'">+{{btx.amountTl}}<span class="hisunit">INVE</span></span>
-        
-                                <span class="hisbsamount" ng-if="btx.action == 'sent'">-{{btx.amountTl}}<span class="hisunit">INVE</span></span>
-        
-                                <span  class="size-12" ng-if="btx.action == 'invalid'" translate>
+                            </div>
+                        </div>
+                        <div class="hisbottom">
+                            <span class="hisbramount" ng-if="btx.action == 'received'">+{{btx.amountTl}}<span class="hisunit">INVE</span></span>
+
+                            <span class="hisbsamount" ng-if="btx.action == 'sent'">-{{btx.amountTl}}<span class="hisunit">INVE</span></span>
+
+                            <span  class="size-12" ng-if="btx.action == 'invalid'" translate>
         
                                     (possible double spend)
         
                                 </span>
-                                </div>
-        
-                                <!-- <div class="size-14 text-gray columns m5t" ng-if="btx.message || btx.addressTo">
-                                <div ng-show="btx.message"><span translate>Note</span>: {{btx.message}}</div>
-                                <div ng-show="!btx.message">
-                                    <span translate>To</span>: {{index.addressbook[btx.addressTo] || btx.addressTo}}
-                                </div>
-                                <span ng-show="btx.textAddress || btx.original_address" class="small-10">
-                                    <span>{{index.getToAddressLabel(btx.textAddress || btx.original_address)}}</span>: {{index.getAddressValue(btx.textAddress || btx.original_address)}}
-                                </span>
-                                <span ng-show="btx.isTextcoin" class="small-2 right">
-                                    <span class="label tu light-gray radius">textcoin</span>
-                                </span>
-                                </div> -->
-                            </div>
-        
-                            <div class="row m20t text-center" ng-show="index.historyRendering">
-        
-                                <div class="columns large-12 medium-12 small-12">
-        
-                                <div class="spinner">
-        
-                                    <div class="rect1"></div>
-        
-                                    <div class="rect2"></div>
-        
-                                    <div class="rect3"></div>
-        
-                                    <div class="rect4"></div>
-        
-                                    <div class="rect5"></div>
-        
-                                </div>
-        
-                                </div>
-        
-                            </div>
-                            <button type="submit" ng-show="index.historyShowShowAll" ng-click="index.showAllHistory()" translate>
-
-                                Show all
-
-                            </button>
-                             <!--<div class="row m20t">
-
-                                    <div class="large-6 medium-6 small-6 columns">
-
-
-
-                                    </div>
-
-                                    <div class="large-6 medium-6 small-6 columns" ng-show="!index.isCordova">
-
-                                    <input id="export_file" type="file" nwsaveas="Byteball-{{index.alias || index.walletName}}.csv" accept=".csv" style="display:none">
-
-                                    <a class="button outline dark-gray round" ng-click="index.csvHistory();">
-
-                                        <i class="fi-page-export-csv"></i>
-
-                                        <span translate>Download CSV file</span>
-
-                                    </a>
-
-                                    </div>
-
-                                </div>-->
                         </div>
-    
-                    </div> <!-- END History -->
+
+                        <!-- <div class="size-14 text-gray columns m5t" ng-if="btx.message || btx.addressTo">
+                        <div ng-show="btx.message"><span translate>Note</span>: {{btx.message}}</div>
+                        <div ng-show="!btx.message">
+                            <span translate>To</span>: {{index.addressbook[btx.addressTo] || btx.addressTo}}
+                        </div>
+                        <span ng-show="btx.textAddress || btx.original_address" class="small-10">
+                            <span>{{index.getToAddressLabel(btx.textAddress || btx.original_address)}}</span>: {{index.getAddressValue(btx.textAddress || btx.original_address)}}
+                        </span>
+                        <span ng-show="btx.isTextcoin" class="small-2 right">
+                            <span class="label tu light-gray radius">textcoin</span>
+                        </span>
+                        </div> -->
+                    </div>
+
+                    <div class="row m20t text-center" ng-show="index.historyRendering">
+
+                        <div class="columns large-12 medium-12 small-12">
+
+                            <div class="spinner">
+
+                                <div class="rect1"></div>
+
+                                <div class="rect2"></div>
+
+                                <div class="rect3"></div>
+
+                                <div class="rect4"></div>
+
+                                <div class="rect5"></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <button type="submit" ng-show="index.historyShowShowAll" ng-click="index.showAllHistory()" translate>
+
+                        Show all
+
+                    </button>
+                    <!--<div class="row m20t">
+
+                           <div class="large-6 medium-6 small-6 columns">
+
+
+
+                           </div>
+
+                           <div class="large-6 medium-6 small-6 columns" ng-show="!index.isCordova">
+
+                           <input id="export_file" type="file" nwsaveas="Byteball-{{index.alias || index.walletName}}.csv" accept=".csv" style="display:none">
+
+                           <a class="button outline dark-gray round" ng-click="index.csvHistory();">
+
+                               <i class="fi-page-export-csv"></i>
+
+                               <span translate>Download CSV file</span>
+
+                           </a>
+
+                           </div>
+
+                       </div>-->
+                </div>
+
+            </div> <!-- END History -->
         </div> <!-- END WalletHome -->
 
         <!--
@@ -338,8 +338,11 @@
                 </div>
             </div>
             <div class="addwcontent" ng-if="home.showtab == 'new1'" id="new1tab" ng-init="index.newsData()" homescrolled="index.loadmore('new1tab', 'new1tablist')">
-                <div ng-if="index.newslist == ''">
-                    空的
+                <div ng-if="index.newslist == ''" class="nonews">
+                    <div class="nonewsin">
+                        <img src="./img/nonews.png" />
+                        <div class="nonewsintext">暂无新鲜内容</div>
+                    </div>
                 </div>
                 <div class="newslist" ng-if="index.newslist !== ''" id="new1tablist">
                     <div class="item" ng-repeat="item in index.newslist track by $index">
@@ -356,8 +359,11 @@
                 <div ng-show="index.shownewsloading" class="shownewsloading">加载动画</div>
             </div>
             <div class="addwcontent" ng-if="home.showtab == 'new2'" id="new2tab" ng-init="index.quickData()" homescrolled="index.loadmore('new2tab', 'new2tablist')">
-                <div ng-if="index.quicklistshow == ''">
-                    空的
+                <div ng-if="index.quicklistshow == ''" class="nonews">
+                    <div class="nonewsin">
+                        <img src="./img/nonews.png" />
+                        <div class="nonewsintext">暂无新鲜内容</div>
+                    </div>
                 </div>
                 <div class="letterlist" ng-if="index.quicklistshow !== ''" id="new2tablist">
                     <div class="datenow" ng-class="{'fadeInUpBig animated': index.quickanimate <= 2}">{{index.getweekginglee}}</div>
@@ -369,33 +375,21 @@
                                 <div class="info">
                                     <div class="title">{{itemin.title}}</div>
                                     <div class="desc">
-                                    {{itemin.content}}
+                                        {{itemin.content}}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--<div class="itemin">-->
-                        <!--<div class="date">昨天 10/16 星期二</div>-->
-                        <!--<div class="itemlr">-->
-                            <!--<div class="item">-->
-                                <!--<div class="time">59分钟前</div>-->
-                                <!--<div class="info">-->
-                                    <!--<div class="title">现场| 火币集团品牌公关VP：本轮下跌原因是行业发展过程中矛盾体现</div>-->
-                                    <!--<div class="desc">-->
-                                        <!--在被问到关于近期担任拼多多独立董事的问题时，陆奇回应称，从个人角度来说，他会适当的和一些高科技企业合作，比如担任独立董事，-->
-                                        <!--前提是他确认自己可以帮助企业长期发展。他现在的重心放在Ycombinator上，但如果其他企业有这样的机会，他会考虑参与。（新浪）-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
                 </div>
                 <div ng-show="index.shownewsloading" class="shownewsloading">加载动画</div>
             </div>
             <div class="addwcontent" ng-if="home.showtab == 'new3'" id="new3tab" ng-init="index.currencyData()" homescrolled="index.loadmore('new3tab', 'new3tablist')">
-                <div ng-if="index.coinlist == ''">
-                    空的
+                <div ng-if="index.coinlist == ''" class="nonews">
+                    <div class="nonewsin">
+                        <img src="./img/nonews.png" />
+                        <div class="nonewsintext">暂无新鲜内容</div>
+                    </div>
                 </div>
                 <div class="quotelist" ng-if="index.coinlist !== ''" id="new3tablist">
                     <div class="titlelabel">
@@ -449,7 +443,7 @@
                       <span class="text-warning">
                         {{home.error|translate}}
                       </span>
-                      <a class="close-notification text-warning">&#215;</a>
+                        <a class="close-notification text-warning">&#215;</a>
                     </div>
                     <div ng-hide="home.hideAmount">
                         <div>
@@ -492,16 +486,16 @@
                                     <a ng-click="home.setSendAll()" ng-show="!home.bSendAll && !home.lockAmount" translate>Send all</a>
                                 </label>
                                 <div ng-show="!home.onGoingProcess" class="m30t">
-                                    
+
                                     <!--<button type="submit" class="m20t" ng-if="mtab == 1" ng-disabled="home.current_payment_key || sendPaymentForm.$invalid || home.blockUx || index.isOffline || !index.isEnoughSignersSelected()"-->
-                                                     <!--ng-style="{'background-color':index.backgroundColor}"  translate>-->
+                                    <!--ng-style="{'background-color':index.backgroundColor}"  translate>-->
                                     <!--Send-->
-                                <!--</button>-->
+                                    <!--</button>-->
                                     <button type="submit" class="m20t m20b" ng-if="mtab == 1" ng-disabled="sendPaymentForm.$invalid" translate>
                                         Send
                                     </button>
                                     <a class="sendcancel" ng-click="home.resetForm(sendPaymentForm)"
-                                    ng-show="!home.blockUx && !home.send_multiple && (home.lockAddress || home.lockAmount || home.bSendAll)" translate>Cancel</a>
+                                       ng-show="!home.blockUx && !home.send_multiple && (home.lockAddress || home.lockAmount || home.bSendAll)" translate>Cancel</a>
                                 </div>
                             </div>
                         </div>
