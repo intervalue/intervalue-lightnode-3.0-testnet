@@ -2466,6 +2466,30 @@ msgstr "有一笔新的交易"
 msgid "Payment received:"
 msgstr "已收到付款："
 
+msgid "News"
+msgstr "资讯"
+
+msgid "Newest"
+msgstr "最新"
+
+msgid "Newsletter"
+msgstr "快讯"
+
+msgid "Quotes"
+msgstr "行情"
+
+msgid "Market value"
+msgstr "市值"
+
+msgid "Price"
+msgstr "价格"
+
+msgid "Latest gains"
+msgstr "最新涨幅"
+
+msgid "views"
+msgstr "浏览"
+
 
 
 

@@ -349,6 +349,16 @@ angular
           }
         }
       })
+      .state('preferencesGlobal.preferencesCurrency', {
+          url: '/currency',
+          walletShouldBeComplete: true,
+          needProfile: true,
+          views: {
+              'main@': {
+                  templateUrl: 'views/preferencesCurrency.html'
+              }
+          }
+      })
       .state('preferencesGlobal.preferencesAttestorAddresses', {
         url: '/attestorAddresses',
         walletShouldBeComplete: true,
@@ -421,17 +431,6 @@ angular
         views: {
           'main@': {
             templateUrl: 'views/preferencesEditWitness.html'
-          }
-        }
-      })
-      .state('preferencesGlobal.backup', {
-        url: '/backup',
-        templateUrl: 'views/backup.html',
-        walletShouldBeComplete: true,
-        needProfile: true,
-        views: {
-          'main@': {
-            templateUrl: 'views/backup.html'
           }
         }
       })
@@ -529,7 +528,7 @@ angular
       })
 
       .state('walletnamea', {
-        url: '/walletname?image&name&addr&ammount&walletId&mnemonic&mnemonicEncrypted',
+        url: '/walletname?name&addr&ammount&walletid&image&mnemonic&mnemonicEncrypted',
         needProfile: true,
         views: {
             'main@': {
@@ -538,7 +537,7 @@ angular
         }
       })
       .state('changeWalletPassWord', {
-          url: '/changeWalletPassWord?walletId&addr&name&image&ammount',
+          url: '/changeWalletPassWord?name&addr&ammount&walletid&image&mnemonic&mnemonicEncrypted',
           needProfile: true,
           views: {
               'main@': {
@@ -557,7 +556,7 @@ angular
       })
 
       .state('backup', {
-          url: '/backup?name&addr&ammount&walletId&mnemonic&mnemonicEncrypted',
+          url: '/backup?name&addr&ammount&walletid&image&mnemonic&mnemonicEncrypted',
           templateUrl: 'views/backup.html',
           walletShouldBeComplete: true,
           needProfile: true,
@@ -579,6 +578,15 @@ angular
 
               }
           }
+      })
+
+      .state('newsin', {
+            url: '/article?id',
+            views: {
+                'main': {
+                    templateUrl: 'views/newsin.html'
+                }
+            }
       })
       .state('cordova', { // never used
         url: '/cordova/:status/:isHome',
@@ -610,11 +618,11 @@ angular
         needProfile: false
       });
   })
-  .run(function ($rootScope, $state, $log, uriHandler, isCordova, profileService, $timeout, nodeWebkit, uxLanguage, animationService) {
-    FastClick.attach(document.body);
+  .run(function ($rootScope, $state, $log, uriHandler, isCordova, profileService, $timeout, nodeWebkit, uxLanguage ,uxCurrency, animationService) {
+     FastClick.attach(document.body);
 
     uxLanguage.init();
-
+    uxCurrency.init();
     // Register URI handler, not for mobileApp
     if (!isCordova) {
       uriHandler.register();

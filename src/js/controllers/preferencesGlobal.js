@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('preferencesGlobalController',
-  function($scope, $rootScope, $log, configService, uxLanguage, pushNotificationsService, profileService) {
+  function($scope, $rootScope, $log, configService, uxLanguage,uxCurrency, pushNotificationsService, profileService) {
 	
 		var conf = require('intervaluecore/conf.js');
   
@@ -15,6 +15,7 @@ angular.module('copayApp.controllers').controller('preferencesGlobalController',
       this.myDeviceAddress = require('intervaluecore/device.js').getMyDeviceAddress();
       this.hub = config.hub;
       this.currentLanguageName = uxLanguage.getCurrentLanguageName();
+      this.currentCurrencyName = uxCurrency.getCurrentCurrencyName();
       this.torEnabled = conf.socksHost && conf.socksPort;
       $scope.pushNotifications = config.pushNotifications.enabled;
     };

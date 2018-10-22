@@ -2,12 +2,13 @@
 
 angular.module('copayApp.controllers')
 	.controller('preferencesController',
-		function($scope, $rootScope, $filter, $timeout, $modal, $log, lodash, configService, profileService, uxLanguage, $q) {
+		function($scope, $rootScope, $filter, $timeout, $modal, $log, lodash, configService, profileService, uxLanguage,uxCurrency, $q) {
 
 			this.init = function() {
 				var config = configService.getSync();
 				this.unitName = config.wallet.settings.unitName;
 				this.currentLanguageName = uxLanguage.getCurrentLanguageName();
+                this.currentCurrencyName = uxCurrency.getCurrentCurrencyName();
 				$scope.spendUnconfirmed = config.wallet.spendUnconfirmed;
 				var fc = profileService.focusedClient;
 				if (!fc)

@@ -78,6 +78,7 @@ module.exports = function (grunt) {
                     'bower_components/angular-ui-switch/angular-ui-switch.js',
                     'bower_components/angular-elastic/elastic.js',
                     'bower_components/ui-router-extras/release/ct-ui-router-extras.js',
+                    'bower_components/angular-sanitize/angular-sanitize.js'
 				],
 				dest: 'public/angular.js'
 			},
