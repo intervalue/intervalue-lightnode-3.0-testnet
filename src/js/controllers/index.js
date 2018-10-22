@@ -39,6 +39,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.coinlist = '';
     self.quicklist = [];
     self.quicklistshow = '';
+    self.newslists = [];
     self.quicklists = {};
     self.newsanimate = 1;
     self.quickanimate = 1;
@@ -2026,13 +2027,17 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         // 	}
         // ]
         news.getNewsData(6,self.newspage,null,function(res) {
-            console.log('111111111111');
+
             if(!!res && res.code == 0) {
-                console.log('dddddddddd')
                 self.shownewsloading = false;
                 self.newspage += 6;
+                if(JSON.stringify(self.newslists) == '[]'){
+                    self.newslists = res.page.list;
+                }else{
+
+                }
                 $timeout(function(){
-                    self.newslist = res.page.list
+                    self.newslist = (self.newslists).concat(res.page.list);
                 },10)
                 $scope.$apply();
                 console.log(res.page.list);
@@ -2044,24 +2049,32 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.quickData = function () {
         news.getQuickData(6,null,null,function(res) {
             var list = [];
+            var showlist = {};
             if(!!res && res.code == 0) {
                 self.shownewsloading = false;
+                //给返回对象加字段
                 lodash.forEach(res.page.list, function(value, key){
                     value.grayweek = self.getWeekNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
                     value.graydate = self.getDateNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
                     value.greentime = self.getTimeFromNow(value.createTime);
                 })
-                self.quicklists = Object.assign(self.quicklists, res.page.list);
                 list = res.page.list;
+                //换返回对象的格式
                 for(var i = 0; i < list.length; i++) {
-                    if(!self.quicklists[list[i].grayweek]) {
+                    if(!showlist[list[i].grayweek]) {
                         var arr = [];
                         arr.push(list[i]);
-                        self.quicklists[list[i].grayweek] = arr;
+                        showlist[list[i].grayweek] = arr;
                     }else {
-                        self.quicklists[list[i].grayweek].push(list[i])
+                        showlist[list[i].grayweek].push(list[i])
                     }
                 }
+                if(JSON.stringify(self.quicklists) == '{}'){
+                    self.quicklists = showlist;
+                }else{
+
+                }
+                self.quicklists = Object.assign(self.quicklists, showlist);
                 self.quicklistshow = res.page.list;
                 self.quicklist = self.quicklists;
                 console.log(self.quicklist);
@@ -2082,7 +2095,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 $timeout(function(){
                     $scope.$apply();
                 });
-
                 console.log(res);
             }else
                 console.error("error~!");
@@ -2090,7 +2102,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     };
 
     //	加载更多
-    self.loadmore = function(outlr, inlr, num){
+    self.loadmore = lodash.debounce(function(outlr, inlr, num){
         self.shownewsloading = true;
         if(outlr == 'new1tab'){
             self.newsData();
@@ -2099,39 +2111,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         }else if(outlr == 'new3tab'){
             self.currencyData();
         }
-
-        // //获得元素
-        // var isBottom = false;
-        // var wai = $window.document.getElementById("外层滚动容器wai");
-        // var content = $window.document.getElementById("承载内容列表content");
-        //
-        // //监听滚动
-        // wai.onscroll = function () {
-        //     var scrollTop = wai.scrollTop,
-        //         viewHeight = wai.clientHeight,
-        //         height = content.offsetHeight;
-        //
-        //     //判断是否滚动到底部
-        //     if (((scrollTop + viewHeight) >= height) && !isBottom)
-        //     {
-        //         isBottom = true;
-        //         console.log("到底了");
-        //         $scope.infinite_isCmp = true;
-        //         $scope.$apply();
-        //         $rootScope.requireCount+=10;
-        //
-        //         //模拟请求延时,将第二次延时2s后
-        //         $timeout(function () {
-        //             aaa.require().success(function (data) {
-        //                 $scope.model = data;
-        //                 isBottom = false;
-        //                 $scope.infinite_isCmp = false;
-        //             });
-        //         },2000);
-        //     }
-        // }
-
-    }
+    },2000)
 
     var id = 0;
     eventBus.on('newtransaction',function(event){
