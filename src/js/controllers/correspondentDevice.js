@@ -8,7 +8,8 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
     function($scope, $rootScope, $timeout, $sce, $modal, configService, profileService, animationService, isCordova, go, correspondentListService, addressService, lodash, $deepStateRedirect, $state, backButton, gettext) {
 
         var async = require('async');
-        var chatStorage = require('intervaluecore/chat_storage.js');
+        //todo delete
+        // var chatStorage = require('intervaluecore/chat_storage.js');
         var self = this;
         console.log("correspondentDeviceController");
         var privateProfile = require('intervaluecore/private_profile.js');
@@ -40,7 +41,8 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             var device = require('intervaluecore/device.js');
             device.sendMessageToDevice(correspondent.device_address, "chat_recording_pref", pref, {
                 ifOk: function(){
-                    device.updateCorrespondentProps(correspondent);
+                    //todo delete
+                    // device.updateCorrespondentProps(correspondent);
                     var oldState = (correspondent.peer_record_pref && !correspondent.my_record_pref);
                     var newState = (correspondent.peer_record_pref && correspondent.my_record_pref);
                     if (newState != oldState) {
@@ -55,7 +57,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                         $timeout(function(){
                             $scope.$digest();
                         });
-                        chatStorage.store(correspondent.device_address, JSON.stringify({state: newState}), 0, 'system');
+                        // chatStorage.store(correspondent.device_address, JSON.stringify({state: newState}), 0, 'system');
                     }
                     /*if (!pref) {
                         chatStorage.purge(correspondent.device_address);
@@ -111,7 +113,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     $timeout(function(){
                         $scope.$apply();
                     });
-                    if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(correspondent.device_address, message, 0);
+                    // if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(correspondent.device_address, message, 0);
                 },
                 ifError: function(error){
                     setOngoingProcess();
@@ -356,18 +358,19 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                                         device_address: device.getMyDeviceAddress()
                                     }
                                 };
-                                walletDefinedByAddresses.createNewSharedAddress(arrDefinition, assocSignersByPath, {
-                                    ifError: function(err){
-                                        $scope.bWorking = false;
-                                        $scope.error = err;
-                                        $timeout(function(){
-                                            $scope.$digest();
-                                        });
-                                    },
-                                    ifOk: function(shared_address){
-                                        composeAndSend(shared_address, arrDefinition, assocSignersByPath, my_address);
-                                    }
-                                });
+                                //todo delete
+                                // walletDefinedByAddresses.createNewSharedAddress(arrDefinition, assocSignersByPath, {
+                                //     ifError: function(err){
+                                //         $scope.bWorking = false;
+                                //         $scope.error = err;
+                                //         $timeout(function(){
+                                //             $scope.$digest();
+                                //         });
+                                //     },
+                                //     ifOk: function(shared_address){
+                                //         composeAndSend(shared_address, arrDefinition, assocSignersByPath, my_address);
+                                //     }
+                                // });
                             });
                         });
 
@@ -417,7 +420,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                                 device.sendMessageToDevice(correspondent.device_address, 'text', paymentRequestText);
                                 var body = correspondentListService.formatOutgoingMessage(paymentRequestText);
                                 correspondentListService.addMessageEvent(false, correspondent.device_address, body);
-                                if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(correspondent.device_address, body, 0, 'html');
+                                // if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(correspondent.device_address, body, 0, 'html');
                                 if (contract.peer_pays_to === 'me')
                                     issueNextAddress(); // make sure the address is not reused
                             });
@@ -491,7 +494,8 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                         assocMemberAddressesByDestAddress[destinationAddress] = arrMemberAddresses;
                         arrAllMemberAddresses = arrAllMemberAddresses.concat(arrMemberAddresses);
                         arrFuncs.push(function(cb){
-                            walletDefinedByAddresses.validateAddressDefinition(arrDefinition, cb);
+                            //todo delete
+                            // walletDefinedByAddresses.validateAddressDefinition(arrDefinition, cb);
                         });
                     }
                     arrAllMemberAddresses = lodash.uniq(arrAllMemberAddresses);
@@ -515,9 +519,10 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                                 for (var destinationAddress in objMultiPaymentRequest.definitions){
                                     var arrDefinition = objMultiPaymentRequest.definitions[destinationAddress].definition;
                                     var assocSignersByPath = objMultiPaymentRequest.definitions[destinationAddress].signers;
-                                    var arrPeerAddresses = walletDefinedByAddresses.getPeerAddressesFromSigners(assocSignersByPath);
-                                    if (lodash.difference(arrPeerAddresses, arrAllMemberAddresses).length !== 0)
-                                        throw Error("inconsistent peer addresses");
+                                    //todo delete
+                                    // var arrPeerAddresses = walletDefinedByAddresses.getPeerAddressesFromSigners(assocSignersByPath);
+                                    // if (lodash.difference(arrPeerAddresses, arrAllMemberAddresses).length !== 0)
+                                    //     throw Error("inconsistent peer addresses");
                                     $scope.arrHumanReadableDefinitions.push({
                                         destinationAddress: destinationAddress,
                                         humanReadableDefinition: correspondentListService.getHumanReadableDefinition(arrDefinition, arrMyAddresses, [], arrPeerAddresses)
@@ -560,12 +565,13 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                             console.log('shared address '+shared_address+' already known');
                             return cb();
                         }
-                        walletDefinedByAddresses.handleNewSharedAddress({address: shared_address, definition: arrDefinition, signers: signers}, {
-                            ifOk: cb,
-                            ifError: function(err){
-                                throw Error('failed to create shared address '+shared_address+': '+err);
-                            }
-                        });
+                        //todo delete
+                        // walletDefinedByAddresses.handleNewSharedAddress({address: shared_address, definition: arrDefinition, signers: signers}, {
+                        //     ifOk: cb,
+                        //     ifError: function(err){
+                        //         throw Error('failed to create shared address '+shared_address+': '+err);
+                        //     }
+                        // });
                     });
                 }
 
@@ -742,13 +748,14 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                         if (rows.length === 0){
                             if (conf.bLight && bFirstAttempt){
                                 $scope.question = '[Fetching the question...]';
-                                network.requestProofsOfJointsIfNewOrUnstable([objVote.poll_unit], function(err){
-                                    if (err){
-                                        $scope.error = err;
-                                        return scopeApply();
-                                    }
-                                    setPollQuestion();
-                                });
+                                //todo delete
+                                // network.requestProofsOfJointsIfNewOrUnstable([objVote.poll_unit], function(err){
+                                //     if (err){
+                                //         $scope.error = err;
+                                //         return scopeApply();
+                                //     }
+                                //     setPollQuestion();
+                                // });
                             }
                             else
                                 $scope.question = '[No such poll: '+objVote.poll_unit+']';
@@ -931,20 +938,21 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                         }
                         indexScope.current_message_signing_key = current_message_signing_key;
                         var recipient_device_address = lodash.clone(correspondent.device_address);
-                        fc.signMessage($scope.address, message_to_sign, getSigningDeviceAddresses(fc), function(err, objSignedMessage){
-                            delete indexScope.current_message_signing_key;
-                            if (err){
-                                if (chatScope){
-                                    setError(err);
-                                    $timeout(function() {
-                                        chatScope.$apply();
-                                    });
-                                }
-                                return;
-                            }
-                            var signedMessageBase64 = Buffer.from(JSON.stringify(objSignedMessage)).toString('base64');
-                            appendText('[Signed message](signed-message:' + signedMessageBase64 + ')');
-                        });
+                        //todo delete
+                        // fc.signMessage($scope.address, message_to_sign, getSigningDeviceAddresses(fc), function(err, objSignedMessage){
+                        //     delete indexScope.current_message_signing_key;
+                        //     if (err){
+                        //         if (chatScope){
+                        //             setError(err);
+                        //             $timeout(function() {
+                        //                 chatScope.$apply();
+                        //             });
+                        //         }
+                        //         return;
+                        //     }
+                        //     var signedMessageBase64 = Buffer.from(JSON.stringify(objSignedMessage)).toString('base64');
+                        //     appendText('[Signed message](signed-message:' + signedMessageBase64 + ')');
+                        // });
                         $modalInstance.dismiss('cancel');
                     });
                 }; // signMessage
@@ -989,13 +997,14 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                 $scope.color = fc.backgroundColor;
                 $scope.signed_message = objSignedMessage.signed_message;
                 $scope.address = objSignedMessage.authors[0].address;
-                var validation = require('intervaluecore/validation.js');
-                validation.validateSignedMessage(objSignedMessage, function(err){
-                    $scope.bValid = !err;
-                    if (err)
-                        console.log("validateSignedMessage: "+err);
-                    scopeApply();
-                });
+                //todo delete
+                // var validation = require('intervaluecore/validation.js');
+                // validation.validateSignedMessage(objSignedMessage, function(err){
+                //     $scope.bValid = !err;
+                //     if (err)
+                //         console.log("validateSignedMessage: "+err);
+                //     scopeApply();
+                // });
 
                 function scopeApply(){
                     $timeout(function(){
@@ -1070,7 +1079,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                 timestamp: Math.floor(+ new Date() / 1000),
                 chat_recording_status: true
             };
-            chatStorage.store(correspondent.device_address, message.message, 0, 'system');
+            // chatStorage.store(correspondent.device_address, message.message, 0, 'system');
             $scope.messageEvents.push(correspondentListService.parseMessage(message));
         });
 
@@ -1079,11 +1088,13 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             $scope.error = error;
         }
 
+        //todo delete
         function readLastMainChainIndex(cb){
             if (conf.bLight){
-                network.requestFromLightVendor('get_last_mci', null, function(ws, request, response){
-                    response.error ? cb(response.error) : cb(null, response);
-                });
+
+                // network.requestFromLightVendor('get_last_mci', null, function(ws, request, response){
+                //     response.error ? cb(response.error) : cb(null, response);
+                // });
             }
             else
                 storage.readLastMainChainIndex(function(last_mci){
@@ -1229,87 +1240,89 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             }
         }
 
-        $scope.acceptPrivateProfile = function(privateProfileJsonBase64){
-            $rootScope.modalOpened = true;
-            var objPrivateProfile = privateProfile.getPrivateProfileFromJsonBase64(privateProfileJsonBase64);
-            if (!objPrivateProfile)
-                throw Error('failed to parse the already validated base64 private profile '+privateProfileJsonBase64);
-            var fc = profileService.focusedClient;
-            var ModalInstanceCtrl = function($scope, $modalInstance) {
-                $scope.color = fc.backgroundColor;
-                var openProfile = {};
-                for (var field in objPrivateProfile.src_profile)
-                    if (Array.isArray(objPrivateProfile.src_profile[field]))
-                        openProfile[field] = objPrivateProfile.src_profile[field][0];
-                $scope.openProfile = openProfile;
-                $scope.bDisabled = true;
-                $scope.buttonLabel = gettext('Verifying the profile...');
-                privateProfile.parseAndValidatePrivateProfile(objPrivateProfile, function(error, address, attestor_address, bMyAddress){
-                    if (!$scope)
-                        return;
-                    if (error){
-                        $scope.error = error;
-                        $scope.buttonLabel = gettext('Bad profile');
-                        $timeout(function() {
-                            $rootScope.$apply();
-                        });
-                        return;
-                    }
-                    $scope.address = address;
-                    $scope.attestor_address = attestor_address;
-                    $scope.bMyAddress = bMyAddress;
-                    if (!bMyAddress)
-                        return $timeout(function() {
-                            $rootScope.$apply();
-                        });
-                    checkIfPrivateProfileExists(objPrivateProfile, function(bExists){
-                        if (bExists)
-                            $scope.buttonLabel = gettext('Already saved');
-                        else{
-                            $scope.buttonLabel = gettext('Store');
-                            $scope.bDisabled = false;
-                        }
-                        $timeout(function() {
-                            $rootScope.$apply();
-                        });
-                    });
-                });
 
-                $scope.getDisplayField = getDisplayField;
-
-                $scope.store = function() {
-                    if (!$scope.bMyAddress)
-                        throw Error("not my address");
-                    privateProfile.savePrivateProfile(objPrivateProfile, $scope.address, $scope.attestor_address, function(){
-                        $timeout(function(){
-                            $modalInstance.dismiss('cancel');
-                        });
-                    });
-                };
-
-                $scope.cancel = function() {
-                    $modalInstance.dismiss('cancel');
-                };
-            };
-
-            var modalInstance = $modal.open({
-                templateUrl: 'views/modals/accept-profile.html',
-                windowClass: animationService.modalAnimated.slideUp,
-                controller: ModalInstanceCtrl,
-                scope: $scope
-            });
-
-            var disableCloseModal = $rootScope.$on('closeModal', function() {
-                modalInstance.dismiss('cancel');
-            });
-
-            modalInstance.result.finally(function() {
-                $rootScope.modalOpened = false;
-                disableCloseModal();
-                var m = angular.element(document.getElementsByClassName('reveal-modal'));
-                m.addClass(animationService.modalAnimated.slideOutDown);
-            });
-        };
+        //todo delete
+        // $scope.acceptPrivateProfile = function(privateProfileJsonBase64){
+        //     $rootScope.modalOpened = true;
+        //     var objPrivateProfile = privateProfile.getPrivateProfileFromJsonBase64(privateProfileJsonBase64);
+        //     if (!objPrivateProfile)
+        //         throw Error('failed to parse the already validated base64 private profile '+privateProfileJsonBase64);
+        //     var fc = profileService.focusedClient;
+        //     var ModalInstanceCtrl = function($scope, $modalInstance) {
+        //         $scope.color = fc.backgroundColor;
+        //         var openProfile = {};
+        //         for (var field in objPrivateProfile.src_profile)
+        //             if (Array.isArray(objPrivateProfile.src_profile[field]))
+        //                 openProfile[field] = objPrivateProfile.src_profile[field][0];
+        //         $scope.openProfile = openProfile;
+        //         $scope.bDisabled = true;
+        //         $scope.buttonLabel = gettext('Verifying the profile...');
+        //         privateProfile.parseAndValidatePrivateProfile(objPrivateProfile, function(error, address, attestor_address, bMyAddress){
+        //             if (!$scope)
+        //                 return;
+        //             if (error){
+        //                 $scope.error = error;
+        //                 $scope.buttonLabel = gettext('Bad profile');
+        //                 $timeout(function() {
+        //                     $rootScope.$apply();
+        //                 });
+        //                 return;
+        //             }
+        //             $scope.address = address;
+        //             $scope.attestor_address = attestor_address;
+        //             $scope.bMyAddress = bMyAddress;
+        //             if (!bMyAddress)
+        //                 return $timeout(function() {
+        //                     $rootScope.$apply();
+        //                 });
+        //             checkIfPrivateProfileExists(objPrivateProfile, function(bExists){
+        //                 if (bExists)
+        //                     $scope.buttonLabel = gettext('Already saved');
+        //                 else{
+        //                     $scope.buttonLabel = gettext('Store');
+        //                     $scope.bDisabled = false;
+        //                 }
+        //                 $timeout(function() {
+        //                     $rootScope.$apply();
+        //                 });
+        //             });
+        //         });
+        //
+        //         $scope.getDisplayField = getDisplayField;
+        //
+        //         $scope.store = function() {
+        //             if (!$scope.bMyAddress)
+        //                 throw Error("not my address");
+        //             privateProfile.savePrivateProfile(objPrivateProfile, $scope.address, $scope.attestor_address, function(){
+        //                 $timeout(function(){
+        //                     $modalInstance.dismiss('cancel');
+        //                 });
+        //             });
+        //         };
+        //
+        //         $scope.cancel = function() {
+        //             $modalInstance.dismiss('cancel');
+        //         };
+        //     };
+        //
+        //     var modalInstance = $modal.open({
+        //         templateUrl: 'views/modals/accept-profile.html',
+        //         windowClass: animationService.modalAnimated.slideUp,
+        //         controller: ModalInstanceCtrl,
+        //         scope: $scope
+        //     });
+        //
+        //     var disableCloseModal = $rootScope.$on('closeModal', function() {
+        //         modalInstance.dismiss('cancel');
+        //     });
+        //
+        //     modalInstance.result.finally(function() {
+        //         $rootScope.modalOpened = false;
+        //         disableCloseModal();
+        //         var m = angular.element(document.getElementsByClassName('reveal-modal'));
+        //         m.addClass(animationService.modalAnimated.slideOutDown);
+        //     });
+        // };
 
 
 

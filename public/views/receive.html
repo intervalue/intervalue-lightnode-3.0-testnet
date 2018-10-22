@@ -4,7 +4,7 @@
 	ng-init="titleSection='receive address'; closeToHome = true; noColor = true">
 </div>
 <!-- 顶部导航栏视图 -->
-    <div ng-controller="walletHomeController as home" class="receivelr">
+    <div ng-controller="walletHomeController as home" class="receivelr content">
         <!-- 如果需要备份，则... -->
         <div ng-show="index.needsBackup" class="row text-center">
             <div class="large-12 columns">
@@ -64,7 +64,7 @@
 
 
             </div>
-            <div class="text-center p18h">
+            <div class="text-center p18v">
     
                 <div ng-show="!agreed" >
                     <button class="m20t" ng-click="home.copyAddress(index.shared_address || home.addr[index.walletId])" ng-disabled="loading">
@@ -73,7 +73,7 @@
                 </div>
     
                 <div ng-show="!agreed" >
-                    <button class="awbtn m20t m20b" ng-click="home.openCustomizedAmountModal(index.shared_address || home.addr[index.walletId])" ng-disabled="loading" translate>
+                    <button class="awbtn m20t" ng-click="home.openCustomizedAmountModal(index.shared_address || home.addr[index.walletId])" ng-disabled="loading" translate>
                         Request a specific amount
                     </button>
                 </div>

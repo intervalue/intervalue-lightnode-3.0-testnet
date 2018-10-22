@@ -569,28 +569,31 @@ API.prototype.sendMultiPayment = function (opts, cb) {
     Wallet.sendMultiPayment(opts, cb);
   }
   else {
-    if (!opts.paying_addresses)
-      opts.wallet = self.credentials.walletId;
-    if (opts.change_address)
-      return Wallet.sendMultiPayment(opts, cb);
-    // create a new change address or select first unused one
-    if (!self.isSingleAddress) {
-      walletDefinedByKeys.issueOrSelectNextChangeAddress(self.credentials.walletId, function (objAddr) {
-        opts.change_address = objAddr.address;
-        Wallet.sendMultiPayment(opts, cb);
-      });
-    } else {
-      walletDefinedByKeys.readAddresses(self.credentials.walletId, {}, function (addresses) {
-        opts.change_address = addresses[0].address;
-              Wallet.sendMultiPayment(opts, cb);
-      });
-    }
+    alert("the shared_address is wrong : " + opts.shared_address);
+    //todo delete
+    // if (!opts.paying_addresses)
+    //   opts.wallet = self.credentials.walletId;
+    // if (opts.change_address)
+    //   return Wallet.sendMultiPayment(opts, cb);
+    // // create a new change address or select first unused one
+    // if (!self.isSingleAddress) {
+    //   walletDefinedByKeys.issueOrSelectNextChangeAddress(self.credentials.walletId, function (objAddr) {
+    //     opts.change_address = objAddr.address;
+    //     Wallet.sendMultiPayment(opts, cb);
+    //   });
+    // } else {
+    //   walletDefinedByKeys.readAddresses(self.credentials.walletId, {}, function (addresses) {
+    //     opts.change_address = addresses[0].address;
+    //           Wallet.sendMultiPayment(opts, cb);
+    //   });
+    // }
   }
 };
 
 API.prototype.signMessage = function (from_address, message, arrSigningDeviceAddresses, cb) {
   var Wallet = require('intervaluecore/wallet.js');
-  Wallet.signMessage(from_address, message, arrSigningDeviceAddresses, this.getSignerWithLocalPrivateKey(), cb);
+  //todo delete
+  // Wallet.signMessage(from_address, message, arrSigningDeviceAddresses, this.getSignerWithLocalPrivateKey(), cb);
 };
 
 API.prototype.getAddresses = function (opts, cb) {
@@ -614,6 +617,7 @@ API.prototype.getAddresses = function (opts, cb) {
  *
  * @param {Callback} cb
  */
+//TODO delete可以删除
 API.prototype.getBalance = function (shared_address, cb) {
   var Wallet = require('intervaluecore/wallet.js');
   $.checkState(this.credentials && this.credentials.isComplete());
@@ -654,13 +658,14 @@ API.prototype.getBalance = function (shared_address, cb) {
   });
 };
 
+//todo delete 可以删除
 API.prototype.getListOfBalancesOnAddresses = function (cb) {
   var Wallet = require('intervaluecore/wallet.js');
   $.checkState(this.credentials && this.credentials.isComplete());
   var walletId = this.credentials.walletId;
-  Wallet.readBalancesOnAddresses(walletId, function (assocBalances) {
-    cb(assocBalances);
-  });
+  // Wallet.readBalancesOnAddresses(walletId, function (assocBalances) {
+  //   cb(assocBalances);
+  // });
 };
 
 API.prototype.getTxHistory = function (asset, walletId, cb) {

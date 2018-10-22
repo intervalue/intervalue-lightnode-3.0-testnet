@@ -124,7 +124,8 @@ angular.module('copayApp.controllers').controller('preferencesTorController',
 			conf.socksHost = root.socksHost;
 			conf.socksPort = root.socksPort;
 			conf.socksLocalDNS = root.socksLocalDNS;
-			network.closeAllWsConnections();
+			//todo delete
+			// network.closeAllWsConnections();
 		}
 		
 		function saveConfToFile(cb) {

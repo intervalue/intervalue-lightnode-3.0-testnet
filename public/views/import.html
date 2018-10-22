@@ -25,35 +25,39 @@
 			</div>
 		</div>
 		<div class="addwcontentin">
-			<div ng-if="import.showtab == 'tabcold'">
+			<div ng-if="import.showtab == 'tabcold'" ng-controller="addwalletController as add">
 				<div translate>Wallet Seed :</div>
-				<textarea placeholder="{{'Enter your mnemonic, separated by spaces'|translate}}" ng-model="import.importcode"></textarea>
-				<div class="adinputitem">
-					<div class="adinputic">
-						<div class="adinputimg">
-							<img src="./img/walletnameinput.png">
+				<textarea placeholder="{{'Enter your mnemonic, separated by spaces'|translate}}" ng-model="add.importcode"></textarea>
+				<form name="creatwform"  novalidate>
+					<div class="adinputitem" mdinputvalidc>
+						<div class="adinputic">
+							<div class="adinputimg addwname"></div>
+							<input type="text" ng-model="add.addwiname" mdinputname ng-attr-placeholder="{{'Wallet name'|translate}}" autocomplete="off"
+							ng-minlength="1" ng-maxlength="20" minlength="1" maxlength="20" />
 						</div>
-						<input type="text" ng-model="import.addwiname" ng-attr-placeholder="{{'Wallet name'|translate}}">
+						<p class="adinputp" translate></p>
 					</div>
-				</div>
-				<div class="adinputitem">
-					<div class="adinputic">
-						<div class="adinputimg">
-							<img src="./img/walletpassirinput.png">
+					<div class="adinputitem" mdinputvalidc>
+						<div class="adinputic">
+							<div class="adinputimg addwpass"></div>
+							<input type="password" autocomplete="new-password" name="addwpass" ng-model="add.addwipass" mdinputpass ng-attr-placeholder="{{'Password'|translate}}"
+							autocomplete="off" ng-minlength="1" ng-maxlength="18" minlength="1" maxlength="18" />
 						</div>
-						<input type="text" ng-model="import.addwipass" ng-attr-placeholder="{{'Password'|translate}}">
+						<p class="adinputp" translate></p>
 					</div>
-				</div>
-				<div class="adinputitem">
-					<div class="adinputic">
-						<div class="adinputimg">
-							<img src="./img/walletpassinput.png">
+					<div class="adinputitem" mdinputvalidc>
+						<div class="adinputic">
+							<div class="adinputimg addwrpass"></div>
+							<input type="password" autocomplete="new-password" name="addwrpass" ng-model="add.addwirpass"
+							ng-attr-placeholder="{{'Repeat password'|translate}}" autocomplete="off" 
+							ng-minlength="1" ng-maxlength="18" minlength="1" maxlength="18"
+							/>
 						</div>
-						<input type="text" ng-model="import.addwirpass" ng-attr-placeholder="{{'Repeat password'|translate}}">
+						<p class="adinputpass" translate ng-show="creatwform.addwpass.$valid && add.addwirpass !== add.addwipass">*Inconsistent password</p>
 					</div>
-				</div>
-				<button class="m24b m20t" translate ng-disabled="!import.importcode || !import.addwipass || !import.addwirpass" ng-click="import.importw()">Start importing</button>
-				<div class="size-12 redcolor" translate>Note: Please be patient while the wallet is recovering. Do not quit the software.</div>
+					<button class="m40t m15b" ng-click="add.importw()" ng-disabled="!add.importcode || !add.addwipass || !add.addwirpass || creatwform.$invalid || add.addwirpass !== add.addwipass" translate>Start importing</button>
+					<div class="size-12 redcolor" translate>Note: Please be patient while the wallet is recovering. Do not quit the software.</div>
+				</form>
 			</div>
 			<div ng-if="import.showtab == 'tabhot'" ng-controller="importwalletController as import">
 				<form name="addressForm" ng-submit="import.generateAddressQRCode()">

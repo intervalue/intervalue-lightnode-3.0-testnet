@@ -12,7 +12,7 @@ angular.module('copayApp.controllers').controller('approveNewWitnesses', functio
     var n = 0, l = newWitnesses.length;
 
     function replaceWitness(n, oldWitnesses, newWitnesses){
-	  var myWitnesses = require('intervaluecore/my_witnesses.js');
+	  /*var myWitnesses = require('intervaluecore/my_witnesses.js');
       myWitnesses.replaceWitness(oldWitnesses[n], newWitnesses[n], function(err){
 
         if (l < n) {
@@ -20,7 +20,7 @@ angular.module('copayApp.controllers').controller('approveNewWitnesses', functio
         } else {
           $modalInstance.close('closed result');
         }
-      });
+      });*/
     }
 
     replaceWitness(n, oldWitnesses, newWitnesses);

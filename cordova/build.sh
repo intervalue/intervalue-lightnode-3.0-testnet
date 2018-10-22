@@ -57,7 +57,7 @@ echo "Project directory is $PROJECT"
 if [ ! -d $PROJECT ]; then
 	cd $BUILDDIR
 	echo "${OpenColor}${Green}* Creating project... ${CloseColor}"
-	cordova create ../../intervaluebuilds/project-$1 org.intervalue.wallet InterValue-3.0-testnet
+	cordova create ../../intervaluebuilds/project-$1 org.intervalue.wallet3 InterValue-3.0-testnet
 	checkOK
 
 	cd $PROJECT
@@ -98,6 +98,9 @@ if [ ! -d $PROJECT ]; then
 
 	cordova plugin add cordova-plugin-statusbar
 	checkOK
+
+    cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications.git
+    checkOK
 
 	cordova plugin add cordova-plugin-customurlscheme --variable URL_SCHEME=intervalue
 	checkOK

@@ -4,20 +4,22 @@ angular.module('copayApp.controllers').controller('botController',
   function($stateParams, $scope, $rootScope, $timeout, configService, profileService, isCordova, go, correspondentListService) {
 	
 	var self = this;
-	var bots = require('intervaluecore/bots.js');
+	//todo delete
+	// var bots = require('intervaluecore/bots.js');
 	var fc = profileService.focusedClient;
 	$scope.backgroundColor = fc.backgroundColor;
 	$scope.$root = $rootScope;
 	
 	var id = $stateParams.id;
 
-	bots.getBotByID(id, function(bot){
-		bot.description = correspondentListService.escapeHtmlAndInsertBr(bot.description);
-		$scope.bot = bot;
-		$timeout(function(){
-			$scope.$digest();
-		});
-	})
+	//todo delete
+	// bots.getBotByID(id, function(bot){
+	// 	bot.description = correspondentListService.escapeHtmlAndInsertBr(bot.description);
+	// 	$scope.bot = bot;
+	// 	$timeout(function(){
+	// 		$scope.$digest();
+	// 	});
+	// })
 
 	$scope.pair = function(bot) {
 		var matches = bot.pairing_code.match(/^([\w\/+]+)@([\w.:\/-]+)#([\w\/+-]+)$/);

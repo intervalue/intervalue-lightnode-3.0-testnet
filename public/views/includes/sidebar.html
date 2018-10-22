@@ -4,11 +4,11 @@
     ng-repeat="item in index.walletInfo track by $index"
     ng-class="{'selected': item.wallet == index.wallet}"
     class="nav-item">
-    <a ng-click="sidebar.switchWallet(item.wallet, index.wallet);index.updateTxHistory(3)" class="oh">
-      <div class="avatar-wallet"><img src="{{item.image}}"></div>
-      <div class="name-wallet" ng-class="{'m8t':item.n == 1}">{{item.walletName || item.wallet}}</div>
-      <div class="size-12" ng-show="item.n > 1" translate>{{item.m}}-of-{{item.n}}</div>
-    </a>
+      <a ng-click="sidebar.switchWallet(item.wallet, index.wallet);index.updateTxHistory(3)" class="oh">
+        <div class="avatar-wallet"><img src="{{item.image}}"></div>
+        <div class="name-wallet">{{item.walletName || item.wallet}}</div>
+        <div class="whpback" ng-show="item.mnemonic || item.mnemonicEncrypted" ng-click="$root.go('backup');index.backhome = true;" translate>Please backup</div>
+      </a>
     </li>
     <!--<li>-->
       <!--<a ng-click="$root.go('correspondentDevices'); index.tab='chat'" class="oh">-->
@@ -31,14 +31,20 @@
       <!--</a>-->
     <!--</li>-->
   </ul>
-  <div class="siderbarb">
+  <!-- <div class="siderbarb" ng-show="!index.isCordova">
       <a ng-click="$root.go('addwallet')">
           <div><img src="./img/creat.png"/></div>
           <span translate>Create a new wallet</span>
       </a>
-      <a ng-click="$root.go('addwallet')">
-        <div><img src="./img/sidescan.png"/></div>
+      <div ng-controller="topbarController as topbar" class="scansidebar">
+        <qr-scanner on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
         <span translate>Scan</span>
+      </div>
+  </div> -->
+  <div class="siderbarbn">
+      <a ng-click="$root.go('addwallet')">
+          <div><img src="./img/creat.png"/></div>
+          <span translate>Create a new wallet</span>
       </a>
   </div>
 </nav>

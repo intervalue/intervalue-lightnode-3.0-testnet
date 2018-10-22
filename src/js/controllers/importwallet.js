@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('importwalletController',
-    function ($scope,$rootScope) {
+    function ($scope,$rootScope, gettext, gettextCatalog) {
         var self = this;
         self.importtab1 = false;
         self.importtab2 = true;
@@ -25,7 +25,7 @@ angular.module('copayApp.controllers').controller('importwalletController',
             if(address && address.length == 32){
                 $rootScope.$emit('Local/ShadowAddressForm',address);
             } else {
-                return $rootScope.$emit('Local/ShowErrorAlert', "The address: "+address+" is illegal");
+                return $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('The address: ')+address+gettextCatalog.getString(' is illegal'));
             }
 
         }

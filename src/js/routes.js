@@ -529,7 +529,7 @@ angular
       })
 
       .state('walletnamea', {
-        url: '/walletname?image?name&addr&ammount&walletid&mnemonic&mnemonicEncrypted',
+        url: '/walletname?image&name&addr&ammount&walletId&mnemonic&mnemonicEncrypted',
         needProfile: true,
         views: {
             'main@': {
@@ -538,7 +538,7 @@ angular
         }
       })
       .state('changeWalletPassWord', {
-          url: '/changeWalletPassWord?walletId',
+          url: '/changeWalletPassWord?walletId&addr&name&image&ammount',
           needProfile: true,
           views: {
               'main@': {
@@ -547,7 +547,7 @@ angular
           }
       })
       .state('importwallet', {
-          url: '/importwallet',
+          url: '/importwallet?walletId&name',
           needProfile: true,
           views: {
               'main': {
@@ -557,7 +557,7 @@ angular
       })
 
       .state('backup', {
-          url: '/backup?name&addr&ammount&walletid&mnemonic&mnemonicEncrypted',
+          url: '/backup?name&addr&ammount&walletId&mnemonic&mnemonicEncrypted',
           templateUrl: 'views/backup.html',
           walletShouldBeComplete: true,
           needProfile: true,

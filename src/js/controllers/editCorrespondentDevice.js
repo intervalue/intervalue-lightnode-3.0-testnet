@@ -17,9 +17,10 @@ angular.module('copayApp.controllers').controller('editCorrespondentDeviceContro
 		correspondent.name = $scope.name;
 		correspondent.hub = $scope.hub;
 		var device = require('intervaluecore/device.js');
-		device.updateCorrespondentProps(correspondent, function(){
-			go.path('correspondentDevices.correspondentDevice');
-		});
+		//todo delete
+		// device.updateCorrespondentProps(correspondent, function(){
+		// 	go.path('correspondentDevices.correspondentDevice');
+		// });
 	};
 
 	$scope.purge_chat = function() {
@@ -50,8 +51,9 @@ angular.module('copayApp.controllers').controller('editCorrespondentDeviceContro
 
       modalInstance.result.then(function(ok) {
         if (ok) {
-          	var chatStorage = require('intervaluecore/chat_storage.js');
-			chatStorage.purge(correspondent.device_address);
+            //todo delete
+          	// var chatStorage = require('intervaluecore/chat_storage.js');
+			// chatStorage.purge(correspondent.device_address);
 			correspondentListService.messageEventsByCorrespondent[correspondent.device_address] = [];
         }
         

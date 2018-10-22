@@ -11,7 +11,8 @@ angular.module('copayApp.controllers')
 		var self = this;
 		var home = this;
 		var conf = require('intervaluecore/conf.js');
-		var chatStorage = require('intervaluecore/chat_storage.js');
+		//todo delete
+		// var chatStorage = require('intervaluecore/chat_storage.js');
 		this.protocol = conf.program;
 		$rootScope.hideMenuBar = false;
 		$rootScope.wpInputFocused = false;
@@ -118,7 +119,7 @@ angular.module('copayApp.controllers')
 			eventBus.removeListener("new_wallet_address", onNewWalletAddress);
 		});
 
-		//$rootScope.$digest();
+		//$rootScope.$apply();
 
 
 		var accept_msg = gettextCatalog.getString('Accept');
@@ -158,8 +159,10 @@ angular.module('copayApp.controllers')
 							form.address.$isValid = true;
 							form.address.$render();
 						}
-						
-						$scope.$digest();
+						$timeout(function () {
+                          if(!$rootScope.$$phase) $scope.$apply();
+                        },1);
+
 					}, 100);
 				};
 
@@ -188,31 +191,37 @@ angular.module('copayApp.controllers')
 
 				$scope.listEntries = function() {
 					$scope.error = null;
-					addressbookService.list(function(err, ab) {
-						if (err) {
-							$scope.error = err;
-							return;
-						}
-						$scope.list = ab;
-					});
+                        addressbookService.list(function(err, ab) {
+                            if (err) {
+                                $scope.error = err;
+                                return;
+                            }
+                            $scope.list = ab;
+                            $timeout(function(){
+                                $scope.$apply();
+                            },100)
+                        });
+
 				};
 
-				$scope.add = function(addressbook) {
+                $scope.add = lodash.debounce(function(addressbook) {
 					$scope.error = null;
-					$timeout(function() {
 						addressbookService.add(addressbook, function(err, ab) {
 							if (err) {
-								$scope.error = err;
+								$timeout(function () {
+                                    $scope.error = err;
+                                });
 								return;
 							}
 							$rootScope.$emit('Local/AddressbookUpdated', ab);
 							$scope.list = ab;
 							$scope.editAddressbook = true;
 							$scope.toggleEditAddressbook();
-							$scope.$digest();
+							$timeout(function () {
+                                if(!$rootScope.$$phase) $scope.$apply();
+                            },1);
 						});
-					}, 100);
-				};
+				},1000);
 
 				$scope.remove = function(addr) {
 					$scope.error = null;
@@ -224,7 +233,10 @@ angular.module('copayApp.controllers')
 							}
 							$rootScope.$emit('Local/AddressbookUpdated', ab);
 							$scope.list = ab;
-							$scope.$digest();
+							$timeout(function () {
+                                if(!$rootScope.$$phase) $scope.$apply();
+                            },1);
+
 						});
 					}, 100);
 				};
@@ -292,15 +304,16 @@ angular.module('copayApp.controllers')
 				var walletGeneral = require('intervaluecore/wallet_general.js');
 				var walletDefinedByAddresses = require('intervaluecore/wallet_defined_by_addresses.js');
 				walletGeneral.readMyAddresses(function(arrMyAddresses) {
-					walletDefinedByAddresses.readSharedAddressDefinition(address, function(arrDefinition, creation_ts) {
-						walletDefinedByAddresses.readSharedAddressPeerAddresses(address, function(arrPeerAddresses) {
-							$scope.humanReadableDefinition = correspondentListService.getHumanReadableDefinition(arrDefinition, arrMyAddresses, [], arrPeerAddresses, true);
-							$scope.creation_ts = creation_ts;
-							$timeout(function() {
-								$scope.$apply();
-							});
-						});
-					});
+					//todo delete
+					// walletDefinedByAddresses.readSharedAddressDefinition(address, function(arrDefinition, creation_ts) {
+						// walletDefinedByAddresses.readSharedAddressPeerAddresses(address, function(arrPeerAddresses) {
+						// 	$scope.humanReadableDefinition = correspondentListService.getHumanReadableDefinition(arrDefinition, arrMyAddresses, [], arrPeerAddresses, true);
+						// 	$scope.creation_ts = creation_ts;
+						// 	$timeout(function() {
+						// 		$scope.$apply();
+						// 	});
+						// });
+					// });
 				});
 
 				// clicked a link in the definition
@@ -381,8 +394,8 @@ angular.module('copayApp.controllers')
 					}
 
 					$timeout(function() {
-						$scope.$digest();
-					});
+                        if(!$rootScope.$$phase) $scope.$apply();
+					},1);
 				});
 			});
 		};
@@ -530,36 +543,37 @@ angular.module('copayApp.controllers')
 		function claimTextCoin(mnemonic, addr) {
 			var wallet = require('intervaluecore/wallet.js');
 			$rootScope.$emit('process_status_change', 'claiming', true);
-			wallet.receiveTextCoin(mnemonic, addr, function(err, unit, asset) {
-				$timeout(function() {
-					$rootScope.$emit('closeModal');
-					if (err) {
-						if (err.indexOf("not confirmed") !== -1) {
-							store_mnemonic_back();
-						}
-						$rootScope.$emit('process_status_change', 'claiming', false);
-						return $rootScope.$emit('Local/ShowErrorAlert', err);
-					}
-					if (asset) {
-						var disableBalanceListener = $rootScope.$on('Local/BalanceUpdated', function(assocBalances) {
-							var assetIndex = lodash.findIndex(indexScope.arrBalances, {
-								asset: asset
-							});
-							indexScope.assetIndex = assetIndex;
-							indexScope.updateTxHistory();
-							$rootScope.$emit('Local/SetTab', 'history', null, true);
-							disableBalanceListener();
-						});
-						indexScope.updateAll();
-					} else {
-						indexScope.assetIndex = 0;
-						indexScope.updateAll({triggerTxUpdate: true});
-						$rootScope.$emit('Local/SetTab', 'history', null, true);
-					}
-					$scope.$digest();
-					$rootScope.$emit('process_status_change', 'claiming', false);
-				});
-			});
+			//todo delete
+			// wallet.receiveTextCoin(mnemonic, addr, function(err, unit, asset) {
+			// 	$timeout(function() {
+			// 		$rootScope.$emit('closeModal');
+			// 		if (err) {
+			// 			if (err.indexOf("not confirmed") !== -1) {
+			// 				store_mnemonic_back();
+			// 			}
+			// 			$rootScope.$emit('process_status_change', 'claiming', false);
+			// 			return $rootScope.$emit('Local/ShowErrorAlert', err);
+			// 		}
+			// 		if (asset) {
+			// 			var disableBalanceListener = $rootScope.$on('Local/BalanceUpdated', function(assocBalances) {
+			// 				var assetIndex = lodash.findIndex(indexScope.arrBalances, {
+			// 					asset: asset
+			// 				});
+			// 				indexScope.assetIndex = assetIndex;
+			// 				indexScope.updateTxHistory();
+			// 				$rootScope.$emit('Local/SetTab', 'history', null, true);
+			// 				disableBalanceListener();
+			// 			});
+			// 			indexScope.updateAll();
+			// 		} else {
+			// 			indexScope.assetIndex = 0;
+			// 			indexScope.updateAll({triggerTxUpdate: true});
+			// 			$rootScope.$emit('Local/SetTab', 'history', null, true);
+			// 		}
+			// 		$scope.$apply();
+			// 		$rootScope.$emit('process_status_change', 'claiming', false);
+			// 	});
+			// });
 		}
 	
 		var disableClaimTextcoinListener = $rootScope.$on('claimTextcoin', function(event, mnemonic) {
@@ -575,8 +589,8 @@ angular.module('copayApp.controllers')
 					}
 
 					$timeout(function() {
-						$scope.$digest();
-					});
+                        if(!$rootScope.$$phase) $scope.$apply();
+					},1);
 				});
 			}
 		});
@@ -630,8 +644,8 @@ angular.module('copayApp.controllers')
 				$rootScope.hideMenuBar = false;
 			}
 			$timeout(function(){
-				$rootScope.$digest();
-			});
+                if(!$rootScope.$$phase) $rootScope.$apply();
+			},1);
 		}, 100);
 
 		this.formFocus = function(what) {
@@ -655,7 +669,7 @@ angular.module('copayApp.controllers')
 				}
 			}
 			$timeout(function() {
-				$rootScope.$digest();
+                if(!$rootScope.$$phase) $rootScope.$apply();
 			}, 1);
 		};
 
@@ -704,7 +718,7 @@ angular.module('copayApp.controllers')
 			console.log(this.error);
 
 			$timeout(function() {
-				$scope.$digest();
+                if(!$rootScope.$$phase) $scope.$apply();
 			}, 1);
 		};
 
@@ -724,8 +738,8 @@ angular.module('copayApp.controllers')
 			else {
 				self.onGoingProcess = name;
 				$timeout(function() {
-					$rootScope.$apply();
-				});
+                    if(!$rootScope.$$phase) $rootScope.$apply();
+				},1);
 			};
 		};
 
@@ -919,7 +933,6 @@ angular.module('copayApp.controllers')
                     return $rootScope.$emit('Local/ShowErrorAlert', "This payment is already under way");
                 self.current_payment_key = current_payment_key;
 
-
 			//indexScope.setOngoingProcess(gettext('sending'), true);
 			$timeout(function() {
                 if (!isMultipleSend && accountValidationResult.isValid) { // try to replace validation result with attested BB address
@@ -992,12 +1005,11 @@ angular.module('copayApp.controllers')
 						self.error = err;
 						$timeout(function() {
 							delete self.current_payment_key;
-							$scope.$digest();
+                            if(!$rootScope.$$phase) $scope.$apply();
 						}, 1);
 						return;
 					}
-					
-					var device = require('intervaluecore/device.js');
+
 					if (self.binding) {
 						if (isTextcoin) {
 							delete self.current_payment_key;
@@ -1006,110 +1018,12 @@ angular.module('copayApp.controllers')
 						}
 						if (!recipient_device_address)
 							throw Error('recipient device address not known');
-						var walletDefinedByAddresses = require('intervaluecore/wallet_defined_by_addresses.js');
-						var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
-						var my_address;
-						// never reuse addresses as the required output could be already present
-						/*useOrIssueNextAddress(fc.credentials.walletId, 0, function(addressInfo) {
-							my_address = addressInfo.address;
-							if (self.binding.type === 'reverse_payment') {
-								var arrSeenCondition = ['seen', {
-									what: 'output',
-									address: my_address,
-									asset: self.binding.reverseAsset,
-									amount: self.binding.reverseAmount
-								}];
-								var arrDefinition = ['or', [
-									['and', [
-										['address', address],
-										arrSeenCondition
-									]],
-									['and', [
-										['address', my_address],
-										['not', arrSeenCondition],
-										['in data feed', [
-											[configService.TIMESTAMPER_ADDRESS], 'timestamp', '>', Date.now() + Math.round(self.binding.timeout * 3600 * 1000)
-										]]
-									]]
-								]];
-								var assocSignersByPath = {
-									'r.0.0': {
-										address: address,
-										member_signing_path: 'r',
-										device_address: recipient_device_address
-									},
-									'r.1.0': {
-										address: my_address,
-										member_signing_path: 'r',
-										device_address: device.getMyDeviceAddress()
-									}
-								};
-							}
-							else {
-								var arrExplicitEventCondition =
-									['in data feed', [
-										[self.binding.oracle_address], self.binding.feed_name, '=', self.binding.feed_value
-									]];
-								var arrMerkleEventCondition =
-									['in merkle', [
-										[self.binding.oracle_address], self.binding.feed_name, self.binding.feed_value
-									]];
-								var arrEventCondition;
-								if (self.binding.feed_type === 'explicit')
-									arrEventCondition = arrExplicitEventCondition;
-								else if (self.binding.feed_type === 'merkle')
-									arrEventCondition = arrMerkleEventCondition;
-								else if (self.binding.feed_type === 'either')
-									arrEventCondition = ['or', [arrMerkleEventCondition, arrExplicitEventCondition]];
-								else
-									throw Error("unknown feed type: " + self.binding.feed_type);
-								var arrDefinition = ['or', [
-									['and', [
-										['address', address],
-										arrEventCondition
-									]],
-									['and', [
-										['address', my_address],
-										['in data feed', [
-											[configService.TIMESTAMPER_ADDRESS], 'timestamp', '>', Date.now() + Math.round(self.binding.timeout * 3600 * 1000)
-										]]
-									]]
-								]];
-								var assocSignersByPath = {
-									'r.0.0': {
-										address: address,
-										member_signing_path: 'r',
-										device_address: recipient_device_address
-									},
-									'r.1.0': {
-										address: my_address,
-										member_signing_path: 'r',
-										device_address: device.getMyDeviceAddress()
-									}
-								};
-								if (self.binding.feed_type === 'merkle' || self.binding.feed_type === 'either')
-									assocSignersByPath[(self.binding.feed_type === 'merkle') ? 'r.0.1' : 'r.0.1.0'] = {
-										address: '',
-										member_signing_path: 'r',
-										device_address: recipient_device_address
-									};
-							}
-							walletDefinedByAddresses.createNewSharedAddress(arrDefinition, assocSignersByPath, {
-								ifError: function(err) {
-									delete self.current_payment_key;
-									indexScope.setOngoingProcess(gettext('sending'), false);
-									self.setSendError(err);
-								},
-								ifOk: function(shared_address) {
-									composeAndSend(shared_address);
-								}
-							});
-						});*/
 					}
 					else
 						composeAndSend(address);
 
 					// compose and send
+                    var from_address ;
 					function composeAndSend(to_address) {
                         var arrSigningDeviceAddresses = []; // empty list means that all signatures are required (such as 2-of-2)
                         if (fc.credentials.m < fc.credentials.n)
@@ -1124,132 +1038,100 @@ angular.module('copayApp.controllers')
                         breadcrumbs.add('sending payment in ' + asset);
                         profileService.bKeepUnlocked = true;
                         var isHot = fc.credentials.xPrivKey ? 0 : 1;//判断冷热钱包,0为普通钱包，1为热钱包
-                        var opts = {
-                            shared_address: indexScope.shared_address,
-                            merkle_proof: merkle_proof,
-                            asset: asset,
-                            do_not_email: true,
-                            send_all: self.bSendAll,
-                            arrSigningDeviceAddresses: arrSigningDeviceAddresses,
-                            recipient_device_address: recipient_device_address,
-                            isHot: isHot,
-                            xPrivKey: fc.credentials.xPrivKey
-                        };
-                        if (!isMultipleSend) {
-                            opts.to_address = to_address;
-                            opts.amount = amount;
-                        } else {
-                            if (asset !== "base")
-                                opts.asset_outputs = outputs;
-                            else
-                                opts.base_outputs = outputs;
-                        }
-                        var filePath;
-                        if (assetInfo.is_private) {
-                            opts.getPrivateAssetPayloadSavePath = function (cb) {
-                                self.getPrivatePayloadSavePath(function (fullPath, cordovaPathObj) {
-                                    filePath = fullPath ? fullPath : (cordovaPathObj ? cordovaPathObj.root + cordovaPathObj.path + '/' + cordovaPathObj.fileName : null);
-                                    cb(fullPath, cordovaPathObj);
-                                });
-                            };
-                        }
-                        if (opts.isHot == 1 ) {//热钱包
-                            //生成未签名的交易信息
-                            var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
-                            walletDefinedByKeys.readAddresses(fc.credentials.walletId, opts, function (objAddr) {
-                                opts.change_address = objAddr;
-                                var shadowWallet = require('intervaluecore/shadowWallet');
-                                shadowWallet.getTradingUnit(opts, function (obj) {
-                                    if(typeof obj == "object"){
-                                        $rootScope.$emit('Local/unsignedTransactionIfo', obj);
-                                    }else {
-                                        console.log("error: "+obj);
-                                        return self.setSendError(obj);
-                                    }
 
-                                });
-                            });
-                            return;
-                        }
+						 require('intervaluecore/wallet').readAddressByWallet(fc.credentials.walletId,function (cb) {
+                                from_address = cb;
+                             var opts = {
+                                 shared_address: from_address ? from_address: '',
+                                 merkle_proof: merkle_proof,
+                                 asset: asset,
+                                 do_not_email: true,
+                                 send_all: self.bSendAll,
+                                 arrSigningDeviceAddresses: arrSigningDeviceAddresses,
+                                 recipient_device_address: recipient_device_address,
+                                 isHot: isHot,
+                                 xPrivKey: fc.credentials.xPrivKey,
+								 walletId: fc.credentials.walletId
+                             };
+                             if (!isMultipleSend) {
+                                 opts.to_address = to_address;
+                                 opts.amount = amount;
+                             } else {
+                                 if (asset !== "base")
+                                     opts.asset_outputs = outputs;
+                                 else
+                                     opts.base_outputs = outputs;
+                             }
+                             var filePath;
+                             if (assetInfo.is_private) {
+                                 opts.getPrivateAssetPayloadSavePath = function (cb) {
+                                     self.getPrivatePayloadSavePath(function (fullPath, cordovaPathObj) {
+                                         filePath = fullPath ? fullPath : (cordovaPathObj ? cordovaPathObj.root + cordovaPathObj.path + '/' + cordovaPathObj.fileName : null);
+                                         cb(fullPath, cordovaPathObj);
+                                     });
+                                 };
+                             }
+                             if (opts.isHot == 1 ) {//热钱包
+                                 //生成未签名的交易信息
+                                 var wallet = require('intervaluecore/wallet.js');
+                                 wallet.readAddressByWallet(fc.credentials.walletId, function (objAddr) {
+                                     opts.change_address = objAddr;
+                                     var shadowWallet = require('intervaluecore/shadowWallet');
+                                     shadowWallet.getTradingUnit(opts, function (obj) {
+                                         if(typeof obj == "object"){
+                                             $rootScope.$emit('Local/unsignedTransactionIfo', obj);
+                                         }else {
+                                             console.log("error: "+obj);
+                                             return self.setSendError(gettextCatalog.getString(obj));
+                                         }
 
-                        /*var shadowWallet = require('intervaluecore/wallet');
-                        shadowWallet.getRradingUnit(opts,function (cb) {
+                                     });
+                                     $timeout(function () {
+                                         delete self.current_payment_key;
+                                         resetAddressValidation();
+                                         profileService.bKeepUnlocked = false;
+                                         self.resetForm();
+                                     },1000);
 
-                        })*/
+                                 });
+                                 return;
+                             }
 
-						fc.sendMultiPayment(opts, function(err, unit, mnemonics) {
-							// if multisig, it might take very long before the callback is called
-							//indexScope.setOngoingProcess(gettext('sending'), false);
-							breadcrumbs.add('done payment in ' + asset + ', err=' + err);
-							delete self.current_payment_key;
-							resetAddressValidation();
-							profileService.bKeepUnlocked = false;
-							if (err) {
-								if (typeof err === 'object') {
-									err = JSON.stringify(err);
-									eventBus.emit('nonfatal_error', "error object from sendMultiPayment: " + err, new Error());
-								}
-								else if (err.match(/device address/))
-									err = "This is a private asset, please send it only by clicking links from chat";
-								else if (err.match(/no funded/))
-									err = "Not enough spendable funds, make sure all your funds are confirmed";
-								else if (err.match(/authentifier verification failed/))
-									err = "Check that smart contract conditions are satisfied and signatures are correct";
-								else if (err.match(/precommit/))
-									err = err.replace('precommit callback failed: ', '');
-								return self.setSendError(err);
-							}
-							var binding = self.binding;
-							self.resetForm();
-							//$rootScope.$emit("NewOutgoingTx");
-							/*if (original_address){
-								var db = require('intervaluecore/db.js');
-								db.query("INSERT INTO original_addresses (unit, address, original_address) VALUES(?,?,?)", 
-									[unit, to_address, original_address]);
-							}*/
-							/*if (recipient_device_address) { // show payment in chat window
-								eventBus.emit('sent_payment', recipient_device_address, amount || 'all', asset, !!binding);
-								if (binding && binding.reverseAmount) { // create a request for reverse payment
-									if (!my_address)
-										throw Error('my address not known');
-									var paymentRequestCode = 'intervalue:' + my_address + '?amount=' + binding.reverseAmount + '&asset=' + encodeURIComponent(binding.reverseAsset);
-									var paymentRequestText = '[reverse payment](' + paymentRequestCode + ')';
-									device.sendMessageToDevice(recipient_device_address, 'text', paymentRequestText);
-									var body = correspondentListService.formatOutgoingMessage(paymentRequestText);
-									correspondentListService.addMessageEvent(false, recipient_device_address, body);
-									device.readCorrespondent(recipient_device_address, function(correspondent) {
-										if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(correspondent.device_address, body, 0, 'html');
-									});
-
-									// issue next address to avoid reusing the reverse payment address
-									if (!fc.isSingleAddress) walletDefinedByKeys.issueNextAddress(fc.credentials.walletId, 0, function() {});
-								}
-							}*/
-							/*else if (Object.keys(mnemonics).length) {
-								var mnemonic = mnemonics[to_address];
-								if (opts.send_all && asset === "base")
-									amount = assetInfo.stable;
-
-								self.openShareTextcoinModal(isEmail ? address.slice("textcoin:".length) : null, mnemonic, amount, asset, false, filePath);
-								$rootScope.$emit('Local/SetTab', 'history');
-							}*/
-							//else  redirect to history
-							$rootScope.$emit('Local/paymentDone');
-                            //$rootScope.$emit('Local/TabChanged', 'history');
-						});
-
+                             fc.sendMultiPayment(opts, function(err, unit, mnemonics) {
+                                 // if multisig, it might take very long before the callback is called
+                                 //indexScope.setOngoingProcess(gettext('sending'), false);
+                                 breadcrumbs.add('done payment in ' + asset + ', err=' + err);
+                                 delete self.current_payment_key;
+                                 resetAddressValidation();
+                                 profileService.bKeepUnlocked = false;
+                                 if (err) {
+                                    if (typeof err === 'object') {
+                                         err = JSON.stringify(err);
+                                         eventBus.emit('nonfatal_error', "error object from sendMultiPayment: " + err, new Error());
+                                     }
+                                    else if (err.match(/device address/))
+                                         err = "This is a private asset, please send it only by clicking links from chat";
+                                    else if (err.match(/no funded/))
+                                         err = gettextCatalog.getString("Not enough spendable funds, make sure all your funds are confirmed");
+                                    else if (err.match(/authentifier verification failed/))
+                                         err = "Check that smart contract conditions are satisfied and signatures are correct";
+									else if (err.match(/precommit/))
+										 err = err.replace('precommit callback failed: ', '');
+									else if (err.match(/is same/))
+                                         err = gettextCatalog.getString("to_address and from_address is same");
+                                    else if (err.match(/network error/))
+                                        err = gettextCatalog.getString("network error,please try again.");
+                                    else if (err.match(/not enough spendable/))
+                                        err = gettextCatalog.getString("not enough spendable");
+                                     return self.setSendError(err);
+                                 }
+                                 var binding = self.binding;
+                                 self.resetForm();
+                                 $rootScope.$emit('Local/paymentDone');
+                                 //$rootScope.$emit('Local/TabChanged', 'history');
+                             });
+						 });
 					}
-
-					/*function useOrIssueNextAddress(wallet, is_change, handleAddress) {
-						if (fc.isSingleAddress) {
-							addressService.getAddress(fc.credentials.walletId, false, function(err, addr) {
-								handleAddress({
-									address: addr
-								});
-							});
-						}
-						else walletDefinedByKeys.issueNextAddress(wallet, is_change, handleAddress);
-					}*/
 
 				});
 			}, 100);
@@ -1328,7 +1210,7 @@ angular.module('copayApp.controllers')
 					indexScope.setOngoingProcess(gettext('sending'), false);
 					self.error = err;
 					$timeout(function() {
-						$scope.$digest();
+                        if(!$rootScope.$$phase) $scope.$apply();
 					}, 1);
 					return;
 				}
@@ -1380,7 +1262,7 @@ angular.module('copayApp.controllers')
 			this.resetError();
 			$scope.home.feedvaluespairs = [{}];
 			$timeout(function() {
-				$rootScope.$digest();
+                if(!$rootScope.$$phase) $rootScope.$apply();
 			}, 1);
 		};
 
@@ -1584,6 +1466,7 @@ angular.module('copayApp.controllers')
 			this.lockAmount = false;
 			this.hideAdvSend = true;
 			this.send_multiple = false;
+			this.current_payment_key = '';
 			$scope.currentSpendUnconfirmed = configService.getSync()
 				.wallet.spendUnconfirmed;
 
@@ -1617,9 +1500,13 @@ angular.module('copayApp.controllers')
 					}
 				}
 				self.switchForms();
-				$timeout(function() {
-					$rootScope.$digest();
-				}, 1);
+				/*$timeout(function() {
+					$rootScope.$apply();
+				}, 1);*/
+				$timeout(function () {
+                    if(!$rootScope.$$phase) $rootScope.$apply();
+                },1);
+
 			});
 		};
 
@@ -1627,28 +1514,15 @@ angular.module('copayApp.controllers')
 			var form = $scope.sendPaymentForm;
 			if (!form || !form.amount) // disappeared?
 				return console.log('form.amount has disappeared');
-			if (indexScope.arrBalances.length === 0)
-				return;
 			var assetInfo = indexScope.arrBalances[indexScope.assetIndex];
-			if (assetInfo.asset === 'base') {
-				this._amount = null;
-				this.bSendAll = true;
-				form.amount.$setViewValue('');
-				form.amount.$setValidity('validAmount', true);
-				form.amount.$render();
-			}
-			else {
-				var full_amount = assetInfo.stable;
-				if (assetInfo.asset === constants.BLACKBYTES_ASSET)
-					full_amount /= this.bbUnitValue;
-				else if (assetInfo.decimals)
-					full_amount /= Math.pow(10, assetInfo.decimals);
+
+				var full_amount = indexScope.ammountTatol.replace(/,/g,'');
 				form.amount.$setViewValue('' + full_amount);
 				form.amount.$render();
-			}
+
 			//console.log('done setsendall')
 			/*$timeout(function() {
-				$rootScope.$digest();
+				$rootScope.$apply();
 				console.log('-- amount invalid? '+form.amount.$invalid);
 				console.log('-- form invalid? '+form.$invalid);
 			}, 1);*/
@@ -1737,20 +1611,21 @@ angular.module('copayApp.controllers')
 
 				$scope.shareAgain = function() {
 					if ($scope.isPrivate) {
-						var indivisible_asset = require('intervaluecore/indivisible_asset');
+						// var indivisible_asset = require('intervaluecore/indivisible_asset');
 						var wallet = require('intervaluecore/wallet.js');
-						indivisible_asset.restorePrivateChains(btx.asset, btx.unit, btx.addressTo, function(arrRecipientChains, arrCosignerChains){
-							self.getPrivatePayloadSavePath(function(fullPath, cordovaPathObj){
-								if (!fullPath && !cordovaPathObj)
-									return;
-								var filePath = fullPath ? fullPath : (cordovaPathObj.root + cordovaPathObj.path + '/' + cordovaPathObj.fileName);
-								wallet.storePrivateAssetPayload(fullPath, cordovaPathObj, btx.mnemonic, arrRecipientChains, function(err) {
-									if (err)
-										throw Error(err);
-									self.openShareTextcoinModal(btx.textAddress, btx.mnemonic, btx.amount, btx.asset, true, filePath);
-								});
-							});
-						});
+						//todo delete
+						// indivisible_asset.restorePrivateChains(btx.asset, btx.unit, btx.addressTo, function(arrRecipientChains, arrCosignerChains){
+						// 	self.getPrivatePayloadSavePath(function(fullPath, cordovaPathObj){
+						// 		if (!fullPath && !cordovaPathObj)
+						// 			return;
+						// 		var filePath = fullPath ? fullPath : (cordovaPathObj.root + cordovaPathObj.path + '/' + cordovaPathObj.fileName);
+						// 		wallet.storePrivateAssetPayload(fullPath, cordovaPathObj, btx.mnemonic, arrRecipientChains, function(err) {
+						// 			if (err)
+						// 				throw Error(err);
+						// 			self.openShareTextcoinModal(btx.textAddress, btx.mnemonic, btx.amount, btx.asset, true, filePath);
+						// 		});
+						// 	});
+						// });
 					} else
 						self.openShareTextcoinModal(btx.textAddress, btx.mnemonic, btx.amount, btx.asset, true);
 				}
@@ -1767,8 +1642,9 @@ angular.module('copayApp.controllers')
 							$scope.ok = function() {
 								$scope.loading = true;
 								$modalInstance.close(gettextCatalog.getString('Confirm'));
-								
-								wallet.eraseTextcoin(btx.unit, btx.addressTo);
+
+								//todo delete
+								// wallet.eraseTextcoin(btx.unit, btx.addressTo);
 								
 								indexScope.updateTxHistory();
 								$rootScope.$emit('Local/SetTab', 'history');
@@ -1826,7 +1702,7 @@ angular.module('copayApp.controllers')
 				};
 
 				$scope.reSendPrivateMultiSigPayment = function() {
-					var indivisible_asset = require('intervaluecore/indivisible_asset');
+					// var indivisible_asset = require('intervaluecore/indivisible_asset');
 					var wallet_defined_by_keys = require('intervaluecore/wallet_defined_by_keys');
 					var walletDefinedByAddresses = require('intervaluecore/wallet_defined_by_addresses');
 					var fc = profileService.focusedClient;
@@ -1837,14 +1713,15 @@ angular.module('copayApp.controllers')
 						});
 					}
 
-					indivisible_asset.restorePrivateChains(btx.asset, btx.unit, btx.addressTo, function(arrRecipientChains, arrCosignerChains) {
-						if (indexScope.shared_address) {
-							walletDefinedByAddresses.forwardPrivateChainsToOtherMembersOfAddresses(arrCosignerChains, [indexScope.shared_address], null, success);
-						}
-						else {
-							wallet_defined_by_keys.forwardPrivateChainsToOtherMembersOfWallets(arrCosignerChains, [fc.credentials.walletId], null, success);
-						}
-					});
+                    //todo delete
+					// indivisible_asset.restorePrivateChains(btx.asset, btx.unit, btx.addressTo, function(arrRecipientChains, arrCosignerChains) {
+					// 	if (indexScope.shared_address) {
+					// 		walletDefinedByAddresses.forwardPrivateChainsToOtherMembersOfAddresses(arrCosignerChains, [indexScope.shared_address], null, success);
+					// 	}
+					// 	else {
+					// 		wallet_defined_by_keys.forwardPrivateChainsToOtherMembersOfWallets(arrCosignerChains, [fc.credentials.walletId], null, success);
+					// 	}
+					// });
 				};
 
 				$scope.cancel = function() {
@@ -1896,23 +1773,24 @@ angular.module('copayApp.controllers')
 						}
 						$scope.list = ab;
 						$timeout(function(){
-							$scope.$digest();
-						});
+                            if(!$rootScope.$$phase) $scope.$apply();
+						},1);
 					});
 				};
 
 				$scope.sendPrivatePayments = function(correspondent) {
-					var indivisible_asset = require('intervaluecore/indivisible_asset');
+					// var indivisible_asset = require('intervaluecore/indivisible_asset');
 					var wallet_general = require('intervaluecore/wallet_general');
-					indivisible_asset.restorePrivateChains(btx.asset, btx.unit, btx.addressTo, function(arrRecipientChains, arrCosignerChains) {
-						wallet_general.sendPrivatePayments(correspondent.device_address, arrRecipientChains, true, null, function() {
-							modalInstance.dismiss('cancel');
-							go.history();
-							$timeout(function() {
-								notification.success(gettextCatalog.getString('Success'), gettextCatalog.getString('Private payloads sent', {}));
-							});
-						});
-					});
+					//todo delete
+					// indivisible_asset.restorePrivateChains(btx.asset, btx.unit, btx.addressTo, function(arrRecipientChains, arrCosignerChains) {
+					// 	wallet_general.sendPrivatePayments(correspondent.device_address, arrRecipientChains, true, null, function() {
+					// 		modalInstance.dismiss('cancel');
+					// 		go.history();
+					// 		$timeout(function() {
+					// 			notification.success(gettextCatalog.getString('Success'), gettextCatalog.getString('Private payloads sent', {}));
+					// 		});
+					// 	});
+					// });
 
 				};
 
@@ -1975,7 +1853,7 @@ angular.module('copayApp.controllers')
 					console.log('==== referrer: '+referrer);
 					window.plugins.appPreferences.remove(function(){}, function(){}, 'referrer');
 					store_mnemonic_back = function() {
-						window.plugins.appPreferences.store(function(){}, function(){}, 'referrer', referrer);
+						// window.plugins.appPreferences.store(function(){}, function(){}, 'referrer', referrer);
 					};
 					if (referrer.split('-').length % 3 === 0)
 						$rootScope.$emit("claimTextcoin", referrer);

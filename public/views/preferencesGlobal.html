@@ -2,22 +2,22 @@
 <div 
   class="topbar-container" 
   ng-include="'views/includes/topbar.html'"
-  ng-init="titleSection='Global preferences'; goToWallet = true; noColor = true">
+  ng-init="titleSection='Settings'; goToWallet = true; noColor = true">
 </div>
 
 
 <div class="content preferences" ng-controller="preferencesGlobalController as prefGlobal" ng-init="prefGlobal.init()">
   <ul class="no-bullet m0 ">
-    <li>
-      <div translate>Small transaction free password</div>
-      <switch id="network-name" name="encrypt" ng-model="encrypt" class="green right"></switch>
-    </li>
+    <!--<li>-->
+      <!--<div translate>Small transaction free password</div>-->
+      <!--<switch id="network-name" name="encrypt" ng-model="encrypt" class="green right"></switch>-->
+    <!--</li>-->
     <li ng-click="$root.go('preferencesGlobal.preferencesLanguage')" class="preflitwo">
       <div class="ld">
         <div class="limg">
           <img src="./img/settinglg.png" />
         </div>
-        <span>Language</span>
+        <span translate>Language</span>
       </div>
       <div class="rd">
         {{prefGlobal.currentLanguageName|translate}}
@@ -29,7 +29,7 @@
         <div class="limg">
           <img src="./img/settingab.png" />
         </div>
-        <span>About InterValue-3.0-testnet</span>
+        <span translate>About InterValue</span>
       </div>
       <div class="rd">
         <img src="./img/more.png" />
@@ -138,3 +138,17 @@
     <!--</li>-->
   <!--</ul>-->
 </div>
+<!--
+<div class="content preferences" ng-controller="preferencesController as preferences" ng-init="preferences.init()">
+  <div ng-show="!index.noFocusedWallet && index.canSign && preferences.touchidAvailable">
+    <h4 translate  ng-show="index.canSign">
+      Spending Restrictions
+    </h4>
+    <ul class="no-bullet m0">
+      <li  ng-show="preferences.touchidAvailable">
+        <switch id="touchid" name="touchid" ng-model="touchid" class="green right"></switch>
+        <div translate>Scan Fingerprint</div>
+      </li>
+    </ul>
+  </div>
+</div>-->

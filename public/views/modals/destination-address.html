@@ -20,7 +20,9 @@
       </section>
 
       <!-- 右区：编辑、完成、二维码 -->
-      <section class="right-small" ng-show="!selectedWalletsOpt" >
+      <section class="right-small">
+               <!--ng-show="!selectedWalletsOpt" -->
+      
           <!-- 非编辑状态且不是添加地址时，显示编辑功能 -->
           <a ng-show="!editAddressbook && !addAddressbookEntry"  ng-click="toggleEditAddressbook()">
               <img src="./img/tranedit.png">
@@ -29,17 +31,12 @@
           <a ng-show="editAddressbook && !addAddressbookEntry"  ng-click="toggleEditAddressbook()">
               <span translate>Done</span>
           </a>
-          <!-- 添加地址页面时，显示扫一扫功能 -->
-          <a ng-show="addAddressbookEntry">
-              <qr-scanner on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()" >
-              </qr-scanner>
-          </a>
       </section>
   </nav>
 
   <!-- 主视图 -->
   <div class="modal-content fix-modals-touch">
-      <div ng-show="selectedWalletsOpt">
+      <!-- <div ng-show="selectedWalletsOpt">
           <div class="onGoingProcess" ng-if="gettingAddress">
               <div class="onGoingProcess-content">
                   <div class="spinner">
@@ -68,10 +65,10 @@
                   </li>
               </ul>
           </div>
-      </div>
+      </div> -->
 
       <!-- 收款地址管理 -->
-      <div ng-show="!selectedWalletsOpt" >
+      <div >
           <div class="addedit">
                 <div>
                     <!-- 非添加地址页面时，显示收款地址列表 -->
@@ -133,7 +130,7 @@
                   <div class="adinputitem">
                       <div mdinputc class="adcpmdic">
                           <label translate mdlabel for="address">Wallet address</label>
-                          <input mdinput type="text" id="address" name="address" maxlength="32" onkeyup="this.value=this.value.replace(/[^A-Z0-9_]/g,'')"
+                          <input mdinput type="text" id="address" name="address" maxlength="32"
                                     ng-model="addressbook.address" valid-address required>
                       </div>
                   </div>
@@ -142,7 +139,8 @@
                       <div mdinputc class="adcpmdic">
                           <label translate mdlabel for="label">Name of the contact</label>
                           <input mdinput type="text" id="label" name="label"
-                                   ng-model="addressbook.label" required>
+                                   ng-model="addressbook.label" required ng-minlength="1" ng-maxlength="20"
+                                   minlength="1" maxlength="20">
                       </div>
                   </div>
                   <!-- 按钮 -->

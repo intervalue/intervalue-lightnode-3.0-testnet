@@ -42,8 +42,12 @@ msgid "12 words separated by dashes"
 msgstr "用破折号隔开的12个单词"
 
 #: public/views/preferencesGlobal.html:139
-msgid "About Intervalue"
-msgstr "关于ByteBall"
+msgid "About InterValue"
+msgstr "关于InterValue"
+
+#: public/views/preferencesGlobal.html:139
+msgid "About InterValue-3.0-testnet"
+msgstr "关于InterValue3.0测试链"
 
 #: src/js/controllers/copayers.js:8
 #: src/js/controllers/preferencesDelete.js:9
@@ -146,16 +150,7 @@ msgstr "此外在设置菜单中，你可以找到安全选项，例如密码设
 
 #: public/views/includes/password.html:42
 msgid "Also, don't forget to delete your seed"
-msgstr "此外，不要忘记删除你的口令私钥"
-
-#: public/views/includes/output.html:6
-#: public/views/modals/customized-amount.html:38
-#: public/views/modals/customized-amount.html:59
-#: public/views/modals/customized-amount.html:62
-#: public/views/paymentUri.html:16
-#: public/views/walletHome.html:378
-msgid "Amount"
-msgstr "数额"
+msgstr "此外，不要忘记删除你的助记词"
 
 #: public/views/modals/vote.html:22
 msgid "Answer:"
@@ -230,7 +225,7 @@ msgstr "立即备份"
 
 #: public/views/preferencesGlobal.html:104
 msgid "Backup wallet seed"
-msgstr "备份钱包口令私匙"
+msgstr "备份钱包助记词"
 
 #: src/js/controllers/backup.js:7
 msgid "Backup words deleted"
@@ -250,7 +245,7 @@ msgstr "地址余额"
 
 #: public/views/walletHome.html:241
 msgid "Before receiving funds, it is highly recommended you backup your wallet keys."
-msgstr "接收资金之前，强烈建议您备份钱包口令密匙。"
+msgstr "接收资金之前，强烈建议您备份钱包助记词。"
 
 #: public/views/backup.html:26
 msgid "Better yet, use multisig wallets with redundancy,"
@@ -467,7 +462,7 @@ msgstr "无法使用指定的扩展公钥创建"
 
 #: src/js/services/profileService.js:272
 msgid "Could not create: Invalid wallet seed"
-msgstr "无法创建：无效的钱包口令私匙"
+msgstr "无法创建：无效的钱包助记词"
 
 #: src/js/controllers/backup.js:81
 msgid "Could not decrypt"
@@ -580,10 +575,6 @@ msgstr "智能地址的定义"
 msgid "Definitions of addresses"
 msgstr "地址的定义"
 
-#: public/views/preferencesAdvanced.html:31
-msgid "Delete Wallet"
-msgstr "删除钱包"
-
 #: public/views/preferencesDeleteWallet.html:23
 msgid "Delete wallet"
 msgstr "删除钱包"
@@ -617,7 +608,7 @@ msgstr "与您通信的其他设备可以看到此设备名称。"
 
 #: public/views/recoveryFromSeed.html:43
 msgid "Do not clone wallets, stop using the original wallet with this seed."
-msgstr "不要复制钱包，停止在原始钱包上使用这个口令私匙。"
+msgstr "不要复制钱包，停止在原始钱包上使用这个助记词。"
 
 #: public/views/backup.html:59
 msgid "Do not use it to clone the wallet."
@@ -660,6 +651,9 @@ msgstr "输入从其他设备接收的配对码，或使用相机（右上角的
 #: public/views/includes/password.html:13
 msgid "Enter your password"
 msgstr "输入您的密码"
+
+msgid "Enter your old password"
+msgstr "输入您的原始密码"
 
 #: src/js/services/profileService.js:338
 #: src/js/services/profileService.js:390
@@ -979,7 +973,7 @@ msgstr "否"
 
 #: src/js/controllers/password.js:18
 msgid "No password given"
-msgstr "没有设置密码"
+msgstr "没有输入密码"
 
 #: public/views/modals/choose-profile.html:67
 msgid "No profiles matching the requested criteria."
@@ -1210,7 +1204,7 @@ msgstr "恢复"
 
 #: public/views/preferencesGlobal.html:113
 msgid "Recovery from seed"
-msgstr "使用口令恢复钱包"
+msgstr "使用助记词恢复钱包"
 
 #: public/views/walletHome.html:80
 msgid "Recreating Wallet..."
@@ -1421,7 +1415,7 @@ msgstr "显示所有"
 
 #: public/views/backup.html:44
 msgid "Show the Wallet Seed Anyway"
-msgstr "无论如何显示钱包口令私匙"
+msgstr "无论如何显示钱包助记词"
 
 #: public/views/modals/sign-message.html:46
 msgid "Sign"
@@ -1460,7 +1454,7 @@ msgstr "小额钱包"
 
 #: src/js/controllers/create.js:32
 msgid "Specify Seed..."
-msgstr "指定口令…"
+msgstr "指定助记词…"
 
 #: public/views/preferences.html:63
 #: public/views/preferencesGlobal.html:86
@@ -1668,6 +1662,10 @@ msgstr "共同签署者总数"
 msgid "Transaction"
 msgstr "交易"
 
+#: public/views/modals/tx-details.html:9
+msgid "Transaction Details"
+msgstr "交易详情"
+
 #: public/views/walletHome.html:646
 msgid "Transactions<br> Downloaded"
 msgstr "交易历史<br>下载完毕"
@@ -1747,7 +1745,7 @@ msgstr "注意：有必要进行备份"
 
 #: public/views/backup.html:77
 msgid "WARNING: This seed was created with a passphrase. To recover this wallet both the mnemonic and passphrase are needed."
-msgstr "注意：这个种子是由密码创建的。要恢复这个钱包，需要恢复口令和密码。"
+msgstr "注意：这个种子是由密码创建的。要恢复这个钱包，需要助记词和密码。"
 
 #: public/views/import.html:55
 #: public/views/recoveryFromSeed.html:37
@@ -1801,7 +1799,7 @@ msgstr "钱包名称"
 
 #: public/views/backup.html:34
 msgid "Wallet seed not available."
-msgstr "钱包口令不可用。"
+msgstr "钱包助记词不可用。"
 
 #: public/views/modals/destination-address.html:15
 #: public/views/modals/destination-address.html:29
@@ -1874,7 +1872,7 @@ msgstr ""
 #: public/views/backup.html:55
 #: public/views/recoveryFromSeed.html:31
 msgid "Your Wallet Seed:"
-msgstr "你的钱包口令："
+msgstr "你的钱包助记词："
 
 #: public/views/export.html:33
 msgid "Your export password"
@@ -1893,7 +1891,10 @@ msgid "Your wallet key will be encrypted. Password cannot be recovered. Be sure 
 msgstr "您的钱包密码将被加密，密码无法被恢复，一定要记下来。"
 
 #: public/views/splash.html:90
-msgid "Your wallet will be created on this device, keep it safe.  See your backup options in the Settings menu."
+msgid "Your wallet will be created on this device,"
+msgstr "你的钱包将被创建在此设备上"
+
+msgid "keep it safe.  See your backup options in the Settings menu."
 msgstr "你的钱包将被创建在此设备上，请确保其是安全的。请在设备菜单中查看备份选项。"
 
 #: public/views/create.html:94
@@ -1904,6 +1905,9 @@ msgstr "[添加新的多钱包设备]"
 #: public/views/modals/offer-contract.html:44
 #: public/views/modals/offer-contract.html:52
 msgid "amount"
+msgstr "金额"
+
+msgid "Amount"
 msgstr "金额"
 
 #: public/views/modals/bind.html:31
@@ -2166,10 +2170,10 @@ msgid "InterValue does not store passwords and cannot be retrieved for you. Plea
 msgstr "InterValue不存储密码，也无法帮您找回，请务必牢记！"
 
 msgid "Please do not take a screenshot and copy your wallet password."
-msgstr "请勿截图，抄写下您的钱包口令"
+msgstr "请勿截图，抄写下您的钱包助记词"
 
 msgid "The password is used to restore the wallet, write it accurately on paper, and save it where you only know it."
-msgstr "口令用于恢复钱包，将它准确地写在纸上，并保存在只有你知道的地方"
+msgstr "助记词用于恢复钱包，将它准确地写在纸上，并保存在只有你知道的地方"
 
 msgid "Confirm your mnemonic"
 msgstr "确认您的助记词"
@@ -2178,7 +2182,7 @@ msgid "Are you sure you want to delete the mnemonic?"
 msgstr "您确定要删除助记词吗？"
 
 msgid "Your password is correct. To ensure the security of your wallet, we recommend that you delete your password."
-msgstr "您的口令正确，为了保证您的钱包安全，建议您删掉口令。"
+msgstr "您的助记词正确，为了保证您的钱包安全，建议您删掉助记词。"
 
 msgid "This will completely remove the mnemonics from the app and it will not be recoverable. Please reconfirm that you have backed up your mnemonics to a safe place."
 msgstr "此操作将彻底删除应用中助记词并且不可恢复，请再次确认您已经将助记词备份到安全的地方。"
@@ -2190,7 +2194,7 @@ msgid "Hot Wallet"
 msgstr "热钱包"
 
 msgid "Wallet Seed :"
-msgstr "钱包口令："
+msgstr "钱包助记词："
 
 msgid "Enter your mnemonic, separated by spaces"
 msgstr "请输入您的助记词，按空格分隔"
@@ -2228,6 +2232,9 @@ msgstr "请输入交易上限额度"
 msgid "Change password"
 msgstr "修改密码"
 
+msgid "Change wallet name"
+msgstr "修改名称"
+
 msgid "Current password"
 msgstr "当前密码"
 
@@ -2241,7 +2248,7 @@ msgid "Wallet address"
 msgstr "钱包地址"
 
 msgid "The wallet password:"
-msgstr "钱包口令："
+msgstr "钱包助记词："
 
 msgid "It is highly recommended that you write your password on paper and have a safe place, do not take screenshots or take photos, and do not use the same password on multiple devices.Once you have written your wallet password, it is recommended to remove the password from the device."
 msgstr "强烈建议您在纸上写下密码并有一个安全的地方，不要截取屏幕截图或拍照，也不要在多个设备上使用相同的密码。一旦您编写了钱包密码，建议您删除 来自设备的密码。"
@@ -2251,6 +2258,214 @@ msgstr "编写钱包密码后，建议从设备中删除密码。"
 
 msgid "Delete words"
 msgstr "删除助记词"
+
+msgid "Authorized Signature"
+msgstr "授权签名"
+
+msgid "Please use the cold wallet of this address to scan the QR code to authorize observation."
+msgstr "请用此地址的冷钱包扫描二维码授权观察"
+
+msgid "Please use the hot wallet to scan the QR code to issue a transaction."
+msgstr "请用热钱包扫描二维码发出交易"
+
+msgid "Authorized address"
+msgstr "授权地址"
+
+msgid "Data"
+msgstr "数据"
+
+msgid "Authorized success"
+msgstr "授权成功"
+
+msgid "Complete authorization"
+msgstr "完成授权"
+
+msgid "Scan the QR code of the authorized wallet page and import the signature"
+msgstr "扫描授权钱包页面的二维码，导入签名"
+
+msgid "Import the signature"
+msgstr "导入签名"
+
+msgid "Cold wallet scanning"
+msgstr "冷钱包扫描"
+
+msgid "Read in signature data"
+msgstr "读入签名数据"
+
+msgid "Scan cold wallet signature data QR code"
+msgstr "扫描冷钱包签名数据二维码"
+
+msgid "Send transaction"
+msgstr "发送交易"
+
+msgid "Status"
+msgstr "状态"
+
+msgid "Unit"
+msgstr "单位"
+
+msgid "Transaction preview"
+msgstr "交易预览"
+
+msgid "Authorized signature details"
+msgstr "授权签名详情"
+
+msgid "*Inconsistent password"
+msgstr "*两次输入密码不一致"
+
+msgid "*Not less than 8 characters, it is recommended to mix uppercase and lowercase letters, numbers, special characters!"
+msgstr "*不少于8位字符，建议混合大小写字母、数字、特殊字符！"
+
+msgid "*Password cannot exceed 18 digits!"
+msgstr "*密码不能超过18位！"
+
+msgid "*Characters exceed the 5-20 limit!"
+msgstr "*字符超出5-20限制范围！"
+
+msgid "*The password is too simple, it is recommended to mix uppercase and lowercase letters, numbers, special characters!"
+msgstr "*密码太简单，建议混合大小写字母、数字、特殊字符！"
+
+msgid "Creat wallet"
+msgstr "创建钱包"
+
+msgid "Import wallet"
+msgstr "导入钱包"
+
+msgid "My INVE address"
+msgstr "我的INVE地址"
+
+msgid "Copy address"
+msgstr "复制地址"
+
+msgid "receive address"
+msgstr "收款地址"
+
+msgid "No transactions yet"
+msgstr "没有交易记录"
+
+msgid "The software you are about to use functions as a free, open source, and multi-signature digital wallet."
+msgstr "您即将使用的软件可用作免费，开源和多签名的数字钱包。"
+
+msgid "The software does not constitute an account where the developer of this software or other third parties serve as financial intermediaries or custodians of your bytes or other valuables."
+msgstr "本软件不构成本软件开发人员或其他第三方作为您的字节或其他贵重物品的金融中介或托管人的帐户。"
+
+msgid "While the software has undergone beta testing and continues to be improved by feedback from the open-source user and developer community, we cannot guarantee that there will be no bugs in the software."
+msgstr "虽然该软件已经过beta测试，并且继续通过开源用户和开发人员社区的反馈进行改进，但我们无法保证软件中不会出现任何错误。"
+
+msgid "You acknowledge that your use of this software is at your own discretion and in compliance with all applicable laws."
+msgstr "您承认您使用本软件的行为由您自行决定并符合所有适用法律。"
+
+msgid "You are responsible for safekeeping your passwords, private key pairs, PINs and any other codes you use to access the software."
+msgstr "您有责任妥善保管密码，私钥对，PIN以及用于访问软件的任何其他代码。"
+
+msgid "IF YOU LOSE ACCESS TO YOUR INTERVALUE WALLET, YOU ACKNOWLEDGE AND AGREE THAT ANY BYTES OR OTHER VALUABLES YOU HAVE ASSOCIATED WITH THAT INTERVALUE WALLET WILL BECOME INACCESSIBLE."
+msgstr "如果您失去了对您的间隔钱包的访问权限，您承认并同意您与间隔钱包相关的任何字节或其他价值将成为不可接受的。"
+
+msgid "All transaction requests are irreversible."
+msgstr "所有交易请求都是不可逆转的。"
+
+msgid "The authors of the software cannot retrieve your private keys or passwords if you lose or forget them and cannot guarantee transaction confirmation as they do not have control over the InterValue network."
+msgstr "如果您丢失或忘记了私钥或密码，则该软件的作者无法检索您的私钥或密码，并且无法保证交易确认，因为他们无法控制InterValue 网络。"
+
+msgid "To the fullest extent permitted by law, this software is provided “as is” and no representations or warranties can be made of any kind, express or implied, including but not limited to the warranties of merchantability, fitness or a particular purpose and noninfringement."
+msgstr "在法律允许的最大范围内，本软件“按原样”提供，不得作出任何明示或暗示的陈述或保证，包括但不限于适销性，适用性或特定用途和不侵权的保证。"
+
+msgid "You assume any and all risks associated with the use of the software."
+msgstr "您承担与使用该软件相关的任何和所有风险。"
+
+msgid "In no event shall the authors of the software be held liable for any claim, damages or other liability, whether in an action of contract, tort, or otherwise, arising from, out of or in connection with the software."
+msgstr "在任何情况下，软件的作者均不对任何索赔，损害赔偿或其他责任承担责任，无论是在合同，侵权或其他方面，由软件引起，引起或与软件有关。"
+
+msgid "We reserve the right to modify this disclaimer from time to time."
+msgstr "我们保留随时修改此免责声明的权利。"
+
+msgid "Show wallet seed"
+msgstr "显示钱包助记词"
+
+msgid "Hide wallet seed"
+msgstr "隐藏钱包助记词"
+
+msgid "Backup"
+msgstr "备份"
+
+msgid "Delete the wallet code"
+msgstr "删除此钱包助记词"
+
+msgid "Forget password? Import mnemonics to reset your password."
+msgstr "忘记密码？导入助记词可重置密码。"
+
+msgid "Import now"
+msgstr "马上导入"
+
+msgid "Entry already exist"
+msgstr "钱包地址已存在"
+
+msgid "Can't delete the last remaining wallet"
+msgstr "无法删除最后一个的钱包"
+
+msgid "shadowWallet is random failed"
+msgstr "shadowWallet随机失败"
+
+msgid "The address: "
+msgstr "地址: "
+
+msgid " is illegal"
+msgstr "格式不正确"
+
+msgid " Could not create: Invalid wallet seed."
+msgstr "无法创建：无效的钱包助记词。"
+
+msgid "to_address and from_address is same"
+msgstr "不能发给自己。"
+
+msgid "Pending"
+msgstr "待确认"
+
+msgid "Incorrect mnemonic"
+msgstr "助记词不正确"
+
+msgid "wallet exists"
+msgstr "钱包已存在"
+
+msgid "Hot wallet verification failed"
+msgstr "热钱包验证失败"
+
+msgid "There is a new deal."
+msgstr "有一笔新的交易"
+
+msgid "Payment received:"
+msgstr "收到付款： "
+
+msgid "Available amount"
+msgstr "可用余额"
+
+msgid "After the wallet is deleted, it must be logged by mnemonic to ensure that the mnemonic has been backed up. Do you want to continue deleting?"
+msgstr "钱包删除后必须通过助记词才能恢复，请确保助记词已备份。是否继续删除？"
+
+msgid "network error,please try again."
+msgstr "网络异常，请重试。"
+
+msgid "shadowWallet is random failed"
+msgstr "验证码校验失败"
+
+msgid "not enough spendable"
+msgstr "此地址余额不足。"
+
+msgid "Are you sure you want to delete the wallet?"
+msgstr "您确定要删除钱包吗"
+
+msgid "Password reset complete"
+msgstr "密码重置完成"
+
+msgid "wallets recovered, please restart the application to finish."
+msgstr "钱包恢复，请重新启动应用程序完成。"
+
+msgid "There is a new deal"
+msgstr "有一笔新的交易"
+
+msgid "Payment received:"
+msgstr "已收到付款："
+
 
 
 

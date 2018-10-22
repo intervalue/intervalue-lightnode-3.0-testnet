@@ -1,13 +1,28 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('wordsController',
-  function($rootScope, $scope, $timeout, $stateParams, profileService, go, gettext, confirmDialog, notification, $log, isCordova) {
-
+  function($rootScope, $scope, $timeout, $stateParams, profileService, go, gettext, confirmDialog, notification, $log, isCordova,$state,gettextCatalog) {
+      var self = this;
+      self.walletId = $stateParams.walletId;
+      self.name = $stateParams.name;
+      self.image = $stateParams.image;
+      self.addr = $stateParams.addr;
+      self.ammount = $stateParams.ammount;
+      self.mnemonic = $stateParams.mnemonic;
+      self.mnemonicEncrypted = $stateParams.mnemonicEncrypted;
     var msg = gettext('Are you sure you want to delete the backup words?');
     var successMsg = gettext('Backup words deleted');
     var self = this;
     self.show = false;
     var fc = profileService.focusedClient;
+    if(self.walletId && fc.credentials.walletId != self.walletId){
+        profileService.setAndStoreFocus(self.walletId, function() {
+            fc = profileService.focusedClient;
+            $state.go('backup');
+        });
+
+
+    }
     var showconfirm = false;
 	if (!isCordova){
 		var desktopApp = require('intervaluecore/desktop_app.js'+'');
@@ -88,6 +103,7 @@ angular.module('copayApp.controllers').controller('wordsController',
 
           profileService.unlockFC(null, function(err) {
             if (err) {
+               $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('Could not decrypt') +': '+ err.message);
               self.error = gettext('Could not decrypt') +': '+ err.message;
               $log.warn('Error decrypting credentials:', self.error); //TODO
               return;

@@ -219,6 +219,7 @@ angular.module('copayApp.directives')
 
             if (typeof value == 'undefined' || value == 0) {
               ctrl.$pristine = true;
+              ctrl.$setValidity('validAmount', false);
               return value;
             }
 
@@ -227,9 +228,13 @@ angular.module('copayApp.directives')
               var str_value = ('' + value).substring(sep_index + 1);
               if (sep_index > 0 && str_value.length > decimals) {
                   ctrl.$setValidity('validAmount', false);
-              } else {
+              }else if(sep_index == 0){
+                  ctrl.$setValidity('validAmount', false);
+              }else if(str_value == 0){
+                  ctrl.$setValidity('validAmount', false);
+              }else {
                   ctrl.$setValidity('validAmount', true);
-               }
+              }
             } else {
               ctrl.$setValidity('validAmount', false);
             }
@@ -499,7 +504,9 @@ angular.module('copayApp.directives')
           var li = angular.element(this);
           elem.html(li.find('a').find('span').eq(0).html());
           scope.bindObj[scope.bindProp] = li.attr('data-value');
-          if(!$rootScope.$$phase) $rootScope.$digest();
+            $timeout(function () {
+                if(!$rootScope.$$phase) $rootScope.$digest();
+            },1);
         });
         scope.$watch(function(scope){return scope.bindObj[scope.bindProp]}, function(newValue, oldValue) {
           angular.forEach(dropdown.find('li'), function(element){
@@ -561,7 +568,8 @@ angular.module('copayApp.directives')
             });
         }
     }
-  }]).directive("mdinputc", function(){
+  }])
+  .directive("mdinputc", function(){
     return {
         scope: {},
         restrict: 'A',
@@ -639,7 +647,148 @@ angular.module('copayApp.directives')
           controllerInstance.setHasValue(false);
         });
     }
-  }).filter('encodeURIComponent', function() {
+  }).directive("mdchangename",function(){
+    return {
+        scope: {},
+        restrict: 'A',
+        require: ['?ngModel'],
+        link: postLink
+    }
+      function postLink(scope, elem, attrs, ctrl){
+        if(ctrl){
+          scope.$watch(function(){
+            return (ctrl).$modelValue + "";
+          },function(val){
+            if(typeof(val) == 'undefined'){
+              ctrl.$setValidity('mdchangename', false);
+            }else if(val == ''){
+              ctrl.$setValidity('mdchangename', false);
+            }else if(val.length < 5 || val.length > 20){
+              ctrl.$setValidity('mdchangename', false);
+            }else{
+              ctrl.$setValidity('mdchangename', true);
+            }
+          })  
+        }
+    }
+  }).directive("mdinputvalidc", function(gettextCatalog){
+    return {
+        scope: {},
+        restrict: 'A',
+        controller: function($scope, $element, gettextCatalog){
+          this.setErrorexp = function(isFocused, errpass) {
+            var errtext = '';
+            if (errpass.match(/regerror/))
+               errtext = '*Not less than 8 characters, it is recommended to mix uppercase and lowercase letters, numbers, special characters!';
+            else if (errpass.match(/lengtherror/))
+                errtext = '*Password cannot exceed 18 digits!';
+            else if (errpass.match(/lengthnameerror/))
+                errtext = '*Characters exceed the 5-20 limit!';
+            else if (errpass.match(/easyerror/))
+                errtext = '*The password is too simple, it is recommended to mix uppercase and lowercase letters, numbers, special characters!';
+            else if (errpass.match(/nomatch/))
+                errtext = '*Inconsistent password';
+            $element[0].children[1].innerHTML = gettextCatalog.getString(errtext);
+            $element.toggleClass('setErrorexp', !!isFocused);
+          };
+        }
+    }
+  }).directive("mdinputname",function(){
+    return {
+        scope: {},
+        restrict: 'A',
+        require: ['^mdinputvalidc','?ngModel'],
+        link: postLink
+    }
+      function postLink(scope, elem, attrs, ctrl){
+        if(ctrl[1]){
+          scope.$watch(function(){
+            return (ctrl[1]).$modelValue + "";
+          },function(val){
+            if(typeof(val) == 'undefined'){
+              ctrl[0].setErrorexp(false, 'noerror');
+              ctrl[1].$setValidity('mdinputname', false);
+            }else if(val == ''){
+              ctrl[0].setErrorexp(false, 'noerror');
+              ctrl[1].$setValidity('mdinputname', false);
+            }else if(val.length < 5 || val.length > 20){
+              ctrl[0].setErrorexp(true, 'lengthnameerror');
+              ctrl[1].$setValidity('mdinputname', false);
+            }else{
+              ctrl[0].setErrorexp(false, 'noerror');
+              ctrl[1].$setValidity('mdinputname', true);
+            }
+          })  
+        }
+    }
+  }).directive("mdinputpass",function(){
+    return {
+        scope: {},
+        restrict: 'A',
+        require: ['^mdinputvalidc','?ngModel'],
+        link: postLink
+    }
+      function postLink(scope, elem, attrs, ctrl){
+        if(ctrl[1]){
+          scope.$watch(function(){
+            return (ctrl[1]).$modelValue + "";
+          },function(val){
+            var trimExp=/^[a-zA-Z0-9-\.!@#\$%&~\\\{\}\[\]\_\$\^\*\(\)\+\?><]{8,}$/;
+            var trimeasyExp=/^(([a-z]){8,18}|([A-Z]){8,18}|([0-9]){8,18})$/;
+            if(typeof(val) == 'undefined'){
+              ctrl[0].setErrorexp(false, 'noerror');
+              ctrl[1].$setValidity('mdinputpass', false);
+            }else if(val == ''){
+              ctrl[0].setErrorexp(false, 'noerror');
+              ctrl[1].$setValidity('mdinputpass', false);
+            }else if(!trimExp.test(val)){
+              ctrl[0].setErrorexp(true, 'regerror');
+              ctrl[1].$setValidity('mdinputpass', false);
+            }else if(val.length > 18){
+              ctrl[0].setErrorexp(true, 'lengtherror');
+              ctrl[1].$setValidity('mdinputpass', false);
+            }else if(trimeasyExp.test(val)){
+              ctrl[0].setErrorexp(true, 'easyerror');
+              ctrl[1].$setValidity('mdinputpass', false);
+            }else{
+              ctrl[0].setErrorexp(false, 'noerror');
+              ctrl[1].$setValidity('mdinputpass', true);
+            }
+          })  
+        }
+    }
+  })
+  //   .directive("mdinputpassr",function(){
+  //   return {
+  //       scope: {},
+  //       restrict: 'A',
+  //       require: ['^mdinputvalidc','?ngModel'],
+  //       link: postLink
+  //   }
+  //     function postLink(scope, elem, attrs, ctrl){
+  //       var isSame = function(value) {
+  //         var anotherValue = attrs.mdinputpassr;
+  //         return value === anotherValue;
+  //       };
+  //       if(ctrl[1]){
+  //         scope.$watch(function() {
+  //           return (ctrl[1]).$modelValue + "";
+  //         }, function(val) {
+  //           if(typeof(val) == 'undefined'){
+  //             ctrl[0].setErrorexp(false, 'noerror');
+  //             ctrl[1].$setValidity('mdinputpassr', false);
+  //           }else if(val == ''){
+  //             ctrl[0].setErrorexp(false, 'noerror');
+  //             ctrl[1].$setValidity('mdinputpassr', false);
+  //           }else{
+  //             ctrl[0].setErrorexp(!(isSame(val)), 'nomatch');
+  //             ctrl[1].$setValidity('mdinputpassr', isSame(val));
+  //           }
+  //         });
+  //       }
+  //   }
+  // })
+    .filter('encodeURIComponent', function() {
     return window.encodeURIComponent;
   }).filter('objectKeys', [function() {
     return function(item) {

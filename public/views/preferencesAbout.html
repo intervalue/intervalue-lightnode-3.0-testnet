@@ -1,7 +1,7 @@
 <div 
   class="topbar-container" 
   ng-include="'views/includes/topbar.html'"
-  ng-init="titleSection='About InterValue-3.0-testnet'; goBackToState = true">
+  ng-init="titleSection='About InterValue'; goBackToState = true">
 </div>
 
 <div class="content preferences" ng-controller="preferencesAbout as about">
@@ -9,7 +9,7 @@
       <ul class="no-bullet m0">
         <li>
           <div class="ld">
-            <span>Version</span>
+            <span translate>Version</span>
           </div>
           <div class="rd">
               v{{v.version}} 
@@ -17,7 +17,7 @@
         </li>
         <li ng-click="$root.go('preferencesGlobal.preferencesAbout.term')">
             <div class="ld">
-              <span>Terms of Use</span>
+              <span translate>Terms of Use</span>
             </div>
             <div class="rd">
               <img src="./img/more.png" />

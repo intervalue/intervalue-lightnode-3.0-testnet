@@ -1,66 +1,55 @@
-<div
-        class="topbar-container"
-        ng-include="'views/includes/topbar.html'"
-        ng-init="titleSection='Create new wallet';  goToWallet = true; noColor = true">
-</div>
-
-
-
-<div class="content p20v" ng-controller="importwalletController as import">
-
-    <div class="create-tab small-only-text-center">
-        <div class="row">
-            <div class="tab-container small-6 medium-3 large-2" ng-class="{'selected': import.importtab1}">
-                <a href
-                   ng-click="import.showimporttabone()" translate>Plain Wallet</a>
+<div ng-controller="importController as import">
+    <!--导入钱包-导入钱包  start-->
+    <div class="addwcontent addwimportwallet">
+        <nav class="tab-bar" ng-controller="topbarController as topbar">
+            <section class="left-small">
+                <a ng-click="$root.go('walletHome')">
+                    <img src="./img/chatbackstate.png" />
+                </a>
+            </section>
+            <section class="middle tab-bar-section">
+                <h1 class="title ellipsis" translate>
+                    Import wallet
+                </h1>
+            </section>
+        </nav>
+        <div class="addwcontentin">
+            <div>
+                <div translate>Wallet Seed :</div>
+                <textarea placeholder="{{'Enter your mnemonic, separated by spaces'|translate}}" ng-model="import.importcode"></textarea>
+                <form name="creatwform"  novalidate>
+                    <div class="adinputitem" mdinputvalidc>
+                        <div class="adinputic">
+                            <div class="adinputimg addwname"></div>
+                            <input type="text" ng-model="import.addwiname" mdinputname ng-attr-placeholder="{{'Wallet name'|translate}}" autocomplete="off"
+                                   ng-minlength="1" ng-maxlength="20" minlength="1" maxlength="20" />
+                        </div>
+                        <p class="adinputp" translate></p>
+                    </div>
+                    <div class="adinputitem" mdinputvalidc>
+                        <div class="adinputic">
+                            <div class="adinputimg addwpass"></div>
+                            <input type="password" autocomplete="new-password" name="addwpass" ng-model="import.addwipass" mdinputpass ng-attr-placeholder="{{'Password'|translate}}"
+                                   autocomplete="off" ng-minlength="1" ng-maxlength="18" minlength="1" maxlength="18" />
+                        </div>
+                        <p class="adinputp" translate></p>
+                    </div>
+                    <div class="adinputitem" mdinputvalidc>
+                        <div class="adinputic">
+                            <div class="adinputimg addwrpass"></div>
+                            <input type="password" autocomplete="new-password" name="addwrpass" ng-model="import.addwirpass"
+                                   ng-attr-placeholder="{{'Repeat password'|translate}}" autocomplete="off"
+                                   ng-minlength="1" ng-maxlength="18" minlength="1" maxlength="18"
+                            />
+                        </div>
+                        <p class="adinputpass" translate ng-show="creatwform.addwpass.$valid && import.addwirpass !== import.addwipass">*Inconsistent password</p>
+                    </div>
+                    <button class="m40t m15b" ng-click="import.recoveryWallet(import.walletId,import.name)" ng-disabled="!import.importcode || !import.addwipass || !import.addwirpass || creatwform.$invalid || import.addwirpass !== import.addwipass" translate>Start importing</button>
+                    <div class="size-12 redcolor" translate>Note: Please be patient while the wallet is recovering. Do not quit the software.</div>
+                </form>
             </div>
-            <div class="tab-container small-6 medium-3 large-2" ng-class="{'selected': import.importtab2}">
-                <a href
-                   ng-click="import.showimporttabtwo()" translate>观察者钱包</a>
-            </div>
+
         </div>
     </div>
-    <div class="row">
-        <div class="large-12 columns">
-            <div ng-show="import.importtab1">
-                <label for="aicode">钱包口令
-                </label>
-                <textarea name="aicode"></textarea>
-                <div class="adcpitem">
-                    <div mdinputc class="adcpmdic">
-                        <label for="curadpass">密码</label>
-                        <input mdinput type="text" name="curadpass" ng-model="value">
-                    </div>
-                </div>
-                <div class="adcpitem">
-                    <div mdinputc class="adcpmdic">
-                        <label for="curadpass">重复密码</label>
-                        <input mdinput type="text" name="curadpass" ng-value="index.verificationQRCode">
-                    </div>
-                </div>
-                <button class="button round black expand m0">
-                    <span translate>开始导入</span>
-                </button>
-            </div>
-            <form name="addressForm" ng-submit="import.generateAddressQRCode()">
-                <div class="row" ng-show="import.importtab2" >
-                    <div>观察钱包不需要导入私钥，只导入钱包地址，进行日常查看账户、交易和接受通知。大额资金的私钥建议使用冷钱包或硬件钱包管理，避免泄露被盗。</div>
-                    <div >
-                        <label>扫描或输入钱包地址</label>
-                        <input  name="address"  type="text"  value="{{index.signatureAddr}}">
-                    </div>
-                    <button type="submit" class="button round black expand m0">
-                        <span translate>开始导入fgff</span>
-                    </button>
-                    <section  ng-controller="topbarController as topbar">
-                        <qr-scanner on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
-                    </section>
-                </div>
-            </form>
-
-
-
-        </div> <!-- large-12 columns -->
-    </div> <!-- row -->
+    <!--导入钱包-导入钱包  end-->
 </div>
-<div class="extra-margin-bottom"></div>

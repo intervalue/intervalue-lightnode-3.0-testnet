@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('passwordController',
-  function($rootScope, $scope, $timeout, profileService, notification, go, gettext) {
+  function($rootScope, $scope, $timeout, profileService, notification, go, gettext, gettextCatalog) {
 
     var self = this;
-
+    self.password = '';
     var pass1;
 
     self.isVerification = false;
@@ -15,7 +15,8 @@ angular.module('copayApp.controllers').controller('passwordController',
     document.getElementById("passwordInput").focus();
 
     self.close = function(cb) {
-      return cb(gettext('No password given'));
+        $scope.index.askPassword = false;
+      return cb(gettextCatalog.getString('No password given'));
     };
 
     self.set = function(isSetup, cb) {
@@ -33,7 +34,7 @@ angular.module('copayApp.controllers').controller('passwordController',
       }
       if (isSetup) {
         if (pass1 != self.password) {
-          self.error = gettext('Passwords do not match');
+          self.error = gettextCatalog.getString('Passwords do not match');
           self.isVerification = false;
           self.password = null;
           pass1 = null;

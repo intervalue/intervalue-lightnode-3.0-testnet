@@ -47,39 +47,40 @@ angular.module('copayApp.controllers').controller('inviteCorrespondentDeviceCont
 	};
 	
     $scope.error = null;
-    correspondentListService.startWaitingForPairing(function(pairingInfo){
-        console.log("beginAddCorrespondent " + pairingInfo.pairing_secret);
-        $scope.code = pairingInfo.device_pubkey + "@" + pairingInfo.hub + "#" + pairingInfo.pairing_secret;
-
-        function determineQRcodeVersionFromString( inputtext ) {
-            // maximum characters per QR code version using ECC level m
-            // source: http://www.qrcode.com/en/about/version.html
-            var maxCharsforQRVersion = [0,14,26,42,62,84,106,122,152,180,213];
-            var qrversion = 5;
-            // find lowest version number that has enough space for our text
-            for (var i = (maxCharsforQRVersion.length-1); i > 0 ; i--) {
-                if ( maxCharsforQRVersion[i] >= inputtext.length)
-                {
-                    qrversion = i;
-                }
-            }
-
-            return qrversion;
-        }
-
-        var qrstring = $scope.protocol + ":" +$scope.code;  //as passed to the qr generator in inviteCorrespondentDevice.html
-        $scope.qr_version = determineQRcodeVersionFromString( qrstring );
-
-        $timeout(function(){
-        	$scope.$digest();
-        });
-        var eventName = 'paired_by_secret-'+pairingInfo.pairing_secret;
-        eventBus.once(eventName, onPaired);
-        $scope.$on('$destroy', function() {
-            console.log("removing listener for pairing by our secret");
-            eventBus.removeListener(eventName, onPaired);
-        });
-    });
+    //todo delete
+    // correspondentListService.startWaitingForPairing(function(pairingInfo){
+    //     console.log("beginAddCorrespondent " + pairingInfo.pairing_secret);
+    //     $scope.code = pairingInfo.device_pubkey + "@" + pairingInfo.hub + "#" + pairingInfo.pairing_secret;
+    //
+    //     function determineQRcodeVersionFromString( inputtext ) {
+    //         // maximum characters per QR code version using ECC level m
+    //         // source: http://www.qrcode.com/en/about/version.html
+    //         var maxCharsforQRVersion = [0,14,26,42,62,84,106,122,152,180,213];
+    //         var qrversion = 5;
+    //         // find lowest version number that has enough space for our text
+    //         for (var i = (maxCharsforQRVersion.length-1); i > 0 ; i--) {
+    //             if ( maxCharsforQRVersion[i] >= inputtext.length)
+    //             {
+    //                 qrversion = i;
+    //             }
+    //         }
+    //
+    //         return qrversion;
+    //     }
+    //
+    //     var qrstring = $scope.protocol + ":" +$scope.code;  //as passed to the qr generator in inviteCorrespondentDevice.html
+    //     $scope.qr_version = determineQRcodeVersionFromString( qrstring );
+    //
+    //     $timeout(function(){
+    //     	$scope.$digest();
+    //     });
+    //     var eventName = 'paired_by_secret-'+pairingInfo.pairing_secret;
+    //     eventBus.once(eventName, onPaired);
+    //     $scope.$on('$destroy', function() {
+    //         console.log("removing listener for pairing by our secret");
+    //         eventBus.removeListener(eventName, onPaired);
+    //     });
+    // });
 
     $scope.cancelAddCorrespondent = function() {
         go.path('correspondentDevices');

@@ -35,7 +35,10 @@ Utils.formatAmount = function(bytes, unitCode, opts) {
 			return x0 + x2;
 		}
     else {
-		return parseFloat(x0 + x2).toLocaleString([], {maximumFractionDigits: 20});
+        if(x1){
+            return parseFloat(x0).toLocaleString([], {maximumFractionDigits: 20})+"."+x1;
+        }else
+        return parseFloat(x0).toLocaleString([], {maximumFractionDigits: 20});
 		}
   }
 
@@ -43,7 +46,8 @@ Utils.formatAmount = function(bytes, unitCode, opts) {
 
   var u = Constants.UNITS[unitCode];
   var intAmountLength = Math.floor(bytes / u.value).toString().length;
-  var digits = intAmountLength >= 6 || unitCode == 'one' ? 0 : 6 - intAmountLength;
+  //var digits = intAmountLength >= 6 || unitCode == 'one' ? 0 : 6 - intAmountLength;
+    var digits = 6;//强制显示6位小数
   var amount = opts.dontRound ? (bytes / u.value).toString() : (bytes / u.value).toFixed(digits);
   return addSeparators(amount, opts.thousandsSeparator || ',', opts.decimalSeparator || '.', u.minDecimals);
 };

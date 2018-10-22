@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('addwalletController',
-    function ($rootScope, $scope, $timeout, storageService, notification, profileService, bwcService, $log,gettext,go) {
+    function ($rootScope, $scope, $timeout, storageService, notification, profileService, bwcService, $log,gettext,go,gettextCatalog) {
         var self = this;
         var successMsg = gettext('Backup words deleted');
         self.addwname = '';
@@ -10,6 +10,8 @@ angular.module('copayApp.controllers').controller('addwalletController',
         self.addwipass = '';
         self.addwiname = '';
         self.importcode = '';
+        self.importcode1 = '';
+        self.importcode2 = '';
         self.addwirpass = '';
         self.chosenWords = [];
         self.showcodes = [];
@@ -22,14 +24,6 @@ angular.module('copayApp.controllers').controller('addwalletController',
         var fc = profileService.focusedClient;
         var walletClient = bwcService.getClient();
         self.ducodes = walletClient.createRandomMnemonic().split(' ');
-        self.passequal = function () {
-            if (self.addwpass !== self.addwrpass) {
-                self.addwalleterr = true;
-                return false;
-            } else {
-                self.step = "showcode";
-            }
-        }
         //乱序
         self.shuffle = function (v) {
             for (var j, x, i = v.length; i; j = parseInt(Math.random() * i), x = v[--i], v[i] = v[j], v[j] = x);
@@ -99,11 +93,11 @@ angular.module('copayApp.controllers').controller('addwalletController',
             if (self.chosenWords.length > 11) {
                 var chostr = '';
                 for (var i = 0; i < self.chosenWords.length; i++) {
-                    chostr += self.chosenWords[i].id;
+                    chostr += self.chosenWords[i].str;
                 }
                 var showstr = '';
                 for (var i = 0; i < self.showcodes.length; i++) {
-                    showstr += self.showcodes[i].id;
+                    showstr += self.showcodes[i].str;
                 }
                 if (chostr == showstr) {
                     for (var i = 0; i < self.showcodes.length; i++) {
@@ -140,7 +134,11 @@ angular.module('copayApp.controllers').controller('addwalletController',
 
         };
         // 删除口令 修改后
-        self.addWallet = function (walletName, passphrase, mnemonic,del) {
+        self.addWallet = function (walletName, password, passphrase, mnemonic,del) {
+            if(password !== passphrase){
+                $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('*Inconsistent password'));
+                return;
+            }
             mnemonic = mnemonic.trim();
             if (self.creatingProfile)
                 return console.log('already creating profile');
@@ -168,6 +166,7 @@ angular.module('copayApp.controllers').controller('addwalletController',
                             self.deleted = true;
                             notification.success(successMsg);
                             go.walletHome();
+                            $rootScope.$emit('Local/WalletImported', walletId);
                         });
                     }else{
                         $rootScope.$emit('Local/WalletImported', walletId);
@@ -177,22 +176,24 @@ angular.module('copayApp.controllers').controller('addwalletController',
         };
         //import wallet
         self.importw = function(){
-            if (self.creatingProfile)
-                return console.log('already creating profile');
-            self.creatingProfile = true;
-
+            if(self.addwipass !== self.addwirpass){
+                $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('*Inconsistent password'));
+                return;
+            }
+            self.importcode1 = self.importcode.replace(/^\s+/, '').replace(/\s+$/, '');
+            self.importcode2 = self.importcode1.replace(/\s+/g, ' ');
             $timeout(function () {
-                profileService.createWallet({ name: self.addwiname, password: self.addwipass, mnemonic: self.importcode,m:1,n:1,networkName:"livenet",cosigners:[],isSinglecreateress:true }, function (err,walletId) {
+                profileService.createWallet({ name: self.addwiname, password: self.addwipass, mnemonic: self.importcode2,m:1,n:1,networkName:"livenet",cosigners:[],isSinglecreateress:true }, function (err,walletId) {
                     if(err){
                         self.creatingProfile = false;
                         $log.warn(err);
                         self.error = err;
+                        alert(err);
                         $timeout(function () {
                             $scope.$apply();
                         });
-                    }else{
-                        $rootScope.$emit('Local/WalletImported', walletId);
                     }
+                     $rootScope.$emit('Local/WalletImported', walletId);
                 });
             }, 100);
         }

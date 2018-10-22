@@ -16,6 +16,10 @@
            ng-click="topbar.goToWaname(); goToWaname = null;index.backwaname = false;">
             <img src="./img/chatbackstate.png" />
         </a>
+        <a ng-show="passgoToWaname"
+           ng-click="topbar.passgoToWaname(); passgoToWaname = null;index.backwaname = false;">
+            <img src="./img/chatbackstate.png" />
+        </a>
         <a ng-show="gohisback" history-back
            ng-click=" gohisback = null">
             <img src="./img/chatbackstate.png" />
@@ -25,9 +29,9 @@
     <section class="right-small">
         <qr-scanner ng-show="showCamera && index.isComplete" on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
 
-        <a ng-click="" ng-show="walletsave" class="greencolor size-14" translate><span>Save</span></a>
+        <a ng-click="" ng-show="walletsave" class="greencolor size-14"><span translate>Save</span></a>
 
-        <a ng-click="" ng-show="passsave" class="greencolor size-14" translate><span>Save</span></a>
+        <a ng-click="" ng-show="passsave" class="greencolor size-14"><span translate>Save</span></a>
     </section>
     <section class="middle tab-bar-section">
         <h1 class="title ellipsis">

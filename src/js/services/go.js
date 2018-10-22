@@ -2,7 +2,7 @@
 
 var eventBus = require('intervaluecore/event_bus.js');
 
-angular.module('copayApp.services').factory('go', function($window, $rootScope, $location, $state, profileService, fileSystemService, nodeWebkit, notification, gettextCatalog, authService, $deepStateRedirect, $stickyState, configService) {
+angular.module('copayApp.services').factory('go', function($window, $rootScope, $location, $state, profileService, fileSystemService, nodeWebkit, notification, gettextCatalog, authService, $deepStateRedirect, $stickyState, configService, gettext) {
     var root = {};
 
     var hideSidebars = function() {
@@ -152,9 +152,10 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                     }
                     //第二次扫码授权
                     else if(objRequest.type === 'sign'){
-                        var mnemonic;
+                        var xPrivKey;
                         var wc = profileService.walletClients;
                         db.query('select extended_pubkey,a.wallet  from extended_pubkeys as a  left join my_addresses as b on a.wallet=b.wallet where b.address=?',[objRequest.addr],function (rows) {
+                            if(rows.length >0 ){
                             for(var index in wc){
                                 if(rows[0].extended_pubkey == wc[index].credentials.xPubKey){
                                     if(!wc[index].credentials.mnemonic){
@@ -162,10 +163,13 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                                             profileService.setAndStoreFocus(rows[0].wallet, function() {
                                             });
                                         }
-                                        profileService.insistUnlockFC(null, function (err){
-                                            if (err) return;
-                                            mnemonic = profileService.focusedClient.credentials.mnemonic;;
-                                            shadowWallet.getSignatureDetlCode(objRequest,mnemonic,function (signatureDetlCode) {
+                                        profileService.unlockFC(null, function (err){
+                                            if (err) {
+                                                $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('Wrong password'));
+                                                return;
+                                            }
+                                            xPrivKey = profileService.focusedClient.credentials.xPrivKey;
+                                            shadowWallet.getSignatureDetlCode(objRequest,xPrivKey,function (signatureDetlCode) {
                                                 if(typeof  signatureDetlCode =="object"){
                                                     $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
                                                 }else{
@@ -176,8 +180,8 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                                         });
                                         break;
                                     }else {
-                                        mnemonic = wc[index].credentials.mnemonic;
-                                        shadowWallet.getSignatureDetlCode(objRequest,mnemonic,function (signatureDetlCode) {
+                                        xPrivKey = wc[index].credentials.xPrivKey;
+                                        shadowWallet.getSignatureDetlCode(objRequest,xPrivKey,function (signatureDetlCode) {
                                             if(typeof  signatureDetlCode =="object"){
                                                 $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
                                             }else{
@@ -189,7 +193,10 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                                     }
                                 }
                             }
-
+                        }else {
+                            notification.error(objRequest.addr+'is not found ,please try agin ');
+                        }
+                            $rootScope.$emit('Local/NeedFreshHistory');
                         });
 
                     }
@@ -200,7 +207,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                                 $rootScope.$emit('Local/generateShadowWallet', shadowWallet);
                             }else {
                                 console.log("shadowWallet is  "+shadowWallet);
-                                notification.error('shadowWallet is   '+shadowWallet);
+                                notification.error(gettextCatalog.getString('shadowWallet is '+shadowWallet));
                             }
                         });
                     }
@@ -269,40 +276,48 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                         var xPrivKey;
                         var wc = profileService.walletClients;
                         db.query('select extended_pubkey,a.wallet  from extended_pubkeys as a  left join my_addresses as b on a.wallet=b.wallet where b.address=?',[objRequest.addr],function (rows) {
-                            for(var index in wc){
-                                if(rows[0].extended_pubkey == wc[index].credentials.xPubKey){
-                                    if(!wc[index].credentials.mnemonic){
-                                        if(wc[index].credentials.walletId != profileService.focusedClient.walletId){
-                                            profileService.setAndStoreFocus(rows[0].wallet, function() {
-                                            });
-                                        }
-                                        profileService.insistUnlockFC(null, function (err){
-                                            if (err) return;
-                                            xPrivKey = profileService.focusedClient.credentials.xPrivKey;
-                                            shadowWallet.getSignatureDetlCode(objRequest,xPrivKey,function (signatureDetlCode) {
-                                                if(typeof  signatureDetlCode =="object"){
-                                                    $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
-                                                }else{
-                                                    console.log(" signatureDetlCode is "+signatureDetlCode);
-                                                    notification.error('signatureDetlCode is '+signatureDetlCode);
+                                if(rows.length > 0) {
+                                    for (var index in wc) {
+                                        if (rows[0].extended_pubkey == wc[index].credentials.xPubKey) {
+                                            if (!wc[index].credentials.mnemonic) {
+                                                if (wc[index].credentials.walletId != profileService.focusedClient.walletId) {
+                                                    profileService.setAndStoreFocus(rows[0].wallet, function () {
+                                                    });
                                                 }
-                                            });
-                                        });
-                                        break;
-                                    }else {
-                                        xPrivKey = wc[index].credentials.xPrivKey;
-                                        shadowWallet.getSignatureDetlCode(objRequest,xPrivKey,function (signatureDetlCode) {
-                                            if(typeof  signatureDetlCode =="object"){
-                                                $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
-                                            }else{
-                                                console.log(" signatureDetlCode is "+signatureDetlCode);
-                                                notification.error('signatureDetlCode is '+signatureDetlCode);
+                                                profileService.unlockFC(null, function (err) {
+                                                    if (err) {
+                                                        $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('Wrong password'));
+                                                        return;
+                                                    };
+                                                    xPrivKey = profileService.focusedClient.credentials.xPrivKey;
+                                                    shadowWallet.getSignatureDetlCode(objRequest, xPrivKey, function (signatureDetlCode) {
+                                                        if (typeof  signatureDetlCode == "object") {
+                                                            $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
+                                                        } else {
+                                                            console.log(" signatureDetlCode is " + signatureDetlCode);
+                                                            notification.error('signatureDetlCode is ' + signatureDetlCode);
+                                                        }
+                                                    });
+                                                });
+                                                break;
+                                            } else {
+                                                xPrivKey = wc[index].credentials.xPrivKey;
+                                                shadowWallet.getSignatureDetlCode(objRequest, xPrivKey, function (signatureDetlCode) {
+                                                    if (typeof  signatureDetlCode == "object") {
+                                                        $rootScope.$emit('Local/ShadowSignInvitation', signatureDetlCode);
+                                                    } else {
+                                                        console.log(" signatureDetlCode is " + signatureDetlCode);
+                                                        notification.error('signatureDetlCode is ' + signatureDetlCode);
+                                                    }
+                                                });
+                                                break;
                                             }
-                                        });
-                                        break;
+                                        }
                                     }
+                                }else {
+                                    notification.error(objRequest.addr+'is not found ,please try agin ');
                                 }
-                            }
+                                 $rootScope.$emit('Local/NeedFreshHistory');
 
                         });
 
@@ -314,7 +329,7 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
                                 $rootScope.$emit('Local/generateShadowWallet', shadowWallet);
                             }else {
                                 console.log("shadowWallet is  "+shadowWallet);
-                                notification.error('shadowWallet is   '+shadowWallet);
+                                notification.error(gettextCatalog.getString('shadowWallet is '+shadowWallet));
                             }
                         });
                     }
@@ -372,13 +387,15 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
         if (uri.indexOf("content:") !== -1) {
             window.plugins.intent.readFileFromContentUrl(uri.replace(/#/g,'%23'), function (content) {
                 breadcrumbs.add("handleFile - content url");
-                require('intervaluecore/wallet.js').handlePrivatePaymentFile(null, content, cb);
+                //todo delete
+                // require('intervaluecore/wallet.js').handlePrivatePaymentFile(null, content, cb);
             }, function (err) {throw err});
             return checkDoubleClaim();
         }
         if (uri.indexOf("." + configService.privateTextcoinExt) != -1) {
             breadcrumbs.add("handleFile - file path url");
-            require('intervaluecore/wallet.js').handlePrivatePaymentFile(uri, null, cb);
+            //todo delete
+            // require('intervaluecore/wallet.js').handlePrivatePaymentFile(uri, null, cb);
             return checkDoubleClaim();
         }
         $rootScope.$emit('process_status_change', 'claiming', false);

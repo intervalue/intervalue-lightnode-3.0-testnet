@@ -2,7 +2,7 @@
 var db = require('intervaluecore/db');
 var shadowWallet = require('intervaluecore/shadowWallet');
 angular.module('copayApp.controllers').controller('signedTransactionIfoControllers',
-    function($scope, $rootScope, $timeout,go,profileService) {
+    function($scope, $rootScope, $timeout,go,profileService,gettext, gettextCatalog) {
         var self = this;
         var xPrivKey ;
 
@@ -11,9 +11,11 @@ angular.module('copayApp.controllers').controller('signedTransactionIfoControlle
          */
         self.signedTransaction = function () {
             var form = $scope.signedTransactionIfo;
-            var obj = JSON.parse(form.$$element[0][0].value);
+            var obj = JSON.parse(form.transactioninfo.$modelValue);
+
+            //var obj = JSON.parse(form.$$element[0][0].value);
             var wc = profileService.walletClients;
-            db.query('select extended_pubkey  from extended_pubkeys as a  left join my_addresses as b on a.wallet=b.wallet where b.address=?',[obj.from[0].address],function (rows) {
+            db.query('select extended_pubkey,a.wallet   from extended_pubkeys as a  left join my_addresses as b on a.wallet=b.wallet where b.address=?',[obj.fromAddress],function (rows) {
                 if(rows.length > 0){
                     for(var index in wc){
                         if(rows[0].extended_pubkey == wc[index].credentials.xPubKey){
@@ -22,15 +24,18 @@ angular.module('copayApp.controllers').controller('signedTransactionIfoControlle
                                     profileService.setAndStoreFocus(rows[0].wallet, function() {
                                     });
                                 }
-                                profileService.insistUnlockFC(null, function (err){
-                                    if (err) return;
+                                profileService.unlockFC(null, function (err){
+                                    if (err) {
+                                        $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('Wrong password'));
+                                        return;
+                                    }
                                     xPrivKey = profileService.focusedClient.credentials.xPrivKey;
                                     shadowWallet.signTradingUnit(obj,xPrivKey,function (objrequest) {
                                         if(typeof objrequest == "object"){
                                             $rootScope.$emit('Local/signedTransactionIfo', objrequest);
                                         }else {
                                             console.log("error: "+objrequest);
-                                            return self.setSendError(objrequest);
+                                            return $rootScope.$emit('Local/ShowErrorAlert', objrequest);
                                         }
                                     });
                                 });
@@ -42,7 +47,7 @@ angular.module('copayApp.controllers').controller('signedTransactionIfoControlle
                                         $rootScope.$emit('Local/signedTransactionIfo', objrequest);
                                     }else {
                                         console.log("error: "+objrequest);
-                                        return self.setSendError(objrequest);
+                                        return $rootScope.$emit('Local/ShowErrorAlert', objrequest);
                                     }
                                 });
                                 break;
@@ -51,9 +56,9 @@ angular.module('copayApp.controllers').controller('signedTransactionIfoControlle
                     }
                 }else {
                     console.log("error not find address ");
-                    return self.setSendError("error not find address");
+                    return $rootScope.$emit('Local/ShowErrorAlert', "error not find address : "+obj.fromAddress);
                 }
-
+                $rootScope.$emit('Local/NeedFreshHistory');
             });
         };
 
@@ -69,16 +74,15 @@ angular.module('copayApp.controllers').controller('signedTransactionIfoControlle
          */
         self.sendPaymentHot = function () {
             var form = $scope.signedTransactionIfo;
-            var opts = JSON.parse(form.$$element[0][0].value);
+            var opts = JSON.parse(form.txStIfo.$modelValue);
             var wallet = require('intervaluecore/wallet');
             wallet.sendMultiPayment(opts,function (cb) {
                 if(typeof cb =="object"){
-                    $rootScope.$emit('Local/SetTab', 'wallet');
+                    $rootScope.$emit('Local/paymentDone');
                 }else {
                     console.log("error: "+cb);
-                    return self.setSendError(cb);
+                    return $rootScope.$emit('Local/ShowErrorAlert', "sendPaymentHot :"+cb);
                 }
             });
         }
-
     });

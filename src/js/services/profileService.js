@@ -114,16 +114,17 @@ angular.module('copayApp.services')
     };
 
     root.setWalletClient = function (credentials) {
-      if (root.walletClients[credentials.walletId] && root.walletClients[credentials.walletId].started)
-        return;
-
+     /* if (root.walletClients[credentials.walletId] && root.walletClients[credentials.walletId].started)
+        return;*/
       var client = bwcService.getClient(JSON.stringify(credentials));
+
         for(let item in root.profile.credentials){
           if(root.profile.credentials[item].walletId ==client.credentials.walletId ){
               client.credentials.xPrivKey = root.profile.credentials[item].xPrivKey;
               client.credentials.mnemonic = root.profile.credentials[item].mnemonic;
               client.credentials.xPrivKeyEncrypted = root.profile.credentials[item].xPrivKeyEncrypted;
               client.credentials.mnemonicEncrypted = root.profile.credentials[item].mnemonicEncrypted;
+              client.credentials.walletName = root.profile.credentials[item].walletName;
               break;
           }
         }
@@ -133,7 +134,6 @@ angular.module('copayApp.services')
       client.credentials.mnemonicEncrypted = root.profile.mnemonicEncrypted;*/
 
       root.walletClients[credentials.walletId] = client;
-
       root.walletClients[credentials.walletId].started = true;
       client.initialize({}, function (err) {
         if (err) {
@@ -210,7 +210,8 @@ angular.module('copayApp.services')
             var config = configService.getSync();
             var firstWc = root.walletClients[lodash.keys(root.walletClients)[0]];
             // set light_vendor_url here as we may request new assets history at startup during balances update
-            require('intervaluecore/light_wallet.js').setLightVendorHost(config.hub);
+            //todo delete
+            //   require('intervaluecore/light_wallet.js').setLightVendorHost(config.hub);
             if (root.profile.xPrivKeyEncrypted) {
               console.log('priv key is encrypted, will wait for UI and request password');
               // assuming bindProfile is called on encrypted keys only at program startup
@@ -223,21 +224,63 @@ angular.module('copayApp.services')
               throw Error("neither xPrivKey nor xPrivKeyEncrypted");*/
             //var tempDeviceKey = device.genPrivKey();
             //saveTempKeys(tempDeviceKey, null, function(){});
-            var tempDeviceKey = Buffer.from(profile.tempDeviceKey, 'base64');
-            var prevTempDeviceKey = profile.prevTempDeviceKey ? Buffer.from(profile.prevTempDeviceKey, 'base64') : null;
-            device.setTempKeys(tempDeviceKey, prevTempDeviceKey, saveTempKeys);
-            $rootScope.$emit('Local/ProfileBound');
-            Wallet.readAssetMetadata(null, function (assocAssetMetadata) {
-              for (var asset in assocAssetMetadata) {
-                if (!root.assetMetadata[asset])
-                  root.assetMetadata[asset] = assocAssetMetadata[asset];
+              if(profile.tempDeviceKey){
+              var tempDeviceKey = Buffer.from(profile.tempDeviceKey, 'base64');
+              var prevTempDeviceKey = profile.prevTempDeviceKey ? Buffer.from(profile.prevTempDeviceKey, 'base64') : null;
+              device.setTempKeys(tempDeviceKey, prevTempDeviceKey, saveTempKeys);
               }
-            });
+
+            $rootScope.$emit('Local/ProfileBound');
+            // Wallet.readAssetMetadata(null, function (assocAssetMetadata) {
+            //   for (var asset in assocAssetMetadata) {
+            //     if (!root.assetMetadata[asset])
+            //       root.assetMetadata[asset] = assocAssetMetadata[asset];
+            //   }
+            // });
             return cb();
           });
         });
       });
     };
+
+      root.bindProfileOld = function (profile, cb) {
+          breadcrumbs.add('bindProfile');
+          root.profile = profile;
+          configService.get(function (err) {
+              //$log.debug('Preferences read');
+              if (err)
+                  return cb(err);
+              root.setWalletClients();
+              storageService.getFocusedWalletId(function (err, focusedWalletId) {
+                  if (err)
+                      return cb(err);
+                  root._setFocus(focusedWalletId, function () {
+                      console.log("focusedWalletId", focusedWalletId);
+                      var Wallet = require('intervaluecore/wallet.js');
+                      var device = require('intervaluecore/device.js');
+                      var config = configService.getSync();
+                      var firstWc = root.walletClients[lodash.keys(root.walletClients)[0]];
+                      // set light_vendor_url here as we may request new assets history at startup during balances update
+                      //todo delete
+                      //   require('intervaluecore/light_wallet.js').setLightVendorHost(config.hub);
+                      if (root.profile.xPrivKeyEncrypted) {
+                          console.log('priv key is encrypted, will wait for UI and request password');
+                          device.setDeviceAddress(root.profile.my_device_address);
+                      }
+                      else if (root.profile.xPrivKey)
+                          root.focusedClient.initDeviceProperties(profile.xPrivKey, root.profile.my_device_address, config.hub, config.deviceName);
+                      if(profile.tempDeviceKey){
+                          var tempDeviceKey = Buffer.from(profile.tempDeviceKey, 'base64');
+                          var prevTempDeviceKey = profile.prevTempDeviceKey ? Buffer.from(profile.prevTempDeviceKey, 'base64') : null;
+                          device.setTempKeys(tempDeviceKey, prevTempDeviceKey, saveTempKeys);
+                      }
+
+                      $rootScope.$emit('Local/ProfileBound');
+                      return cb();
+                  });
+              });
+          });
+      };
 
     root.loadAndBindProfile = function (cb) {
       breadcrumbs.add('loadAndBindProfile');
@@ -256,6 +299,7 @@ angular.module('copayApp.services')
               return cb(new Error('NOPROFILE: No profile'));
             } else {
               $log.debug('Profile read');
+                console.log(profile);
               return root.bindProfile(profile, cb);
             }
 
@@ -263,6 +307,7 @@ angular.module('copayApp.services')
         }
       });
     };
+
 
 
     root._seedWallet = function (opts, cb) {
@@ -285,7 +330,10 @@ angular.module('copayApp.services')
 
         } catch (ex) {
           $log.info(ex);
-          return cb(gettext('Could not create: Invalid wallet seed'));
+            $rootScope.$emit('Local/ShowAlert', gettextCatalog.getString(' Could not create: Invalid wallet seed.'), 'fi-check', function () {
+            });
+          return;
+          //return cb(gettext('Could not create: Invalid wallet seed'));
         }
       } else if (opts.extendedPrivateKey) {
         try {
@@ -346,7 +394,8 @@ angular.module('copayApp.services')
         require('intervaluecore/wallet.js'); // load hub/ message handlers
         var device = require('intervaluecore/device.js');
         var tempDeviceKey = device.genPrivKey();
-        require('intervaluecore/light_wallet.js').setLightVendorHost(config.hub);
+        //todo delete
+        // require('intervaluecore/light_wallet.js').setLightVendorHost(config.hub);
         // initDeviceProperties sets my_device_address needed by walletClient.createWallet
         walletClient.initDeviceProperties(walletClient.credentials.xPrivKey, null, config.hub, config.deviceName);
         var walletName = opts.walletName || gettextCatalog.getString('Small Expenses Wallet');
@@ -402,6 +451,15 @@ angular.module('copayApp.services')
         root._seedWallet(opts, function (err, walletClient) {
           if (err)
             return cb(err);
+        var xPubKey = walletClient.credentials.xPubKey;
+
+        // check if exists
+        var w = lodash.find(root.profile.credentials, { 'xPubKey': xPubKey });
+        if (w){
+            $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('wallet already exist'));
+            return;
+        }
+
 
           walletClient.createWallet(opts.name, opts.m, opts.n, {
             network: opts.networkName,
@@ -430,17 +488,47 @@ angular.module('copayApp.services')
       var device = require('intervaluecore/device.js');
       device.setMyHotDeviceAddress(addr);
       var walletClient = bwcService.getClient();
-      walletClient.import(JSON.stringify(opts));
-      walletClient.createWallet(opts.name, opts.m, opts.n, {
-        network: opts.network,
-        account: opts.account,
-        cosigners: opts.cosigners
-      }, function (err) {
-        if (err)
-          return cb(gettext('Error creating wallet') + ": " + err);
-        opts.observed = true;
-        root._addWalletClient(walletClient, opts, cb);
-      });
+        if(!root.profile){
+            Profile.create();
+            var walletClient = bwcService.getClient();
+            walletClient.import(JSON.stringify(opts));
+            walletClient.createWallet(opts.name, opts.m, opts.n, {
+                network: opts.network,
+                account: opts.account,
+                cosigners: opts.cosigners
+            }, function (err) {
+                if (err)
+                    return cb(gettext('Error creating wallet') + ": " + err);
+                var p = Profile.create({
+                    credentials: [JSON.parse(walletClient.export())],
+                    tempDeviceKey: null,
+                    my_device_address: addr
+                });
+                console.log(p);
+                root.profile = p;
+                configService.get(function (err) {
+                    root.bindProfile(p, function (err) {
+                        storageService.storeNewProfile(p, function (err) {
+                            root.setSingleAddressFlag(true);
+                            return cb(err);
+                        });
+                    });
+                });
+            });
+
+        }else {
+            walletClient.import(JSON.stringify(opts));
+            walletClient.createWallet(opts.name, opts.m, opts.n, {
+                network: opts.network,
+                account: opts.account,
+                cosigners: opts.cosigners
+            }, function (err) {
+                if (err)
+                    return cb(gettext('Error creating wallet') + ": " + err);
+                opts.observed = true;
+                root._addWalletClient(walletClient, opts, cb);
+            });
+        }
     };
 
     root.getClient = function (walletId) {
@@ -741,7 +829,7 @@ angular.module('copayApp.services')
       $rootScope.$emit('Local/NeedsPassword', false, error_message, function (err2, password) {
         if (err2 || !password) {
           return cb({
-            message: (err2 || gettext('Password needed'))
+            message: (err2 || gettextCatalog.getString('Password needed'))
           });
         }
         var fc = root.focusedClient;
@@ -751,7 +839,7 @@ angular.module('copayApp.services')
         } catch (e) {
           $log.debug(e);
           return cb({
-            message: gettext('Wrong password')
+            message: gettextCatalog.getString('Wrong password')
           });
         }
         var autolock = function () {
@@ -791,6 +879,7 @@ angular.module('copayApp.services')
       var config = configService.getSync();
       config.colorFor = config.colorFor || {};
       config.aliasFor = config.aliasFor || {};
+      config.imageFor = config.imageFor || {};
       var ret = lodash.map(root.profile.credentials, function (c) {
         return {
           m: c.m,
