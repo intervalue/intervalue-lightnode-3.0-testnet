@@ -34,13 +34,16 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.backhome = false;
     self.backwaname = false;
     self.changePD = false;
+    self.shownewsloading = false;
     self.newslist = '';
     self.coinlist = '';
     self.quicklist = [];
     self.quicklistshow = '';
+    self.quicklists = {};
     self.newsanimate = 1;
     self.quickanimate = 1;
     self.coinanimate = 1;
+    self.newspage = 1;
     function updatePublicKeyRing(walletClient, onDone) {
         var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
         walletDefinedByKeys.readCosigners(walletClient.credentials.walletId, function (arrCosigners) {
@@ -1254,52 +1257,52 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         breadcrumbs.add('index: ' + self.assetIndex + '; balances: ' + JSON.stringify(self.arrBalances));
         if (!client.isComplete())
             return console.log('fc incomplete yet');
-            client.getTxHistory('base', walletId, function onGotTxHistory(txs) {
-                $timeout(function () {
-                    var newHistory = self.processNewTxs(txs);
-                    $log.debug('Tx History synced. Total Txs: ' + newHistory.length);
-                    //if (walletId == profileService.focusedClient.credentials.walletId) {
-                        self.completeHistory = newHistory;
-                        self.txHistory = newHistory.slice(0, self.historyShowLimit);
-                        require('intervaluecore/light').findStable2(walletId,function (obj) {
-                            self.ammountTatol = profileService.formatAmount(obj,'bytes');
-                            $timeout(function () {
-                                $rootScope.$apply();
-                            },1);
-                        });
-                    require('intervaluecore/wallet').getWalletsInfo(function (obj) {
-                        if(!obj) return;
-                        self.updateImage();
-                        let trans = [];
-                        let fc = profileService.walletClients;
-                        obj.forEach(function(tran){
-                            for(var item in fc) {
-                                if (tran.wallet == fc[item].credentials.walletId){
-                                    var walletNameIfo = fc[item].credentials.walletName;
-                                    var imageIfo = fc[item].image;
-                                    var mnemonicEncryptedIfo = fc[item].credentials.mnemonicEncrypted;
-                                    break;
-                                }
-                            }
-                            trans.push({
-                                address : tran.address,
-                                wallet  : tran.wallet,
-                                stables  : profileService.formatAmount(tran.stables,'bytes'),
-                                walletName : walletNameIfo,
-                                image : imageIfo,
-                                mnemonicEncrypted: mnemonicEncryptedIfo
-                            });
-                        });
-                        self.walletInfo = trans;
-                        $timeout(function () {
-                            $rootScope.$apply();
-                        },1);
-                    });
-                        self.historyShowShowAll = newHistory.length >= self.historyShowLimit;
-                    //}
-                    return cb();
+        client.getTxHistory('base', walletId, function onGotTxHistory(txs) {
+            $timeout(function () {
+                var newHistory = self.processNewTxs(txs);
+                $log.debug('Tx History synced. Total Txs: ' + newHistory.length);
+                //if (walletId == profileService.focusedClient.credentials.walletId) {
+                self.completeHistory = newHistory;
+                self.txHistory = newHistory.slice(0, self.historyShowLimit);
+                require('intervaluecore/light').findStable2(walletId,function (obj) {
+                    self.ammountTatol = profileService.formatAmount(obj,'bytes');
+                    $timeout(function () {
+                        $rootScope.$apply();
+                    },1);
                 });
+                require('intervaluecore/wallet').getWalletsInfo(function (obj) {
+                    if(!obj) return;
+                    self.updateImage();
+                    let trans = [];
+                    let fc = profileService.walletClients;
+                    obj.forEach(function(tran){
+                        for(var item in fc) {
+                            if (tran.wallet == fc[item].credentials.walletId){
+                                var walletNameIfo = fc[item].credentials.walletName;
+                                var imageIfo = fc[item].image;
+                                var mnemonicEncryptedIfo = fc[item].credentials.mnemonicEncrypted;
+                                break;
+                            }
+                        }
+                        trans.push({
+                            address : tran.address,
+                            wallet  : tran.wallet,
+                            stables  : profileService.formatAmount(tran.stables,'bytes'),
+                            walletName : walletNameIfo,
+                            image : imageIfo,
+                            mnemonicEncrypted: mnemonicEncryptedIfo
+                        });
+                    });
+                    self.walletInfo = trans;
+                    $timeout(function () {
+                        $rootScope.$apply();
+                    },1);
+                });
+                self.historyShowShowAll = newHistory.length >= self.historyShowLimit;
+                //}
+                return cb();
             });
+        });
 
     };
 
@@ -1965,7 +1968,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     };
 
     self.newsData = function () {
-        self.newsanimate += 1;
         // self.newslist = [
         // 	{
         //         "author" : "区块链大本营",
@@ -2023,8 +2025,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         //         "updateTime" : "2018-10-20 09:51:26"
         // 	}
         // ]
-        news.getNewsData(6,1,null,function(res) {
+
+        news.getNewsData(6,self.newsPage,null,function(res) {
             if(!!res && res.code == 0) {
+                self.shownewsloading = false;
+                self.newsPage += 6;
                 $timeout(function(){
                     self.newslist = res.page.list
                 },10)
@@ -2034,32 +2039,30 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 console.error("error~!");
         })
     };
-
+    // var showlist = {};
     self.quickData = function () {
-        self.quickanimate += 1;
-        console.log(self.quickanimate)
         news.getQuickData(6,null,null,function(res) {
-
             var list = [];
-            var showlist = {};
             if(!!res && res.code == 0) {
+                self.shownewsloading = false;
                 lodash.forEach(res.page.list, function(value, key){
                     value.grayweek = self.getWeekNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
                     value.graydate = self.getDateNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
                     value.greentime = self.getTimeFromNow(value.createTime);
                 })
+                self.quicklists = Object.assign(self.quicklists, res.page.list);
                 list = res.page.list;
                 for(var i = 0; i < list.length; i++) {
-                    if(!showlist[list[i].grayweek]) {
+                    if(!self.quicklists[list[i].grayweek]) {
                         var arr = [];
                         arr.push(list[i]);
-                        showlist[list[i].grayweek] = arr;
+                        self.quicklists[list[i].grayweek] = arr;
                     }else {
-                        showlist[list[i].grayweek].push(list[i])
+                        self.quicklists[list[i].grayweek].push(list[i])
                     }
                 }
                 self.quicklistshow = res.page.list;
-                self.quicklist = showlist;
+                self.quicklist = self.quicklists;
                 console.log(self.quicklist);
                 $timeout(function () {
                     $scope.$apply();
@@ -2071,10 +2074,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     };
 
     self.currencyData = function () {
-        self.coinanimate += 1;
         news.getCurrencyData(function(res) {
-
             if(res != null) {
+                self.shownewsloading = false;
                 self.coinlist = res;
                 $timeout(function(){
                     $scope.$apply();
@@ -2091,7 +2093,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     };
     //	加载更多
     self.loadmore = function(outlr, inlr, num){
+        self.shownewsloading = true;
         if(outlr == 'new1tab'){
+            console.log(111111);
             self.newsData();
         }else if(outlr == 'new2tab'){
             self.quickData();
@@ -2134,7 +2138,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     var id = 0;
     eventBus.on('newtransaction',function(event){
-            id++;
+        id++;
         cordova.plugins.notification.local.schedule({
             id: id,
             title: gettextCatalog.getString('There is a new deal'),
@@ -2199,6 +2203,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             }
         }, false);
     })();
-console.log(profileService.walletClients);
+    console.log(profileService.walletClients);
 
 });
