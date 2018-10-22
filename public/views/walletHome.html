@@ -337,12 +337,12 @@
                     <a ng-click="home.showtab = 'new3'" translate>Quotes</a>
                 </div>
             </div>
-            <div class="addwcontent" ng-if="home.showtab == 'new1'" id="new1tab" ng-init="home.loadmore('new1tab', 'new1tablist')">
-                <div ng-if="home.newslist == ''">
+            <div class="addwcontent" ng-if="home.showtab == 'new1'" id="new1tab" ng-init="index.newsData()" homescrolled="index.loadmore('new1tab', 'new1tablist')">
+                <div ng-if="index.newslist == ''">
                     空的
                 </div>
-                <div class="newslist" ng-if="home.newslist !== ''" id="new1tablist">
-                    <div class="item fadeInUpBig animated" ng-repeat="item in home.newslist track by $index">
+                <div class="newslist" ng-if="index.newslist !== ''" id="new1tablist">
+                    <div class="item" ng-repeat="item in index.newslist track by $index">
                         <img src="{{item.coverPath}}" ng-click="home.gonewsin(item.id)" />
                         <div class="info">
                             <div class="title" ng-click="home.gonewsin(item.id)" >{{item.title}}</div>
@@ -353,15 +353,15 @@
                         </div>
                     </div>
                 </div>
-                <div ng-show="home.infinite_isCmp">加载动画</div>
+                <div ng-show="index.shownewsloading" class="shownewsloading">加载动画</div>
             </div>
-            <div class="addwcontent" ng-if="home.showtab == 'new2'" id="new2tab" ng-init="home.loadmore('new2tab', 'new2tablist')">
-                <div ng-if="home.quicklistshow == ''">
+            <div class="addwcontent" ng-if="home.showtab == 'new2'" id="new2tab" ng-init="index.quickData()" homescrolled="index.loadmore('new2tab', 'new2tablist')">
+                <div ng-if="index.quicklistshow == ''">
                     空的
                 </div>
-                <div class="letterlist" ng-if="home.quicklistshow !== ''" id="new2tablist">
-                    <div class="datenow Foundation fadeInUpBig animated">{{home.getweekginglee}}</div>
-                    <div class="itemin Foundation fadeInUpBig animated" ng-repeat="(key,item) in home.quicklist track by $index">
+                <div class="letterlist" ng-if="index.quicklistshow !== ''" id="new2tablist">
+                    <div class="datenow" ng-class="{'fadeInUpBig animated': index.quickanimate <= 2}">{{index.getweekginglee}}</div>
+                    <div class="itemin" ng-class="{'fadeInUpBig animated': index.quickanimate <= 2}" ng-repeat="(key,item) in index.quicklist track by $index">
                         <div class="date">{{key}}</div>
                         <div class="itemlr" ng-repeat="itemin in item">
                             <div class="item">
@@ -391,19 +391,19 @@
                         <!--</div>-->
                     <!--</div>-->
                 </div>
-                <div ng-show="home.infinite_isCmp">加载动画</div>
+                <div ng-show="index.shownewsloading" class="shownewsloading">加载动画</div>
             </div>
-            <div class="addwcontent" ng-if="home.showtab == 'new3'" id="new3tab" ng-init="home.loadmore('new3tab', 'new3tablist')">
-                <div ng-if="home.coinlist == ''">
+            <div class="addwcontent" ng-if="home.showtab == 'new3'" id="new3tab" ng-init="index.currencyData()" homescrolled="index.loadmore('new3tab', 'new3tablist')">
+                <div ng-if="index.coinlist == ''">
                     空的
                 </div>
-                <div class="quotelist" ng-if="home.coinlist !== ''" id="new3tablist">
+                <div class="quotelist" ng-if="index.coinlist !== ''" id="new3tablist">
                     <div class="titlelabel">
                         <div class="numall" translate>Market value</div>
                         <div class="price" translate>Price</div>
                         <div class="gains" translate>Latest gains</div>
                     </div>
-                    <div class="itemin" ng-repeat="item in home.coinlist track by $index">
+                    <div class="itemin" ng-repeat="item in index.coinlist track by $index">
                         <div class="item">
                             <div class="leftcoininfo">
                                 <div class="coinimg">
@@ -419,7 +419,7 @@
                         </div>
                     </div>
                 </div>
-                <div ng-show="home.infinite_isCmp">加载动画</div>
+                <div ng-show="index.shownewsloading" class="shownewsloading">加载动画</div>
             </div>
         </div>
 

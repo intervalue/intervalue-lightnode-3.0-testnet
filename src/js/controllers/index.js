@@ -34,7 +34,16 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.backhome = false;
     self.backwaname = false;
     self.changePD = false;
-
+    self.shownewsloading = false;
+    self.newslist = '';
+    self.coinlist = '';
+    self.quicklist = [];
+    self.quicklistshow = '';
+    self.quicklists = {};
+    self.newsanimate = 1;
+    self.quickanimate = 1;
+    self.coinanimate = 1;
+    self.newspage = 1;
     function updatePublicKeyRing(walletClient, onDone) {
         var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
         walletDefinedByKeys.readCosigners(walletClient.credentials.walletId, function (arrCosigners) {
@@ -1248,52 +1257,52 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         breadcrumbs.add('index: ' + self.assetIndex + '; balances: ' + JSON.stringify(self.arrBalances));
         if (!client.isComplete())
             return console.log('fc incomplete yet');
-            client.getTxHistory('base', walletId, function onGotTxHistory(txs) {
-                $timeout(function () {
-                    var newHistory = self.processNewTxs(txs);
-                    $log.debug('Tx History synced. Total Txs: ' + newHistory.length);
-                    //if (walletId == profileService.focusedClient.credentials.walletId) {
-                        self.completeHistory = newHistory;
-                        self.txHistory = newHistory.slice(0, self.historyShowLimit);
-                        require('intervaluecore/light').findStable2(walletId,function (obj) {
-                            self.ammountTatol = profileService.formatAmount(obj,'bytes');
-                            $timeout(function () {
-                                $rootScope.$apply();
-                            },1);
-                        });
-                    require('intervaluecore/wallet').getWalletsInfo(function (obj) {
-                        if(!obj) return;
-                        self.updateImage();
-                        let trans = [];
-                        let fc = profileService.walletClients;
-                        obj.forEach(function(tran){
-                            for(var item in fc) {
-                                if (tran.wallet == fc[item].credentials.walletId){
-                                    var walletNameIfo = fc[item].credentials.walletName;
-                                    var imageIfo = fc[item].image;
-                                    var mnemonicEncryptedIfo = fc[item].credentials.mnemonicEncrypted;
-                                    break;
-                                }
-                            }
-                            trans.push({
-                                address : tran.address,
-                                wallet  : tran.wallet,
-                                stables  : profileService.formatAmount(tran.stables,'bytes'),
-                                walletName : walletNameIfo,
-                                image : imageIfo,
-                                mnemonicEncrypted: mnemonicEncryptedIfo
-                            });
-                        });
-                        self.walletInfo = trans;
-                        $timeout(function () {
-                            $rootScope.$apply();
-                        },1);
-                    });
-                        self.historyShowShowAll = newHistory.length >= self.historyShowLimit;
-                    //}
-                    return cb();
+        client.getTxHistory('base', walletId, function onGotTxHistory(txs) {
+            $timeout(function () {
+                var newHistory = self.processNewTxs(txs);
+                $log.debug('Tx History synced. Total Txs: ' + newHistory.length);
+                //if (walletId == profileService.focusedClient.credentials.walletId) {
+                self.completeHistory = newHistory;
+                self.txHistory = newHistory.slice(0, self.historyShowLimit);
+                require('intervaluecore/light').findStable2(walletId,function (obj) {
+                    self.ammountTatol = profileService.formatAmount(obj,'bytes');
+                    $timeout(function () {
+                        $rootScope.$apply();
+                    },1);
                 });
+                require('intervaluecore/wallet').getWalletsInfo(function (obj) {
+                    if(!obj) return;
+                    self.updateImage();
+                    let trans = [];
+                    let fc = profileService.walletClients;
+                    obj.forEach(function(tran){
+                        for(var item in fc) {
+                            if (tran.wallet == fc[item].credentials.walletId){
+                                var walletNameIfo = fc[item].credentials.walletName;
+                                var imageIfo = fc[item].image;
+                                var mnemonicEncryptedIfo = fc[item].credentials.mnemonicEncrypted;
+                                break;
+                            }
+                        }
+                        trans.push({
+                            address : tran.address,
+                            wallet  : tran.wallet,
+                            stables  : profileService.formatAmount(tran.stables,'bytes'),
+                            walletName : walletNameIfo,
+                            image : imageIfo,
+                            mnemonicEncrypted: mnemonicEncryptedIfo
+                        });
+                    });
+                    self.walletInfo = trans;
+                    $timeout(function () {
+                        $rootScope.$apply();
+                    },1);
+                });
+                self.historyShowShowAll = newHistory.length >= self.historyShowLimit;
+                //}
+                return cb();
             });
+        });
 
     };
 
@@ -1887,10 +1896,246 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             $rootScope.$apply();
         });
     });
+    let news = require("intervaluecore/newsServers");
+
+    self.getTimeFromNow =  function(datestr){
+        if(datestr){
+            let aa = new Date(Date.parse(datestr.replace(/-/g,"/")))
+            let now = new Date()
+            let hour = (now.getTime() - aa.getTime())/(1000*60*60)
+            let showtime = null
+            if(hour < 0){
+                return "1分钟前"
+            }
+            if(hour < 1 ){
+                showtime = Math.floor(hour*60)
+                return showtime+"分钟前"
+            }else if(hour >= 1 && hour <=23){
+                showtime = Math.floor(hour)
+                return showtime+"小时前"
+            }else{
+                showtime = (datestr.split(" "))[0]
+                return showtime
+            }
+        }
+        return null
+    };
+
+    self.getWeeksingle =  function(){
+        //当前年月日
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        var comprared = year + '-' + month + '-' + day;
+        //计算星期几
+        let qdatearr = comprared.split('-');
+        let qdatearr2 = new Date(qdatearr[0], parseInt(qdatearr[1] - 1), qdatearr[2]);
+        let qweeknow = String(qdatearr2.getDay()).replace("0","日").replace("1","一").replace("2","二").replace("3","三").replace("4","四").replace("5","五").replace("6","六");
+        let qdatenow = "星期" + qweeknow;
+        return '今天'+ ' ' +qdatearr[1] + '/' + qdatearr[2] + ' '+ qdatenow;
+    };
+    self.getweekginglee = self.getWeeksingle();
+
+    self.getWeekNow =  function(datestr){
+        if(datestr){
+            //当前年月日
+            var date = new Date();
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var comprared = year + '-' + month + '-' + day;
+            //计算星期几
+            let qdatearr = datestr.split('-');
+            let qdatearr2 = new Date(qdatearr[0], parseInt(qdatearr[1] - 1), qdatearr[2]);
+            let qweeknow = String(qdatearr2.getDay()).replace("0","日").replace("1","一").replace("2","二").replace("3","三").replace("4","四").replace("5","五").replace("6","六");
+            let qdatenow = "星期" + qweeknow;
+            if (datestr ==  comprared) {
+                return '今天'+ ' ' +qdatearr[1] + '/' + qdatearr[2] + ' '+ qdatenow;
+            }else{
+                return qdatearr[1] + '/' + qdatearr[2] + ' '+ qdatenow;
+            }
+        }
+        return null
+    };
+
+    self.getDateNow =  function(datestr){
+        if(datestr){
+            let qdatearr = datestr.split('-');
+            return qdatearr[0] + '-' + qdatearr[1] + '-' + qdatearr[2];
+        }
+        return null
+    };
+
+    self.newsData = function () {
+        // self.newslist = [
+        // 	{
+        //         "author" : "区块链大本营",
+        //         "coverPath" : "https://img.jinse.com/1094427_image3.png",
+        //         "createTime" : "2018-09-14 17:48:31",
+        //         "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+        //         "id" : 10,
+        //         "publishTime" : "2018-10-19 17:58:33",
+        //         "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+        //         "updateTime" : "2018-10-20 09:51:26"
+        // 	},{
+        //     	"author" : "区块链大本营",
+        //         "coverPath" : "https://img.jinse.com/1094427_image3.png",
+        //         "createTime" : "2018-09-14 17:48:31",
+        //         "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+        //         "id" : 10,
+        //         "publishTime" : "2018-10-19 17:58:33",
+        //         "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+        //         "updateTime" : "2018-10-20 09:51:26"
+        // 	},{
+        //     	"author" : "区块链大本营",
+        //         "coverPath" : "https://img.jinse.com/1094427_image3.png",
+        //         "createTime" : "2018-09-14 17:48:31",
+        //         "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+        //         "id" : 10,
+        //         "publishTime" : "2018-10-19 17:58:33",
+        //         "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+        //         "updateTime" : "2018-10-20 09:51:26"
+        // 	},{
+        //     	"author" : "区块链大本营",
+        //         "coverPath" : "https://img.jinse.com/1094427_image3.png",
+        //         "createTime" : "2018-09-14 17:48:31",
+        //         "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+        //         "id" : 10,
+        //         "publishTime" : "2018-10-19 17:58:33",
+        //         "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+        //         "updateTime" : "2018-10-20 09:51:26"
+        // 	},{
+        //     	"author" : "区块链大本营",
+        //         "coverPath" : "https://img.jinse.com/1094427_image3.png",
+        //         "createTime" : "2018-09-14 17:48:31",
+        //         "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+        //         "id" : 10,
+        //         "publishTime" : "2018-10-19 17:58:33",
+        //         "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+        //         "updateTime" : "2018-10-20 09:51:26"
+        // 	},{
+        //    		"author" : "区块链大本营",
+        //         "coverPath" : "https://img.jinse.com/1094427_image3.png",
+        //         "createTime" : "2018-09-14 17:48:31",
+        //         "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
+        //         "id" : 10,
+        //         "publishTime" : "2018-10-19 17:58:33",
+        //         "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
+        //         "updateTime" : "2018-10-20 09:51:26"
+        // 	}
+        // ]
+        news.getNewsData(6,self.newspage,null,function(res) {
+            console.log('111111111111');
+            if(!!res && res.code == 0) {
+                console.log('dddddddddd')
+                self.shownewsloading = false;
+                self.newspage += 6;
+                $timeout(function(){
+                    self.newslist = res.page.list
+                },10)
+                $scope.$apply();
+                console.log(res.page.list);
+            }else
+                console.error("error~!");
+        })
+    };
+
+    self.quickData = function () {
+        news.getQuickData(6,null,null,function(res) {
+            var list = [];
+            if(!!res && res.code == 0) {
+                self.shownewsloading = false;
+                lodash.forEach(res.page.list, function(value, key){
+                    value.grayweek = self.getWeekNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
+                    value.graydate = self.getDateNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
+                    value.greentime = self.getTimeFromNow(value.createTime);
+                })
+                self.quicklists = Object.assign(self.quicklists, res.page.list);
+                list = res.page.list;
+                for(var i = 0; i < list.length; i++) {
+                    if(!self.quicklists[list[i].grayweek]) {
+                        var arr = [];
+                        arr.push(list[i]);
+                        self.quicklists[list[i].grayweek] = arr;
+                    }else {
+                        self.quicklists[list[i].grayweek].push(list[i])
+                    }
+                }
+                self.quicklistshow = res.page.list;
+                self.quicklist = self.quicklists;
+                console.log(self.quicklist);
+                $timeout(function () {
+                    $scope.$apply();
+                });
+
+            }else
+                console.error("error~!");
+        });
+    };
+
+    self.currencyData = function () {
+        news.getCurrencyData(function(res) {
+            if(res != null) {
+                self.shownewsloading = false;
+                self.coinlist = res;
+                $timeout(function(){
+                    $scope.$apply();
+                });
+
+                console.log(res);
+            }else
+                console.error("error~!");
+        });
+    };
+
+    //	加载更多
+    self.loadmore = function(outlr, inlr, num){
+        self.shownewsloading = true;
+        if(outlr == 'new1tab'){
+            self.newsData();
+        }else if(outlr == 'new2tab'){
+            self.quickData();
+        }else if(outlr == 'new3tab'){
+            self.currencyData();
+        }
+
+        // //获得元素
+        // var isBottom = false;
+        // var wai = $window.document.getElementById("外层滚动容器wai");
+        // var content = $window.document.getElementById("承载内容列表content");
+        //
+        // //监听滚动
+        // wai.onscroll = function () {
+        //     var scrollTop = wai.scrollTop,
+        //         viewHeight = wai.clientHeight,
+        //         height = content.offsetHeight;
+        //
+        //     //判断是否滚动到底部
+        //     if (((scrollTop + viewHeight) >= height) && !isBottom)
+        //     {
+        //         isBottom = true;
+        //         console.log("到底了");
+        //         $scope.infinite_isCmp = true;
+        //         $scope.$apply();
+        //         $rootScope.requireCount+=10;
+        //
+        //         //模拟请求延时,将第二次延时2s后
+        //         $timeout(function () {
+        //             aaa.require().success(function (data) {
+        //                 $scope.model = data;
+        //                 isBottom = false;
+        //                 $scope.infinite_isCmp = false;
+        //             });
+        //         },2000);
+        //     }
+        // }
+
+    }
 
     var id = 0;
     eventBus.on('newtransaction',function(event){
-            id++;
+        id++;
         cordova.plugins.notification.local.schedule({
             id: id,
             title: gettextCatalog.getString('There is a new deal'),
@@ -1955,6 +2200,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             }
         }, false);
     })();
-console.log(profileService.walletClients);
+    console.log(profileService.walletClients);
 
 });
