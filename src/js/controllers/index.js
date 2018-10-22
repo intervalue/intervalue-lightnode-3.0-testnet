@@ -47,6 +47,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.coinanimate = 1;
     self.newspage = 1;
     self.quickpage = 1;
+    self.shownonews = false;
     function updatePublicKeyRing(walletClient, onDone) {
         var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
         walletDefinedByKeys.readCosigners(walletClient.credentials.walletId, function (arrCosigners) {
@@ -2035,19 +2036,23 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 self.shownewsloading = false;
                 if(JSON.stringify(self.newslists) == '[]'){
                     self.newslists = res.page.list;
+                    self.newslist = res.page.list;
                     $timeout(function(){
-                        self.newslist = res.page.list;
-                        self.newspage += 1;
-                    },10)
-                    $scope.$apply();
+                        $scope.$apply();
+                    })
                 }else{
+                    self.newslist = self.newslists.concat(res.page.list);
+                    console.log('6666666666666666666666666666666666666666666666666666')
+                    console.log(self.newslist);
+                    if(self.newspage > res.page.totalPage){
+                        self.shownonews = true;
+                        return false;
+                    }
+                    self.newspage += 1;
                     $timeout(function(){
-                        self.newslist = self.newslists.concat(res.page.list);
-                        console.log('6666666666666666666666666666666666666666666666666666')
-                        console.log(self.newslist);
-                        self.newspage += 1;
-                    },10)
-                    $scope.$apply();
+                        $scope.$apply();
+                    })
+
                 }
             }else
                 console.error("error~!");
@@ -2060,7 +2065,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             var showlist = {};
             if(!!res && res.code == 0) {
                 self.shownewsloading = false;
-                self.quickpage += 1;
                 //给返回对象加字段
                 lodash.forEach(res.page.list, function(value, key){
                     value.grayweek = self.getWeekNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
@@ -2089,6 +2093,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     self.quicklists = Object.assign(self.quicklists, showlist);
                     self.quicklistshow = res.page.list;
                     self.quicklist = self.quicklists;
+                    if(self.quickpage > res.page.totalPage){
+                        self.shownonews = true;
+                        return false;
+                    }
+                    self.quickpage += 1;
                     $timeout(function () {
                         $scope.$apply();
                     });
