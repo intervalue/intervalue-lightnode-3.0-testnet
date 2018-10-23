@@ -2045,7 +2045,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                         $scope.$apply();
                     })
                 }else{
-                    console.log(res)
                     self.newslists = self.newslists.concat(res.page.list);
                     self.newslist = self.newslists;
                     if(self.newspage == res.page.totalPage){
@@ -2064,11 +2063,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     };
 
     self.quickData = function () {
-        news.getQuickData(6,self.quickpage,null,function(res) {
+        news.getQuickData(50,self.quickpage,null,function(res) {
             var list = [];
             var showlist = {};
             if(!!res && res.code == 0) {
-                self.shownewsloading = false;
+                self.showquicksloading = false;
                 //给返回对象加字段
                 lodash.forEach(res.page.list, function(value, key){
                     value.grayweek = self.getWeekNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
@@ -2076,7 +2075,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     value.greentime = self.getTimeFromNow(value.createTime);
                 })
                 list = res.page.list;
-                //换返回对象的格式
+                //转换返回对象的格式
                 for(var i = 0; i < list.length; i++) {
                     if(!showlist[list[i].grayweek]) {
                         var arr = [];
@@ -2086,27 +2085,28 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                         showlist[list[i].grayweek].push(list[i])
                     }
                 }
+
                 if(JSON.stringify(self.quicklists) == '{}'){
-                    self.quicklists = showlist;
                     self.quicklistshow = res.page.list;
+                    self.quicklists = showlist;
                     self.quicklist = showlist;
+                    self.quickpage += 1;
                     $timeout(function () {
                         $scope.$apply();
                     });
                 }else{
                     self.quicklists = Object.assign(self.quicklists, showlist);
-                    self.quicklistshow = res.page.list;
                     self.quicklist = self.quicklists;
-                    if(self.quickpage > res.page.totalPage){
+                    console.log(self.quicklist)
+                    if(self.quickpage == res.page.totalPage){
                         self.shownoquick = true;
                         self.showquicksloading = false;
-                        return false;
-                        return false;
                     }
                     self.quickpage += 1;
                     $timeout(function () {
                         $scope.$apply();
                     });
+                    return;
                 }
             }else
                 console.error("error~!");
@@ -2137,18 +2137,16 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.loadmore = function(outlr, inlr, num){
         if(outlr == 'new1tab'){
             if(self.shownonews == true){
-                console.log('00000000000000000000000000000000000000000000000000000000000000000000000000000000')
                 self.shownewsloading = false;
-                return ;
+                return;
             }else{
-                console.log('999999999999999999999999999999999999999999999999999999999999999999999999999999999999')
                 self.shownewsloading = true;
                 self.newsData();
             }
         }else if(outlr == 'new2tab'){
             if(self.shownoquick == true){
                 self.showquicksloading = false;
-                return ;
+                return;
             }else{
                 self.showquicksloading = true;
                 self.quickData();
