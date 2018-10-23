@@ -28,7 +28,6 @@
     "java": false,
     "plugin": false
   },
-  "chromium-args": "--proxy-server=http://127.1.2.7 --password-store=basic --disable-password-generation",
   "homepage": "https://github.com/intervalue/intervalue-lightnode-3.0-testnet",
   "license": "MIT",
   "repository": {

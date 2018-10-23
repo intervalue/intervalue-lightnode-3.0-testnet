@@ -8,6 +8,16 @@ var ValidationUtils = require('intervaluecore/validation_utils.js');
 angular.module('copayApp.controllers')
 	.controller('walletHomeController', function($http, $scope, $rootScope, $timeout, $window, $state, $stateParams, $filter, $modal, $log, notification, isCordova, profileService, lodash, configService, storageService, gettext, gettextCatalog, nodeWebkit, addressService, confirmDialog, animationService, addressbookService, correspondentListService, newVersion, autoUpdatingWitnessesList, go, aliasValidationService) {
 
+
+
+
+
+
+
+
+
+
+
 		var self = this;
 		var home = this;
         self.showtab = 'new1';
@@ -1863,7 +1873,9 @@ angular.module('copayApp.controllers')
 			}, function(){}, "referrer");
 		}
 
-
+        self.gonewsin = function(id){
+            $state.go('newsin',{ id: id});
+        };
 
 
 	});

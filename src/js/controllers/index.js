@@ -39,11 +39,15 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.coinlist = '';
     self.quicklist = [];
     self.quicklistshow = '';
+    self.newslists = [];
     self.quicklists = {};
+    self.coinlists = [];
     self.newsanimate = 1;
     self.quickanimate = 1;
     self.coinanimate = 1;
     self.newspage = 1;
+    self.quickpage = 1;
+    self.shownonews = false;
     function updatePublicKeyRing(walletClient, onDone) {
         var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
         walletDefinedByKeys.readCosigners(walletClient.credentials.walletId, function (arrCosigners) {
@@ -690,13 +694,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         'img': 'mmtabwallet',
         'imgid': 'wallet',
         'link': 'wallet'
-    }, {
-        'title': gettext('Message'),
-        'icon': 'icon-duihua',
-        'img': 'mmtabchat',
-        'imgid': 'chat',
-        'new_state': 'correspondentDevices',
-        'link': 'chat'
     }];
     self.addonViews = addonManager.addonViews();
     self.menu = self.menu.concat(addonManager.addonMenuItems());
@@ -905,8 +902,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             return breadcrumbs.add('updateAll not complete yet');
 
         // reconnect if lost connection
-        var device = require('intervaluecore/device.js');
-        device.loginToHub();
+        /*var device = require('intervaluecore/device.js');
+        device.loginToHub();*/
         $timeout(function () {
             /* if (!opts.quiet)
                self.setOngoingProcess('updatingStatus', true);
@@ -2032,115 +2029,128 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         //         "updateTime" : "2018-10-20 09:51:26"
         // 	}
         // ]
-
-        news.getNewsData(6,self.newsPage,null,function(res) {
+        news.getNewsData(6,self.newspage,null,function(res) {
             if(!!res && res.code == 0) {
                 self.shownewsloading = false;
-                self.newsPage += 6;
-                $timeout(function(){
-                    self.newslist = res.page.list
-                },10)
-                $scope.$apply();
-                console.log(res.page.list);
+                if(JSON.stringify(self.newslists) == '[]'){
+                    self.newslists = res.page.list;
+                    self.newslist = res.page.list;
+                    self.newspage += 1;
+                    $timeout(function(){
+                        $scope.$apply();
+                    })
+                }else{
+                    console.log(res)
+                    self.newslists = self.newslists.concat(res.page.list);
+                    self.newslist = self.newslists;
+                    if(self.newspage == res.page.totalPage){
+                        self.shownonews = true;
+                        self.shownewsloading = false;
+                    }
+                    self.newspage += 1;
+                    $timeout(function(){
+                        $scope.$apply();
+                    });
+                    return;
+                }
             }else
                 console.error("error~!");
         })
     };
-    // var showlist = {};
+
     self.quickData = function () {
-        news.getQuickData(6,null,null,function(res) {
+        news.getQuickData(6,self.quickpage,null,function(res) {
             var list = [];
+            var showlist = {};
             if(!!res && res.code == 0) {
                 self.shownewsloading = false;
+                //给返回对象加字段
                 lodash.forEach(res.page.list, function(value, key){
                     value.grayweek = self.getWeekNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
                     value.graydate = self.getDateNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
                     value.greentime = self.getTimeFromNow(value.createTime);
                 })
-                self.quicklists = Object.assign(self.quicklists, res.page.list);
                 list = res.page.list;
+                //换返回对象的格式
                 for(var i = 0; i < list.length; i++) {
-                    if(!self.quicklists[list[i].grayweek]) {
+                    if(!showlist[list[i].grayweek]) {
                         var arr = [];
                         arr.push(list[i]);
-                        self.quicklists[list[i].grayweek] = arr;
+                        showlist[list[i].grayweek] = arr;
                     }else {
-                        self.quicklists[list[i].grayweek].push(list[i])
+                        showlist[list[i].grayweek].push(list[i])
                     }
                 }
-                self.quicklistshow = res.page.list;
-                self.quicklist = self.quicklists;
-                console.log(self.quicklist);
-                $timeout(function () {
-                    $scope.$apply();
-                });
-
+                if(JSON.stringify(self.quicklists) == '{}'){
+                    self.quicklists = showlist;
+                    self.quicklistshow = res.page.list;
+                    self.quicklist = showlist;
+                    $timeout(function () {
+                        $scope.$apply();
+                    });
+                }else{
+                    self.quicklists = Object.assign(self.quicklists, showlist);
+                    self.quicklistshow = res.page.list;
+                    self.quicklist = self.quicklists;
+                    if(self.quickpage > res.page.totalPage){
+                        self.shownoquick = true;
+                        self.showquicksloading = false;
+                        return false;
+                        return false;
+                    }
+                    self.quickpage += 1;
+                    $timeout(function () {
+                        $scope.$apply();
+                    });
+                }
             }else
                 console.error("error~!");
         });
     };
 
     self.currencyData = function () {
-        news.getCurrencyData(function(res) {
+        news.getCurrencyData(function(res) {coinlists
             if(res != null) {
                 self.shownewsloading = false;
-                self.coinlist = res;
+                if(JSON.stringify(self.coinlists) == '[]'){
+                    self.coinlists = res;
+                }else{
+
+                }
+                $timeout(function(){
+                    self.coinlist = self.coinlists.concat(res);
+                },10)
                 $timeout(function(){
                     $scope.$apply();
                 });
-
-                console.log(res);
             }else
                 console.error("error~!");
         });
     };
 
-    self.gonewsin = function(id){
-        $state.go('newsin',{ id: id});
-    };
     //	加载更多
     self.loadmore = function(outlr, inlr, num){
-        self.shownewsloading = true;
         if(outlr == 'new1tab'){
-            console.log(111111);
-            self.newsData();
+            if(self.shownonews == true){
+                console.log('00000000000000000000000000000000000000000000000000000000000000000000000000000000')
+                self.shownewsloading = false;
+                return ;
+            }else{
+                console.log('999999999999999999999999999999999999999999999999999999999999999999999999999999999999')
+                self.shownewsloading = true;
+                self.newsData();
+            }
         }else if(outlr == 'new2tab'){
-            self.quickData();
+            if(self.shownoquick == true){
+                self.showquicksloading = false;
+                return ;
+            }else{
+                self.showquicksloading = true;
+                self.quickData();
+            }
         }else if(outlr == 'new3tab'){
             self.currencyData();
         }
-
-        // //获得元素
-        // var isBottom = false;
-        // var wai = $window.document.getElementById("外层滚动容器wai");
-        // var content = $window.document.getElementById("承载内容列表content");
-        //
-        // //监听滚动
-        // wai.onscroll = function () {
-        //     var scrollTop = wai.scrollTop,
-        //         viewHeight = wai.clientHeight,
-        //         height = content.offsetHeight;
-        //
-        //     //判断是否滚动到底部
-        //     if (((scrollTop + viewHeight) >= height) && !isBottom)
-        //     {
-        //         isBottom = true;
-        //         console.log("到底了");
-        //         $scope.infinite_isCmp = true;
-        //         $scope.$apply();
-        //         $rootScope.requireCount+=10;
-        //
-        //         //模拟请求延时,将第二次延时2s后
-        //         $timeout(function () {
-        //             aaa.require().success(function (data) {
-        //                 $scope.model = data;
-        //                 isBottom = false;
-        //                 $scope.infinite_isCmp = false;
-        //             });
-        //         },2000);
-        //     }
-        // }
-
     }
 
     var id = 0;
