@@ -1,0 +1,20 @@
+<nav class="tab-bar">
+    <!-- 左区 -->
+    <section class="left-small">
+        <a ng-click="cancel()">
+            <img src="./img/chatbackstate.png">
+        </a>
+    </section>
+    <!-- 中区 -->
+    <section class="middle tab-bar-section">
+        <h1 class="title ellipsis" translate>
+            News
+        </h1>
+    </section>
+</nav>
+<div class="content newsinc" ng-init="newsInfoData()">
+  <div class="title">
+      {{newstitle}}
+  </div>
+  <p ng-bind-html="newscontent"></p>
+</div>
