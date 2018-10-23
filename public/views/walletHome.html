@@ -383,7 +383,8 @@
                         </div>
                     </div>
                 </div>
-                <div ng-show="index.shownewsloading" class="shownewsloading">加载动画</div>
+                <div ng-show="index.shownoquick">没有更多了</div>
+                <div ng-show="index.showquicksloading" class="shownewsloading">加载动画</div>
             </div>
             <div class="addwcontent" ng-if="home.showtab == 'new3'" id="new3tab" ng-init="index.currencyData()" homescrolled="index.loadmore('new3tab', 'new3tablist')">
                 <div ng-if="index.coinlist == ''" class="nonews">

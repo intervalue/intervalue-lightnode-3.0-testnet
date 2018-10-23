@@ -2030,22 +2030,22 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         // 	}
         // ]
         news.getNewsData(6,self.newspage,null,function(res) {
-            console.log('11111111111111111111111111111111111111')
-            console.log(res);
             if(!!res && res.code == 0) {
                 self.shownewsloading = false;
                 if(JSON.stringify(self.newslists) == '[]'){
                     self.newslists = res.page.list;
                     self.newslist = res.page.list;
+                    self.newspage += 1;
                     $timeout(function(){
                         $scope.$apply();
                     })
                 }else{
-                    self.newslist = self.newslists.concat(res.page.list);
-                    console.log('6666666666666666666666666666666666666666666666666666')
-                    console.log(self.newslist);
+                    console.log(res)
+                    self.newslists = self.newslists.concat(res.page.list);
+                    self.newslist = self.newslists;
                     if(self.newspage > res.page.totalPage){
                         self.shownonews = true;
+                        self.shownewsloading = false;
                         return false;
                     }
                     self.newspage += 1;
@@ -2094,7 +2094,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     self.quicklistshow = res.page.list;
                     self.quicklist = self.quicklists;
                     if(self.quickpage > res.page.totalPage){
-                        self.shownonews = true;
+                        self.shownoquick = true;
+                        self.showquicksloading = false;
+                        return false;
                         return false;
                     }
                     self.quickpage += 1;
@@ -2129,12 +2131,24 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     //	加载更多
     self.loadmore = function(outlr, inlr, num){
-        self.shownewsloading = true;
-        console.log('00000000000000000000000000000000000000000000000000000000000000000000000000000000')
         if(outlr == 'new1tab'){
-            self.newsData();
+            if(self.shownonews == true){
+                console.log('00000000000000000000000000000000000000000000000000000000000000000000000000000000')
+                self.shownewsloading = false;
+                return false;
+            }else{
+                console.log('999999999999999999999999999999999999999999999999999999999999999999999999999999999999')
+                self.shownewsloading = true;
+                self.newsData();
+            }
         }else if(outlr == 'new2tab'){
-            self.quickData();
+            if(self.shownoquick == true){
+                self.showquicksloading = false;
+                return false;
+            }else{
+                self.showquicksloading = true;
+                self.quickData();
+            }
         }else if(outlr == 'new3tab'){
             self.currencyData();
         }
