@@ -346,9 +346,9 @@
                 </div>
                 <div class="newslist" ng-if="index.newslist !== ''" id="new1tablist" ng-class="{'animated bounceInUp': index.newsanimate <= 1}">
                     <div class="item" ng-repeat="item in index.newslist track by $index">
-                        <img src="{{item.coverPath}}" ng-click="home.gonewsin(item.id)" />
+                        <img src="{{item.coverPath}}" ng-click="index.openNewsinModal(item.id)" />
                         <div class="info">
-                            <div class="title" ng-click="home.gonewsin(item.id)" >{{item.title}}</div>
+                            <div class="title" ng-click="index.openNewsinModal(item.id)" >{{item.title}}</div>
                             <div class="litinfo">
                                 <div class="time">{{item.type}} <span>{{item.publishTime}}</span></div>
                                 <div class="browse">{{item.pageviews}} <span translate>views</span></div>
