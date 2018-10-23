@@ -834,7 +834,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
             if (document.getElementById(tab)) {
                 if (tab == 'news') {
-                    self.shownewstab = 'new1';
+                    if(self.shownewstab == ''){
+                        self.shownewstab = 'new1';
+                    }
                 }
                 var el = angular.element(document.getElementById(tab));
                 el.removeClass('tab-out').addClass('tab-in');
