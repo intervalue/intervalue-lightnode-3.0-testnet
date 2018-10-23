@@ -2043,16 +2043,15 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     console.log(res)
                     self.newslists = self.newslists.concat(res.page.list);
                     self.newslist = self.newslists;
-                    if(self.newspage > res.page.totalPage){
+                    if(self.newspage == res.page.totalPage){
                         self.shownonews = true;
                         self.shownewsloading = false;
-                        return false;
                     }
                     self.newspage += 1;
                     $timeout(function(){
                         $scope.$apply();
-                    })
-
+                    });
+                    return;
                 }
             }else
                 console.error("error~!");
@@ -2135,7 +2134,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             if(self.shownonews == true){
                 console.log('00000000000000000000000000000000000000000000000000000000000000000000000000000000')
                 self.shownewsloading = false;
-                return false;
+                return ;
             }else{
                 console.log('999999999999999999999999999999999999999999999999999999999999999999999999999999999999')
                 self.shownewsloading = true;
@@ -2144,7 +2143,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         }else if(outlr == 'new2tab'){
             if(self.shownoquick == true){
                 self.showquicksloading = false;
-                return false;
+                return ;
             }else{
                 self.showquicksloading = true;
                 self.quickData();
