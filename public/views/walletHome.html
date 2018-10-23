@@ -337,14 +337,14 @@
                     <a ng-click="index.shownewstab = 'new3';index.coinanimate = index.coinanimate + 1;" translate>Quotes</a>
                 </div>
             </div>
-            <div class="addwcontent" ng-if="index.shownewstab == 'new1'" id="new1tab" homescrolled="index.loadmore('new1tab', 'new1tablist')">
-                <div ng-if="index.newslist == ''" class="nonews">
+            <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new1'}" id="new1tab" homescrolled="index.loadmore('new1tab', 'new1tablist')">
+                <div ng-if="index.newslist == ''" class="nonews" >
                     <div class="nonewsin">
                         <img src="./img/nonews.png" />
                         <div class="nonewsintext">暂无新鲜内容</div>
                     </div>
                 </div>
-                <div class="newslist" ng-if="index.newslist !== ''" id="new1tablist" ng-class="{'animated bounceInUp': index.newsanimate <= 1}">
+                <div class="newslist" id="new1tablist" ng-class="{'animated bounceInUp': index.newsanimate <= 1 && index.shownewstab == 'new1'}">
                     <div class="item" ng-repeat="item in index.newslist track by $index">
                         <img src="{{item.coverPath}}" ng-click="index.openNewsinModal(item.id)" />
                         <div class="info">
@@ -359,7 +359,7 @@
                 <div ng-show="index.shownonews" class="nomorenews"><img src="./img/nomore.png" />暂无更多内容</div>
                 <div ng-show="index.shownewsloading" class="shownewsloading"><img src="./img/loading.png" />加载中</div>
             </div>
-            <div class="addwcontent" ng-if="index.shownewstab == 'new2'" id="new2tab" homescrolled="index.loadmore('new2tab', 'new2tablist')">
+            <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new2'}" id="new2tab" homescrolled="index.loadmore('new2tab', 'new2tablist')">
                 <div ng-if="index.quicklistshow == ''" class="nonews">
                     <div class="nonewsin">
                         <img src="./img/nonews.png" />
@@ -367,8 +367,8 @@
                     </div>
                 </div>
                 <div class="letterlist" ng-if="index.quicklistshow !== ''" id="new2tablist" >
-                    <div class="datenow">{{index.getweekginglee}}</div>
-                    <div class="itemin" ng-class="{'animated bounceInUp': index.quickanimate <= 2}" ng-repeat="(key,item) in index.quicklist track by $index">
+                    <div class="datenow" ng-class="{'animated bounceInUp': index.quickanimate <= 2 && index.shownewstab == 'new2'}">{{index.getweekginglee}}</div>
+                    <div class="itemin" ng-class="{'animated bounceInUp': index.quickanimate <= 2 && index.shownewstab == 'new2'}" ng-repeat="(key,item) in index.quicklist track by $index">
                         <div class="date">{{key}}</div>
                         <div class="itemlr" ng-repeat="itemin in item">
                             <div class="item">
@@ -386,14 +386,14 @@
                 <div ng-show="index.shownoquick" class="nomorenews"><img src="./img/nomore.png" />暂无更多内容</div>
                 <div ng-show="index.showquicksloading" class="shownewsloading"><img src="./img/loading.png" />加载中</div>
             </div>
-            <div class="addwcontent" ng-if="index.shownewstab == 'new3'" id="new3tab" homescrolled="index.loadmore('new3tab', 'new3tablist')">
+            <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new3'}" id="new3tab" homescrolled="index.loadmore('new3tab', 'new3tablist')">
                 <div ng-if="index.coinlist == ''" class="nonews">
                     <div class="nonewsin">
                         <img src="./img/nonews.png" />
                         <div class="nonewsintext">暂无新鲜内容</div>
                     </div>
                 </div>
-                <div class="quotelist" ng-if="index.coinlist !== ''" id="new3tablist" ng-class="{'animated bounceInUp': index.coinanimate <= 2}">
+                <div class="quotelist" ng-if="index.coinlist !== ''" id="new3tablist" ng-class="{'animated bounceInUp': index.coinanimate <= 2 && index.shownewstab == 'new3'}">
                     <div class="titlelabel">
                         <div class="numall" translate>Market value</div>
                         <div class="price" translate>Price</div>

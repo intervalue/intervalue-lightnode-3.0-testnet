@@ -507,6 +507,12 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .nomorenews img{
     margin-right: 10px;
 }
+.tabnewsout{
+    transform: translateX(-100%);
+}
+#news .tabnewsin{
+    transform: translateX(0);
+}
 /*资讯*/
 .news .tab-container{
     width:33.3%;
@@ -576,7 +582,8 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     line-height: 26px;
     position: fixed;
     left: 0;
-    top:90px;
+    /*top:90px;*/
+    top: 0;
     width: 100%;
     z-index:5;
 }
