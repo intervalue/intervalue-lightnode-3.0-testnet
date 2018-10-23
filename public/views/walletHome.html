@@ -320,7 +320,7 @@
 
 
 
-        <div id="news" class="news tab-view" ng-init="index.newsData();index.quickData();">
+        <div id="news" class="news tab-view" ng-init="index.newsData();index.quickData();index.currencyData();">
             <nav ng-controller="topbarController as topbar" class="tab-bar">
                 <section class="middle tab-bar-section">
                     <h1 class="title ellipsis" translate>News</h1>
@@ -387,18 +387,33 @@
                 <div ng-show="index.shownoquick" class="nomorenews"><img src="./img/nomore.png" /><span translate>No more content</span></div>
                 <div ng-show="index.showquicksloading" class="shownewsloading"><img src="./img/loading.png" /><span translate>Loading</span></div>
             </div>
-            <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new3'}" id="new3tab" homescrolled="index.loadmore('new3tab', 'new3tablist')">
-                <div ng-if="index.coinlist == ''" class="nonews">
-                    <div class="nonewsin">
-                        <img src="./img/nonews.png" />
-                        <div class="nonewsintext">暂无新鲜内容</div>
-                    </div>
-                </div>
-                <div class="quotelist" ng-if="index.coinlist !== ''" id="new3tablist" ng-class="{'animated bounceInUp': index.coinanimate <= 2 && index.shownewstab == 'new3'}">
+            <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new3'}" id="new3tab" >
+                <!--<div ng-if="index.coinlist == ''" class="nonews">-->
+                    <!--<div class="nonewsin">-->
+                        <!--<img src="./img/nonews.png" />-->
+                        <!--<div class="nonewsintext">暂无新鲜内容</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="quotelist" id="new3tablist" ng-class="{'animated bounceInUp': index.coinanimate <= 2 && index.shownewstab == 'new3'}">
                     <div class="titlelabel">
                         <div class="numall" translate>Market value</div>
                         <div class="price" translate>Price</div>
                         <div class="gains" translate>Latest gains</div>
+                    </div>
+                    <div class="itemin" ng-repeat="item in index.coininvelist track by $index">
+                        <div class="item">
+                            <div class="leftcoininfo">
+                                <div class="coinimg">
+                                    <img src="{{item.iconUrl}}" />
+                                    <span class="nameshort">{{item.currency}}</span>
+                                </div>
+                                <div class="numallin">市值：¥ <span>176.78</span>亿 <span class="name">瑞波币</span></div>
+                            </div>
+                            <div class="pricein" ng-class="{ 'priceblue': item.change > 0, 'pricered': item.change < 0}">¥{{item.price}}</div>
+                            <div class="gainsin" ng-if="item.change == 0"><div class="gainsinfo"><span>{{item.change}}</span></div></div>
+                            <div class="gainsin priceblue" ng-if="item.change > 0"><div class="gainsinfo"><span>{{item.change}}</span></div></div>
+                            <div class="gainsin pricered" ng-if="item.change < 0"><div class="gainsinfo"><span>{{item.change}}</span></div></div>
+                        </div>
                     </div>
                     <div class="itemin" ng-repeat="item in index.coinlist track by $index">
                         <div class="item">
@@ -407,7 +422,7 @@
                                     <img src="{{item.iconUrl}}" />
                                     <span class="nameshort">{{item.currency}}</span>
                                 </div>
-                                <div class="numallin">市值：¥ <span>176.78</span>亿 <span class="name">瑞波币</span></div>
+                                <div class="numallin">市值：¥ <span>{{item.market}}</span>亿 <span class="name">瑞波币</span></div>
                             </div>
                             <div class="pricein" ng-class="{ 'priceblue': item.change > 0, 'pricered': item.change < 0}">¥{{item.price}}</div>
                             <div class="gainsin" ng-if="item.change == 0"><div class="gainsinfo"><span>{{item.change}}</span></div></div>

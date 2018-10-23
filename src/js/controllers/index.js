@@ -37,6 +37,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.shownewsloading = false;
     self.newslist = '';
     self.coinlist = '';
+    self.coininvelist = '';
     self.quicklist = [];
     self.quicklistshow = '';
     self.newslists = [];
@@ -2042,25 +2043,35 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         });
     };
 
-    // self.currencyData = function () {
-    //     news.getCurrencyData(function(res) {
-    //         if(res != null) {
-    //             self.shownewsloading = false;
-    //             if(JSON.stringify(self.coinlists) == '[]'){
-    //                 self.coinlists = res;
-    //             }else{
-    //
-    //             }
-    //             $timeout(function(){
-    //                 self.coinlist = self.coinlists.concat(res);
-    //             },10)
-    //             $timeout(function(){
-    //                 $scope.$apply();
-    //             });
-    //         }else
-    //             console.error("error~!");
-    //     });
-    // };
+    self.currencyData = function () {
+        //inve 行情
+        news.getInveData2(function (res) {
+            if(!!res && res != null) {
+                console.log(res);
+                console.log('iiiiiiiiiiiiiiiiinveeeeeeeeeeeeeeeee')
+                self.coininvelist = res;
+            }
+        });
+
+        news.getCurrencyData(function(res) {
+            console.log(res);
+            console.log('33333333333333333333333333333333333333333333333')
+            if(!!res && res != null) {
+                console.log(res);
+                console.log('22222222222222222222222222222222222222222')
+                self.shownewsloading = false;
+                console.log(res);
+
+                $timeout(function(){
+                    self.coinlist = self.coinlists.concat(res);
+                },10)
+                $timeout(function(){
+                    $scope.$apply();
+                });
+            }else
+                console.error("error~!");
+        });
+    };
 
     //	加载更多
     self.loadmore = function(outlr, inlr, num){
