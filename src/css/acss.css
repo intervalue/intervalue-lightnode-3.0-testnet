@@ -538,6 +538,8 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     overflow: hidden;
     display: -webkit-box;
     cursor:pointer;
+    -ms-word-break: break-all;
+    word-break: break-all;
 }
 .news .newslist .item .litinfo{
     font-size:10px;
@@ -625,6 +627,8 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     font-size:12px;
     font-weight:400;
     color:#646464;
+    -ms-word-break: break-all;
+    word-break: break-all;
 }
 /*行情*/
 .news .quotelist .titlelabel{

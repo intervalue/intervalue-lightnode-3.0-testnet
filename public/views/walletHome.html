@@ -367,8 +367,8 @@
                     </div>
                 </div>
                 <div class="letterlist" ng-if="index.quicklistshow !== ''" id="new2tablist">
-                    <div class="datenow" ng-class="{'fadeInUpBig animated': index.quickanimate <= 2}">{{index.getweekginglee}}</div>
-                    <div class="itemin" ng-class="{'fadeInUpBig animated': index.quickanimate <= 2}" ng-repeat="(key,item) in index.quicklist track by $index">
+                    <div class="datenow">{{index.getweekginglee}}</div>
+                    <div class="itemin" ng-repeat="(key,item) in index.quicklist track by $index">
                         <div class="date">{{key}}</div>
                         <div class="itemlr" ng-repeat="itemin in item">
                             <div class="item">
