@@ -356,8 +356,8 @@
                         </div>
                     </div>
                 </div>
-                <div ng-show="index.shownonews">没有更多了</div>
-                <div ng-show="index.shownewsloading" class="shownewsloading">加载动画</div>
+                <div ng-show="index.shownonews" class="nomorenews"><img src="./img/nomore.png" />暂无更多内容</div>
+                <div ng-show="index.shownewsloading" class="shownewsloading"><img src="./img/loading.png" />加载中</div>
             </div>
             <div class="addwcontent" ng-if="home.showtab == 'new2'" id="new2tab" ng-init="index.quickData()" homescrolled="index.loadmore('new2tab', 'new2tablist')">
                 <div ng-if="index.quicklistshow == ''" class="nonews">
@@ -383,8 +383,8 @@
                         </div>
                     </div>
                 </div>
-                <div ng-show="index.shownoquick">没有更多了</div>
-                <div ng-show="index.showquicksloading" class="shownewsloading">加载动画</div>
+                <div ng-show="index.shownoquick" class="nomorenews"><img src="./img/nomore.png" />暂无更多内容</div>
+                <div ng-show="index.showquicksloading" class="shownewsloading"><img src="./img/loading.png" />加载中</div>
             </div>
             <div class="addwcontent" ng-if="home.showtab == 'new3'" id="new3tab" ng-init="index.currencyData()" homescrolled="index.loadmore('new3tab', 'new3tablist')">
                 <div ng-if="index.coinlist == ''" class="nonews">

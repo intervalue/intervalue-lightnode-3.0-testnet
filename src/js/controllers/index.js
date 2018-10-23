@@ -2058,9 +2058,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     };
 
     self.quickData = function () {
-        news.getQuickData(50,self.quickpage,null,function(res) {
+        news.getQuickData(6,self.quickpage,null,null,function(res) {
             var list = [];
-            var showlist = {};
             if(!!res && res.code == 0) {
                 self.showquicksloading = false;
                 //给返回对象加字段
@@ -2072,37 +2071,24 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 list = res.page.list;
                 //转换返回对象的格式
                 for(var i = 0; i < list.length; i++) {
-                    if(!showlist[list[i].grayweek]) {
+                    if(!self.quicklists[list[i].grayweek]) {
                         var arr = [];
                         arr.push(list[i]);
-                        showlist[list[i].grayweek] = arr;
+                        self.quicklists[list[i].grayweek] = arr;
                     }else {
-                        showlist[list[i].grayweek].push(list[i])
+                        self.quicklists[list[i].grayweek].push(list[i])
                     }
                 }
-
-                if(JSON.stringify(self.quicklists) == '{}'){
-                    self.quicklistshow = res.page.list;
-                    self.quicklists = showlist;
-                    self.quicklist = showlist;
-                    self.quickpage += 1;
-                    $timeout(function () {
-                        $scope.$apply();
-                    });
-                }else{
-                    self.quicklists = Object.assign(self.quicklists, showlist);
-                    self.quicklist = self.quicklists;
-                    console.log(self.quicklist)
-                    if(self.quickpage == res.page.totalPage){
-                        self.shownoquick = true;
-                        self.showquicksloading = false;
-                    }
-                    self.quickpage += 1;
-                    $timeout(function () {
-                        $scope.$apply();
-                    });
-                    return;
+                self.quicklistshow = res.page.list;
+                self.quicklist = self.quicklists;
+                if(self.quickpage == res.page.totalPage){
+                    self.shownoquick = true;
+                    self.showquicksloading = false;
                 }
+                self.quickpage += 1;
+                $timeout(function () {
+                    $scope.$apply();
+                });
             }else
                 console.error("error~!");
         });
