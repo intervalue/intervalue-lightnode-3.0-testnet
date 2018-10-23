@@ -71,7 +71,7 @@ angular.module('copayApp.services').factory('configService', function (storageSe
 			totalCosigners: 6
 		},
 
-		hub: (constants.alt === '2' && isTestnet) ? 'intervalue.org/bb-test' : 'intervalue.org/bb',
+		hub: 'test.inve.zhang123.vip/bb',
 		attestorAddresses: {
 			email: 'H5EZTQE7ABFH27AUDTQFMZIALANK6RBG',
 			reddit: 'OYW2XTDKSNKGSEZ27LMGNOPJSYIXHBHC',
