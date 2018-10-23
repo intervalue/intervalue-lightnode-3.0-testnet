@@ -48,6 +48,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.newspage = 1;
     self.quickpage = 1;
     self.shownonews = false;
+    self.shownewstab = '';
     function updatePublicKeyRing(walletClient, onDone) {
         var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
         walletDefinedByKeys.readCosigners(walletClient.credentials.walletId, function (arrCosigners) {
@@ -832,6 +833,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             }
 
             if (document.getElementById(tab)) {
+                if (tab == 'news') {
+                    self.shownewstab = 'new1';
+                }
                 var el = angular.element(document.getElementById(tab));
                 el.removeClass('tab-out').addClass('tab-in');
                 var newe = document.getElementById('menu-' + tab);
@@ -839,7 +843,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     newe.className = 'active';
                 }
             }
-
             $rootScope.tab = self.tab = tab;
             $rootScope.$emit('Local/TabChanged', tab);
         };
@@ -1972,63 +1975,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     };
 
     self.newsData = function () {
-        // self.newslist = [
-        // 	{
-        //         "author" : "区块链大本营",
-        //         "coverPath" : "https://img.jinse.com/1094427_image3.png",
-        //         "createTime" : "2018-09-14 17:48:31",
-        //         "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
-        //         "id" : 10,
-        //         "publishTime" : "2018-10-19 17:58:33",
-        //         "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
-        //         "updateTime" : "2018-10-20 09:51:26"
-        // 	},{
-        //     	"author" : "区块链大本营",
-        //         "coverPath" : "https://img.jinse.com/1094427_image3.png",
-        //         "createTime" : "2018-09-14 17:48:31",
-        //         "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
-        //         "id" : 10,
-        //         "publishTime" : "2018-10-19 17:58:33",
-        //         "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
-        //         "updateTime" : "2018-10-20 09:51:26"
-        // 	},{
-        //     	"author" : "区块链大本营",
-        //         "coverPath" : "https://img.jinse.com/1094427_image3.png",
-        //         "createTime" : "2018-09-14 17:48:31",
-        //         "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
-        //         "id" : 10,
-        //         "publishTime" : "2018-10-19 17:58:33",
-        //         "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
-        //         "updateTime" : "2018-10-20 09:51:26"
-        // 	},{
-        //     	"author" : "区块链大本营",
-        //         "coverPath" : "https://img.jinse.com/1094427_image3.png",
-        //         "createTime" : "2018-09-14 17:48:31",
-        //         "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
-        //         "id" : 10,
-        //         "publishTime" : "2018-10-19 17:58:33",
-        //         "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
-        //         "updateTime" : "2018-10-20 09:51:26"
-        // 	},{
-        //     	"author" : "区块链大本营",
-        //         "coverPath" : "https://img.jinse.com/1094427_image3.png",
-        //         "createTime" : "2018-09-14 17:48:31",
-        //         "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
-        //         "id" : 10,
-        //         "publishTime" : "2018-10-19 17:58:33",
-        //         "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
-        //         "updateTime" : "2018-10-20 09:51:26"
-        // 	},{
-        //    		"author" : "区块链大本营",
-        //         "coverPath" : "https://img.jinse.com/1094427_image3.png",
-        //         "createTime" : "2018-09-14 17:48:31",
-        //         "digest" : "在斯坦福大学校园的格里芬（Griffin）大道上，有个编号304的学生宿舍，这个坐落在斯坦福大学角落的宿舍楼本来普普通通。",
-        //         "id" : 10,
-        //         "publishTime" : "2018-10-19 17:58:33",
-        //         "title" : "斯坦福区块链匪帮传奇 致那些辍学、迷幻乐、睡地毯、没日没夜写代码的日子",
-        //         "updateTime" : "2018-10-20 09:51:26"
-        // 	}
-        // ]
         news.getNewsData(6,self.newspage,null,function(res) {
             if(!!res && res.code == 0) {
                 self.shownewsloading = false;
@@ -2094,29 +2040,30 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         });
     };
 
-    self.currencyData = function () {
-        news.getCurrencyData(function(res) {coinlists
-            if(res != null) {
-                self.shownewsloading = false;
-                if(JSON.stringify(self.coinlists) == '[]'){
-                    self.coinlists = res;
-                }else{
-
-                }
-                $timeout(function(){
-                    self.coinlist = self.coinlists.concat(res);
-                },10)
-                $timeout(function(){
-                    $scope.$apply();
-                });
-            }else
-                console.error("error~!");
-        });
-    };
+    // self.currencyData = function () {
+    //     news.getCurrencyData(function(res) {
+    //         if(res != null) {
+    //             self.shownewsloading = false;
+    //             if(JSON.stringify(self.coinlists) == '[]'){
+    //                 self.coinlists = res;
+    //             }else{
+    //
+    //             }
+    //             $timeout(function(){
+    //                 self.coinlist = self.coinlists.concat(res);
+    //             },10)
+    //             $timeout(function(){
+    //                 $scope.$apply();
+    //             });
+    //         }else
+    //             console.error("error~!");
+    //     });
+    // };
 
     //	加载更多
     self.loadmore = function(outlr, inlr, num){
         if(outlr == 'new1tab'){
+            self.newsanimate = 5;
             if(self.shownonews == true){
                 self.shownewsloading = false;
                 return;
@@ -2125,6 +2072,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 self.newsData();
             }
         }else if(outlr == 'new2tab'){
+            self.quickanimate = 5;
             if(self.shownoquick == true){
                 self.showquicksloading = false;
                 return;
@@ -2133,6 +2081,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 self.quickData();
             }
         }else if(outlr == 'new3tab'){
+            self.coinanimate = 5;
             self.currencyData();
         }
     }

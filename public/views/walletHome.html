@@ -320,31 +320,31 @@
 
 
 
-        <div id="news" class="news tab-view">
+        <div id="news" class="news tab-view" ng-init="index.newsData();index.quickData();">
             <nav ng-controller="topbarController as topbar" class="tab-bar">
                 <section class="middle tab-bar-section">
                     <h1 class="title ellipsis" translate>News</h1>
                 </section>
             </nav>
             <div class="tabclicktitle">
-                <div class="tab-container" ng-class="{'selected': home.showtab == 'new1'}">
-                    <a ng-click="home.showtab = 'new1'" translate>Newest</a>
+                <div class="tab-container" ng-class="{'selected': index.shownewstab == 'new1'}">
+                    <a ng-click="index.shownewstab = 'new1';index.newsanimate = index.newsanimate + 1;" translate>Newest</a>
                 </div>
-                <div class="tab-container" ng-class="{'selected': home.showtab == 'new2'}">
-                    <a ng-click="home.showtab = 'new2'" translate>Newsletter</a>
+                <div class="tab-container" ng-class="{'selected': index.shownewstab == 'new2'}">
+                    <a ng-click="index.shownewstab = 'new2';index.quickanimate = index.quickanimate + 1;" translate>Newsletter</a>
                 </div>
-                <div class="tab-container" ng-class="{'selected': home.showtab == 'new3'}">
-                    <a ng-click="home.showtab = 'new3'" translate>Quotes</a>
+                <div class="tab-container" ng-class="{'selected': index.shownewstab == 'new3'}">
+                    <a ng-click="index.shownewstab = 'new3';index.coinanimate = index.coinanimate + 1;" translate>Quotes</a>
                 </div>
             </div>
-            <div class="addwcontent" ng-if="home.showtab == 'new1'" id="new1tab" ng-init="index.newsData()" homescrolled="index.loadmore('new1tab', 'new1tablist')">
+            <div class="addwcontent" ng-if="index.shownewstab == 'new1'" id="new1tab" homescrolled="index.loadmore('new1tab', 'new1tablist')">
                 <div ng-if="index.newslist == ''" class="nonews">
                     <div class="nonewsin">
                         <img src="./img/nonews.png" />
                         <div class="nonewsintext">暂无新鲜内容</div>
                     </div>
                 </div>
-                <div class="newslist" ng-if="index.newslist !== ''" id="new1tablist">
+                <div class="newslist" ng-if="index.newslist !== ''" id="new1tablist" ng-class="{'animated bounceInUp': index.newsanimate <= 1}">
                     <div class="item" ng-repeat="item in index.newslist track by $index">
                         <img src="{{item.coverPath}}" ng-click="home.gonewsin(item.id)" />
                         <div class="info">
@@ -359,7 +359,7 @@
                 <div ng-show="index.shownonews" class="nomorenews"><img src="./img/nomore.png" />暂无更多内容</div>
                 <div ng-show="index.shownewsloading" class="shownewsloading"><img src="./img/loading.png" />加载中</div>
             </div>
-            <div class="addwcontent" ng-if="home.showtab == 'new2'" id="new2tab" ng-init="index.quickData()" homescrolled="index.loadmore('new2tab', 'new2tablist')">
+            <div class="addwcontent" ng-if="index.shownewstab == 'new2'" id="new2tab" homescrolled="index.loadmore('new2tab', 'new2tablist')">
                 <div ng-if="index.quicklistshow == ''" class="nonews">
                     <div class="nonewsin">
                         <img src="./img/nonews.png" />
@@ -367,8 +367,8 @@
                     </div>
                 </div>
                 <div class="letterlist" ng-if="index.quicklistshow !== ''" id="new2tablist">
-                    <div class="datenow">{{index.getweekginglee}}</div>
-                    <div class="itemin" ng-repeat="(key,item) in index.quicklist track by $index">
+                    <div class="datenow" ng-class="{'animated bounceInUp': index.quickanimate <= 1}">{{index.getweekginglee}}</div>
+                    <div class="itemin" ng-class="{'animated bounceInUp': index.quickanimate <= 1}" ng-repeat="(key,item) in index.quicklist track by $index">
                         <div class="date">{{key}}</div>
                         <div class="itemlr" ng-repeat="itemin in item">
                             <div class="item">
@@ -386,7 +386,7 @@
                 <div ng-show="index.shownoquick" class="nomorenews"><img src="./img/nomore.png" />暂无更多内容</div>
                 <div ng-show="index.showquicksloading" class="shownewsloading"><img src="./img/loading.png" />加载中</div>
             </div>
-            <div class="addwcontent" ng-if="home.showtab == 'new3'" id="new3tab" ng-init="index.currencyData()" homescrolled="index.loadmore('new3tab', 'new3tablist')">
+            <div class="addwcontent" ng-if="index.shownewstab == 'new3'" id="new3tab" homescrolled="index.loadmore('new3tab', 'new3tablist')">
                 <div ng-if="index.coinlist == ''" class="nonews">
                     <div class="nonewsin">
                         <img src="./img/nonews.png" />
