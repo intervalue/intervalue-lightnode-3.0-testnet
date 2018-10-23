@@ -694,7 +694,12 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         'img': 'mmtabwallet',
         'imgid': 'wallet',
         'link': 'wallet'
-    }];
+    }, {
+           'title': gettext('Chat'),
+           'icon': 'icon-bubble',
+           'new_state': 'correspondentDevices',
+           'link': 'chat'
+         }];
     self.addonViews = addonManager.addonViews();
     self.menu = self.menu.concat(addonManager.addonMenuItems());
     self.menuItemSize = self.menu.length > 5 ? 2 : 3;
@@ -902,8 +907,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             return breadcrumbs.add('updateAll not complete yet');
 
         // reconnect if lost connection
-        /*var device = require('intervaluecore/device.js');
-        device.loginToHub();*/
+        var device = require('intervaluecore/device.js');
+        device.loginToHub();
         $timeout(function () {
             /* if (!opts.quiet)
                self.setOngoingProcess('updatingStatus', true);
