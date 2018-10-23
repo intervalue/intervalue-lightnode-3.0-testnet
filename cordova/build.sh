@@ -92,15 +92,17 @@ if [ ! -d $PROJECT ]; then
 		#cordova plugin add cordova-plugin-android-support-v4-jar
 		#checkOK
 
-		cordova plugin add https://github.com/phonegap/phonegap-plugin-barcodescanner.git
+        cordova plugin add https://github.com/jrontend/phonegap-plugin-barcodescanner.git
+
+		#cordova plugin add https://github.com/phonegap/phonegap-plugin-barcodescanner.git
 	fi
 	checkOK
 
 	cordova plugin add cordova-plugin-statusbar
 	checkOK
 
-    cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications.git
-    checkOK
+#    cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications.git
+#    checkOK
 
 	cordova plugin add cordova-plugin-customurlscheme --variable URL_SCHEME=intervalue
 	checkOK
@@ -129,9 +131,9 @@ if [ ! -d $PROJECT ]; then
 	cordova plugin add cordova-plugin-console
 	checkOK
 
-# 	cordova plugin add cordova-plugin-uniquedeviceid
-# 	checkOK
-
+ 	cordova plugin add cordova-plugin-uniquedeviceid
+ 	checkOK
+#-------
 	cordova plugin add cordova-plugin-file
 	checkOK
 
@@ -140,7 +142,7 @@ if [ ! -d $PROJECT ]; then
 
 #	cordova plugin add cordova-plugin-transport-security
 #	checkOK
- 
+
 	cordova plugin add cordova-ios-requires-fullscreen
 	checkOK
 
