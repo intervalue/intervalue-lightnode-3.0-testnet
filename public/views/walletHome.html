@@ -366,9 +366,9 @@
                         <div class="nonewsintext">暂无新鲜内容</div>
                     </div>
                 </div>
-                <div class="letterlist" ng-if="index.quicklistshow !== ''" id="new2tablist">
-                    <div class="datenow" ng-class="{'animated bounceInUp': index.quickanimate <= 1}">{{index.getweekginglee}}</div>
-                    <div class="itemin" ng-class="{'animated bounceInUp': index.quickanimate <= 1}" ng-repeat="(key,item) in index.quicklist track by $index">
+                <div class="letterlist" ng-if="index.quicklistshow !== ''" id="new2tablist" >
+                    <div class="datenow">{{index.getweekginglee}}</div>
+                    <div class="itemin" ng-class="{'animated bounceInUp': index.quickanimate <= 2}" ng-repeat="(key,item) in index.quicklist track by $index">
                         <div class="date">{{key}}</div>
                         <div class="itemlr" ng-repeat="itemin in item">
                             <div class="item">
@@ -393,7 +393,7 @@
                         <div class="nonewsintext">暂无新鲜内容</div>
                     </div>
                 </div>
-                <div class="quotelist" ng-if="index.coinlist !== ''" id="new3tablist">
+                <div class="quotelist" ng-if="index.coinlist !== ''" id="new3tablist" ng-class="{'animated bounceInUp': index.coinanimate <= 2}">
                     <div class="titlelabel">
                         <div class="numall" translate>Market value</div>
                         <div class="price" translate>Price</div>
