@@ -769,6 +769,89 @@ angular.module('copayApp.directives')
             });
         };
     }])
+    .directive('reloadData',function(){
+        return{
+            restrict:'A',
+            template : "<div id='slideDown'><div id='slideDown1' class='shownewsloading'>松开刷新</div><div id='slideDown2' class='shownewsloading'><img src='./img/loading.png' />加载中<div/></div>",
+            link:function($scope){
+                window.addEventListener("scroll",function(){
+                    $scope.scrollTop = document.body.scrollTop;
+                    if($scope.scrollTop<=0){ console.log('刷新启动');k_touch("y");}else{console.log('未激活刷新');
+                        console.log($scope.scrollTop);
+                    }
+                });
+                function slideDownStep1(dist){ // dist 下滑的距离，用以拉长背景模拟拉伸效果
+                    $scope.slideDown1 = document.getElementById("slideDown1");
+                    $scope.slideDown2 = document.getElementById("slideDown2");
+                    $scope.slideDown2.style.display = "none";//正在刷新block
+                    $scope. slideDown1.style.display = "block";//松开刷新出现
+                    $scope.slideDown1.style.height = (parseInt("20px") - dist) + "px";//松开刷新的高度
+                }
+                function slideDownStep2(){
+                    $scope.slideDown1 = document.getElementById("slideDown1");
+                    $scope.slideDown2 = document.getElementById("slideDown2");
+                    $scope.slideDown1.style.display = "none";//松开刷新none
+                    $scope.slideDown1.style.height = "20px";//高度设定为20px
+                    $scope.slideDown2.style.display = "block";//刷新出现
+                    //刷新数据
+                    //location.reload();//加载数据
+                }
+                function slideDownStep3(){
+                    $scope.slideDown1 = document.getElementById("slideDown1");
+                    $scope.slideDown2 = document.getElementById("slideDown2");
+                    $scope.slideDown1.style.display = "none";//松开刷新none
+                    $scope.slideDown2.style.display = "none";//正在刷新none
+                }
+                function k_touch(way){
+                    $scope._start = 0;
+                    $scope. _end = 0;
+                    document.body.addEventListener("touchstart",touchStart,false);//当手指触摸屏幕时候触发，即使已经有一个手指放在屏幕上也会触发。
+                    document.body.addEventListener("touchmove",touchMove,false);//当手指在屏幕上滑动的时候连续地触发。在这个事件发生期间，调用preventDefault()事件可以阻止滚动。
+                    document.body.addEventListener("touchend",touchEnd,false);
+                    function touchStart(event){//touchStart函数
+                        var touch = event.targetTouches[0];
+                        if(way == "x"){
+                            $scope._start = touch.pageX;console.log('x'+$scope._start);
+                        }else{
+                            $scope._start = touch.pageY;console.log('ystart'+$scope._start);
+                        }
+                    }
+                    function touchMove(event){//touchMove函数
+                        var touch = event.targetTouches[0];
+                        if(way == "x"){
+                            $scope._end = ($scope._start - touch.pageX);
+                        }else{
+                            $scope._end = ($scope._start - touch.pageY);
+                            //下滑才执行操作
+                            if($scope._end < 0){
+                                if( document.body.scrollTop <= 0){slideDownStep1($scope._end);}else{return;}
+                            }
+                        }
+                    }
+                    function touchEnd(event){//touchEnd函数
+                        if($scope._end >0){
+                            console.log("左滑或上滑 "+$scope._end);
+                        }else{
+                            console.log("右滑或下滑"+$scope._end);
+                            ////////////////
+                            if( document.body.scrollTop <= 0){
+                                ////////////////
+                                slideDownStep2();
+                                //刷新成功则
+                                //模拟刷新成功进入第三步
+                                setTimeout(function(){
+                                    slideDownStep3();
+                                },3000);
+                                //////////////////
+                            }else{return;}
+
+                        }
+
+                    }
+                }
+            }
+        }
+    })
   //   .directive("mdinputpassr",function(){
   //   return {
   //       scope: {},

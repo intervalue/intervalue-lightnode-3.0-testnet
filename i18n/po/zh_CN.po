@@ -2469,6 +2469,20 @@ msgstr "已收到付款："
 msgid "News"
 msgstr "新闻详情"
 
+msgid "No more content"
+msgstr "暂无更多内容"
+
+msgid "No fresh content"
+msgstr "暂无新鲜内容"
+
+msgid "Loading"
+msgstr "加载中"
+
+
+
+
+
+
 
 
 

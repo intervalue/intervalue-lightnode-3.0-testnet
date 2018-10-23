@@ -513,6 +513,11 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 #news .tabnewsin{
     transform: translateX(0);
 }
+#slideDown{margin-top: 0;width: 100%;}
+#slideDown1,#slideDown2{width: 100%;height: 70px;;background: #e9f4f7;display: none;}
+#slideDown1{height: 20px;}
+#slideDown1>p,#slideDown2>p{margin: 20px auto;text-align:center;font-size: 14px;color: #37bbf5;}
+
 /*资讯*/
 .news .tab-container{
     width:33.3%;
@@ -643,6 +648,8 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     font-weight:600;
     color:#323232;
     margin-bottom: 6px;
+    -ms-word-break: break-all;
+    word-break: break-all;
 }
 .news .letterlist .itemin .item .desc{
     font-size:12px;
