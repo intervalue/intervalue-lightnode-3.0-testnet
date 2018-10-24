@@ -1984,7 +1984,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     angular.element(document.getElementById('newupheight')).css('display', 'none');
                     self.newslists = res.page.list;
                     self.newslist = res.page.list;
-                    self.newspage = 1;
+                    self.newspage = 2;
                     $timeout(function(){
                         $scope.$apply();
                     })
@@ -2024,9 +2024,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     self.quickData = function (upyn) {
         if(upyn == 'up'){
-            news.getQuickData(6,self.quickpage,null,null,function(res) {
+            news.getQuickData(6,1,null,null,function(res) {
                 var list = [];
                 if(!!res && res.code == 0) {
+                    angular.element(document.getElementById('quickupheight')).css('display', 'none');
+                    self.quicklists = {};
                     //给返回对象加字段
                     lodash.forEach(res.page.list, function(value, key){
                         value.grayweek = self.getWeekNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
@@ -2046,7 +2048,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     }
                     self.quicklistshow = res.page.list;
                     self.quicklist = self.quicklists;
-                    self.quickpage = 1;
+                    self.quickpage = 2;
                     $timeout(function () {
                         $scope.$apply();
                     });
@@ -2057,8 +2059,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             news.getQuickData(6,self.quickpage,null,null,function(res) {
                 var list = [];
                 if(!!res && res.code == 0) {
-                    angular.element(document.getElementById('quickupheight')).css('display', 'none');
-                    self.quicklists = {};
                     //给返回对象加字段
                     lodash.forEach(res.page.list, function(value, key){
                         value.grayweek = self.getWeekNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));

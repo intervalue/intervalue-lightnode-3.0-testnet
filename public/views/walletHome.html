@@ -344,7 +344,7 @@
                         <div class="nonewsintext" translate>No fresh content</div>
                     </div>
                 </div>
-                <div class="newslist" id="new1tablist" home-pull-down="index.newsData('up')" draggable="true">
+                <div class="newslist" ng-if="index.newslist !== ''" id="new1tablist" home-pull-down="index.newsData('up')" draggable="true">
                     <div class="newsupheight" id="newupheight">
                         <div class="newuprelease" translate>Release refresh</div>
                         <div class="newupload" translate>Loading</div>
@@ -370,12 +370,12 @@
                         <div class="nonewsintext" translate>No fresh content</div>
                     </div>
                 </div>
-                <div class="letterlist" id="new2tablist" home-pull-down="index.quickData('up')"  draggable="true">
+                <div class="letterlist" ng-if="index.quicklistshow !== ''" id="new2tablist" home-pull-down="index.quickData('up')"  draggable="true">
                     <div class="newsupheight" id="quickupheight">
                         <div class="newuprelease" translate>Release refresh</div>
                         <div class="newupload" translate>Loading</div>
                     </div>
-                    <div class="datenow" ng-class="{'animated bounceInUp': index.quickanimate <= 2 && index.shownewstab == 'new2'}">{{index.getweekginglee}}</div>
+                    <!--<div class="datenow" ng-class="{'animated bounceInUp': index.quickanimate <= 2 && index.shownewstab == 'new2'}">{{index.getweekginglee}}</div>-->
                     <div class="itemin" ng-class="{'animated bounceInUp': index.quickanimate <= 2 && index.shownewstab == 'new2'}" ng-repeat="(key,item) in index.quicklist track by $index">
                         <div class="date" >{{key}}</div>
                         <div class="itemlr" ng-repeat="itemin in item">
