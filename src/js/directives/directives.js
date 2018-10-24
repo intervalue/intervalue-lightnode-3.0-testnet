@@ -628,7 +628,8 @@ angular.module('copayApp.directives')
           ctrl[0].setHasValue(false);
         });
     }
-  }).directive("mdlabel",function(){
+  })
+  .directive("mdlabel",function(){
     return {
         scope: {},
         restrict: 'A',
@@ -647,7 +648,8 @@ angular.module('copayApp.directives')
           controllerInstance.setHasValue(false);
         });
     }
-  }).directive("mdchangename",function(){
+  })
+  .directive("mdchangename",function(){
     return {
         scope: {},
         restrict: 'A',
@@ -671,7 +673,8 @@ angular.module('copayApp.directives')
           })  
         }
     }
-  }).directive("mdinputvalidc", function(gettextCatalog){
+  })
+  .directive("mdinputvalidc", function(gettextCatalog){
     return {
         scope: {},
         restrict: 'A',
@@ -693,7 +696,8 @@ angular.module('copayApp.directives')
           };
         }
     }
-  }).directive("mdinputname",function(){
+  })
+    .directive("mdinputname",function(){
     return {
         scope: {},
         restrict: 'A',
@@ -721,7 +725,8 @@ angular.module('copayApp.directives')
           })  
         }
     }
-  }).directive("mdinputpass",function(){
+  })
+    .directive("mdinputpass",function(){
     return {
         scope: {},
         restrict: 'A',
@@ -769,25 +774,100 @@ angular.module('copayApp.directives')
             });
         };
     }])
-    // .directive('homepulldown',function(){
-    //     return{
-    //         restrict:'A',
-    //         link:function(scope, elm, attr){
-    //
-    //
-    //         }
-    //     }
-    // })
-    // .directive('reloadData',function(){
-    //     return{
-    //         restrict:'A',
-    //         require: ['^homepulldown'],
-    //         link:function(scope, elm, attr){
-    //
-    //
-    //         }
-    //     }
-    // })
+    .directive('homePullDown',function(){
+        return{
+            restrict:'A',
+            link:function(scope, elm, attr){
+                var raw = elm[0];
+                var rawh = (elm[0].children)[0];
+                scope._start = 0;
+                scope. _end = 0;
+                raw.addEventListener("dragstart",dragStart,false);//当鼠标按住屏幕时候触发。
+                raw.addEventListener("drag",dragMove,false);//当鼠标屏幕上滑动的时候连续地触发。在这个事件发生期间，调用preventDefault()事件可以阻止滚动。
+                raw.addEventListener("dragend",dragEnd,false);
+                raw.addEventListener("drop",dropEnd,false);
+                function dragStart(event){//dragStart函数
+                    console.log(event)
+                    scope._start = event.pageY;
+                }
+                function dragMove(event){//dragMove函数
+                    scope._end = (scope._start - event.pageY);
+                    //下滑才执行操作
+                    if(scope._end < 0){
+                        if( raw.scrollTop <= 0){
+                            releaseh(scope._end);
+                        }else{
+                            return;
+                        }
+                    }
+                }
+                function dragEnd(event){//dragEnd函数
+                    scope._end = (scope._start - event.pageY);
+                    if(scope._end >0){
+                        return;
+                    }else{
+                        if( document.body.scrollTop <= 0){
+                            releaseload();
+                        }else{
+                            return;
+                        }
+                    }
+                }
+                function dropEnd(event){//dragEnd函数
+                    if(scope._end >0){
+                        return;
+                    }else{
+                        if( document.body.scrollTop <= 0){
+                            releaseload();
+                        }else{
+                            return;
+                        }
+                    }
+                }
+                // raw.addEventListener("mousedown",mouseDown,false);//当鼠标按住屏幕时候触发。
+                // raw.addEventListener("mousemove",mouseMove,false);//当鼠标屏幕上滑动的时候连续地触发。在这个事件发生期间，调用preventDefault()事件可以阻止滚动。
+                // raw.addEventListener("mouseup",mouseUp,false);
+                // function mouseDown(event){//dragStart函数
+                //     scope._start = event.pageY;
+                // }
+                // function mouseMove(event){//dragMove函数
+                //     scope._end = (scope._start - event.pageY);
+                //     //下滑才执行操作
+                //     if(scope._end < 0){
+                //         if( raw.scrollTop <= 0){
+                //             releaseh(scope._end);
+                //         }else{
+                //             return;
+                //         }
+                //     }
+                // }
+                // function mouseUp(event){//dragEnd函数
+                //     scope._start = event.pageY + 1;
+                //     if(scope._end >0){
+                //       return;
+                //     }else{
+                //         if( document.body.scrollTop <= 0){
+                //             releaseload();
+                //         }else{
+                //           return;
+                //         }
+                //     }
+                // }
+                function releaseh(dist){ // dist 下滑的距离，用以拉长背景模拟拉伸效果
+                    rawh.style.height = (parseInt("48px") - dist) + "px";//松开刷新的高度
+                    rawh.style.display = 'block';
+                    rawh.children[0].style.display = 'block';
+                    rawh.children[1].style.display = 'none';
+                }
+                function releaseload(){
+                    rawh.children[0].style.display = 'none';
+                    rawh.children[1].style.display = 'block';
+                    rawh.style.height = "48px";//高度设定为48px
+                    scope.$apply(attr.homePullDown);
+                }
+            }
+        }
+    })
   //   .directive("mdinputpassr",function(){
   //   return {
   //       scope: {},

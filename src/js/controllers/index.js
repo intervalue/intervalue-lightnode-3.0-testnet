@@ -1977,33 +1977,52 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         return null
     };
 
-    self.newsData = function () {
-        news.getNewsData(6,self.newspage,null,function(res) {
-            if(!!res && res.code == 0) {
-                self.shownewsloading = false;
-                if(JSON.stringify(self.newslists) == '[]'){
+    self.newsData = function (upyn) {
+        if(upyn == 'up'){
+            news.getNewsData(6,1,null,function(res) {
+                if(!!res && res.code == 0) {
+                    angular.element(document.getElementById('newupheight')).css('display', 'none');
                     self.newslists = res.page.list;
                     self.newslist = res.page.list;
-                    self.newspage += 1;
+                    self.newspage = 1;
                     $timeout(function(){
                         $scope.$apply();
                     })
-                }else{
-                    self.newslists = self.newslists.concat(res.page.list);
-                    self.newslist = self.newslists;
-                    if(self.newspage == res.page.totalPage){
-                        self.shownonews = true;
-                        self.shownewsloading = false;
-                    }
-                    self.newspage += 1;
                     $timeout(function(){
                         $scope.$apply();
                     });
                     return;
-                }
-            }else
-                console.error("error~!");
-        })
+                }else
+                    console.error("error~!");
+            })
+        }else{
+            news.getNewsData(6,self.newspage,null,function(res) {
+                if(!!res && res.code == 0) {
+                    self.shownewsloading = false;
+                    if(JSON.stringify(self.newslists) == '[]'){
+                        self.newslists = res.page.list;
+                        self.newslist = res.page.list;
+                        self.newspage += 1;
+                        $timeout(function(){
+                            $scope.$apply();
+                        })
+                    }else{
+                        self.newslists = self.newslists.concat(res.page.list);
+                        self.newslist = self.newslists;
+                        if(self.newspage == res.page.totalPage){
+                            self.shownonews = true;
+                            self.shownewsloading = false;
+                        }
+                        self.newspage += 1;
+                        $timeout(function(){
+                            $scope.$apply();
+                        });
+                        return;
+                    }
+                }else
+                    console.error("error~!");
+            })
+        }
     };
 
     self.quickData = function () {
@@ -2047,21 +2066,13 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         //inve 行情
         news.getInveData2(function (res) {
             if(!!res && res != null) {
-                console.log(res);
-                console.log('iiiiiiiiiiiiiiiiinveeeeeeeeeeeeeeeee')
                 self.coininvelist = res;
             }
         });
 
         news.getCurrencyData(function(res) {
-            console.log(res);
-            console.log('33333333333333333333333333333333333333333333333')
             if(!!res && res != null) {
-                console.log(res);
-                console.log('22222222222222222222222222222222222222222')
                 self.shownewsloading = false;
-                console.log(res);
-
                 $timeout(function(){
                     self.coinlist = self.coinlists.concat(res);
                 },10)

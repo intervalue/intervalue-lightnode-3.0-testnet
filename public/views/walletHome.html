@@ -344,8 +344,11 @@
                         <div class="nonewsintext" translate>No fresh content</div>
                     </div>
                 </div>
-                <div class="newslist" id="new1tablist" ng-class="{'animated bounceInUp': index.newsanimate <= 1 && index.shownewstab == 'new1'}">
-                    <div reload-data></div>
+                <div class="newslist" draggable="true" id="new1tablist" home-pull-down="index.newsData('up')"  ng-class="{'animated bounceInUp': index.newsanimate <= 1 && index.shownewstab == 'new1'}">
+                    <div class="newsupheight" id="newupheight">
+                        <div class="newuprelease" translate>Release refresh</div>
+                        <div class="newupload" translate>Loading</div>
+                    </div>
                     <div class="item" ng-repeat="item in index.newslist track by $index">
                         <img src="{{item.coverPath}}" ng-click="index.openNewsinModal(item.id)" />
                         <div class="info">

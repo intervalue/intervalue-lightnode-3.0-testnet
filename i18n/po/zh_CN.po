@@ -2481,7 +2481,8 @@ msgstr "暂无新鲜内容"
 msgid "Loading"
 msgstr "加载中"
 
-
+msgid "Release refresh"
+msgstr "松开刷新"
 
 
 
