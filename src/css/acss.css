@@ -558,6 +558,9 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .newupload img{
     margin-right: 10px;
 }
+.topanimate{
+    top: 0 !important;
+}
 /*资讯*/
 .news .tab-container{
     width:33.3%;
@@ -716,8 +719,8 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     line-height: 34px;
     position: fixed;
     left: 0;
-    /*top:90px;*/
-    top:0;
+    top:90px;
+    /*top:0;*/
     width: 100%;
     z-index:5;
     font-size:12px;

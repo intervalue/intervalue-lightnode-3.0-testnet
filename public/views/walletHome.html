@@ -395,14 +395,14 @@
                 <div ng-show="index.showquicksloading" class="shownewsloading"><img src="./img/loading.png" /><span translate>Loading</span></div>
             </div>
             <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new3'}" id="new3tab" >
-                <!--<div ng-if="index.coinlist == ''" class="nonews">-->
-                    <!--<div class="nonewsin">-->
-                        <!--<img src="./img/nonews.png" />-->
-                        <!--<div class="nonewsintext">暂无新鲜内容</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <div class="quotelist" id="new3tablist" ng-class="{'animated bounceInUp': index.coinanimate <= 2 && index.shownewstab == 'new3'}">
-                    <div class="titlelabel">
+                <div ng-if="index.coinlist == ''" class="nonews">
+                    <div class="nonewsin">
+                        <img src="./img/nonews.png" />
+                        <div class="nonewsintext" translate>No fresh content</div>
+                    </div>
+                </div>
+                <div class="quotelist" ng-if="index.coinlist !== ''"  id="new3tablist" ng-class="{'animated bounceInUp': index.coinanimate <= 2 && index.shownewstab == 'new3'}">
+                    <div class="titlelabel" ng-class="{'topanimate': index.coinanimate <= 2 && index.shownewstab == 'new3'}">
                         <div class="numall" translate>Market value</div>
                         <div class="price" translate>Price</div>
                         <div class="gains" translate>Latest gains</div>
