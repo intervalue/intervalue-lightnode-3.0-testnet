@@ -774,6 +774,17 @@ angular.module('copayApp.directives')
             });
         };
     }])
+    .directive('homequiscrolled', ['$timeout', function($timeout) {
+        return function(scope, elm, attr) {
+            var raw = elm[0];
+
+            elm.bind('scroll', function() {
+                if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
+                    scope.$apply(attr.homequiscrolled);
+                };
+            });
+        };
+    }])
     .directive('homePullDown',function(){
         return{
             restrict:'A',
