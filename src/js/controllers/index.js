@@ -37,6 +37,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.shownewsloading = false;
     self.newslist = '';
     self.coinlist = '';
+    self.coininvelist = '';
     self.quicklist = [];
     self.quicklistshow = '';
     self.newslists = [];
@@ -1980,33 +1981,52 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         return null
     };
 
-    self.newsData = function () {
-        news.getNewsData(6,self.newspage,null,function(res) {
-            if(!!res && res.code == 0) {
-                self.shownewsloading = false;
-                if(JSON.stringify(self.newslists) == '[]'){
+    self.newsData = function (upyn) {
+        if(upyn == 'up'){
+            news.getNewsData(6,1,null,function(res) {
+                if(!!res && res.code == 0) {
+                    angular.element(document.getElementById('newupheight')).css('display', 'none');
                     self.newslists = res.page.list;
                     self.newslist = res.page.list;
-                    self.newspage += 1;
+                    self.newspage = 1;
                     $timeout(function(){
                         $scope.$apply();
                     })
-                }else{
-                    self.newslists = self.newslists.concat(res.page.list);
-                    self.newslist = self.newslists;
-                    if(self.newspage == res.page.totalPage){
-                        self.shownonews = true;
-                        self.shownewsloading = false;
-                    }
-                    self.newspage += 1;
                     $timeout(function(){
                         $scope.$apply();
                     });
                     return;
-                }
-            }else
-                console.error("error~!");
-        })
+                }else
+                    console.error("error~!");
+            })
+        }else{
+            news.getNewsData(6,self.newspage,null,function(res) {
+                if(!!res && res.code == 0) {
+                    self.shownewsloading = false;
+                    if(JSON.stringify(self.newslists) == '[]'){
+                        self.newslists = res.page.list;
+                        self.newslist = res.page.list;
+                        self.newspage += 1;
+                        $timeout(function(){
+                            $scope.$apply();
+                        })
+                    }else{
+                        self.newslists = self.newslists.concat(res.page.list);
+                        self.newslist = self.newslists;
+                        if(self.newspage == res.page.totalPage){
+                            self.shownonews = true;
+                            self.shownewsloading = false;
+                        }
+                        self.newspage += 1;
+                        $timeout(function(){
+                            $scope.$apply();
+                        });
+                        return;
+                    }
+                }else
+                    console.error("error~!");
+            })
+        }
     };
 
     self.quickData = function () {
@@ -2046,25 +2066,27 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         });
     };
 
-    // self.currencyData = function () {
-    //     news.getCurrencyData(function(res) {
-    //         if(res != null) {
-    //             self.shownewsloading = false;
-    //             if(JSON.stringify(self.coinlists) == '[]'){
-    //                 self.coinlists = res;
-    //             }else{
-    //
-    //             }
-    //             $timeout(function(){
-    //                 self.coinlist = self.coinlists.concat(res);
-    //             },10)
-    //             $timeout(function(){
-    //                 $scope.$apply();
-    //             });
-    //         }else
-    //             console.error("error~!");
-    //     });
-    // };
+    self.currencyData = function () {
+        //inve 行情
+        news.getInveData2(function (res) {
+            if(!!res && res != null) {
+                self.coininvelist = res;
+            }
+        });
+
+        news.getCurrencyData(function(res) {
+            if(!!res && res != null) {
+                self.shownewsloading = false;
+                $timeout(function(){
+                    self.coinlist = self.coinlists.concat(res);
+                },10)
+                $timeout(function(){
+                    $scope.$apply();
+                });
+            }else
+                console.error("error~!");
+        });
+    };
 
     //	加载更多
     self.loadmore = function(outlr, inlr, num){
@@ -2189,22 +2211,22 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     //     });
     // };
 
-    (function () {
-        "drag dragover dragstart dragenter".split(" ").forEach(function (e) {
-            window.addEventListener(e, function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                e.dataTransfer.dropEffect = "copy";
-            }, false);
-        });
-        document.addEventListener('drop', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            for (var i = 0; i < e.dataTransfer.files.length; ++i) {
-                go.handleUri(e.dataTransfer.files[i].path);
-            }
-        }, false);
-    })();
+    // (function () {
+    //     "drag dragover dragstart dragenter".split(" ").forEach(function (e) {
+    //         window.addEventListener(e, function (e) {
+    //             e.preventDefault();
+    //             e.stopPropagation();
+    //             e.dataTransfer.dropEffect = "copy";
+    //         }, false);
+    //     });
+    //     document.addEventListener('drop', function (e) {
+    //         e.preventDefault();
+    //         e.stopPropagation();
+    //         for (var i = 0; i < e.dataTransfer.files.length; ++i) {
+    //             go.handleUri(e.dataTransfer.files[i].path);
+    //         }
+    //     }, false);
+    // })();
     console.log(profileService.walletClients);
 
 });

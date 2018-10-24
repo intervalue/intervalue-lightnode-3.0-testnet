@@ -508,10 +508,28 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     margin-right: 10px;
 }
 .tabnewsout{
-    transform: translateX(-100%);
+    left:calc(-500vw);
+    visibility: hidden;
+    /*transform: translateX(-100%);*/
 }
 #news .tabnewsin{
-    transform: translateX(0);
+    left:0;
+    visibility: visible;
+    /*transform: translateX(0);*/
+}
+.newsupheight{
+    width: 100%;
+    background:#fff;
+    height: 20px;
+    font-size:12px;
+    font-weight:400;
+    color:rgba(144,144,144,1);
+    text-align: center;
+    display: none;
+}
+
+.newuprelease, .newupload{
+    display: none;
 }
 /*资讯*/
 .news .tab-container{
@@ -521,11 +539,18 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     background: #FDFEFF;
 }
 .news .addwcontent{
-    top: 90px;
+    /*top: 90px;*/
+    top: 93px;
     z-index: -1;
-    height: calc(100vh - 138px);
+    /*height: calc(100vh - 138px);*/
+    height: calc(100vh - 143px);
 }
 /*最新*/
+/*.news .newslist,.news .newslist a,.news .newslist img, .news .newslist div, .news .newslist p, .news .newslist  span,.news .letterlist,.news .quotelist{*/
+    /*-webkit-user-drag: auto;*/
+    /*-ms-user-drag: auto;*/
+    /*user-drag: auto;*/
+/*}*/
 .news .newslist .item{
     height: 100px;
     display: flex;
@@ -534,6 +559,9 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     padding: 15px;
     box-sizing: border-box;
     border-bottom: 1px solid #EEEEEE;
+}
+.news .newslist .item:nth-child(2){
+    border-top: 1px solid #EEEEEE;
 }
 .news .newslist .item:last-child{
     border-bottom: none;
@@ -582,8 +610,8 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     line-height: 26px;
     position: fixed;
     left: 0;
-    /*top:90px;*/
-    top: 0;
+    top:90px;
+    /*top: 0;*/
     width: 100%;
     z-index:5;
 }
@@ -643,6 +671,8 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     font-weight:600;
     color:#323232;
     margin-bottom: 6px;
+    -ms-word-break: break-all;
+    word-break: break-all;
 }
 .news .letterlist .itemin .item .desc{
     font-size:12px;
@@ -659,7 +689,8 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     line-height: 34px;
     position: fixed;
     left: 0;
-    top:90px;
+    /*top:90px;*/
+    top:0;
     width: 100%;
     z-index:5;
     font-size:12px;
