@@ -680,10 +680,10 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	root.addMessageEvent = addMessageEvent;
 	
 	root.list = function(cb) {
-	  //todo delete
-		// device.readCorrespondents(function(arrCorrespondents){
-		//   cb(null, arrCorrespondents);
-	  // });
+
+		device.readCorrespondents(function(arrCorrespondents){
+		  cb(null, arrCorrespondents);
+	  });
 	};
 
 

@@ -7,7 +7,7 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 	
 	var wallet = require('intervaluecore/wallet.js');
 	//todo delete
-	// var bots = require('intervaluecore/bots.js');
+	 var bots = require('intervaluecore/bots.js');
 	var mutex = require('intervaluecore/mutex.js');
 	$scope.editCorrespondentList = false;
 	$scope.selectedCorrespondentList = {};
@@ -103,7 +103,7 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 	$scope.remove = function(device_address) {
 		mutex.lock(["remove_device"], function(unlock){
 			// check to be safe
-			//todo delete
+
 			wallet.determineIfDeviceCanBeRemoved(device_address, function(bRemovable) {
 				if (!bRemovable) {
 					unlock();
@@ -113,7 +113,7 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 
 				// send message to paired device
 				// this must be done before removing the device
-				// device.sendMessageToDevice(device_address, "removed_paired_device", "removed");
+				 device.sendMessageToDevice(device_address, "removed_paired_device", "removed");
 
 				// remove device
 				device.removeCorrespondentDevice(device_address, function() {
