@@ -71,26 +71,25 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         });
     }
 
-    //todo delete
+
     function sendBugReport(error_message, error_object) {
         var conf = require('intervaluecore/conf.js');
         var network = require('intervaluecore/network.js');
         var bug_sink_url = conf.WS_PROTOCOL + (conf.bug_sink_url || configService.getSync().hub);
-        //todo delete
-        // network.findOutboundPeerOrConnect(bug_sink_url, function (err, ws) {
-        //     if (err)
-        //         return;
-        //     breadcrumbs.add('bugreport');
-        //     var description = error_object.stack || JSON.stringify(error_object, null, '\t');
-        //     if (error_object.bIgnore)
-        //         description += "\n(ignored)";
-        //     description += "\n\nBreadcrumbs:\n" + breadcrumbs.get().join("\n") + "\n\n";
-        //     description += "UA: " + navigator.userAgent + "\n";
-        //     description += "Language: " + (navigator.userLanguage || navigator.language) + "\n";
-        //     description += "Program: " + conf.program + ' ' + conf.program_version + ' ' + (conf.bLight ? 'light' : 'full') + " #" + window.commitHash + "\n";
-        //     //todo delete
-        //     // network.sendJustsaying(ws, 'bugreport', { message: error_message, exception: description });
-        // });
+        network.findOutboundPeerOrConnect(bug_sink_url, function (err, ws) {
+            if (err)
+                return;
+            breadcrumbs.add('bugreport');
+            var description = error_object.stack || JSON.stringify(error_object, null, '\t');
+            if (error_object.bIgnore)
+                description += "\n(ignored)";
+            description += "\n\nBreadcrumbs:\n" + breadcrumbs.get().join("\n") + "\n\n";
+            description += "UA: " + navigator.userAgent + "\n";
+            description += "Language: " + (navigator.userLanguage || navigator.language) + "\n";
+            description += "Program: " + conf.program + ' ' + conf.program_version + ' ' + (conf.bLight ? 'light' : 'full') + " #" + window.commitHash + "\n";
+
+             network.sendJustsaying(ws, 'bugreport', { message: error_message, exception: description });
+        });
     }
 
     self.sendBugReport = sendBugReport;

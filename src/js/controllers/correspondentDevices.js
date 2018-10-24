@@ -66,34 +66,33 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 				return;
 			}
 
-			//todo delete
-			// wallet.readDeviceAddressesUsedInSigningPaths(function(arrNotRemovableDeviceAddresses) {
-			//
-			// 	// add a new property indicating whether the device can be removed or not
-			//
-			// 	var length = ab.length;
-			// 	for (var i = 0; i < length; i++) {
- 			// 	 	corrDev = ab[i];
-			//
-			// 	 	corrDevAddr = corrDev.device_address;
-			//
-			// 	 	var ix = arrNotRemovableDeviceAddresses.indexOf(corrDevAddr);
-			//
-			// 		// device is removable when not in list
-			// 	 	corrDev.removable = (ix == -1);
-			// 	}
-			// });
+			wallet.readDeviceAddressesUsedInSigningPaths(function(arrNotRemovableDeviceAddresses) {
+
+				// add a new property indicating whether the device can be removed or not
+
+				var length = ab.length;
+				for (var i = 0; i < length; i++) {
+ 				 	corrDev = ab[i];
+
+				 	corrDevAddr = corrDev.device_address;
+
+				 	var ix = arrNotRemovableDeviceAddresses.indexOf(corrDevAddr);
+
+					// device is removable when not in list
+				 	corrDev.removable = (ix == -1);
+				}
+			});
 		
 			$scope.list = ab;
 
 			//todo delete
-			// bots.load(function(err, rows){
-			// 	if (err) $scope.botsError = err.toString();
-			// 	$scope.bots = rows;
-			// 	$timeout(function(){
-			// 		$scope.$digest();
-			// 	});
-			// });
+			bots.load(function(err, rows){
+				if (err) $scope.botsError = err.toString();
+				$scope.bots = rows;
+				$timeout(function(){
+					$scope.$digest();
+				});
+			});
 		});
 	};
 	
@@ -105,27 +104,27 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 		mutex.lock(["remove_device"], function(unlock){
 			// check to be safe
 			//todo delete
-			// wallet.determineIfDeviceCanBeRemoved(device_address, function(bRemovable) {
-			// 	if (!bRemovable) {
-			// 		unlock();
-			// 		return console.log('device '+device_address+' is not removable');
-			// 	}
-			// 	var device = require('intervaluecore/device.js');
-			//
-			// 	// send message to paired device
-			// 	// this must be done before removing the device
-			// 	// device.sendMessageToDevice(device_address, "removed_paired_device", "removed");
-			//
-			// 	// remove device
-			// 	device.removeCorrespondentDevice(device_address, function() {
-			// 		unlock();
-			// 		$scope.hideRemove = true;
-			// 		correspondentListService.currentCorrespondent = null;
-			// 		$scope.readList();
-			// 		$rootScope.$emit('Local/SetTab', 'chat', true);
-			// 		setTimeout(function(){document.querySelector('[ui-view=chat]').scrollTop = listScrollTop;}, 5);
-			// 	});
-			// });
+			wallet.determineIfDeviceCanBeRemoved(device_address, function(bRemovable) {
+				if (!bRemovable) {
+					unlock();
+					return console.log('device '+device_address+' is not removable');
+				}
+				var device = require('intervaluecore/device.js');
+
+				// send message to paired device
+				// this must be done before removing the device
+				// device.sendMessageToDevice(device_address, "removed_paired_device", "removed");
+
+				// remove device
+				device.removeCorrespondentDevice(device_address, function() {
+					unlock();
+					$scope.hideRemove = true;
+					correspondentListService.currentCorrespondent = null;
+					$scope.readList();
+					$rootScope.$emit('Local/SetTab', 'chat', true);
+					setTimeout(function(){document.querySelector('[ui-view=chat]').scrollTop = listScrollTop;}, 5);
+				});
+			});
 		});
 	};
 
