@@ -2207,22 +2207,22 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     //     });
     // };
 
-    (function () {
-        "drag dragover dragstart dragenter".split(" ").forEach(function (e) {
-            window.addEventListener(e, function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                e.dataTransfer.dropEffect = "copy";
-            }, false);
-        });
-        document.addEventListener('drop', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            for (var i = 0; i < e.dataTransfer.files.length; ++i) {
-                go.handleUri(e.dataTransfer.files[i].path);
-            }
-        }, false);
-    })();
+    // (function () {
+    //     "drag dragover dragstart dragenter".split(" ").forEach(function (e) {
+    //         window.addEventListener(e, function (e) {
+    //             e.preventDefault();
+    //             e.stopPropagation();
+    //             e.dataTransfer.dropEffect = "copy";
+    //         }, false);
+    //     });
+    //     document.addEventListener('drop', function (e) {
+    //         e.preventDefault();
+    //         e.stopPropagation();
+    //         for (var i = 0; i < e.dataTransfer.files.length; ++i) {
+    //             go.handleUri(e.dataTransfer.files[i].path);
+    //         }
+    //     }, false);
+    // })();
     console.log(profileService.walletClients);
 
 });
