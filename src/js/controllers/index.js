@@ -2034,6 +2034,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                         value.grayweek = self.getWeekNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
                         value.graydate = self.getDateNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
                         value.greentime = self.getTimeFromNow(value.createTime);
+                        value.greenhms = (value.createTime).slice((lodash.indexOf((value.createTime), ' ', 0)+1),-3);
                     })
                     list = res.page.list;
                     //转换返回对象的格式
@@ -2047,6 +2048,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                         }
                     }
                     self.quicklistshow = res.page.list;
+                    console.log(self.quicklist)
                     self.quicklist = self.quicklists;
                     self.quickpage = 2;
                     $timeout(function () {
@@ -2064,6 +2066,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                         value.grayweek = self.getWeekNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
                         value.graydate = self.getDateNow((value.createTime).substring(0,lodash.indexOf((value.createTime), ' ', 0)));
                         value.greentime = self.getTimeFromNow(value.createTime);
+                        value.greenhms = (value.createTime).slice((lodash.indexOf((value.createTime), ' ', 0)+1),-3);
                     })
                     list = res.page.list;
                     //转换返回对象的格式
