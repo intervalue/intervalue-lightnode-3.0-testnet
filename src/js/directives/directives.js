@@ -782,18 +782,14 @@ angular.module('copayApp.directives')
                 var rawh = (elm[0].children)[0];
                 scope._start = 0;
                 scope. _end = 0;
-
-
-
                 raw.addEventListener("dragstart",dragStart,false);//当鼠标按住屏幕时候触发。
                 raw.addEventListener("drag",dragMove,false);//当鼠标屏幕上滑动的时候连续地触发。在这个事件发生期间，调用preventDefault()事件可以阻止滚动。
                 raw.addEventListener("dragend",dragEnd,false);
                 raw.addEventListener("drop",dropEnd,false);
                 function dragStart(event){//dragStart函数
                     var img = new Image();
-                    img.src = '../../img/backupdelete.png';
+                    img.src = './img/transparent.png';
                     event.dataTransfer.setDragImage(img, 10, 10);
-                    console.log(event)
                     scope._start = event.pageY;
                 }
                 function dragMove(event){//dragMove函数
