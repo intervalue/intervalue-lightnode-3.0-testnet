@@ -10,7 +10,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	var device = require('intervaluecore/device.js');
 	var wallet = require('intervaluecore/wallet.js');
 
-	// var chatStorage = require('intervaluecore/chat_storage.js');
+	 var chatStorage = require('intervaluecore/chat_storage.js');
 	$rootScope.newMessagesCount = {};
 	$rootScope.newMsgCounterEnabled = false;
 
