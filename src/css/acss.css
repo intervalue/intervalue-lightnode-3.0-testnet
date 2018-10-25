@@ -748,7 +748,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .quotelist .itemin{
     padding: 0 15px 0;
 }
-.news .quotelist .itemin:nth-child(2){
+.news .quotelist .itemin:nth-child(3){
     padding-top:34px;
 }
 .news .quotelist .itemin .item{

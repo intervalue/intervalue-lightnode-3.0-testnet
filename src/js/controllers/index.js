@@ -35,6 +35,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.backwaname = false;
     self.changePD = false;
     self.shownewsloading = false;
+    self.showquicksloading = false;
+    self.showcoinloading = false;
     self.newslist = '';
     self.coinlist = '';
     self.coininvelist = '';
@@ -48,7 +50,10 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.coinanimate = 1;
     self.newspage = 1;
     self.quickpage = 1;
+    self.coinpage = 1;
     self.shownonews = false;
+    self.shownoquick = false;
+    self.shownocoin = false;
     self.shownewstab = '';
     function updatePublicKeyRing(walletClient, onDone) {
         var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
@@ -2101,8 +2106,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         //inve 行情
         news.getInveData2(function (res) {
             if(!!res && res != null) {
-                console.log('5555555555555555555555555555555555555555555555555555')
-                console.log(res)
                 self.coininvelist = res;
             }
         });
@@ -2112,8 +2115,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 console.log(res);
                 if(!!res) {
                     angular.element(document.getElementById('coinupheight')).css('display', 'none');
-                    self.coinlists = res;
-                    self.coinlist = res;
+                    self.coinlists = res.page.list;
+                    self.coinlist = res.page.list;
                     self.coinpage = 2;
                     $timeout(function(){
                         $scope.$apply();
@@ -2124,6 +2127,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             })
         }else{
             news.getCurrencyData(6,self.coinpage,null,function(res) {
+                console.log('ddddddddddddddddddddddddddddfffd')
                 console.log(res);
                 if(!!res) {
                     self.showcoinloading = false;
@@ -2135,7 +2139,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                             $scope.$apply();
                         })
                     }else{
-                        self.coinlists = self.coinlists.concat(res.page.list);
+                        // self.coinlists = self.coinlists.concat(res.page.list);
                         self.coinlist = self.coinlists;
                         if(self.coinpage == res.page.totalPage){
                             self.shownonews = true;
