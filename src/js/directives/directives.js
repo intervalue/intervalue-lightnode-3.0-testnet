@@ -1005,6 +1005,14 @@ angular.module('copayApp.directives')
             }
         }
     })
+    // .directive('clickCoin', ['$timeout', function($timeout) {
+    //     return function(scope, elm, attr) {
+    //         var raw = elm[0];
+    //         elm.bind('click', function() {
+    //             console.log('dddddddd')
+    //         });
+    //     };
+    // }])
   //   .directive("mdinputpassr",function(){
   //   return {
   //       scope: {},

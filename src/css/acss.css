@@ -541,6 +541,9 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     padding-top: 14px;
     box-sizing: border-box;
 }
+.quotelist .newuprelease{
+    padding-top: 55px;
+}
 .newuprelease img{
     margin-right: 10px;
 }
@@ -559,7 +562,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     margin-right: 10px;
 }
 .topanimate{
-    top: 0 !important;
+    top: 4px !important;
 }
 /*资讯*/
 .news .tab-container{
@@ -581,6 +584,9 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     /*-ms-user-drag: auto;*/
     /*user-drag: auto;*/
 /*}*/
+.news .newslist{
+    margin-top: -1px;
+}
 .news .newslist .item{
     height: 100px;
     display: flex;
@@ -719,7 +725,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     line-height: 34px;
     position: fixed;
     left: 0;
-    top:90px;
+    top:92px;
     /*top:0;*/
     width: 100%;
     z-index:5;
@@ -732,6 +738,45 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     box-sizing: border-box;
     padding-left: 32px;
 }
+.news .quotelist .titlelabel .sorttitle{
+    padding-right:5px;
+    display: inline-block;
+    height: 34px;
+}
+.news .quotelist .titlelabel .cointri{
+    position: relative;
+    width: 9px;
+    height: 10px;
+    display: inline-block;
+}
+.news .quotelist .titlelabel .cointri:before{
+    content: '';
+    display: block;
+    border: 4px solid transparent;
+    border-bottom: 5px solid #C4C4C4;
+    margin-bottom:1px;
+    margin-top:-3px;
+}
+.news .quotelist .titlelabel .cointri:after{
+    content: '';
+    display: block;
+    border: 4px solid transparent;
+    border-top: 5px solid #C4C4C4;
+}
+.news .quotelist .titlelabel .cointri.upcoin:before{
+    content: '';
+    display: block;
+    border: 4px solid transparent;
+    border-bottom: 5px solid #45AD8E;
+    margin-bottom:1px;
+    margin-top:-3px;
+}
+.news .quotelist .titlelabel .cointri.downcoin:after{
+    content: '';
+    display: block;
+    border: 4px solid transparent;
+    border-top: 5px solid #45AD8E;
+}
 .news .quotelist .titlelabel .price{
     position: absolute;
     top: 0;
@@ -742,23 +787,24 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     position: absolute;
     top: 0;
     right: 15px;
-    width:70px;
+    /*width:70px;*/
+    width: 84px;
     text-align:center;
 }
 .news .quotelist .itemin{
     padding: 0 15px 0;
 }
 .news .quotelist .itemin:nth-child(3){
-    padding-top:34px;
+    padding-top:32px;
 }
 .news .quotelist .itemin .item{
     padding: 14px 0;
     position: relative;
     border-bottom: 1px solid #DEDEDE;
 }
-/*.news .quotelist .itemin .item:last-child{*/
-/*border-bottom: none;*/
-/*}*/
+.news .quotelist .itemin:nth-child(3) .item{
+    border-top: 1px solid #DEDEDE;
+}
 .news .quotelist .itemin .item .leftcoininfo{
     width: calc(100% - 175px);
 }

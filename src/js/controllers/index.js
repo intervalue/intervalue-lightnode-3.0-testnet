@@ -2112,7 +2112,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
         if(upyn == 'up'){
             news.getCurrencyData(6,1,null,function(res) {
-                console.log(res);
                 if(!!res) {
                     angular.element(document.getElementById('coinupheight')).css('display', 'none');
                     self.coinlists = res.page.list;
@@ -2190,6 +2189,13 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         }
     }
 
+    //行情市值排序
+    // self.coinValueSort = function(){
+    //
+    //     self.quicklist
+    // }
+
+    // 新闻内容
     self.openNewsinModal = function(id) {
         $rootScope.modalOpened = true;
 
