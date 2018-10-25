@@ -779,6 +779,17 @@ angular.module('copayApp.directives')
             var raw = elm[0];
 
             elm.bind('scroll', function() {
+                scope.$apply(attr.quickscrolltop);
+                // var dateall = document.querySelectorAll('.news .letterlist .itemin .date');
+                // for(var i = 0; i < dateall.length; i++){
+                //
+                //   console.log('hhhhhh')
+                //   console.log(dateall[1].offsetTop)
+                //   console.log('ddddd')
+                //   if(raw.scrollTop == dateall[i].offsetTop){
+                //     console.log('hhhhhhhhhhhhhhaafdsffsfwfwfwdwef')
+                //   }
+                // }
                 if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
                     scope.$apply(attr.homequiscrolled);
                 };
