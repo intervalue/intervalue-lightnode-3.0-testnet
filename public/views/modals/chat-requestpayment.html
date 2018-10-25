@@ -1,0 +1,51 @@
+<div ng-controller="editCorrespondentDeviceController">
+    <nav class="tab-bar">
+        <section class="left-small">
+            <a ng-click="cancel()">
+                <img src="./img/chatbackstate.png">
+            </a>
+        </section>
+
+        <section class="middle tab-bar-section">
+            <h1 class="title ellipsis" translate>
+                Request payment
+            </h1>
+        </section>
+    </nav>
+</div>
+<!-- 要求特定金额对应视图 -->
+<div class="modal-content fix-modals-touch">
+    <!-- amountInSmallestUnits = false -->
+    <div class="f9fafch"></div>
+    <form name="amountForm" class="ammountlr" ng-submit="submitForm(amountForm)" novalidate>
+        <!-- 金额 -->
+        <div>
+            <div class="adinputitem">
+                <div mdinputc="" class="adcpmdic ng-isolate-scope">
+                    <label translate="" mdlabel="" for="label" class="ng-isolate-scope">Amount</label>
+                    <input mdinput="" type="number" id="amount" name="amount"
+                    ng-model="_customAmount" valid-amount="{{index.arrBalances[index.assetIndex].asset}}"
+                    required autocomplete="off">
+                    <a class="postfix" ng-if="index.arrBalances[index.assetIndex].asset === 'base'">{{unitName}}</a>
+                    <a class="f9fafccolor postfix" ng-if="index.arrBalances[index.assetIndex].asset === index.BLACKBYTES_ASSET">{{bbUnitName}}</a>
+                    <a class="f9fafccolor postfix" ng-if="index.arrBalances[index.assetIndex].name">{{index.arrBalances[index.assetIndex].name}}</a>
+                    <a class="f9fafccolor postfix" ng-if="index.arrBalances[index.assetIndex].asset !== 'base' && index.arrBalances[index.assetIndex].asset !== index.BLACKBYTES_ASSET && !index.arrBalances[index.assetIndex].name">of
+                    {{index.arrBalances[index.assetIndex].asset.substr(0,4)}}</a>
+                </div>
+                <!-- 校验 -->
+                <div class="right chatjiaoyan" ng-hide="amountForm.amount.$pristine && !amountForm.amount.$modelValue ">
+                    <span class="has-error right size-12 chatnotinvalid"  style="color:red;" ng-if="amountForm.amount.$invalid">
+                    <i class="icon-close-circle size-14" translate>&nbsp;Not valid</i>
+                    <span clas="vm" ></span>
+                    </span>
+                        <small class="text-primary right chatyesinvalid" ng-if="!amountForm.amount.$invalid">
+                            <i class="icon-checkmark-circle size-14"  style="color:green;"></i>
+                        </small>
+                </div>
+            </div>
+            <button type="submit" translate class="m24t" ng-disabled="amountForm.$invalid">
+                OK
+            </button>
+        </div>
+    </form>
+</div>
