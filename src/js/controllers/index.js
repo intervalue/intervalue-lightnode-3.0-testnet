@@ -1998,6 +1998,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             })
         }else{
             news.getNewsData(6,self.newspage,null,function(res) {
+
+                console.log(res);
                 if(!!res && res.code == 0) {
                     self.shownewsloading = false;
                     if(JSON.stringify(self.newslists) == '[]'){
@@ -2099,26 +2101,61 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         }
     };
 
-    self.currencyData = function () {
+    self.currencyData = function (upyn) {
         //inve 行情
         news.getInveData2(function (res) {
             if(!!res && res != null) {
+                console.log('5555555555555555555555555555555555555555555555555555')
+                console.log(res)
                 self.coininvelist = res;
             }
         });
 
-        news.getCurrencyData(function(res) {
-            if(!!res && res != null) {
-                self.shownewsloading = false;
-                $timeout(function(){
-                    self.coinlist = self.coinlists.concat(res);
-                },10)
-                $timeout(function(){
-                    $scope.$apply();
-                });
-            }else
-                console.error("error~!");
-        });
+        if(upyn == 'up'){
+            news.getCurrencyData(6,1,null,function(res) {
+                console.log(res);
+                if(!!res) {
+                    angular.element(document.getElementById('coinupheight')).css('display', 'none');
+                    self.coinlists = res;
+                    self.coinlist = res;
+                    self.coinpage = 2;
+                    $timeout(function(){
+                        $scope.$apply();
+                    })
+                    return;
+                }else
+                    console.error("error~!");
+            })
+        }else{
+            news.getCurrencyData(6,self.coinpage,null,function(res) {
+                console.log(res);
+                if(!!res) {
+                    self.showcoinloading = false;
+                    if(JSON.stringify(self.coinlists) == '[]'){
+                        self.coinlists = res.page.list;
+                        self.coinlist = res.page.list;
+                        self.coinpage += 1;
+                        $timeout(function(){
+                            $scope.$apply();
+                        })
+                    }else{
+                        self.coinlists = self.coinlists.concat(res.page.list);
+                        self.coinlist = self.coinlists;
+                        if(self.coinpage == res.page.totalPage){
+                            self.shownonews = true;
+                            self.showcoinloading = false;
+                        }
+                        self.coinpage += 1;
+                        $timeout(function(){
+                            $scope.$apply();
+                        });
+                        return;
+                    }
+                }else
+                    console.error("error~!");
+            })
+        }
+
     };
 
     //	加载更多
@@ -2143,7 +2180,13 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             }
         }else if(outlr == 'new3tab'){
             self.coinanimate = 5;
-            self.currencyData();
+            if(self.shownocoin == true){
+                self.showcoinloading = false;
+                return;
+            }else{
+                self.showcoinloading = true;
+                self.currencyData();
+            }
         }
     }
 
