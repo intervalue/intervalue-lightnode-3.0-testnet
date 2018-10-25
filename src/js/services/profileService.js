@@ -174,7 +174,7 @@ angular.module('copayApp.services')
       var removeListener = $rootScope.$on('Local/BalanceUpdated', function () {
         removeListener();
         breadcrumbs.add('unlockWalletAndInitDevice BalanceUpdated');
-        root.insistUnlockFC(null, function () {
+        /*root.insistUnlockFC(null, function () {
           breadcrumbs.add('unlockWalletAndInitDevice unlocked');
 
           //After unlock, make mainSection visible again
@@ -188,7 +188,9 @@ angular.module('copayApp.services')
           root.focusedClient.initDeviceProperties(
             root.focusedClient.credentials.xPrivKey, root.profile.my_device_address, config.hub, config.deviceName);
           $rootScope.$emit('Local/BalanceUpdatedAndWalletUnlocked');
-        });
+        });*/
+          var mainSectionElement = angular.element(document.querySelector('#mainSection'));
+          mainSectionElement.css('visibility', 'visible');
       });
     }
 
