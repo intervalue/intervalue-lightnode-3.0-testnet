@@ -402,6 +402,10 @@
                     </div>
                 </div>
                 <div class="quotelist" ng-if="index.coinlist !== ''"  id="new3tablist" ng-class="{'animated bounceInUp': index.coinanimate <= 2 && index.shownewstab == 'new3'}">
+                    <div class="newsupheight" id="coinupheight">
+                        <div class="newuprelease"><img src="./img/pulldown.png" /><span translate>Pull down to refresh</span></div>
+                        <div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>
+                    </div>
                     <div class="titlelabel" ng-class="{'topanimate': index.coinanimate <= 2 && index.shownewstab == 'new3'}">
                         <div class="numall" translate>Market value</div>
                         <div class="price" translate>Price</div>
@@ -438,7 +442,8 @@
                         </div>
                     </div>
                 </div>
-                <div ng-show="index.shownewsloading" class="shownewsloading">加载动画</div>
+                <div ng-show="index.shownocoin" class="nomorenews"><img src="./img/nomore.png" /><span translate>No more content</span></div>
+                <div ng-show="index.showcoinloading" class="shownewsloading"><img src="./img/loading.png" /><span translate>Loading</span></div>
             </div>
         </div>
 
