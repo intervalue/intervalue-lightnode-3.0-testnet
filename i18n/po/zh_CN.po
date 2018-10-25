@@ -2484,7 +2484,8 @@ msgstr "加载中"
 msgid "Release refresh"
 msgstr "松开刷新"
 
-
+msgid "Pull down to refresh"
+msgstr "下拉刷新"
 
 
 
