@@ -85,7 +85,6 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 		
 			$scope.list = ab;
 
-			//todo delete
 			bots.load(function(err, rows){
 				if (err) $scope.botsError = err.toString();
 				$scope.bots = rows;
@@ -100,7 +99,8 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 		return $scope.hideRemove || !removable;
 	}
 
-	$scope.remove = function(device_address) {
+	$scope.remove = function(device_address,$event) {
+        $event.stopPropagation();
 		mutex.lock(["remove_device"], function(unlock){
 			// check to be safe
 
