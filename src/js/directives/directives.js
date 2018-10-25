@@ -895,7 +895,7 @@ angular.module('copayApp.directives')
             }
         }
     })
-    .directive('homePullDownm',function(){
+    .directive('homeQpullDown',function(){
         return{
             restrict:'A',
             link:function(scope, elm, attr){
@@ -911,12 +911,14 @@ angular.module('copayApp.directives')
                 raw.addEventListener("touchend",touchEnd,false);
                 //raw.addEventListener("drop",dropEnd,false);
                 function dragStart(event){//dragStart函数
+                    document.getElementById('datenow').style.display = 'none';
                     var img = new Image();
                     img.src = './img/transparent.png';
                     event.dataTransfer.setDragImage(img, 10, 10);
                     scope._start = event.pageY;
                 }
                 function dragMove(event){//dragMove函数
+                    document.getElementById('datenow').style.display = 'none';
                     scope._end = (scope._start - event.pageY);
                     //下滑才执行操作
                     if(scope._end < 0){
@@ -930,6 +932,7 @@ angular.module('copayApp.directives')
                     }
                 }
                 function dragEnd(event){//dragEnd函数
+                    document.getElementById('datenow').style.display = 'none';
                     scope._end = (scope._start - event.pageY);
                     if(scope._end >0){
                         resetdrag();
@@ -958,9 +961,11 @@ angular.module('copayApp.directives')
                 //     }
                 // }
                 function touchStart(event){//dragStart函数
+                    document.getElementById('datenow').style.display = 'none';
                     scope._start = event.targetTouches[0].pageY;
                 }
                 function touchMove(event){//dragMove函数
+                    document.getElementById('datenow').style.display = 'none';
                     scope._end = (scope._start - event.targetTouches[0].pageY);
                     //下滑才执行操作
                     if(scope._end < 0){
@@ -974,6 +979,7 @@ angular.module('copayApp.directives')
                     }
                 }
                 function touchEnd(event){//dragEnd函数
+                    document.getElementById('datenow').style.display = 'none';
                     scope._end = (scope._start - event.targetTouches[0].pageY);
                     if(scope._end >0){
                         resetdrag();
@@ -997,7 +1003,7 @@ angular.module('copayApp.directives')
                     rawh.children[0].style.display = 'none';
                     rawh.children[1].style.display = 'block';
                     rawh.style.height = "45px";//高度设定为20px
-                    scope.$apply(attr.homePullDown);
+                    scope.$apply(attr.homeQpullDown);
                 }
                 function resetdrag(){
                     rawh.style.display = 'none';

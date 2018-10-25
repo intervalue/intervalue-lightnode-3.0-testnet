@@ -541,8 +541,10 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     padding-top: 14px;
     box-sizing: border-box;
 }
-.quotelist .newuprelease{
-    padding-top: 55px;
+.quotelist .newuprelease,.quotelist .newupload{
+    padding-top: 46px;
+    margin-bottom: -22px;
+    height:auto;
 }
 .newuprelease img{
     margin-right: 10px;

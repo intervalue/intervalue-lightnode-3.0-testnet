@@ -2035,6 +2035,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 var list = [];
                 if(!!res && res.code == 0) {
                     angular.element(document.getElementById('quickupheight')).css('display', 'none');
+                    document.getElementById('datenow').style.display = 'block';
                     self.quicklists = {};
                     //给返回对象加字段
                     lodash.forEach(res.page.list, function(value, key){
