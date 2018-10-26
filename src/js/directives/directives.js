@@ -875,7 +875,7 @@ angular.module('copayApp.directives')
                     }
                 }
                 function touchEnd(event){//dragEnd函数
-                    scope._end = (scope._start - event.targetTouches[0].pageY);
+                    scope._end = (scope._start - event.changedTouches[0].pageY);
                     if(scope._end >0){
                         resetdrag();
                         return;
