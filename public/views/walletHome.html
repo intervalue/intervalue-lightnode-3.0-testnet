@@ -101,6 +101,10 @@
                                 <img class="whewm" ng-click="$root.go('receive')" src="./img/lewm.png"/>
                             </div>
                             <div class="whamount"><div>{{index.ammountTatol}}</div> INVE</div>
+                            <div class="whcnyd">
+                                <div ng-show="index.showdollar == true;">&asymp; $ {{index.ammountTatolNmuber * index.invedollar}}</div>
+                                <div ng-show="index.showdollar == false">&asymp; &yen; {{index.ammountTatolNmuber * index.invermb}}</div>
+                            </div>
                         </div>
                         <!--former carousel end...-->
                     </div>

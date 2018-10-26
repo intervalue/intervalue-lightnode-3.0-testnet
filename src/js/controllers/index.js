@@ -57,6 +57,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.shownewstab = '';
     self.quickscrolltop = 0;
     self.currentdddddDate = null;
+    self.showdollar = true;
+    self.invedollar = 1;
+    self.invermb = 1;
     function updatePublicKeyRing(walletClient, onDone) {
         var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
         walletDefinedByKeys.readCosigners(walletClient.credentials.walletId, function (arrCosigners) {
@@ -1292,6 +1295,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 self.completeHistory = newHistory;
                 self.txHistory = newHistory.slice(0, self.historyShowLimit);
                 require('intervaluecore/light').findStable2(walletId,function (obj) {
+                    self.ammountTatolNmuber = obj;
                     self.ammountTatol = profileService.formatAmount(obj,'bytes');
                     $timeout(function () {
                         $rootScope.$apply();
@@ -2175,6 +2179,19 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         }
 
     };
+
+    self.getexRate  = function(){
+        news.getInveData2(function (res) {
+            if (!!res && res != null) {
+                self.invedollar = res.page.list.INVE.price;
+                self.invermb = res.page.list.INVE.cnyPrice;
+                $timeout(function(){
+                    $scope.$apply();
+                })
+            }
+        });
+    }
+    self.getexRate();
 
     self.quickequaltop = function(){
         var curtop = document.getElementById('new2tab').scrollTop;

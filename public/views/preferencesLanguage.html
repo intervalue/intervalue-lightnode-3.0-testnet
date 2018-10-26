@@ -8,12 +8,20 @@
 
 <div class="content preferences" ng-controller="preferencesLanguageController as prefLang">
   <ul class="no-bullet m0 ">
-  <li
-    ng-repeat="lang in prefLang.availableLanguages" 
+<!--  <li
+    ng-repeat="lang in prefLang.availableLanguages"
     ng-click="prefLang.save(lang.isoCode)" class="line-b p20 size-14">
     <span>{{lang.name}}</span>
     <i class="fi-check size-16 right" ng-show="index.defaultLanguageIsoCode == lang.isoCode"></i>
-  </li>
+  </li>-->
+    <li ng-repeat="lang in prefLang.availableLanguages" ng-click="prefLang.save(lang.isoCode)">
+      <div class="ld">
+        <span translate>{{lang.name}}</span>
+      </div>
+      <div class="rd" >
+        <img src="./img/right.png" ng-show="index.defaultLanguageIsoCode == lang.isoCode"/>
+      </div>
+    </li>
   </ul>
 </div>
 <div class="extra-margin-bottom"></div>
