@@ -159,7 +159,7 @@ _:-ms-fullscreen, :root .main {
 .amount {
   width: 100%;
   text-align: center;
-  padding: 35px;
+  padding: 30px 35px;
   color: #fff;
   height: 192px;
   box-sizing: border-box;

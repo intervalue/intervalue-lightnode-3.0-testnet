@@ -807,9 +807,9 @@ angular.module('copayApp.directives')
                 raw.addEventListener("dragstart",dragStart,false);//当鼠标按住屏幕时候触发。
                 raw.addEventListener("drag",dragMove,false);//当鼠标屏幕上滑动的时候连续地触发。在这个事件发生期间，调用preventDefault()事件可以阻止滚动。
                 raw.addEventListener("dragend",dragEnd,false);
-                raw.addEventListener("touchstart",touchStart,false);//当按住屏幕时候触发。
-                raw.addEventListener("touchmove",touchMove,false);//当屏幕上滑动的时候连续地触发。在这个事件发生期间，调用preventDefault()事件可以阻止滚动。
-                raw.addEventListener("touchend",touchEnd,false);
+                // raw.addEventListener("touchstart",touchStart,false);//当按住屏幕时候触发。
+                // raw.addEventListener("touchmove",touchMove,false);//当屏幕上滑动的时候连续地触发。在这个事件发生期间，调用preventDefault()事件可以阻止滚动。
+                // raw.addEventListener("touchend",touchEnd,false);
                 //raw.addEventListener("drop",dropEnd,false);
                 function dragStart(event){//dragStart函数
                     var img = new Image();
