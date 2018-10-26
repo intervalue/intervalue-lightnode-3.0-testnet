@@ -715,7 +715,7 @@ angular.module('copayApp.directives')
             }else if(val == ''){
               ctrl[0].setErrorexp(false, 'noerror');
               ctrl[1].$setValidity('mdinputname', false);
-            }else if(val.length < 5 || val.length > 20){
+            }else if(val.length < 1 || val.length > 20){
               ctrl[0].setErrorexp(true, 'lengthnameerror');
               ctrl[1].$setValidity('mdinputname', false);
             }else{
