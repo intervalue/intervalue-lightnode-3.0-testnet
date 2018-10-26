@@ -111,8 +111,9 @@
 .whlinfo .whname{font-family:"pfbold";margin-right:10px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;font-size:14px;}
 .whlinfo .whpback{padding:0 8px;border:1px solid #8CF8D8;border-radius:18px;font-size:10px;margin-right:20px;flex-shrink:0;cursor:pointer;}
 .whlinfo .whewm{width:15px;height:15px;margin-right:0;flex-shrink:0;cursor:pointer;}
-.whamount{margin-top:20px;font-size:20px;font-weight:bold;}
+.whamount{margin-top:10px;font-size:20px;font-weight:bold;}
 .whamount div{font-weight:600;font-size:30px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;}
+.whcnyd{font-size:12px;font-weight:400;color: #C4C4C4;margin-top:6px;}
 /*walletHome-home-part end*/
 
 /*sidebar start*/
@@ -387,6 +388,7 @@
 .graytext{font-size:12px;font-weight:400;color:#90919D;}
 .f9fafch{background:#F9FAFC;height:20px;width:100%;}
 .redcolor{color:#D45757;}
+.warmcolor{color:#646464}
 .greencolor{color:#45AD8E;}
 .nzcolor{color:#909090;}
 .fontbold{font-family: "pfbold";}

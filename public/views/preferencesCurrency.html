@@ -8,13 +8,19 @@
 
 <div class="content preferences" ng-controller="preferencesCurrencyController as prefLang">
     <ul class="no-bullet m0 ">
-        <li
+       <!-- <li
                 ng-repeat="currency in prefLang.availableCurrenry"
                 ng-click="prefLang.save(currency.isoCode)" class="line-b p20 size-14">
             <span>{{currency.name}}</span>
-            <!--<span>{{index.defaultCurrencyIsoCode}}111</span>-->
-            <!--<span>{{currency.isoCode}}222</span>-->
             <i class="fi-check size-16 right" ng-show="index.defaultCurrencyIsoCode == currency.isoCode"></i>
+        </li>-->
+        <li ng-repeat="currency in prefLang.availableCurrenry" ng-click="prefLang.save(currency.isoCode)">
+            <div class="ld">
+                <span translate>{{currency.name}}</span>
+            </div>
+            <div class="rd">
+                <img src="./img/right.png" ng-show="index.defaultCurrencyIsoCode == currency.isoCode"/>
+            </div>
         </li>
     </ul>
 </div>

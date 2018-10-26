@@ -159,7 +159,7 @@ _:-ms-fullscreen, :root .main {
 .amount {
   width: 100%;
   text-align: center;
-  padding: 35px;
+  padding: 30px 35px;
   color: #fff;
   height: 192px;
   box-sizing: border-box;
@@ -344,9 +344,23 @@ a.missing-copayers {
 }
 
 .sidebar li.nav-item.selected {
-  background-color: #122232;
+  border-bottom: 1px dashed #909090;
+  position: relative;
 }
-
+.sidebar li.nav-item.selected:before{
+  position: absolute;
+  display: inline-block;
+  content: '';
+  border: 5px solid transparent;
+  border-left: 7px solid #8CF8D8;
+  left: 6px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
 .sidebar .avatar-wallet, .payment-uri .avatar-wallet, .modal-content .avatar-wallet {
   color: #fff;
   font-size: 1.4rem;
@@ -387,11 +401,10 @@ a.missing-copayers {
 }
 
 .sidebar ul.off-canvas-list li a,  .modal-content ul:not(.f-dropdown) li a {
-  font-size: 12px;
-  font-weight: 300;
   border-bottom: transparent;
-  color: #A5B2BF;
-  padding: 1rem 0.7rem;
+  font-size:14px;
+  font-weight:600;
+  color:rgba(255,255,255,1);
 }
 
 .modal-content ul li .external-link, .modal-content ul li .external-link a, .modal-content ul li a.blue-link {
