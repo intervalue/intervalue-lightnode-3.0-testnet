@@ -779,6 +779,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             self.canSign = fc.canSign();
             self.isPrivKeyExternal = fc.isPrivKeyExternal();
             self.isPrivKeyEncrypted = fc.isPrivKeyEncrypted();
+            self.mnemonic = fc.credentials.mnemonic;
             self.externalSource = fc.getPrivKeyExternalSourceName();
             self.account = fc.credentials.account;
 
@@ -811,6 +812,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             if (lodash.isFunction(cb)) {
                 cb();
             }
+            $timeout(function () {
+                $rootScope.$apply();
+            });
             /*if (fc.isPrivKeyExternal()) {
                 self.needsBackup = false;
                 self.openWallet();
@@ -1298,6 +1302,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                                 var walletNameIfo = fc[item].credentials.walletName;
                                 var imageIfo = fc[item].image;
                                 var mnemonicEncryptedIfo = fc[item].credentials.mnemonicEncrypted;
+                                var mnemonic = fc[item].credentials.mnemonic;
                                 break;
                             }
                         }
@@ -1307,7 +1312,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                             stables  : profileService.formatAmount(tran.stables,'bytes'),
                             walletName : walletNameIfo,
                             image : imageIfo,
-                            mnemonicEncrypted: mnemonicEncryptedIfo
+                            mnemonicEncrypted: mnemonicEncryptedIfo,
+                            mnemonicInfo : mnemonic
                         });
                     });
                     self.walletInfo = trans;
