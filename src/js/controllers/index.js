@@ -55,6 +55,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.shownoquick = false;
     self.shownocoin = false;
     self.shownewstab = '';
+    self.quickscrolltop = 0;
+    self.currentdddddDate = null;
     function updatePublicKeyRing(walletClient, onDone) {
         var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
         walletDefinedByKeys.readCosigners(walletClient.credentials.walletId, function (arrCosigners) {
@@ -781,6 +783,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             self.canSign = fc.canSign();
             self.isPrivKeyExternal = fc.isPrivKeyExternal();
             self.isPrivKeyEncrypted = fc.isPrivKeyEncrypted();
+            self.mnemonic = fc.credentials.mnemonic;
             self.externalSource = fc.getPrivKeyExternalSourceName();
             self.account = fc.credentials.account;
 
@@ -813,6 +816,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             if (lodash.isFunction(cb)) {
                 cb();
             }
+            $timeout(function () {
+                $rootScope.$apply();
+            });
             /*if (fc.isPrivKeyExternal()) {
                 self.needsBackup = false;
                 self.openWallet();
@@ -1266,6 +1272,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     self.updateLocalTxHistory = function (client, cb) {
         var walletId = client.credentials.walletId;
+        self.mnemonicEncrypted = client.credentials.mnemonicEncrypted;
+        self.mnemonic = client.credentials.mnemonic;
         if(client.credentials.mnemonicEncrypted || client.credentials.mnemonic){
             self.needsBackupa = true;
         }else {
@@ -1300,6 +1308,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                                 var walletNameIfo = fc[item].credentials.walletName;
                                 var imageIfo = fc[item].image;
                                 var mnemonicEncryptedIfo = fc[item].credentials.mnemonicEncrypted;
+                                var mnemonic = fc[item].credentials.mnemonic;
                                 break;
                             }
                         }
@@ -1309,7 +1318,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                             stables  : profileService.formatAmount(tran.stables,'bytes'),
                             walletName : walletNameIfo,
                             image : imageIfo,
-                            mnemonicEncrypted: mnemonicEncryptedIfo
+                            mnemonicEncrypted: mnemonicEncryptedIfo,
+                            mnemonic : mnemonic
                         });
                     });
                     self.walletInfo = trans;
@@ -2035,7 +2045,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     self.quickData = function (upyn) {
         if(upyn == 'up'){
-            news.getQuickData(6,1,null,null,function(res) {
+            news.getQuickData(100,1,null,null,function(res) {
                 var list = [];
                 if(!!res && res.code == 0) {
                     angular.element(document.getElementById('quickupheight')).css('display', 'none');
@@ -2064,6 +2074,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     self.quicklist = self.quicklists;
                     self.quickpage = 2;
                     $timeout(function () {
+                        angular.element(document.getElementById('datenow')).html(res.page.list[0].grayweek);
                         $scope.$apply();
                     });
                 }else
@@ -2099,6 +2110,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     }
                     self.quickpage += 1;
                     $timeout(function () {
+                        if(self.quickpage == 2){
+                            angular.element(document.getElementById('datenow')).html(res.page.list[0].grayweek);
+                        }else{
+                            return;
+                        }
                         $scope.$apply();
                     });
                 }else
@@ -2131,8 +2147,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             })
         }else{
             news.getCurrencyData(6,self.coinpage,null,function(res) {
-                console.log('ddddddddddddddddddddddddddddfffd')
-                console.log(res);
                 if(!!res) {
                     self.showcoinloading = false;
                     if(JSON.stringify(self.coinlists) == '[]'){
@@ -2161,6 +2175,31 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         }
 
     };
+
+    self.quickequaltop = function(){
+        var curtop = document.getElementById('new2tab').scrollTop;
+        // console.log(curtop)
+        var dateall = document.querySelectorAll('.news .letterlist .itemin .date');
+       // console.log(dateall)
+       //  self.currentdddddDate = dateall[0];
+        for(var i = 1; i < dateall.length; i++){
+            // console.log(dateall[i].innerText);
+            if(self.currentdddddDate){
+                if(curtop >= dateall[i].offsetTop - 26  && curtop <= dateall[i].offsetTop + 26 ){
+                    if(curtop < dateall[i].offsetTop){
+                        self.currentdddddDate = dateall[i-1]
+                    }else{
+                        self.currentdddddDate = dateall[i]
+                    }
+
+                    angular.element(document.getElementById('datenow')).html(self.currentdddddDate.innerText);
+                }
+            }else{
+                self.currentdddddDate = dateall[0];
+            }
+
+        }
+    }
 
     //	加载更多
     self.loadmore = function(outlr, inlr, num){

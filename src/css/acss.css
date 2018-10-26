@@ -566,6 +566,12 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .topanimate{
     top: 4px !important;
 }
+.dddfixed{
+    position: fixed;
+    top:60px;
+    left: 0;
+    background: red;
+}
 /*资讯*/
 .news .tab-container{
     width:33.3%;
