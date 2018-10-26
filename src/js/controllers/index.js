@@ -2286,17 +2286,17 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         });
     };
 
-    var id = 0;
-    eventBus.on('newtransaction',function(event){
-        id++;
-        cordova.plugins.notification.local.schedule({
-            id: id,
-            title: gettextCatalog.getString('There is a new deal'),
-            text: gettextCatalog.getString('Payment received:')+(parseInt(event.amount))/1000000,
-            foreground: true,
-            wakeup:true
-        });
-    });
+    // var id = 0;
+    // eventBus.on('newtransaction',function(event){
+    //     id++;
+    //     cordova.plugins.notification.local.schedule({
+    //         id: id,
+    //         title: gettextCatalog.getString('There is a new deal'),
+    //         text: gettextCatalog.getString('Payment received:')+(parseInt(event.amount))/1000000,
+    //         foreground: true,
+    //         wakeup:true
+    //     });
+    // });
 
 
     self.towalletname = function (image, name, addr, ammount, walletId, mnemonic, mnemonicEncrypted) {
