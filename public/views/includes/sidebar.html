@@ -14,7 +14,7 @@
       <a ng-click="sidebar.switchWallet(item.wallet, index.wallet);index.updateTxHistory(3)" class="oh">
         <div class="avatar-wallet"><img src="{{item.image}}"></div>
         <div class="name-wallet">{{item.walletName}}</div>
-        <div class="whpback" ng-show="item.mnemonicInfo || item.mnemonicEncrypted" ng-click="$root.go('backup');index.backhome = true;" translate>Please backup</div>
+        <div class="whpback" ng-show="item.mnemonic || item.mnemonicEncrypted" ng-click="$root.go('backup');index.backhome = true;" translate>Please backup</div>
       </a>
     </li>
     <!--<li>-->

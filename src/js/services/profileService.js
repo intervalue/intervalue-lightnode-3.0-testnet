@@ -736,6 +736,7 @@ angular.module('copayApp.services')
       delete root.profile.mnemonicEncrypted;
       for(let item in root.profile.credentials){
         if(root.focusedClient.credentials.walletId == root.profile.credentials[item].walletId){
+            delete  root.profile.credentials[item].mnemonic;
             delete  root.profile.credentials[item].mnemonicEncrypted;
         }
 

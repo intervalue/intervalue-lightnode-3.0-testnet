@@ -1268,6 +1268,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     self.updateLocalTxHistory = function (client, cb) {
         var walletId = client.credentials.walletId;
+        self.mnemonicEncrypted = client.credentials.mnemonicEncrypted;
+        self.mnemonic = client.credentials.mnemonic;
         if(client.credentials.mnemonicEncrypted || client.credentials.mnemonic){
             self.needsBackupa = true;
         }else {
@@ -1313,7 +1315,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                             walletName : walletNameIfo,
                             image : imageIfo,
                             mnemonicEncrypted: mnemonicEncryptedIfo,
-                            mnemonicInfo : mnemonic
+                            mnemonic : mnemonic
                         });
                     });
                     self.walletInfo = trans;
