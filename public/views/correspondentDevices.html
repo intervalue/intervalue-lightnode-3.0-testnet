@@ -21,39 +21,7 @@
 				<h1 class="title ellipsis" translate>
 					Message
 				</h1>
-			</section><!-- 右区 -->
-			<section class="right-small">
-				<a>
-					<img src="./img/chatradd.png"  id="indexpop" ng-click="showrightpop($event)">
-				</a>
 			</section>
-			<div id="pop" style="position: fixed;padding: 0 7px;right:12px;top:56px;z-index:1;background: #fff;border: 1px solid #BE935F;" ng-show="showrightpopvalue" >
-				<div class="triangle ">
-				</div>
-				<div class="chatpopUpWindw"  >
-					<!-- 扫一扫 -->
-					<div class="subDiv" ng-show="index.isCordova">
-						<qr-scanner ng-show="index.isComplete" on-scan="topbar.onQrCodeScanned(data)"
-									before-scan="topbar.onBeforeScan()">
-							<img src="./img/chatscannner.png"/><span translate>Scanner</span>
-						</qr-scanner>
-					</div>
-
-					<!-- 收款地址 -->
-					<div class="subDiv">
-						<a ng-click="$root.go('receive')">
-							<img src="./img/lewm.png"/><span translate>receive address</span>
-						</a>
-					</div>
-
-					<!--添加设备-->
-					<div class="subDiv" >
-						<a ng-click="$root.go('correspondentDevices.chataddCorrespondentDevice')" >
-							<img src="./img/add.png"/><span translate>Add device</span>
-						</a>
-					</div>
-				</div>
-			</div>
 		</nav>
 		<div class="height13"></div>
 		<!-- contacts页签对应视图 -->
