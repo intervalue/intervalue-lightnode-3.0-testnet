@@ -1,20 +1,20 @@
-<div ng-controller="editCorrespondentDeviceController">
-    <nav class="tab-bar">
-        <section class="left-small">
-            <a ng-click="cancel()">
-                <img src="./img/chatbackstate.png">
-            </a>
-        </section>
-
-        <section class="middle tab-bar-section">
-            <h1 class="title ellipsis" translate>
-                Request payment
-            </h1>
-        </section>
-    </nav>
-</div>
 <!-- 要求特定金额对应视图 -->
 <div class="modal-content fix-modals-touch chatmodal">
+    <div ng-controller="editCorrespondentDeviceController">
+        <nav class="tab-bar">
+            <section class="left-small">
+                <a ng-click="cancel()">
+                    <img src="./img/chatbackstate.png">
+                </a>
+            </section>
+
+            <section class="middle tab-bar-section">
+                <h1 class="title ellipsis" translate>
+                    Request payment
+                </h1>
+            </section>
+        </nav>
+    </div>
     <!-- amountInSmallestUnits = false -->
     <div class="f9fafch"></div>
     <form name="amountForm" class="ammountlr" ng-submit="submitForm(amountForm)" novalidate>
@@ -43,7 +43,11 @@
                             <span translate>Choose a collection wallet</span>
                         </div>
                         <div class="rd">
-                            <span>{{}}</span>
+                            <div class="chatsetinfo">
+                                <div class="chatinfoname"><img src="./img/rimg/1.png"/> jojo2</div>
+                                <div class="chatinfomon"><span translate>Available amount</span>:&nbsp;<span>10000</span></div>
+                            </div>
+                            <img src="./img/more.png" />
                         </div>
                     </div>
                 </li>

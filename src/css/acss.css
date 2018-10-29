@@ -544,8 +544,10 @@ text-align: center;border-radius: 50%;margin-right:15px;}
 /*correspondentDevices   end*/
 
 /*chat-requiestpayment   end*/
-.modal-content.chatmodal{top:0;padding-top:45px;z-index:1006;}
-
+.modal-content.chatmodal{top:0;z-index:1006;}
+.chatbiline ul li .rd .chatsetinfo img{margin-left:8px;width:19px;vertical-align: sub;}
+.chatbiline ul li .rd .chatsetinfo .chatinfoname{font-size:14px;font-family: pfmedium;font-weight:500;color:#323232;}
+.chatbiline ul li .rd .chatsetinfo .chatinfomon{font-size:10px;font-family: pfmedium;font-weight:500;color:#999999;}
 /*chat-requiestpayment    end*/
 
 
