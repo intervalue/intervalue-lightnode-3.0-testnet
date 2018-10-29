@@ -125,7 +125,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             chatltmessage.triggerHandler('click');
             // if (!profileService.focusedClient.credentials.isComplete())
             //     return $rootScope.$emit('Local/ShowErrorAlert', "The wallet is not approved yet");
-            readMyPaymentAddress(walletId,function (result) {
+            readMyPaymentAddressToInsert(walletId,function (result) {
                 appendMyPaymentAddress(result);
                 $timeout(function () {
                     $scope.showselectwt = false;
@@ -953,7 +953,15 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                 })
         }
 
-        function readMyPaymentAddress(walletId,cb){
+        function readMyPaymentAddress(cb){
+            //	if (indexScope.shared_address)
+            //		return cb(indexScope.shared_address);
+            addressService.getAddress(profileService.focusedClient.credentials.walletId, false, function(err, address) {
+                cb(address);
+            });
+        }
+
+        function readMyPaymentAddressToInsert(walletId,cb){
             //	if (indexScope.shared_address)
             //		return cb(indexScope.shared_address);
             addressService.getAddressToChat(walletId, function(result) {
@@ -1048,7 +1056,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     if (asset !== 'base')
                         params += '&asset='+encodeURIComponent(asset);
                     var units = profileService.getUnitName(asset);
-                    appendText('['+amount+' '+units+'](luxalpa:'+myPaymentAddress+'?'+params+')');
+                    appendText('['+amount+' '+units+'](intervalue-3.0-testnet:'+myPaymentAddress+'?'+params+')');
                     $modalInstance.dismiss('cancel');
                 };
 
