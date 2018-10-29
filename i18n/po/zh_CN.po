@@ -2488,6 +2488,8 @@ msgstr "输入对方配对码"
 msgid "Choose a collection wallet"
 msgstr "选择收款钱包"
 
+msgid "Add device"
+msgstr "添加设备"
 
-
-
+msgid "My wallet address"
+msgstr "我的钱包地址"
