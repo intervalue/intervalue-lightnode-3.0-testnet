@@ -21,32 +21,42 @@
     </h1>
   </section>
 </nav>
+  <div class="splitt">
 
-    <div class="columns m20t m20b" >
-      <div> 
-		<span translate>Full address:</span>
-        <div class="size-10 text-gray ellipsis enable_text_select">{{correspondent.device_address}}@{{hub}}</div>
+  </div>
+<div class="addeditcd">
+
+  <div class="m20t m20b" >
+    <div class="address">
+      <div class="deviceadd">
+      <img src="img/wallet.png">
+      <span translate>Device address:</span>
       </div>
-
-        <form name="editForm" class="m20t" no-validate>
-          <div class="text-warning size-12 m10b" ng-show="error">{{error|translate}}</div>
-		  <span translate>Rename:</span>
-          <input type="text" id="name" name="name" ng-model="name" required>
-		  <span translate>Change hub:</span>
-          <input type="text" id="hub" name="hub" ng-model="hub" required>
-          <div class="row">
-            <div>
-              <input type="submit" 
-                     class="button expand round" 
-                     value="{{'Save'|translate}}"
-                     ng-disabled="!editForm.$valid"
-                     ng-style="{'background-color':backgroundColor}" 
-                     ng-click="save()">
-            </div>
-          </div>
-        </form>
+      <div class="size-10 text-gray ellipsis enable_text_select">{{correspondent.device_address}}@{{hub}}</div>
     </div>
-    <div class="purge_chat columns"><a href="#" ng-click="purge_chat()" translate>clear chat history</a></div>
-    <div class="extra-margin-bottom"></div>
+
+    <form name="editForm" class="m20t" no-validate>
+      <div class="text-warning size-12 m10b" ng-show="error">{{error|translate}}</div>
+      <div class="renameadd">
+      <img src="img/rename.png">
+      <span translate>Rename:</span>
+      </div>
+      <div class="chatcname">
+      <input type="text" id="name" name="name" ng-model="name" required>
+      </div>
+      <!--<span translate>Change hub:</span>
+      <input type="text" id="hub" name="hub" ng-model="hub" required>-->
+      <div class="purge_chat columns"><a href="#" ng-click="purge_chat()" translate>clear chat history</a></div>
+    </form>
+  </div>
+    <div>
+      <input type="submit"
+             class="addbutton"
+             value="{{'Save'|translate}}"
+             ng-disabled="!editForm.$valid"
+             ng-style="{'background-color':rgb(59, 59, 59)}"
+             ng-click="save()">
+    </div>
 </div>
+
 <div ng-include="'views/includes/menu.html'" ng-show="!index.noFocusedWallet"></div>
