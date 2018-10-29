@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('editCorrespondentDeviceController',
-  function($scope, $rootScope, $timeout, configService, profileService, isCordova, go, correspondentListService, $modal, animationService) {
+  function($scope, $rootScope, $timeout, configService, profileService, isCordova, go, correspondentListService, $modal, animationService,addressService) {
 	
 	var self = this;
 	
@@ -12,6 +12,7 @@ angular.module('copayApp.controllers').controller('editCorrespondentDeviceContro
 	$scope.name = correspondent.name;
 	$scope.hub = correspondent.hub;
     $scope.showselectwt = false;
+    self.address = '';
 	$scope.save = function() {
 		$scope.error = null;
 		correspondent.name = $scope.name;
@@ -62,6 +63,17 @@ angular.module('copayApp.controllers').controller('editCorrespondentDeviceContro
 	function setError(error){
 		$scope.error = error;
 	}
+
+      self.insertMyAddress = function(walletId){
+          addressService.getAddressToChat(walletId, function(result) {
+              self.address = result;
+              $timeout(function () {
+                  $scope.showselectwt = false;
+                  $scope.$apply();
+              })
+          });
+
+      }
 
 	
 });

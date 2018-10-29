@@ -1043,6 +1043,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     if ($scope.index.arrBalances.length === 0)
                         return console.log('showRequestPaymentModal: no balances yet');
                     var amount = form.amount.$modelValue;
+                    let address = form.address.$modelValue;
                     if(amount == '' || amount == undefined){
                         console.log('amount'+amount);
                         return false;
@@ -1051,12 +1052,12 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     var asset = $scope.index.arrBalances[$scope.index.assetIndex].asset;
                     if (!asset)
                         throw Error("no asset");
-                    var amountInSmallestUnits = profileService.getAmountInSmallestUnits(amount, asset);
+                    var amountInSmallestUnits = profileService.getAmountInSmallestUnits(amount/1000000, asset);
                     var params = 'amount='+amountInSmallestUnits;
                     if (asset !== 'base')
                         params += '&asset='+encodeURIComponent(asset);
                     var units = profileService.getUnitName(asset);
-                    appendText('['+amount+' '+units+'](intervalue-3.0-testnet:'+myPaymentAddress+'?'+params+')');
+                    appendText('['+amount+' '+units+'](intervalue-3.0-testnet:'+address+'?'+params+')');
                     $modalInstance.dismiss('cancel');
                 };
 
