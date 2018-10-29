@@ -185,8 +185,9 @@ angular.module('copayApp.services')
             throw Error("xPrivKey still not set after unlock");
           console.log('unlocked: ' + root.focusedClient.credentials.xPrivKey);
           var config = configService.getSync();
+          let confHub  = configService.getHub();
           root.focusedClient.initDeviceProperties(
-            root.focusedClient.credentials.xPrivKey, root.profile.my_device_address, config.hub, config.deviceName);
+            root.focusedClient.credentials.xPrivKey, root.profile.my_device_address, confHub, config.deviceName);
           $rootScope.$emit('Local/BalanceUpdatedAndWalletUnlocked');
         });
       });
