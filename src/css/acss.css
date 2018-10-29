@@ -326,6 +326,7 @@
 .greencolor{color:#45AD8E;}
 .nzcolor{color:#909090;}
 .fontbold{font-family:"pfbold";}
+.height15{height: 15px;background: #F9FAFC;width: 100%;}
 .secondcontent{width:100%;position:absolute;top:0;bottom:0;overflow:auto;background:#F9FAFC;}
 .popconfirm{position:fixed;width:100%;height:100%;top:0;left:0;z-index:100;}
 .popconfirm .popmask{position:absolute;width:100%;height:100%;text-align:center;top:0;left:0;background:rgba(0,0,0,0.3);z-index:100;cursor:pointer;}
@@ -499,7 +500,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     overflow: auto;
 }
 .addpartner ul{list-style-type:none;}
-.addpartner ul li{background:#fff;padding-left:15px;}
+.addpartner ul li{background:#fff;padding-left:15px;cursor:pointor;}
 .addpartner ul li:first-child{margin-top:15px;border-top:1px solid #EDEEF0;}
 .addpartner ul li .liin{border-bottom:1px solid #EDEEF0;display:flex;justify-content:space-between;align-items:center;padding:13px 13px 13px 0;}
 .addpartner ul li.preflitwo{border-top:1px solid #EDEEF0;margin-top:15px;}
@@ -511,6 +512,32 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .addpartner ul li img{vertical-align: initial;}
 .addpartner ul li .rd img{margin-left:10px;}
 /*添加设备 end*/
+
+/*correspondentDevice   start*/
+.popconfirm .popcontentwt{position:absolute;width:100%;max-height:245px;overflow:scroll;bottom:0;left:0;background:#fff;box-sizing:border-box;z-index:101;}
+.popconfirm .popcontentwt ul{list-style-type:none;}
+.popconfirm .popcontentwt ul li{background:#fff;padding:0 15px;cursor:pointor;}
+.popconfirm .popcontentwt ul li .liin{border-bottom:1px solid #EDEEF0;display:flex;justify-content:space-between;align-items:center;padding:13px 13px 13px 0;}
+.popconfirm .popcontentwt ul li .ld{display:flex;justify-content:flex-start;align-items:center;}
+.popconfirm .popcontentwt ul li .ld span{color:#323232;}
+.popconfirm .popcontentwt ul li .rd{display:flex;justify-content:flex-end;align-items:center;color:#909090;}
+.popconfirm .popcontentwt ul li .limg{width:20px;height:20px;margin-right:10px;}
+.popconfirm .popcontentwt ul li img{vertical-align: initial;}
+.popconfirm .popcontentwt ul li .rd img{margin-left:10px;}
+
+
+
+
+
+
+
+
+
+
+
+/*correspondentDevice   end*/
+
+
 
 
 

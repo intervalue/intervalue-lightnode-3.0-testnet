@@ -344,7 +344,7 @@
         <!-- 左侧功能选项 -->
         <ul id="drop" class="f-dropdown drop-top drop-up" data-dropdown-content>
             <!-- 插入我的地址（小额钱包） -->
-            <li class="dropup-item" ng-click="insertMyAddress()" >
+            <li class="dropup-item" ng-click="showselectwt = true;" >
                 <span translate>insert my address</span>
             </li>
             <div class="clear"></div>
@@ -361,4 +361,24 @@
                ng-disabled="!chatForm.$valid"
                ng-click="send()" value="" />
     </form>
+    <div ng-if="showselectwt" class="popconfirm">
+        <div class="popmask" ng-click="showselectwt = false;"></div>
+        <div class="popcontentwt">
+            <ul>
+                <li ng-repeat="item in index.walletInfo" ng-click="">
+                    <div class="liin">
+                        <div class="ld">
+                            <div class="limg">
+                                <img ng-src="{{item.image}}" />
+                            </div>
+                            <span>{{item.walletName}}</span>
+                        </div>
+                        <div class="rd">
+                            <span translate>Available amount</span>:&nbsp;<span>{{item.stables}}</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>

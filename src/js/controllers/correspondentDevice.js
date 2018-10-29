@@ -5,7 +5,6 @@ var constants = require('intervaluecore/constants.js');
 
 angular.module('copayApp.controllers').controller('correspondentDeviceController',
     function($scope, $rootScope, $timeout, $sce, $modal, configService, profileService, animationService, isCordova, go, correspondentListService, addressService, lodash, $deepStateRedirect, $state, backButton, gettext) {
-
         var async = require('async');
         var chatStorage = require('intervaluecore/chat_storage.js');
         var self = this;
@@ -26,6 +25,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
         $rootScope.tab = $scope.index.tab = 'chat';
         var correspondent = correspondentListService.currentCorrespondent;
         $scope.correspondent = correspondent;
+        $scope.showselectwt = false;
 //	var myPaymentAddress = indexScope.shared_address;
         if (document.chatForm && document.chatForm.message)
             document.chatForm.message.focus();

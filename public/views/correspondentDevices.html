@@ -15,7 +15,7 @@
 	<!---->
 	<div></div>
 	<!-- tab对应视图 -->
-	<div class="tab-view tab-in chat-tab-view" ng-show="state.is('correspondentDevices')" id="chat"  style="height:100%;" ng-click="hiderightpop($event)">
+	<div class="tab-view tab-in chat-tab-view" ng-show="state.is('correspondentDevices')" id="chat"  style="height:100%;">
 		<nav ng-controller="topbarController as topbar" class="tab-bar">
 			<section class="middle tab-bar-section">
 				<h1 class="title ellipsis" translate>
@@ -23,7 +23,7 @@
 				</h1>
 			</section>
 		</nav>
-		<div class="height13"></div>
+		<div class="height15"></div>
 		<!-- contacts页签对应视图 -->
 		<div class="mtab" ng-class="{'active': mtab == 1}" ng-init="mtab = 1" style="min-height:150px;background-color:#FFFFFF;max-height: calc(100% - 257px);">
 			<ul class="no-bullet m0 correspondentList" ng-init="readList()" style="background-color:#fff;">
