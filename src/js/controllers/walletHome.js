@@ -79,7 +79,7 @@ angular.module('copayApp.controllers')
 
 		var disableTabListener = $rootScope.$on('Local/TabChanged', function(e, tab) {
 			// This will slow down switch, do not add things here!
-			console.log("tab changed " + tab);
+			//console.log("tab changed " + tab);
 			switch (tab) {
 				case 'receive':
 					// just to be sure we have an address
