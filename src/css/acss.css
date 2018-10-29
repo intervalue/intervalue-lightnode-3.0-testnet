@@ -324,6 +324,7 @@
 .warmcolor{color:#646464}
 .greencolor{color:#45AD8E;}
 .nzcolor{color:#909090;}
+.sfcolor{color:#646464;}
 .fontbold{font-family:"pfbold";}
 .height15{height: 15px;background: #F9FAFC;width: 100%;}
 .secondcontent{width:100%;position:absolute;top:0;bottom:0;overflow:auto;background:#F9FAFC;}
@@ -540,7 +541,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .chatbiline ul li img{vertical-align: initial;}
 .chatbiline ul li .rd img{margin-left:10px;}
 #chat .mtab .chatname{width:40px;height: 40px;line-height: 40px;font-size:24px;font-family:pfbold;font-weight:600;color:#323232;background: #EFEFEF;
-text-align: center;border-radius: 50%;margin-right:15px;}
+    text-align: center;border-radius: 50%;margin-right:15px;}
 /*correspondentDevices   end*/
 
 /*chat-requiestpayment   end*/
@@ -551,9 +552,10 @@ text-align: center;border-radius: 50%;margin-right:15px;}
 /*chat-requiestpayment    end*/
 
 
-
-
-
+/*editCorrespondentDevice    start*/
+.chatdeleter{text-align: center;padding:0 25px 22px;border-bottom: 1px solid #F5F5F5;}
+.chatdeleter img{margin-bottom: 18px;}
+/*editCorrespondentDevice    end*/
 
 
 

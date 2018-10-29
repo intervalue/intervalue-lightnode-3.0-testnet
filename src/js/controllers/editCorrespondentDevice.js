@@ -12,6 +12,7 @@ angular.module('copayApp.controllers').controller('editCorrespondentDeviceContro
 	$scope.name = correspondent.name;
 	$scope.hub = correspondent.hub;
     $scope.showselectwt = false;
+    $scope.showconfirm = false;
     self.address = '';
 	$scope.save = function() {
 		$scope.error = null;
@@ -63,6 +64,12 @@ angular.module('copayApp.controllers').controller('editCorrespondentDeviceContro
 	function setError(error){
 		$scope.error = error;
 	}
+  $scope.deletechat = function(){
+      var chatStorage = require('intervaluecore/chat_storage.js');
+      chatStorage.purge(correspondent.device_address);
+      correspondentListService.messageEventsByCorrespondent[correspondent.device_address] = [];
+      go.path('correspondentDevices.correspondentDevice');
+  }
 
       self.insertMyAddress = function(walletId){
           addressService.getAddressToChat(walletId, function(result) {
