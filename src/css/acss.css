@@ -352,7 +352,7 @@
 .md-input-focused{position:relative;transition:all 0.2s ease-in-out;}
 .md-input-focused label,
 .md-input-has-value label{top:-10px;font-size:14px;transition:all 0.2s ease-in-out;}
-.md-input-focused input[type='text']{background:blue;position:absolute;top:10px;transition:all 0.2s ease-in-out;}
+.md-input-focused input[type='text']{position:absolute;top:10px;transition:all 0.2s ease-in-out;}
 .adinputitem{margin-bottom:10px;}
 .adinputic{width:100%;display:flex;align-items:center;justify-content:flex-start;border-bottom:1px solid #EDEEF0;padding:0 4px;}
 .adinputic .adinputimg{width:24px;height:20px;text-align:center;}

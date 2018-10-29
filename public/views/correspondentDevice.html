@@ -361,10 +361,10 @@
                ng-disabled="!chatForm.$valid"
                ng-click="send()" value="" />
     </form>
-    <div ng-if="showselectwt" class="popconfirm">
+    <div ng-show="showselectwt" class="popconfirm">
         <div class="popmask" ng-click="showselectwt = false;"></div>
         <div class="popcontentwt">
-            <ul>
+            <ul class="m0">
                 <li ng-repeat="item in index.walletInfo" ng-click="">
                     <div class="liin">
                         <div class="ld">
