@@ -120,12 +120,18 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             });
         };
 
-        $scope.insertMyAddress = function(){
+        $scope.insertMyAddress = function(walletId){
             var chatltmessage = angular.element(document.getElementById('chatltmessage'));
             chatltmessage.triggerHandler('click');
-            if (!profileService.focusedClient.credentials.isComplete())
-                return $rootScope.$emit('Local/ShowErrorAlert', "The wallet is not approved yet");
-            readMyPaymentAddress(appendMyPaymentAddress);
+            // if (!profileService.focusedClient.credentials.isComplete())
+            //     return $rootScope.$emit('Local/ShowErrorAlert', "The wallet is not approved yet");
+            readMyPaymentAddress(walletId,function (result) {
+                appendMyPaymentAddress(result);
+                $timeout(function () {
+                    $scope.showselectwt = false;
+                    $scope.$apply();
+                })
+            });
             //	issueNextAddressIfNecessary(appendMyPaymentAddress);
         };
 
@@ -947,11 +953,11 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                 })
         }
 
-        function readMyPaymentAddress(cb){
+        function readMyPaymentAddress(walletId,cb){
             //	if (indexScope.shared_address)
             //		return cb(indexScope.shared_address);
-            addressService.getAddress(profileService.focusedClient.credentials.walletId, false, function(err, address) {
-                cb(address);
+            addressService.getAddressToChat(walletId, function(result) {
+                cb(result);
             });
         }
 
@@ -987,6 +993,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             var msgField = document.chatForm.message;
             $timeout(function(){$rootScope.$digest()});
             msgField.selectionStart = msgField.selectionEnd = msgField.value.length;
+
         }
 
         function appendMyPaymentAddress(myPaymentAddress){
