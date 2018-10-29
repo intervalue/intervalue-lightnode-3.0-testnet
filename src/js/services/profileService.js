@@ -209,10 +209,11 @@ angular.module('copayApp.services')
             var Wallet = require('intervaluecore/wallet.js');
             var device = require('intervaluecore/device.js');
             var config = configService.getSync();
+            let confHub  = configService.getHub();
             var firstWc = root.walletClients[lodash.keys(root.walletClients)[0]];
             // set light_vendor_url here as we may request new assets history at startup during balances update
-            //todo delete
-            //   require('intervaluecore/light_wallet.js').setLightVendorHost(config.hub);
+
+            require('intervaluecore/light_wallet.js').setLightVendorHost(confHub);
             if (root.profile.xPrivKeyEncrypted) {
               console.log('priv key is encrypted, will wait for UI and request password');
               // assuming bindProfile is called on encrypted keys only at program startup
@@ -220,7 +221,7 @@ angular.module('copayApp.services')
               device.setDeviceAddress(root.profile.my_device_address);
             }
             else if (root.profile.xPrivKey)
-              root.focusedClient.initDeviceProperties(profile.xPrivKey, root.profile.my_device_address, config.hub, config.deviceName);
+              root.focusedClient.initDeviceProperties(profile.xPrivKey, root.profile.my_device_address, confHub, config.deviceName);
             /*else
               throw Error("neither xPrivKey nor xPrivKeyEncrypted");*/
             //var tempDeviceKey = device.genPrivKey();
@@ -260,16 +261,17 @@ angular.module('copayApp.services')
                       var Wallet = require('intervaluecore/wallet.js');
                       var device = require('intervaluecore/device.js');
                       var config = configService.getSync();
+                      let confHub = configService.getHub();
                       var firstWc = root.walletClients[lodash.keys(root.walletClients)[0]];
                       // set light_vendor_url here as we may request new assets history at startup during balances update
-                      //todo delete
-                      //   require('intervaluecore/light_wallet.js').setLightVendorHost(config.hub);
+
+                       require('intervaluecore/light_wallet.js').setLightVendorHost(confHub);
                       if (root.profile.xPrivKeyEncrypted) {
                           console.log('priv key is encrypted, will wait for UI and request password');
                           device.setDeviceAddress(root.profile.my_device_address);
                       }
                       else if (root.profile.xPrivKey)
-                          root.focusedClient.initDeviceProperties(profile.xPrivKey, root.profile.my_device_address, config.hub, config.deviceName);
+                          root.focusedClient.initDeviceProperties(profile.xPrivKey, root.profile.my_device_address, confHub, config.deviceName);
                       if(profile.tempDeviceKey){
                           var tempDeviceKey = Buffer.from(profile.tempDeviceKey, 'base64');
                           var prevTempDeviceKey = profile.prevTempDeviceKey ? Buffer.from(profile.prevTempDeviceKey, 'base64') : null;
@@ -392,13 +394,13 @@ angular.module('copayApp.services')
         if (err)
           return cb(err);
         var config = configService.getSync();
+        let confHub  = configService.getHub();
         require('intervaluecore/wallet.js'); // load hub/ message handlers
         var device = require('intervaluecore/device.js');
         var tempDeviceKey = device.genPrivKey();
-        //todo delete
-        // require('intervaluecore/light_wallet.js').setLightVendorHost(config.hub);
+         require('intervaluecore/light_wallet.js').setLightVendorHost(confHub);
         // initDeviceProperties sets my_device_address needed by walletClient.createWallet
-        walletClient.initDeviceProperties(walletClient.credentials.xPrivKey, null, config.hub, config.deviceName);
+        walletClient.initDeviceProperties(walletClient.credentials.xPrivKey, null, confHub, config.deviceName);
         var walletName = opts.walletName || gettextCatalog.getString('Small Expenses Wallet');
         //数据库中创建钱包
         walletClient.createWallet(walletName, 1, 1, {
