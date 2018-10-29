@@ -98,9 +98,10 @@ _:-ms-fullscreen, :root .main {
 }
 
 .tab-bar h1 {
-  font-size:17px;
-  font-weight:400;
-  color:#323232;
+  font-size:18px;
+  color:#3B3B3B;
+  font-family:pfmedium;
+  font-weight:500;
 }
 
 .tab-bar-section.middle {

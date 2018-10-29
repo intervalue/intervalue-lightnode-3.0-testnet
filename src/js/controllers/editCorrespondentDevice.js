@@ -11,7 +11,7 @@ angular.module('copayApp.controllers').controller('editCorrespondentDeviceContro
 	$scope.correspondent = correspondent;
 	$scope.name = correspondent.name;
 	$scope.hub = correspondent.hub;
-
+    $scope.showselectwt = false;
 	$scope.save = function() {
 		$scope.error = null;
 		correspondent.name = $scope.name;

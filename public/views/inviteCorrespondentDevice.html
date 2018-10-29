@@ -7,11 +7,7 @@
 
 
 <div ng-controller="inviteCorrespondentDeviceController" style="position: absolute; width: 100%; top:45px; bottom: 37px; overflow: scroll;">
-
-    
-
     <div class="m20b">
-
       <div class="text-center">
         <div class="columns m10t" >
             <div ng-click="copyCode()">
@@ -28,17 +24,12 @@
 				</span>
 			</div>
           <div class="row">
-              <input type="button" 
-                     class="button expand outline dark-gray round" 
+              <input type="button"
                      ng-click="$root.go('^', true); goBackToState = null"
                      value="{{'Done'|translate}}">
           </div>
         </div>
-      
       </div>
-
     </div>
-
-    
 </div>
 <div ng-include="'views/includes/menu.html'" ng-show="!index.noFocusedWallet"></div>

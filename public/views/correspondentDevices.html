@@ -13,73 +13,56 @@
 	<!-- 主显示区 -->
 	<div ui-view="dialog"></div>
 	<!---->
-	<div></div>
 	<!-- tab对应视图 -->
-	<div class="tab-view tab-in chat-tab-view" ng-show="state.is('correspondentDevices')" id="chat"  style="height:100%;">
+	<div class="tab-view tab-in chat-tab-view" ng-show="state.is('correspondentDevices')" id="chat" >
 		<nav ng-controller="topbarController as topbar" class="tab-bar">
 			<section class="middle tab-bar-section">
 				<h1 class="title ellipsis" translate>
 					Message
 				</h1>
 			</section>
+			<section class="right-small">
+				<a ng-click="beginAddCorrespondent()">
+					<span translate>Added</span>
+				</a>
+			</section>
 		</nav>
 		<div class="height15"></div>
 		<!-- contacts页签对应视图 -->
-		<div class="mtab" ng-class="{'active': mtab == 1}" ng-init="mtab = 1" style="min-height:150px;background-color:#FFFFFF;max-height: calc(100% - 257px);">
-			<ul class="no-bullet m0 correspondentList" ng-init="readList()" style="background-color:#fff;">
+		<div class="mtab chatbiline" ng-class="{'active': mtab == 1}" ng-init="mtab = 1">
+			<ul class="no-bullet m0 correspondentList" ng-init="readList()">
 				<!-- 聊天联系人列表 -->
-				<div class="settingli" ng-repeat="correspondent in list | orderBy:newMsgByAddressComparator">
-					<li ng-click="showCorrespondent(correspondent)">
+				<li ng-click="showCorrespondent(correspondent)" ng-repeat="correspondent in list | orderBy:newMsgByAddressComparator">
+					<div class="liin">
 						<div class="ld">
-							<span>{{correspondent.name}} ({{correspondent.device_address | limitTo:4}}...)</span>
+							<div class="correspondentlist_badge"
+								 ng-show="newMessagesCount[correspondent.device_address]">
+								{{newMessagesCount[correspondent.device_address]}}
+							</div>
+							<span class="chatname">{{correspondent.name | limitTo:1}}</span>
+							<span>{{correspondent.name}}</span>
 						</div>
 						<div class="rd">
 							{{prefGlobal.deviceName}}
 							<img src="./img/more.png" ng-show="!editCorrespondentList && hideRemove"/>
 							<!--消息个数提示-->
-							<div class="correspondentlist_badge"
-								 ng-show="newMessagesCount[correspondent.device_address]">
-								{{newMessagesCount[correspondent.device_address]}}
-							</div>
 							<!--消息个数提示-->
 							<img src="./img/add.png" ng-show="selectedCorrespondentList[correspondent.device_address]"
 								 ng-hide="hideRemoveButton(correspondent.removable)" ng-click="remove(correspondent.device_address,$event)"/>
 						</div>
-					</li>
-				</div>
-				<!-- Contacts 页签显示内容 -->
-				<!-- 添加 -->
-				<!--<li class="m10t" ng-show="!editCorrespondentList">-->
-				<!--<a ng-click="beginAddCorrespondent()" class="p10">-->
-				<!--<i class="fi-plus size-18 m10r" style="vertical-align: middle;"></i>-->
-				<!--<span class="text-close size-12" translate>Add a new device</span>-->
-				<!--</a>-->
-				<!--</li>-->
-				<!-- 刪除 -->
-				<!--<li class="m10t" ng-show="!editCorrespondentList">-->
-				<!--<a ng-click="hideRemove = !hideRemove" class="p10">-->
-				<!--<i class="fi-minus size-18 m10r" style="vertical-align: middle;"></i>-->
-				<!--<span class="text-close size-12" translate>Remove a device</span>-->
-				<!--</a>-->
-				<!--</li>-->
+					</div>
+				</li>
 			</ul>
-			<!-- 添加 -->
-			<div ng-show="!editCorrespondentList" translate class="p15h m40t">
-				<button ng-click="beginAddCorrespondent()" translate>
-					<text translate>Add device</text>
-				</button>
-			</div>
 			<!-- 刪除 -->
-			<div id="chatdelete" ng-show="!editCorrespondentList" translate class="p15h m20t">
+			<!--<div id="chatdelete" ng-show="!editCorrespondentList" translate class="p15h m20t">
 				<button ng-click="hideRemove = !hideRemove" translate>
-					<!--<i class="fi-minus size-18 m10r" style="vertical-align: middle;"></i>-->
+					&lt;!&ndash;<i class="fi-minus size-18 m10r" style="vertical-align: middle;"></i>&ndash;&gt;
 					<text ng-show="!editCorrespondentList && hideRemove" translate>Remove device</text>
 					<text ng-show="!editCorrespondentList && !hideRemove" translate>CANCEL</text>
 				</button>
-			</div>
+			</div>-->
 			<div ng-include="'views/includes/menu.html'" ng-show="!index.noFocusedWallet"></div>
 		</div>
-
 		<!-- DApp store标签对应视图 -->
 		<!--<div class="mtab" ng-class="{'active': mtab == 2}">-->
 		<!--<ul class="no-bullet m0 correspondentList">-->
@@ -98,7 +81,5 @@
 		<!--</ul>-->
 		<!--<div class="text-warning size-12 m10b" ng-show="botsError">{{botsError|translate}}</div>-->
 		<!--</div>-->
-
 	</div>
-
 </div>
