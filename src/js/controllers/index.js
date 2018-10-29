@@ -700,17 +700,18 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         'img': 'mmtabsend',
         'imgid': 'send',
         'link': 'send'
+    },{
+        'title': gettext('Chat'),
+        'img': 'mmtabchat',
+        'imgid': 'chat',
+        'link': 'chat',
+        'new_state': 'correspondentDevices',
     }, {
         'title': gettext('Wallet'),
         'img': 'mmtabwallet',
         'imgid': 'wallet',
         'link': 'wallet'
-    }, {
-           'title': gettext('Chat'),
-           'icon': 'icon-bubble',
-           'new_state': 'correspondentDevices',
-           'link': 'chat'
-         }];
+    }];
     self.addonViews = addonManager.addonViews();
     self.menu = self.menu.concat(addonManager.addonMenuItems());
     self.menuItemSize = self.menu.length > 5 ? 2 : 3;
@@ -838,7 +839,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     self.setTab = function (tab, reset, tries, switchState) {
         FastClick.attach(document.body);
-        console.log("setTab", tab, reset, tries, switchState);
+       // console.log("setTab", tab, reset, tries, switchState);
         tries = tries || 0;
 
         var changeTab = function (tab) {
@@ -886,12 +887,12 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 return self.setTab(tab.link, reset, tries, switchState);
             }
         }
-        console.log("current tab " + self.tab + ", requested to set tab " + tab + ", reset=" + reset);
+        //console.log("current tab " + self.tab + ", requested to set tab " + tab + ", reset=" + reset);
         if (self.tab === tab && !reset)
             return;
 
         if (!document.getElementById('menu-' + tab) && ++tries < 5) {
-            console.log("will retry setTab later:", tab, reset, tries, switchState);
+            //console.log("will retry setTab later:", tab, reset, tries, switchState);
             return $timeout(function () {
                 self.setTab(tab, reset, tries, switchState);
             }, (tries === 1) ? 10 : 300);
@@ -1760,7 +1761,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     });
 
     $rootScope.$on('Local/SetTab', function (event, tab, reset, swtichToHome) {
-        console.log("SetTab " + tab + ", reset " + reset);
+        //console.log("SetTab " + tab + ", reset " + reset);
         self.setTab(tab, reset, null, swtichToHome);
     });
 
@@ -2018,7 +2019,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         }else{
             news.getNewsData(6,self.newspage,null,function(res) {
 
-                console.log(res);
                 if(!!res && res.code == 0) {
                     self.shownewsloading = false;
                     if(JSON.stringify(self.newslists) == '[]'){

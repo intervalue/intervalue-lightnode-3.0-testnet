@@ -3,7 +3,7 @@
       {{index.wallet}}
       <li class="selected nav-item">
           <a ng-click="sidebar.switchWallet(index.wallet, index.wallet);index.updateTxHistory(3)" class="oh">
-              <div class="avatar-wallet"><img src="{{index.image}}"></div>
+              <div class="avatar-wallet"><img ng-src="{{index.image}}"></div>
               <div class="name-wallet">{{index.walletName}}</div>
               <div class="whpback" ng-show="index.mnemonic || index.mnemonicEncrypted" ng-click="$root.go('backup');index.backhome = true;" translate>Backup</div>
           </a>
@@ -12,7 +12,7 @@
     ng-repeat="item in index.walletInfo track by $index"
     class="nav-item" ng-show="item.walletName != index.walletName">
       <a ng-click="sidebar.switchWallet(item.wallet, index.wallet);index.updateTxHistory(3)" class="oh">
-        <div class="avatar-wallet"><img src="{{item.image}}"></div>
+        <div class="avatar-wallet"><img ng-src="{{item.image}}"></div>
         <div class="name-wallet">{{item.walletName}}</div>
         <div class="whpback" ng-show="item.mnemonic || item.mnemonicEncrypted" ng-click="$root.go('backup');index.backhome = true;" translate>Backup</div>
       </a>

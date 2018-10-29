@@ -95,7 +95,7 @@
                         <!--former carousel start...-->
                         <div>
                             <div class="whlinfo">
-                                <img class="whlogo" src="{{index.image}}"/>
+                                <img class="whlogo" ng-src="{{index.image}}"/>
                                 <span class="whname">{{ (index.alias || index.walletName)}}</span>
                                 <span class="whpback" ng-show="index.needsBackupa" ng-click="$root.go('backup');index.backhome = true;" translate>Please backup</span>
                                 <img class="whewm" ng-click="$root.go('receive')" src="./img/lewm.png"/>
@@ -354,7 +354,7 @@
                         <div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>
                     </div>
                     <div class="item" ng-repeat="item in index.newslist track by $index">
-                        <img src="{{item.coverPath}}" ng-click="index.openNewsinModal(item.id)" />
+                        <img ng-src="{{item.coverPath}}" ng-click="index.openNewsinModal(item.id)" />
                         <div class="info">
                             <div class="title" ng-click="index.openNewsinModal(item.id)" >{{item.title}}</div>
                             <div class="litinfo">
@@ -420,7 +420,7 @@
                         <div class="item">
                             <div class="leftcoininfo">
                                 <div class="coinimg">
-                                    <img src="{{item.iconUrl}}" />
+                                    <img ng-src="{{item.iconUrl}}" />
                                     <span class="nameshort">{{item.name}}</span>
                                 </div>
                                 <div class="numallin">市值：¥ <span>{{item.value}}</span>亿 <span class="name">{{item.c_name}}</span></div>
@@ -435,7 +435,7 @@
                         <div class="item">
                             <div class="leftcoininfo">
                                 <div class="coinimg">
-                                    <img src="{{item.iconUrl}}" />
+                                    <img ng-src="{{item.iconUrl}}" />
                                     <span class="nameshort">{{item.name}}</span>
                                 </div>
                                 <div class="numallin">市值：¥ <span>{{item.value}}</span>亿 <span class="name">{{item.c_name}}</span></div>
@@ -559,7 +559,7 @@
             <div class="adwwto">
                 <div class="adwwt" ng-repeat="item in index.walletInfo track by $index">
                     <div class="adwwtflex" ng-click="index.towalletname(item.image, item.walletName, item.address, item.stables, item.wallet, item.mnemonic, item.mnemonicEncrypted)">
-                        <div class="adwwtlogo"><img src="{{item.image}}"></div>
+                        <div class="adwwtlogo"><img ng-src="{{item.image}}"></div>
                         <div class="adwwt100">
                             <div class="adwwtname">{{item.walletName}}
                                 <span class="whpback" ng-show="item.mnemonic || item.mnemonicEncrypted" ng-click="$root.go('backup');index.backwallet=true" translate>Please backup</span>
