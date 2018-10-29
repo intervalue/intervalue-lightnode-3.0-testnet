@@ -65,13 +65,17 @@ angular.module('copayApp.services').factory('configService', function (storageSe
 
 	root.privateTextcoinExt = 'coin';
 
+	root.getHub = function () {
+		return defaultConfig.hub;
+    }
+
 	var defaultConfig = {
 		// wallet limits
 		limits: {
 			totalCosigners: 6
 		},
 
-		hub: 'test.inve.zhang123.vip/bb',
+		hub: 'ec2-18-191-18-104.us-east-2.compute.amazonaws.com/bb',
 		attestorAddresses: {
 			email: 'H5EZTQE7ABFH27AUDTQFMZIALANK6RBG',
 			reddit: 'OYW2XTDKSNKGSEZ27LMGNOPJSYIXHBHC',
