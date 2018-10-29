@@ -18,7 +18,7 @@
         <!-- 编辑 -->
         <section class="right-small" ng-click="editCorrespondent()">
             <a>
-                <span translate class="size-18" style="color: #664C2A;">Setting</span>
+                <span translate>Settings</span>
             </a>
         </section>
     </nav>
@@ -60,20 +60,44 @@
             vertical-align: baseline;
         }
         #drop {
-            max-width: 300px;
             width: auto !important;
             text-align: left;
-            line-height: 1em;
-            top: -50px  !important;
-            left: 13px  !important;
-            border: 1px solid #BE935F;
+            top: -78px  !important;
+            left: 45px  !important;
+            background:rgba(69,173,142,1);
+            box-shadow:0px 4px 8px -4px rgba(69,173,142,1);
+            border-radius:10px 10px 10px 0px;
+            margin:0;
+            padding:0 13px;
         }
-        .f-dropdown.drop-top:after{
-            border-color:  #BE935F transparent transparent transparent;
+        .f-dropdown.drop-top:before,.f-dropdown.drop-top:after{
+            content: '';
+            display: none;
         }
         .f-dropdown li{
-            padding: 4px 9px;
+            padding: 12px 3px;
             text-align: center;
+            font-size:12px;
+            font-weight:400;
+            margin-bottom:0;
+            color:#FDFEFF;
+        }
+        .f-dropdown li:first-child:hover{
+            color:#FDFEFF;
+            background:rgba(69,173,142,1);
+            border-radius:10px 10px 0 0px;
+            padding: 12px 3px 0;
+            margin-bottom:0 !important;
+        }
+        .f-dropdown li:last-child:hover{
+            color:#FDFEFF;
+            background:rgba(69,173,142,1);
+            border-radius:0 0 10px 0px;
+            padding: 12px 3px;
+            margin-bottom:0 !important;;
+        }
+        .f-dropdown li img{
+            margin-right: 12px;
         }
         .f-dropdown > *:first-child{
             padding-bottom: 0;
@@ -83,8 +107,8 @@
             margin:0 auto;
             content: '';
             display: block;
-            border-bottom: 1px solid #DEDEDE;
-            margin-top: 4px;
+            border-bottom: 1px solid rgba(255,255,255,0.1667);
+            margin-top: 12px;
         }
         #recording-drop {
             max-width: 200px;
@@ -263,8 +287,6 @@
             white-space: nowrap;
         }
         .dropup-item {
-            correspondentDevice . html
-            display: inline-block;
             max-width: 100%;
             padding: 0 15px 0 10px;
         }
@@ -338,28 +360,28 @@
           ng-mousemove="newMsgCounterEnabled ?'': newMessagesCount[correspondent.device_address] = 0">
         <div class="text-warning size-12 m10b" ng-show="error">{{error|translate}}</div>
         <!-- 左侧功能选项anniu -->
-        <img src="./img/chatltmessage.png" class="chatboardbtn left" dropdown-toggle="#drop" id="chatltmessage" data-options="align:top"/>
 
-        <!--<i class="iconfont icon-xiaoxib chatboardbtn left" dropdown-toggle="#drop" data-options="align:top"></i>-->
         <!-- 左侧功能选项 -->
+        <div class="chatsendform">
+            <img src="./img/chatdrop.png" class="left" dropdown-toggle="#drop" id="chatltmessage" data-options="align:top"/>
+            <input  msd-elastic id="message" name="message" ng-model="message" autofocus required
+                    ng-enter="send()" class="chatcurtextinput"/>
+            <!-- 发送按钮 -->
+            <input type="submit" class="chatsend"
+                   ng-disabled="!chatForm.$valid"
+                   ng-click="send()" value="" />
+        </div>
         <ul id="drop" class="f-dropdown drop-top drop-up" data-dropdown-content>
             <!-- 插入我的地址（小额钱包） -->
-            <li class="dropup-item" ng-click="showselectwt = true;" >
-                <span translate>insert my address</span>
+            <li ng-click="showselectwt = true;" >
+                <img src="./img/dropadd.png" /><span translate>insert my address</span>
             </li>
-            <div class="clear"></div>
             <!-- 请求付款（小额钱包） -->
-            <li class="dropup-item" ng-click="requestPayment()" >
-                <span translate>request payment</span>
+            <li ng-click="requestPayment()" >
+                <img src="./img/droppay.png" /><span translate>request payment</span>
             </li>
         </ul>
-        <input  msd-elastic id="message" name="message" ng-model="message" autofocus required
-                ng-enter="send()" class="chatcurtextinput"/>
-        <!-- 发送按钮 -->
-        <input type="submit"
-               class="chatcursubmitbtn"
-               ng-disabled="!chatForm.$valid"
-               ng-click="send()" value="" />
+
     </form>
     <div ng-show="showselectwt" class="popconfirm">
         <div class="popmask" ng-click="showselectwt = false;"></div>

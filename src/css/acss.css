@@ -514,6 +514,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 /*添加设备 end*/
 
 /*correspondentDevice   start*/
+/*弹出框*/
 .popconfirm .popcontentwt{position:absolute;width:100%;max-height:245px;overflow:scroll;bottom:0;left:0;background:#fff;box-sizing:border-box;z-index:101;}
 .popconfirm .popcontentwt ul{list-style-type:none;}
 .popconfirm .popcontentwt ul li{background:#fff;padding:0 15px;cursor:pointer;}
@@ -521,25 +522,33 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .popconfirm .popcontentwt ul li .ld{display:flex;justify-content:flex-start;align-items:center;}
 .popconfirm .popcontentwt ul li .ld span{color:#323232;}
 .popconfirm .popcontentwt ul li .rd{display:flex;justify-content:flex-end;align-items:center;color:#909090;}
-.popconfirm .popcontentwt ul li .limg{width:20px;height:20px;margin-right:10px;}
-.popconfirm .popcontentwt ul li img{vertical-align: initial;}
+.popconfirm .popcontentwt ul li .limg{width:20px;height:20px;margin-right:16px;}
+.popconfirm .popcontentwt ul li img{vertical-align: initial;width:36px;}
 .popconfirm .popcontentwt ul li .rd img{margin-left:10px;}
+/*发送表单*/
+.chatsendform{height:50px;display: flex;justify-content: flex-start;align-items: center;padding:0 17px;background:#fff;box-shadow:0px 1px 4px 0px rgba(196,196,196,1);}
+.chatsendform #chatltmessage{flex-shrink:0;cursor:pointer;}
+.chatsendform input{margin:0;padding:0;}
+.chatsendform #message{width:100%;margin:-5px 13px 0;border: none;border-bottom: 1px solid #DEDEDE;}
+.chatsend{width:26px;height:26px;border-radius: 50%;background: url(../img/chatsend.png) no-repeat center;flex-shrink:0;cursor:pointer;}
+
 /*correspondentDevice   end*/
 
 /*correspondentDevices   start*/
 #chat{height: 100%;}
-#chat .right-small a{font-size:16px;font-weight:400;color: #323232;}
-#chat .right-small a:hover{color: #323232;}
+.chatcurchattop .right-small a{font-size:16px;font-weight:400;color: #323232;}
+.chatcurchattop .right-small a:hover{color: #323232;}
 #chat .mtab{min-height:150px;background-color:#FFFFFF;max-height: calc(100% - 125px);overflow:scroll;}
 .chatbiline ul{list-style-type:none;}
 .chatbiline ul li{background:#fff;padding:0 15px;cursor:pointer;}
 .chatbiline ul li .liin{border-bottom:1px solid #EDEEF0;display:flex;justify-content:space-between;align-items:center;padding:13px 0;}
-.chatbiline ul li .ld{display:flex;justify-content:flex-start;align-items:center;}
-.chatbiline ul li .ld span{color:#323232;}
+.chatbiline ul li .ld{display:flex;justify-content:flex-start;align-items:center;margin-right: 10px;}
+.chatbiline ul li .ld span{color:#323232;white-space: nowrap;}
 .chatbiline ul li .rd{display:flex;justify-content:flex-end;align-items:center;color:#909090;}
 .chatbiline ul li .limg{width:20px;height:20px;margin-right:10px;}
 .chatbiline ul li img{vertical-align: initial;}
 .chatbiline ul li .rd img{margin-left:10px;}
+.chatbiline ul li .rd span{word-break: break-all;}
 #chat .mtab .chatname{width:40px;height: 40px;line-height: 40px;font-size:24px;font-family:pfbold;font-weight:600;color:#323232;background: #EFEFEF;
     text-align: center;border-radius: 50%;margin-right:15px;}
 /*correspondentDevices   end*/
