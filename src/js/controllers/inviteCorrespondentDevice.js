@@ -41,7 +41,8 @@ angular.module('copayApp.controllers').controller('inviteCorrespondentDeviceCont
         $scope.error = null;
         correspondentListService.startWaitingForPairing(function(pairingInfo){
             console.log("beginAddCorrespondent " + pairingInfo.pairing_secret);
-            $scope.code = pairingInfo.device_pubkey + "@" + pairingInfo.hub + "#" + pairingInfo.pairing_secret;
+            let device_pubkey = profileService.profile.device_pubkey;
+            $scope.code = device_pubkey + "@" + pairingInfo.hub + "#" + pairingInfo.pairing_secret;
 
             function determineQRcodeVersionFromString( inputtext ) {
                 // maximum characters per QR code version using ECC level m

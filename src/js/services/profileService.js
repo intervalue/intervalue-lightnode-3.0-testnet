@@ -419,7 +419,8 @@ angular.module('copayApp.services')
             xPrivKey: xPrivKey,
             mnemonic: mnemonic,
             tempDeviceKey: tempDeviceKey.toString('base64'),
-            my_device_address: device.getMyDeviceAddress()
+            my_device_address: device.getMyDeviceAddress(),
+            device_pubkey:  device.getDevicePubkey()
           });
           device.setTempKeys(tempDeviceKey, null, saveTempKeys);
           return cb(null, p);
