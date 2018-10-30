@@ -8,7 +8,6 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
         var async = require('async');
         var chatStorage = require('intervaluecore/chat_storage.js');
         var self = this;
-        console.log("correspondentDeviceController");
         var ValidationUtils = require('intervaluecore/validation_utils.js');
         var objectHash = require('intervaluecore/object_hash.js');
         var db = require('intervaluecore/db.js');

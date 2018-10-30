@@ -32,7 +32,7 @@
 		<div class="mtab chatbiline" ng-class="{'active': mtab == 1}" ng-init="mtab = 1">
 			<ul class="no-bullet m0 correspondentList" ng-init="readList()">
 				<!-- 聊天联系人列表 -->
-				<li ng-click="showCorrespondent(correspondent)" ng-repeat="correspondent in list | orderBy:newMsgByAddressComparator" chat-swiper-left="newsData('up')">
+				<li draggable="true" chat-swiper-left="newsData('up')" ng-click="showCorrespondent(correspondent)" ng-repeat="correspondent in list | orderBy:newMsgByAddressComparator">
 					<div class="liin">
 						<div class="ld">
 							<div class="correspondentlist_badge"
@@ -47,11 +47,32 @@
 							<img src="./img/more.png" ng-show="!editCorrespondentList && hideRemove"/>
 							<!--消息个数提示-->
 							<!--消息个数提示-->
-							<img src="./img/add.png" ng-show="selectedCorrespondentList[correspondent.device_address]"
-								 ng-hide="hideRemoveButton(correspondent.removable)" ng-click="remove(correspondent.device_address,$event)"/>
+							<div  class="chatremovep" ng-click="remove(correspondent.device_address,$event)">
+								删除
+							</div>
 						</div>
 					</div>
 				</li>
+				<!--<li chat-swiper-left="newsData('up')" ng-click="showCorrespondent(correspondent)" ng-repeat="correspondent in list | orderBy:newMsgByAddressComparator">-->
+					<!--<div class="liin">-->
+						<!--<div class="ld">-->
+							<!--<div class="correspondentlist_badge"-->
+								 <!--ng-show="newMessagesCount[correspondent.device_address]">-->
+								<!--{{newMessagesCount[correspondent.device_address]}}-->
+							<!--</div>-->
+							<!--<span class="chatname">{{correspondent.name | limitTo:1}}</span>-->
+							<!--<span>{{correspondent.name}}</span>-->
+						<!--</div>-->
+						<!--<div class="rd">-->
+							<!--{{prefGlobal.deviceName}}-->
+							<!--<img src="./img/more.png" ng-show="!editCorrespondentList && hideRemove"/>-->
+							<!--&lt;!&ndash;消息个数提示&ndash;&gt;-->
+							<!--&lt;!&ndash;消息个数提示&ndash;&gt;-->
+							<!--<img src="./img/add.png" ng-show="selectedCorrespondentList[correspondent.device_address]"-->
+								 <!--ng-hide="hideRemoveButton(correspondent.removable)" ng-click="remove(correspondent.device_address,$event)"/>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</li>-->
 			</ul>
 			<!-- 刪除 -->
 			<!--<div id="chatdelete" ng-show="!editCorrespondentList" translate class="p15h m20t">
