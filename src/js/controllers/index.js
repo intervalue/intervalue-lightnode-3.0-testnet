@@ -927,6 +927,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             return breadcrumbs.add('updateAll not complete yet');
 
         // reconnect if lost connection
+        var device = require('intervaluecore/device.js');
+        device.loginToHub();
 
         $timeout(function () {
             /* if (!opts.quiet)
