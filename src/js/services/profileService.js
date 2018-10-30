@@ -189,12 +189,9 @@ angular.module('copayApp.services')
                     console.log(1);
                     let Bitcore = require('bitcore-lib');
 
-                    let device_xprivKey;
-
-                    device_xprivKey = Bitcore.HDPrivateKey.fromString(root.focusedClient.credentials.xPrivKey).derive("m/1'").privateKey.bn.toBuffer({ size: 32 });
 
                     root.focusedClient.initDeviceProperties(
-                        device_xprivKey, root.profile.my_device_address, confHub, config.deviceName);
+                        root.profile.device_xprivKey, root.profile.my_device_address, confHub, config.deviceName);
                     $rootScope.$emit('Local/BalanceUpdatedAndWalletUnlocked');
                 });
             });
@@ -414,10 +411,7 @@ angular.module('copayApp.services')
                 var tempDeviceKey = device.genPrivKey();
                 require('intervaluecore/light_wallet.js').setLightVendorHost(confHub);
                 // initDeviceProperties sets my_device_address needed by walletClient.createWallet
-                let Bitcore = require('bitcore-lib');
-                let device_xprivKey = Bitcore.HDPrivateKey.fromString(walletClient.credentials.xPrivKey).derive("m/1'").privateKey.bn.toBuffer({ size: 32 });
-                console.log(4);
-                walletClient.initDeviceProperties(device_xprivKey, null, confHub, config.deviceName);
+                walletClient.initDeviceProperties(walletClient.credentials.xPrivKey, null, confHub, config.deviceName);
                 var walletName = opts.walletName || gettextCatalog.getString('Small Expenses Wallet');
                 //数据库中创建钱包
                 walletClient.createWallet(walletName, 1, 1, {
@@ -438,7 +432,7 @@ angular.module('copayApp.services')
                         tempDeviceKey: tempDeviceKey.toString('base64'),
                         my_device_address: device.getMyDeviceAddress(),
                         device_pubkey:  device.getDevicePubkey(),
-                        device_xprivKey:device_xprivKey
+                        device_xprivKey:xPrivKey
                     });
                     device.setTempKeys(tempDeviceKey, null, saveTempKeys);
                     return cb(null, p);

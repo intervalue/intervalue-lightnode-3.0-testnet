@@ -675,7 +675,7 @@ API.prototype.getTxHistory = function (asset, walletId, cb) {
   });
 };
 
-API.prototype.initDeviceProperties = function (device_xprivKey, device_address, hub, deviceName) {
+API.prototype.initDeviceProperties = function (xPrivKey, device_address, hub, deviceName) {
   console.log("initDeviceProperties");
   var device = require('intervaluecore/device.js');
     var lightWallet = require('intervaluecore/light_wallet.js');
@@ -701,7 +701,7 @@ API.prototype.initDeviceProperties = function (device_xprivKey, device_address, 
     console.log("buffer=", Bitcore.HDPrivateKey.fromString(xPrivKey).derive("m/1'").privateKey.bn.toBuffer({size:32}));
     console.log("device priv key="+Bitcore.HDPrivateKey.fromString(xPrivKey).derive("m/1'").privateKey.bn.toBuffer({size:32}).toString("base64"));
     */
-    device.setDevicePrivateKey(device_xprivKey);
+    device.setDevicePrivateKey(Bitcore.HDPrivateKey.fromString(xPrivKey).derive("m/1'").privateKey.bn.toBuffer({ size: 32 }));
   }
   catch (e) {
     console.log("error in initDeviceProperties: " + e);
