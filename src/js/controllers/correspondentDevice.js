@@ -1059,13 +1059,13 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     var asset = $scope.index.arrBalances[$scope.index.assetIndex].asset;
                     if (!asset)
                         throw Error("no asset");
-                    var amountInSmallestUnits = profileService.getAmountInSmallestUnits(amount/1000000, asset);
+                    var amountInSmallestUnits = profileService.getAmountInSmallestUnits(amount, asset);
                     var params = 'amount='+amountInSmallestUnits;
                     if (asset !== 'base')
                         params += '&asset='+encodeURIComponent(asset);
                     var units = profileService.getUnitName(asset);
-                   // appendText('['+amount+' '+units+'](intervalue-3.0-testnet:'+address+'?'+params+')');
-                    appendText('Payment request: '+amount+' '+units+ ' to ' +address);
+                   appendText('['+amount+' '+units+'](intervalue:'+address+'?'+params+')');
+
                     $modalInstance.dismiss('cancel');
                 };
 
