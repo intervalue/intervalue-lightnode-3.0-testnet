@@ -358,7 +358,7 @@
 
     <form name="chatForm" class="send-form mychatcurform" id="mychatcurform" no-validate
           ng-mousemove="newMsgCounterEnabled ?'': newMessagesCount[correspondent.device_address] = 0">
-        <div class="text-warning size-12 m10b" ng-show="error">{{error|translate}}</div>
+        <!--<div class="text-warning size-12 m10b" ng-show="error">{{error|translate}}</div>-->
         <!-- 左侧功能选项anniu -->
 
         <!-- 左侧功能选项 -->
@@ -373,11 +373,11 @@
         </div>
         <ul id="drop" class="f-dropdown drop-top drop-up" data-dropdown-content>
             <!-- 插入我的地址（小额钱包） -->
-            <li ng-click="showselectwt = true;" >
+            <li ng-click="showwalletaddr();" >
                 <img src="./img/dropadd.png" /><span translate>insert my address</span>
             </li>
             <!-- 请求付款（小额钱包） -->
-            <li ng-click="requestPayment()" >
+            <li ng-click="requestPayment();" >
                 <img src="./img/droppay.png" /><span translate>request payment</span>
             </li>
         </ul>
@@ -390,6 +390,7 @@
                 <li ng-repeat="item in index.walletInfo" ng-click="insertMyAddress(item.wallet);">
                     <div class="liin">
                         <div class="ld">
+                            <span class="greendot"></span>
                             <div class="limg">
                                 <img ng-src="{{item.image}}" />
                             </div>

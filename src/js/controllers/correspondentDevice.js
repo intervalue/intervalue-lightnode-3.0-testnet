@@ -135,7 +135,15 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             //	issueNextAddressIfNecessary(appendMyPaymentAddress);
         };
 
+        $scope.showwalletaddr = function(){
+            var chatltmessage = angular.element(document.getElementById('chatltmessage'));
+            chatltmessage.triggerHandler('click');
+            $scope.showselectwt = true;
+        };
+
         $scope.requestPayment = function(){
+            var chatltmessage = angular.element(document.getElementById('chatltmessage'));
+            chatltmessage.triggerHandler('click');
             if (!profileService.focusedClient.credentials.isComplete())
                 return $rootScope.$emit('Local/ShowErrorAlert', "The wallet is not approved yet");
             readMyPaymentAddress(showRequestPaymentModal);
