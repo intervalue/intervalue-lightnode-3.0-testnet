@@ -174,26 +174,33 @@ angular.module('copayApp.services')
             var removeListener = $rootScope.$on('Local/BalanceUpdated', function () {
                 removeListener();
                 breadcrumbs.add('unlockWalletAndInitDevice BalanceUpdated');
-                root.insistUnlockFC(null, function () {
-                    breadcrumbs.add('unlockWalletAndInitDevice unlocked');
-
-                    //After unlock, make mainSection visible again
-                    var mainSectionElement = angular.element(document.querySelector('#mainSection'));
+                // root.insistUnlockFC(null, function () {
+                //     breadcrumbs.add('unlockWalletAndInitDevice unlocked');
+                //
+                //     //After unlock, make mainSection visible again
+                //     var mainSectionElement = angular.element(document.querySelector('#mainSection'));
+                //     mainSectionElement.css('visibility', 'visible');
+                //
+                //     if (!root.focusedClient.credentials.xPrivKey)
+                //         throw Error("xPrivKey still not set after unlock");
+                //     console.log('unlocked: ' + root.focusedClient.credentials.xPrivKey);
+                //     var config = configService.getSync();
+                //     let confHub  = configService.getHub();
+                //     console.log(1);
+                //     let Bitcore = require('bitcore-lib');
+                //
+                //
+                //     root.focusedClient.initDeviceProperties(
+                //         root.profile.device_xprivKey, root.profile.my_device_address, confHub, config.deviceName);
+                //     $rootScope.$emit('Local/BalanceUpdatedAndWalletUnlocked');
+                // });
+                var mainSectionElement = angular.element(document.querySelector('#mainSection'));
                     mainSectionElement.css('visibility', 'visible');
-
-                    if (!root.focusedClient.credentials.xPrivKey)
-                        throw Error("xPrivKey still not set after unlock");
-                    console.log('unlocked: ' + root.focusedClient.credentials.xPrivKey);
-                    var config = configService.getSync();
-                    let confHub  = configService.getHub();
-                    console.log(1);
-                    let Bitcore = require('bitcore-lib');
-
-
-                    root.focusedClient.initDeviceProperties(
-                        root.profile.device_xprivKey, root.profile.my_device_address, confHub, config.deviceName);
-                    $rootScope.$emit('Local/BalanceUpdatedAndWalletUnlocked');
-                });
+                var config = configService.getSync();
+                let confHub  = configService.getHub();
+                root.focusedClient.initDeviceProperties(
+                    root.profile.device_xprivKey, root.profile.my_device_address, confHub, config.deviceName);
+                $rootScope.$emit('Local/BalanceUpdatedAndWalletUnlocked');
             });
         }
 
