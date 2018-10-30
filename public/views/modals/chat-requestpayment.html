@@ -45,8 +45,8 @@
                         </div>
                         <div class="rd">
                             <div class="chatsetinfo">
-                                <div class="chatinfoname"><img src="./img/rimg/1.png"/> jojo2</div>
-                                <div class="chatinfomon"><span translate>Available amount</span>:&nbsp;<span>10000</span></div>
+                                <div class="chatinfoname"><img src="{{editCont.image}}"/> {{editCont.walletName}}</div>
+                                <div class="chatinfomon"><span translate>Available amount</span>:&nbsp;<span>{{editCont.stables}}</span></div>
                             </div>
                             <img src="./img/more.png" />
                         </div>
@@ -77,7 +77,7 @@
         <div class="popmask" ng-click="showselectwt = false;"></div>
         <div class="popcontentwt">
             <ul class="m0">
-                <li ng-repeat="item in index.walletInfo" ng-click="editCont.insertMyAddress(item.wallet);">
+                <li ng-repeat="item in index.walletInfo" ng-click="editCont.insertMyAddress(item.wallet,item.stables,item.walletName,item.image);">
                     <div class="liin">
                         <div class="ld">
                             <span class="greendot"></span>

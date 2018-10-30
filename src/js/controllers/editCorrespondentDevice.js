@@ -14,6 +14,9 @@ angular.module('copayApp.controllers').controller('editCorrespondentDeviceContro
     $scope.showselectwt = false;
     $scope.showconfirm = false;
     self.address = '';
+    self.stables = '';
+    self.walletName = '';
+    self.image = '';
 	$scope.save = function() {
 		$scope.error = null;
 		correspondent.name = $scope.name;
@@ -71,9 +74,12 @@ angular.module('copayApp.controllers').controller('editCorrespondentDeviceContro
       go.path('correspondentDevices.correspondentDevice');
   }
 
-      self.insertMyAddress = function(walletId){
+      self.insertMyAddress = function(walletId,stables,walletName,image){
           addressService.getAddressToChat(walletId, function(result) {
               self.address = result;
+              self.stables = stables;
+              self.walletName = walletName;
+              self.image = image;
               $timeout(function () {
                   $scope.showselectwt = false;
                   $scope.$apply();
