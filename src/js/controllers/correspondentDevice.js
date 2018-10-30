@@ -1065,7 +1065,8 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     if (asset !== 'base')
                         params += '&asset='+encodeURIComponent(asset);
                     var units = profileService.getUnitName(asset);
-                    appendText('['+amount+' '+units+'](intervalue-3.0-testnet:'+address+'?'+params+')');
+                   // appendText('['+amount+' '+units+'](intervalue-3.0-testnet:'+address+'?'+params+')');
+                    appendText('Payment request: '+amount+' '+units+ ' to ' +address);
                     $modalInstance.dismiss('cancel');
                 };
 
