@@ -1,17 +1,19 @@
 <div
   class="topbar-container"
   ng-include="'views/includes/topbar.html'"
-  ng-init="titleSection='Invite new device'|translate; goBackToState = true; showCamera = true; ">
+  ng-init="titleSection='Add device'|translate; goBackToState = true; showCamera = true; ">
 </div>
 
-
-
-<div ng-controller="inviteCorrespondentDeviceController" style="position: absolute; width: 100%; top:45px; bottom: 37px; overflow: scroll;">
-    <div class="m20b">
-      <div class="text-center">
-        <div class="columns m10t" >
-            <div ng-click="copyCode()">
-                <qrcode size="220" version="{{qr_version}}" data="{{protocol}}:{{code}}"></qrcode>
+<div class="addinvitecd">
+    <div ng-controller="inviteCorrespondentDeviceController" style="position: absolute; width: 100%; top:45px; bottom: 37px; overflow: scroll;">
+    <!--<div class="m20b">
+      <div class="text-center">-->
+       <!-- <div class="columns m10t" >-->
+            <div class="myaddress">
+                <span>My wallet address</span>
+                <div ng-click="copyCode()">
+                    <qrcode size="185" version="{{qr_version}}" data="{{protocol}}:{{code}}"></qrcode>
+                </div>
             </div>
             <div class="m10t">
 				<span translate>Scan the above QR code using the other device, or send this pairing code to the other device:</span>
@@ -28,8 +30,9 @@
                      ng-click="$root.go('^', true); goBackToState = null"
                      value="{{'Done'|translate}}">
           </div>
-        </div>
-      </div>
+        <!--</div>-->
+      <!--</div>
+    </div>-->
     </div>
 </div>
 <div ng-include="'views/includes/menu.html'" ng-show="!index.noFocusedWallet"></div>
