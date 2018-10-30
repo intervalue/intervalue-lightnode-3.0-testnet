@@ -2499,3 +2499,6 @@ msgstr "分享代码"
 
 msgid "Copy pairing code"
 msgstr "复制配对码"
+
+msgid "yi"
+msgstr "亿"

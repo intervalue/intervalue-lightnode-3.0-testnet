@@ -99,7 +99,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             description += "Language: " + (navigator.userLanguage || navigator.language) + "\n";
             description += "Program: " + conf.program + ' ' + conf.program_version + ' ' + (conf.bLight ? 'light' : 'full') + " #" + window.commitHash + "\n";
 
-             network.sendJustsaying(ws, 'bugreport', { message: error_message, exception: description });
+            network.sendJustsaying(ws, 'bugreport', { message: error_message, exception: description });
         });
     }
 
@@ -839,7 +839,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     self.setTab = function (tab, reset, tries, switchState) {
         FastClick.attach(document.body);
-       // console.log("setTab", tab, reset, tries, switchState);
+        // console.log("setTab", tab, reset, tries, switchState);
         tries = tries || 0;
 
         var changeTab = function (tab) {
@@ -2131,8 +2131,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.currencyData = function (upyn) {
         //inve 行情
         news.getInveData2(function (res) {
-            console.log(111111111111111111111111111111111111111)
-            console.log(res)
             if(!!res && res != null) {
                 self.coininvelist = res.page.list;
             }
@@ -2200,8 +2198,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         var curtop = document.getElementById('new2tab').scrollTop;
         // console.log(curtop)
         var dateall = document.querySelectorAll('.news .letterlist .itemin .date');
-       // console.log(dateall)
-       //  self.currentdddddDate = dateall[0];
+        // console.log(dateall)
+        //  self.currentdddddDate = dateall[0];
         for(var i = 1; i < dateall.length; i++){
             // console.log(dateall[i].innerText);
             if(self.currentdddddDate){

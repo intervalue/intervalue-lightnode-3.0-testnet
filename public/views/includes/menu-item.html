@@ -1,7 +1,9 @@
 <a  ng-click="index.setTab(item, false, 0, true)" ng-class="{'active': index.tab == item.link}" id="menu-{{item.link}}">
-    <img class="activecirimg" src="./img/activecirimg.png"/>
-    <img ng-if="index.tab == item.link" id="menuimg-{{item.imgid}}" class="activebimg" ng-src="./img/active{{item.img}}.png"/>
-    <img ng-if="index.tab !== item.link" id="menuimg-{{item.imgid}}" ng-src="./img/{{item.img}}.png" />
+    <!--<img class="activecirimg" src="./img/activecirimg.png"/>-->
+    <div class="menuimg">
+        <img ng-if="index.tab == item.link" id="menuimg-{{item.imgid}}" class="activebimg" ng-src="./img/active{{item.img}}.png"/>
+        <img ng-if="index.tab !== item.link" id="menuimg-{{item.imgid}}" ng-src="./img/{{item.img}}.png" />
+    </div>
     <div class="size-10 tu">
         {{ item.title|translate }}
         <span class="label alert round" ng-if="item.link=='walletHome' && index.pendingTxProposalsCountForUs > 0">

@@ -458,7 +458,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .letterlist .itemin .itemlr:last-child .item:last-child{padding-bottom:28px;}
 .news .letterlist .itemin .item .time{display:inline-block;font-size:10px;font-family:pfbold;font-weight:600;color:#45AD8E;border-radius:10px;border:1px solid #45AD8E;padding:0 8px;position:relative;margin-bottom:12px;}
 .news .letterlist .itemin .item .time:before{display:block;content:'';position:absolute;z-index:1;width:13px;height:13px;background:#45AD8E;border-radius:50%;border:2px solid #fff;left:-24px;top:1px;}
-.news .letterlist .itemin .item .title{font-size:14px;font-family:pfbold;font-weight:600;color:#323232;margin-bottom:6px;-ms-word-break:break-all;word-break:break-all;}
+.news .letterlist .itemin .item .title{font-size:14px;font-family:pfbold;color:#323232;margin-bottom:6px;-ms-word-break:break-all;word-break:break-all;}
 .news .letterlist .itemin .item .desc{font-size:12px;font-weight:400;color:#646464;-ms-word-break:break-all;word-break:break-all;}
 
 /*快讯 end*/
@@ -480,10 +480,10 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .quotelist .itemin:nth-child(3) .item{border-top:1px solid #DEDEDE;}
 .news .quotelist .itemin .item .leftcoininfo{width:calc(100% - 175px);}
 .news .quotelist .itemin .item .coinimg{margin-bottom:6px;}
-.news .quotelist .itemin .item .coinimg img{margin-right:16px;vertical-align:middle;}
+.news .quotelist .itemin .item .coinimg img{margin-right:16px;vertical-align:middle;width:20px;height:20px;flex-shrink: 0;}
 .news .quotelist .itemin .item .coinimg .nameshort{font-size:16px;font-weight:400;color:rgba(50,50,50,1);vertical-align:middle;}
 .news .quotelist .itemin .item .numallin{font-size:12px;color:rgba(144,144,144,1);}
-.news .quotelist .itemin .item .pricein{position:absolute;top:50%;transform:translateY(-50%);right:92px;text-align:right;font-size:16px;font-family:pfbold;font-weight:600;color:#323232;}
+.news .quotelist .itemin .item .pricein{position:absolute;top:50%;transform:translateY(-50%);right:92px;text-align:right;font-size:16px;font-family:pfbold;color:#323232;}
 .news .quotelist .itemin .item .pricein.priceblue{color:#45AD8E;}
 .news .quotelist .itemin .item .pricein.pricered{color:#D45757;}
 .news .quotelist .itemin .item .gainsin{position:absolute;top:50%;transform:translateY(-50%);right:0;width:70px;text-align:center;}
@@ -598,11 +598,31 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .chatbiline ul li .rd .chatsetinfo img{margin-left:8px;width:19px;vertical-align:sub;}
 .chatbiline ul li .rd .chatsetinfo .chatinfoname{font-size:14px;font-family:pfmedium;font-weight:500;color:#323232;}
 .chatbiline ul li .rd .chatsetinfo .chatinfomon{font-size:10px;font-family:pfmedium;font-weight:500;color:#999999;}
-
 /*chat-requiestpayment    end*/
 
 /*editCorrespondentDevice    start*/
 .chatdeleter{text-align:center;padding:0 25px 22px;border-bottom:1px solid #F5F5F5;}
 .chatdeleter img{margin-bottom:18px;}
-
 /*editCorrespondentDevice    end*/
+
+
+/*menu-item    start*/
+.menuimg{width:27px;height:24px;text-align: center;margin:0 auto;}
+/*menu-item    end*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
