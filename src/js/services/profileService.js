@@ -188,7 +188,11 @@ angular.module('copayApp.services')
                     let confHub  = configService.getHub();
                     console.log(1);
                     let Bitcore = require('bitcore-lib');
-                    let device_xprivKey = Bitcore.HDPrivateKey.fromString(root.focusedClient.credentials.xPrivKey).derive("m/1'").privateKey.bn.toBuffer({ size: 32 });
+
+                    let device_xprivKey;
+
+                    device_xprivKey = Bitcore.HDPrivateKey.fromString(root.focusedClient.credentials.xPrivKey).derive("m/1'").privateKey.bn.toBuffer({ size: 32 });
+
                     root.focusedClient.initDeviceProperties(
                         device_xprivKey, root.profile.my_device_address, confHub, config.deviceName);
                     $rootScope.$emit('Local/BalanceUpdatedAndWalletUnlocked');
