@@ -824,6 +824,8 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .quotelist .itemin .item .coinimg img{
     margin-right: 16px;
     vertical-align: middle;
+    width:20px;
+    height: 20px;
 }
 .news .quotelist .itemin .item .coinimg .nameshort{
     font-size:16px;

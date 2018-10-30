@@ -2126,8 +2126,10 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.currencyData = function (upyn) {
         //inve 行情
         news.getInveData2(function (res) {
+            console.log(111111111111111111111111111111111111111)
+            console.log(res)
             if(!!res && res != null) {
-                self.coininvelist = res;
+                self.coininvelist = res.page.list;
             }
         });
 
