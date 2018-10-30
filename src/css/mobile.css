@@ -234,14 +234,14 @@ ul.copayer-list img {
 }
 
 .bottombar-item a {
-  color: #323232;
+  color: #909090;
   display: block;
   padding: 6px 0 4px;
   height:48px;
 }
 
 .bottombar-item a.active {
-  color: #45AD8E;
+  color: #646464;
   background-color: #fff;
 }
 .bottombar-item a img{

@@ -134,113 +134,87 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 	};
 
   })
-//   .directive('chatSwiperLeft',function(){
-//     return{
-//         restrict:'A',
-//         link:function(scope, elm, attr){
-//             var raw = elm[0];
-//             var rawh = (elm[0].children)[0];
-//             scope._start = 0;
-//             scope. _end = 0;
-//             raw.addEventListener("dragstart",dragStart,false);//当鼠标按住屏幕时候触发。
-//             raw.addEventListener("drag",dragMove,false);//当鼠标屏幕上滑动的时候连续地触发。在这个事件发生期间，调用preventDefault()事件可以阻止滚动。
-//             raw.addEventListener("dragend",dragEnd,false);
-//             // raw.addEventListener("touchstart",touchStart,false);//当按住屏幕时候触发。
-//             // raw.addEventListener("touchmove",touchMove,false);//当屏幕上滑动的时候连续地触发。在这个事件发生期间，调用preventDefault()事件可以阻止滚动。
-//             // raw.addEventListener("touchend",touchEnd,false);
-//             //raw.addEventListener("drop",dropEnd,false);
-//             function dragStart(event){//dragStart函数
-//                 var img = new Image();
-//                 img.src = './img/transparent.png';
-//                 event.dataTransfer.setDragImage(img, 10, 10);
-//                 scope._start = event.pageX;
-//             }
-//             function dragMove(event){//dragMove函数
-//                 scope._end = (scope._start - event.pageX);
-//                 //下滑才执行操作
-//                 if(scope._end < 0){
-//                     if( raw.scrollTop <= 0){
-//                         releaseh(scope._end);
-//                     }else{
-//                         return;
-//                     }
-//                 }else{
-//
-//                 }
-//             }
-//             function dragEnd(event){//dragEnd函数
-//                 scope._end = (scope._start - event.pageX);
-//                 if(scope._end >0){
-//                     resetdrag();
-//                     return;
-//                 }else{
-//                     if( document.body.scrollTop <= 0){
-//                         releaseload();
-//                     }else{
-//                         resetdrag();
-//                         return;
-//                     }
-//                 }
-//             }
-//             // function dropEnd(event){//dragEnd函数
-//             //     scope._end = (scope._start - event.pageY);
-//             //     if(scope._end >0){
-//             //         resetdrag();
-//             //         return;
-//             //     }else{
-//             //         if( document.body.scrollTop <= 0){
-//             //             releaseload();
-//             //         }else{
-//             //             resetdrag();
-//             //             return;
-//             //         }
-//             //     }
-//             // }
-//             function touchStart(event){//dragStart函数
-//                 scope._start = event.targetTouches[0].pageX;
-//             }
-//             function touchMove(event){//dragMove函数
-//                 scope._end = (scope._start - event.targetTouches[0].pageX);
-//                 //下滑才执行操作
-//                 if(scope._end < 0){
-//                     if( raw.scrollTop <= 0){
-//                         releaseh(scope._end);
-//                     }else{
-//                         return;
-//                     }
-//                 }else{
-//
-//                 }
-//             }
-//             function touchEnd(event){//dragEnd函数
-//                 scope._end = (scope._start - event.changedTouches[0].pageX);
-//                 if(scope._end >0){
-//                     resetdrag();
-//                     return;
-//                 }else{
-//                     if( document.body.scrollTop <= 0){
-//                         releaseload();
-//                     }else{
-//                         resetdrag();
-//                         return;
-//                     }
-//                 }
-//             }
-//             function releaseh(dist){ // dist 下滑的距离，用以拉长背景模拟拉伸效果
-//                 rawh.style.height = (parseInt("45px") - dist) + "px";//松开刷新的高度
-//                 rawh.style.display = 'block';
-//                 rawh.children[0].style.display = 'block';
-//                 rawh.children[1].style.display = 'none';
-//             }
-//             function releaseload(){
-//                 rawh.children[0].style.display = 'none';
-//                 rawh.children[1].style.display = 'block';
-//                 rawh.style.height = "45px";//高度设定为20px
-//                 scope.$apply(attr.homePullDown);
-//             }
-//             function resetdrag(){
-//                 rawh.style.display = 'none';
-//             }
-//         }
-//     }
-// });
+  .directive('chatSwiperLeft',function(){
+    return{
+        restrict:'A',
+        link:function(scope, elm, attr){
+            var raw = elm[0];
+            var clickimg = elm[0].children[0].children[1].children[0];
+            var deleteimg = elm[0].children[0].children[1].children[1];
+            scope._start = 0;
+            scope. _end = 0;
+            raw.addEventListener("dragstart",dragStart,false);//当鼠标按住屏幕时候触发。
+            raw.addEventListener("drag",dragMove,false);//当鼠标屏幕上滑动的时候连续地触发。在这个事件发生期间，调用preventDefault()事件可以阻止滚动。
+            raw.addEventListener("dragend",dragEnd,false);
+            raw.addEventListener("touchstart",touchStart,false);//当按住屏幕时候触发。
+            raw.addEventListener("touchmove",touchMove,false);//当屏幕上滑动的时候连续地触发。在这个事件发生期间，调用preventDefault()事件可以阻止滚动。
+            raw.addEventListener("touchend",touchEnd,false);
+            function dragStart(event){//dragStart函数
+                var img = new Image();
+                img.src = './img/transparent.png';
+                event.dataTransfer.setDragImage(img, 10, 10);
+                scope._start = event.pageX;
+            }
+            function dragMove(event){//dragMove函数
+                scope._end = (scope._start - event.pageX);
+                //下滑才执行操作
+                if( 5 < scope._end){
+                    showimgw(scope._end);
+                }else{
+                    resetdrag();
+                }
+            }
+            function dragEnd(event){//dragEnd函数
+                scope._end = (scope._start - event.pageX);
+                if(scope._end < 5){
+                    resetdrag();
+                    return;
+                }else{
+                    showimgok();
+                    return;
+                }
+            }
+            function touchStart(event){//dragStart函数
+                scope._start = event.targetTouches[0].pageX;
+            }
+            function touchMove(event){//dragMove函数
+                scope._end = (scope._start - event.targetTouches[0].pageX);
+                //下滑才执行操作
+                if( 5 < scope._end){
+                    showimgw(scope._end);
+                }else{
+                    resetdrag();
+                }
+            }
+            function touchEnd(event){//dragEnd函数
+                scope._end = (scope._start - event.changedTouches[0].pageX);
+                if(scope._end < 5){
+                    resetdrag();
+                    return;
+                }else{
+                    showimgok();
+                    return;
+                }
+            }
+            function showimgw(dist){ // dist 下滑的距离，用以拉长背景模拟拉伸效果
+                clickimg.style.display = 'none';
+                deleteimg.style.display = 'block';
+                if(dist > 80){
+                    deleteimg.style.width = 'auto';
+                }else{
+                    deleteimg.style.width = dist + 'px';
+                }
+            }
+            function showimgok(){
+                clickimg.style.display = 'none';
+                deleteimg.style.display = 'block';
+                deleteimg.style.width = 'auto';
+            }
+            function resetdrag(){
+                clickimg.style.display = 'block';
+                deleteimg.style.width = 0 + 'px';
+                deleteimg.style.display = 'none';
+            }
+        }
+    }
+});

@@ -579,8 +579,8 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .chatcurchattop .right-small a:hover{color:#323232;}
 #chat .mtab{min-height:150px;background-color:#FFFFFF;max-height:calc(100% - 125px);overflow:auto;}
 .chatbiline ul{list-style-type:none;}
-.chatbiline ul li{background:#fff;padding:0 15px;cursor:pointer;}
-.chatbiline ul li .liin{border-bottom:1px solid #EDEEF0;display:flex;justify-content:space-between;align-items:center;padding:13px 0;}
+.chatbiline ul li{background:#fff;padding:0 15px;cursor:pointer;position:relative;}
+.chatbiline ul li .liin{border-bottom:1px solid #EDEEF0;display:flex;justify-content:space-between;align-items:center;height:58px;}
 .chatbiline ul li .ld{display:flex;justify-content:flex-start;align-items:center;margin-right:10px;}
 .chatbiline ul li .ld span{color:#323232;white-space:nowrap;}
 .chatbiline ul li .rd{display:flex;justify-content:flex-end;align-items:center;color:#909090;}
@@ -589,7 +589,8 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .chatbiline ul li .rd img{margin-left:10px;}
 .chatbiline ul li .rd span{word-break:break-all;}
 #chat .mtab .chatname{width:40px;height:40px;line-height:40px;font-size:24px;font-family:pfbold;font-weight:600;color:#323232;background:#EFEFEF;text-align:center;border-radius:50%;margin-right:15px;}
-
+.chatremovep{display: none;position:absolute;right:0;top:0;background:#D45757;font-size:16px;font-family:pfmedium;font-weight:500;color:#fff;padding:0 24px;height:58px;line-height: 58px;}
+.mtab .correspondentlist_badge{position: absolute;right: auto;left: 42px;padding: 0;width: 11px;height: 11px;font-size: 0;top: 12px;}
 /*correspondentDevices   end*/
 
 /*chat-requiestpayment   end*/
