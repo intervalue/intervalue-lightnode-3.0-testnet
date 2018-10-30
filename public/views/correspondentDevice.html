@@ -47,7 +47,7 @@
          ng-mousemove="newMsgCounterEnabled ?'': newMessagesCount[correspondent.device_address] = 0">
         <div class="chat-message " ng-repeat="messageEvent in messageEvents" >
             <div ng-class="messageEvent.bIncoming ? 'from-them' : (messageEvent.type == 'system' ? 'system' : 'from-me')"
-                 class="bubble " ><span class="chatname">{{messageEvent.bIncoming ? (correspondent.name | limitTo:1) : 'me'}}: </span><span dynamic="messageEvent.message"></span></div>
+                 class="bubble " ><span class="chatname">{{messageEvent.bIncoming ? (correspondent.name | limitTo:1) : 'me'}} </span><span dynamic="messageEvent.message"></span></div>
             <span class=""></span>
             <div ng-class="(messageEvent.bIncoming ? 'lefttime' : 'righttime')" class="msg-ts "
                  ng-if="messageEvent.type != 'system'">{{messageEvent.timestamp * 1000 | date:'shortTime'}}
