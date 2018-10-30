@@ -2493,3 +2493,9 @@ msgstr "添加设备"
 
 msgid "My wallet address"
 msgstr "我的钱包地址"
+
+msgid "Share the code"
+msgstr "分享代码"
+
+msgid "Copy pairing code"
+msgstr "复制配对码"
