@@ -156,7 +156,7 @@
 .adwwt .adwwtflex{display:flex;justify-content:space-between;cursor:pointer;align-items:center;padding-bottom:14px;}
 .adwwt .adwwtflex .adwwtlogo{width:45px;height:45px;flex-shrink:0;margin-right:12px;align-self:flex-start;}
 .adwwt .adwwtflex .adwwt100{width:100%;margin-right:12px;}
-.adwwt .adwwtflex .adwwt100 .adwwtname{font-size:14px;color:#323232;font-family:pfbold;font-weight:600;display:flex;align-content:center;justify-content:flex-start;}
+.adwwt .adwwtflex .adwwt100 .adwwtname{font-size:14px;color:#323232;font-family:pfbold;display:flex;align-content:center;justify-content:flex-start;}
 .adwwt .adwwtflex .adwwt100 .adwwtname .whpback{padding:0 8px;border:1px solid #45AD8E;border-radius:18px;font-size:10px;flex-shrink:0;height:14px;line-height:12px;cursor:pointer;color:#45AD8E;margin-left:12px;}
 .adwwt .adwwtflex .adwwt100 .adwwtaddr{font-size:12px;color:#909090;word-break:break-all;font-weight:400;margin-top:6px;}
 .adwwt .adwwtflex .moreimg{width:12px;height:18px;}

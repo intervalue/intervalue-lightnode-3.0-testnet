@@ -1,7 +1,7 @@
 <div ng-controller="acceptCorrespondentInvitationController">
   <nav class="tab-bar">
     <section class="left-small">
-      <a  ng-click="$root.go('correspondentDevices.chataddCorrespondentDevice')">
+      <a  ng-click="$root.go('^', true); goBackToState = null">
         <img src="./img/chatbackstate.png">
       </a>
     </section>
