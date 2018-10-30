@@ -253,18 +253,36 @@
 /*添加设备自己的二维码页面 e*/
 
 /* acceptCorrespondentinvitation */
-.pairingCodeForm #code{
-    font-size:16px;
-    font-family:pfregular;
+.pairingCodeForm .chatpairinfodiv{
+    width:100%;
+    font-size:12px;
     font-weight:400;
-    color: #909090;border-bottom: 1px solid #CACACA;margin-top: 10px;}
-.pairingCodeForm  .chatpairinfodiv{
-    font-size:14px;
-    font-family:pfmedium;
-    font-weight:500;
-    color:#323232;
+    color:rgba(144,144,144,1);
+    line-height:17px;
+}
+.pairingCodeForm .inputcode{
+    width:100%;display:flex;align-items:center;justify-content:flex-start;border-bottom:1px solid #EDEEF0;padding:0 4px;
+    margin-top:35px;
+}
+.pairingCodeForm .paircode{
+    width:24px;height:20px;text-align:center;
+    background:url(../img/pair_code.png) center no-repeat;
+    z-index:2;
+}
+.pairingCodeForm #code{
+    font-size:12px;padding:0 10px 0 15px;font-weight:400;margin:0;width:100%;color:#C4C4C4;border:none;
+}
+
+.pairingCodeForm .buttoncode{
+    margin-top:30px;
+    width:100%;
+    background:rgba(59,59,59,1);
+    border-radius:3px;
 }
 /* acceptCorrespondentinvitation e*/
+
+
+
 
 
 

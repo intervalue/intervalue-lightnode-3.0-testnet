@@ -2502,3 +2502,9 @@ msgstr "复制配对码"
 
 msgid "yi"
 msgstr "亿"
+
+msgid "Add new device"
+msgstr "添加新设备"
+
+msgid "Enter the pairing code received from another device, or use the camera (upper right corner icon) to scan the QR code displayed on other devices."
+msgstr "输入从其他设备接收的配对码，或使用相机（右上角图标）扫描其他设备上显示的QR码。"
