@@ -1293,8 +1293,8 @@ msgid "Scan status finished with error"
 msgstr "查询结果出现错误"
 
 #: public/views/inviteCorrespondentDevice.html:21
-msgid "Scan the above QR code using the other device, or send this pairing code to the other device:"
-msgstr "使用其他设备扫描上述QR码，或将此配对码发送到其他设备："
+msgid "Scan the above QR code using the other device, or send this pairing code to the other device."
+msgstr "使用其他设备扫描上述QR码，或将此配对码发送到其他设备."
 
 #: src/js/controllers/index.js:1624
 msgid "Scan your fingerprint please"
