@@ -8,7 +8,7 @@
     <nav ng-controller="topbarController as topbar" class="tab-bar">
         <section class="right-small">
             <button ng-click="nameW.changeWalletName(nameW.walletId)" class="greencolor size-14" 
-            ng-disabled="!nameW.name || nameW.name.length < 5 || nameW.name.length > 18"><span translate>Save</span></button>
+            ng-disabled="!nameW.name || nameW.name.length < 1 || nameW.name.length > 20"><span translate>Save</span></button>
         </section>
         <section class="left-small">
             <a  ng-click="topbar.goWallet();goToWallet = null;index.backwallet = false;">

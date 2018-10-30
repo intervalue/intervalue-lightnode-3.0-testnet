@@ -1,52 +1,71 @@
 
 <div ng-controller="editCorrespondentDeviceController">
 
-<!--div
-  class="topbar-container"
-  ng-include="'views/includes/topbar.html'"
-  ng-init="titleSection='{{name}}'; goBackToState = true; showCamera = true">
-</div-->
+  <!--div
+    class="topbar-container"
+    ng-include="'views/includes/topbar.html'"
+    ng-init="titleSection='{{name}}'; goBackToState = true; showCamera = true">
+  </div-->
 
-<nav class="tab-bar">
-  <section class="left-small">
-    <a
-      ng-click="$root.go('correspondentDevices.correspondentDevice')"><i class="icon-arrow-left3 icon-back"></i>
-      <span class="text-back">{{'Back'|translate}}</span>
-    </a>
-  </section>
+  <nav class="tab-bar">
+    <section class="left-small">
+      <a ng-click="$root.go('correspondentDevices.correspondentDevice')">
+        <img src="./img/chatbackstate.png">
+      </a>
+    </section>
+    <section class="middle tab-bar-section">
+      <h1 class="title ellipsis">
+        {{name}}
+      </h1>
+    </section>
+  </nav>
+  <div class="height13"></div>
+  <div class="addeditcd">
 
-  <section class="middle tab-bar-section">
-    <h1 class="title ellipsis" ng-style="{'color': noColor ? '#4A90E2' : index.backgroundColor}">
-      {{name}}
-    </h1>
-  </section>
-</nav>
-
-    <div class="columns m20t m20b" >
-      <div> 
-		<span translate>Full address:</span>
+    <div class="m20t m20b" >
+      <div class="address">
+        <div class="deviceadd">
+          <img src="img/wallet.png">
+          <span translate>Device address:</span>
+        </div>
         <div class="size-10 text-gray ellipsis enable_text_select">{{correspondent.device_address}}@{{hub}}</div>
       </div>
 
-        <form name="editForm" class="m20t" no-validate>
-          <div class="text-warning size-12 m10b" ng-show="error">{{error|translate}}</div>
-		  <span translate>Rename:</span>
+      <form name="editForm" class="m20t" no-validate>
+        <div class="text-warning size-12 m10b" ng-show="error">{{error|translate}}</div>
+        <div class="renameadd">
+          <img src="img/rename.png">
+          <span translate>Rename:</span>
+        </div>
+        <div class="chatcname">
           <input type="text" id="name" name="name" ng-model="name" required>
-		  <span translate>Change hub:</span>
-          <input type="text" id="hub" name="hub" ng-model="hub" required>
-          <div class="row">
-            <div>
-              <input type="submit" 
-                     class="button expand round" 
-                     value="{{'Save'|translate}}"
-                     ng-disabled="!editForm.$valid"
-                     ng-style="{'background-color':backgroundColor}" 
-                     ng-click="save()">
-            </div>
-          </div>
-        </form>
+        </div>
+        <!--<span translate>Change hub:</span>
+        <input type="text" id="hub" name="hub" ng-model="hub" required>-->
+        <div class="purge_chat columns"><a ng-click="showconfirm = true;" translate>clear chat history</a></div>
+      </form>
     </div>
-    <div class="purge_chat columns"><a href="#" ng-click="purge_chat()" translate>clear chat history</a></div>
-    <div class="extra-margin-bottom"></div>
-</div>
-<div ng-include="'views/includes/menu.html'" ng-show="!index.noFocusedWallet"></div>
+    <div>
+      <input type="submit"
+             class="addbutton"
+             value="{{'Save'|translate}}"
+             ng-disabled="!editForm.$valid"
+             ng-style="{'background-color':rgb(59, 59, 59)}"
+             ng-click="save()">
+    </div>
+    <div ng-show="showconfirm" class="popconfirm">
+      <div class="popmask" ng-click="showconfirm = false;"></div>
+      <div class="popcontent">
+        <div class="m20b chatdeleter">
+          <img src="./img/chatdeleter.png">
+          <div translate class="size-16 sfcolor">Are you sure you want to delete the wallet?</div>
+        </div>
+        <div class="p25h popbutton">
+          <button ng-click="deletechat()" translate>Confirm</button>
+          <button class="awbtn" ng-click="showconfirm = false;" translate>Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-include="'views/includes/menu.html'" ng-show="!index.noFocusedWallet"></div>

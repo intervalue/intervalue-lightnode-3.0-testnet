@@ -14,7 +14,7 @@
 }
 @font-face{
   font-family: "pfbold";
-  src: url('../font/PingFang-Bold.ttf');
+  src: url('../font/PingFang-Semibold.ttf');
 }
 @font-face{
   font-family: "pflight";
@@ -565,6 +565,7 @@ ul.manage li {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  padding: 16px 20px;
 }
 ul.off-canvas-list .avatar-wallet{
   flex-shrink: 0;
@@ -579,7 +580,7 @@ ul.off-canvas-list .avatar-wallet{
   text-overflow: ellipsis;
 }
 ul.off-canvas-list .whpback{
-  padding:0 8px;border:1px solid #8CF8D8;border-radius:18px;font-size:10px;margin-right:20px;flex-shrink:0;cursor:pointer;color: #8CF8D8;
+  padding:0 8px;border:1px solid #8CF8D8;border-radius:18px;font-size:10px;margin-left:10px;flex-shrink:0;cursor:pointer;color: #8CF8D8;
 }
 .tab-bar h1, .tab-bar h2, .tab-bar h3, .tab-bar h4, .tab-bar h5, .tab-bar h6 {
   /*line-height: 2.7rem;*/
@@ -594,6 +595,7 @@ ul.off-canvas-list .whpback{
 
 .sidebar li.nav-item.selected .name-wallet {
   color: #fff;
+  white-space: nowrap;
 }
 
 .name-wallet i {
@@ -1614,8 +1616,4 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
 	cursor: auto !important;
 	overflow: auto;
 	white-space: normal;
-}
-
-form[name="chatForm"] .f-dropdown.drop-top > *:last-child {
-	margin-bottom: -2px;
 }

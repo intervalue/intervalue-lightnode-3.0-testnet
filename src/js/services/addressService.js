@@ -1,5 +1,7 @@
 'use strict';
 'use strict';
+
+var wallet = require('intervaluecore/wallet');
 angular.module('copayApp.services')
   .factory('addressService', function(profileService, $log, $timeout) {
     var root = {};
@@ -49,6 +51,13 @@ angular.module('copayApp.services')
             });
         }
     };
+
+
+      root.getAddressToChat = function(walletId, cb) {
+          wallet.readAddressByWallet(walletId, function (result) {
+              if (result) cb(result);
+          });
+      }
 
     return root;
   });

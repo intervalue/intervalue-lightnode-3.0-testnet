@@ -15,7 +15,6 @@
 
 .newsinc p {
     font-size: 13px;
-    font-family: PingFangSC-Regular;
     font-weight: 400;
     color: rgba(50, 50, 50, 1);
     line-height: 22px;
@@ -25,3 +24,211 @@
 .newsinc img{
     width:100%;
 }
+
+
+
+/*eitcorrespondentdevie   start*/
+.splitt{
+    height:13px;
+    background-color: #f0f2f5;
+}
+.addeditcd{
+    padding: 11px 15px;
+}
+
+.addeditcd .address{
+    margin-top:12px;
+    height:65px;
+    background:rgba(255,255,255,1);
+}
+
+.addeditcd .address .deviceadd{
+    padding-top:15px;
+}
+
+.addeditcd .address .deviceadd span{
+    padding-top:12px;
+    margin-left:14px;
+    font-size:16px;
+    font-family:pfmedium;
+    font-weight:500;
+    color:rgba(59,59,59,1);
+}
+
+.addeditcd .address .size-10 {
+    padding-top:6px;
+    margin-left:35px;
+    background:rgba(255,255,255,1);
+}
+
+.addeditcd .m20t{
+    margin-top:0px;
+}
+
+.addeditcd .m20t .renameadd{
+    padding-top:13px;
+}
+
+.addeditcd .m20t .renameadd span{
+    font-size:16px;
+    font-family:pfmedium;
+    font-weight:500;
+    color:rgba(59,59,59,1);
+    line-height:22px;
+    margin-left:14px;
+}
+
+.addeditcd .m20t .chatcname{
+    padding-left:34px;
+    padding-right:15px;
+}
+
+.addeditcd .m20t .chatcname #name{
+    padding-top:13px;
+    border-bottom: 1px solid #EDEEF0;
+}
+
+.addeditcd .purge_chat{
+    margin-top:20px;
+}
+
+.addeditcd .purge_chat a{
+    font-size:14px;
+    font-weight:400;
+    color:rgba(212,87,87,1);
+    line-height:20px;
+    text-align:center;
+}
+
+
+.addeditcd  .addbutton{
+    margin-top:30px;
+    font-size: 14px;
+    font-weight:400;
+    width: 100%;
+    line-height: 45px;
+    position: static;
+    background-color: rgb(59, 59, 59);
+    height:45px;
+    padding:0;
+    border-radius: 3px;
+    color:rgba(255,255,255,1);
+}
+
+/*eitcorrespondentdevie   end*/
+
+
+/*inviteCOrrespondentDevice  start*/
+.addinvitecd{
+    background-color:#F9FAFC;
+    height:800px;
+}
+
+.addinvitecd .myaddress{
+    margin:15px 15px;
+    background:rgba(255,255,255,1);
+    box-shadow:0px 0px 8px 0px rgba(220,220,220,0.5);
+    border-radius:5px;height:350px;
+}
+
+.addinvitecd .myaddress span{
+    margin-left:28px;
+    height:22px;
+    font-size:16px;
+    font-family:PingFangSC-Medium;
+    font-weight:500;
+    color:rgba(50,50,50,1);
+    line-height:66px;
+}
+
+.addinvitecd .myaddress .copycode{
+    width:185px;
+    height:185px;
+    margin:0 auto;
+}
+
+.addinvitecd .myaddress .secret{
+
+}
+
+.addinvitecd  .m10t{
+    margin-top:40px;
+    height:17px;
+    font-size:12px;
+    font-family:PingFangSC-Medium;
+    font-weight:500;
+    color:rgba(50,50,50,1);
+    line-height:17px;
+}
+
+.addinvitecd  .m10t span{
+    margin-left:29px;
+    margin-top:40px;
+    height:17px;
+    font-size:12px;
+    font-family:PingFangSC-Medium;
+    font-weight:500;
+    color:rgba(50,50,50,1);
+    line-height:17px;
+}
+
+
+.addinvitecd .row input{
+    width:100%;
+    margin-top:30px;
+    margin-left:15px;
+    height:45px;
+    line-height: 45px;
+    background-color: rgb(59, 59, 59);
+    padding:0;
+    border-radius: 3px;
+    font-family:PingFangSC-Regular;
+    font-size: 14px;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+}
+
+.addinvitecd .text-center .button{
+    width:135px;
+    height:40px;
+    background:rgba(69,173,142,1);
+    box-shadow:0px 6px 8px -7px rgba(69,173,142,1);
+    border-radius:29px;
+
+}
+
+.addinvitecd .text-center .button .fi-share{
+    width:14px;
+    height:16px;
+    color:rgba(255,255,255,1);
+}
+
+.addinvitecd .text-center .button span{
+    width:70px;
+    height:20px;
+    font-size:14px;
+    font-family:PingFangSC-Medium;
+    font-weight:500;
+    color:rgba(255,255,255,1);
+    line-height:20px;
+    margin-left:12px;
+}
+/*inviteCOrrespondentDevice  end*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

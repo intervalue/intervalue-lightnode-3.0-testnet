@@ -1,0 +1,97 @@
+<!-- 要求特定金额对应视图 -->
+<div class="modal-content fix-modals-touch chatmodal" ng-controller="editCorrespondentDeviceController as editCont">
+    <div >
+        <nav class="tab-bar">
+            <section class="left-small">
+                <a ng-click="cancel()">
+                    <img src="./img/chatbackstate.png">
+                </a>
+            </section>
+
+            <section class="middle tab-bar-section">
+                <h1 class="title ellipsis" translate>
+                    Request payment
+                </h1>
+            </section>
+        </nav>
+    </div>
+    <!-- amountInSmallestUnits = false -->
+    <div class="f9fafch"></div>
+    <form name="amountForm" class="ammountlr" ng-submit="submitForm(amountForm)" novalidate>
+        <!-- 金额 -->
+        <div class="chatbiline">
+            <ul class="m0">
+                <li>
+                    <div class="liin">
+                        <div class="ld">
+                            <div class="limg">
+                                <img src="./img/setaddr.png"/>
+                            </div>
+                            <span translate>Address</span>
+                        </div>
+                        <div class="rd">
+                            <input type="hidden" name="address" ng-model= editCont.address>
+                            <span >{{editCont.address}}</span>
+                        </div>
+                    </div>
+                </li>
+                <li ng-click="showselectwt = true;">
+                    <div class="liin">
+                        <div class="ld">
+                            <div class="limg">
+                                <img src="./img/setwallet.png"/>
+                            </div>
+                            <span translate>Choose a collection wallet</span>
+                        </div>
+                        <div class="rd">
+                            <div class="chatsetinfo">
+                                <div class="chatinfoname"><img src="{{editCont.image}}"/> {{editCont.walletName}}</div>
+                                <div class="chatinfomon"><span translate>Available amount</span>:&nbsp;<span>{{editCont.stables}}</span></div>
+                            </div>
+                            <img src="./img/more.png" />
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="p15h">
+            <!-- Amount -->
+            <div class="adcpitem" style="margin-top: 16px;">
+                <div mdinputc class="adcpmdic">
+                    <label translate mdlabel for="label">Amount</label>
+                    <input mdinput type="number" id="amount" name="amount" ng-maxlength="18" maxlength="18"
+                           ng-model="_customAmount" valid-amount="{{index.arrBalances[index.assetIndex].asset}}" required autocomplete="off" >
+                    <a class="postfix" ng-if="index.arrBalances[index.assetIndex].asset === 'base'">{{unitName}}</a>
+                    <a class="f9fafccolor postfix" ng-if="index.arrBalances[index.assetIndex].asset === index.BLACKBYTES_ASSET">{{bbUnitName}}</a>
+                    <a class="f9fafccolor postfix" ng-if="index.arrBalances[index.assetIndex].name">{{index.arrBalances[index.assetIndex].name}}</a>
+                    <a class="f9fafccolor postfix" ng-if="index.arrBalances[index.assetIndex].asset !== 'base' && index.arrBalances[index.assetIndex].asset !== index.BLACKBYTES_ASSET && !index.arrBalances[index.assetIndex].name">of
+                        {{index.arrBalances[index.assetIndex].asset.substr(0,4)}}</a>
+                </div>
+            </div>
+            <button type="submit" ng-disabled="amountForm.$invalid" translate class="m24t">
+                OK
+            </button>
+        </div>
+    </form>
+    <div ng-show="showselectwt" class="popconfirm">
+        <div class="popmask" ng-click="showselectwt = false;"></div>
+        <div class="popcontentwt">
+            <ul class="m0">
+                <li ng-repeat="item in index.walletInfo" ng-click="editCont.insertMyAddress(item.wallet,item.stables,item.walletName,item.image);">
+                    <div class="liin">
+                        <div class="ld">
+                            <span class="greendot"></span>
+                            <div class="limg">
+                                <img ng-src="{{item.image}}" />
+                            </div>
+                            <span>{{item.walletName}}</span>
+                        </div>
+                        <div class="rd">
+                            <span translate>Available amount</span>:&nbsp;<span>{{item.stables}}</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

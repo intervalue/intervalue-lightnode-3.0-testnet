@@ -280,7 +280,7 @@
   
           <span ng-show="!btx.claimed && btx.mnemonic" class="external-link">
   
-            (<a href="#" ng-click="$root.$emit('claimTextcoin', btx.mnemonic.split('-').join(' '));" style="padding: 0; color: inherit;">claim back</a>)
+            (<a ng-click="$root.$emit('claimTextcoin', btx.mnemonic.split('-').join(' '));" style="padding: 0; color: inherit;">claim back</a>)
   
           </span>
   
