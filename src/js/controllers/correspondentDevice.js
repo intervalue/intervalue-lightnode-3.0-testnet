@@ -1058,7 +1058,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     }
                     //var asset = form.asset.$modelValue;
                     var asset = $scope.index.arrBalances[$scope.index.assetIndex].asset;
-                    if (!asset)chrome-extension://giijcmkcibbehagicnfbfiealkkmjelg/public/img/chatbackstate.png
+                    if (!asset)
                         throw Error("no asset");
                     var amountInSmallestUnits = profileService.getAmountInSmallestUnits(amount/1000000, asset);
                     var params = 'amount='+amountInSmallestUnits;
