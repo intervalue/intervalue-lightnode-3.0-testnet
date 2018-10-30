@@ -32,7 +32,7 @@
 		<div class="mtab chatbiline" ng-class="{'active': mtab == 1}" ng-init="mtab = 1">
 			<ul class="no-bullet m0 correspondentList" ng-init="readList()">
 				<!-- 聊天联系人列表 -->
-				<li ng-click="showCorrespondent(correspondent)" ng-repeat="correspondent in list | orderBy:newMsgByAddressComparator">
+				<li ng-click="showCorrespondent(correspondent)" ng-repeat="correspondent in list | orderBy:newMsgByAddressComparator" chat-swiper-left="newsData('up')">
 					<div class="liin">
 						<div class="ld">
 							<div class="correspondentlist_badge"
