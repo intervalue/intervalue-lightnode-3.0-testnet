@@ -702,6 +702,8 @@ API.prototype.initDeviceProperties = function (xPrivKey, device_address, hub, de
     console.log("device priv key="+Bitcore.HDPrivateKey.fromString(xPrivKey).derive("m/1'").privateKey.bn.toBuffer({size:32}).toString("base64"));
     */
     device.setDevicePrivateKey(Bitcore.HDPrivateKey.fromString(xPrivKey).derive("m/1'").privateKey.bn.toBuffer({ size: 32 }));
+      var device = require('intervaluecore/device.js');
+      device.loginToHub();
   }
   catch (e) {
     console.log("error in initDeviceProperties: " + e);
