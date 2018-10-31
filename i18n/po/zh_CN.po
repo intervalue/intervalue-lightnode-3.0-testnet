@@ -2497,11 +2497,18 @@ msgid "Quotes"
 msgstr "行情"
 
 msgid "views"
-msgstr "查看"
+msgstr "浏览"
 
-msgid "Loading"
-msgstr "加载中"
+msgid "Market value"
+msgstr "市值"
 
+msgid "Price"
+msgstr "价格"
 
+msgid "Latest gains"
+msgstr "最新涨幅"
+
+msgid "views"
+msgstr "浏览"
 
 
