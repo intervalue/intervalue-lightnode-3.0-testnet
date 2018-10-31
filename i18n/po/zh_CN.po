@@ -2487,7 +2487,20 @@ msgstr "松开刷新"
 msgid "Pull down to refresh"
 msgstr "下拉刷新"
 
+msgid "Newest"
+msgstr "最新"
 
+msgid "Newsletter"
+msgstr "快讯"
+
+msgid "Quotes"
+msgstr "行情"
+
+msgid "Loading"
+msgstr "加载中"
+
+msgid "Loading"
+msgstr "加载中"
 
 
 

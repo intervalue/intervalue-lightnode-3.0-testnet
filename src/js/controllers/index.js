@@ -1783,7 +1783,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     });
 
     $rootScope.$on('Local/NeedsPassword', function (event, isSetup, error_message, cb) {
-        console.log('NeedsPassword');
         self.askPassword = {
             isSetup: isSetup,
             error: error_message,
@@ -1996,6 +1995,50 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         return null
     };
 
+    /*self.newsData = function (upyn) {
+        if(upyn == 'up'){
+            news.getNewsData(6,1,null,function(res) {
+                if(!!res && res.code == 0) {
+                    angular.element(document.getElementById('newupheight')).css('display', 'none');
+                    self.newslists = res.page.list;
+                    self.newslist = res.page.list;
+                    self.newspage = 2;
+                    $timeout(function(){
+                        $scope.$apply();
+                    })
+                    return;
+                }else
+                    console.error("error~!");
+            })
+        }else{
+            news.getNewsData(6,self.newspage,null,function(res) {
+                if(!!res && res.code == 0) {
+                    self.shownewsloading = false;
+                    if(JSON.stringify(self.newslists) == '[]'){
+                        self.newslists = res.page.list;
+                        self.newslist = res.page.list;
+                        self.newspage += 1;
+                        $timeout(function(){
+                            $scope.$apply();
+                        })
+                    }else{
+                        self.newslists = self.newslists.concat(res.page.list);
+                        self.newslist = self.newslists;
+                        if(self.newspage == res.page.totalPage){
+                            self.shownonews = true;
+                            self.shownewsloading = false;
+                        }
+                        self.newspage += 1;
+                        $timeout(function(){
+                            $scope.$apply();
+                        });
+                        return;
+                    }
+                }else
+                    console.error("error~!");
+            })
+        }
+    };*/
     self.newsData = function (upyn) {
         if(upyn == 'up'){
             news.getNewsData(6,1,null,function(res) {
@@ -2013,8 +2056,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             })
         }else{
             news.getNewsData(6,self.newspage,null,function(res) {
-
-                console.log(res);
                 if(!!res && res.code == 0) {
                     self.shownewsloading = false;
                     if(JSON.stringify(self.newslists) == '[]'){
@@ -2070,7 +2111,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                         }
                     }
                     self.quicklistshow = res.page.list;
-                    console.log(self.quicklist)
                     self.quicklist = self.quicklists;
                     self.quickpage = 2;
                     $timeout(function () {
@@ -2111,6 +2151,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     self.quickpage += 1;
                     $timeout(function () {
                         if(self.quickpage == 2){
+                            console.log('99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999')
+                            console.log(res.page.list[0].grayweek)
                             angular.element(document.getElementById('datenow')).html(res.page.list[0].grayweek);
                         }else{
                             return;
@@ -2126,8 +2168,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.currencyData = function (upyn) {
         //inve 行情
         news.getInveData2(function (res) {
-            console.log(111111111111111111111111111111111111111)
-            console.log(res)
             if(!!res && res != null) {
                 self.coininvelist = res.page.list;
             }
@@ -2193,14 +2233,10 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     self.quickequaltop = function(){
         var curtop = document.getElementById('new2tab').scrollTop;
-        // console.log(curtop)
         var dateall = document.querySelectorAll('.news .letterlist .itemin .date');
-       // console.log(dateall)
-       //  self.currentdddddDate = dateall[0];
         for(var i = 1; i < dateall.length; i++){
-            // console.log(dateall[i].innerText);
             if(self.currentdddddDate){
-                if(curtop >= dateall[i].offsetTop - 26  && curtop <= dateall[i].offsetTop + 26 ){
+                if(curtop >= dateall[i].offsetTop - 78  && curtop <= dateall[i].offsetTop + 78 ){
                     if(curtop < dateall[i].offsetTop){
                         self.currentdddddDate = dateall[i-1]
                     }else{
