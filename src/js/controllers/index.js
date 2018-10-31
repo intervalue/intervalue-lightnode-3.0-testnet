@@ -56,6 +56,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.shownocoin = false;
     self.shownewstab = '';
     self.quickscrolltop = 0;
+    self.quickdatanow = '';
     self.currentdddddDate = null;
     self.showdollar = true;
     self.invedollar = 1;
@@ -1973,7 +1974,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         }
         return null
     };
-    //获取快讯固定的时间
+    //获取快讯滚动的时间
     self.getDateNow =  function(datestr){
         if(datestr){
             let qdatearr = datestr.split('-');
@@ -2028,9 +2029,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     };*/
     self.newsData = function (upyn) {
         if(upyn == 'up'){
-            news.getNewsData(6,1,null,function(res) {
+            news.getNewsData(20,1,null,function(res) {
                 if(!!res && res.code == 0) {
-                    console.log(res)
                     //给返回对象加字段
                     lodash.forEach(res.page.list, function(value, key){
                         value.greentime = self.getTimeFromNow(value.createTime);
@@ -2047,9 +2047,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     console.error("error~!");
             })
         }else{
-            news.getNewsData(6,self.newspage,null,function(res) {
+            news.getNewsData(20,self.newspage,null,function(res) {
                 if(!!res && res.code == 0) {
-
                     self.shownewsloading = false;
                     //给返回对象加字段
                     lodash.forEach(res.page.list, function(value, key){
@@ -2083,7 +2082,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     self.quickData = function (upyn) {
         if(upyn == 'up'){
-            news.getQuickData(100,1,null,null,function(res) {
+            news.getQuickData(20,1,null,null,function(res) {
                 var list = [];
                 if(!!res && res.code == 0) {
                     angular.element(document.getElementById('quickupheight')).css('display', 'none');
@@ -2111,14 +2110,14 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     self.quicklist = self.quicklists;
                     self.quickpage = 2;
                     $timeout(function () {
-                        angular.element(document.getElementById('datenow')).html(res.page.list[0].grayweek);
+                        self.quickdatanow = res.page.list[0].grayweek;
                         $scope.$apply();
                     });
                 }else
                     console.error("error~!");
             });
         }else{
-            news.getQuickData(6,self.quickpage,null,null,function(res) {
+            news.getQuickData(20,self.quickpage,null,null,function(res) {
                 var list = [];
                 if(!!res && res.code == 0) {
                     //给返回对象加字段
@@ -2148,7 +2147,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     self.quickpage += 1;
                     $timeout(function () {
                         if(self.quickpage == 2){
-                           angular.element(document.getElementById('datenow')).html(res.page.list[0].grayweek);
+                            self.quickdatanow = res.page.list[0].grayweek;
                         }else{
                             return;
                         }
@@ -2237,8 +2236,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     }else{
                         self.currentdddddDate = dateall[i]
                     }
-
-                    angular.element(document.getElementById('datenow')).html(self.currentdddddDate.innerText);
+                    self.quickdatanow = self.currentdddddDate.innerText;
                 }
             }else{
                 self.currentdddddDate = dateall[0];
