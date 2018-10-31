@@ -10,7 +10,7 @@
         <li ng-repeat="currency in prefCoin.availableCurrenry" ng-click="prefCoin.save(currency.isoCode)">
             <div class="ld">
                 <span translate ng-show="prefCoin.currentLanguageName == '中文'">{{currency.name}}</span>
-                <span translate ng-show="prefCoin.currentLanguageName == 'English'" >{{currency.isoCode}}</span>
+                <span translate ng-show="prefCoin.currentLanguageName == 'English'" >{{currency.enname}}</span>
             </div>
             <div class="rd">
                 <img src="./img/right.png" ng-show="index.defaultCurrencyIsoCode == currency.isoCode"/>

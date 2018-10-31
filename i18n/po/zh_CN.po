@@ -2513,3 +2513,30 @@ msgstr "美元"
 
 msgid "CNY"
 msgstr "人民币"
+
+msgid "Currency"
+msgstr "计价货币"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
