@@ -358,7 +358,7 @@
                         <div class="info">
                             <div class="title" ng-click="index.openNewsinModal(item.id)" >{{item.title}}</div>
                             <div class="litinfo">
-                                <div class="time">{{item.type}} <span>{{item.publishTime}}</span></div>
+                                <div class="time">{{item.type}} <span>{{item.greentime}}</span></div>
                                 <div class="browse">{{item.pageviews}} <span translate>views</span></div>
                             </div>
                         </div>
@@ -381,7 +381,7 @@
                     </div>
                     <div class="datenow" id="datenow"></div>
                     <div class="itemin" ng-repeat="(key,item) in index.quicklist track by $index">
-                        <div class="date">{{key}}{{this.offsetTop}}</div>
+                        <div class="date">{{key}}</div>
                         <div class="itemlr" ng-repeat="itemin in item">
                             <div class="item">
                                 <div class="time">{{itemin.greenhms}}</div>
@@ -398,7 +398,7 @@
                 <div ng-show="index.shownoquick" class="nomorenews"><img src="./img/nomore.png" /><span translate>No more content</span></div>
                 <div ng-show="index.showquicksloading" class="shownewsloading"><img src="./img/loading.png" /><span translate>Loading</span></div>
             </div>
-            <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new3'}" id="new3tab" homescrolled="index.loadmore('new3tab', 'new3tablist')">
+            <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new3'}" id="new3tab">
                 <div ng-if="index.coinlist == ''" class="nonews">
                     <div class="nonewsin">
                         <img src="./img/nonews.png" />
@@ -420,15 +420,16 @@
                         <div class="item">
                             <div class="leftcoininfo">
                                 <div class="coinimg">
-                                    <img ng-src="./img/qidongyeicon.png" />
+                                    <img src="./img/qidongyeicon.png" />
                                     <span class="nameshort">{{item.name}}</span>
+                                    <span class="name">{{item.cname}}</span>
                                 </div>
-                                <div class="numallin">市值：¥ <span>{{item.value}}</span>亿 <span class="name">{{item.cname}}</span></div>
+                                <div class="numallin"><span translate>Market value</span>：¥ <span>{{item.value}}</span></div>
                             </div>
-                            <div class="pricein" ng-class="{ 'priceblue': item.quoteChange > 0, 'pricered': item.quoteChange < 0}">¥{{item.price}}</div>
-                            <div class="gainsin" ><div class="gainsinfo"><span>{{item.quoteChange}}</span></div></div>
-                            <div class="gainsin priceblue" ng-if="item.quoteChange > 0"><div class="gainsinfo">+<span>{{item.quoteChange | number:2}}</span></div></div>
-                            <div class="gainsin pricered" ng-if="item.quoteChange < 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}</span></div></div>
+                            <div class="pricein" ng-class="{ 'priceblue': item.quote_change > 0, 'pricered': item.quote_change < 0}">¥{{item.price}}</div>
+                            <div class="gainsin" ><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
+                            <div class="gainsin priceblue" ng-if="item.quote_change > 0"><div class="gainsinfo">+<span>{{item.quote_change | number:2}}%</span></div></div>
+                            <div class="gainsin pricered" ng-if="item.quote_change < 0"><div class="gainsinfo"><span>{{item.quote_change | number:2}}%</span></div></div>
                         </div>
                     </div>
                     <div class="itemin" ng-repeat="item in index.coinlist track by $index">
@@ -437,11 +438,12 @@
                                 <div class="coinimg">
                                     <img ng-src="{{item.coinImgHerf}}" />
                                     <span class="nameshort">{{item.name}}</span>
+                                    <span class="name">{{item.cname}}</span>
                                 </div>
-                                <div class="numallin">市值：¥ <span>{{item.value}}</span>亿 <span class="name">{{item.cname}}</span></div>
+                                <div class="numallin"><span translate>Market value</span>：¥ <span>{{item.value}}</span></div>
                             </div>
                             <div class="pricein" ng-class="{ 'priceblue': item.quoteChange > 0, 'pricered': item.quoteChange < 0}">¥{{item.price}}</div>
-                            <div class="gainsin" ng-if="item.quoteChange == 0"><div class="gainsinfo"><span>{{item.quoteChange}}%</span></div></div>
+                            <div class="gainsin" ng-if="item.quoteChange == 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
                             <div class="gainsin priceblue" ng-if="item.quoteChange > 0"><div class="gainsinfo">+<span>{{item.quoteChange | number:2}}%</span></div></div>
                             <div class="gainsin pricered" ng-if="item.quoteChange < 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
                         </div>

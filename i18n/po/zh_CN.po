@@ -2496,8 +2496,8 @@ msgstr "快讯"
 msgid "Quotes"
 msgstr "行情"
 
-msgid "Loading"
-msgstr "加载中"
+msgid "views"
+msgstr "查看"
 
 msgid "Loading"
 msgstr "加载中"
