@@ -866,6 +866,37 @@ angular.module('copayApp.controllers')
 				this.error = gettext('Unable to send transaction proposal');
 				return;
 			}
+			//通过聊天跳转付款，选择地址后，需要判断
+            // require('intervaluecore/wallet').readAddressByWallet(fc.credentials.walletId,function (result) {
+            // 	let from_adress = form.from_address;
+            // 	if(result != from_adress){
+            //         db.query("select wallet from my_addresses where address = ?", [from_adress], function (rows) {
+            //             if (rows != null && rows.length === 1) {
+            //                 profileService.setAndStoreFocusToPayment(rows[0].wallet,function () {
+            //                     if (fc.isPrivKeyEncrypted()) {
+            //                         profileService.unlockFC(null, function(err) {
+            //                             if (err)
+            //                                 return self.setSendError(err.message);
+            //                             return self.submitPayment();
+            //                         });
+            //                         return;
+            //                     }
+            //                 })
+            //             }
+            //         });
+            //
+			// 	}else{
+            //         if (fc.isPrivKeyEncrypted()) {
+            //             profileService.unlockFC(null, function(err) {
+            //                 if (err)
+            //                     return self.setSendError(err.message);
+            //                 return self.submitPayment();
+            //             });
+            //             return;
+            //         }
+			// 	}
+            //
+			// });
 
 			if (fc.isPrivKeyEncrypted()) {
 				profileService.unlockFC(null, function(err) {

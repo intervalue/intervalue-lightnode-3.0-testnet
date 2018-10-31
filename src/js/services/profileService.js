@@ -107,6 +107,43 @@ angular.module('copayApp.services')
             // return cb();
         };
 
+        root._setFocusToPayment = function (walletId, cb) {
+            $log.debug('Set focus:', walletId);
+
+            // Set local object
+            if (walletId) {
+                var device = require('intervaluecore/device');
+                device.uPMyHotDeviceAddress(walletId);
+                root.focusedClient = root.walletClients[walletId];
+            }
+            else
+                root.focusedClient = [];
+
+            if (lodash.isEmpty(root.focusedClient)) {
+                root.focusedClient = root.walletClients[lodash.keys(root.walletClients)[0]];
+            }
+
+            // Still nothing?
+            if (lodash.isEmpty(root.focusedClient)) {
+                $rootScope.$emit('Local/NoWallets');
+            } else {
+                $rootScope.$emit('Local/NewFocusedWalletToPayment', function () { return cb() });
+            }
+
+            // return cb();
+        };
+
+        /**
+         * 聊天窗口跳转付款，选择钱包
+         * @param walletId
+         * @param cb
+         */
+        root.setAndStoreFocusToPayment = function (walletId, cb) {
+            root._setFocusToPayment(walletId, function () {
+                storageService.storeFocusedWalletId(walletId, cb);
+            });
+        };
+
         root.setAndStoreFocus = function (walletId, cb) {
             root._setFocus(walletId, function () {
                 storageService.storeFocusedWalletId(walletId, cb);

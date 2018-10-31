@@ -1761,6 +1761,12 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         go.walletHome();
     });
 
+    $rootScope.$on('Local/NewFocusedWalletToPayment', function (event, cb) {
+        console.log('on Local/NewFocusedWallet');
+        self.setFocusedWallet(cb);
+
+    });
+
     $rootScope.$on('Local/SetTab', function (event, tab, reset, swtichToHome) {
         //console.log("SetTab " + tab + ", reset " + reset);
         self.setTab(tab, reset, null, swtichToHome);
