@@ -16,6 +16,7 @@ angular.module('copayApp.controllers').controller('preferencesGlobalController',
       this.hub = config.hub;
       this.currentLanguageName = uxLanguage.getCurrentLanguageName();
       this.currentCurrencyName = uxCurrency.getCurrentCurrencyName();
+      this.currentCurrencyEnName = uxCurrency.getCurrentCurrencyEnName();
       this.torEnabled = conf.socksHost && conf.socksPort;
       $scope.pushNotifications = config.pushNotifications.enabled;
     };

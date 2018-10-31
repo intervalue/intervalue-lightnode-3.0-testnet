@@ -51,6 +51,10 @@ angular.module('copayApp.services')
             return root.getName(root.currentCurrency);
         };
 
+        root.getCurrentCurrencyEnName = function() {
+            return root.getEnName(root.currentCurrency);
+        };
+
         root.getCurrentCurrencyInfo = function() {
             return lodash.find(root.availableCurrency, {
                 'isoCode': root.currentCurrency
@@ -80,6 +84,12 @@ angular.module('copayApp.services')
             return lodash.result(lodash.find(root.availableCurrency, {
                 'isoCode': lang
             }), 'name');
+        };
+
+        root.getEnName = function(lang) {
+            return lodash.result(lodash.find(root.availableCurrency, {
+                'isoCode': lang
+            }), 'enname');
         };
 
         return root;
