@@ -81,7 +81,7 @@
 /*addwallet start*/
 
 /*importwallet start*/
-.tabclicktitle{background:#FAFAFA;height:45px;width:100%;}
+.tabclicktitle{background:#FAFAFA;height:30px;width:100%;}
 .addwimportwallet .addwcontentin{padding-top:20px;}
 .addwcontent textarea{padding:12px;height:105px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;border-radius:3px;border:1px solid #D6D6D6;resize:none;color:#323232;font-size:12px;margin-top:10px;margin-bottom:30px;}
 
@@ -416,6 +416,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .nomorenews img{margin-right:10px;}
 .tabnewsout{left:calc(-500vw);visibility:hidden;    /*transform: translateX(-100%);*/}
 #news .tabnewsin{left:0;visibility:visible;    /*transform: translateX(0);*/}
+.news .tab-container a{padding:5px 0;}
 .newsupheight{width:100%;background:#fff;font-size:12px;font-weight:400;color:rgba(144,144,144,1);text-align:center;display:none;}
 .newuprelease,
 .newupload{display:none;}
@@ -431,8 +432,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 /*资讯*/
 .news .tab-container{width:33.3%;}
 .news .tabclicktitle{background:#FDFEFF;}
-.news .addwcontent{    /*top: 90px;*/
-    top:93px;z-index:-1;    /*height: calc(100vh - 138px);*/height:calc(100vh - 143px);}
+.news .addwcontent{top:78px;z-index:-1; height:calc(100vh - 126px);}
 
 /*最新*/
 
@@ -449,14 +449,14 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .newslist .item{height:100px;display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-moz-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:start;-moz-box-align:start;-ms-flex-align:start;align-items:flex-start;padding:15px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;border-bottom:1px solid #EEEEEE;}
 .news .newslist .item:nth-child(2){border-top:1px solid #EEEEEE;}
 .news .newslist .item:last-child{border-bottom:none;}
-.news .newslist .item img{width:100px;height:65px;margin-right:10px;display:inline-block;-ms-flex-negative:0;flex-shrink:0;cursor:pointer;}
+.news .newslist .item img{width:100px;height:65px;margin-right:10px;display:inline-block;-ms-flex-negative:0;flex-shrink:0;cursor:pointer;border-radius:1px;}
 .news .newslist .item .info{width:100%;}
 .news .newslist .item .title{font-size:14px;color:#323232;height:40px;line-height:20px;margin-bottom:10px;-webkit-box-orient:vertical;-webkit-line-clamp:2;text-overflow:ellipsis;overflow:hidden;display:-webkit-box;cursor:pointer;-ms-word-break:break-all;word-break:break-all;}
 .news .newslist .item .litinfo{font-size:10px;display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-moz-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-moz-box-align:center;-ms-flex-align:center;align-items:center;color:#45AD8E;}
 .news .newslist .item .litinfo span{color:#909090;}
 
 /*快讯*/
-.news .letterlist .datenow{text-align:left;padding:0 18px;font-size:10px;color:#909090;background:#f9fafc;height:26px;line-height:26px;position:fixed;left:0;top:90px;    /*top: 0;*/width:100%;z-index:5;}
+.news .letterlist .datenow{text-align:left;padding:0 18px;font-size:10px;color:#909090;background:#f9fafc;height:26px;line-height:26px;position:fixed;left:0;top:78px;width:100%;z-index:5;}
 .news .letterlist .itemin .date{text-align:left;padding:0 18px;font-size:10px;color:#909090;background:#f9fafc;height:26px;line-height:26px;}
 .news .letterlist .itemin .itemlr{padding:0 22px 0 18px;}
 .news .letterlist .itemin .item{border-left:1px solid #DEDEDE;padding:14px 0 0 16px;}
@@ -474,7 +474,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .letterlist .itemin .item .desc{font-size:12px;font-weight:400;color:#646464;-ms-word-break:break-all;word-break:break-all;}
 
 /*行情*/
-.news .quotelist .titlelabel{padding:0 15px;background:#f9fafc;height:34px;line-height:34px;position:fixed;left:0;top:92px;    /*top:0;*/width:100%;z-index:5;font-size:12px;color:rgba(50,50,50,1);}
+.news .quotelist .titlelabel{padding:0 15px;background:#f9fafc;height:34px;line-height:34px;position:fixed;left:0;top:78px;width:100%;z-index:5;font-size:12px;color:rgba(50,50,50,1);}
 .news .quotelist .titlelabel .numall{width:calc(100% - 175px);text-align:left;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding-left:32px;}
 .news .quotelist .titlelabel .sorttitle{padding-right:5px;display:inline-block;height:34px;white-space: nowrap;}
 .news .quotelist .titlelabel .cointri{position:relative;width:9px;height:10px;display:inline-block;}
@@ -490,7 +490,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .quotelist .itemin:nth-child(3) .item{border-top:1px solid #DEDEDE;}
 .news .quotelist .itemin .item .leftcoininfo{width:calc(100% - 175px);}
 .news .quotelist .itemin .item .coinimg{margin-bottom:6px;}
-.news .quotelist .itemin .item .coinimg img{margin-right:16px;vertical-align:middle;width:20px;height:20px;}
+.news .quotelist .itemin .item .coinimg img{margin-right:10px;vertical-align:middle;width:20px;height:20px;}
 .news .quotelist .itemin .item .coinimg .nameshort{font-size:16px;font-weight:400;color:rgba(50,50,50,1);vertical-align:middle;}
 .news .quotelist .itemin .item .coinimg .fullname{font-size:10px;font-weight:400;color:#909090;vertical-align:middle;margin-left:6px;}
 .news .quotelist .itemin .item .numallin{font-size:12px;color:rgba(144,144,144,1);}

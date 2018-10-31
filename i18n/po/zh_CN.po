@@ -2467,7 +2467,7 @@ msgid "Payment received:"
 msgstr "已收到付款："
 
 msgid "News"
-msgstr "新闻"
+msgstr "资讯"
 
 msgid "News detail"
 msgstr "新闻详情"
