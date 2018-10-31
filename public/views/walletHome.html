@@ -331,14 +331,14 @@
                 </section>
             </nav>
             <div class="tabclicktitle">
-                <div class="tab-container" ng-class="{'selected': index.shownewstab == 'new1'}">
-                    <a ng-click="index.shownewstab = 'new1';index.newsanimate = index.newsanimate + 1;" translate>Newest</a>
+                <div class="tab-container" ng-click="index.shownewstab = 'new1';index.newsanimate = index.newsanimate + 1;" ng-class="{'selected': index.shownewstab == 'new1'}">
+                    <a  translate>Newest</a>
                 </div>
-                <div class="tab-container" ng-class="{'selected': index.shownewstab == 'new2'}">
-                    <a ng-click="index.shownewstab = 'new2';index.quickanimate = index.quickanimate + 1;" translate>Newsletter</a>
+                <div class="tab-container" ng-click="index.shownewstab = 'new2';index.quickanimate = index.quickanimate + 1;" ng-class="{'selected': index.shownewstab == 'new2'}">
+                    <a  translate>Newsletter</a>
                 </div>
-                <div class="tab-container" ng-class="{'selected': index.shownewstab == 'new3'}">
-                    <a ng-click="index.shownewstab = 'new3';index.coinanimate = index.coinanimate + 1;" translate>Quotes</a>
+                <div class="tab-container" ng-click="index.shownewstab = 'new3';index.coinanimate = index.coinanimate + 1;" ng-class="{'selected': index.shownewstab == 'new3'}" >
+                    <a translate>Quotes</a>
                 </div>
             </div>
             <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new1'}" id="new1tab" homescrolled="index.loadmore('new1tab', 'new1tablist')">
