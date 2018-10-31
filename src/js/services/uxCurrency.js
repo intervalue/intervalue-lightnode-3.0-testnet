@@ -4,11 +4,13 @@ angular.module('copayApp.services')
         var root = {};
 
         root.availableCurrency = [{
-            name: '美刀',
+            name: '美元',
             isoCode: 'en',
+            enname: 'USD'
         }, {
             name: '人民币',
             isoCode: 'zh_CN',
+            enname: 'CNY',
             useIdeograms: true,
         }];
 
@@ -71,9 +73,6 @@ angular.module('copayApp.services')
             }
 
             root._set(userLang);
-            // if (userLang != gettextCatalog.getCurrentCurrency()) {
-            //     root._set(userLang);
-            // }
             return userLang;
         };
 

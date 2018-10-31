@@ -5,18 +5,12 @@
 </div>
 
 
-
-<div class="content preferences" ng-controller="preferencesCurrencyController as prefLang">
+<div class="content preferences" ng-controller="preferencesCurrencyController as prefCoin">
     <ul class="no-bullet m0 ">
-       <!-- <li
-                ng-repeat="currency in prefLang.availableCurrenry"
-                ng-click="prefLang.save(currency.isoCode)" class="line-b p20 size-14">
-            <span>{{currency.name}}</span>
-            <i class="fi-check size-16 right" ng-show="index.defaultCurrencyIsoCode == currency.isoCode"></i>
-        </li>-->
-        <li ng-repeat="currency in prefLang.availableCurrenry" ng-click="prefLang.save(currency.isoCode)">
+        <li ng-repeat="currency in prefCoin.availableCurrenry" ng-click="prefCoin.save(currency.isoCode)">
             <div class="ld">
-                <span translate>{{currency.name}}</span>
+                <span translate ng-show="prefCoin.currentLanguageName == '中文'">{{currency.name}}</span>
+                <span translate ng-show="prefCoin.currentLanguageName == 'English'" >{{currency.isoCode}}</span>
             </div>
             <div class="rd">
                 <img src="./img/right.png" ng-show="index.defaultCurrencyIsoCode == currency.isoCode"/>
@@ -24,4 +18,4 @@
         </li>
     </ul>
 </div>
-<div class="extra-margin-bottom"></div>
+

@@ -2508,7 +2508,8 @@ msgstr "价格"
 msgid "Latest gains"
 msgstr "最新涨幅"
 
-msgid "views"
-msgstr "浏览"
+msgid "USD"
+msgstr "美元"
 
-
+msgid "CNY"
+msgstr "人民币"

@@ -1515,9 +1515,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     };
 
     self.setUxCurrency = function () {
-        var userLang = uxCurrency.update();
-        self.defaultCurrencyIsoCode = userLang;
-        self.defaultCurrencyName = uxCurrency.getName(userLang);
+        var userCoin = uxCurrency.update();
+        self.defaultCurrencyIsoCode = userCoin;
+        self.defaultCurrencyName = uxCurrency.getName(userCoin);
     };
 
 

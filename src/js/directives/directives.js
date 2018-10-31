@@ -899,17 +899,21 @@ angular.module('copayApp.directives')
                 raw.addEventListener("touchmove",touchMove,false);//当屏幕上滑动的时候连续地触发。在这个事件发生期间，调用preventDefault()事件可以阻止滚动。
                 raw.addEventListener("touchend",touchEnd,false);
                 function dragStart(event){//dragStart函数
-                    document.getElementById('datenow').style.display = 'none';
                     var img = new Image();
                     img.src = './img/transparent.png';
                     event.dataTransfer.setDragImage(img, 10, 10);
                     scope._start = event.pageY;
+                    if(rawp.scrollTop <= 0){
+                        document.getElementById('datenow').style.display = 'none';
+                    }else{
+                        return;
+                    }
                 }
                 function dragMove(event){//dragMove函数
-                    document.getElementById('datenow').style.display = 'none';
                     scope._end = (scope._start - event.pageY);
                     //下滑才执行操作
                     if(rawp.scrollTop <= 0){
+                        document.getElementById('datenow').style.display = 'none';
                         if(scope._end < 0){
                             releaseh(scope._end);
                         }else{
@@ -920,7 +924,6 @@ angular.module('copayApp.directives')
                     }
                 }
                 function dragEnd(event){//dragEnd函数
-                    document.getElementById('datenow').style.display = 'none';
                     scope._end = (scope._start - event.pageY);
                     if(scope._end >0){
                         resetdrag();
@@ -953,7 +956,6 @@ angular.module('copayApp.directives')
                     }
                 }
                 function touchEnd(event){//dragEnd函数
-                    document.getElementById('datenow').style.display = 'none';
                     scope._end = (scope._start - event.targetTouches[0].pageY);
                     if(scope._end >0){
                         resetdrag();

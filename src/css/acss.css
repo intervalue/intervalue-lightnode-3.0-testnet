@@ -492,6 +492,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .quotelist .itemin .item .coinimg{margin-bottom:6px;}
 .news .quotelist .itemin .item .coinimg img{margin-right:16px;vertical-align:middle;width:20px;height:20px;}
 .news .quotelist .itemin .item .coinimg .nameshort{font-size:16px;font-weight:400;color:rgba(50,50,50,1);vertical-align:middle;}
+.news .quotelist .itemin .item .coinimg .fullname{font-size:10px;font-weight:400;color:#909090;vertical-align:middle;margin-left:6px;}
 .news .quotelist .itemin .item .numallin{font-size:12px;color:rgba(144,144,144,1);}
 .news .quotelist .itemin .item .pricein{position:absolute;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);right:92px;text-align:right;font-size:16px;font-family:pfbold;font-weight:600;color:#323232;}
 .news .quotelist .itemin .item .pricein.priceblue{color:#45AD8E;}

@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('preferencesCurrencyController',
-    function($rootScope, $scope, $log, $timeout, configService, go, uxCurrency) {
+    function($rootScope, $scope, $log, $timeout, configService, go, uxCurrency, uxLanguage) {
         let news = require("intervaluecore/newsServers");
         var indexScope = $scope.index;
         this.availableCurrenry = uxCurrency.getCurrencys();
-
+        this.currentLanguageName = uxLanguage.getCurrentLanguageName();
+        this.currentCurrencyName = uxCurrency.getCurrentCurrencyName();
         this.save = function(newCurrency) {
             var opts = {
                 wallet: {
