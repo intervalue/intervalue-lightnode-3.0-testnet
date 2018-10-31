@@ -56,6 +56,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.shownocoin = false;
     self.shownewstab = '';
     self.quickscrolltop = 0;
+    self.quickdatanow = '';
     self.currentdddddDate = null;
     self.showdollar = true;
     self.invedollar = 1;
@@ -2026,8 +2027,13 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         }else{
             news.getNewsData(6,self.newspage,null,function(res) {
 
+                console.log(res);
                 if(!!res && res.code == 0) {
                     self.shownewsloading = false;
+                    //给返回对象加字段
+                    lodash.forEach(res.page.list, function(value, key){
+                        value.greentime = self.getTimeFromNow(value.createTime);
+                    })
                     if(JSON.stringify(self.newslists) == '[]'){
                         self.newslists = res.page.list;
                         self.newslist = res.page.list;
@@ -2056,7 +2062,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     self.quickData = function (upyn) {
         if(upyn == 'up'){
-            news.getQuickData(100,1,null,null,function(res) {
+            news.getQuickData(20,1,null,null,function(res) {
                 var list = [];
                 if(!!res && res.code == 0) {
                     angular.element(document.getElementById('quickupheight')).css('display', 'none');
@@ -2081,18 +2087,17 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                         }
                     }
                     self.quicklistshow = res.page.list;
-                    console.log(self.quicklist)
                     self.quicklist = self.quicklists;
                     self.quickpage = 2;
                     $timeout(function () {
-                        angular.element(document.getElementById('datenow')).html(res.page.list[0].grayweek);
+                        self.quickdatanow = res.page.list[0].grayweek;
                         $scope.$apply();
                     });
                 }else
                     console.error("error~!");
             });
         }else{
-            news.getQuickData(6,self.quickpage,null,null,function(res) {
+            news.getQuickData(20,self.quickpage,null,null,function(res) {
                 var list = [];
                 if(!!res && res.code == 0) {
                     //给返回对象加字段
@@ -2122,7 +2127,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     self.quickpage += 1;
                     $timeout(function () {
                         if(self.quickpage == 2){
-                            angular.element(document.getElementById('datenow')).html(res.page.list[0].grayweek);
+                            self.quickdatanow = res.page.list[0].grayweek;
                         }else{
                             return;
                         }
@@ -2202,21 +2207,16 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     self.quickequaltop = function(){
         var curtop = document.getElementById('new2tab').scrollTop;
-        // console.log(curtop)
         var dateall = document.querySelectorAll('.news .letterlist .itemin .date');
-        // console.log(dateall)
-        //  self.currentdddddDate = dateall[0];
         for(var i = 1; i < dateall.length; i++){
-            // console.log(dateall[i].innerText);
             if(self.currentdddddDate){
-                if(curtop >= dateall[i].offsetTop - 26  && curtop <= dateall[i].offsetTop + 26 ){
+                if(curtop >= dateall[i].offsetTop - 78  && curtop <= dateall[i].offsetTop + 78 ){
                     if(curtop < dateall[i].offsetTop){
                         self.currentdddddDate = dateall[i-1]
                     }else{
                         self.currentdddddDate = dateall[i]
                     }
-
-                    angular.element(document.getElementById('datenow')).html(self.currentdddddDate.innerText);
+                    self.quickdatanow = self.currentdddddDate.innerText;
                 }
             }else{
                 self.currentdddddDate = dateall[0];

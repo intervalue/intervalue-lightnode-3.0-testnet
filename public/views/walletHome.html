@@ -358,7 +358,7 @@
                         <div class="info">
                             <div class="title" ng-click="index.openNewsinModal(item.id)" >{{item.title}}</div>
                             <div class="litinfo">
-                                <div class="time">{{item.type}} <span>{{item.publishTime}}</span></div>
+                                <div class="time">{{item.type}} <span>{{item.greentime}}</span></div>
                                 <div class="browse">{{item.pageviews}} <span translate>views</span></div>
                             </div>
                         </div>
@@ -379,9 +379,9 @@
                         <div class="newuprelease"><img src="./img/pulldown.png" /><span translate>Pull down to refresh</span></div>
                         <div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>
                     </div>
-                    <div class="datenow" id="datenow"></div>
+                    <div class="datenow" id="datenow">{{index.quickdatanow}}</div>
                     <div class="itemin" ng-repeat="(key,item) in index.quicklist track by $index">
-                        <div class="date">{{key}}{{this.offsetTop}}</div>
+                        <div class="date">{{key}}</div>
                         <div class="itemlr" ng-repeat="itemin in item">
                             <div class="item">
                                 <div class="time">{{itemin.greenhms}}</div>
@@ -422,13 +422,14 @@
                                 <div class="coinimg">
                                     <img src="./img/qidongyeicon.png" />
                                     <span class="nameshort">{{item.name}}</span>
+                                    <span class="fullname">{{item.cname}}</span>
                                 </div>
-                                <div class="numallin"><span translate>Market value</span>：¥ <span>{{item.value}}</span><span translate>yi</span> <span class="name">{{item.cname}}</span></div>
+                                <div class="numallin"><span translate>Market value</span>：¥ <span>{{item.value}}</span></div>
                             </div>
-                            <div class="pricein" ng-class="{ 'priceblue': item.quote_change > 0, 'pricered': item.quote_change < 0}">¥{{item.price}}</div>
-                            <div class="gainsin" ><div class="gainsinfo"><span>{{item.quoteChange}}</span></div></div>
-                            <div class="gainsin priceblue" ng-if="item.quote_change > 0"><div class="gainsinfo">+<span>{{item.quote_change | number:2}}%</span></div></div>
-                            <div class="gainsin pricered" ng-if="item.quote_change < 0"><div class="gainsinfo"><span>{{item.quote_change | number:2}}%</span></div></div>
+                            <div class="pricein" ng-class="{ 'priceblue': item.quoteChange > 0, 'pricered': item.quoteChange < 0}">¥{{item.price}}</div>
+                            <div class="gainsin" ng-if="item.quoteChange == 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
+                            <div class="gainsin priceblue" ng-if="item.quoteChange > 0"><div class="gainsinfo">+<span>{{item.quoteChange | number:2}}%</span></div></div>
+                            <div class="gainsin pricered" ng-if="item.quoteChange < 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
                         </div>
                     </div>
                     <div class="itemin" ng-repeat="item in index.coinlist track by $index">
@@ -437,11 +438,12 @@
                                 <div class="coinimg">
                                     <img ng-src="{{item.coinImgHerf}}" />
                                     <span class="nameshort">{{item.name}}</span>
+                                    <span class="fullname">{{item.cname}}</span>
                                 </div>
-                                <div class="numallin"><span translate>Market value</span>：¥ <span>{{item.value}}</span><span translate>yi</span> <span class="name">{{item.cname}}</span></div>
+                                <div class="numallin"><span translate>Market value</span>：¥ <span>{{item.value}}</span></div>
                             </div>
                             <div class="pricein" ng-class="{ 'priceblue': item.quoteChange > 0, 'pricered': item.quoteChange < 0}">¥{{item.price}}</div>
-                            <div class="gainsin" ng-if="item.quoteChange == 0"><div class="gainsinfo"><span>{{item.quoteChange}}%</span></div></div>
+                            <div class="gainsin" ng-if="item.quoteChange == 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
                             <div class="gainsin priceblue" ng-if="item.quoteChange > 0"><div class="gainsinfo">+<span>{{item.quoteChange | number:2}}%</span></div></div>
                             <div class="gainsin pricered" ng-if="item.quoteChange < 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
                         </div>
@@ -526,7 +528,6 @@
                                     <!--ng-style="{'background-color':index.backgroundColor}"  translate>-->
                                     <!--Send-->
                                     <!--</button>-->
-                                    <div ng-show="home.chat" name="from_address">钱包列表</div>
                                     <button type="submit" class="m20t m20b" ng-if="mtab == 1" ng-disabled="sendPaymentForm.$invalid" translate>
                                         Send
                                     </button>
