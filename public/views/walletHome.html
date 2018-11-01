@@ -102,8 +102,8 @@
                             </div>
                             <div class="whamount"><div>{{index.ammountTatol}}</div> INVE</div>
                             <div class="whcnyd">
-                                <div ng-show="index.showdollar == true;">&asymp; $ {{index.ammountTatolNmuber * index.invedollar}}</div>
-                                <div ng-show="index.showdollar == false">&asymp; &yen; {{index.ammountTatolNmuber * index.invermb}}</div>
+                                <div ng-show="index.defaultCurrencyIsoCode == 'zh_CN';">&asymp; $ {{index.ammountTatolNmuber * index.invedollar}}</div>
+                                <div ng-show="index.defaultCurrencyIsoCode == 'zh_CN';">&asymp; &yen; {{index.ammountTatolNmuber * index.invermb}}</div>
                             </div>
                         </div>
                         <!--former carousel end...-->
