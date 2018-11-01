@@ -2028,6 +2028,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         }
     };*/
     self.newsData = function (upyn) {
+        if (navigator.onLine) {
+            self.online = true;
+        } else {
+            self.online = false;
+        }
         if(upyn == 'up'){
             news.getNewsData(20,1,null,function(res) {
                 if(!!res && res.code == 0) {
@@ -2081,6 +2086,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     };
 
     self.quickData = function (upyn) {
+        if (navigator.onLine) {
+            self.online = true;
+        } else {
+            self.online = false;
+        }
         if(upyn == 'up'){
             news.getQuickData(20,1,null,null,function(res) {
                 var list = [];
@@ -2160,6 +2170,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     };
 
     self.currencyData = function (upyn) {
+        if (navigator.onLine) {
+            self.online = true;
+        } else {
+            self.online = false;
+        }
         //inve 行情
         news.getInveData2(function (res) {
             if(!!res && res != null) {

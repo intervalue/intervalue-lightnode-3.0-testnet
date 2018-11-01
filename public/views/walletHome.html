@@ -374,7 +374,7 @@
                 <div ng-show="index.shownewsloading" class="shownewsloading"><img src="./img/loading.png" /><span translate>Loading</span></div>
             </div>
             <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new2'}" id="new2tab" quickscrolltop="index.quickequaltop()" homequiscrolled="index.loadmore('new2tab', 'new2tablist')">
-                <div ng-if="!index.online" ng-click="index.quickData();" class="nowire">
+                <div ng-if="!index.online" ng-click="index.quickData('up');" class="nowire">
                     <div class="nowirein">
                         <img src="./img/nowire.png" />
                         <div class="nowireintext" translate>The network is not strong. Please click the screen to reload.</div>
@@ -411,7 +411,7 @@
                 <div ng-show="index.showquicksloading" class="shownewsloading"><img src="./img/loading.png" /><span translate>Loading</span></div>
             </div>
             <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new3'}" id="new3tab">
-                <div ng-if="!index.online" ng-click="index.currencyData();" class="nowire">
+                <div ng-if="!index.online" ng-click="index.currencyData('up');" class="nowire">
                     <div class="nowirein">
                         <img src="./img/nowire.png" />
                         <div class="nowireintext" translate>The network is not strong. Please click the screen to reload.</div>
