@@ -135,8 +135,8 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
 
     //冷热钱包扫码开始
     function handleUriAddr(uri) {
-        if(uri.indexOf("InterValue-3.0-testnet:") != -1){
-            uri = uri.replace('InterValue-3.0-testnet:','');
+        if(uri.indexOf("InterValue-3.1-testnet:") != -1){
+            uri = uri.replace('InterValue-3.1-testnet:','');
             if(uri.length === 32) {
                 $rootScope.$emit('Local/ShadowAddress',uri);
             }            //冷钱包二维码验证
@@ -230,10 +230,10 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
     //扫码付款开始
     function handleUri(uri){
         //if (uri.indexOf("intervalue:") == -1 ) return handleFile(uri);
-        //if (uri.indexOf("InterValue-3.0-testnet:") == -1 ) return handleFile(uri);
+        //if (uri.indexOf("InterValue-3.1-testnet:") == -1 ) return handleFile(uri);
         console.log("handleUri "+uri);
         //付款扫码验证
-        if(uri.indexOf("InterValue-3.0-testnet:") != -1){
+        if(uri.indexOf("InterValue-3.1-testnet:") != -1){
             require('intervaluecore/uri.js').parseUri(uri, {
                 ifError: function(err){
                     console.log(err);

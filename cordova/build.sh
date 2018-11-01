@@ -57,7 +57,7 @@ echo "Project directory is $PROJECT"
 if [ ! -d $PROJECT ]; then
 	cd $BUILDDIR
 	echo "${OpenColor}${Green}* Creating project... ${CloseColor}"
-	cordova create ../../intervaluebuilds/project-$1 org.intervalue.wallet3 InterValue-3.0-testnet
+	cordova create ../../intervaluebuilds/project-$1 org.intervalue.wallet3 InterValue-3.1-testnet
 	checkOK
 
 	cd $PROJECT
@@ -235,19 +235,19 @@ if [ $CURRENT_OS == "IOS" ]; then
 #  mkdir -p $PROJECT/platforms/ios
 #  checkOK
 #
-#  cp ios/InterValue-3.0-testnet-Info.plist $PROJECT/platforms/ios/InterValue-3.0-testnet-Info.plist
+#  cp ios/InterValue-3.1-testnet-Info.plist $PROJECT/platforms/ios/InterValue-3.1-testnet-Info.plist
 #  checkOK
 #
-#  mkdir -p $PROJECT/platforms/ios/InterValue-3.0-testnet/Resources/icons
+#  mkdir -p $PROJECT/platforms/ios/InterValue-3.1-testnet/Resources/icons
 #  checkOK
 #
-#  mkdir -p $PROJECT/platforms/ios/InterValue-3.0-testnet/Resources/splash
+#  mkdir -p $PROJECT/platforms/ios/InterValue-3.1-testnet/Resources/splash
 #  checkOK
 #
-#  cp -R ios/icons/* $PROJECT/platforms/ios/InterValue-3.0-testnet/Resources/icons
+#  cp -R ios/icons/* $PROJECT/platforms/ios/InterValue-3.1-testnet/Resources/icons
 #  checkOK
 #
-#  cp -R ios/splash/* $PROJECT/platforms/ios/InterValue-3.0-testnet/Resources/splash
+#  cp -R ios/splash/* $PROJECT/platforms/ios/InterValue-3.1-testnet/Resources/splash
 #  checkOK
 fi
 
