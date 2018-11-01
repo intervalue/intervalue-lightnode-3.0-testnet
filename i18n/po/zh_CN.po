@@ -2517,7 +2517,8 @@ msgstr "人民币"
 msgid "Currency"
 msgstr "计价货币"
 
-
+msgid "The network is not strong. Please click the screen to reload."
+msgstr "网络不给力 请点击屏幕重新加载"
 
 
 
