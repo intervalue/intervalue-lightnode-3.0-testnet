@@ -455,7 +455,7 @@
                                     <span class="fullname">{{item.cname}}</span>
                                 </div>
                                 <div class="numallin" ng-show="index.defaultCurrencyIsoCode == 'en';"><span translate>Market value</span>：$ <span>{{item.value | number:2}}{{item.unit}}</span></div>
-                                <div class="numallin" ng-show="index.defaultCurrencyIsoCode == 'zh_CN';"><span translate>Market value</span>：￥ <span>{{item.cnyValue | number:2}}{{item.unit}}</span></div>
+                                <div class="numallin" ng-show="index.defaultCurrencyIsoCode == 'zh_CN';"><span translate>Market value</span>：￥ <span>{{item.cnyValue | number:2}}{{item.cnyUnit}}</span></div>
                             </div>
                             <div class="pricein" ng-show="index.defaultCurrencyIsoCode == 'en';" ng-class="{ 'priceblue': (item.quoteChange | number:2) > 0, 'pricered': (item.quoteChange | number:2) < 0}">${{item.price | number:4}}</div>
                             <div class="pricein" ng-show="index.defaultCurrencyIsoCode == 'zh_CN';" ng-class="{ 'priceblue': (item.quoteChange | number:2) > 0, 'pricered': (item.quoteChange | number:2) < 0}">￥{{item.cnyPrice | number:4}}</div>
@@ -473,7 +473,7 @@
                                     <span class="fullname">{{item.cname}}</span>
                                 </div>
                                 <div class="numallin" ng-show="index.defaultCurrencyIsoCode == 'en';"><span translate>Market value</span>：$ <span>{{item.value | number:2}}{{item.unit}}</span></div>
-                                <div class="numallin" ng-show="index.defaultCurrencyIsoCode == 'zh_CN';"><span translate>Market value</span>：￥ <span>{{item.cnyValue | number:2}}{{item.unit}}</span></div>
+                                <div class="numallin" ng-show="index.defaultCurrencyIsoCode == 'zh_CN';"><span translate>Market value</span>：￥ <span>{{item.cnyValue | number:2}}{{item.cnyUnit}}</span></div>
                             </div>
                             <div class="pricein" ng-show="index.defaultCurrencyIsoCode == 'en';" ng-class="{ 'priceblue': (item.quoteChange | number:2) > 0, 'pricered': (item.quoteChange | number:2) < 0}">${{item.price | number:4}}</div>
                             <div class="pricein" ng-show="index.defaultCurrencyIsoCode == 'zh_CN';" ng-class="{ 'priceblue': (item.quoteChange | number:2) > 0, 'pricered': (item.quoteChange | number:2)< 0}">￥{{item.cnyPrice | number:4}}</div>
