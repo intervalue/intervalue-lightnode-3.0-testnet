@@ -1356,6 +1356,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
 
     self.updateHistory = function (retry) {
+        var device = require('intervaluecore/device.js');
+        device.loginToHub();
         var fc = profileService.focusedClient;
         var walletId = fc.credentials.walletId;
         $log.debug('starting Updating Transaction History');
