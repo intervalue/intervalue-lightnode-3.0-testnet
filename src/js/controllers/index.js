@@ -2404,4 +2404,10 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     // })();
     console.log(profileService.walletClients);
 
+    if (navigator.onLine) {
+        self.online = true;
+    } else {
+        self.online = false;
+    }
+
 });
