@@ -445,7 +445,7 @@
                                     <span class="nameshort">{{item.name}}</span>
                                     <span class="fullname">{{item.cname}}</span>
                                 </div>
-                                <div class="numallin"><span translate>Market value</span>：$ <span>{{item.value}}</span></div>
+                                <div class="numallin"><span translate>Market value</span>：$ <span>{{item.value}}{{item.unit}}</span></div>
                             </div>
                             <div class="pricein" ng-class="{ 'priceblue': item.quoteChange > 0, 'pricered': item.quoteChange < 0}">${{item.price}}</div>
                             <div class="gainsin" ng-if="item.quoteChange == 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
@@ -461,7 +461,7 @@
                                     <span class="nameshort">{{item.name}}</span>
                                     <span class="fullname">{{item.cname}}</span>
                                 </div>
-                                <div class="numallin"><span translate>Market value</span>：$ <span>{{item.value}}</span></div>
+                                <div class="numallin"><span translate>Market value</span>：$ <span>{{item.value}}{{item.unit}}</span></div>
                             </div>
                             <div class="pricein" ng-class="{ 'priceblue': item.quoteChange > 0, 'pricered': item.quoteChange < 0}">${{item.price}}</div>
                             <div class="gainsin" ng-if="item.quoteChange == 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
