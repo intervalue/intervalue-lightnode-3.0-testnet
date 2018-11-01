@@ -874,7 +874,7 @@ angular.module('copayApp.directives')
                 function releaseload(){
                     rawh.children[0].style.display = 'none';
                     rawh.children[1].style.display = 'block';
-                    rawh.style.height = "45px";//高度设定为20px
+                    rawh.style.height = "45px";//高度设定为45px
                     scope.$apply(attr.homePullDown);
                 }
                 function resetdrag(){
@@ -978,7 +978,7 @@ angular.module('copayApp.directives')
                 function releaseload(){
                     rawh.children[0].style.display = 'none';
                     rawh.children[1].style.display = 'block';
-                    rawh.style.height = "45px";//高度设定为20px
+                    rawh.style.height = "45px";//高度设定为45px
                     scope.$apply(attr.homeQpullDown);
                 }
                 function resetdrag(){
