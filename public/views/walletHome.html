@@ -241,9 +241,9 @@
                             <span class="hisbsamount" ng-if="btx.action == 'sent'">-{{btx.amountTl}}<span class="hisunit">INVE</span></span>
 
                             <span  class="size-12" ng-if="btx.action == 'invalid'" translate>
-        
+
                                     (possible double spend)
-        
+
                                 </span>
                         </div>
 
@@ -348,7 +348,7 @@
                         <div class="nowireintext" translate>The network is not strong. Please click the screen to reload.</div>
                     </div>
                 </div>
-                <div class="newslistheight" ng-if ="!index.online && index.loading">
+                <div class="newslistheight" ng-if ="index.online && index.loading">
                     <div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>
                 </div>
                 <div ng-if="index.newslist == '' && index.online" class="nonews" >
@@ -386,7 +386,7 @@
                         <div class="nowireintext" translate>The network is not strong. Please click the screen to reload.</div>
                     </div>
                 </div>
-                <div class="newslistheight" ng-if ="!index.online && index.loading">
+                <div class="newslistheight" ng-if ="index.online && index.loading">
                     <div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>
                 </div>
                 <div ng-if="index.quicklistshow == '' && index.online" class="nonews">
@@ -426,7 +426,7 @@
                         <div class="nowireintext" translate>The network is not strong. Please click the screen to reload.</div>
                     </div>
                 </div>
-                <div class="newslistheight" ng-if ="!index.online && index.loading">
+                <div class="newslistheight" ng-if ="index.online && index.loading">
                     <div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>
                 </div>
                 <div ng-if="index.coinlist == '' && index.online" class="nonews">
@@ -454,12 +454,14 @@
                                     <span class="nameshort">{{item.name}}</span>
                                     <span class="fullname">{{item.cname}}</span>
                                 </div>
-                                <div class="numallin"><span translate>Market value</span>：$ <span>{{item.value}}{{item.unit}}</span></div>
+                                <div class="numallin" ng-show="index.defaultCurrencyIsoCode == 'en';"><span translate>Market value</span>：$ <span>{{item.value | number:2}}{{item.unit}}</span></div>
+                                <div class="numallin" ng-show="index.defaultCurrencyIsoCode == 'zh_CN';"><span translate>Market value</span>：￥ <span>{{item.cnyValue | number:2}}{{item.unit}}</span></div>
                             </div>
-                            <div class="pricein" ng-class="{ 'priceblue': item.quoteChange > 0, 'pricered': item.quoteChange < 0}">${{item.price}}</div>
-                            <div class="gainsin" ng-if="item.quoteChange == 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
-                            <div class="gainsin priceblue" ng-if="item.quoteChange > 0"><div class="gainsinfo">+<span>{{item.quoteChange | number:2}}%</span></div></div>
-                            <div class="gainsin pricered" ng-if="item.quoteChange < 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
+                            <div class="pricein" ng-show="index.defaultCurrencyIsoCode == 'en';" ng-class="{ 'priceblue': (item.quoteChange | number:2) > 0, 'pricered': (item.quoteChange | number:2) < 0}">${{item.price | number:4}}</div>
+                            <div class="pricein" ng-show="index.defaultCurrencyIsoCode == 'zh_CN';" ng-class="{ 'priceblue': (item.quoteChange | number:2) > 0, 'pricered': (item.quoteChange | number:2) < 0}">￥{{item.cnyPrice | number:4}}</div>
+                            <div class="gainsin" ng-if="(item.quoteChange | number:2) == 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
+                            <div class="gainsin priceblue" ng-if="(item.quoteChange | number:2)  > 0"><div class="gainsinfo">+<span>{{item.quoteChange | number:2}}%</span></div></div>
+                            <div class="gainsin pricered" ng-if="(item.quoteChange | number:2) < 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
                         </div>
                     </div>
                     <div class="itemin" ng-repeat="item in index.coinlist track by $index">
@@ -470,12 +472,14 @@
                                     <span class="nameshort">{{item.name}}</span>
                                     <span class="fullname">{{item.cname}}</span>
                                 </div>
-                                <div class="numallin"><span translate>Market value</span>：$ <span>{{item.value}}{{item.unit}}</span></div>
+                                <div class="numallin" ng-show="index.defaultCurrencyIsoCode == 'en';"><span translate>Market value</span>：$ <span>{{item.value | number:2}}{{item.unit}}</span></div>
+                                <div class="numallin" ng-show="index.defaultCurrencyIsoCode == 'zh_CN';"><span translate>Market value</span>：￥ <span>{{item.cnyValue | number:2}}{{item.unit}}</span></div>
                             </div>
-                            <div class="pricein" ng-class="{ 'priceblue': item.quoteChange > 0, 'pricered': item.quoteChange < 0}">${{item.price}}</div>
-                            <div class="gainsin" ng-if="item.quoteChange == 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
-                            <div class="gainsin priceblue" ng-if="item.quoteChange > 0"><div class="gainsinfo">+<span>{{item.quoteChange | number:2}}%</span></div></div>
-                            <div class="gainsin pricered" ng-if="item.quoteChange < 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
+                            <div class="pricein" ng-show="index.defaultCurrencyIsoCode == 'en';" ng-class="{ 'priceblue': (item.quoteChange | number:2) > 0, 'pricered': (item.quoteChange | number:2) < 0}">${{item.price | number:4}}</div>
+                            <div class="pricein" ng-show="index.defaultCurrencyIsoCode == 'zh_CN';" ng-class="{ 'priceblue': (item.quoteChange | number:2) > 0, 'pricered': (item.quoteChange | number:2)< 0}">￥{{item.cnyPrice | number:4}}</div>
+                            <div class="gainsin" ng-if="(item.quoteChange | number:2) == 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
+                            <div class="gainsin priceblue" ng-if="(item.quoteChange | number:2) > 0"><div class="gainsinfo">+<span>{{item.quoteChange | number:2}}%</span></div></div>
+                            <div class="gainsin pricered" ng-if="(item.quoteChange | number:2)< 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
                         </div>
                     </div>
                 </div>

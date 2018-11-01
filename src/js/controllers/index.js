@@ -58,7 +58,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.quickscrolltop = 0;
     self.quickdatanow = '';
     self.currentdddddDate = null;
-    self.showdollar = true;
+    //self.showdollar = true;
     self.invedollar = 1;
     self.invermb = 1;
     function updatePublicKeyRing(walletClient, onDone) {
