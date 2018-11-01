@@ -6,7 +6,6 @@ angular.module('copayApp.controllers').controller('preferencesLanguageController
     this.availableLanguages = uxLanguage.getLanguages();
 
     this.save = function(newLang) {
-
       var opts = {
         wallet: {
           settings: {
@@ -18,9 +17,9 @@ angular.module('copayApp.controllers').controller('preferencesLanguageController
       configService.set(opts, function(err) {
         if (err) $log.warn(err);
         $scope.$emit('Local/LanguageSettingUpdated');
-        $timeout(function() {
+        //$timeout(function() {
           go.preferencesGlobal();
-        }, 100);
+        //}, 100);
       });
     };
   });

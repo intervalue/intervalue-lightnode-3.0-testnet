@@ -1623,7 +1623,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     $rootScope.$on('Local/LanguageSettingUpdated', function () {
         self.setUxLanguage();
-        self.setUxCurrency();
     });
 
     $rootScope.$on('Local/CurrencySettingUpdated', function () {
