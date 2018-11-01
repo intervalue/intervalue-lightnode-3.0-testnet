@@ -2034,6 +2034,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             self.online = false;
         }
         if(upyn == 'up'){
+            self.loading = true;
             news.getNewsData(20,1,null,function(res) {
                 if(!!res && res.code == 0) {
                     //给返回对象加字段
@@ -2046,11 +2047,19 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     self.newspage = 2;
                     $timeout(function(){
                         $scope.$apply();
-                    })
+                    });
+                    
                     return;
-                }else
+                }else{
+                    
                     console.error("error~!");
-            })
+                }
+                
+            });
+            $timeout(function () {
+                self.loading = false;
+            },500);
+
         }else{
             news.getNewsData(20,self.newspage,null,function(res) {
                 if(!!res && res.code == 0) {
@@ -2092,6 +2101,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             self.online = false;
         }
         if(upyn == 'up'){
+            self.loading = true;
             news.getQuickData(20,1,null,null,function(res) {
                 var list = [];
                 if(!!res && res.code == 0) {
@@ -2126,6 +2136,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 }else
                     console.error("error~!");
             });
+            $timeout(function () {
+                self.loading = false;
+            },500);
         }else{
             news.getQuickData(20,self.quickpage,null,null,function(res) {
                 var list = [];
@@ -2183,6 +2196,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         });
 
         if(upyn == 'up'){
+            self.loading = true;
             news.getCurrencyData(6,1,null,function(res) {
                 if(!!res) {
                     angular.element(document.getElementById('coinupheight')).css('display', 'none');
@@ -2195,7 +2209,10 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     return;
                 }else
                     console.error("error~!");
-            })
+            });
+            $timeout(function () {
+                self.loading = false;
+            },500);
         }else{
             news.getCurrencyData(6,self.coinpage,null,function(res) {
                 if(!!res) {
