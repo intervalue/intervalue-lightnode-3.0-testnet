@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('addwalletController',
-    function ($rootScope, $scope, $timeout, storageService, notification, profileService, bwcService, $log,gettext,go,gettextCatalog) {
+    function ($rootScope, $scope, $timeout, storageService, notification, profileService, bwcService, $log,gettext,go,gettextCatalog,isCordova) {
         var self = this;
         var successMsg = gettext('Backup words deleted');
         self.addwname = '';
@@ -144,9 +144,13 @@ angular.module('copayApp.controllers').controller('addwalletController',
                 return console.log('already creating profile');
             self.creatingProfile = true;
             //	saveDeviceName();
-
+            if (isCordova) {
+                window.plugins.spinnerDialog.show(null, gettextCatalog.getString('Loading...'), true);
+            }
             $timeout(function () {
                 profileService.createWallet({ name: walletName, password: passphrase, mnemonic: mnemonic,m:1,n:1,networkName:"livenet",cosigners:[],isSinglecreateress:true  }, function (err,walletId) {
+                    if (isCordova)
+                        window.plugins.spinnerDialog.hide();
                     if (err) {
                         self.creatingProfile = false;
                         $log.warn(err);
@@ -180,10 +184,16 @@ angular.module('copayApp.controllers').controller('addwalletController',
                 $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('*Inconsistent password'));
                 return;
             }
+
             self.importcode1 = self.importcode.replace(/^\s+/, '').replace(/\s+$/, '');
             self.importcode2 = self.importcode1.replace(/\s+/g, ' ');
+            if (isCordova) {
+                window.plugins.spinnerDialog.show(null, gettextCatalog.getString('Loading...'), true);
+            }
             $timeout(function () {
                 profileService.createWallet({ name: self.addwiname, password: self.addwipass, mnemonic: self.importcode2,m:1,n:1,networkName:"livenet",cosigners:[],isSinglecreateress:true }, function (err,walletId) {
+                    if (isCordova)
+                        window.plugins.spinnerDialog.hide();
                     if(err){
                         self.creatingProfile = false;
                         $log.warn(err);
@@ -193,6 +203,8 @@ angular.module('copayApp.controllers').controller('addwalletController',
                             $scope.$apply();
                         });
                     }
+                    if (isCordova)
+                        window.plugins.spinnerDialog.hide();
                      $rootScope.$emit('Local/WalletImported', walletId);
                 });
             }, 100);
