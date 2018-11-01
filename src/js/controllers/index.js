@@ -2352,7 +2352,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
      * @param address
      */
     self.generatePubkey =  function (address) {
-        self.verificationAddress = "InterValue-3.0-testnet:"+address;
+        self.verificationAddress = "InterValue-3.1-testnet:"+address;
         self.showshadow = true;
         self.shadowstep = 'hot1';
         $timeout(function () {

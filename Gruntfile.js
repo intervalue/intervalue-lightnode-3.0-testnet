@@ -169,7 +169,7 @@ module.exports = function (grunt) {
 			node_modules: {
 				expand: true,
 				src: 'node_modules/**',
-				dest: '../intervaluebuilds/InterValue-3.0-testnet/win64/'
+				dest: '../intervaluebuilds/InterValue-3.1-testnet/win64/'
 			},
 
 			icons: {
@@ -203,7 +203,7 @@ module.exports = function (grunt) {
 							'../public/img/icons/icon-white-outline.ico',
 							'../public/img/icons/icon-white-256.png'
 						],
-						dest: '../intervaluebuilds/InterValue-3.0-testnet/linux32/',
+						dest: '../intervaluebuilds/InterValue-3.1-testnet/linux32/',
 						flatten: true,
 						filter: 'isFile',
 						options: { timestamp: true, mode: true }
@@ -216,7 +216,7 @@ module.exports = function (grunt) {
 							'../public/img/icons/icon-white-outline.ico',
 							'../public/img/icons/icon-white-256.png'
 						],
-						dest: '../intervaluebuilds/InterValue-3.0-testnet/linux64/',
+						dest: '../intervaluebuilds/InterValue-3.1-testnet/linux64/',
 						flatten: true,
 						filter: 'isFile',
 						options: { timestamp: true, mode: true }
@@ -247,7 +247,7 @@ module.exports = function (grunt) {
 				//platforms: ['win','osx64','linux'],
 				//platforms: ['osx64'],
 				platforms: [getPlatform()],
-				appName: 'InterValue-3.0-testnet',
+				appName: 'InterValue-3.1-testnet',
 				buildDir: '../intervaluebuilds',
 				version: '0.21.6',
 				zip: false,
@@ -256,7 +256,7 @@ module.exports = function (grunt) {
 				exeIco: './public/img/icons/icon-white-outline.ico',
 				macPlist: {
 					CFBundleURLTypes: [{
-						CFBundleURLName: 'InterValue-3.0-testnet action',
+						CFBundleURLName: 'InterValue-3.1-testnet action',
 						CFBundleURLSchemes: ['intervalue']
 					}], /*CFBundleIconFile: 'nw.icns',*/ LSHasLocalizedDisplayName: 0
 				}
@@ -275,12 +275,12 @@ module.exports = function (grunt) {
 			},
 			linux64: {
 				options: {
-					archive: '../intervaluebuilds/InterValue-3.0-testnet-linux64.zip'
+					archive: '../intervaluebuilds/InterValue-3.1-testnet-linux64.zip'
 				},
 				expand: true,
-				cwd: '../intervaluebuilds/InterValue-3.0-testnet/linux64/',
+				cwd: '../intervaluebuilds/InterValue-3.1-testnet/linux64/',
 				src: ['**/*'],
-				dest: 'InterValue-3.0-testnet-linux64/'
+				dest: 'InterValue-3.1-testnet-linux64/'
 			}
 		},
 		browserify: {
@@ -313,7 +313,7 @@ module.exports = function (grunt) {
 				],
 				options: {
 					maintainer: {
-						name: 'InterValue-3.0-testnet',
+						name: 'InterValue-3.1-testnet',
 						email: 'intervalue@inve.one'
 					},
 					long_description: 'Smart payments made simple',
@@ -342,24 +342,24 @@ module.exports = function (grunt) {
             linux64:{
                 options: {force: true},
                 files:[{
-                    src:'../intervaluebuilds/InterValue-3.0-testnet/linux64/node_modules/grunt*',
-                    src:'../intervaluebuilds/InterValue-3.0-testnet/linux64/node_modules/karma*',
+                    src:'../intervaluebuilds/InterValue-3.1-testnet/linux64/node_modules/grunt*',
+                    src:'../intervaluebuilds/InterValue-3.1-testnet/linux64/node_modules/karma*',
                 }],
             },
             win64:{
                 options: {force: true},
                 files:[{
-                    src:'../intervaluebuilds/InterValue-3.0-testnet/win64/node_modules/grunt*',
-                    src:'../intervaluebuilds/InterValue-3.0-testnet/win64/node_modules/karma*',
-                    src:'../intervaluebuilds/InterValue-3.0-testnet/win64/node_modules/babel*',
+                    src:'../intervaluebuilds/InterValue-3.1-testnet/win64/node_modules/grunt*',
+                    src:'../intervaluebuilds/InterValue-3.1-testnet/win64/node_modules/karma*',
+                    src:'../intervaluebuilds/InterValue-3.1-testnet/win64/node_modules/babel*',
                 }],
             },
             osx64:{
                 options: {force: true},
                 files:[{
-                    src:'../intervaluebuilds/InterValue-3.0-testnet/osx64/node_modules/grunt*',
-                    src:'../intervaluebuilds/InterValue-3.0-testnet/osx64/node_modules/karma*',
-                    src:'../intervaluebuilds/InterValue-3.0-testnet/osx64/node_modules/babel*',
+                    src:'../intervaluebuilds/InterValue-3.1-testnet/osx64/node_modules/grunt*',
+                    src:'../intervaluebuilds/InterValue-3.1-testnet/osx64/node_modules/karma*',
+                    src:'../intervaluebuilds/InterValue-3.1-testnet/osx64/node_modules/babel*',
                 }],
             },
         }
