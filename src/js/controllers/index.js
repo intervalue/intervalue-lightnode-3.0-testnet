@@ -37,11 +37,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.shownewsloading = false;
     self.showquicksloading = false;
     self.showcoinloading = false;
-    self.newslist = '';
-    self.coinlist = '';
+    //self.newslist = '';
+    //self.coinlist = '';
     self.coininvelist = '';
     self.quicklist = [];
-    self.quicklistshow = '';
+    //self.quicklistshow = '';
     self.newslists = [];
     self.quicklists = {};
     self.coinlists = [];
@@ -2051,8 +2051,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     
                     return;
                 }else{
-                    
-                    console.error("error~!");
+                    self.newslist = '';
                 }
                 
             });
@@ -2089,7 +2088,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                         return;
                     }
                 }else
-                    console.error("error~!");
+                    self.newslist = '';
+
             })
         }
     };
@@ -2134,7 +2134,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                         $scope.$apply();
                     });
                 }else
-                    console.error("error~!");
+                    cself.quicklistshow = '';
             });
             $timeout(function () {
                 self.loading = false;
@@ -2177,7 +2177,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                         $scope.$apply();
                     });
                 }else
-                    console.error("error~!");
+                    self.quicklistshow = '';
             });
         }
     };
@@ -2208,7 +2208,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     })
                     return;
                 }else
-                    console.error("error~!");
+                    self.coinlist = '';
             });
             $timeout(function () {
                 self.loading = false;
@@ -2238,7 +2238,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                         return;
                     }
                 }else
-                    console.error("error~!");
+                    self.coinlist = '';
             })
         }
 
