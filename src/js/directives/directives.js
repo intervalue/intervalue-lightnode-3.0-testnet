@@ -779,6 +779,10 @@ angular.module('copayApp.directives')
             var raw = elm[0];
 
             elm.bind('scroll', function() {
+              console.log(angular.element(document.getElementById('datenow')))
+                scope.$apply(function(){
+                    angular.element(document.getElementById('datenow')).css('top',raw.scrollTop+'px');
+                })
                 scope.$apply(attr.quickscrolltop);
                 if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
                     scope.$apply(attr.homequiscrolled);

@@ -465,7 +465,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .newslist .item .litinfo span{color:#909090;}
 
 /*快讯*/
-.news .datenow{text-align:left;padding:0 18px;font-size:10px;color:#909090;background:#f9fafc;height:26px;line-height:26px;position:fixed;left:0;top:78px;width:100%;z-index:3;}
+.news .datenow{text-align:left;padding:0 18px;font-size:10px;color:#909090;background:#f9fafc;height:26px;line-height:26px;position:absolute;left:0;top:0;width:100%;z-index:3;}
 .news .letterlist .itemin .date{text-align:left;padding:0 18px;font-size:10px;color:#909090;background:#f9fafc;height:26px;line-height:26px;}
 .news .letterlist .itemin .itemlr{padding:0 22px 0 18px;}
 .news .letterlist .itemin .item{border-left:1px solid #DEDEDE;padding:14px 0 0 16px;}
