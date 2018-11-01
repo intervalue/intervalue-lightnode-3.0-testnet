@@ -357,10 +357,10 @@
                         <div class="nonewsintext" translate>No fresh content</div>
                     </div>
                 </div>
-                <div class="newslistheight" ng-if ="index.online && index.loading">
-                    <div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>
-                </div>
-                <div class="newslist" ng-if="index.newslist !== ''  && index.online  && !index.loading" id="new1tablist" home-pull-down="index.newsData('up')" draggable="true">
+                <!--<div class="newslistheight" ng-if ="index.online && index.loading">-->
+                    <!--<div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>-->
+                <!--</div>-->
+                <div class="newslist" ng-if="index.newslist !== ''  && index.online  " id="new1tablist" home-pull-down="index.newsData('up')" draggable="true">
                     <div class="newsupheight" id="newupheight">
                         <div class="newuprelease"><img src="./img/pulldown.png" /><span translate>Pull down to refresh</span></div>
                         <div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>

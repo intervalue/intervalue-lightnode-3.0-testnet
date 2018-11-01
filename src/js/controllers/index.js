@@ -2060,6 +2060,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             },500);
 
         }else{
+            self.loading = true;
             news.getNewsData(20,self.newspage,null,function(res) {
                 if(!!res && res.code == 0) {
                     self.shownewsloading = false;
@@ -2090,7 +2091,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 }else
                     self.newslist = '';
 
-            })
+            });
+            self.loading = false;
         }
     };
 
@@ -2140,6 +2142,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 self.loading = false;
             },500);
         }else{
+            self.loading = true;
             news.getQuickData(20,self.quickpage,null,null,function(res) {
                 var list = [];
                 if(!!res && res.code == 0) {
@@ -2179,6 +2182,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 }else
                     self.quicklistshow = '';
             });
+            self.loading = false;
         }
     };
 
@@ -2214,6 +2218,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 self.loading = false;
             },500);
         }else{
+            self.loading = true;
             news.getCurrencyData(6,self.coinpage,null,function(res) {
                 if(!!res) {
                     self.showcoinloading = false;
@@ -2239,7 +2244,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     }
                 }else
                     self.coinlist = '';
-            })
+            });
+            self.loading = false;
         }
 
     };
