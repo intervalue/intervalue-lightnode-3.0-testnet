@@ -2308,6 +2308,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 $modalInstance.dismiss('cancel');
                 for(let item in self.newslist){
                     if(self.newslist[item].id == id) self.newslist[item].pageviews += 1;
+                    break;
                 }
 
             };
