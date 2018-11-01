@@ -2028,7 +2028,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     };*/
     setInterval(function() {
         self.currencyData();
-    }, 5 * 1000);
+    }, 1 * 1000);
 
     self.newsData = function (upyn) {
         if (navigator.onLine) {
