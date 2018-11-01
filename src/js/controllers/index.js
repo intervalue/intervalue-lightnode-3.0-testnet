@@ -2306,8 +2306,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             }
             $scope.cancel = function() {
                 $modalInstance.dismiss('cancel');
-                //self.newslist.id.pageviews +=1;
-                console.log("self.newslist");
                 for(let item in self.newslist){
                     if(self.newslist[item].id == id) self.newslist[item].pageviews += 1;
                 }
