@@ -376,6 +376,7 @@
                 <div ng-show="index.shownonews" class="nomorenews"><img src="./img/nomore.png" /><span translate>No more content</span></div>
                 <div ng-show="index.shownewsloading" class="shownewsloading"><img src="./img/loading.png" /><span translate>Loading</span></div>
             </div>
+            <div class="datenow" ng-if="index.quicklistshow !== '' && index.online && index.shownewstab == 'new2'" id="datenow">{{index.quickdatanow}}</div>
             <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new2'}" id="new2tab" quickscrolltop="index.quickequaltop()" homequiscrolled="index.loadmore('new2tab', 'new2tablist')">
                 <div ng-if="!index.online && !index.loading" ng-click="index.newsData('up');index.quickData('up');index.currencyData('up');" class="nowire">
                     <div class="nowirein">
@@ -397,7 +398,6 @@
                         <div class="newuprelease"><img src="./img/pulldown.png" /><span translate>Pull down to refresh</span></div>
                         <div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>
                     </div>
-                    <div class="datenow" id="datenow">{{index.quickdatanow}}</div>
                     <div class="itemin" ng-repeat="(key,item) in index.quicklist track by $index">
                         <div class="date">{{key}}</div>
                         <div class="itemlr" ng-repeat="itemin in item">
