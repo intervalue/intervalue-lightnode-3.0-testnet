@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('createwalletController',
-    function ($rootScope, $scope, $timeout, storageService, notification, profileService, bwcService, $log,gettext,go,gettextCatalog) {
+    function ($rootScope, $scope, $timeout, storageService, notification, profileService, bwcService, $log,gettext,go,gettextCatalog,isCordova) {
         var self = this;
         var successMsg = gettext('Backup words deleted');
         self.createwname = '';
@@ -142,10 +142,13 @@ angular.module('copayApp.controllers').controller('createwalletController',
                 return console.log('already creating profile');
             self.creatingProfile = true;
             //	saveDeviceName();
-
+            if (isCordova) {
+                window.plugins.spinnerDialog.show(null, gettextCatalog.getString('Loading...'), true);
+            }
             $timeout(function () {
                 profileService.create({ walletName: walletName, password: passphrase, mnemonic: mnemonic }, function (err) {
-                    self.loading = false;
+                    if (isCordova)
+                        window.plugins.spinnerDialog.hide();
                     if (err) {
                         $log.warn(err);
                         self.error = err;
@@ -175,8 +178,13 @@ angular.module('copayApp.controllers').controller('createwalletController',
                 $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('*Inconsistent password'));
                 return;
             }
+            if (isCordova) {
+                window.plugins.spinnerDialog.show(null, gettextCatalog.getString('Loading...'), true);
+            }
             $timeout(function () {
                 profileService.create({ walletName: self.createwiname, password: self.createwipass, mnemonic: self.importcode }, function (err) {
+                    if (isCordova)
+                        window.plugins.spinnerDialog.hide();
                     if(err){
                         self.creatingProfile = false;
                         $log.warn(err);
