@@ -167,7 +167,7 @@ angular.module('copayApp.controllers').controller('createwalletController',
                     });
                     }
                     $timeout(function () {
-                      $scope.index.updateHistory(3);
+                      $scope.index.updateHistory(4);
                     })
                 });
             }, 100);
@@ -194,7 +194,7 @@ angular.module('copayApp.controllers').controller('createwalletController',
                         });
                     }
                     $timeout(function () {
-                        $scope.index.updateHistory(3);
+                        $scope.index.updateHistory(4);
                     })
                 });
             }, 100);
