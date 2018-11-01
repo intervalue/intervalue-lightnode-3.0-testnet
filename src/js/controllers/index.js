@@ -2296,6 +2296,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     if(!!res &&  res.code == 0) {
                         $scope.newstitle = res.article.title;
                         $scope.newscontent = res.article.content;
+
                         $timeout(function(){
                             $scope.$apply();
                         });
@@ -2305,6 +2306,12 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             }
             $scope.cancel = function() {
                 $modalInstance.dismiss('cancel');
+                //self.newslist.id.pageviews +=1;
+                console.log("self.newslist");
+                for(let item in self.newslist){
+                    if(self.newslist[item].id == id) self.newslist[item].pageviews += 1;
+                }
+
             };
         };
 
