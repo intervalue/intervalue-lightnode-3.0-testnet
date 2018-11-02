@@ -479,15 +479,15 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 
 /*行情*/
 .news .quotelist .titlelabel{padding:0 15px;background:#f9fafc;height:34px;line-height:34px;position:absolute;left:0;top:0;width:100%;z-index:5;font-size:12px;color:rgba(50,50,50,1);}
-.news .quotelist .titlelabel .numall{width:calc(100% - 175px);text-align:left;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding-left:32px;}
+.news .quotelist .titlelabel .numall{cursor: pointer;position:absolute;left:47px;text-align:left;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
 .news .quotelist .titlelabel .sorttitle{padding-right:5px;display:inline-block;height:34px;white-space: nowrap;}
 .news .quotelist .titlelabel .cointri{position:relative;width:9px;height:10px;display:inline-block;}
 .news .quotelist .titlelabel .cointri:before{content:'';display:block;border:4px solid transparent;border-bottom:5px solid #C4C4C4;margin-bottom:1px;margin-top:-3px;}
 .news .quotelist .titlelabel .cointri:after{content:'';display:block;border:4px solid transparent;border-top:5px solid #C4C4C4;}
 .news .quotelist .titlelabel .cointri.upcoin:before{content:'';display:block;border:4px solid transparent;border-bottom:5px solid #45AD8E;margin-bottom:1px;margin-top:-3px;}
 .news .quotelist .titlelabel .cointri.downcoin:after{content:'';display:block;border:4px solid transparent;border-top:5px solid #45AD8E;}
-.news .quotelist .titlelabel .price{position:absolute;top:0;right:107px;text-align:right;}
-.news .quotelist .titlelabel .gains{position:absolute;top:0;right:15px;width:84px;text-align:center;}
+.news .quotelist .titlelabel .price{cursor: pointer;position:absolute;top:0;right:107px;text-align:right;}
+.news .quotelist .titlelabel .gains{cursor: pointer;position:absolute;top:0;right:15px;text-align:center;}
 .news .quotelist .itemin{padding:0 15px 0;}
 .news .quotelist .itemin:nth-child(3){padding-top:32px;}
 .news .quotelist .itemin .item{padding:14px 0;position:relative;border-bottom:1px solid #DEDEDE;}
@@ -506,5 +506,5 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .quotelist .itemin .item .gainsin.priceblue .gainsinfo{background:#45AD8E;}
 .news .quotelist .itemin .item .gainsin.pricered .gainsinfo{background:#D45757;}
 @media (max-width: 330px){
-    .news .quotelist .titlelabel .numall{padding-left: 0;}
+    .news .quotelist .titlelabel .numall{left:15px;}
 }
