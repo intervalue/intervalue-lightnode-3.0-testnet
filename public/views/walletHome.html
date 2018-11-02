@@ -439,9 +439,9 @@
                         <div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>
                     </div>
                     <div class="titlelabel" id="cointitle">
-                        <div class="numall"><span translate class="sorttitle">Market value</span><span class="cointri"></span></div>
-                        <div class="price" translate><span translate class="sorttitle">Price</span><span class="cointri"></span></div>
-                        <div class="gains" translate><span translate class="sorttitle">Latest gains</span><span class="cointri"></span></div>
+                        <div class="numall"><span translate class="sorttitle">Market value</span><span class="cointri" ng-click="index.orderbyShowValue()"></span></div>
+                        <div class="price" translate><span translate class="sorttitle">Price</span><span class="cointri" ng-click="index.orderbyShowPrice()"></span></div>
+                        <div class="gains" translate><span translate class="sorttitle">Latest gains</span><span class="cointri" ng-click="index.orderbyShowGains()"></span></div>
                     </div>
                     <div class="itemin" ng-repeat="item in index.coininvelist track by $index">
                         <div class="item">
@@ -461,7 +461,7 @@
                             <div class="gainsin pricered" ng-if="(item.quoteChange | number:2) < 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
                         </div>
                     </div>
-                    <div class="itemin" ng-repeat="item in index.coinlist track by $index">
+                    <div class="itemin" ng-repeat="item in index.coinlist | orderBy : index.orderByList ">
                         <div class="item">
                             <div class="leftcoininfo">
                                 <div class="coinimg">

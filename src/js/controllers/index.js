@@ -2026,6 +2026,31 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             })
         }
     };*/
+
+    //行情排序
+
+    self.orderByValue = '';
+    self.orderByPrice = '';
+    self.orderByQuoteChange='-quoteChange';
+    self.orderByList = [self.orderByQuoteChange,self.orderByPrice,self.orderByValue];
+
+
+    self.orderbyShowValue = function(){
+        if(self.orderByValue == '-value') self.orderByValue = 'value'; else self.orderByValue = '-value';
+        self.orderByList = [self.orderByValue,self.orderByQuoteChange,self.orderByPrice];
+    }
+
+    self.orderbyShowPrice = function(){
+        if(self.orderByPrice == '-price') self.orderByPrice = 'price'; else self.orderByPrice = '-price';
+        self.orderByList = [self.orderByPrice,self.orderByQuoteChange,self.orderByValue];
+
+    }
+
+    self.orderbyShowGains = function(){
+        if(self.orderByQuoteChange == '-quoteChange') self.orderByQuoteChange = 'quoteChange'; else self.orderByQuoteChange = '-quoteChange';
+        self.orderByList = [self.orderByQuoteChange,self.orderByPrice,self.orderByValue];
+    }
+
     setInterval(function() {
         if (navigator.onLine) {
             if(!self.online){
