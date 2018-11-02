@@ -2028,11 +2028,16 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     };*/
     setInterval(function() {
         if (navigator.onLine) {
+            if(!self.online){
+                self.newsData();
+                self.quickData();
+            }
             self.online = true;
             self.currencyData();
         } else {
             self.online = false;
         }
+
 
     }, 1 * 1000);
 
@@ -2117,7 +2122,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 var list = [];
                 if(!!res && res.code == 0) {
                     angular.element(document.getElementById('quickupheight')).css('display', 'none');
-                    angular.element(document.getElementById('datenow')).style.display = 'block';
+                    angular.element(document.getElementById('datenow')).css('display', 'block');
                     self.quicklists = {};
                     //给返回对象加字段
                     lodash.forEach(res.page.list, function(value, key){
