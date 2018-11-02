@@ -2037,8 +2037,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         } else {
             self.online = false;
         }
-
-
     }, 1 * 1000);
 
     self.newsData = function (upyn) {
