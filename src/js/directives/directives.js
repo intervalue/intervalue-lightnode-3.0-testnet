@@ -768,6 +768,13 @@ angular.module('copayApp.directives')
             var raw = elm[0];
 
             elm.bind('scroll', function() {
+              console.log(elm)
+                if(elm[0].id == 'new3tab'){
+                    scope.$apply(function(){
+                        angular.element(document.getElementById('cointitle')).css('top',raw.scrollTop+'px');
+                    });
+                    return;
+                }
                 if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
                     scope.$apply(attr.homescrolled);
                 };
@@ -779,7 +786,6 @@ angular.module('copayApp.directives')
             var raw = elm[0];
 
             elm.bind('scroll', function() {
-              console.log(angular.element(document.getElementById('datenow')))
                 scope.$apply(function(){
                     angular.element(document.getElementById('datenow')).css('top',raw.scrollTop+'px');
                 })

@@ -398,7 +398,7 @@
                         <div class="newuprelease"><img src="./img/pulldown.png" /><span translate>Pull down to refresh</span></div>
                         <div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>
                     </div>
-                    <div class="datenow" id="datenow">{{index.quickdatanow}}</div>
+                    <div class="datenow" id="datenow" ng-bind="index.quickdatanow"></div>
                     <div class="itemin" ng-repeat="(key,item) in index.quicklist track by $index">
                         <div class="date">{{key}}</div>
                         <div class="itemlr" ng-repeat="itemin in item">
@@ -417,7 +417,7 @@
                 <div ng-show="index.shownoquick" class="nomorenews"><img src="./img/nomore.png" /><span translate>No more content</span></div>
                 <div ng-show="index.showquicksloading" class="shownewsloading"><img src="./img/loading.png" /><span translate>Loading</span></div>
             </div>
-            <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new3'}" id="new3tab">
+            <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new3'}" id="new3tab" homescrolled="index.loadmore('new3tab', 'new3tablist')">
                 <div ng-if="!index.online && !index.loading" ng-click="index.newsData('up');index.quickData('up');index.currencyData('up');" class="nowire">
                     <div class="nowirein">
                         <img src="./img/nowire.png" />
@@ -439,7 +439,7 @@
                         <div class="newuprelease"><img src="./img/pulldown.png" /><span translate>Pull down to refresh</span></div>
                         <div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>
                     </div>
-                    <div class="titlelabel">
+                    <div class="titlelabel" id="cointitle">
                         <div class="numall"><span translate class="sorttitle">Market value</span><span class="cointri"></span></div>
                         <div class="price" translate><span translate class="sorttitle">Price</span><span class="cointri"></span></div>
                         <div class="gains" translate><span translate class="sorttitle">Latest gains</span><span class="cointri"></span></div>
