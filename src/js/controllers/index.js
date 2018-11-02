@@ -37,11 +37,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.shownewsloading = false;
     self.showquicksloading = false;
     self.showcoinloading = false;
-    //self.newslist = '';
-    //self.coinlist = '';
+    self.newslist = '';
+    self.coinlist = '';
     self.coininvelist = '';
     self.quicklist = [];
-    //self.quicklistshow = '';
+    self.quicklistshow = '';
     self.newslists = [];
     self.quicklists = {};
     self.coinlists = [];
@@ -2027,7 +2027,13 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         }
     };*/
     setInterval(function() {
-        self.currencyData();
+        if (navigator.onLine) {
+            self.online = true;
+            self.currencyData();
+        } else {
+            self.online = false;
+        }
+
     }, 1 * 1000);
 
     self.newsData = function (upyn) {
@@ -2111,7 +2117,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 var list = [];
                 if(!!res && res.code == 0) {
                     angular.element(document.getElementById('quickupheight')).css('display', 'none');
-                    document.getElementById('datenow').style.display = 'block';
+                    angular.element(document.getElementById('datenow')).style.display = 'block';
                     self.quicklists = {};
                     //给返回对象加字段
                     lodash.forEach(res.page.list, function(value, key){
@@ -2190,11 +2196,15 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     };
 
     self.currencyData = function (upyn) {
-        if (navigator.onLine) {
-            self.online = true;
-        } else {
-            self.online = false;
+        if(!self.online){
+            if (navigator.onLine) {
+                self.online = true;
+            } else {
+                self.online = false;
+                return;
+            }
         }
+
         //inve 行情
         news.getInveData2(function (res) {
             if(!!res && res != null) {
