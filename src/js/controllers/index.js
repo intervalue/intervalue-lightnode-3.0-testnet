@@ -1279,11 +1279,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         }else {
             self.needsBackupa = false;
         }
-        if (self.arrBalances.length === 0)
-            return console.log('updateLocalTxHistory: no balances yet');
-        breadcrumbs.add('index: ' + self.assetIndex + '; balances: ' + JSON.stringify(self.arrBalances));
-        if (!client.isComplete())
-            return console.log('fc incomplete yet');
+        // if (self.arrBalances.length === 0)
+        //     return console.log('updateLocalTxHistory: no balances yet');
+        // breadcrumbs.add('index: ' + self.assetIndex + '; balances: ' + JSON.stringify(self.arrBalances));
+        // if (!client.isComplete())
+        //     return console.log('fc incomplete yet');
         client.getTxHistory('base', walletId, function onGotTxHistory(txs) {
             $timeout(function () {
                 var newHistory = self.processNewTxs(txs);
