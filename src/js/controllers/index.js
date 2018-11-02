@@ -2031,12 +2031,12 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     self.orderByValue = '';
     self.orderByPrice = '';
-    self.orderByQuoteChange='-quoteChange';
+    self.orderByQuoteChange='';
     self.orderByList = [self.orderByQuoteChange,self.orderByPrice,self.orderByValue];
 
 
     self.orderbyShowValue = function(){
-        if(self.orderByValue == '-value') self.orderByValue = 'value'; else self.orderByValue = '-value';
+        if(self.orderByValue == '-values') self.orderByValue = 'values'; else self.orderByValue = '-values';
         self.orderByList = [self.orderByValue,self.orderByQuoteChange,self.orderByPrice];
     }
 
