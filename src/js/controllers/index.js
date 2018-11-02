@@ -57,7 +57,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.shownewstab = '';
     self.quickscrolltop = 0;
     self.quickdatanow = '';
-    self.currentdddddDate = null;
+    self.currentfixDate = null;
     //self.showdollar = true;
     self.invedollar = 1;
     self.invermb = 1;
@@ -2283,17 +2283,17 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         var curtop = document.getElementById('new2tab').scrollTop;
         var dateall = document.querySelectorAll('.news .letterlist .itemin .date');
         for(var i = 1; i < dateall.length; i++){
-            if(self.currentdddddDate){
+            if(self.currentfixDate){
                 if(curtop >= dateall[i].offsetTop - 78  && curtop <= dateall[i].offsetTop + 78 ){
                     if(curtop < dateall[i].offsetTop){
-                        self.currentdddddDate = dateall[i-1]
+                        self.currentfixDate = dateall[i-1]
                     }else{
-                        self.currentdddddDate = dateall[i]
+                        self.currentfixDate = dateall[i]
                     }
-                    self.quickdatanow = self.currentdddddDate.innerText;
+                    self.quickdatanow = self.currentfixDate.innerText;
                 }
             }else{
-                self.currentdddddDate = dateall[0];
+                self.currentfixDate = dateall[0];
             }
 
         }

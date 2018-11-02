@@ -768,7 +768,6 @@ angular.module('copayApp.directives')
             var raw = elm[0];
 
             elm.bind('scroll', function() {
-              console.log(elm)
                 if(elm[0].id == 'new3tab'){
                     scope.$apply(function(){
                         angular.element(document.getElementById('cointitle')).css('top',raw.scrollTop+'px');
@@ -787,6 +786,7 @@ angular.module('copayApp.directives')
 
             elm.bind('scroll', function() {
                 scope.$apply(function(){
+                    document.getElementById('datenow').style.display = 'block';
                     angular.element(document.getElementById('datenow')).css('top',raw.scrollTop+'px');
                 });
                 scope.$apply(attr.quickscrolltop);

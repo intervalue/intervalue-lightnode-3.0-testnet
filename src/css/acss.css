@@ -466,17 +466,11 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .newslist .item .litinfo span{color:#909090;}
 
 /*快讯*/
-.news .datenow{text-align:left;padding:0 18px;font-size:10px;color:#909090;background:#f9fafc;height:26px;line-height:26px;position:absolute;left:0;top:0;width:100%;z-index:3;}
+.news .letterlist .datenow{text-align:left;padding:0 18px;font-size:10px;color:#909090;background:#f9fafc;height:26px;line-height:26px;position:absolute;left:0;top:0;width:100%;z-index:5;}
 .news .letterlist .itemin .date{text-align:left;padding:0 18px;font-size:10px;color:#909090;background:#f9fafc;height:26px;line-height:26px;}
 .news .letterlist .itemin .itemlr{padding:0 22px 0 18px;}
 .news .letterlist .itemin .item{border-left:1px solid #DEDEDE;padding:14px 0 0 16px;}
 .news .letterlist .itemin .item:nth-child(1){padding-top:28px;}
-
-/*.news .letterlist .itemin .item:last-child{*/
-
-/*padding-bottom: 28px;*/
-
-/*}*/
 .news .letterlist .itemin .itemlr:last-child .item:last-child{padding-bottom:28px;}
 .news .letterlist .itemin .item .time{display:inline-block;font-size:10px;font-family:pfbold;font-weight:600;color:#45AD8E;border-radius:10px;border:1px solid #45AD8E;padding:0 8px;position:relative;margin-bottom:12px;}
 .news .letterlist .itemin .item .time:before{display:block;content:'';position:absolute;z-index:1;width:13px;height:13px;background:#45AD8E;border-radius:50%;border:2px solid #fff;left:-24px;top:1px;}
@@ -493,7 +487,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .quotelist .titlelabel .cointri.upcoin:before{content:'';display:block;border:4px solid transparent;border-bottom:5px solid #45AD8E;margin-bottom:1px;margin-top:-3px;}
 .news .quotelist .titlelabel .cointri.downcoin:after{content:'';display:block;border:4px solid transparent;border-top:5px solid #45AD8E;}
 .news .quotelist .titlelabel .price{position:absolute;top:0;right:107px;text-align:right;}
-.news .quotelist .titlelabel .gains{position:absolute;top:0;right:15px;    /*width:70px;*/width:84px;text-align:center;}
+.news .quotelist .titlelabel .gains{position:absolute;top:0;right:15px;width:84px;text-align:center;}
 .news .quotelist .itemin{padding:0 15px 0;}
 .news .quotelist .itemin:nth-child(3){padding-top:32px;}
 .news .quotelist .itemin .item{padding:14px 0;position:relative;border-bottom:1px solid #DEDEDE;}

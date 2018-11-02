@@ -376,7 +376,6 @@
                 <div ng-show="index.shownonews" class="nomorenews"><img src="./img/nomore.png" /><span translate>No more content</span></div>
                 <div ng-show="index.shownewsloading" class="shownewsloading"><img src="./img/loading.png" /><span translate>Loading</span></div>
             </div>
-            <!--<div class="datenow" ng-if="index.quicklistshow !== '' && index.online && index.shownewstab == 'new2'" id="datenow">{{index.quickdatanow}}</div>-->
             <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new2'}" id="new2tab" quickscrolltop="index.quickequaltop()" homequiscrolled="index.loadmore('new2tab', 'new2tablist')">
                 <div ng-if="!index.online && (index.quicklistshow == '' || !index.loading)" ng-click="index.newsData('up');index.quickData('up');" class="nowire">
                     <div class="nowirein">
