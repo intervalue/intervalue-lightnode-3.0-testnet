@@ -2034,23 +2034,27 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.orderByQuoteChange='';
     self.orderByList = [self.orderByQuoteChange,self.orderByPrice,self.orderByValue];
 
-
+    //根据总市值排序
     self.orderbyShowValue = function(){
         if(self.orderByValue == '-values') self.orderByValue = 'values'; else self.orderByValue = '-values';
         self.orderByList = [self.orderByValue,self.orderByQuoteChange,self.orderByPrice];
     }
 
+    //根据货币单价排序
     self.orderbyShowPrice = function(){
         if(self.orderByPrice == '-price') self.orderByPrice = 'price'; else self.orderByPrice = '-price';
         self.orderByList = [self.orderByPrice,self.orderByQuoteChange,self.orderByValue];
 
     }
 
+    //根据24H涨幅排序
     self.orderbyShowGains = function(){
         if(self.orderByQuoteChange == '-quoteChange') self.orderByQuoteChange = 'quoteChange'; else self.orderByQuoteChange = '-quoteChange';
         self.orderByList = [self.orderByQuoteChange,self.orderByPrice,self.orderByValue];
     }
 
+
+    //定时拉去信息
     setInterval(function() {
         if (navigator.onLine) {
             if(!self.online){
