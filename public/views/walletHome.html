@@ -426,10 +426,10 @@
                 <div class="newslistheight" ng-if ="!index.online && index.loading">
                     <div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>
                 </div>
-                <div ng-if="index.coinlist == '' && index.online" class="nonews">
+                <div ng-if="index.coinlist == '' && index.online" class="nonews" ng-click="index.currencyData('up');">
                     <div class="nonewsin">
                         <img src="./img/nonews.png" />
-                        <div class="nonewsintext" translate>No fresh content</div>
+                        <div class="nonewsintext" translate>No fresh content. Please click the screen to reload.</div>
                     </div>
                 </div>
                 <div class="quotelist" ng-if="index.coinlist !== '' && index.online"  id="new3tablist"

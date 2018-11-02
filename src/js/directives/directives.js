@@ -786,7 +786,6 @@ angular.module('copayApp.directives')
 
             elm.bind('scroll', function() {
                 scope.$apply(function(){
-                    document.getElementById('datenow').style.display = 'block';
                     angular.element(document.getElementById('datenow')).css('top',raw.scrollTop+'px');
                 });
                 scope.$apply(attr.quickscrolltop);
@@ -913,11 +912,6 @@ angular.module('copayApp.directives')
                     img.src = './img/transparent.png';
                     event.dataTransfer.setDragImage(img, 10, 10);
                     scope._start = event.pageY;
-                    if(rawp.scrollTop <= 0){
-                        document.getElementById('datenow').style.display = 'none';
-                    }else{
-                        return;
-                    }
                 }
                 function dragMove(event){//dragMove函数
                     scope._end = (scope._start - event.pageY);
@@ -948,12 +942,15 @@ angular.module('copayApp.directives')
                     }
                 }
                 function touchStart(event){//dragStart函数
-                    document.getElementById('datenow').style.display = 'none';
                     scope._start = event.targetTouches[0].pageY;
                 }
                 function touchMove(event){//dragMove函数
-                    document.getElementById('datenow').style.display = 'none';
                     scope._end = (scope._start - event.targetTouches[0].pageY);
+                    if(scope._end >= 0){
+                        document.getElementById('datenow').style.display = 'block';
+                    }else{
+                        document.getElementById('datenow').style.display = 'none';
+                    }
                     //下滑才执行操作
                     if(rawp.scrollTop <= 0){
                         if(scope._end < 0){
@@ -997,36 +994,6 @@ angular.module('copayApp.directives')
             }
         }
     })
-  //   .directive("mdinputpassr",function(){
-  //   return {
-  //       scope: {},
-  //       restrict: 'A',
-  //       require: ['^mdinputvalidc','?ngModel'],
-  //       link: postLink
-  //   }
-  //     function postLink(scope, elem, attrs, ctrl){
-  //       var isSame = function(value) {
-  //         var anotherValue = attrs.mdinputpassr;
-  //         return value === anotherValue;
-  //       };
-  //       if(ctrl[1]){
-  //         scope.$watch(function() {
-  //           return (ctrl[1]).$modelValue + "";
-  //         }, function(val) {
-  //           if(typeof(val) == 'undefined'){
-  //             ctrl[0].setErrorexp(false, 'noerror');
-  //             ctrl[1].$setValidity('mdinputpassr', false);
-  //           }else if(val == ''){
-  //             ctrl[0].setErrorexp(false, 'noerror');
-  //             ctrl[1].$setValidity('mdinputpassr', false);
-  //           }else{
-  //             ctrl[0].setErrorexp(!(isSame(val)), 'nomatch');
-  //             ctrl[1].$setValidity('mdinputpassr', isSame(val));
-  //           }
-  //         });
-  //       }
-  //   }
-  // })
     .filter('encodeURIComponent', function() {
     return window.encodeURIComponent;
   }).filter('objectKeys', [function() {
