@@ -2069,10 +2069,17 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     }, 5 * 1000);
 
     self.newsData = function (upyn) {
-        if (navigator.onLine) {
-            self.online = true;
-        } else {
-            self.online = false;
+        if(!self.online){
+            if (navigator.onLine) {
+                self.online = true;
+            } else {
+                self.online = false;
+                self.loading = true;
+                $timeout(function () {
+                    self.loading = false;
+                },1000);
+                return;
+            }
         }
         if(upyn == 'up'){
             self.loading = true;
@@ -2138,10 +2145,17 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     };
 
     self.quickData = function (upyn) {
-        if (navigator.onLine) {
-            self.online = true;
-        } else {
-            self.online = false;
+        if(!self.online){
+            if (navigator.onLine) {
+                self.online = true;
+            } else {
+                self.online = false;
+                self.loading = true;
+                $timeout(function () {
+                    self.loading = false;
+                },1000);
+                return;
+            }
         }
         if(upyn == 'up'){
             self.loading = true;
@@ -2233,6 +2247,10 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 self.online = true;
             } else {
                 self.online = false;
+                self.loading = true;
+                $timeout(function () {
+                    self.loading = false;
+                },1000);
                 return;
             }
         }

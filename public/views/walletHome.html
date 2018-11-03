@@ -342,7 +342,7 @@
                 </div>
             </div>
             <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new1'}" id="new1tab" homescrolled="index.loadmore('new1tab', 'new1tablist')">
-                <div ng-if="!index.online  && (index.newslist == '' || !index.loading)" ng-click="index.newsData('up');" class="nowire">
+                <div ng-if="!index.online  && !index.loading" ng-click="index.newsData('up');index.quickData('up');" class="nowire">
                     <div class="nowirein">
                         <img src="./img/nowire.png" />
                         <div class="nowireintext" translate>The network is not strong. Please click the screen to reload.</div>
@@ -351,7 +351,7 @@
                 <div class="newslistheight" ng-if ="!index.online && index.loading">
                     <div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>
                 </div>
-                <div ng-if="index.newslist == '' && index.online" class="nonews" ng-click="index.newsData('up');">
+                <div ng-if="index.newslist == '' && index.online" class="nonews" ng-click="index.newsData('up');index.quickData('up');">
                     <div class="nonewsin">
                         <img src="./img/nonews.png" />
                         <div class="nonewsintext" translate>No fresh content. Please click the screen to reload.</div>
@@ -377,7 +377,7 @@
                 <div ng-show="index.shownewsloading" class="shownewsloading"><img src="./img/loading.png" /><span translate>Loading</span></div>
             </div>
             <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new2'}" id="new2tab" quickscrolltop="index.quickequaltop()" homequiscrolled="index.loadmore('new2tab', 'new2tablist')">
-                <div ng-if="!index.online && (index.quicklistshow == '' || !index.loading)" ng-click="index.newsData('up');index.quickData('up');" class="nowire">
+                <div ng-if="!index.online && !index.loading" ng-click="index.newsData('up');index.quickData('up');" class="nowire">
                     <div class="nowirein">
                         <img src="./img/nowire.png" />
                         <div class="nowireintext" translate>The network is not strong. Please click the screen to reload.</div>
@@ -417,7 +417,7 @@
                 <div ng-show="index.showquicksloading" class="shownewsloading"><img src="./img/loading.png" /><span translate>Loading</span></div>
             </div>
             <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new3'}" id="new3tab" homescrolled="index.loadmore('new3tab', 'new3tablist')">
-                <div ng-if="!index.online && !index.loading" ng-click="index.newsData('up');index.quickData('up');index.currencyData('up');" class="nowire">
+                <div ng-if="!index.online && !index.loading" ng-click="index.currencyData('up');" class="nowire">
                     <div class="nowirein">
                         <img src="./img/nowire.png" />
                         <div class="nowireintext" translate>The network is not strong. Please click the screen to reload.</div>
