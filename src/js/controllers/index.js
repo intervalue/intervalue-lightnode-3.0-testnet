@@ -1951,6 +1951,41 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     };
 
 
+    function timeChange (valueTime) {
+
+        if (valueTime) {
+            var newData = Date.parse(new Date());
+            var diffTime = Math.abs(newData - valueTime);
+            if (diffTime > 7 * 24 * 3600 * 1000) {
+                var date = new Date(valueTime);
+                var y = date.getFullYear();
+                var m = date.getMonth() + 1;
+                m = m < 10 ? ('0' + m) : m;
+                var d = date.getDate();
+                d = d < 10 ? ('0' + d) : d;
+                var h = date.getHours();
+                h = h < 10 ? ('0' + h) : h;
+                var minute = date.getMinutes();
+                var second = date.getSeconds();
+                minute = minute < 10 ? ('1' + minute) : minute;
+                second = second < 10 ? ('0' + second) : second;
+                return m + '-' + d + ' ' + h + ':' + minute;
+
+            } else if (diffTime < 7 * 24 * 3600 * 1000 && diffTime > 24 * 3600 * 1000) {
+                // //注释("一周之内");
+
+                // var time = newData - diffTime;
+                var dayNum = Math.floor(diffTime / (24 * 60 * 60 * 1000));
+
+                if (dayNum===1){
+                    return '昨天'
+                }
+            } else {
+                return '今天'
+            }
+        }
+    }
+
     //获取快讯固定的时间
     self.getWeekNow =  function(datestr){
         if(datestr){
@@ -1960,6 +1995,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             var month = date.getMonth() + 1;
             var day = date.getDate() < 10 ? '0'+ date.getDate() :  date.getDate();
             var comprared = year + '-' + month + '-' + day;
+            var datestrtime = new Date(year+'-'+month+'-'+day).getTime();
+            var cstrtime = new Date(datestr).getTime();
             //计算星期几
             let qdatearr = datestr.split('-');
             let qdatearr2 = new Date(qdatearr[0], parseInt(qdatearr[1] - 1), qdatearr[2]);
@@ -1967,6 +2004,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             let qdatenow = "星期" + qweeknow;
             if (datestr ==  comprared) {
                 return '今天'+ ' ' +qdatearr[1] + '/' + qdatearr[2] + ' '+ qdatenow;
+            }else if(parseInt(datestrtime) == parseInt(cstrtime) + 86400000){
+                return '昨天'+ ' ' +qdatearr[1] + '/' + qdatearr[2] + ' '+ qdatenow;
             }else{
                 return qdatearr[1] + '/' + qdatearr[2] + ' '+ qdatenow;
             }
@@ -1982,50 +2021,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         return null
     };
 
-    /*self.newsData = function (upyn) {
-        if(upyn == 'up'){
-            news.getNewsData(6,1,null,function(res) {
-                if(!!res && res.code == 0) {
-                    angular.element(document.getElementById('newupheight')).css('display', 'none');
-                    self.newslists = res.page.list;
-                    self.newslist = res.page.list;
-                    self.newspage = 2;
-                    $timeout(function(){
-                        $scope.$apply();
-                    })
-                    return;
-                }else
-                    console.error("error~!");
-            })
-        }else{
-            news.getNewsData(6,self.newspage,null,function(res) {
-                if(!!res && res.code == 0) {
-                    self.shownewsloading = false;
-                    if(JSON.stringify(self.newslists) == '[]'){
-                        self.newslists = res.page.list;
-                        self.newslist = res.page.list;
-                        self.newspage += 1;
-                        $timeout(function(){
-                            $scope.$apply();
-                        })
-                    }else{
-                        self.newslists = self.newslists.concat(res.page.list);
-                        self.newslist = self.newslists;
-                        if(self.newspage == res.page.totalPage){
-                            self.shownonews = true;
-                            self.shownewsloading = false;
-                        }
-                        self.newspage += 1;
-                        $timeout(function(){
-                            $scope.$apply();
-                        });
-                        return;
-                    }
-                }else
-                    console.error("error~!");
-            })
-        }
-    };*/
 
     //行情排序
 
@@ -2146,6 +2141,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         if(upyn == 'up'){
             self.loading = true;
             news.getQuickData(20,1,null,null,function(res) {
+                console.log(res)
                 var list = [];
                 if(!!res && res.code == 0) {
                     angular.element(document.getElementById('quickupheight')).css('display', 'none');
