@@ -946,21 +946,18 @@ angular.module('copayApp.directives')
                 }
                 function touchMove(event){//dragMove函数
                     scope._end = (scope._start - event.targetTouches[0].pageY);
-                    if(scope._end >= 0){
-                        document.getElementById('datenow').style.display = 'block';
-                    }else{
-                        document.getElementById('datenow').style.display = 'none';
-                    }
-                    //下滑才执行操作
                     if(rawp.scrollTop <= 0){
+                        document.getElementById('datenow').style.display = 'none';
                         if(scope._end < 0){
                             releaseh(scope._end);
                         }else{
+                            document.getElementById('datenow').style.display = 'block';
                             return;
                         }
                     }else{
                         return;
                     }
+
                 }
                 function touchEnd(event){//dragEnd函数
                     scope._end = (scope._start - event.changedTouches[0].pageY);
