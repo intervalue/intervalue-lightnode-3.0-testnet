@@ -2475,8 +2475,8 @@ msgstr "新闻详情"
 msgid "No more content"
 msgstr "暂无更多内容"
 
-msgid "No fresh content"
-msgstr "暂无新鲜内容"
+msgid "No fresh content. Please click the screen to reload. "
+msgstr "暂无新鲜内容，请点击屏幕刷新。"
 
 msgid "Loading"
 msgstr "加载中"
