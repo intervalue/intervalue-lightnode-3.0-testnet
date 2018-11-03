@@ -9,8 +9,8 @@
 <div class="content preferences" ng-controller="preferencesLanguageController as prefLang">
   <ul class="no-bullet m0 ">
     <li ng-repeat="lang in prefLang.availableLanguages" ng-click="prefLang.save(lang.isoCode)">
-      <div class="ld">
-        <span translate>{{lang.name}}</span>
+      <div  ng-cloak class="ng-cloak ld">
+        <span translate ng-bind="lang.name"></span>
       </div>
       <div class="rd" >
         <img src="./img/right.png" ng-show="index.defaultLanguageIsoCode == lang.isoCode"/>

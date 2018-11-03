@@ -15,11 +15,9 @@ angular.module('copayApp.controllers').controller('preferencesCurrencyController
                     }
                 }
             };
-            indexScope.showdollar = newCurrency == 'en';
             configService.set(opts, function(err) {
                 if (err) $log.warn(err);
                 $scope.$emit('Local/CurrencySettingUpdated');
-
                 $timeout(function() {
                     go.preferencesGlobal();
                 }, 100);

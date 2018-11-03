@@ -702,8 +702,8 @@ msgid "From"
 msgstr "来自"
 
 #: public/views/editCorrespondentDevice.html:27
-msgid "Device address:"
-msgstr "设备地址:"
+msgid "Full address:"
+msgstr "完整地址:"
 
 #: public/views/preferencesGlobal.html:122
 msgid "Full backup"
@@ -1301,8 +1301,8 @@ msgid "Scan status finished with error"
 msgstr "查询结果出现错误"
 
 #: public/views/inviteCorrespondentDevice.html:21
-msgid "Scan the above QR code using the other device, or send this pairing code to the other device."
-msgstr "使用其他设备扫描上述QR码，或将此配对码发送到其他设备."
+msgid "Scan the above QR code using the other device, or send this pairing code to the other device:"
+msgstr "使用其他设备扫描上述QR码，或将此配对码发送到其他设备："
 
 #: src/js/controllers/index.js:1624
 msgid "Scan your fingerprint please"
@@ -2508,11 +2508,42 @@ msgstr "分享代码"
 msgid "Copy pairing code"
 msgstr "复制配对码"
 
-msgid "yi"
-msgstr "亿"
+msgid "The network is not strong. Please click the screen to reload."
+msgstr "网络不给力 请点击屏幕重新加载"
+
 
 msgid "Add new device"
 msgstr "添加新设备"
 
 msgid "Enter the pairing code received from another device, or use the camera (upper right corner icon) to scan the QR code displayed on other devices."
 msgstr "输入从其他设备接收的配对码，或使用相机（右上角图标）扫描其他设备上显示的QR码。"
+
+msgid "Newest"
+msgstr "最新"
+
+msgid "Newsletter"
+msgstr "快讯"
+
+msgid "Quotes"
+msgstr "行情"
+
+msgid "views"
+msgstr "浏览"
+
+msgid "Market value"
+msgstr "市值"
+
+msgid "Price"
+msgstr "价格"
+
+msgid "Latest gains"
+msgstr "最新涨幅"
+
+msgid "USD"
+msgstr "美元"
+
+msgid "CNY"
+msgstr "人民币"
+
+msgid "Currency"
+msgstr "计价货币"

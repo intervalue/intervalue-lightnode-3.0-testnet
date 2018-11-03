@@ -768,6 +768,12 @@ angular.module('copayApp.directives')
             var raw = elm[0];
 
             elm.bind('scroll', function() {
+                if(elm[0].id == 'new3tab'){
+                    scope.$apply(function(){
+                        angular.element(document.getElementById('cointitle')).css('top',raw.scrollTop+'px');
+                    });
+                    return;
+                }
                 if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
                     scope.$apply(attr.homescrolled);
                 };
@@ -779,6 +785,9 @@ angular.module('copayApp.directives')
             var raw = elm[0];
 
             elm.bind('scroll', function() {
+                scope.$apply(function(){
+                    angular.element(document.getElementById('datenow')).css('top',raw.scrollTop+'px');
+                });
                 scope.$apply(attr.quickscrolltop);
                 if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
                     scope.$apply(attr.homequiscrolled);
@@ -874,7 +883,7 @@ angular.module('copayApp.directives')
                 function releaseload(){
                     rawh.children[0].style.display = 'none';
                     rawh.children[1].style.display = 'block';
-                    rawh.style.height = "45px";//高度设定为20px
+                    rawh.style.height = "45px";//高度设定为45px
                     scope.$apply(attr.homePullDown);
                 }
                 function resetdrag(){
@@ -903,11 +912,6 @@ angular.module('copayApp.directives')
                     img.src = './img/transparent.png';
                     event.dataTransfer.setDragImage(img, 10, 10);
                     scope._start = event.pageY;
-                    if(rawp.scrollTop <= 0){
-                        document.getElementById('datenow').style.display = 'none';
-                    }else{
-                        return;
-                    }
                 }
                 function dragMove(event){//dragMove函数
                     scope._end = (scope._start - event.pageY);
@@ -938,12 +942,15 @@ angular.module('copayApp.directives')
                     }
                 }
                 function touchStart(event){//dragStart函数
-                    document.getElementById('datenow').style.display = 'none';
                     scope._start = event.targetTouches[0].pageY;
                 }
                 function touchMove(event){//dragMove函数
-                    document.getElementById('datenow').style.display = 'none';
                     scope._end = (scope._start - event.targetTouches[0].pageY);
+                    if(scope._end >= 0){
+                        document.getElementById('datenow').style.display = 'block';
+                    }else{
+                        document.getElementById('datenow').style.display = 'none';
+                    }
                     //下滑才执行操作
                     if(rawp.scrollTop <= 0){
                         if(scope._end < 0){
@@ -978,7 +985,7 @@ angular.module('copayApp.directives')
                 function releaseload(){
                     rawh.children[0].style.display = 'none';
                     rawh.children[1].style.display = 'block';
-                    rawh.style.height = "45px";//高度设定为20px
+                    rawh.style.height = "45px";//高度设定为45px
                     scope.$apply(attr.homeQpullDown);
                 }
                 function resetdrag(){
@@ -987,36 +994,6 @@ angular.module('copayApp.directives')
             }
         }
     })
-  //   .directive("mdinputpassr",function(){
-  //   return {
-  //       scope: {},
-  //       restrict: 'A',
-  //       require: ['^mdinputvalidc','?ngModel'],
-  //       link: postLink
-  //   }
-  //     function postLink(scope, elem, attrs, ctrl){
-  //       var isSame = function(value) {
-  //         var anotherValue = attrs.mdinputpassr;
-  //         return value === anotherValue;
-  //       };
-  //       if(ctrl[1]){
-  //         scope.$watch(function() {
-  //           return (ctrl[1]).$modelValue + "";
-  //         }, function(val) {
-  //           if(typeof(val) == 'undefined'){
-  //             ctrl[0].setErrorexp(false, 'noerror');
-  //             ctrl[1].$setValidity('mdinputpassr', false);
-  //           }else if(val == ''){
-  //             ctrl[0].setErrorexp(false, 'noerror');
-  //             ctrl[1].$setValidity('mdinputpassr', false);
-  //           }else{
-  //             ctrl[0].setErrorexp(!(isSame(val)), 'nomatch');
-  //             ctrl[1].$setValidity('mdinputpassr', isSame(val));
-  //           }
-  //         });
-  //       }
-  //   }
-  // })
     .filter('encodeURIComponent', function() {
     return window.encodeURIComponent;
   }).filter('objectKeys', [function() {

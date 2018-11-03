@@ -57,8 +57,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.shownewstab = '';
     self.quickscrolltop = 0;
     self.quickdatanow = '';
-    self.currentdddddDate = null;
-    self.showdollar = true;
+    self.currentfixDate = null;
+    //self.showdollar = true;
     self.invedollar = 1;
     self.invermb = 1;
     function updatePublicKeyRing(walletClient, onDone) {
@@ -701,12 +701,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         'img': 'mmtabsend',
         'imgid': 'send',
         'link': 'send'
-    },{
-        'title': gettext('Chat'),
-        'img': 'mmtabchat',
-        'imgid': 'chat',
-        'link': 'chat',
-        'new_state': 'correspondentDevices',
     }, {
         'title': gettext('Wallet'),
         'img': 'mmtabwallet',
@@ -840,7 +834,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     self.setTab = function (tab, reset, tries, switchState) {
         FastClick.attach(document.body);
-        // console.log("setTab", tab, reset, tries, switchState);
+        console.log("setTab", tab, reset, tries, switchState);
         tries = tries || 0;
 
         var changeTab = function (tab) {
@@ -888,12 +882,12 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 return self.setTab(tab.link, reset, tries, switchState);
             }
         }
-        //console.log("current tab " + self.tab + ", requested to set tab " + tab + ", reset=" + reset);
+        console.log("current tab " + self.tab + ", requested to set tab " + tab + ", reset=" + reset);
         if (self.tab === tab && !reset)
             return;
 
         if (!document.getElementById('menu-' + tab) && ++tries < 5) {
-            //console.log("will retry setTab later:", tab, reset, tries, switchState);
+            console.log("will retry setTab later:", tab, reset, tries, switchState);
             return $timeout(function () {
                 self.setTab(tab, reset, tries, switchState);
             }, (tries === 1) ? 10 : 300);
@@ -928,9 +922,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             return breadcrumbs.add('updateAll not complete yet');
 
         // reconnect if lost connection
-        var device = require('intervaluecore/device.js');
-        device.loginToHub();
-
+        /*var device = require('intervaluecore/device.js');
+        device.loginToHub();*/
         $timeout(function () {
             /* if (!opts.quiet)
                self.setOngoingProcess('updatingStatus', true);
@@ -1285,11 +1278,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         }else {
             self.needsBackupa = false;
         }
-        if (self.arrBalances.length === 0)
-            return console.log('updateLocalTxHistory: no balances yet');
-        breadcrumbs.add('index: ' + self.assetIndex + '; balances: ' + JSON.stringify(self.arrBalances));
-        if (!client.isComplete())
-            return console.log('fc incomplete yet');
+        // if (self.arrBalances.length === 0)
+        //     return console.log('updateLocalTxHistory: no balances yet');
+        // breadcrumbs.add('index: ' + self.assetIndex + '; balances: ' + JSON.stringify(self.arrBalances));
+        // if (!client.isComplete())
+        //     return console.log('fc incomplete yet');
         client.getTxHistory('base', walletId, function onGotTxHistory(txs) {
             $timeout(function () {
                 var newHistory = self.processNewTxs(txs);
@@ -1361,7 +1354,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         var fc = profileService.focusedClient;
         var walletId = fc.credentials.walletId;
         $log.debug('starting Updating Transaction History');
-        if (!fc.isComplete() || self.arrBalances.length === 0 || self.updatingTxHistory[walletId]) {
+        if ((!fc.isComplete() || self.arrBalances.length === 0 || self.updatingTxHistory[walletId]) && retry !== 4) {
             $log.debug('failed Updating Transaction History');
             if (retry) {
                 setTimeout(function () {
@@ -1523,9 +1516,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     };
 
     self.setUxCurrency = function () {
-        var userLang = uxCurrency.update();
-        self.defaultCurrencyIsoCode = userLang;
-        self.defaultCurrencyName = uxCurrency.getName(userLang);
+        var userCoin = uxCurrency.update();
+        self.defaultCurrencyIsoCode = userCoin;
+        self.defaultCurrencyName = uxCurrency.getName(userCoin);
     };
 
 
@@ -1631,7 +1624,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     $rootScope.$on('Local/LanguageSettingUpdated', function () {
         self.setUxLanguage();
-        self.setUxCurrency();
     });
 
     $rootScope.$on('Local/CurrencySettingUpdated', function () {
@@ -1764,14 +1756,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         go.walletHome();
     });
 
-    $rootScope.$on('Local/NewFocusedWalletToPayment', function (event, cb) {
-        console.log('on Local/NewFocusedWallet');
-        self.setFocusedWallet(cb);
-
-    });
-
     $rootScope.$on('Local/SetTab', function (event, tab, reset, swtichToHome) {
-        //console.log("SetTab " + tab + ", reset " + reset);
+        console.log("SetTab " + tab + ", reset " + reset);
         self.setTab(tab, reset, null, swtichToHome);
     });
 
@@ -1798,7 +1784,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     });
 
     $rootScope.$on('Local/NeedsPassword', function (event, isSetup, error_message, cb) {
-        console.log('NeedsPassword');
         self.askPassword = {
             isSetup: isSetup,
             error: error_message,
@@ -1942,6 +1927,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     });
     let news = require("intervaluecore/newsServers");
 
+    //24小时显示小时，超过24小时显示日期
     self.getTimeFromNow =  function(datestr){
         if(datestr){
             let aa = new Date(Date.parse(datestr.replace(/-/g,"/")))
@@ -1965,29 +1951,16 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         return null
     };
 
-    self.getWeeksingle =  function(){
-        //当前年月日
-        var date = new Date();
-        var year = date.getFullYear();
-        var month = date.getMonth() + 1;
-        var day = date.getDate();
-        var comprared = year + '-' + month + '-' + day;
-        //计算星期几
-        let qdatearr = comprared.split('-');
-        let qdatearr2 = new Date(qdatearr[0], parseInt(qdatearr[1] - 1), qdatearr[2]);
-        let qweeknow = String(qdatearr2.getDay()).replace("0","日").replace("1","一").replace("2","二").replace("3","三").replace("4","四").replace("5","五").replace("6","六");
-        let qdatenow = "星期" + qweeknow;
-        return '今天'+ ' ' +qdatearr[1] + '/' + qdatearr[2] + ' '+ qdatenow;
-    };
-    self.getweekginglee = self.getWeeksingle();
 
+
+    //获取快讯固定的时间
     self.getWeekNow =  function(datestr){
         if(datestr){
             //当前年月日
             var date = new Date();
             var year = date.getFullYear();
             var month = date.getMonth() + 1;
-            var day = date.getDate();
+            var day = date.getDate() < 10 ? '0'+ date.getDate() :  date.getDate();
             var comprared = year + '-' + month + '-' + day;
             //计算星期几
             let qdatearr = datestr.split('-');
@@ -2002,7 +1975,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         }
         return null
     };
-
+    //获取快讯滚动的时间
     self.getDateNow =  function(datestr){
         if(datestr){
             let qdatearr = datestr.split('-');
@@ -2011,7 +1984,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         return null
     };
 
-    self.newsData = function (upyn) {
+    /*self.newsData = function (upyn) {
         if(upyn == 'up'){
             news.getNewsData(6,1,null,function(res) {
                 if(!!res && res.code == 0) {
@@ -2028,8 +2001,110 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             })
         }else{
             news.getNewsData(6,self.newspage,null,function(res) {
+                if(!!res && res.code == 0) {
+                    self.shownewsloading = false;
+                    if(JSON.stringify(self.newslists) == '[]'){
+                        self.newslists = res.page.list;
+                        self.newslist = res.page.list;
+                        self.newspage += 1;
+                        $timeout(function(){
+                            $scope.$apply();
+                        })
+                    }else{
+                        self.newslists = self.newslists.concat(res.page.list);
+                        self.newslist = self.newslists;
+                        if(self.newspage == res.page.totalPage){
+                            self.shownonews = true;
+                            self.shownewsloading = false;
+                        }
+                        self.newspage += 1;
+                        $timeout(function(){
+                            $scope.$apply();
+                        });
+                        return;
+                    }
+                }else
+                    console.error("error~!");
+            })
+        }
+    };*/
 
-                console.log(res);
+    //行情排序
+
+    self.orderByValue = '';
+    self.orderByPrice = '';
+    self.orderByQuoteChange='';
+    self.orderByList = [self.orderByQuoteChange,self.orderByPrice,self.orderByValue];
+
+    //根据总市值排序
+    self.orderbyShowValue = function(){
+        if(self.orderByValue == '-values') self.orderByValue = 'values'; else self.orderByValue = '-values';
+        self.orderByList = [self.orderByValue,self.orderByQuoteChange,self.orderByPrice];
+    }
+
+    //根据货币单价排序
+    self.orderbyShowPrice = function(){
+        if(self.orderByPrice == '-price') self.orderByPrice = 'price'; else self.orderByPrice = '-price';
+        self.orderByList = [self.orderByPrice,self.orderByQuoteChange,self.orderByValue];
+
+    }
+
+    //根据24H涨幅排序
+    self.orderbyShowGains = function(){
+        if(self.orderByQuoteChange == '-quoteChange') self.orderByQuoteChange = 'quoteChange'; else self.orderByQuoteChange = '-quoteChange';
+        self.orderByList = [self.orderByQuoteChange,self.orderByPrice,self.orderByValue];
+    }
+
+
+    //定时拉去信息
+    setInterval(function() {
+        if (navigator.onLine) {
+            if(!self.online){
+                self.newsData();
+                self.quickData();
+            }
+            self.online = true;
+            self.currencyData();
+        } else {
+            self.online = false;
+        }
+    }, 5 * 1000);
+
+    self.newsData = function (upyn) {
+        if (navigator.onLine) {
+            self.online = true;
+        } else {
+            self.online = false;
+        }
+        if(upyn == 'up'){
+            self.loading = true;
+            news.getNewsData(20,1,null,function(res) {
+                if(!!res && res.code == 0) {
+                    //给返回对象加字段
+                    lodash.forEach(res.page.list, function(value, key){
+                        value.greentime = self.getTimeFromNow(value.createTime);
+                    })
+                    angular.element(document.getElementById('newupheight')).css('display', 'none');
+                    self.newslists = res.page.list;
+                    self.newslist = res.page.list;
+                    self.newspage = 2;
+                    $timeout(function(){
+                        $scope.$apply();
+                    });
+
+                    return;
+                }else{
+                    self.newslist = '';
+                }
+
+            });
+            $timeout(function () {
+                self.loading = false;
+            },500);
+
+        }else{
+            self.loading = true;
+            news.getNewsData(20,self.newspage,null,function(res) {
                 if(!!res && res.code == 0) {
                     self.shownewsloading = false;
                     //给返回对象加字段
@@ -2057,18 +2132,26 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                         return;
                     }
                 }else
-                    console.error("error~!");
-            })
+                    self.newslist = '';
+
+            });
+            self.loading = false;
         }
     };
 
     self.quickData = function (upyn) {
+        if (navigator.onLine) {
+            self.online = true;
+        } else {
+            self.online = false;
+        }
         if(upyn == 'up'){
+            self.loading = true;
             news.getQuickData(20,1,null,null,function(res) {
                 var list = [];
                 if(!!res && res.code == 0) {
                     angular.element(document.getElementById('quickupheight')).css('display', 'none');
-                    document.getElementById('datenow').style.display = 'block';
+                    angular.element(document.getElementById('datenow')).css('display', 'block');
                     self.quicklists = {};
                     //给返回对象加字段
                     lodash.forEach(res.page.list, function(value, key){
@@ -2096,9 +2179,13 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                         $scope.$apply();
                     });
                 }else
-                    console.error("error~!");
+                    cself.quicklistshow = '';
             });
+            $timeout(function () {
+                self.loading = false;
+            },500);
         }else{
+            self.loading = true;
             news.getQuickData(20,self.quickpage,null,null,function(res) {
                 var list = [];
                 if(!!res && res.code == 0) {
@@ -2136,12 +2223,22 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                         $scope.$apply();
                     });
                 }else
-                    console.error("error~!");
+                    self.quicklistshow = '';
             });
+            self.loading = false;
         }
     };
 
     self.currencyData = function (upyn) {
+        if(!self.online){
+            if (navigator.onLine) {
+                self.online = true;
+            } else {
+                self.online = false;
+                return;
+            }
+        }
+
         //inve 行情
         news.getInveData2(function (res) {
             if(!!res && res != null) {
@@ -2150,6 +2247,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         });
 
         if(upyn == 'up'){
+            self.loading = true;
             news.getCurrencyData(6,1,null,function(res) {
                 if(!!res) {
                     angular.element(document.getElementById('coinupheight')).css('display', 'none');
@@ -2161,9 +2259,13 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     })
                     return;
                 }else
-                    console.error("error~!");
-            })
+                    self.coinlist = '';
+            });
+            $timeout(function () {
+                self.loading = false;
+            },500);
         }else{
+            self.loading = true;
             news.getCurrencyData(6,self.coinpage,null,function(res) {
                 if(!!res) {
                     self.showcoinloading = false;
@@ -2188,8 +2290,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                         return;
                     }
                 }else
-                    console.error("error~!");
-            })
+                    self.coinlist = '';
+            });
+            self.loading = false;
         }
 
     };
@@ -2211,17 +2314,17 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         var curtop = document.getElementById('new2tab').scrollTop;
         var dateall = document.querySelectorAll('.news .letterlist .itemin .date');
         for(var i = 1; i < dateall.length; i++){
-            if(self.currentdddddDate){
+            if(self.currentfixDate){
                 if(curtop >= dateall[i].offsetTop - 78  && curtop <= dateall[i].offsetTop + 78 ){
                     if(curtop < dateall[i].offsetTop){
-                        self.currentdddddDate = dateall[i-1]
+                        self.currentfixDate = dateall[i-1]
                     }else{
-                        self.currentdddddDate = dateall[i]
+                        self.currentfixDate = dateall[i]
                     }
-                    self.quickdatanow = self.currentdddddDate.innerText;
+                    self.quickdatanow = self.currentfixDate.innerText;
                 }
             }else{
-                self.currentdddddDate = dateall[0];
+                self.currentfixDate = dateall[0];
             }
 
         }
@@ -2278,6 +2381,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     if(!!res &&  res.code == 0) {
                         $scope.newstitle = res.article.title;
                         $scope.newscontent = res.article.content;
+
                         $timeout(function(){
                             $scope.$apply();
                         });
@@ -2287,6 +2391,10 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             }
             $scope.cancel = function() {
                 $modalInstance.dismiss('cancel');
+                for(let item in self.newslist){
+                    if(self.newslist[item].id == id) self.newslist[item].pageviews += 1;
+                }
+
             };
         };
 
@@ -2380,5 +2488,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     //     }, false);
     // })();
     console.log(profileService.walletClients);
+
+    if (navigator.onLine) {
+        self.online = true;
+    } else {
+        self.online = false;
+    }
 
 });
