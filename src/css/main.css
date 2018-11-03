@@ -581,6 +581,7 @@ ul.off-canvas-list .avatar-wallet{
 }
 ul.off-canvas-list .whpback{
   padding:0 8px;border:1px solid #8CF8D8;border-radius:18px;font-size:10px;margin-left:10px;flex-shrink:0;cursor:pointer;color: #8CF8D8;
+  line-height:13px;
 }
 .tab-bar h1, .tab-bar h2, .tab-bar h3, .tab-bar h4, .tab-bar h5, .tab-bar h6 {
   /*line-height: 2.7rem;*/

@@ -97,7 +97,7 @@
                             <div class="whlinfo">
                                 <img class="whlogo" src="{{index.image}}"/>
                                 <span class="whname">{{ (index.alias || index.walletName)}}</span>
-                                <span class="whpback" ng-show="index.needsBackupa" ng-click="$root.go('backup');index.backhome = true;" translate>Please backup</span>
+                                <div class="whpback" ng-show="index.needsBackupa" ng-click="$root.go('backup');index.backhome = true;" translate>Please backup</div>
                                 <img class="whewm" ng-click="$root.go('receive')" src="./img/lewm.png"/>
                             </div>
                             <div class="whamount"><div>{{index.ammountTatol}}</div> INVE</div>
@@ -604,7 +604,7 @@
                         <div class="adwwtlogo"><img src="{{item.image}}"></div>
                         <div class="adwwt100">
                             <div class="adwwtname">{{item.walletName}}
-                                <span class="whpback" ng-show="item.mnemonic || item.mnemonicEncrypted" ng-click="$root.go('backup');index.backwallet=true" translate>Please backup</span>
+                                <div class="whpback" ng-show="item.mnemonic || item.mnemonicEncrypted" ng-click="$root.go('backup');index.backwallet=true" translate>Please backup</div>
                             </div>
                             <div class="adwwtaddr">{{item.address}}</div>
                         </div>
