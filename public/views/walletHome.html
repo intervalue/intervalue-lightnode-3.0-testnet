@@ -95,15 +95,15 @@
                         <!--former carousel start...-->
                         <div>
                             <div class="whlinfo">
-                                <img class="whlogo" src="{{index.image}}"/>
+                                <img class="whlogo" ng-src="{{index.image}}"/>
                                 <span class="whname">{{ (index.alias || index.walletName)}}</span>
                                 <div class="whpback" ng-show="index.needsBackupa" ng-click="$root.go('backup');index.backhome = true;" translate>Please backup</div>
                                 <img class="whewm" ng-click="$root.go('receive')" src="./img/lewm.png"/>
                             </div>
                             <div class="whamount"><div>{{index.ammountTatol}}</div> INVE</div>
                             <div class="whcnyd">
-                                <div ng-show="index.defaultCurrencyIsoCode == 'en';">&asymp; $ {{index.ammountTatolNmuber * index.invedollar}}</div>
-                                <div ng-show="index.defaultCurrencyIsoCode == 'zh_CN';">&asymp; &yen; {{index.ammountTatolNmuber * index.invermb}}</div>
+                                <div ng-show="index.defaultCurrencyIsoCode == 'en';">&asymp; $ {{index.ammountTatolNmuber * index.invedollar/1000000 | number :4}}</div>
+                                <div ng-show="index.defaultCurrencyIsoCode == 'zh_CN';">&asymp; &yen; {{index.ammountTatolNmuber * index.invermb/1000000 | number :4}}</div>
                             </div>
                         </div>
                         <!--former carousel end...-->
@@ -342,7 +342,7 @@
                 </div>
             </div>
             <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new1'}" id="new1tab" homescrolled="index.loadmore('new1tab', 'new1tablist')">
-                <div ng-if="!index.online && !index.loading" ng-click="index.newsData('up');index.quickData('up');" class="nowire">
+                <div ng-if="!index.online  && !index.loading" ng-click="index.newsData('up');index.quickData('up');" class="nowire">
                     <div class="nowirein">
                         <img src="./img/nowire.png" />
                         <div class="nowireintext" translate>The network is not strong. Please click the screen to reload.</div>
@@ -363,7 +363,7 @@
                         <div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>
                     </div>
                     <div class="item" ng-repeat="item in index.newslist track by $index">
-                        <img src="{{item.coverPath}}" ng-click="index.openNewsinModal(item.id)" />
+                        <img ng-src="{{item.coverPath}}" ng-click="index.openNewsinModal(item.id)" />
                         <div class="info">
                             <div class="title" ng-click="index.openNewsinModal(item.id)" >{{item.title}}</div>
                             <div class="litinfo">
@@ -377,7 +377,7 @@
                 <div ng-show="index.shownewsloading" class="shownewsloading"><img src="./img/loading.png" /><span translate>Loading</span></div>
             </div>
             <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new2'}" id="new2tab" quickscrolltop="index.quickequaltop()" homequiscrolled="index.loadmore('new2tab', 'new2tablist')">
-                <div ng-if="!index.online &&  !index.loading" ng-click="index.newsData('up');index.quickData('up');" class="nowire">
+                <div ng-if="!index.online && !index.loading" ng-click="index.newsData('up');index.quickData('up');" class="nowire">
                     <div class="nowirein">
                         <img src="./img/nowire.png" />
                         <div class="nowireintext" translate>The network is not strong. Please click the screen to reload.</div>
@@ -386,7 +386,7 @@
                 <div class="newslistheight" ng-if ="!index.online && index.loading">
                     <div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>
                 </div>
-                <div ng-if="index.quicklistshow == '' && index.online" class="nonews" ng-click="index.newsData('up');index.quickData('up');" >
+                <div ng-if="index.quicklistshow == '' && index.online" class="nonews" ng-click="index.quickData('up');" >
                     <div class="nonewsin">
                         <img src="./img/nonews.png" />
                         <div class="nonewsintext" translate>No fresh content. Please click the screen to reload.</div>
@@ -417,7 +417,7 @@
                 <div ng-show="index.showquicksloading" class="shownewsloading"><img src="./img/loading.png" /><span translate>Loading</span></div>
             </div>
             <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new3'}" id="new3tab" homescrolled="index.loadmore('new3tab', 'new3tablist')">
-                <div ng-if="!index.online && !index.loading" ng-click="index.newsData('up');index.quickData('up');index.currencyData('up');" class="nowire">
+                <div ng-if="!index.online && !index.loading" ng-click="index.currencyData('up');" class="nowire">
                     <div class="nowirein">
                         <img src="./img/nowire.png" />
                         <div class="nowireintext" translate>The network is not strong. Please click the screen to reload.</div>
@@ -568,6 +568,27 @@
                                     <!--ng-style="{'background-color':index.backgroundColor}"  translate>-->
                                     <!--Send-->
                                     <!--</button>-->
+                                    <div ng-show="home.chat" name="from_address" class="chatbiline">
+                                        <ul class="m0">
+                                            <li ng-click="showselectwt = true;">
+                                                <div class="liin">
+                                                    <div class="ld">
+                                                        <div class="limg">
+                                                            <img src="./img/setwallet.png">
+                                                        </div>
+                                                        <span translate="">选择付款钱包</span>
+                                                    </div>
+                                                    <div class="rd">
+                                                        <div class="chatsetinfo">
+                                                            <div class="chatinfoname ng-binding"><img src="{{home.from_image}}"> </div>
+                                                            <div class="chatinfomon"><span translate="">可用余额</span>:&nbsp;<span class="ng-binding"></span>{{home.from_stables}}</div>
+                                                        </div>
+                                                        <img src="./img/more.png">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
                                     <button type="submit" class="m20t m20b" ng-if="mtab == 1" ng-disabled="sendPaymentForm.$invalid" translate>
                                         Send
                                     </button>
@@ -578,6 +599,27 @@
                         </div>
                     </div>
                 </form>
+                <div ng-show="showselectwt" class="popconfirm">
+                    <div class="popmask" ng-click="showselectwt = false;"></div>
+                    <div class="popcontentwt">
+                        <ul class="m0">
+                            <li ng-repeat="item in index.walletInfo" ng-click="home.findPaymentAddress(item.wallet,item.stables,item.walletName,item.image);">
+                                <div class="liin">
+                                    <div class="ld">
+                                        <span class="greendot"></span>
+                                        <div class="limg">
+                                            <img ng-src="{{item.image}}" />
+                                        </div>
+                                        <span>{{item.walletName}}</span>
+                                    </div>
+                                    <div class="rd">
+                                        <span translate>Available amount</span>:&nbsp;<span>{{item.stables}}</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div> <!-- END Send -->
         <!--
@@ -601,7 +643,7 @@
             <div class="adwwto">
                 <div class="adwwt" ng-repeat="item in index.walletInfo track by $index">
                     <div class="adwwtflex" ng-click="index.towalletname(item.image, item.walletName, item.address, item.stables, item.wallet, item.mnemonic, item.mnemonicEncrypted)">
-                        <div class="adwwtlogo"><img src="{{item.image}}"></div>
+                        <div class="adwwtlogo"><img ng-src="{{item.image}}"></div>
                         <div class="adwwt100">
                             <div class="adwwtname">{{item.walletName}}
                                 <div class="whpback" ng-show="item.mnemonic || item.mnemonicEncrypted" ng-click="$root.go('backup');index.backwallet=true" translate>Please backup</div>

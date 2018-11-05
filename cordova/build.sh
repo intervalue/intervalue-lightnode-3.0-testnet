@@ -92,9 +92,9 @@ if [ ! -d $PROJECT ]; then
 		#cordova plugin add cordova-plugin-android-support-v4-jar
 		#checkOK
 
-        cordova plugin add https://github.com/jrontend/phonegap-plugin-barcodescanner.git
+        #cordova plugin add https://github.com/jrontend/phonegap-plugin-barcodescanner.git
 
-		#cordova plugin add https://github.com/phonegap/phonegap-plugin-barcodescanner.git
+		cordova plugin add https://github.com/phonegap/phonegap-plugin-barcodescanner.git
 	fi
 	checkOK
 

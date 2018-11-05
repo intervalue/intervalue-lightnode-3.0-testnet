@@ -2487,6 +2487,37 @@ msgstr "松开刷新"
 msgid "Pull down to refresh"
 msgstr "下拉刷新"
 
+msgid "Provide my pairing code"
+msgstr "提供我的配对码"
+
+msgid "Enter the partner's pairing code"
+msgstr "输入对方配对码"
+
+msgid "Choose a collection wallet"
+msgstr "选择收款钱包"
+
+msgid "Add device"
+msgstr "添加设备"
+
+msgid "My wallet address"
+msgstr "我的钱包地址"
+
+msgid "Share the code"
+msgstr "分享代码"
+
+msgid "Copy pairing code"
+msgstr "复制配对码"
+
+msgid "The network is not strong. Please click the screen to reload."
+msgstr "网络不给力 请点击屏幕重新加载"
+
+
+msgid "Add new device"
+msgstr "添加新设备"
+
+msgid "Enter the pairing code received from another device, or use the camera (upper right corner icon) to scan the QR code displayed on other devices."
+msgstr "输入从其他设备接收的配对码，或使用相机（右上角图标）扫描其他设备上显示的QR码。"
+
 msgid "Newest"
 msgstr "最新"
 
@@ -2516,28 +2547,3 @@ msgstr "人民币"
 
 msgid "Currency"
 msgstr "计价货币"
-
-msgid "The network is not strong. Please click the screen to reload."
-msgstr "网络不给力 请点击屏幕重新加载"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

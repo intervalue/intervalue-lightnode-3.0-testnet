@@ -83,26 +83,25 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         });
     }
 
-    //todo delete
+
     function sendBugReport(error_message, error_object) {
         var conf = require('intervaluecore/conf.js');
         var network = require('intervaluecore/network.js');
         var bug_sink_url = conf.WS_PROTOCOL + (conf.bug_sink_url || configService.getSync().hub);
-        //todo delete
-        // network.findOutboundPeerOrConnect(bug_sink_url, function (err, ws) {
-        //     if (err)
-        //         return;
-        //     breadcrumbs.add('bugreport');
-        //     var description = error_object.stack || JSON.stringify(error_object, null, '\t');
-        //     if (error_object.bIgnore)
-        //         description += "\n(ignored)";
-        //     description += "\n\nBreadcrumbs:\n" + breadcrumbs.get().join("\n") + "\n\n";
-        //     description += "UA: " + navigator.userAgent + "\n";
-        //     description += "Language: " + (navigator.userLanguage || navigator.language) + "\n";
-        //     description += "Program: " + conf.program + ' ' + conf.program_version + ' ' + (conf.bLight ? 'light' : 'full') + " #" + window.commitHash + "\n";
-        //     //todo delete
-        //     // network.sendJustsaying(ws, 'bugreport', { message: error_message, exception: description });
-        // });
+        network.findOutboundPeerOrConnect(bug_sink_url, function (err, ws) {
+            if (err)
+                return;
+            breadcrumbs.add('bugreport');
+            var description = error_object.stack || JSON.stringify(error_object, null, '\t');
+            if (error_object.bIgnore)
+                description += "\n(ignored)";
+            description += "\n\nBreadcrumbs:\n" + breadcrumbs.get().join("\n") + "\n\n";
+            description += "UA: " + navigator.userAgent + "\n";
+            description += "Language: " + (navigator.userLanguage || navigator.language) + "\n";
+            description += "Program: " + conf.program + ' ' + conf.program_version + ' ' + (conf.bLight ? 'light' : 'full') + " #" + window.commitHash + "\n";
+
+            network.sendJustsaying(ws, 'bugreport', { message: error_message, exception: description });
+        });
     }
 
     self.sendBugReport = sendBugReport;
@@ -707,7 +706,13 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         'img': 'mmtabwallet',
         'imgid': 'wallet',
         'link': 'wallet'
-    }];
+    }, {
+        'title': gettext('Chat'),
+        'img': 'mmtabchat',
+        'imgid': 'chat',
+        'link': 'chat',
+        'new_state': 'correspondentDevices',
+        }];
     self.addonViews = addonManager.addonViews();
     self.menu = self.menu.concat(addonManager.addonMenuItems());
     self.menuItemSize = self.menu.length > 5 ? 2 : 3;
@@ -1350,6 +1355,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
 
     self.updateHistory = function (retry) {
+        var device = require('intervaluecore/device.js');
+        device.loginToHub();
         var fc = profileService.focusedClient;
         var walletId = fc.credentials.walletId;
         $log.debug('starting Updating Transaction History');
@@ -2064,10 +2071,17 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     }, 5 * 1000);
 
     self.newsData = function (upyn) {
-        if (navigator.onLine) {
-            self.online = true;
-        } else {
-            self.online = false;
+        if(!self.online){
+            if (navigator.onLine) {
+                self.online = true;
+            } else {
+                self.online = false;
+                self.loading = true;
+                $timeout(function () {
+                    self.loading = false;
+                },1000);
+                return;
+            }
         }
         if(upyn == 'up'){
             self.loading = true;
@@ -2084,12 +2098,12 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     $timeout(function(){
                         $scope.$apply();
                     });
-                    
+
                     return;
                 }else{
                     self.newslist = '';
                 }
-                
+
             });
             $timeout(function () {
                 self.loading = false;
@@ -2133,15 +2147,21 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     };
 
     self.quickData = function (upyn) {
-        if (navigator.onLine) {
-            self.online = true;
-        } else {
-            self.online = false;
+        if(!self.online){
+            if (navigator.onLine) {
+                self.online = true;
+            } else {
+                self.online = false;
+                self.loading = true;
+                $timeout(function () {
+                    self.loading = false;
+                },1000);
+                return;
+            }
         }
         if(upyn == 'up'){
             self.loading = true;
             news.getQuickData(20,1,null,null,function(res) {
-                console.log(res)
                 var list = [];
                 if(!!res && res.code == 0) {
                     angular.element(document.getElementById('quickupheight')).css('display', 'none');
@@ -2229,6 +2249,10 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 self.online = true;
             } else {
                 self.online = false;
+                self.loading = true;
+                $timeout(function () {
+                    self.loading = false;
+                },1000);
                 return;
             }
         }

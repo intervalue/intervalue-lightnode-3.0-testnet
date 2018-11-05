@@ -10,7 +10,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	var device = require('intervaluecore/device.js');
 	var wallet = require('intervaluecore/wallet.js');
 
-	// var chatStorage = require('intervaluecore/chat_storage.js');
+	 var chatStorage = require('intervaluecore/chat_storage.js');
 	$rootScope.newMessagesCount = {};
 	$rootScope.newMsgCounterEnabled = false;
 
@@ -110,7 +110,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 		//	if (arrMyAddresses.indexOf(address) >= 0)
 		//		return address;
 			//return '<a send-payment address="'+address+'">'+address+'</a>';
-			return pre+'<a dropdown-toggle="#pop'+address+'">'+address+'</a><ul id="pop'+address+'" class="f-dropdown" style="left:0px" data-dropdown-content><li><a ng-click="sendPayment(\''+address+'\')">'+gettext('Pay to this address')+'</a></li><li><a ng-click="offerContract(\''+address+'\')">'+gettext('Offer a contract')+'</a></li></ul>'+post;
+			return pre+'<a ng-click="sendPayment(\''+address+'\',\''+''+'\',\''+''+'\',\''+'chat'+'\')">'+address+'</a>'+post;
 		//	return '<a ng-click="sendPayment(\''+address+'\')">'+address+'</a>';
 			//return '<a send-payment ng-click="sendPayment(\''+address+'\')">'+address+'</a>';
 			//return '<a send-payment ng-click="console.log(\''+address+'\')">'+address+'</a>';
@@ -123,7 +123,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 			var objPaymentRequest = parsePaymentRequestQueryString(query_string);
 			if (!objPaymentRequest)
 				return str;
-			return '<a ng-click="sendPayment(\''+address+'\', '+objPaymentRequest.amount+', \''+objPaymentRequest.asset+'\', \''+objPaymentRequest.device_address+'\', \''+objPaymentRequest.single_address+'\')">'+objPaymentRequest.amountStr+'</a>';
+			return '<a ng-click="sendPayment(\''+address+'\', '+objPaymentRequest.amount+', \''+objPaymentRequest.asset+'\',\''+'chat'+'\', \''+objPaymentRequest.device_address+'\', \''+objPaymentRequest.single_address+'\')">'+objPaymentRequest.amountStr+'</a>';
 		}).replace(/\[(.+?)\]\(command:(.+?)\)/g, function(str, description, command){
 			return '<a ng-click="sendCommand(\''+escapeQuotes(command)+'\', \''+escapeQuotes(description)+'\')" class="command">'+description+'</a>';
 		}).replace(/\[(.+?)\]\(payment:(.+?)\)/g, function(str, description, paymentJsonBase64){
@@ -500,40 +500,40 @@ angular.module('copayApp.services').factory('correspondentListService', function
 			last_msg_ts = new Date(messageEvents[0].timestamp * 1000);
 			last_msg_id = messageEvents[0].id;
 		}
-		// chatStorage.load(correspondent.device_address, last_msg_id, limit, function(messages){
-		// 	for (var i in messages) {
-		// 		messages[i] = parseMessage(messages[i]);
-		// 	}
-		// 	var walletGeneral = require('intervaluecore/wallet_general.js');
-		// 	walletGeneral.readMyAddresses(function(arrMyAddresses){
-		// 		if (messages.length < limit)
-		// 			historyEndForCorrespondent[correspondent.device_address] = true;
-		// 		for (var i in messages) {
-		// 			var message = messages[i];
-		// 			var msg_ts = new Date(message.creation_date.replace(' ', 'T')+'.000Z');
-		// 			if (last_msg_ts && last_msg_ts.getDay() != msg_ts.getDay()) {
-		// 				messageEvents.unshift({type: 'system', bIncoming: false, message: "<span>" + last_msg_ts.toDateString() + "</span>", timestamp: Math.floor(msg_ts.getTime() / 1000)});
-		// 			}
-		// 			last_msg_ts = msg_ts;
-		// 			if (message.type == "text") {
-		// 				if (message.is_incoming) {
-		// 					message.message = highlightActions(escapeHtml(message.message), arrMyAddresses);
-		// 					message.message = text2html(message.message);
-		// 				} else {
-		// 					message.message = formatOutgoingMessage(message.message);
-		// 				}
-		// 			}
-		// 			messageEvents.unshift({id: message.id, type: message.type, bIncoming: message.is_incoming, message: message.message, timestamp: Math.floor(msg_ts.getTime() / 1000), chat_recording_status: message.chat_recording_status});
-		// 		}
-		// 		if (historyEndForCorrespondent[correspondent.device_address] && messageEvents.length > 1) {
-		// 			messageEvents.unshift({type: 'system', bIncoming: false, message: "<span>" + (last_msg_ts ? last_msg_ts : new Date()).toDateString() + "</span>", timestamp: Math.floor((last_msg_ts ? last_msg_ts : new Date()).getTime() / 1000)});
-		// 		}
-		// 		$timeout(function(){
-		// 			$rootScope.$digest();
-		// 		});
-		// 		if (cb) cb();
-		// 	});
-		// });
+		chatStorage.load(correspondent.device_address, last_msg_id, limit, function(messages){
+			for (var i in messages) {
+				messages[i] = parseMessage(messages[i]);
+			}
+			var walletGeneral = require('intervaluecore/wallet_general.js');
+			walletGeneral.readMyAddresses(function(arrMyAddresses){
+				if (messages.length < limit)
+					historyEndForCorrespondent[correspondent.device_address] = true;
+				for (var i in messages) {
+					var message = messages[i];
+					var msg_ts = new Date(message.creation_date.replace(' ', 'T')+'.000Z');
+					if (last_msg_ts && last_msg_ts.getDay() != msg_ts.getDay()) {
+						messageEvents.unshift({type: 'system', bIncoming: false, message: "<span>" + last_msg_ts.toDateString() + "</span>", timestamp: Math.floor(msg_ts.getTime() / 1000)});
+					}
+					last_msg_ts = msg_ts;
+					if (message.type == "text") {
+						if (message.is_incoming) {
+							message.message = highlightActions(escapeHtml(message.message), arrMyAddresses);
+							message.message = text2html(message.message);
+						} else {
+							message.message = formatOutgoingMessage(message.message);
+						}
+					}
+					messageEvents.unshift({id: message.id, type: message.type, bIncoming: message.is_incoming, message: message.message, timestamp: Math.floor(msg_ts.getTime() / 1000), chat_recording_status: message.chat_recording_status});
+				}
+				if (historyEndForCorrespondent[correspondent.device_address] && messageEvents.length > 1) {
+					messageEvents.unshift({type: 'system', bIncoming: false, message: "<span>" + (last_msg_ts ? last_msg_ts : new Date()).toDateString() + "</span>", timestamp: Math.floor((last_msg_ts ? last_msg_ts : new Date()).getTime() / 1000)});
+				}
+				$timeout(function(){
+					$rootScope.$digest();
+				});
+				if (cb) cb();
+			});
+		});
 	}
 
 	function checkAndInsertDate(messageEvents, message) {
@@ -550,7 +550,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 		switch (message.type) {
 			case "system":
 				message.message = JSON.parse(message.message);
-				message.message = "<span>chat recording " + (message.message.state ? "&nbsp;" : "") + "</span><b dropdown-toggle=\"#recording-drop\">" + (message.message.state ? "ON" : "OFF") + "</b><span class=\"padding\"></span>";
+				message.message = "<span>chat recording " + (message.message.state ? "&nbsp;" : "") + "</span>";
 				message.chat_recording_status = true;
 				break;
 		}
@@ -558,87 +558,85 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	}
 	
 	eventBus.on("text", function(from_address, body, message_counter){
-		//todo delete
-		// device.readCorrespondent(from_address, function(correspondent){
-		// 	if (!root.messageEventsByCorrespondent[correspondent.device_address]) loadMoreHistory(correspondent);
-		// 	addIncomingMessageEvent(correspondent.device_address, body, message_counter);
-		// 	// if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(from_address, body, 1);
-		// });
+
+		 device.readCorrespondent(from_address, function(correspondent){
+		 	if (!root.messageEventsByCorrespondent[correspondent.device_address]) loadMoreHistory(correspondent);
+		 	addIncomingMessageEvent(correspondent.device_address, body, message_counter);
+		 	 if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(from_address, body, 1);
+		 });
 	});
 
-	//todo delete
 	eventBus.on("chat_recording_pref", function(correspondent_address, enabled, message_counter){
-	// 	device.readCorrespondent(correspondent_address, function(correspondent){
-	// 		var oldState = (correspondent.peer_record_pref && correspondent.my_record_pref);
-	// 		correspondent.peer_record_pref = enabled;
-	// 		var newState = (correspondent.peer_record_pref && correspondent.my_record_pref);
-	// 		device.updateCorrespondentProps(correspondent);
-	// 		if (newState != oldState) {
-	// 			if (!root.messageEventsByCorrespondent[correspondent_address]) root.messageEventsByCorrespondent[correspondent_address] = [];
-	// 			var message = {
-	// 				type: 'system',
-	// 				message: JSON.stringify({state: newState}),
-	// 				timestamp: Math.floor(Date.now() / 1000),
-	// 				chat_recording_status: true,
-	// 				message_counter: message_counter
-	// 			};
-	// 			insertMsg(root.messageEventsByCorrespondent[correspondent_address], parseMessage(message));
-	// 			$timeout(function(){
-	// 				$rootScope.$digest();
-	// 			});
-	// 			//todo delete
-	// 			// chatStorage.store(correspondent_address, JSON.stringify({state: newState}), 0, 'system');
-	// 		}
-	// 		if (root.currentCorrespondent && root.currentCorrespondent.device_address == correspondent_address) {
-	// 			root.currentCorrespondent.peer_record_pref = enabled ? 1 : 0;
-	// 		}
-	// 	});
+		device.readCorrespondent(correspondent_address, function(correspondent){
+			var oldState = (correspondent.peer_record_pref && correspondent.my_record_pref);
+			correspondent.peer_record_pref = enabled;
+			var newState = (correspondent.peer_record_pref && correspondent.my_record_pref);
+			device.updateCorrespondentProps(correspondent);
+			if (newState != oldState) {
+				if (!root.messageEventsByCorrespondent[correspondent_address]) root.messageEventsByCorrespondent[correspondent_address] = [];
+				var message = {
+					type: 'system',
+					message: JSON.stringify({state: newState}),
+					timestamp: Math.floor(Date.now() / 1000),
+					chat_recording_status: true,
+					message_counter: message_counter
+				};
+				insertMsg(root.messageEventsByCorrespondent[correspondent_address], parseMessage(message));
+				$timeout(function(){
+					$rootScope.$digest();
+				});
+				//todo delete
+				// chatStorage.store(correspondent_address, JSON.stringify({state: newState}), 0, 'system');
+			}
+			if (root.currentCorrespondent && root.currentCorrespondent.device_address == correspondent_address) {
+				root.currentCorrespondent.peer_record_pref = enabled ? 1 : 0;
+			}
+		});
 	});
 
-	//todo delete
 	eventBus.on("sent_payment", function(peer_address, amount, asset, bToSharedAddress){
-	// 	var title = bToSharedAddress ? 'Payment to smart address' : 'Payment';
-	// 	setCurrentCorrespondent(peer_address, function(bAnotherCorrespondent){
-	// 		var body = '<a ng-click="showPayment(\''+asset+'\')" class="payment">'+title+': '+getAmountText(amount, asset)+'</a>';
-	// 		addMessageEvent(false, peer_address, body);
-	// 		device.readCorrespondent(peer_address, function(correspondent){
-	// 			// if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(peer_address, body, 0, 'html');
-	// 		});
-	// 		$timeout(function(){
-	// 			go.path('correspondentDevices.correspondentDevice');
-	// 		});
-	// 	});
+		var title = bToSharedAddress ? 'Payment to smart address' : 'Payment';
+		setCurrentCorrespondent(peer_address, function(bAnotherCorrespondent){
+			var body = '<a ng-click="showPayment(\''+asset+'\')" class="payment">'+title+': '+getAmountText(amount, asset)+'</a>';
+			addMessageEvent(false, peer_address, body);
+			device.readCorrespondent(peer_address, function(correspondent){
+				// if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(peer_address, body, 0, 'html');
+			});
+			$timeout(function(){
+				go.path('correspondentDevices.correspondentDevice');
+			});
+		});
 	});
 
 	//todo delete
 	eventBus.on("received_payment", function(peer_address, amount, asset, message_counter, bToSharedAddress){
-	// 	var title = bToSharedAddress ? 'Payment to smart address' : 'Payment';
-	// 	var body = '<a ng-click="showPayment(\''+asset+'\')" class="payment">'+title+': '+getAmountText(amount, asset)+'</a>';
-	// 	addMessageEvent(true, peer_address, body, message_counter);
-	// 	device.readCorrespondent(peer_address, function(correspondent){
-	// 		// if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(peer_address, body, 1, 'html');
-	// 	});
+		var title = bToSharedAddress ? 'Payment to smart address' : 'Payment';
+		var body = '<a ng-click="showPayment(\''+asset+'\')" class="payment">'+title+': '+getAmountText(amount, asset)+'</a>';
+		addMessageEvent(true, peer_address, body, message_counter);
+		device.readCorrespondent(peer_address, function(correspondent){
+			// if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(peer_address, body, 1, 'html');
+		});
 	});
 
-	//todo delete
+
 	eventBus.on('paired', function(device_address){
-	// 	pushNotificationsService.pushNotificationsInit();
-	// 	if ($state.is('correspondentDevices'))
-	// 		return $state.reload(); // refresh the list
-	// 	if (!$state.is('correspondentDevices.correspondentDevice'))
-	// 		return;
-	// 	if (!root.currentCorrespondent)
-	// 		return;
-	// 	if (device_address !== root.currentCorrespondent.device_address)
-	// 		return;
-	// 	// re-read the correspondent to possibly update its name
-	// 	device.readCorrespondent(device_address, function(correspondent){
-	// 		// do not assign a new object, just update its property (this object was already bound to a model)
-	// 		root.currentCorrespondent.name = correspondent.name;
-	// 		$timeout(function(){
-	// 			$rootScope.$digest();
-	// 		});
-	// 	});
+		pushNotificationsService.pushNotificationsInit();
+		if ($state.is('correspondentDevices'))
+			return $state.reload(); // refresh the list
+		if (!$state.is('correspondentDevices.correspondentDevice'))
+			return;
+		if (!root.currentCorrespondent)
+			return;
+		if (device_address !== root.currentCorrespondent.device_address)
+			return;
+		// re-read the correspondent to possibly update its name
+		device.readCorrespondent(device_address, function(correspondent){
+			// do not assign a new object, just update its property (this object was already bound to a model)
+			root.currentCorrespondent.name = correspondent.name;
+			$timeout(function(){
+				$rootScope.$digest();
+			});
+		});
 	});
 
 	 eventBus.on('removed_paired_device', function(device_address){
@@ -680,18 +678,18 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	root.addMessageEvent = addMessageEvent;
 	
 	root.list = function(cb) {
-	  //todo delete
-		// device.readCorrespondents(function(arrCorrespondents){
-		//   cb(null, arrCorrespondents);
-	  // });
+
+		device.readCorrespondents(function(arrCorrespondents){
+		  cb(null, arrCorrespondents);
+	  });
 	};
 
 
 	root.startWaitingForPairing = function(cb){
-		//todo delete
-		// device.startWaitingForPairing(function(pairingInfo){
-		// 	cb(pairingInfo);
-		// });
+
+		device.startWaitingForPairing(function(pairingInfo){
+			cb(pairingInfo);
+		});
 	};
 	
 	root.acceptInvitation = function(hub_host, device_pubkey, pairing_secret, cb){
@@ -701,32 +699,32 @@ angular.module('copayApp.services').factory('correspondentListService', function
 		if (!device.isValidPubKey(device_pubkey))
 			return cb("invalid peer public key");
 		// the correspondent will be initially called 'New', we'll rename it as soon as we receive the reverse pairing secret back
-		// device.addUnconfirmedCorrespondent(device_pubkey, hub_host, 'New', function(device_address){
-		// 	//todo delete
-		// 	// device.startWaitingForPairing(function(reversePairingInfo){
-		// 	// 	device.sendPairingMessage(hub_host, device_pubkey, pairing_secret, reversePairingInfo.pairing_secret, {
-		// 	// 		ifOk: cb,
-		// 	// 		ifError: cb
-		// 	// 	});
-		// 	// });
-		// 	// this continues in parallel
-		// 	// open chat window with the newly added correspondent
-		// 	device.readCorrespondent(device_address, function(correspondent){
-		// 		root.currentCorrespondent = correspondent;
-		// 		if (!$state.is('correspondentDevices.correspondentDevice'))
-		// 			go.path('correspondentDevices.correspondentDevice');
-		// 		else {
-		// 			$stickyState.reset('correspondentDevices.correspondentDevice');
-		// 			$state.reload();
-		// 		}
-		// 	});
-		// });
+		device.addUnconfirmedCorrespondent(device_pubkey, hub_host, 'New', function(device_address){
+
+			device.startWaitingForPairing(function(reversePairingInfo){
+				device.sendPairingMessage(hub_host, device_pubkey, pairing_secret, reversePairingInfo.pairing_secret, {
+					ifOk: cb,
+					ifError: cb
+				});
+			});
+			// this continues in parallel
+			// open chat window with the newly added correspondent
+			device.readCorrespondent(device_address, function(correspondent){
+				root.currentCorrespondent = correspondent;
+				if (!$state.is('correspondentDevices.correspondentDevice'))
+					go.path('correspondentDevices.correspondentDevice');
+				else {
+					$stickyState.reset('correspondentDevices.correspondentDevice');
+					$state.reload();
+				}
+			});
+		});
 	};
 	
 	root.currentCorrespondent = null;
 	root.messageEventsByCorrespondent = {};
 
-  /*
+
   root.remove = function(addr, cb) {
 	var fc = profileService.focusedClient;
 	root.list(function(err, ab) {
@@ -749,7 +747,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	  if (err) return cb('Error deleting correspondentList');
 	  return cb();
 	});
-  };*/
+  };
 
 	return root;
 });

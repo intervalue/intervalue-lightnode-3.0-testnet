@@ -10,6 +10,7 @@ angular.module('copayApp.controllers')
 		var self = this;
 		var home = this;
         self.infinite_isCmp = false;
+        self.showselectwt = false;
 		var conf = require('intervaluecore/conf.js');
 		//todo delete
 		// var chatStorage = require('intervaluecore/chat_storage.js');
@@ -40,9 +41,11 @@ angular.module('copayApp.controllers')
 		this.isTestnet = constants.version.match(/t$/);
 		this.testnetName = (constants.alt === '2') ? '[NEW TESTNET]' : '[TESTNET]';
 		this.exchangeRates = network.exchangeRates;
+		self.chat = false;
 		$scope.index.tab = 'walletHome'; // for some reason, current tab state is tracked in index and survives re-instatiations of walletHome.js
 
-		var disablePaymentRequestListener = $rootScope.$on('paymentRequest', function(event, address, amount, asset, recipient_device_address) {
+		var disablePaymentRequestListener = $rootScope.$on('paymentRequest', function(event, address, amount, asset, recipient_device_address,chat) {
+			if(chat) self.chat = true;
 			console.log('paymentRequest event ' + address + ', ' + amount);
 			$rootScope.$emit('Local/SetTab', 'send');
 			self.setForm(address, amount, null, asset, recipient_device_address);
@@ -79,7 +82,8 @@ angular.module('copayApp.controllers')
 
 		var disableTabListener = $rootScope.$on('Local/TabChanged', function(e, tab) {
 			// This will slow down switch, do not add things here!
-			console.log("tab changed " + tab);
+			//console.log("tab changed " + tab);
+            self.resetForm();
 			switch (tab) {
 				case 'receive':
 					// just to be sure we have an address
@@ -864,6 +868,30 @@ angular.module('copayApp.controllers')
 				this.error = gettext('Unable to send transaction proposal');
 				return;
 			}
+			//通过聊天跳转付款，选择地址后，需要判断
+            	if(self.from_walletId != fc.credentials.walletId && self.from_walletId != ''){
+                    profileService.setAndStoreFocusToPayment(self.from_walletId,function () {
+                        if (fc.isPrivKeyEncrypted()) {
+                            profileService.unlockFC(null, function (err) {
+                                if (err)
+                                    return self.setSendError(err.message);
+                                return self.submitPayment();
+                            });
+                            return;
+                        }
+                    });
+
+				}else{
+                    if (fc.isPrivKeyEncrypted()) {
+                        profileService.unlockFC(null, function(err) {
+                            if (err)
+                                return self.setSendError(err.message);
+                            return self.submitPayment();
+                        });
+                        return;
+                    }
+				}
+
 
 			if (fc.isPrivKeyEncrypted()) {
 				profileService.unlockFC(null, function(err) {
@@ -1458,6 +1486,7 @@ angular.module('copayApp.controllers')
 		};
 
 		this.resetForm = function() {
+            var self = this;
 			this.resetError();
 			delete this.binding;
 
@@ -1467,6 +1496,7 @@ angular.module('copayApp.controllers')
 			this.hideAdvSend = true;
 			this.send_multiple = false;
 			this.current_payment_key = '';
+			self.chat = false;
 			$scope.currentSpendUnconfirmed = configService.getSync()
 				.wallet.spendUnconfirmed;
 
@@ -1474,7 +1504,7 @@ angular.module('copayApp.controllers')
 			this.bSendAll = false;
 
 			var form = $scope.sendPaymentForm;
-			var self = this;
+
 
 			$timeout(function() {
 				if (form && form.amount) {
@@ -1865,5 +1895,12 @@ angular.module('copayApp.controllers')
         //     $state.go('newsin',{ id: id});
         // };
 
+		self.findPaymentAddress = function(walletId,stables,walletName,image){
+            $scope.showselectwt = false;
+			self.from_walletId = walletId;
+            self.from_stables = stables;
+            self.from_walletName = walletName;
+            self.from_image = image;
+		}
 
 	});

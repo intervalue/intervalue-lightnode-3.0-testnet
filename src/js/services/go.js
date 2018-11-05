@@ -44,10 +44,10 @@ angular.module('copayApp.services').factory('go', function($window, $rootScope, 
     root.path = function(path, cb) {
         $state.go(path)
             .then(function() {
-                console.log("transition done "+path);
+                //console.log("transition done "+path);
                 if (cb) return cb();
             }, function() {
-                console.log("transition failed "+path);
+               // console.log("transition failed "+path);
                 if (cb) return cb('animation in progress');
             });
         hideSidebars();

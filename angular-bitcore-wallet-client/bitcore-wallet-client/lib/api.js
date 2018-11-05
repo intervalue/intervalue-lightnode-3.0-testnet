@@ -678,9 +678,12 @@ API.prototype.getTxHistory = function (asset, walletId, cb) {
 API.prototype.initDeviceProperties = function (xPrivKey, device_address, hub, deviceName) {
   console.log("initDeviceProperties");
   var device = require('intervaluecore/device.js');
+    var lightWallet = require('intervaluecore/light_wallet.js');
   if (device_address)
     device.setDeviceAddress(device_address);
   device.setDeviceName(deviceName);
+    device.setDeviceHub(hub);
+    lightWallet.setLightVendorHost(hub);
   //device.setDevicePrivateKey(Bitcore.HDPrivateKey.fromString(xPrivKey).derive("m/1'").privateKey.toBuffer());
 
   // since this is executed at app launch, give in to allow other startup tasks to complete
@@ -699,6 +702,7 @@ API.prototype.initDeviceProperties = function (xPrivKey, device_address, hub, de
     console.log("device priv key="+Bitcore.HDPrivateKey.fromString(xPrivKey).derive("m/1'").privateKey.bn.toBuffer({size:32}).toString("base64"));
     */
     device.setDevicePrivateKey(Bitcore.HDPrivateKey.fromString(xPrivKey).derive("m/1'").privateKey.bn.toBuffer({ size: 32 }));
+
   }
   catch (e) {
     console.log("error in initDeviceProperties: " + e);

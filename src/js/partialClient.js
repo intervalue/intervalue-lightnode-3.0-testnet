@@ -64,6 +64,8 @@ function initWallet() {
 		Profile.tempDeviceKey = profile.tempDeviceKey;
 		Profile.prevTempDeviceKey = profile.prevTempDeviceKey; // optional
 		Profile.my_device_address = profile.my_device_address;
+        Profile.device_pubkey =  profile.device_pubkey;
+        Profile.device_xprivKey = profile.device_xprivKey;
 		return Profile;
 	}
 

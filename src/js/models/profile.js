@@ -34,6 +34,9 @@ Profile.create = function(opts) {
 	x.tempDeviceKey = opts.tempDeviceKey;
 	x.prevTempDeviceKey = opts.prevTempDeviceKey; // optional
 	x.my_device_address = opts.my_device_address;
+	x.device_pubkey = opts.device_pubkey;
+	x.xprivkey = opts.xprivkey;
+	x.device_xprivKey = opts.device_xprivKey;
 	return x;
 };
 
@@ -64,7 +67,9 @@ Profile.fromObj = function(obj) {
 	x.tempDeviceKey = obj.tempDeviceKey;
 	x.prevTempDeviceKey = obj.prevTempDeviceKey; // optional
 	x.my_device_address = obj.my_device_address;
-	
+	x.device_pubkey = obj.device_pubkey;
+    x.xprivkey = obj.xprivkey;
+    x.device_xprivKey = obj.device_xprivKey;
 	return x;
 };
 
