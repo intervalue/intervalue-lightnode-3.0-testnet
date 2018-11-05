@@ -362,7 +362,7 @@
 .md-input-focused input[type='text']{background:blue;position:absolute;top:10px;-webkit-transition:all 0.2s ease-in-out;transition:all 0.2s ease-in-out;}
 .adinputitem{margin-bottom:10px;}
 .adinputic{width:100%;display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-moz-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:start;-moz-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;border-bottom:1px solid #909090;padding:0 4px;}
-.adinputic .adinputimg{width:24px;height:20px;text-align:center;}
+.adinputic .adinputimg{width:24px;height:20px;text-align:center;background-size:contain;}
 .adinputic input[type='text'],
 .adinputic input[type='password']{font-size:16px;padding:0 10px 0 20px;font-weight:normal;margin:0;width:100%;color:#3B3B3B;border:none;}
 .adinputic input[type='text']::-webkit-input-placeholder,
@@ -629,7 +629,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 
 /*editCorrespondentDevice    start*/
 .chatdeleter{text-align:center;padding:0 25px 22px;border-bottom:1px solid #F5F5F5;}
-.chatdeleter img{margin-bottom:18px;}
+.chatdeleter img{margin-bottom:18px;width:35px;}
 /*editCorrespondentDevice    end*/
 
 
