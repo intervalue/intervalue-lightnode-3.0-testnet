@@ -869,36 +869,29 @@ angular.module('copayApp.controllers')
 				return;
 			}
 			//通过聊天跳转付款，选择地址后，需要判断
-            // require('intervaluecore/wallet').readAddressByWallet(fc.credentials.walletId,function (result) {
-            // 	let from_adress = form.from_address;
-            // 	if(result != from_adress){
-            //         db.query("select wallet from my_addresses where address = ?", [from_adress], function (rows) {
-            //             if (rows != null && rows.length === 1) {
-            //                 profileService.setAndStoreFocusToPayment(rows[0].wallet,function () {
-            //                     if (fc.isPrivKeyEncrypted()) {
-            //                         profileService.unlockFC(null, function(err) {
-            //                             if (err)
-            //                                 return self.setSendError(err.message);
-            //                             return self.submitPayment();
-            //                         });
-            //                         return;
-            //                     }
-            //                 })
-            //             }
-            //         });
-            //
-			// 	}else{
-            //         if (fc.isPrivKeyEncrypted()) {
-            //             profileService.unlockFC(null, function(err) {
-            //                 if (err)
-            //                     return self.setSendError(err.message);
-            //                 return self.submitPayment();
-            //             });
-            //             return;
-            //         }
-			// 	}
-            //
-			// });
+            	if(self.from_walletId != fc.credentials.walletId && self.from_walletId != ''){
+                    profileService.setAndStoreFocusToPayment(self.from_walletId,function () {
+                        if (fc.isPrivKeyEncrypted()) {
+                            profileService.unlockFC(null, function (err) {
+                                if (err)
+                                    return self.setSendError(err.message);
+                                return self.submitPayment();
+                            });
+                            return;
+                        }
+                    });
+
+				}else{
+                    if (fc.isPrivKeyEncrypted()) {
+                        profileService.unlockFC(null, function(err) {
+                            if (err)
+                                return self.setSendError(err.message);
+                            return self.submitPayment();
+                        });
+                        return;
+                    }
+				}
+
 
 			if (fc.isPrivKeyEncrypted()) {
 				profileService.unlockFC(null, function(err) {
@@ -1902,5 +1895,12 @@ angular.module('copayApp.controllers')
         //     $state.go('newsin',{ id: id});
         // };
 
+		self.findPaymentAddress = function(walletId,stables,walletName,image){
+            $scope.showselectwt = false;
+			self.from_walletId = walletId;
+            self.from_stables = stables;
+            self.from_walletName = walletName;
+            self.from_image = image;
+		}
 
 	});

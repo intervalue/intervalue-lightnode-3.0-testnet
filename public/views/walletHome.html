@@ -576,12 +576,12 @@
                                                         <div class="limg">
                                                             <img src="./img/setwallet.png">
                                                         </div>
-                                                        <span translate="">选择收款钱包</span>
+                                                        <span translate="">选择付款钱包</span>
                                                     </div>
                                                     <div class="rd">
                                                         <div class="chatsetinfo">
-                                                            <div class="chatinfoname ng-binding"><img src=""> </div>
-                                                            <div class="chatinfomon"><span translate="">可用余额</span>:&nbsp;<span class="ng-binding"></span></div>
+                                                            <div class="chatinfoname ng-binding"><img src="{{home.from_image}}"> </div>
+                                                            <div class="chatinfomon"><span translate="">可用余额</span>:&nbsp;<span class="ng-binding"></span>{{home.from_stables}}</div>
                                                         </div>
                                                         <img src="./img/more.png">
                                                     </div>
@@ -603,7 +603,7 @@
                     <div class="popmask" ng-click="showselectwt = false;"></div>
                     <div class="popcontentwt">
                         <ul class="m0">
-                            <li ng-repeat="item in index.walletInfo" ng-click="editCont.insertMyAddress(item.wallet,item.stables,item.walletName,item.image);">
+                            <li ng-repeat="item in index.walletInfo" ng-click="home.findPaymentAddress(item.wallet,item.stables,item.walletName,item.image);">
                                 <div class="liin">
                                     <div class="ld">
                                         <span class="greendot"></span>
