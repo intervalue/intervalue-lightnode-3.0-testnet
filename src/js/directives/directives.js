@@ -768,12 +768,6 @@ angular.module('copayApp.directives')
             var raw = elm[0];
 
             elm.bind('scroll', function() {
-                if(elm[0].id == 'new3tab'){
-                    scope.$apply(function(){
-                        angular.element(document.getElementById('cointitle')).css('top',raw.scrollTop+'px');
-                    });
-                    return;
-                }
                 if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
                     scope.$apply(attr.homescrolled);
                 };
@@ -785,9 +779,6 @@ angular.module('copayApp.directives')
             var raw = elm[0];
 
             elm.bind('scroll', function() {
-                scope.$apply(function(){
-                    angular.element(document.getElementById('datenow')).css('top',raw.scrollTop+'px');
-                });
                 scope.$apply(attr.quickscrolltop);
                 if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
                     scope.$apply(attr.homequiscrolled);
@@ -800,8 +791,7 @@ angular.module('copayApp.directives')
             restrict:'A',
             link:function(scope, elm, attr){
                 var raw = elm[0];
-                var rawp = elm[0].parentElement;
-                var rawh = (elm[0].children)[0];
+                var rawh = elm[0].parentElement.firstElementChild;
                 scope._start = 0;
                 scope. _end = 0;
                 raw.addEventListener("dragstart",dragStart,false);//当鼠标按住屏幕时候触发。
@@ -819,7 +809,7 @@ angular.module('copayApp.directives')
                 function dragMove(event){//dragMove函数
                     scope._end = (scope._start - event.pageY);
                     //下滑才执行操作
-                    if(rawp.scrollTop <= 0){
+                    if(raw.scrollTop <= 0){
                         if(scope._end < 0){
                             releaseh(scope._end);
                         }else{
@@ -835,7 +825,7 @@ angular.module('copayApp.directives')
                         resetdrag();
                         return;
                     }else{
-                        if( rawp.scrollTop <= 0){
+                        if( raw.scrollTop <= 0){
                             releaseload();
                         }else{
                             resetdrag();
@@ -849,7 +839,7 @@ angular.module('copayApp.directives')
                 function touchMove(event){//dragMove函数
                     scope._end = (scope._start - event.targetTouches[0].pageY);
                     //下滑才执行操作
-                    if(rawp.scrollTop <= 0){
+                    if(raw.scrollTop <= 0){
                         if(scope._end < 0){
                             releaseh(scope._end);
                         }else{
@@ -866,7 +856,7 @@ angular.module('copayApp.directives')
                         resetdrag();
                         return;
                     }else{
-                        if( rawp.scrollTop <= 0){
+                        if( raw.scrollTop <= 0){
                             releaseload();
                         }else{
                             resetdrag();
@@ -885,6 +875,9 @@ angular.module('copayApp.directives')
                     rawh.children[1].style.display = 'block';
                     rawh.style.height = "45px";//高度设定为45px
                     scope.$apply(attr.homePullDown);
+                    console.log(elm)
+                    console.log(raw);
+                    console.log(rawh);
                 }
                 function resetdrag(){
                     rawh.style.display = 'none';
@@ -897,8 +890,7 @@ angular.module('copayApp.directives')
             restrict:'A',
             link:function(scope, elm, attr){
                 var raw = elm[0];
-                var rawp = elm[0].parentElement;
-                var rawh = (elm[0].children)[0];
+                var rawh = elm[0].parentElement.firstElementChild;
                 scope._start = 0;
                 scope. _end = 0;
                 raw.addEventListener("dragstart",dragStart,false);//当鼠标按住屏幕时候触发。
@@ -916,7 +908,7 @@ angular.module('copayApp.directives')
                 function dragMove(event){//dragMove函数
                     scope._end = (scope._start - event.pageY);
                     //下滑才执行操作
-                    if(rawp.scrollTop <= 0){
+                    if(raw.scrollTop <= 0){
                         document.getElementById('datenow').style.display = 'none';
                         if(scope._end < 0){
                             releaseh(scope._end);
@@ -933,7 +925,7 @@ angular.module('copayApp.directives')
                         resetdrag();
                         return;
                     }else{
-                        if( rawp.scrollTop <= 0){
+                        if( raw.scrollTop <= 0){
                             releaseload();
                         }else{
                             resetdrag();
@@ -946,7 +938,7 @@ angular.module('copayApp.directives')
                 }
                 function touchMove(event){//dragMove函数
                     scope._end = (scope._start - event.targetTouches[0].pageY);
-                    if(rawp.scrollTop <= 0){
+                    if(raw.scrollTop <= 0){
                         document.getElementById('datenow').style.display = 'none';
                         if(scope._end < 0){
                             releaseh(scope._end);
@@ -965,7 +957,7 @@ angular.module('copayApp.directives')
                         resetdrag();
                         return;
                     }else{
-                        if( rawp.scrollTop <= 0){
+                        if( raw.scrollTop <= 0){
                             releaseload();
                         }else{
                             resetdrag();

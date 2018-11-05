@@ -331,13 +331,13 @@
                 </section>
             </nav>
             <div class="tabclicktitle">
-                <div class="tab-container" ng-click="index.shownewstab = 'new1';index.newsanimate = index.newsanimate + 1;" ng-class="{'selected': index.shownewstab == 'new1'}">
+                <div class="tab-container" ng-click="index.shownewstab = 'new1';" ng-class="{'selected': index.shownewstab == 'new1'}">
                     <a  translate>Newest</a>
                 </div>
-                <div class="tab-container" ng-click="index.shownewstab = 'new2';index.quickanimate = index.quickanimate + 1;" ng-class="{'selected': index.shownewstab == 'new2'}">
+                <div class="tab-container" ng-click="index.shownewstab = 'new2';" ng-class="{'selected': index.shownewstab == 'new2'}">
                     <a  translate>Newsletter</a>
                 </div>
-                <div class="tab-container" ng-click="index.shownewstab = 'new3';index.coinanimate = index.coinanimate + 1;" ng-class="{'selected': index.shownewstab == 'new3'}" >
+                <div class="tab-container" ng-click="index.shownewstab = 'new3';" ng-class="{'selected': index.shownewstab == 'new3'}" >
                     <a translate>Quotes</a>
                 </div>
             </div>
@@ -357,26 +357,30 @@
                         <div class="nonewsintext" translate>No fresh content. Please click the screen to reload.</div>
                     </div>
                 </div>
-                <div class="newslist" ng-if="index.newslist !== ''  && index.online  " id="new1tablist" home-pull-down="index.newsData('up')" draggable="true">
+                <div class="newslist" ng-if="index.newslist !== ''  && index.online  " id="new1tablist" >
                     <div class="newsupheight" id="newupheight">
                         <div class="newuprelease"><img src="./img/pulldown.png" /><span translate>Pull down to refresh</span></div>
                         <div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>
                     </div>
-                    <div class="item" ng-repeat="item in index.newslist track by $index">
-                        <img ng-src="{{item.coverPath}}" ng-click="index.openNewsinModal(item.id)" />
-                        <div class="info">
-                            <div class="title" ng-click="index.openNewsinModal(item.id)" >{{item.title}}</div>
-                            <div class="litinfo">
-                                <div class="time">{{item.type}} <span>{{item.greentime}}</span></div>
-                                <div class="browse">{{item.pageviews}} <span translate>views</span></div>
+                    <div class="removescroll" homescrolled="index.loadmore('new1tab', 'new1tablist')" home-pull-down="index.newsData('up')" draggable="true">
+                        <div class="itemin">
+                            <div class="item" ng-repeat="item in index.newslist track by $index">
+                                <img ng-src="{{item.coverPath}}" ng-click="index.openNewsinModal(item.id)" />
+                                <div class="info">
+                                    <div class="title" ng-click="index.openNewsinModal(item.id)" >{{item.title}}</div>
+                                    <div class="litinfo">
+                                        <div class="time">{{item.type}} <span>{{item.greentime}}</span></div>
+                                        <div class="browse">{{item.pageviews}} <span translate>views</span></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <div ng-show="index.shownonews" class="nomorenews"><img src="./img/nomore.png" /><span translate>No more content</span></div>
+                        <div class="shownewsloading"><img src="./img/loading.png" /><span translate>Loading</span></div>
                     </div>
                 </div>
-                <div ng-show="index.shownonews" class="nomorenews"><img src="./img/nomore.png" /><span translate>No more content</span></div>
-                <div ng-show="index.shownewsloading" class="shownewsloading"><img src="./img/loading.png" /><span translate>Loading</span></div>
             </div>
-            <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new2'}" id="new2tab" quickscrolltop="index.quickequaltop()" homequiscrolled="index.loadmore('new2tab', 'new2tablist')">
+            <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new2'}" id="new2tab">
                 <div ng-if="!index.online && !index.loading" ng-click="index.newsData('up');index.quickData('up');" class="nowire">
                     <div class="nowirein">
                         <img src="./img/nowire.png" />
@@ -392,31 +396,34 @@
                         <div class="nonewsintext" translate>No fresh content. Please click the screen to reload.</div>
                     </div>
                 </div>
-                <div class="letterlist" ng-if="index.quicklistshow !== '' && index.online" id="new2tablist" home-qpull-down="index.quickData('up')"  draggable="true">
+                <div class="letterlist" ng-if="index.quicklistshow !== '' && index.online" id="new2tablist" >
                     <div class="newsupheight" id="quickupheight">
                         <div class="newuprelease"><img src="./img/pulldown.png" /><span translate>Pull down to refresh</span></div>
                         <div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>
                     </div>
                     <div class="datenow" id="datenow" ng-bind="index.quickdatanow"></div>
-                    <div class="itemin" ng-repeat="(key,item) in index.quicklist track by $index">
-                        <div class="date">{{key}}</div>
-                        <div class="itemlr" ng-repeat="itemin in item">
-                            <div class="item">
-                                <div class="time">{{itemin.greenhms}}</div>
-                                <div class="info">
-                                    <div class="title">{{itemin.title}}</div>
-                                    <div class="desc">
-                                        {{itemin.content}}
+                    <div class="removescroll" id="removescroll2" quickscrolltop="index.quickequaltop()" homequiscrolled="index.loadmore('new2tab', 'new2tablist')"
+                         home-qpull-down="index.quickData('up')"  draggable="true">
+                        <div class="itemin" ng-repeat="(key,item) in index.quicklist track by $index">
+                            <div class="date">{{key}}</div>
+                            <div class="itemlr" ng-repeat="itemin in item">
+                                <div class="item">
+                                    <div class="time">{{itemin.greenhms}}</div>
+                                    <div class="info">
+                                        <div class="title">{{itemin.title}}</div>
+                                        <div class="desc">
+                                            {{itemin.content}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div ng-show="index.shownoquick" class="nomorenews"><img src="./img/nomore.png" /><span translate>No more content</span></div>
+                        <div ng-show="index.showquicksloading" class="shownewsloading"><img src="./img/loading.png" /><span translate>Loading</span></div>
                     </div>
                 </div>
-                <div ng-show="index.shownoquick" class="nomorenews"><img src="./img/nomore.png" /><span translate>No more content</span></div>
-                <div ng-show="index.showquicksloading" class="shownewsloading"><img src="./img/loading.png" /><span translate>Loading</span></div>
             </div>
-            <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new3'}" id="new3tab" homescrolled="index.loadmore('new3tab', 'new3tablist')">
+            <div class="addwcontent tabnewsout" ng-class="{'tabnewsin': index.shownewstab == 'new3'}" id="new3tab">
                 <div ng-if="!index.online && !index.loading" ng-click="index.currencyData('up');" class="nowire">
                     <div class="nowirein">
                         <img src="./img/nowire.png" />
@@ -432,8 +439,7 @@
                         <div class="nonewsintext" translate>No fresh content. Please click the screen to reload.</div>
                     </div>
                 </div>
-                <div class="quotelist" ng-if="index.coinlist !== '' && index.online"  id="new3tablist"
-                     home-pull-down="index.currencyData('up')"  draggable="true">
+                <div class="quotelist" ng-if="index.coinlist !== '' && index.online"  id="new3tablist">
                     <div class="newsupheight" id="coinupheight">
                         <div class="newuprelease"><img src="./img/pulldown.png" /><span translate>Pull down to refresh</span></div>
                         <div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>
@@ -452,40 +458,42 @@
                             <span class="cointri" ng-class="{'upcoin':index.orderByQuoteChange == 'quoteChange', 'downcoin':index.orderByQuoteChange == '-quoteChange'}"></span>
                         </div>
                     </div>
-                    <div class="itemin" ng-repeat="item in index.coininvelist track by $index">
-                        <div class="item">
-                            <div class="leftcoininfo">
-                                <div class="coinimg">
-                                    <img src="./img/qidongyeicon.png" />
-                                    <span class="nameshort">{{item.name}}</span>
-                                    <span class="fullname">{{item.cname}}</span>
+                    <div class="removescroll" home-pull-down="index.currencyData('up')"  draggable="true">
+                        <div class="itemin" ng-repeat="item in index.coininvelist track by $index">
+                            <div class="item">
+                                <div class="leftcoininfo">
+                                    <div class="coinimg">
+                                        <img src="./img/qidongyeicon.png" />
+                                        <span class="nameshort">{{item.name}}</span>
+                                        <span class="fullname">{{item.cname}}</span>
+                                    </div>
+                                    <div class="numallin" ng-show="index.defaultCurrencyIsoCode == 'en';"><span translate>Market value</span>：$ <span>{{item.value | number:2}}{{item.unit}}</span></div>
+                                    <div class="numallin" ng-show="index.defaultCurrencyIsoCode == 'zh_CN';"><span translate>Market value</span>：￥ <span>{{item.cnyValue | number:2}}{{item.cnyUnit}}</span></div>
                                 </div>
-                                <div class="numallin" ng-show="index.defaultCurrencyIsoCode == 'en';"><span translate>Market value</span>：$ <span>{{item.value | number:2}}{{item.unit}}</span></div>
-                                <div class="numallin" ng-show="index.defaultCurrencyIsoCode == 'zh_CN';"><span translate>Market value</span>：￥ <span>{{item.cnyValue | number:2}}{{item.cnyUnit}}</span></div>
+                                <div class="pricein" ng-show="index.defaultCurrencyIsoCode == 'en';" ng-class="{ 'priceblue': (item.quoteChange | number:2) > 0, 'pricered': (item.quoteChange | number:2) < 0}">${{item.price | number:4}}</div>
+                                <div class="pricein" ng-show="index.defaultCurrencyIsoCode == 'zh_CN';" ng-class="{ 'priceblue': (item.quoteChange | number:2) > 0, 'pricered': (item.quoteChange | number:2) < 0}">￥{{item.cnyPrice | number:4}}</div>
+                                <div class="gainsin" ng-if="(item.quoteChange | number:2) == 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
+                                <div class="gainsin priceblue" ng-if="(item.quoteChange | number:2)  > 0"><div class="gainsinfo">+<span>{{item.quoteChange | number:2}}%</span></div></div>
+                                <div class="gainsin pricered" ng-if="(item.quoteChange | number:2) < 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
                             </div>
-                            <div class="pricein" ng-show="index.defaultCurrencyIsoCode == 'en';" ng-class="{ 'priceblue': (item.quoteChange | number:2) > 0, 'pricered': (item.quoteChange | number:2) < 0}">${{item.price | number:4}}</div>
-                            <div class="pricein" ng-show="index.defaultCurrencyIsoCode == 'zh_CN';" ng-class="{ 'priceblue': (item.quoteChange | number:2) > 0, 'pricered': (item.quoteChange | number:2) < 0}">￥{{item.cnyPrice | number:4}}</div>
-                            <div class="gainsin" ng-if="(item.quoteChange | number:2) == 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
-                            <div class="gainsin priceblue" ng-if="(item.quoteChange | number:2)  > 0"><div class="gainsinfo">+<span>{{item.quoteChange | number:2}}%</span></div></div>
-                            <div class="gainsin pricered" ng-if="(item.quoteChange | number:2) < 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
                         </div>
-                    </div>
-                    <div class="itemin" ng-repeat="item in index.coinlist | orderBy : index.orderByList ">
-                        <div class="item">
-                            <div class="leftcoininfo">
-                                <div class="coinimg">
-                                    <img ng-src="{{item.coinImgHerf}}" />
-                                    <span class="nameshort">{{item.name}}</span>
-                                    <span class="fullname">{{item.cname}}</span>
+                        <div class="itemin" ng-repeat="item in index.coinlist | orderBy : index.orderByList ">
+                            <div class="item">
+                                <div class="leftcoininfo">
+                                    <div class="coinimg">
+                                        <img ng-src="{{item.coinImgHerf}}" />
+                                        <span class="nameshort">{{item.name}}</span>
+                                        <span class="fullname">{{item.cname}}</span>
+                                    </div>
+                                    <div class="numallin" ng-show="index.defaultCurrencyIsoCode == 'en';"><span translate>Market value</span>：$ <span>{{item.value | number:2}}{{item.unit}}</span></div>
+                                    <div class="numallin" ng-show="index.defaultCurrencyIsoCode == 'zh_CN';"><span translate>Market value</span>：￥ <span>{{item.cnyValue | number:2}}{{item.cnyUnit}}</span></div>
                                 </div>
-                                <div class="numallin" ng-show="index.defaultCurrencyIsoCode == 'en';"><span translate>Market value</span>：$ <span>{{item.value | number:2}}{{item.unit}}</span></div>
-                                <div class="numallin" ng-show="index.defaultCurrencyIsoCode == 'zh_CN';"><span translate>Market value</span>：￥ <span>{{item.cnyValue | number:2}}{{item.cnyUnit}}</span></div>
+                                <div class="pricein" ng-show="index.defaultCurrencyIsoCode == 'en';" ng-class="{ 'priceblue': (item.quoteChange | number:2) > 0, 'pricered': (item.quoteChange | number:2) < 0}">${{item.price | number:4}}</div>
+                                <div class="pricein" ng-show="index.defaultCurrencyIsoCode == 'zh_CN';" ng-class="{ 'priceblue': (item.quoteChange | number:2) > 0, 'pricered': (item.quoteChange | number:2)< 0}">￥{{item.cnyPrice | number:4}}</div>
+                                <div class="gainsin" ng-if="(item.quoteChange | number:2) == 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
+                                <div class="gainsin priceblue" ng-if="(item.quoteChange | number:2) > 0"><div class="gainsinfo">+<span>{{item.quoteChange | number:2}}%</span></div></div>
+                                <div class="gainsin pricered" ng-if="(item.quoteChange | number:2)< 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
                             </div>
-                            <div class="pricein" ng-show="index.defaultCurrencyIsoCode == 'en';" ng-class="{ 'priceblue': (item.quoteChange | number:2) > 0, 'pricered': (item.quoteChange | number:2) < 0}">${{item.price | number:4}}</div>
-                            <div class="pricein" ng-show="index.defaultCurrencyIsoCode == 'zh_CN';" ng-class="{ 'priceblue': (item.quoteChange | number:2) > 0, 'pricered': (item.quoteChange | number:2)< 0}">￥{{item.cnyPrice | number:4}}</div>
-                            <div class="gainsin" ng-if="(item.quoteChange | number:2) == 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
-                            <div class="gainsin priceblue" ng-if="(item.quoteChange | number:2) > 0"><div class="gainsinfo">+<span>{{item.quoteChange | number:2}}%</span></div></div>
-                            <div class="gainsin pricered" ng-if="(item.quoteChange | number:2)< 0"><div class="gainsinfo"><span>{{item.quoteChange | number:2}}%</span></div></div>
                         </div>
                     </div>
                 </div>

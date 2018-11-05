@@ -442,7 +442,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 /*资讯*/
 .news .tab-container{width:33.3%;}
 .news .tabclicktitle{background:#FDFEFF;}
-.news .addwcontent{top:78px;z-index:2; height:calc(100vh - 126px);}
+.news .addwcontent{top:78px;z-index:2; height:calc(100vh - 126px);overflow: hidden;}
 
 /*最新*/
 
@@ -455,7 +455,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 /*user-drag: auto;*/
 
 /*}*/
-.news .newslist{margin-top:-1px;}
+.news .newslist{margin-top:-1px;width: calc(100vw + 7px);}
 .news .newslist .item{height:100px;display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-moz-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:start;-moz-box-align:start;-ms-flex-align:start;align-items:flex-start;padding:15px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;border-bottom:1px solid #EEEEEE;}
 .news .newslist .item:nth-child(2){border-top:1px solid #EEEEEE;}
 .news .newslist .item:last-child{border-bottom:none;}
@@ -464,21 +464,22 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .newslist .item .title{font-size:14px;color:#323232;height:40px;line-height:20px;margin-bottom:10px;-webkit-box-orient:vertical;-webkit-line-clamp:2;text-overflow:ellipsis;overflow:hidden;display:-webkit-box;cursor:pointer;-ms-word-break:break-all;word-break:break-all;}
 .news .newslist .item .litinfo{font-size:10px;display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-moz-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-moz-box-align:center;-ms-flex-align:center;align-items:center;color:#45AD8E;}
 .news .newslist .item .litinfo span{color:#909090;}
-
 /*快讯*/
-.news .letterlist .datenow{text-align:left;padding:0 18px;font-size:10px;color:#909090;background:#f9fafc;height:26px;line-height:26px;position:absolute;left:0;top:0;width:100%;z-index:5;}
+.news .letterlist{width: calc(100vw + 7px);}
+.news .letterlist .datenow{text-align:left;padding:0 18px;font-size:10px;color:#909090;background:#f9fafc;height:26px;line-height:26px;position:fixed;left:0;top:78px;width:100%;z-index:5;}
 .news .letterlist .itemin .date{text-align:left;padding:0 18px;font-size:10px;color:#909090;background:#f9fafc;height:26px;line-height:26px;}
 .news .letterlist .itemin .itemlr{padding:0 22px 0 18px;}
 .news .letterlist .itemin .item{border-left:1px solid #DEDEDE;padding:14px 0 0 16px;}
 .news .letterlist .itemin .item:nth-child(1){padding-top:28px;}
-.news .letterlist .itemin .itemlr:last-child .item:last-child{padding-bottom:28px;}
+.news .letterlist .itemin .itemlr:last-child .item:last-child{padding-bottom:14px;}
 .news .letterlist .itemin .item .time{display:inline-block;font-size:10px;font-family:pfbold;font-weight:600;color:#45AD8E;border-radius:10px;border:1px solid #45AD8E;padding:0 8px;position:relative;margin-bottom:12px;}
 .news .letterlist .itemin .item .time:before{display:block;content:'';position:absolute;z-index:1;width:13px;height:13px;background:#45AD8E;border-radius:50%;border:2px solid #fff;left:-24px;top:1px;}
 .news .letterlist .itemin .item .title{font-size:14px;font-family:pfbold;font-weight:600;color:#323232;margin-bottom:6px;-ms-word-break:break-all;word-break:break-all;}
 .news .letterlist .itemin .item .desc{font-size:12px;font-weight:400;color:#646464;-ms-word-break:break-all;word-break:break-all;}
-
+.news .removescroll{width: 100%;overflow-y: scroll;overflow-x: hidden;max-height:calc(100vh - 126px);}
 /*行情*/
-.news .quotelist .titlelabel{padding:0 15px;background:#f9fafc;height:34px;line-height:34px;position:absolute;left:0;top:0;width:100%;z-index:5;font-size:12px;color:rgba(50,50,50,1);}
+.news .quotelist{width: calc(100vw + 7px);}
+.news .quotelist .titlelabel{padding:0 15px;background:#f9fafc;height:34px;line-height:34px;position:fixed;left:0;top:78px;width:100%;z-index:5;font-size:12px;color:rgba(50,50,50,1);}
 .news .quotelist .titlelabel .numall{cursor: pointer;position:absolute;left:47px;text-align:left;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
 .news .quotelist .titlelabel .sorttitle{padding-right:5px;display:inline-block;height:34px;white-space: nowrap;}
 .news .quotelist .titlelabel .cointri{position:relative;width:9px;height:10px;display:inline-block;}
@@ -489,9 +490,9 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .quotelist .titlelabel .price{cursor: pointer;position:absolute;top:0;right:107px;text-align:right;}
 .news .quotelist .titlelabel .gains{cursor: pointer;position:absolute;top:0;right:15px;text-align:center;}
 .news .quotelist .itemin{padding:0 15px 0;}
-.news .quotelist .itemin:nth-child(3){padding-top:32px;}
+.news .quotelist .itemin:nth-child(1){padding-top:32px;}
 .news .quotelist .itemin .item{padding:14px 0;position:relative;border-bottom:1px solid #DEDEDE;}
-.news .quotelist .itemin:nth-child(3) .item{border-top:1px solid #DEDEDE;}
+.news .quotelist .itemin:nth-child(1) .item{border-top:1px solid #DEDEDE;}
 .news .quotelist .itemin .item .leftcoininfo{width:calc(100% - 175px);}
 .news .quotelist .itemin .item .coinimg{margin-bottom:6px;}
 .news .quotelist .itemin .item .coinimg img{margin-right:10px;vertical-align:middle;width:20px;height:20px;}

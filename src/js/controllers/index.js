@@ -45,9 +45,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.newslists = [];
     self.quicklists = {};
     self.coinlists = [];
-    self.newsanimate = 1;
-    self.quickanimate = 1;
-    self.coinanimate = 1;
     self.newspage = 1;
     self.quickpage = 1;
     self.coinpage = 1;
@@ -2329,7 +2326,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.getexRate();
 
     self.quickequaltop = function(){
-        var curtop = document.getElementById('new2tab').scrollTop;
+        var curtop = document.getElementById('removescroll2').scrollTop;
         var dateall = document.querySelectorAll('.news .letterlist .itemin .date');
         for(var i = 1; i < dateall.length; i++){
             if(self.currentfixDate){
@@ -2351,7 +2348,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     //	加载更多
     self.loadmore = function(outlr, inlr, num){
         if(outlr == 'new1tab'){
-            self.newsanimate = 5;
             if(self.shownonews == true){
                 self.shownewsloading = false;
                 return;
@@ -2360,7 +2356,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 self.newsData();
             }
         }else if(outlr == 'new2tab'){
-            self.quickanimate = 5;
             if(self.shownoquick == true){
                 self.showquicksloading = false;
                 return;
@@ -2369,7 +2364,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 self.quickData();
             }
         }else if(outlr == 'new3tab'){
-            self.coinanimate = 5;
             if(self.shownocoin == true){
                 self.showcoinloading = false;
                 return;
