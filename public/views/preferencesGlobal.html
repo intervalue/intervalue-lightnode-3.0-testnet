@@ -25,7 +25,7 @@
       <div class="rd">
         <span ng-show="prefGlobal.currentLanguageName == 'English'">{{prefGlobal.currentCurrencyEnName}}</span>
         <span ng-show="prefGlobal.currentLanguageName == '中文'">{{prefGlobal.currentCurrencyName}}</span>
-        <img src="./img/more.png" />
+        <img src="./img/more.png" class="morerimg"/>
       </div>
     </li>
     <li ng-click="$root.go('preferencesGlobal.preferencesLanguage')">
@@ -37,7 +37,7 @@
       </div>
       <div class="rd">
         {{prefGlobal.currentLanguageName}}
-        <img src="./img/more.png" />
+        <img src="./img/more.png" class="morerimg"/>
       </div>
     </li>
     <li ng-click="$root.go('preferencesGlobal.preferencesAbout')">
@@ -48,7 +48,7 @@
         <span translate>About InterValue</span>
       </div>
       <div class="rd">
-        <img src="./img/more.png" />
+        <img src="./img/more.png" class="morerimg"/>
       </div>
     </li>
 
