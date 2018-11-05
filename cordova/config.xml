@@ -26,7 +26,7 @@
     <preference name="StatusBarOverlaysWebView" value="false"/>
 
     <!--更改手机状态栏背景色-->
-    <preference name="StatusBarBackgroundColor" value="#12172e"/>
+    <preference name="StatusBarBackgroundColor" value="black"/>
     <preference name="StatusBarStyle" value="lightcontent"/>
     <preference name="BackupWebStorage" value="none"/>
     <preference name="windows-target-version" value="8.1"/>
