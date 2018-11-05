@@ -869,7 +869,7 @@ angular.module('copayApp.controllers')
 				return;
 			}
 			//通过聊天跳转付款，选择地址后，需要判断
-            	if(self.from_walletId != fc.credentials.walletId && self.from_walletId != ''){
+            	if(self.from_walletId != fc.credentials.walletId && typeof self.from_walletId != "undefined"){
                     profileService.setAndStoreFocusToPayment(self.from_walletId,function () {
                         if (fc.isPrivKeyEncrypted()) {
                             profileService.unlockFC(null, function (err) {
@@ -1156,6 +1156,7 @@ angular.module('copayApp.controllers')
                                  var binding = self.binding;
                                  self.resetForm();
                                  $rootScope.$emit('Local/paymentDone');
+                                 //$rootScope.$emit('Local/WalletImported', fc.credentials.walletId);
                                  //$rootScope.$emit('Local/TabChanged', 'history');
                              });
 						 });
@@ -1497,6 +1498,9 @@ angular.module('copayApp.controllers')
 			this.send_multiple = false;
 			this.current_payment_key = '';
 			self.chat = false;
+			self.from_walletId = '';
+			self.from_image = '';
+			self.from_stables = '';
 			$scope.currentSpendUnconfirmed = configService.getSync()
 				.wallet.spendUnconfirmed;
 

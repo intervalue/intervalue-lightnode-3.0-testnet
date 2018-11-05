@@ -1393,8 +1393,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
      * @param obj
      */
     $rootScope.$on('Local/paymentDone', function(event){
-        self.updateHistory(3);
         $rootScope.$emit('Local/SetTab', 'walletHome');
+        self.updateHistory(3);
     });
 
     //  self.throttledUpdateHistory = lodash.throttle(function() {
@@ -1757,6 +1757,13 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         self.setFocusedWallet(cb);
         //self.updateTxHistory(3);
         go.walletHome();
+    });
+
+    $rootScope.$on('Local/NewFocusedWalletToPayment', function (event, cb) {
+        console.log('Local/NewFocusedWalletToPayment');
+        self.setFocusedWallet(cb);
+        //self.updateTxHistory(3);
+        //go.walletHome();
     });
 
     $rootScope.$on('Local/SetTab', function (event, tab, reset, swtichToHome) {
