@@ -91,10 +91,11 @@
 
 /*walletHome-home-part start*/
 #walletHome .opensidebara{position:absolute;right:8px;top:6px;color:#fff;display:block;width:30px;text-align:center;}
+#walletHome .opensidebara img{width: 16px;}
 .whlinfo{display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-moz-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-moz-box-align:center;-ms-flex-align:center;align-items:center;}
 .whlinfo span{color:#8CF8D8;}
 .whlinfo .whlogo{width:30px;margin-right:20px;-ms-flex-negative:0;flex-shrink:0;}
-.whlinfo .whname{font-family:"pfbold";margin-right:10px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;font-size:14px;}
+.whlinfo .whname{font-family:PingFangSC-Semibold,Arial,"微软雅黑";margin-right:10px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;font-size:14px;}
 .whlinfo .whpback{color:#8CF8D8;padding:0 8px;border:1px solid #8CF8D8;border-radius:18px;font-size:10px;margin-right:20px;-ms-flex-negative:0;flex-shrink:0;cursor:pointer;line-height:15px;}
 .whlinfo .whewm{width:15px;height:15px;margin-right:0;-ms-flex-negative:0;flex-shrink:0;cursor:pointer;}
 .whamount{margin-top:10px;font-size:20px;font-weight:bold;}
@@ -128,9 +129,9 @@
 .histopl span{color:#323232;font-size:14px;font-weight:400;}
 .histopr time{font-size:12px;color:#909090;}
 .hisbottom{text-align:right;}
-.hisbramount{color:#45AD8E;font-size:18px;font-weight:500;font-family:pfmedium;text-align:right;}
-.hisbsamount{color:#D45757;font-size:18px;font-weight:500;font-family:pfmedium;text-align:right;}
-.hisunit{font-size:14px;color:#646464;font-weight:500;font-family:pfmedium;margin-left:6px;}
+.hisbramount{color:#45AD8E;font-size:18px;font-weight:500;font-family:PingFangSC-Medium,Arial,微软雅黑;text-align:right;}
+.hisbsamount{color:#D45757;font-size:18px;font-weight:500;font-family:PingFangSC-Medium,Arial,微软雅黑;text-align:right;}
+.hisunit{font-size:14px;color:#646464;font-weight:500;font-family:PingFangSC-Medium,Arial,微软雅黑;margin-left:6px;}
 
 /*walletHome-history-part end*/
 
@@ -142,9 +143,9 @@
 .sendform .adcpmdic #amount{padding-right:52px;}
 .sendform .adcpmdic input[type="text"][disabled]{background-color:#F9FAFC;}
 .sendinfo{margin-top:10px;}
-.sendinfo{font-size:12px;font-family:pfmedium;font-weight:500;color:#999999;}
+.sendinfo{font-size:12px;font-family:PingFangSC-Medium,Arial,微软雅黑;font-weight:500;color:#999999;}
 .sendinfo a{color:#45AD8E;}
-.sendform .sendcancel{display:block;font-family:pfregular,Arial,微软雅黑;font-size:14px;width:100%;height:45px;line-height:45px;padding:0px;margin:0px;border-radius:3px;text-align:center;background-color:#FFFFFF;border:1px solid #3B3B3B;color:#3B3B3B;}
+.sendform .sendcancel{display:block;font-family:PingFangSC-Regular,Arial,微软雅黑;font-size:14px;width:100%;height:45px;line-height:45px;padding:0px;margin:0px;border-radius:3px;text-align:center;background-color:#FFFFFF;border:1px solid #3B3B3B;color:#3B3B3B;}
 .sendcancel:hover{background-color:#007095;color:#fff;border:none;}
 
 /*walletHome-send-part end*/
@@ -156,8 +157,8 @@
 .adwwt .adwwtflex{display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-moz-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;cursor:pointer;-webkit-box-align:center;-moz-box-align:center;-ms-flex-align:center;align-items:center;padding-bottom:14px;}
 .adwwt .adwwtflex .adwwtlogo{width:45px;height:45px;-ms-flex-negative:0;flex-shrink:0;margin-right:12px;-ms-flex-item-align:start;align-self:flex-start;}
 .adwwt .adwwtflex .adwwt100{width:100%;margin-right:12px;}
-.adwwt .adwwtflex .adwwt100 .adwwtname{font-size:14px;color:#323232;font-family:pfbold;font-weight:600;display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-webkit-box-pack:start;-moz-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;}
-.adwwt .adwwtflex .adwwt100 .adwwtname .whpback{height:14px;line-height:14px;padding:0 8px;border:1px solid #45AD8E;border-radius:18px;font-size:10px;-ms-flex-negative:0;flex-shrink:0;cursor:pointer;color:#45AD8E;margin-left:12px;}
+.adwwt .adwwtflex .adwwt100 .adwwtname{font-size:14px;color:#323232;font-family:PingFangSC-Semibold,Arial,"微软雅黑";font-weight:600;display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-webkit-box-pack:start;-moz-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;}
+.adwwt .adwwtflex .adwwt100 .adwwtname .whpback{margin-top: 3px;height:14px;line-height:14px;padding:0 8px;border:1px solid #45AD8E;border-radius:18px;font-size:10px;-ms-flex-negative:0;flex-shrink:0;cursor:pointer;color:#45AD8E;margin-left:12px;}
 .adwwt .adwwtflex .adwwt100 .adwwtaddr{font-size:12px;color:#909090;word-break:break-all;font-weight:400;margin-top:6px;}
 .adwwt .adwwtflex .moreimg{width:12px;height:18px;}
 .adwwt .adwwtnum{text-align:right;font-size:20px;color:#3B3B3B;border-top:1px dashed #cccccc;padding-top:10px;}
@@ -189,15 +190,15 @@
 
 /*customized-amount start*/
 .txcontent{background:#F9FAFC;padding:13px 13px 0;}
-.txunit{font-size:14px;color:#fff;font-family:"pfmedium";font-weight:500;}
+.txunit{font-size:14px;color:#fff;font-family:PingFangSC-Medium,Arial,微软雅黑;font-weight:500;}
 .txheader{height:108px;border-radius:5px;padding:14px 0;color:#fff;margin-bottom:16px;font-size:34px;}
 .txheader .ellisamout{width:100%;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;padding:0 20px;}
 .txreceive{background:rgba(87,193,123,1);-webkit-box-shadow:0px 0px 8px 0px rgba(87,193,123,0.5);box-shadow:0px 0px 8px 0px rgba(87,193,123,0.5);}
 .txsent{background:rgba(234,108,76,1);-webkit-box-shadow:0px 0px 9px 0px rgba(234,108,76,0.51);box-shadow:0px 0px 9px 0px rgba(234,108,76,0.51);}
 .txul{background:#fff;-webkit-box-shadow:0px 0px 3px 0px rgba(0,0,0,0.12);box-shadow:0px 0px 3px 0px rgba(0,0,0,0.12);height:calc(100vh - 183px);border-radius:3px 3px 0px 0px;}
 .txli{padding:12px 16px;border-bottom:1px solid #EDEEF0;}
-.ultitle{font-size:12px;color:#999999;font-family:pfmedium;font-weight:500;display:block;}
-.txulinfo{font-size:12px;color:#3B3B3B;font-family:pfmedium;font-weight:500;word-break:break-all;}
+.ultitle{font-size:12px;color:#999999;font-family:PingFangSC-Medium,Arial,微软雅黑;font-weight:500;display:block;}
+.txulinfo{font-size:12px;color:#3B3B3B;font-family:PingFangSC-Medium,Arial,微软雅黑;font-weight:500;word-break:break-all;}
 
 /*customized-amount end*/
 
@@ -220,8 +221,8 @@
 .adwnnumo{padding:18px 15px;}
 .adwnnum{padding:13px;text-align:center;margin-bottom:18px;background:#45AD8E;-webkit-box-shadow:0px 11px 12px -12px #45AD8E;box-shadow:0px 11px 12px -12px #45AD8E;border-radius:3px;}
 .adwnnum .adwnlogo{width:53px;height:53px;margin:0 auto;margin-bottom:10px;}
-.adwnnum .adwnnumamt{font-size:14px;font-family:pfbold;font-weight:bold;color:#8CF8D8;padding-bottom:16px;border-bottom:1px dashed #fff;}
-.adwnnum .adwnnumamt span{margin-right:14px;font-size:20px;font-family:pfbold;font-weight:600;color:#ffffff;}
+.adwnnum .adwnnumamt{font-size:14px;font-family:PingFangSC-Semibold,Arial,"微软雅黑";font-weight:bold;color:#8CF8D8;padding-bottom:16px;border-bottom:1px dashed #fff;}
+.adwnnum .adwnnumamt span{margin-right:14px;font-size:20px;font-family:PingFangSC-Semibold,Arial,"微软雅黑";font-weight:600;color:#ffffff;}
 .adwnnum .adwnaddr{margin-top:12px;cursor:pointer;margin-left:20px;}
 .adwnnum .adwnaddr span{margin-right:18px;font-size:12px;font-weight:400;color:#fff;}
 .adwnlinput{list-style-type:none;margin:0;padding:0;}
@@ -253,13 +254,15 @@
 .addedit{background:#F9FAFC;padding:18px 15px 0;}
 .addaaddr{height:calc(100vh - 80px);background-color:#fff;}
 .addaddbook .modal-content ul li.addaliste a{padding:14px 16px;display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-moz-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-moz-box-align:center;-ms-flex-align:center;align-items:center;background:#fff;-webkit-box-shadow:0px 0px 3px 0px rgba(160,160,160,0.32);box-shadow:0px 0px 3px 0px rgba(160,160,160,0.32);border-radius:5px;}
-.addaddbook .modal-content ul li.addaliste a span{font-size:16px;font-family:pfmedium;font-weight:500;color:#3B3B3B;word-break:break-all;}
+.addaddbook .modal-content ul li.addaliste a span{font-size:16px;font-family:PingFangSC-Medium,Arial,微软雅黑;font-weight:500;color:#3B3B3B;word-break:break-all;}
 .addaddbook .modal-content ul li.addaliste a span.text-close{-ms-flex-negative:0;flex-shrink:0;margin-right:10px;}
+.addaddbook .modal-content ul li.addaliste a img{width:32px;}
 .addaddbook .modal-content ul.addalist{height:calc(100vh - 140px);overflow:auto;margin-top:16px!important;padding:0;background:#fff;-webkit-box-shadow:0px 0px 3px 0px rgba(160,160,160,0.32);box-shadow:0px 0px 3px 0px rgba(160,160,160,0.32);border-radius:5px 5px 0 0;margin-bottom:0;}
 .addaddbook .modal-content ul.addalist2{height:calc(100vh - 64px);overflow:auto;padding:0;background:#fff;-webkit-box-shadow:0px 0px 3px 0px rgba(160,160,160,0.32);box-shadow:0px 0px 3px 0px rgba(160,160,160,0.32);margin-bottom:0;}
 .addaddbook .modal-content ul.addalist li,
 .addaddbook .modal-content ul.addalist2 li{padding:10px 16px;cursor:pointer;position:relative;}
 .addaddbook .modal-content ul.addalist2 li .selectAddressbook{position:absolute;right:0;top:0;background:#EB6D4D;padding:22px 16px;}
+.addaddbook .modal-content ul.addalist2 li .selectAddressbook img{width:18px;}
 .addaaddr .adinputitem{margin-top:15px;}
 .addrbtn{margin-top:40px;}
 .addrbtn button{width:49%;}
@@ -304,7 +307,7 @@
 .scanpop .scanin .item .itemin label{font-size:14px;color:#323232;}
 .scanpop .scanin .item .itemin div{word-break:break-all;font-size:12px;color:#909090;}
 .csend1{background:#F9FAFC;padding:20px 13px 0;}
-.csend1head{background:#45AD8E;-webkit-box-shadow:0px 11px 9px -7px rgba(87,193,123,0.62);box-shadow:0px 11px 9px -7px rgba(87,193,123,0.62);border-radius:3px;height:90px;color:#fff;text-align:center;font-weight:600;font-family:pfbold;margin-bottom:18px;padding:0 10px;}
+.csend1head{background:#45AD8E;-webkit-box-shadow:0px 11px 9px -7px rgba(87,193,123,0.62);box-shadow:0px 11px 9px -7px rgba(87,193,123,0.62);border-radius:3px;height:90px;color:#fff;text-align:center;font-weight:600;font-family:PingFangSC-Semibold,Arial,"微软雅黑";margin-bottom:18px;padding:0 10px;}
 .csend1head div{padding:4px 0;}
 .csendunit{border-top:1px dashed #fff;}
 .csend1 form{background:#fff;-webkit-box-shadow:0px 0px 3px 0px rgba(0,0,0,0.12);box-shadow:0px 0px 3px 0px rgba(0,0,0,0.12);border-radius:3px 3px 0px 0px;height:calc(100vh - 174px);overflow:auto;padding:0 0 20px;}
@@ -327,7 +330,7 @@
 .warmcolor{color:#646464}
 .greencolor{color:#45AD8E;}
 .nzcolor{color:#909090;}
-.fontbold{font-family:"pfbold";}
+.fontbold{font-family:PingFangSC-Semibold,Arial,"微软雅黑";}
 .secondcontent{width:100%;position:absolute;top:0;bottom:0;overflow:auto;background:#F9FAFC;}
 .popconfirm{position:fixed;width:100%;height:100%;top:0;left:0;z-index:100;}
 .popconfirm .popmask{position:absolute;width:100%;height:100%;text-align:center;top:0;left:0;background:rgba(0,0,0,0.3);z-index:100;cursor:pointer;}
@@ -472,9 +475,9 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .letterlist .itemin .item{border-left:1px solid #DEDEDE;padding:14px 0 0 16px;}
 .news .letterlist .itemin .item:nth-child(1){padding-top:28px;}
 .news .letterlist .itemin .itemlr:last-child .item:last-child{padding-bottom:14px;}
-.news .letterlist .itemin .item .time{display:inline-block;font-size:10px;font-family:pfbold;font-weight:600;color:#45AD8E;border-radius:10px;border:1px solid #45AD8E;padding:0 8px;position:relative;margin-bottom:12px;}
+.news .letterlist .itemin .item .time{display:inline-block;font-size:10px;font-family:PingFangSC-Semibold,Arial,"微软雅黑";font-weight:600;color:#45AD8E;border-radius:10px;border:1px solid #45AD8E;padding:0 8px;position:relative;margin-bottom:12px;}
 .news .letterlist .itemin .item .time:before{display:block;content:'';position:absolute;z-index:1;width:13px;height:13px;background:#45AD8E;border-radius:50%;border:2px solid #fff;left:-24px;top:1px;}
-.news .letterlist .itemin .item .title{font-size:14px;font-family:pfbold;font-weight:600;color:#323232;margin-bottom:6px;-ms-word-break:break-all;word-break:break-all;}
+.news .letterlist .itemin .item .title{font-size:14px;font-family:PingFangSC-Semibold,Arial,"微软雅黑";font-weight:600;color:#323232;margin-bottom:6px;-ms-word-break:break-all;word-break:break-all;}
 .news .letterlist .itemin .item .desc{font-size:12px;font-weight:400;color:#646464;-ms-word-break:break-all;word-break:break-all;}
 .news .removescroll{width: 100%;overflow-y: scroll;overflow-x: hidden;max-height:calc(100vh - 126px);}
 /*行情*/
@@ -522,6 +525,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .addpartner ul li:first-child div{color:#909090;}
 .addpartner ul li .limg{width:20px;height:20px;margin-right:10px;}
 .addpartner ul li img{vertical-align:initial;}
+.addpartner ul li .limg img{width:16px;}
 .addpartner ul li .rd img{margin-left:10px;}
 
 /*添加设备 end*/
@@ -558,20 +562,20 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .message-log{position:absolute;width:100%;top:45px;overflow-x:hidden;overflow-y:auto;font-size:13px;background:#F9FAFC;height:calc(100vh - 96px);}
 .chat-message{width:100%;position:relative;}
 .bubble{padding:10px 15px;margin:0px 7px;border-radius:18px;position:relative;max-width:80%;text-align:left;    /*display: inline-block;*/word-wrap:break-word;}
-.from-me{background:#45AD8E;box-shadow:0px 4px 5px -5px rgba(69,173,142,1);border-radius:10px 0px 10px 10px;font-size:13px;font-weight:500;color:#fff;font-family:pfmedium;float:right;
+.from-me{background:#45AD8E;box-shadow:0px 4px 5px -5px rgba(69,173,142,1);border-radius:10px 0px 10px 10px;font-size:13px;font-weight:500;color:#fff;font-family:PingFangSC-Medium,Arial,微软雅黑;float:right;
     position:relative;margin-right:62px;margin-bottom:28px;padding:10px 10px 10px 17px;}
 .from-me a{color:white;}
 .bubble a.payment,
 .bubble a.external-link{text-decoration:underline;}
 .bubble a.command{line-height:2;}
-.from-them{background:#fff;box-shadow:0px 4px 5px -5px rgba(69,173,142,1);border-radius:0px 10px 10px 10px;font-size:13px;font-weight:500;color:rgba(50,50,50,1);font-family:pfmedium;float:left;
+.from-them{background:#fff;box-shadow:0px 4px 5px -5px rgba(69,173,142,1);border-radius:0px 10px 10px 10px;font-size:13px;font-weight:500;color:rgba(50,50,50,1);font-family:PingFangSC-Medium,Arial,微软雅黑;float:left;
     margin-left:62px;margin-bottom:28px;padding:10px 17px 10px 10px;}
 .system{position:relative;z-index:1;text-align:center;max-width:100%;font-size:12px;}
-.system>span{padding:1px 16px;font-size:13px;font-family:pfmedium;font-weight:500;color:#fff;background:#DEDEDE;border-radius:3px;}
+.system>span{padding:1px 16px;font-size:13px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:#fff;background:#DEDEDE;border-radius:3px;}
 .system b{background-color:white;border:1px dashed #888;border-width:0 0 1px 0;cursor:pointer;}
 .msg-ts{color:#acacac;font-size:10px;padding-top:10px;width:12%;}
 /*图像*/
-.from-me .chatname,.from-them .chatname{position:absolute;width:40px;height:40px;line-height:40px;font-size:24px;font-family:pfbold;color:#323232;background:#EFEFEF;text-align:center;
+.from-me .chatname,.from-them .chatname{position:absolute;width:40px;height:40px;line-height:40px;font-size:24px;font-family:PingFangSC-Semibold,Arial,"微软雅黑";color:#323232;background:#EFEFEF;text-align:center;
     border-radius:50%;}
 .from-them .chatname{left:-54px;top:-18px;}
 .from-me .chatname{right:-54px;top:-18px;}
@@ -581,8 +585,8 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 }
 .dropup-item{max-width:100%;padding:0 15px 0 10px;}
 .dropup-item-link{padding:8px 0!important;display:inline-block!important;max-width:calc(100% - 10px);float:left;}
-.lefttime{text-align:left;position:absolute;left:64px;bottom:8px;color:#909090;font-size:10px;font-family:pfmedium;width:100%;}
-.righttime{text-align:right;position:absolute;right:64px;bottom:8px;color:#909090;font-size:10px;font-family:pfmedium;width:100%;}
+.lefttime{text-align:left;position:absolute;left:64px;bottom:8px;color:#909090;font-size:10px;font-family:PingFangSC-Medium,Arial,"微软雅黑";width:100%;}
+.righttime{text-align:right;position:absolute;right:64px;bottom:8px;color:#909090;font-size:10px;font-family:PingFangSC-Medium,Arial,"微软雅黑";width:100%;}
 
 /*发送表单*/
 .chatsendform{height:50px;display:flex;justify-content:flex-start;align-items:center;padding:0 17px;background:#fff;box-shadow:0px 1px 4px 0px rgba(196,196,196,1);}
@@ -608,16 +612,16 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .chatbiline ul li img{vertical-align:initial;}
 .chatbiline ul li .rd img{margin-left:10px;}
 .chatbiline ul li .rd span{word-break:break-all;}
-#chat .mtab .chatname{width:40px;height:40px;line-height:40px;font-size:24px;font-family:pfbold;color:#323232;background:#EFEFEF;text-align:center;border-radius:50%;margin-right:15px;}
-.chatremovep{display: none;position:absolute;right:0;top:0;background:#D45757;font-size:16px;font-family:pfmedium;font-weight:500;color:#fff;padding:0 24px;height:58px;line-height: 58px;}
+#chat .mtab .chatname{width:40px;height:40px;line-height:40px;font-size:24px;font-family:PingFangSC-Semibold,Arial,"微软雅黑";color:#323232;background:#EFEFEF;text-align:center;border-radius:50%;margin-right:15px;}
+.chatremovep{display: none;position:absolute;right:0;top:0;background:#D45757;font-size:16px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:#fff;padding:0 24px;height:58px;line-height: 58px;}
 .mtab .correspondentlist_badge{position: absolute;right: auto;left: 42px;padding: 0;width: 11px;height: 11px;font-size: 0;top: 12px;}
 /*correspondentDevices   end*/
 
 /*chat-requiestpayment   end*/
 .modal-content.chatmodal{top:0;z-index:1006;}
 .chatbiline ul li .rd .chatsetinfo img{margin-left:8px;width:19px;vertical-align:sub;}
-.chatbiline ul li .rd .chatsetinfo .chatinfoname{font-size:14px;font-family:pfmedium;font-weight:500;color:#323232;}
-.chatbiline ul li .rd .chatsetinfo .chatinfomon{font-size:10px;font-family:pfmedium;font-weight:500;color:#999999;}
+.chatbiline ul li .rd .chatsetinfo .chatinfoname{font-size:14px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:#323232;}
+.chatbiline ul li .rd .chatsetinfo .chatinfomon{font-size:10px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:#999999;}
 /*chat-requiestpayment    end*/
 
 /*editCorrespondentDevice    start*/
@@ -628,4 +632,5 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 
 /*menu-item    start*/
 .menuimg{width:27px;height:24px;text-align: center;margin:0 auto;}
+.menuimg img{height:20px;}
 /*menu-item    end*/
