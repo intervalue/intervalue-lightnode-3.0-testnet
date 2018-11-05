@@ -1300,36 +1300,40 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                         $rootScope.$apply();
                     },1);
                 });
-                require('intervaluecore/wallet').getWalletsInfo(function (obj) {
-                    if(!obj) return;
-                    self.updateImage();
-                    let trans = [];
-                    let fc = profileService.walletClients;
-                    obj.forEach(function(tran){
-                        for(var item in fc) {
-                            if (tran.wallet == fc[item].credentials.walletId){
-                                var walletNameIfo = fc[item].credentials.walletName;
-                                var imageIfo = fc[item].image;
-                                var mnemonicEncryptedIfo = fc[item].credentials.mnemonicEncrypted;
-                                var mnemonic = fc[item].credentials.mnemonic;
-                                break;
+                $timeout(function () {
+                    require('intervaluecore/wallet').getWalletsInfo(function (obj) {
+                        alert(JSON.stringify(obj));
+                        if(!obj) return;
+                        self.updateImage();
+                        let trans = [];
+                        let fc = profileService.walletClients;
+                        obj.forEach(function(tran){
+                            for(var item in fc) {
+                                if (tran.wallet == fc[item].credentials.walletId){
+                                    var walletNameIfo = fc[item].credentials.walletName;
+                                    var imageIfo = fc[item].image;
+                                    var mnemonicEncryptedIfo = fc[item].credentials.mnemonicEncrypted;
+                                    var mnemonic = fc[item].credentials.mnemonic;
+                                    break;
+                                }
                             }
-                        }
-                        trans.push({
-                            address : tran.address,
-                            wallet  : tran.wallet,
-                            stables  : profileService.formatAmount(tran.stables,'bytes'),
-                            walletName : walletNameIfo,
-                            image : imageIfo,
-                            mnemonicEncrypted: mnemonicEncryptedIfo,
-                            mnemonic : mnemonic
+                            trans.push({
+                                address : tran.address,
+                                wallet  : tran.wallet,
+                                stables  : profileService.formatAmount(tran.stables,'bytes'),
+                                walletName : walletNameIfo,
+                                image : imageIfo,
+                                mnemonicEncrypted: mnemonicEncryptedIfo,
+                                mnemonic : mnemonic
+                            });
                         });
+                        self.walletInfo = trans;
+                        $timeout(function () {
+                            $rootScope.$apply();
+                        },1);
                     });
-                    self.walletInfo = trans;
-                    $timeout(function () {
-                        $rootScope.$apply();
-                    },1);
-                });
+                },500);
+
                 self.historyShowShowAll = newHistory.length >= self.historyShowLimit;
                 //}
                 return cb();
