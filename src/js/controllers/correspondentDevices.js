@@ -84,6 +84,9 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 			});
 		
 			$scope.list = ab;
+			$timeout(function () {
+				$scope.$apply();
+            });
 
 			bots.load(function(err, rows){
 				if (err) $scope.botsError = err.toString();
