@@ -1302,7 +1302,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 });
                 $timeout(function () {
                     require('intervaluecore/wallet').getWalletsInfo(function (obj) {
-                        alert(JSON.stringify(obj));
                         if(!obj) return;
                         self.updateImage();
                         let trans = [];
