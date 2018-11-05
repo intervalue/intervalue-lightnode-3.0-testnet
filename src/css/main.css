@@ -4,25 +4,8 @@
  *
  */
 
-@font-face{
-  font-family: "pfmedium";
-  src: url('../font/PingFang-Medium.ttf');
-}
-@font-face{
-  font-family: "pfregular";
-  src: url('../font/PingFang-regular.ttf');
-}
-@font-face{
-  font-family: "pfbold";
-  src: url('../font/PingFang-Bold.ttf');
-}
-@font-face{
-  font-family: "pflight";
-  src: url('../font/PingFang-Light.ttf');
-}
-
 body {
-  font-family: pfregular,Arial,"微软雅黑";
+  font-family: PingFangSC-Regular,Arial,"微软雅黑";
   font-size: 14px;
   color:#323232;
 }
@@ -991,11 +974,13 @@ label.postfix, a.postfix {
   text-align: right;
   padding-right: 5px;
   font-size:18px;
-  font-family:pfmedium;
+  font-family:PingFangSC-Medium,Arial,微软雅黑;
   font-weight:500;
   color:#777777;
 }
-
+label.postfix, a.postfix img{
+  width:18px;
+}
 .pointer {
   cursor: pointer;
 }
@@ -1209,7 +1194,7 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
   border-radius: 3px 3px 0 0;
   font-size: 14px;
   font-weight: 500;
-  font-family: pfregular,Arial,"微软雅黑";
+  font-family: PingFangSC-Regular,Arial,"微软雅黑";
 }
 .mtab-title.disabled {
   cursor: not-allowed;

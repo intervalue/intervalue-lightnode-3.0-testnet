@@ -1036,7 +1036,7 @@ msgstr "已配对设备"
 
 #: public/views/acceptCorrespondentInvitation.html:49
 msgid "Pairing code"
-msgstr "配对的代码"
+msgstr "配对码"
 
 #: public/views/paperWallet.html:30
 msgid "Paper Wallet Private Key"

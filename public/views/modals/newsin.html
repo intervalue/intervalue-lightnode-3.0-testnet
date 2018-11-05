@@ -12,9 +12,23 @@
         </h1>
     </section>
 </nav>
-<div class="content newsinc" ng-init="newsInfoData()">
-  <div class="title">
-      {{newstitle}}
-  </div>
-  <p ng-bind-html="newscontent"></p>
+<div class="content newsincinfo" ng-init="newsInfoData()">
+    <div class="newslistheight" ng-if ="newscontent == '' && online">
+        <div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>
+    </div>
+    <div ng-if="!online  && !loading" ng-click="newsInfoData();" class="nowire">
+        <div class="nowirein">
+            <img src="./img/nowire.png" />
+            <div class="nowireintext" translate>The network is not strong. Please click the screen to reload.</div>
+        </div>
+    </div>
+    <div class="newslistheight" ng-if ="!online && loading">
+        <div class="newupload"><img src="./img/loading.png" /><span translate>Loading</span></div>
+    </div>
+    <div class="newsinc">
+        <div class="title">
+            {{newstitle}}
+        </div>
+        <p ng-bind-html="newscontent"></p>
+    </div>
 </div>

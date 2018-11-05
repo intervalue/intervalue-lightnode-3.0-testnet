@@ -77,7 +77,9 @@
 
         -->
 
-        <div id="walletHome" class="walletHome tab-view tab-in">
+        <div id="walletHome" class="walletHome tab-view tab-in" ng-swipe-disable-mouse
+             ng-swipe-right="index.closeMenu()"
+             ng-swipe-left="index.swipeLeft()">
             <a class="opensidebara" ng-click="index.openMenu()"><img src="./img/indexmenu.png" /></a>
             <div style="position:absolute; width: 100%; left: 0px; top: 15px; text-align: center; color: white; z-index: 1" ng-if="home.isTestnet">{{home.testnetName}}</div>
             <div class="oh">
@@ -152,11 +154,11 @@
 
                         </div>
 
-                        <div class="m40t" ng-if="!index.txHistoryError" translate>
+                        <div class="notximg" ng-if="!index.txHistoryError" translate>
 
-                            <img src="./img/notx.png" />
+                            <img src="./img/notx.png"/>
 
-                            <div class="graytext m24t" translate>No transactions yet</div>
+                            <div class="graytext" translate>No transactions yet</div>
 
                         </div>
 
@@ -591,7 +593,7 @@
                                                             <div class="chatinfoname ng-binding"><img src="{{home.from_image}}"> </div>
                                                             <div class="chatinfomon"><span translate="">可用余额</span>:&nbsp;<span class="ng-binding"></span>{{home.from_stables}}</div>
                                                         </div>
-                                                        <img src="./img/more.png">
+                                                        <img src="./img/more.png" class="morerimg">
                                                     </div>
                                                 </div>
                                             </li>

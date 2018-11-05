@@ -43,12 +43,10 @@
                 </div>
                 <div class="chatdevicecodetext2" ng-if="!index.isCordova">
                     <span translate>Scan the above QR code using the other device, or send this pairing code to the other device.</span>
-                </div>
-                <div class="row">
-                <input type="button "
-                class="chatdevicedonebtn"
-                ng-click="$root.go('^', true); goBackToState = null"
-                value="{{'Done'|translate}}">
+                    <input type="button "
+                           class="chatdevicedonebtn"
+                           ng-click="$root.go('^', true); goBackToState = null"
+                           value="{{'Done'|translate}}">
                 </div>
             </div>
         </div>

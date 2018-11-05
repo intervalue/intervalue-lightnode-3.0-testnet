@@ -100,7 +100,7 @@ _:-ms-fullscreen, :root .main {
 .tab-bar h1 {
   font-size:18px;
   color:#3B3B3B;
-  font-family:pfmedium;
+  font-family:PingFangSC-Medium,Arial,微软雅黑;
   font-weight:500;
 }
 
@@ -297,7 +297,9 @@ ul.copayer-list img {
 .right-small a, .left-small a {
   color: #45AD8E;
 }
-
+.right-small a img{
+  width:18px;
+}
 a.missing-copayers {
   bottom: -34px;
   text-align: center;
@@ -309,7 +311,7 @@ a.missing-copayers {
   padding:0;
   margin:0;
   border: 1px solid transparent;
-  font-family: pfregular,Arial,"微软雅黑";
+  font-family: PingFangSC-Regular,Arial,"微软雅黑";
   font-size: 14px;
   width:100%;
   height: 45px;
