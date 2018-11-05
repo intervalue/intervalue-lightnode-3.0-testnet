@@ -568,7 +568,27 @@
                                     <!--ng-style="{'background-color':index.backgroundColor}"  translate>-->
                                     <!--Send-->
                                     <!--</button>-->
-                                    <div ng-show="home.chat" name="from_address">钱包列表</div>
+                                    <div ng-show="home.chat" name="from_address" class="chatbiline">
+                                        <ul class="m0">
+                                            <li ng-click="showselectwt = true;">
+                                                <div class="liin">
+                                                    <div class="ld">
+                                                        <div class="limg">
+                                                            <img src="./img/setwallet.png">
+                                                        </div>
+                                                        <span translate="">选择收款钱包</span>
+                                                    </div>
+                                                    <div class="rd">
+                                                        <div class="chatsetinfo">
+                                                            <div class="chatinfoname ng-binding"><img src=""> </div>
+                                                            <div class="chatinfomon"><span translate="">可用余额</span>:&nbsp;<span class="ng-binding"></span></div>
+                                                        </div>
+                                                        <img src="./img/more.png">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
                                     <button type="submit" class="m20t m20b" ng-if="mtab == 1" ng-disabled="sendPaymentForm.$invalid" translate>
                                         Send
                                     </button>
@@ -579,6 +599,27 @@
                         </div>
                     </div>
                 </form>
+                <div ng-show="showselectwt" class="popconfirm">
+                    <div class="popmask" ng-click="showselectwt = false;"></div>
+                    <div class="popcontentwt">
+                        <ul class="m0">
+                            <li ng-repeat="item in index.walletInfo" ng-click="editCont.insertMyAddress(item.wallet,item.stables,item.walletName,item.image);">
+                                <div class="liin">
+                                    <div class="ld">
+                                        <span class="greendot"></span>
+                                        <div class="limg">
+                                            <img ng-src="{{item.image}}" />
+                                        </div>
+                                        <span>{{item.walletName}}</span>
+                                    </div>
+                                    <div class="rd">
+                                        <span translate>Available amount</span>:&nbsp;<span>{{item.stables}}</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div> <!-- END Send -->
         <!--
