@@ -181,7 +181,7 @@
 /*receive end*/
 
 /*tx-details start*/
-.ammountlr{position:fixed;width:100%;height:100%;background:#FFFFFF;padding:0 15px 0;overflow:auto;}
+.ammountlr{position:fixed;width:100%;height:100%;background:#FFFFFF;padding:0;overflow:auto;}
 .ammountlr .adcpmdic input[type='number'],
 .ammountlr .adcpmdic input[type='text']{top:5px;padding-right:60px;}
 

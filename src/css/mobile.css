@@ -834,7 +834,7 @@ textarea:focus
 
 .tab-in {
   left: 0;
-  z-index:5;
+  z-index:6;
 }
 
 .tab-out {
