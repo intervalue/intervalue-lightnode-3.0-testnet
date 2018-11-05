@@ -138,7 +138,7 @@ _:-ms-fullscreen, :root .main {
   position: fixed;
   bottom: 0;
   width: 100%;
-  z-index: 5;
+  z-index: 6;
   background: #fff;
   box-shadow:0px 0px 9px 0px rgba(0,0,0,0.06);
 }
