@@ -29,7 +29,7 @@
 		</nav>
 		<div class="height15"></div>
 		<!-- contacts页签对应视图 -->
-		<div class="mtab chatbiline" ng-class="{'active': mtab == 1}" ng-init="mtab = 1">
+		<div class="mtab chatbiline" ng-class="{'active': mtab == 1}" ng-init="mtab = 1;readList();">
 			<ul class="no-bullet m0 correspondentList">
 				<!-- 聊天联系人列表 -->
 				<li draggable="true" chat-swiper-left="newsData('up')" ng-click="showCorrespondent(correspondent)" ng-repeat="correspondent in list | orderBy:newMsgByAddressComparator">
