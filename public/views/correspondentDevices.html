@@ -82,7 +82,7 @@
 					<text ng-show="!editCorrespondentList && !hideRemove" translate>CANCEL</text>
 				</button>
 			</div>-->
-			<div ng-include="'views/includes/menu.html'" ng-show="!index.noFocusedWallet"></div>
+
 		</div>
 		<!-- DApp store标签对应视图 -->
 		<!--<div class="mtab" ng-class="{'active': mtab == 2}">-->
@@ -104,3 +104,7 @@
 		<!--</div>-->
 	</div>
 </div>
+<div ng-controller="correspondentDevicesController">
+	<div ng-include="'views/includes/menu.html'" ng-show="!index.noFocusedWallet && state.is('correspondentDevices')"></div>
+</div>
+
