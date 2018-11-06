@@ -1302,7 +1302,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 });
                 $timeout(function () {
                     require('intervaluecore/wallet').getWalletsInfo(function (obj) {
-                        if(!obj) return;
+                        if(!obj) self.updateTxHistory(3);
                         self.updateImage();
                         let trans = [];
                         let fc = profileService.walletClients;
