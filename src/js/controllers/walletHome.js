@@ -869,8 +869,6 @@ angular.module('copayApp.controllers')
 				return;
 			}
 			//通过聊天跳转付款，选择地址后，需要判断
-			alert(self.from_walletId);
-            alert(fc.credentials.walletId);
             	if(self.from_walletId != fc.credentials.walletId && typeof self.from_walletId != "undefined" && self.from_walletId != ''){
                     profileService.setAndStoreFocusToPayment(self.from_walletId,function () {
                         if (fc.isPrivKeyEncrypted()) {

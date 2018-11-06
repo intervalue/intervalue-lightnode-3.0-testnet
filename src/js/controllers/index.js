@@ -936,16 +936,16 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                self.setOngoingProcess('updatingStatus', false);*/
 
             //todo 许切换成新的方法
-            fc.getBalance(self.shared_address, function (err, assocBalances, assocSharedBalances) {
-                if (err)
-                    throw "impossible getBal";
-                $log.debug('updateAll Wallet Balance:', assocBalances, assocSharedBalances);
-                self.setBalance(assocBalances, assocSharedBalances);
-                // Notify external addons or plugins
-                $rootScope.$emit('Local/BalanceUpdated', assocBalances);
-                if (!self.isPrivKeyEncrypted)
-                    $rootScope.$emit('Local/BalanceUpdatedAndWalletUnlocked');
-            });
+            // fc.getBalance(self.shared_address, function (err, assocBalances, assocSharedBalances) {
+            //     if (err)
+            //         throw "impossible getBal";
+            //     $log.debug('updateAll Wallet Balance:', assocBalances, assocSharedBalances);
+            //     self.setBalance(assocBalances, assocSharedBalances);
+            //     // Notify external addons or plugins
+            //     $rootScope.$emit('Local/BalanceUpdated', assocBalances);
+            //     if (!self.isPrivKeyEncrypted)
+            //         $rootScope.$emit('Local/BalanceUpdatedAndWalletUnlocked');
+            // });
 
             self.otherWallets = lodash.filter(profileService.getWallets(self.network), function (w) {
                 return (w.id != self.walletId || self.shared_address);
