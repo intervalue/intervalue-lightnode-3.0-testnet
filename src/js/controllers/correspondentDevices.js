@@ -68,8 +68,8 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 
 			wallet.readDeviceAddressesUsedInSigningPaths(function(arrNotRemovableDeviceAddresses) {
 
-				// add a new property indicating whether the device can be removed or not
-				if(!ab) $scope.readList();
+				// add a new property indicating whether the device can be removed or no
+				if(!ab) return;
 				var length = ab.length;
 				for (var i = 0; i < length; i++) {
  				 	corrDev = ab[i];
@@ -84,10 +84,6 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 			});
 		
 			$scope.list = ab;
-			$timeout(function () {
-				$scope.$apply();
-            });
-
 			bots.load(function(err, rows){
 				if (err) $scope.botsError = err.toString();
 				$scope.bots = rows;
