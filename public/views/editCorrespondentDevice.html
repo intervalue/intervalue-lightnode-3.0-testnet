@@ -21,37 +21,43 @@
   </nav>
   <div class="height13"></div>
   <div class="addeditcd">
-
-    <div class="m20t m20b" >
       <div class="address">
         <div class="deviceadd">
-          <img src="img/wallet.png">
+          <div>
+            <img src="img/wallet.png">
+          </div>
           <span translate>Device address:</span>
         </div>
-        <div class="size-10 text-gray ellipsis enable_text_select">{{correspondent.device_address}}@{{hub}}</div>
+        <div class="deviceaddinfo ellipsis enable_text_select">{{correspondent.device_address}}@{{hub}}</div>
       </div>
-
-      <form name="editForm" class="m20t" no-validate>
+      <form name="editForm" class="chateditform" no-validate>
         <div class="text-warning size-12 m10b" ng-show="error">{{error|translate}}</div>
-        <div class="renameadd">
-          <img src="img/rename.png">
-          <span translate>Rename:</span>
+        <div class="address">
+          <div class="deviceadd">
+            <div>
+              <img src="img/rename.png">
+            </div>
+            <span translate>Rename:</span>
+          </div>
+          <div class="deviceaddinfo">
+            <input type="text" id="name" name="name" ng-model="name" required>
+          </div>
         </div>
-        <div class="chatcname">
-          <input type="text" id="name" name="name" ng-model="name" required>
-        </div>
+        <!--<div class="renameadd">-->
+          <!--<div>-->
+            <!--<img src="img/rename.png">-->
+          <!--</div>-->
+          <!--<span translate>Rename:</span>-->
+        <!--</div>-->
+        <!--<div class="chatcname">-->
+          <!--<input type="text" id="name" name="name" ng-model="name" required>-->
+        <!--</div>-->
         <!--<span translate>Change hub:</span>
         <input type="text" id="hub" name="hub" ng-model="hub" required>-->
-        <div class="purge_chat columns"><a ng-click="showconfirm = true;" translate>clear chat history</a></div>
+        <div class="purge_chat"><a ng-click="showconfirm = true;" translate>clear chat history</a></div>
       </form>
-    </div>
     <div>
-      <input type="submit"
-             class="addbutton"
-             value="{{'Save'|translate}}"
-             ng-disabled="!editForm.$valid"
-             ng-style="{'background-color':rgb(59, 59, 59)}"
-             ng-click="save()">
+      <button type="submit" class="m30t" ng-disabled="!editForm.$valid" ng-click="save()" translate>Save</button>
     </div>
     <div ng-show="showconfirm" class="popconfirm">
       <div class="popmask" ng-click="showconfirm = false;"></div>
@@ -67,5 +73,3 @@
       </div>
     </div>
   </div>
-
-  <div ng-include="'views/includes/menu.html'" ng-show="!index.noFocusedWallet"></div>
