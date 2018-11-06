@@ -17,37 +17,7 @@
         <div class="whpback" ng-show="item.mnemonic || item.mnemonicEncrypted" ng-click="$root.go('backup');index.backhome = true;" translate>Backup</div>
       </a>
     </li>
-    <!--<li>-->
-      <!--<a ng-click="$root.go('correspondentDevices'); index.tab='chat'" class="oh">-->
-        <!--<i class="icon-arrow-right3 size-18 right m10t"></i>-->
-        <!--<i class="fi-laptop size-24 icon"></i>-->
-        <!--<div class="tu text-bold">-->
-          <!--<span class="size-12" translate>Paired devices</span>-->
-        <!--</div>-->
-        <!--<div translate>Co-signers for multisig</div>-->
-      <!--</a>-->
-    <!--</li>-->
-    <!--<li>-->
-      <!--<a ng-click="sidebar.closeMenu(); $root.go('preferencesGlobal')" class="oh">-->
-        <!--<i class="icon-arrow-right3 size-18 right m10t vm"></i>-->
-        <!--<i class="fi-widget size-24 icon vm"></i>-->
-        <!--<div class="tu text-bold">-->
-          <!--<span class="size-12" translate>Settings</span>-->
-        <!--</div>-->
-        <!--<div translate>Global preferences</div>-->
-      <!--</a>-->
-    <!--</li>-->
   </ul>
-  <!-- <div class="siderbarb" ng-show="!index.isCordova">
-      <a ng-click="$root.go('addwallet')">
-          <div><img src="./img/creat.png"/></div>
-          <span translate>Create a new wallet</span>
-      </a>
-      <div ng-controller="topbarController as topbar" class="scansidebar">
-        <qr-scanner on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
-        <span translate>Scan</span>
-      </div>
-  </div> -->
   <div class="siderbarbn">
       <a ng-click="$root.go('addwallet')">
           <div><img src="./img/creat.png"/></div>

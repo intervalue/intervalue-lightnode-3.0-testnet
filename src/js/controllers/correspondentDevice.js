@@ -120,10 +120,6 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
         };
 
         $scope.insertMyAddress = function(walletId){
-            var chatltmessage = angular.element(document.getElementById('chatltmessage'));
-            chatltmessage.triggerHandler('click');
-            // if (!profileService.focusedClient.credentials.isComplete())
-            //     return $rootScope.$emit('Local/ShowErrorAlert', "The wallet is not approved yet");
             readMyPaymentAddressToInsert(walletId,function (result) {
                 appendMyPaymentAddress(result);
                 $timeout(function () {
@@ -131,7 +127,6 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     $scope.$apply();
                 })
             });
-            //	issueNextAddressIfNecessary(appendMyPaymentAddress);
         };
 
         $scope.showwalletaddr = function(){

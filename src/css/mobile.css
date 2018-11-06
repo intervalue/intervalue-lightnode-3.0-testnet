@@ -172,21 +172,6 @@ _:-ms-fullscreen, :root .main {
   text-decoration: underline;
 }
 
-.scroll-section {
-  position: absolute;
-  top: 120px;
-  overflow-y: auto;
-}
-
-.status {
-  bottom: 65px;
-  left: 0;
-}
-
-.right-off-canvas-menu {
-  background-color: #213140 ;
-}
-
 .off-canvas-wrap,.inner-wrap{
   height:100%;
 }
@@ -209,24 +194,6 @@ _:-ms-fullscreen, :root .main {
   font-weight: 700;
   text-align: center;
   border-radius: 5px;
-}
-
-.walletHome .wallet-info {
-  margin-left: 85px;
-  line-height: 110%;
-  height: 60px;
-  overflow: hidden;
-}
-
-.copayers {
-  position: relative;
-  padding: 0;
-  overflow-y: none;
-}
-
-ul.copayer-list img {
-  width: 30px;
-  height: 30px;
 }
 
 .bottombar-item {
@@ -290,21 +257,12 @@ ul.copayer-list img {
   padding: 0;
   right: calc(50% - 20px);
 }
-.box-founds {
-  background-color: #213140;
-}
 
 .right-small a, .left-small a {
   color: #45AD8E;
 }
 .right-small a img{
   width:18px;
-}
-a.missing-copayers {
-  bottom: -34px;
-  text-align: center;
-  padding: .7rem;
-  width: 100%;
 }
 
 .button, button {
@@ -321,14 +279,6 @@ a.missing-copayers {
   border-radius: 3px;
 }
 
-.box-setup {
-  margin-bottom: 50px;
-}
-
-.footer-setup {
-  margin-bottom: 50px;
-}
-
 .label {
   font-size: 70%;
   padding: 0.2rem 0.2rem;
@@ -336,14 +286,6 @@ a.missing-copayers {
 
 .sidebar {
   background: #646464;
-}
-
-.sidebar .icon {
-  width:  39px;
-  text-align: center;
-  margin-right: 15px;
-  float: left;
-  display: block;
 }
 
 .sidebar li {
@@ -379,26 +321,6 @@ a.missing-copayers {
   height: 35px;
   border-radius: 3px;
   padding: 2px;
-}
-
-.sidebar header {
-  text-align: center;
-  padding: 1.7rem;
-  border-bottom: 1px solid #384B5F;
-}
-
-.sidebar header h1 {
-  color: #fff;
-  margin: 0;
-  padding: 5px;
-}
-
-.sidebar header {
-  color: #fff;
-}
-
-.sidebar header small {
-  color: #fff;
 }
 
 .sidebar ul.off-canvas-list {
@@ -950,22 +872,6 @@ textarea:focus
 }
 .f-dropdown li.selected a .check {
   display: inline;
-}
-.combobox-container {
-  position: relative;
-}
-.combobox-container:after {
-  font-family: 'icomoon' !important;
-  content: "\e601";
-  position: absolute;
-  right: 5px;
-  top: 50%;
-  margin-top: -10px;
-  z-index: 1;
-  height: 15px;
-  border-radius: 100px;
-  background-color: #fff;
-  pointer-events: none;
 }
 span[selectable] {
   border-bottom: 1px dashed black;
