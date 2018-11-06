@@ -90,7 +90,7 @@ msgid "Add wallet"
 msgstr "添加钱包"
 
 #: public/views/correspondentDevices.html:89
-msgid "Added"
+msgid "Add"
 msgstr "添加"
 
 #: public/views/modals/customized-amount.html:32

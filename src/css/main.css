@@ -1340,11 +1340,6 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
 }
 
 @media (max-width: 360px) {
-  /*button.outline.tiny.adaptive{
-      padding-top: 13px;
-      padding-bottom: 14px;
-      font-size: 9px;
-  }*/
   .columns.adaptive{
     padding-left: 8px;
     padding-right: 8px;
@@ -1551,9 +1546,6 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
   color: white;
   width: 80%;
   margin-left: 10%;
-  /*border: 1px solid white;
-  border-right: 1px solid white;
-  border-left: 1px solid white;*/
 }
 
 .center{
@@ -1602,8 +1594,4 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
   cursor: auto !important;
   overflow: auto;
   white-space: normal;
-}
-
-form[name="chatForm"] .f-dropdown.drop-top > *:last-child {
-  margin-bottom: -2px;
 }
