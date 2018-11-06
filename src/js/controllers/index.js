@@ -2389,7 +2389,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.openNewsinModal = function(id) {
         $rootScope.modalOpened = true;
 
-        var ModalInstanceCtrl = function($scope, $modalInstance) {
+        var ModalInstanceCtrl = function($scope, $modalInstance, $sce) {
             $scope.newsInfoData = function (useid = id) {
                 if(!$scope.online){
                     if (navigator.onLine) {
@@ -2405,8 +2405,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 }
                 news.getNewsInfo(useid,function (res) {
                     if(!!res &&  res.code == 0) {
-                        $scope.newstitle = res.article.title;
-                        $scope.newscontent = res.article.content;
+                        $scope.newstitle = $sce.trustAsHtml(res.article.title);
+                        $scope.newscontent = $sce.trustAsHtml(res.article.content);
 
                         $timeout(function(){
                             $scope.$apply();

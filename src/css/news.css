@@ -249,7 +249,7 @@
     line-height:20px;
     text-align:center;
     margin:30px auto;}
-.chatdevicecodetext{text-align: center;word-break:break-all;margin-top: 20px;}
+.chatdevicecodetext{text-align: center;word-break:break-all;margin-top: 20px;padding:0 15px;}
 .chatdevicecodetext2{text-align: center;word-break: break-all;margin-top: 40px;padding:0 15px;box-sizing:border-box;}
 /*添加设备自己的二维码页面 e*/
 

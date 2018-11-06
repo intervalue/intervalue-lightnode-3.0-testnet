@@ -171,12 +171,6 @@ module.exports = function (grunt) {
 				dest: '../intervaluebuilds/InterValue-3.1-testnet/win64/'
 			},
 
-			icons: {
-				expand: true,
-				flatten: true,
-				src: 'bower_components/foundation-icon-fonts/foundation-icons.*',
-				dest: 'public/icons/'
-			},
 			modules: {
 				expand: true,
 				flatten: true,
@@ -378,7 +372,7 @@ module.exports = function (grunt) {
 	//grunt.loadNpmTasks('grunt-debian-package');
 	grunt.loadNpmTasks('innosetup-compiler');
 
-	grunt.registerTask('default', ['nggettext_compile', 'exec:version', 'concat', 'copy:icons', 'copy:modules']);
+	grunt.registerTask('default', ['nggettext_compile', 'exec:version', 'concat', 'copy:modules']);
 	grunt.registerTask('cordova', ['default', 'browserify']);
 	grunt.registerTask('cordova-prod', ['cordova', 'uglify']);
 	//grunt.registerTask('prod', ['default', 'uglify']);

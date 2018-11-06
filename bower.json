@@ -18,7 +18,6 @@
     "animate.css": "3",
     "fastclick": "1",
     "foundation": "5",
-    "foundation-icon-fonts": "*",
     "ng-lodash": "0.2.3",
     "qrcode-decoder-js": "*",
     "angular-elastic": "2.5.1",
