@@ -147,36 +147,37 @@ angular.module('copayApp.controllers').controller('addwalletController',
             if (isCordova) {
                 window.plugins.spinnerDialog.show(null, gettextCatalog.getString('Loading...'), true);
             }
-            $timeout(function () {
                 profileService.createWallet({ name: walletName, password: passphrase, mnemonic: mnemonic,m:1,n:1,networkName:"livenet",cosigners:[],isSinglecreateress:true  }, function (err,walletId) {
-                    if (isCordova)
-                        window.plugins.spinnerDialog.hide();
-                    if (err) {
-                        self.creatingProfile = false;
-                        $log.warn(err);
-                        self.error = err;
-                        $timeout(function () {
-                            $scope.$apply();
-                        });
-                        /*$timeout(function() {
-                            self.create(noWallet);
-                        }, 3000);*/
-                    }
-                else if(del){
-                        //$rootScope.$emit('Local/WalletImported', walletId);
-                        var fc = profileService.focusedClient;
-                        fc.clearMnemonic();
-                        profileService.clearMnemonic(function() {
-                            self.deleted = true;
-                            notification.success(successMsg);
-                            go.walletHome();
-                            $rootScope.$emit('Local/WalletImported', walletId);
-                        });
-                    }else{
-                        $rootScope.$emit('Local/WalletImported', walletId);
-                    }
+                   $timeout(function () {
+                       if (isCordova)
+                           window.plugins.spinnerDialog.hide();
+                       if (err) {
+                           self.creatingProfile = false;
+                           $log.warn(err);
+                           self.error = err;
+                           $timeout(function () {
+                               $scope.$apply();
+                           });
+                           /*$timeout(function() {
+                               self.create(noWallet);
+                           }, 3000);*/
+                       }
+                       else if(del){
+                           //$rootScope.$emit('Local/WalletImported', walletId);
+                           var fc = profileService.focusedClient;
+                           fc.clearMnemonic();
+                           profileService.clearMnemonic(function() {
+                               self.deleted = true;
+                               notification.success(successMsg);
+                               go.walletHome();
+                               $rootScope.$emit('Local/WalletImported', walletId);
+                           });
+                       }else{
+                           $rootScope.$emit('Local/WalletImported', walletId);
+                       }
+                   });
+
                 });
-            }, 100);
         };
         //import wallet
         self.importw = function(){
@@ -190,23 +191,25 @@ angular.module('copayApp.controllers').controller('addwalletController',
             if (isCordova) {
                 window.plugins.spinnerDialog.show(null, gettextCatalog.getString('Loading...'), true);
             }
-            $timeout(function () {
                 profileService.createWallet({ name: self.addwiname, password: self.addwipass, mnemonic: self.importcode2,m:1,n:1,networkName:"livenet",cosigners:[],isSinglecreateress:true }, function (err,walletId) {
-                    if (isCordova)
-                        window.plugins.spinnerDialog.hide();
-                    if(err){
-                        self.creatingProfile = false;
-                        $log.warn(err);
-                        self.error = err;
-                        alert(err);
-                        $timeout(function () {
-                            $scope.$apply();
-                        });
-                    }
-                    if (isCordova)
-                        window.plugins.spinnerDialog.hide();
-                     $rootScope.$emit('Local/WalletImported', walletId);
+                    $timeout(function () {
+                        if (isCordova)
+                            window.plugins.spinnerDialog.hide();
+                        if(err){
+                            self.creatingProfile = false;
+                            $log.warn(err);
+                            self.error = err;
+                            alert(err);
+                            $timeout(function () {
+                                $scope.$apply();
+                            });
+                        }
+                        if (isCordova)
+                            window.plugins.spinnerDialog.hide();
+                        $rootScope.$emit('Local/WalletImported', walletId);
+                    });
+
                 });
-            }, 100);
+
         }
     });

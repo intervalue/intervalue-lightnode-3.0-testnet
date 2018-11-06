@@ -145,28 +145,30 @@ angular.module('copayApp.controllers').controller('createwalletController',
             if (isCordova) {
                 window.plugins.spinnerDialog.show(null, gettextCatalog.getString('Loading...'), true);
             }
-            $timeout(function () {
+
                 profileService.create({ walletName: walletName, password: passphrase, mnemonic: mnemonic }, function (err) {
-                    if (isCordova)
-                        window.plugins.spinnerDialog.hide();
-                    if (err) {
-                        $log.warn(err);
-                        self.error = err;
-                        $timeout(function () {
-                            $rootScope.$apply();
-                        });
-                        return;
-                    } else if(del){
-                        var fc = profileService.focusedClient;
-                        fc.clearMnemonic();
-                        profileService.clearMnemonic(function()  {
-                            self.deleted = true;
-                            notification.success(successMsg);
-                        });
-                    }
+                    $timeout(function () {
+                        if (isCordova)
+                            window.plugins.spinnerDialog.hide();
+                        if (err) {
+                            $log.warn(err);
+                            self.error = err;
+                            $timeout(function () {
+                                $rootScope.$apply();
+                            });
+                            return;
+                        } else if(del){
+                            var fc = profileService.focusedClient;
+                            fc.clearMnemonic();
+                            profileService.clearMnemonic(function()  {
+                                self.deleted = true;
+                                notification.success(successMsg);
+                            });
+                        }
+                    });
+
                     //go.walletHome();
                 });
-            }, 100);
         };
         //import wallet
         self.importw = function(){
@@ -177,22 +179,22 @@ angular.module('copayApp.controllers').controller('createwalletController',
             if (isCordova) {
                 window.plugins.spinnerDialog.show(null, gettextCatalog.getString('Loading...'), true);
             }
-            $timeout(function () {
+
                 profileService.create({ walletName: self.createwiname, password: self.createwipass, mnemonic: self.importcode }, function (err) {
-                    if (isCordova)
-                        window.plugins.spinnerDialog.hide();
-                    if(err){
-                        self.creatingProfile = false;
-                        $log.warn(err);
-                        self.error = err;
-                        $timeout(function () {
-                            $scope.$apply();
-                        });
-                    }
                     $timeout(function () {
-                        $scope.index.updateHistory(4);
-                    })
+                        if (isCordova)
+                            window.plugins.spinnerDialog.hide();
+                        if(err){
+                            self.creatingProfile = false;
+                            $log.warn(err);
+                            self.error = err;
+                            $timeout(function () {
+                                $scope.$apply();
+                            });
+                        }
+                            $scope.index.updateHistory(4);
+                    });
+
                 });
-            }, 100);
         }
     });
