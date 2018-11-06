@@ -31,26 +31,29 @@
 
 
 /*eitcorrespondentdevie   start*/
-.splitt{
+.height13{
     height:13px;
-    background-color: #f0f2f5;
+    background-color: #FAFAFA;
 }
 .addeditcd{
-    padding: 11px 15px;
+    padding: 22px 15px 0;
 }
 
-.addeditcd .address{
-    margin-top:12px;
-    height:65px;
-    background:rgba(255,255,255,1);
-}
 
 .addeditcd .address .deviceadd{
-    padding-top:15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
-
+.addeditcd .address .deviceadd div{
+    width: 16px;
+    flex-shrink: 0;
+    text-align: center;
+}
+.addeditcd .address .deviceadd img{
+    vertical-align: text-top;
+}
 .addeditcd .address .deviceadd span{
-    padding-top:12px;
     margin-left:14px;
     font-size:16px;
     font-family:PingFangSC-Medium,Arial,微软雅黑;
@@ -58,21 +61,24 @@
     color:rgba(59,59,59,1);
 }
 
-.addeditcd .address .size-10 {
-    padding-top:6px;
-    margin-left:35px;
-    background:rgba(255,255,255,1);
+.addeditcd .address .deviceaddinfo{
+    margin-top:6px;
+    padding-left:30px;
+    box-sizing: border-box;
+    font-size:12px;
+    font-family:PingFangSC-Medium,Arial,微软雅黑;
+    font-weight:500;
+    color:#999999;
 }
 
-.addeditcd .m20t{
-    margin-top:0px;
+.addeditcd .chateditform{
+    margin-top: 18px;
 }
-
-.addeditcd .m20t .renameadd{
+.addeditcd .chateditform .renameadd{
     padding-top:13px;
 }
 
-.addeditcd .m20t .renameadd span{
+.addeditcd .chateditform .renameadd span{
     font-size:16px;
     font-family:PingFangSC-Medium,Arial,微软雅黑;
     font-weight:500;
@@ -81,16 +87,23 @@
     margin-left:14px;
 }
 
-.addeditcd .m20t .chatcname{
+.addeditcd .chateditform .chatcname{
     padding-left:34px;
     padding-right:15px;
 }
 
-.addeditcd .m20t .chatcname #name{
+.addeditcd .chateditform .chatcname #name{
     padding-top:13px;
     border-bottom: 1px solid #EDEEF0;
 }
-
+.addeditcd .chateditform input{
+    border-bottom: 1px solid #EDEEF0;
+    font-size:14px;
+    font-family:PingFangSC-Regular,Arial,微软雅黑;
+    font-weight:400;
+    color:#999999;
+    height:26px;
+}
 .addeditcd .purge_chat{
     margin-top:20px;
 }
@@ -102,22 +115,6 @@
     line-height:20px;
     text-align:center;
 }
-
-
-.addeditcd  .addbutton{
-    margin-top:30px;
-    font-size: 14px;
-    font-weight:400;
-    width: 100%;
-    line-height: 45px;
-    position: static;
-    background-color: rgb(59, 59, 59);
-    height:45px;
-    padding:0;
-    border-radius: 3px;
-    color:rgba(255,255,255,1);
-}
-
 /*eitcorrespondentdevie   end*/
 
 
