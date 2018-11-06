@@ -735,6 +735,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	  storageService.setCorrespondentList(fc.credentials.network, JSON.stringify(ab), function(err) {
 		if (err) return cb('Error deleting entry');
 		root.list(function(err, ab) {
+			if(!ab) return;
 		  return cb(err, ab);
 		});
 	  });
