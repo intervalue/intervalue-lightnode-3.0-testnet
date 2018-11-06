@@ -508,6 +508,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                             SELECT shared_address AS address FROM shared_addresses WHERE shared_address IN(?)",
                             [arrAllMemberAddresses, arrAllMemberAddresses],
                             function(rows){
+                                if(!rows) return;
                                 var arrMyAddresses = rows.map(function(row){ return row.address; });
                                 for (var destinationAddress in assocMemberAddressesByDestAddress){
                                     var arrMemberAddresses = assocMemberAddressesByDestAddress[destinationAddress];
@@ -786,6 +787,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                         WHERE wallet=? AND is_spent=0 AND asset IS NULL GROUP BY address ORDER BY total DESC LIMIT 16",
                         [fc.credentials.walletId],
                         function(rows){
+                            if(!rows) return;
                             var arrAddresses = rows.map(function(row){ return row.address; });
                             handleAddresses(arrAddresses);
                         }
