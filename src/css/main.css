@@ -96,13 +96,9 @@ h4.title a {
   font-size:14px;
 }
 
-ul.whopays li, ul.profile-entries li {
+ul.profile-entries li {
   padding:13px 20px;
   border-bottom: 1px solid #E9E9EC;
-}
-
-#send ul.whopays li:first-child {
-  border-top: 1px solid #E9E9EC;
 }
 
 .addressbook-input {
@@ -114,41 +110,6 @@ ul.whopays li, ul.profile-entries li {
   font-size: 13px;
   height: 35px;
   padding-top: 7px;
-}
-
-ul.button-group {
-  margin-top: 8px;
-}
-
-ul.button-group li:first-child {
-  border-top-left-radius: 0.2rem;
-  border-bottom-left-radius: 0.2rem;
-  border: 1px solid #DEDFE1;
-}
-
-ul.button-group li:last-child {
-  border-top-right-radius: 0.2rem;
-  border-bottom-right-radius: 0.2rem;
-  border: 1px solid #DEDFE1;
-}
-
-.button-group.even-2 li {
-  margin: 0 -3px;
-  padding: 4px 5px;
-}
-
-ul.button-group li {
-  color: #A5B2BF;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-size: 0.7rem;
-  display: block;
-  padding: 3px 0;
-}
-
-ul.button-group li.selected {
-  color: #fff;
-  background-color: #DEDFE1;
 }
 
 .modal-content ul.subwallets li.selected {
