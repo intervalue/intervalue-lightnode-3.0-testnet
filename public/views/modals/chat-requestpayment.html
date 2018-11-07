@@ -19,7 +19,7 @@
     <div class="f9fafch"></div>
     <form name="amountForm" class="ammountlr" ng-submit="submitForm(amountForm)" novalidate>
         <!-- 金额 -->
-        <div class="chatbiline">
+        <div class="chatbiline" ng-show="addressLenght = true">
             <ul class="m0">
                 <li>
                     <div class="liin">
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                 </li>
-                <li ng-click="showselectwt = true;">
+                <li ng-click="showselectwt = true" >
                     <div class="liin">
                         <div class="ld">
                             <div class="limg">

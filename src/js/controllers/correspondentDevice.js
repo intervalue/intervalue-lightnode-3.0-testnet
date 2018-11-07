@@ -25,6 +25,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
         var correspondent = correspondentListService.currentCorrespondent;
         $scope.correspondent = correspondent;
         $scope.showselectwt = false;
+        $scope.addressLenght = false;
 //	var myPaymentAddress = indexScope.shared_address;
         if (document.chatForm && document.chatForm.message)
             document.chatForm.message.focus();
@@ -144,6 +145,13 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
         };
 
         $scope.requestPayment = function(){
+            fc  = profileService.profile;
+            if(fc.credentials.length != 1){
+                $scope.addressLenght = true;
+                $timeout(function () {
+                   $scope.$apply();
+                });
+            }
             var chatltmessage = angular.element(document.getElementById('chatltmessage'));
             chatltmessage.triggerHandler('click');
             if (!profileService.focusedClient.credentials.isComplete())
@@ -1055,7 +1063,13 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     if ($scope.index.arrBalances.length === 0)
                         return console.log('showRequestPaymentModal: no balances yet');
                     var amount = form.amount.$modelValue;
-                    let address = form.address.$modelValue;
+                    let address ='';
+                    fc = profileService.profile;
+                    if(fc.credentials.length == 1){
+                        address = myPaymentAddress;
+                    }else {
+                        address = form.address.$modelValue;
+                    }
                     if(amount == '' || amount == undefined){
                         console.log('amount'+amount);
                         return false;
