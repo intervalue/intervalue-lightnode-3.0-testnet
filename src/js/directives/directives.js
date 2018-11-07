@@ -825,7 +825,7 @@ angular.module('copayApp.directives')
                         resetdrag();
                         return;
                     }else{
-                        if( raw.scrollTop <= 0){
+                        if( raw.scrollTop <= 0 && scope._end < -18){
                             releaseload();
                         }else{
                             resetdrag();
@@ -856,7 +856,7 @@ angular.module('copayApp.directives')
                         resetdrag();
                         return;
                     }else{
-                        if( raw.scrollTop <= 0){
+                        if( raw.scrollTop <= 0 && scope._end < -18){
                             releaseload();
                         }else{
                             resetdrag();
@@ -865,21 +865,21 @@ angular.module('copayApp.directives')
                     }
                 }
                 function releaseh(dist){ // dist 下滑的距离，用以拉长背景模拟拉伸效果
-                    rawh.style.height = (parseInt("45px") - dist) + "px";//松开刷新的高度
+                    angular.element(elm).css({'overflow-y':'hidden','width':'calc(100% - 6px)'});
+                    rawh.style.height = (-dist) + "px";//松开刷新的高度
                     rawh.style.display = 'block';
                     rawh.children[0].style.display = 'block';
                     rawh.children[1].style.display = 'none';
                 }
                 function releaseload(){
+                    angular.element(elm).css({'overflow-y':'scroll','width':'100%'});
                     rawh.children[0].style.display = 'none';
                     rawh.children[1].style.display = 'block';
                     rawh.style.height = "45px";//高度设定为45px
                     scope.$apply(attr.homePullDown);
-                    console.log(elm)
-                    console.log(raw);
-                    console.log(rawh);
                 }
                 function resetdrag(){
+                    angular.element(elm).css({'overflow-y':'scroll','width':'100%'});
                     rawh.style.display = 'none';
                 }
             }
@@ -925,7 +925,7 @@ angular.module('copayApp.directives')
                         resetdrag();
                         return;
                     }else{
-                        if( raw.scrollTop <= 0){
+                        if( raw.scrollTop <= 0 && scope._end < -18){
                             releaseload();
                         }else{
                             resetdrag();
@@ -957,7 +957,7 @@ angular.module('copayApp.directives')
                         resetdrag();
                         return;
                     }else{
-                        if( raw.scrollTop <= 0){
+                        if( raw.scrollTop <= 0 && scope._end < -18){
                             releaseload();
                         }else{
                             resetdrag();
@@ -966,18 +966,21 @@ angular.module('copayApp.directives')
                     }
                 }
                 function releaseh(dist){ // dist 下滑的距离，用以拉长背景模拟拉伸效果
-                    rawh.style.height = (parseInt("45px") - dist) + "px";//松开刷新的高度
+                    angular.element(elm).css({'overflow-y':'hidden','width':'calc(100% - 6px)'});
+                    rawh.style.height = (-dist) + "px";//松开刷新的高度
                     rawh.style.display = 'block';
                     rawh.children[0].style.display = 'block';
                     rawh.children[1].style.display = 'none';
                 }
                 function releaseload(){
+                    angular.element(elm).css({'overflow-y':'scroll','width':'100%'});
                     rawh.children[0].style.display = 'none';
                     rawh.children[1].style.display = 'block';
                     rawh.style.height = "45px";//高度设定为45px
                     scope.$apply(attr.homeQpullDown);
                 }
                 function resetdrag(){
+                    angular.element(elm).css({'overflow-y':'scroll','width':'100%'});
                     rawh.style.display = 'none';
                 }
             }

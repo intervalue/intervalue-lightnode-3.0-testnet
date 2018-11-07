@@ -433,12 +433,12 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .newslistheight .newupload{display: block;width:100%;height:45px;background:#fff;font-size:12px;font-weight:400;color:rgba(144,144,144,1);text-align:center;padding-top:14px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
 .newslistheight .newupload img{margin-right:10px;}
 /*上拉刷新加载中*/
-.newsupheight{width:100%;background:#fff;font-size:12px;font-weight:400;color:rgba(144,144,144,1);text-align:center;display:none;}
+.newsupheight{width:100%;background:#fff;font-size:12px;font-weight:400;color:rgba(144,144,144,1);text-align:center;display:none;overflow: hidden;}
 .newuprelease,
 .newupload{display:none;}
 .newuprelease{width:100%;height:45px;background:#fff;font-size:12px;font-weight:400;color:rgba(144,144,144,1);text-align:center;padding-top:14px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
 .quotelist .newuprelease,
-.quotelist .newupload{padding-top:46px;margin-bottom:-22px;height:auto;}
+.quotelist .newupload{margin-bottom:-22px;height:auto;}
 .newuprelease img{margin-right:10px;}
 .newupload{width:100%;height:45px;background:#fff;font-size:12px;font-weight:400;color:rgba(144,144,144,1);text-align:center;padding-top:14px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
 .newupload img{margin-right:10px;}
@@ -449,7 +449,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .tab-container{width:33.3%;}
 .news .tabclicktitle{background:#FDFEFF;}
 .news .addwcontent{top:78px;z-index:2; height:calc(100vh - 126px);overflow: hidden;}
-
+#new3tab{top:110px;height:calc(100vh - 158px);}
 /*最新*/
 
 /*.news .newslist,.news .newslist a,.news .newslist img, .news .newslist div, .news .newslist p, .news .newslist  span,.news .letterlist,.news .quotelist{*/
@@ -495,8 +495,8 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .quotelist .titlelabel .cointri.downcoin:after{content:'';display:block;border:4px solid transparent;border-top:5px solid #45AD8E;}
 .news .quotelist .titlelabel .price{cursor: pointer;position:absolute;top:0;right:107px;text-align:right;}
 .news .quotelist .titlelabel .gains{cursor: pointer;position:absolute;top:0;right:15px;text-align:center;}
-.news .quotelist .itemin{padding:0 15px 0;}
-.news .quotelist .itemin:nth-child(1){padding-top:32px;}
+/*.news .quotelist .itemin{padding:0 15px 0;}*/
+/*.news .quotelist .itemin:nth-child(1){padding-top:32px;}*/
 .news .quotelist .itemin .item{padding:14px 0;position:relative;border-bottom:1px solid #DEDEDE;}
 .news .quotelist .itemin:nth-child(1) .item{border-top:1px solid #DEDEDE;}
 .news .quotelist .itemin .item .leftcoininfo{width:calc(100% - 175px);}
@@ -512,6 +512,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .quotelist .itemin .item .gainsin .gainsinfo{padding:4px 9px;color:#fff;border-radius:3px;background:#C4C4C4;width:70px;}
 .news .quotelist .itemin .item .gainsin.priceblue .gainsinfo{background:#45AD8E;}
 .news .quotelist .itemin .item .gainsin.pricered .gainsinfo{background:#D45757;}
+.news .quotelist .removescroll{padding:0 15px;height:calc(100vh - 158px);}
 @media (max-width: 330px){
     .news .quotelist .titlelabel .numall{left:15px;}
 }
