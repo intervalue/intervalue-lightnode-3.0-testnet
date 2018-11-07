@@ -94,12 +94,11 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
         });
 
         $scope.send = function(deviceAddress,amount) {
-
             $scope.error = null;
             //$scope.message = 'testtestestsetset';
             if (!$scope.message && !deviceAddress )
                 return;
-            if(!$scope.message && deviceAddress) $scope.message = gettextCatalog.getString('Transferred: ')+amount+' INVE';
+            if(deviceAddress) $scope.message = gettextCatalog.getString('Transferred: ')+amount+' INVE';
             if(!deviceAddress)setOngoingProcess("sending");
             //alert($scope.message);
             var message = lodash.clone($scope.message); // save in var as $scope.message may disappear while we are sending the message over the network
