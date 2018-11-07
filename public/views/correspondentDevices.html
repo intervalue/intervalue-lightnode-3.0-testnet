@@ -8,13 +8,13 @@
 	}
 </style>
 <!-- 钱包聊天视图 -->
-<div ng-controller="correspondentDevicesController" style="height:100%;overflow-x: hidden;" >
+<div ng-controller="correspondentDevicesController">
 	<!-- 顶部导航栏 -->
 	<!-- 主显示区 -->
 	<div ui-view="dialog"></div>
 	<!---->
 	<!-- tab对应视图 -->
-	<div class="tab-view tab-in chat-tab-view" ng-show="state.is('correspondentDevices')" id="chat" >
+	<div class="tab-view tab-in" ng-show="state.is('correspondentDevices')" id="chat" >
 		<nav ng-controller="topbarController as topbar" class="tab-bar chatcurchattops">
 			<section class="middle tab-bar-section">
 				<h1 class="title ellipsis" translate>
