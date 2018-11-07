@@ -43,10 +43,14 @@ angular.module('copayApp.controllers')
 		this.exchangeRates = network.exchangeRates;
 		self.chat = false;
         self.chatAddress = false;
+        self.deviceAddress = '';
 		$scope.index.tab = 'walletHome'; // for some reason, current tab state is tracked in index and survives re-instatiations of walletHome.js
 
 		var disablePaymentRequestListener = $rootScope.$on('paymentRequest', function(event, address, amount, asset, recipient_device_address,chat) {
-			if(chat) self.chat = true;
+			if(chat){
+                self.chat = true;
+                self.deviceAddress = recipient_device_address;
+			}
 			let fc  = profileService.profile;
             if(fc.credentials.length != 1 && chat){
             	self.chatAddress = true;
@@ -839,7 +843,9 @@ angular.module('copayApp.controllers')
 		};
 
 		//开始发送交易
-		this.submitPayment = function() {
+		this.submitPayment = function(chat,deviceAddress) {
+			 self.chat = chat ;
+			 self.deviceAddress = deviceAddress;
             var form = $scope.sendPaymentForm;
             //var obj = JSON.parse(form.$$element[0][0].value);
 			if ($scope.index.arrBalances.length === 0)
@@ -880,7 +886,7 @@ angular.module('copayApp.controllers')
                             profileService.unlockFC(null, function (err) {
                                 if (err)
                                     return self.setSendError(err.message);
-                                return self.submitPayment();
+                                return self.submitPayment(self.chat,self.deviceAddress);
                             });
                             return;
                         }
@@ -891,7 +897,7 @@ angular.module('copayApp.controllers')
                         profileService.unlockFC(null, function(err) {
                             if (err)
                                 return self.setSendError(err.message);
-                            return self.submitPayment();
+                            return self.submitPayment(self.chat,self.deviceAddress);
                         });
                         return;
                     }
@@ -1159,8 +1165,12 @@ angular.module('copayApp.controllers')
                                      return self.setSendError(err);
                                  }
                                  var binding = self.binding;
+                                 if(self.chat){
+                                     $rootScope.$emit('Local/paymentDoneAndSendMessage',self.deviceAddress,form.amount.$modelValue);
+                                 }
                                  self.resetForm();
                                  $rootScope.$emit('Local/paymentDone');
+
                                  //$rootScope.$emit('Local/WalletImported', fc.credentials.walletId);
                                  //$rootScope.$emit('Local/TabChanged', 'history');
                              });
@@ -1507,6 +1517,7 @@ angular.module('copayApp.controllers')
 			self.from_walletId = '';
 			self.from_image = '';
 			self.from_stables = '';
+            self.deviceAddress = '';
 			$scope.currentSpendUnconfirmed = configService.getSync()
 				.wallet.spendUnconfirmed;
 

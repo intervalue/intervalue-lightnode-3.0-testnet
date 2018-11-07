@@ -4,7 +4,7 @@
 var constants = require('intervaluecore/constants.js');
 
 angular.module('copayApp.controllers').controller('correspondentDeviceController',
-    function($scope, $rootScope, $timeout, $sce, $modal, configService, profileService, animationService, isCordova, go, correspondentListService, addressService, lodash, $deepStateRedirect, $state, backButton, gettext) {
+    function($scope, $rootScope, $timeout, $sce, $modal, configService, profileService, animationService, isCordova, go, correspondentListService, addressService, lodash, $deepStateRedirect, $state, backButton, gettext,gettextCatalog) {
         var async = require('async');
         var chatStorage = require('intervaluecore/chat_storage.js');
         var self = this;
@@ -88,20 +88,31 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                 removeNewMessagesDelim();
         });
 
-        $scope.send = function() {
+        $rootScope.$on('Local/paymentDoneAndSendMessage',function (event,deviceAddress,amount) {
+            $scope.send(deviceAddress,amount);
+        });
+
+        $scope.send = function(deviceAddress,amount) {
             $scope.error = null;
-            if (!$scope.message)
+            //$scope.message = 'testtestestsetset';
+            if (!$scope.message && !deviceAddress )
                 return;
+            if(!$scope.message && deviceAddress) $scope.message = gettextCatalog.getString('Transferred: ')+amount+' INVE';
             setOngoingProcess("sending");
+            //alert($scope.message);
             var message = lodash.clone($scope.message); // save in var as $scope.message may disappear while we are sending the message over the network
             $scope.message = '';
-            device.sendMessageToDevice(correspondent.device_address, "text", message, {
+            //alert(correspondent.device_address);
+            let device_address = deviceAddress ? deviceAddress:correspondent.device_address;
+                device.sendMessageToDevice(device_address, "text", message, {
+            //device.sendMessageToDevice('0DOJDKCO6CD2JGWMFEWNHJSFXPQQLRSXW', "text", message, {
                 ifOk: function(){
                     setOngoingProcess();
                     //$scope.messageEvents.push({bIncoming: false, message: $sce.trustAsHtml($scope.message)});
                     $scope.autoScrollEnabled = true;
                     var msg_obj = {
                         bIncoming: false,
+                        //message: correspondentListService.formatOutgoingMessage(message),
                         message: correspondentListService.formatOutgoingMessage(message),
                         timestamp: Math.floor(Date.now() / 1000)
                     };
@@ -111,7 +122,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     $timeout(function(){
                         $scope.$apply();
                     });
-                    if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(correspondent.device_address, message, 0);
+                    if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(device_address, message, 0);
                 },
                 ifError: function(error){
                     setOngoingProcess();

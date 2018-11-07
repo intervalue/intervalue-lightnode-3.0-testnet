@@ -525,7 +525,7 @@
             </nav>
 
             <div ng-show="home.shownForm=='payment'">
-                <form class="sendform" name="sendPaymentForm" ng-submit="home.submitPayment(sendPaymentForm)"  novalidate>
+                <form class="sendform" name="sendPaymentForm" ng-submit="home.submitPayment(home.chat,home.deviceAddress)"  novalidate>
                     <div class="box-notification" ng-show="home.error" ng-click="home.resetError()">
                       <span class="text-warning">
                         {{home.error|translate}}
