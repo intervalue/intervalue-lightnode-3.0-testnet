@@ -515,7 +515,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 						messageEvents.unshift({type: 'system', bIncoming: false, message: "<span>" + last_msg_ts.toDateString() + "</span>", timestamp: Math.floor(msg_ts.getTime() / 1000)});
 					}
 					last_msg_ts = msg_ts;
-					if (message.type == "text") {
+					if (message.type == "text" || message.type == "transaction") {
 						if (message.is_incoming) {
 							message.message = highlightActions(escapeHtml(message.message), arrMyAddresses);
 							message.message = text2html(message.message);
@@ -565,6 +565,15 @@ angular.module('copayApp.services').factory('correspondentListService', function
 		 	 if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(from_address, body, 1);
 		 });
 	});
+
+    eventBus.on("transaction", function(from_address, body, message_counter){
+
+        device.readCorrespondent(from_address, function(correspondent){
+            if (!root.messageEventsByCorrespondent[correspondent.device_address]) loadMoreHistory(correspondent);
+            addIncomingMessageEvent(correspondent.device_address, body, message_counter);
+            if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(from_address, body, 1);
+        });
+    });
 
 	eventBus.on("chat_recording_pref", function(correspondent_address, enabled, message_counter){
 		device.readCorrespondent(correspondent_address, function(correspondent){

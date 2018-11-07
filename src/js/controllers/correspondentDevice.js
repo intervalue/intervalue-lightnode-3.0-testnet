@@ -27,6 +27,8 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
         $scope.showselectwt = false;
         $scope.addressLenght = false;
 //	var myPaymentAddress = indexScope.shared_address;
+        if (document.chatForm && document.chatForm.message)
+            document.chatForm.message.focus();
 
         if (!correspondentListService.messageEventsByCorrespondent[correspondent.device_address])
             correspondentListService.messageEventsByCorrespondent[correspondent.device_address] = [];
@@ -91,21 +93,23 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
         });
 
         $scope.send = function(deviceAddress,amount) {
+
             $scope.error = null;
             //$scope.message = 'testtestestsetset';
             if (!$scope.message && !deviceAddress )
                 return;
             if(!$scope.message && deviceAddress) $scope.message = gettextCatalog.getString('Transferred: ')+amount+' INVE';
-            setOngoingProcess("sending");
+            if(!deviceAddress)setOngoingProcess("sending");
             //alert($scope.message);
             var message = lodash.clone($scope.message); // save in var as $scope.message may disappear while we are sending the message over the network
             $scope.message = '';
             //alert(correspondent.device_address);
             let device_address = deviceAddress ? deviceAddress:correspondent.device_address;
-                device.sendMessageToDevice(device_address, "text", message, {
+            let chatType = deviceAddress ? 'transaction':'text';
+                device.sendMessageToDevice(device_address, chatType, message, {
             //device.sendMessageToDevice('0DOJDKCO6CD2JGWMFEWNHJSFXPQQLRSXW', "text", message, {
                 ifOk: function(){
-                    setOngoingProcess();
+                    if(!deviceAddress)setOngoingProcess();
                     //$scope.messageEvents.push({bIncoming: false, message: $sce.trustAsHtml($scope.message)});
                     $scope.autoScrollEnabled = true;
                     var msg_obj = {

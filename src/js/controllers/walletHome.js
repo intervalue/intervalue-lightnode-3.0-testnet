@@ -1090,7 +1090,8 @@ angular.module('copayApp.controllers')
                                  recipient_device_address: recipient_device_address,
                                  isHot: isHot,
                                  xPrivKey: fc.credentials.xPrivKey,
-								 walletId: fc.credentials.walletId
+								 walletId: fc.credentials.walletId,
+								 deviceAddress : self.deviceAddress ? self.deviceAddress: ''
                              };
                              if (!isMultipleSend) {
                                  opts.to_address = to_address;
@@ -1168,6 +1169,9 @@ angular.module('copayApp.controllers')
                                  if(self.chat){
                                      $rootScope.$emit('Local/paymentDoneAndSendMessage',self.deviceAddress,form.amount.$modelValue);
                                  }
+                                 // eventBus.on("chat_transfer_notification",function (deviceAddress,transactionId) {
+								 //
+                                 // });
                                  self.resetForm();
                                  $rootScope.$emit('Local/paymentDone');
 
