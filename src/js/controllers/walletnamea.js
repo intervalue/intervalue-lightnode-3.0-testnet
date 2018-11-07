@@ -81,7 +81,6 @@ angular.module('copayApp.controllers').controller('walletnameaController',
         };
 
         self.truedeleteWallet = function(walletId,name) {
-            alert(walletId);
             var walletName = name;
             profileService.setAndStoreFocus(walletId, function () {
                 let wc = profileService.walletClients;
