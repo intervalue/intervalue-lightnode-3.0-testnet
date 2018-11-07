@@ -602,7 +602,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .chatsendform input{margin:0;padding:0;}
 .chatsendform #message{width:100%;margin:0 13px;border:none;border-bottom:1px solid #DEDEDE;max-height:100px;resize:none;outline:none;min-height:auto;
 box-sizing:border-box;padding:8px 0;height:auto;}
-.chatsend{width:26px;height:26px;border-radius:50%;background:url(../img/chatsend.png) no-repeat center;flex-shrink:0;cursor:pointer;margin-bottom:3px;}
+.chatsendform .chatsend{width:26px;height:26px;border-radius:50%;background:url(../img/chatsend.png) no-repeat center;flex-shrink:0;cursor:pointer;margin-bottom:3px;}
 
 /*correspondentDevice   end*/
 
