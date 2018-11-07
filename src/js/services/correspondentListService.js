@@ -550,7 +550,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 		switch (message.type) {
 			case "system":
 				message.message = JSON.parse(message.message);
-				message.message = "<span>chat recording " + (message.message.state ? "&nbsp;" : "") + "</span>";
+				message.message = "<span translate>chat recording</span>";
 				message.chat_recording_status = true;
 				break;
 		}
