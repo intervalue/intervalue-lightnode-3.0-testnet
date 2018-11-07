@@ -75,15 +75,15 @@ angular.module('copayApp.services').factory('correspondentListService', function
 		};
 		checkAndInsertDate(root.messageEventsByCorrespondent[peer_address], msg_obj);
 		insertMsg(root.messageEventsByCorrespondent[peer_address], msg_obj);
-		if ($state.is('walletHome') && $rootScope.tab == 'walletHome') {
-			setCurrentCorrespondent(peer_address, function(bAnotherCorrespondent){
-				$timeout(function(){
-					$stickyState.reset('correspondentDevices.correspondentDevice');
-					go.path('correspondentDevices.correspondentDevice');
-				});
-			});
-		}
-		else
+		// if ($state.is('walletHome') && $rootScope.tab == 'walletHome') {
+		// 	setCurrentCorrespondent(peer_address, function(bAnotherCorrespondent){
+		// 		$timeout(function(){
+		// 			$stickyState.reset('correspondentDevices.correspondentDevice');
+		// 			go.path('correspondentDevices.correspondentDevice');
+		// 		});
+		// 	});
+		// }
+		// else
 			$timeout(function(){
 				$rootScope.$digest();
 			});
