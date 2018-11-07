@@ -130,9 +130,17 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
         };
 
         $scope.showwalletaddr = function(){
-            var chatltmessage = angular.element(document.getElementById('chatltmessage'));
-            chatltmessage.triggerHandler('click');
-            $scope.showselectwt = true;
+            fc = profileService.profile;
+            if(fc.credentials.length == 1){
+                var chatltmessage = angular.element(document.getElementById('chatltmessage'));
+                chatltmessage.triggerHandler('click');
+                $scope.insertMyAddress(fc.credentials[0].walletId);
+            }else {
+                var chatltmessage = angular.element(document.getElementById('chatltmessage'));
+                chatltmessage.triggerHandler('click');
+                $scope.showselectwt = true;
+            }
+
         };
 
         $scope.requestPayment = function(){
