@@ -610,7 +610,7 @@ box-sizing:border-box;padding:8px 0;height:auto;}
 #chat{height:100%;}
 .chatcurchattops .right-small a{font-size:16px;font-weight:400;color:#323232;}
 .chatcurchattops .right-small a:hover{color:#323232;}
-#chat .mtab{min-height:150px;background-color:#FFFFFF;max-height:calc(100% - 125px);overflow:auto;}
+#chat .mtab{min-height:150px;background-color:#FFFFFF;max-height:calc(100% - 120px);overflow:auto;}
 .chatbiline ul{list-style-type:none;}
 .chatbiline ul li{background:#fff;padding:0 15px;cursor:pointer;position:relative;}
 .chatbiline ul li .liin{border-bottom:1px solid #EDEEF0;display:flex;justify-content:space-between;align-items:center;height:58px;}
