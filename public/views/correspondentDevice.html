@@ -1,5 +1,5 @@
 <!-- 聊天视图 -->
-<div ng-controller="correspondentDeviceController as corresDevice">
+<div ng-controller="correspondentDeviceController as corresDevice" class="view_chat_box">
 
     <!-- top bar 板块 -->
     <nav class="tab-bar chatcurchattop">
@@ -22,8 +22,8 @@
             </a>
         </section>
     </nav>
-
     <style>
+
 
     </style>
 
@@ -42,7 +42,7 @@
     </div>
 
     <!-- 聊天记录信息展示板块 -->
-    <div class="message-log size-12 enable_text_select" scroll-bottom="messageEvents" when-scrolled="loadMoreHistory"
+    <div class="message-log size-12 enable_text_select chatlist" scroll-bottom="messageEvents" when-scrolled="loadMoreHistory"
          bind-to-height="['bottom','form[name=chatForm]']"
          ng-mousemove="newMsgCounterEnabled ?'': newMessagesCount[correspondent.device_address] = 0">
         <div class="chat-message " ng-repeat="messageEvent in messageEvents" >
@@ -59,7 +59,7 @@
 
     <!-- 聊天表单板块 -->
 
-    <form name="chatForm" class="send-form mychatcurform" id="mychatcurform" no-validate
+    <form name="chatForm" class="send-form mychatcurform  " id="mychatcurform" no-validate
           ng-mousemove="newMsgCounterEnabled ?'': newMessagesCount[correspondent.device_address] = 0">
         <!--<div class="text-warning size-12 m10b" ng-show="error">{{error|translate}}</div>-->
         <!-- 左侧功能选项anniu -->
@@ -67,8 +67,7 @@
         <!-- 左侧功能选项 -->
         <div class="chatsendform">
             <img src="./img/chatdrop.png" class="left" dropdown-toggle="#drop" id="chatltmessage" data-options="align:top"/>
-            <input  msd-elastic id="message" name="message" ng-model="message" autofocus required
-                    ng-enter="send()" class="chatcurtextinput"/>
+            <textarea class="text_content"  rows="1"  id="message" enable_text_select name="message" ng-model="message"></textarea>
             <!-- 发送按钮 -->
             <input type="submit" class="chatsend"
                    ng-disabled="!chatForm.$valid"
