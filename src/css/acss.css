@@ -556,7 +556,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 
 /*聊天记录*/
 .send-form{position:fixed;width:100%;bottom:0px;box-shadow:0px 1px 4px 0px rgba(0,0,0,0.22);background-color:white;z-index:5;white-space:nowrap;text-align:center;height:auto;}
-#drop{width:auto!important;text-align:left;top:-78px!important;left:45px!important;background:rgba(69,173,142,1);box-shadow:0px 4px 8px -4px rgba(69,173,142,1);border-radius:10px 10px 10px 0px;margin:0;padding:0 13px;border:none;}
+#drop{width:auto!important;text-align:left;bottom:44px!important;left:45px!important;top:auto!important;background:rgba(69,173,142,1);box-shadow:0px 4px 8px -4px rgba(69,173,142,1);border-radius:10px 10px 10px 0px;margin:0;padding:0 13px;border:none;}
 .f-dropdown.drop-top:before,
 .f-dropdown.drop-top:after{content:'';display:none;}
 .f-dropdown li{padding:12px 3px;text-align:center;font-size:12px;font-weight:400;margin-bottom:0;color:#FDFEFF;}
@@ -597,7 +597,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .righttime{text-align:right;position:absolute;right:64px;bottom:8px;color:#909090;font-size:10px;font-family:PingFangSC-Medium,Arial,"微软雅黑";width:100%;}
 
 /*发送表单*/
-.chatsendform{height:auto;display:flex;justify-content:flex-start;align-items:flex-end;padding:0 17px 8px;background:#fff;box-shadow:0px 1px 4px 0px rgba(196,196,196,1);}
+.chatsendform{height:auto;display:flex;justify-content:flex-start;align-items:flex-end;padding:8px 17px;background:#fff;box-shadow:0px 1px 4px 0px rgba(196,196,196,1);}
 .chatsendform #chatltmessage{flex-shrink:0;cursor:pointer;margin-bottom:3px;}
 .chatsendform input{margin:0;padding:0;}
 .chatsendform #message{width:100%;margin:0 13px;border:none;border-bottom:1px solid #DEDEDE;max-height:100px;resize:none;outline:none;min-height:auto;
