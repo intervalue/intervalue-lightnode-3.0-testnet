@@ -42,10 +42,15 @@ angular.module('copayApp.controllers')
 		this.testnetName = (constants.alt === '2') ? '[NEW TESTNET]' : '[TESTNET]';
 		this.exchangeRates = network.exchangeRates;
 		self.chat = false;
+        self.chatAddress = false;
 		$scope.index.tab = 'walletHome'; // for some reason, current tab state is tracked in index and survives re-instatiations of walletHome.js
 
 		var disablePaymentRequestListener = $rootScope.$on('paymentRequest', function(event, address, amount, asset, recipient_device_address,chat) {
 			if(chat) self.chat = true;
+			let fc  = profileService.profile;
+            if(fc.credentials.length != 1 && chat){
+            	self.chatAddress = true;
+            }
 			console.log('paymentRequest event ' + address + ', ' + amount);
 			$rootScope.$emit('Local/SetTab', 'send');
 			self.setForm(address, amount, null, asset, recipient_device_address);
@@ -1498,6 +1503,7 @@ angular.module('copayApp.controllers')
 			this.send_multiple = false;
 			this.current_payment_key = '';
 			self.chat = false;
+            self.chatAddress = false;
 			self.from_walletId = '';
 			self.from_image = '';
 			self.from_stables = '';
