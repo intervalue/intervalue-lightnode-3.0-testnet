@@ -62,7 +62,7 @@
               </div>
               <p class="adinputp" translate></p>
           </div>
-          <div class="adinputitem" mdinputvalidc>
+          <div class="adinputitem" mdinputvalidc ng-class="{'setErrorexp':creatwform.addwpass.$valid && create.createwpass !== create.createwrpass}">
               <div class="adinputic">
                   <div class="adinputimg addwrpass"></div>
                   <input type="password" autocomplete="new-password" name="addwrpass" ng-model="create.createwrpass"
@@ -216,7 +216,7 @@
                 </div>
                 <p class="adinputp" translate></p>
             </div>
-            <div class="adinputitem" mdinputvalidc>
+            <div class="adinputitem" mdinputvalidc ng-class="{'setErrorexp':creatwiform.addwpass.$valid && create.createwipass !== create.createwirpass}">
                 <div class="adinputic">
                     <div class="adinputimg addwrpass"></div>
                     <input type="password" autocomplete="new-password" name="addwrpass" ng-model="create.createwirpass"

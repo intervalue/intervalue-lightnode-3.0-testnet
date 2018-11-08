@@ -40,9 +40,9 @@
                         </div>
                         <p class="adinputp" translate></p>
                     </div>
-                    <div class="adinputitem" mdinputvalidc>
+                    <div class="adinputitem" mdinputvalidc ng-class="{'setErrorexp':creatwform.addwpass.$valid && addw.addwpass !== addw.addwrpass}">
                         <div class="adinputic">
-                            <div class="adinputimg addwrpass"></div>
+                            <div class="adinputimg addwrpass" ng-class=""></div>
                             <input type="password" autocomplete="new-password" name="addwrpass" ng-model="addw.addwrpass"
                             ng-attr-placeholder="{{'Repeat password'|translate}}" autocomplete="off" ng-minlength="1" ng-maxlength="18"
                             minlength="1" maxlength="18"
