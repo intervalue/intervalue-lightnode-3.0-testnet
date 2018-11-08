@@ -54,19 +54,6 @@
 					</div>
 				</li>
 			</ul>
-			<div ng-show="showchatdel" class="popconfirm">
-				<div class="popmask" ng-click="showchatdel = false;"></div>
-				<div class="popcontent">
-					<div class="m20b chatdeleter">
-						<img src="./img/chatdeleter.png">
-						<div translate class="size-16 sfcolor">Are you sure you want to delete the device?</div>
-					</div>
-					<div class="p25h popbutton">
-						<button ng-click="remove(removechataddr)" translate>Confirm</button>
-						<button class="awbtn" ng-click="showchatdel = false;" translate>Cancel</button>
-					</div>
-				</div>
-			</div>
 		</div>
 		<!-- DApp store标签对应视图 -->
 		<!--<div class="mtab" ng-class="{'active': mtab == 2}">-->
@@ -86,6 +73,19 @@
 		<!--</ul>-->
 		<!--<div class="text-warning size-12 m10b" ng-show="botsError">{{botsError|translate}}</div>-->
 		<!--</div>-->
+	</div>
+	<div ng-show="showchatdel" class="popconfirm">
+		<div class="popmask" ng-click="showchatdel = false;"></div>
+		<div class="popcontent">
+			<div class="m20b chatdeleter">
+				<img src="./img/chatdeleter.png">
+				<div translate class="size-16 sfcolor">Are you sure you want to delete the device?</div>
+			</div>
+			<div class="p25h popbutton">
+				<button ng-click="remove(removechataddr)" translate>Confirm</button>
+				<button class="awbtn" ng-click="showchatdel = false;" translate>Cancel</button>
+			</div>
+		</div>
 	</div>
 </div>
 <div ng-controller="correspondentDevicesController">
