@@ -122,7 +122,7 @@
         <img class="warnbigimg" src="./img/warnbig.png" />
         <p class="center redcolor m28b" translate>Confirm your mnemonic</p>
         <p ng-show="create.showcodeerr" translate>Incorrect mnemonic</p>
-        <div>
+        <div style="display: block;">
           <div class="addwslcbox m24b" ng-click="create.minuswordf($event)">
             <span ng-repeat="item in create.chosenWords track by $index" id="{{item.id}}" >{{item.str}}</span>
           </div>
