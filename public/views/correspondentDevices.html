@@ -47,42 +47,26 @@
 							<img src="./img/more.png" class="morerimg" ng-show="!editCorrespondentList && hideRemove"/>
 							<!--消息个数提示-->
 							<!--消息个数提示-->
-							<div  class="chatremovep" ng-click="remove(correspondent.device_address,$event)">
+							<div  class="chatremovep" ng-click="showchatdelete(correspondent.device_address,$event)">
 								删除
 							</div>
 						</div>
 					</div>
 				</li>
-				<!--<li chat-swiper-left="newsData('up')" ng-click="showCorrespondent(correspondent)" ng-repeat="correspondent in list | orderBy:newMsgByAddressComparator">-->
-					<!--<div class="liin">-->
-						<!--<div class="ld">-->
-							<!--<div class="correspondentlist_badge"-->
-								 <!--ng-show="newMessagesCount[correspondent.device_address]">-->
-								<!--{{newMessagesCount[correspondent.device_address]}}-->
-							<!--</div>-->
-							<!--<span class="chatname">{{correspondent.name | limitTo:1}}</span>-->
-							<!--<span>{{correspondent.name}}</span>-->
-						<!--</div>-->
-						<!--<div class="rd">-->
-							<!--{{prefGlobal.deviceName}}-->
-							<!--<img src="./img/more.png" class="morerimg" ng-show="!editCorrespondentList && hideRemove"/>-->
-							<!--&lt;!&ndash;消息个数提示&ndash;&gt;-->
-							<!--&lt;!&ndash;消息个数提示&ndash;&gt;-->
-							<!--<img src="./img/add.png" ng-show="selectedCorrespondentList[correspondent.device_address]"-->
-								 <!--ng-hide="hideRemoveButton(correspondent.removable)" ng-click="remove(correspondent.device_address,$event)"/>-->
-						<!--</div>-->
-					<!--</div>-->
-				<!--</li>-->
 			</ul>
-			<!-- 刪除 -->
-			<!--<div id="chatdelete" ng-show="!editCorrespondentList" translate class="p15h m20t">
-				<button ng-click="hideRemove = !hideRemove" translate>
-					&lt;!&ndash;<i class="fi-minus size-18 m10r" style="vertical-align: middle;"></i>&ndash;&gt;
-					<text ng-show="!editCorrespondentList && hideRemove" translate>Remove device</text>
-					<text ng-show="!editCorrespondentList && !hideRemove" translate>CANCEL</text>
-				</button>
-			</div>-->
-
+			<div ng-show="showchatdel" class="popconfirm">
+				<div class="popmask" ng-click="showchatdel = false;"></div>
+				<div class="popcontent">
+					<div class="m20b chatdeleter">
+						<img src="./img/chatdeleter.png">
+						<div translate class="size-16 sfcolor">Are you sure you want to delete the device?</div>
+					</div>
+					<div class="p25h popbutton">
+						<button ng-click="remove(removechataddr)" translate>Confirm</button>
+						<button class="awbtn" ng-click="showchatdel = false;" translate>Cancel</button>
+					</div>
+				</div>
+			</div>
 		</div>
 		<!-- DApp store标签对应视图 -->
 		<!--<div class="mtab" ng-class="{'active': mtab == 2}">-->

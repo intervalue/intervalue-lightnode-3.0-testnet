@@ -2575,7 +2575,8 @@ msgstr "使用其他设备扫描上述QR码，或将此配对码发送给其他�
 msgid "My pair code"
 msgstr "我的配对码"
 
-
+msgid "Are you sure you want to delete the device?"
+msgstr "你确定要删除此设备吗？"
 
 
 

@@ -15,10 +15,12 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 	$scope.backgroundColor = fc.backgroundColor;
 
 	$scope.state = $state;
-
+	$scope.showchatdel = false;
 	$scope.hideRemove = true;
 
 	var listScrollTop = 0;
+
+	$scope.removechataddr=''  // 將要刪除的用戶地址
 
 	$scope.$on('$stateChangeStart', function(evt, toState, toParams, fromState) {
 	    if (toState.name === 'correspondentDevices') {
@@ -26,6 +28,14 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 	    	setTimeout(function(){document.querySelector('[ui-view=chat]').scrollTop = listScrollTop;$rootScope.$emit('Local/SetTab', 'chat', true);}, 5);
 	    }
 	});
+
+	$scope.showchatdelete = function(device_address,$event){
+        $event.stopImmediatePropagation();
+        $scope.removechataddr = device_address;
+        $scope.showchatdel = true;
+        angular.element(document.querySelectorAll('.correspondentList .chatremovep')).css({'display':'none','width':0});
+        angular.element(document.querySelectorAll('.correspondentList .morerimg')).css({'display':'block'});
+	}
 
 	$scope.showCorrespondent = function(correspondent) {
 		console.log("showCorrespondent", correspondent);
@@ -99,7 +109,6 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 	}
 
 	$scope.remove = function(device_address,$event) {
-        $event.stopPropagation();
 		mutex.lock(["remove_device"], function(unlock){
 			// check to be safe
 
@@ -125,6 +134,7 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 				});
 			});
 		});
+        $scope.showchatdel = false;
 	};
 
 	$scope.cancel = function() {
