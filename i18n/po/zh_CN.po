@@ -2497,13 +2497,10 @@ msgid "Choose a collection wallet"
 msgstr "选择收款钱包"
 
 msgid "Add device"
-msgstr "添加设备"
+msgstr "添加好友"
 
 msgid "My wallet address"
 msgstr "我的钱包地址"
-
-msgid "Share the code"
-msgstr "分享代码"
 
 msgid "Copy pairing code"
 msgstr "复制配对码"
@@ -2557,17 +2554,26 @@ msgstr "插入地址"
 msgid "request payment"
 msgstr "请求付款"
 
+msgid "cannot pair with myself"
+msgstr "不能加自己为好友"
 
+msgid "invalid peer public key"
+msgstr "配对码不正确"
 
+msgid "Invalid pairing code"
+msgstr "配对码不正确"
 
+msgid "Invalid pubkey length"
+msgstr "配对码格式不正确"
 
+msgid "Share pairing code"
+msgstr "分享配对码"
 
+msgid "Scan the above QR code using the other device, or send this pairing code to the other device."
+msgstr "使用其他设备扫描上述QR码，或将此配对码发送给其他设备。"
 
-
-
-
-
-
+msgid "My pair code"
+msgstr "我的配对码"
 
 
 

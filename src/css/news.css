@@ -1,305 +1,69 @@
-.newsinc{
-    padding: 0 15px;
-    box-sizing:border-box;
-    padding-top:20px;
-}
+.newsinc{padding:0 15px;box-sizing:border-box;padding-top:20px;}
+.newsinc .title{font-size:20px;font-family:PingFangSC-Semibold;font-weight:600;color:rgba(50,50,50,1);line-height:28px;}
+.newsinc p{font-size:13px;font-weight:400;color:rgba(50,50,50,1);line-height:22px;margin-top:20px;}
+.newsinc img{width:100%;}
 
-
-.newsinc .title{
-    font-size:20px;
-    font-family:PingFangSC-Semibold;
-    font-weight:600;
-    color:rgba(50,50,50,1);
-    line-height:28px;
-}
-
-.newsinc p {
-    font-size: 13px;
-    font-weight: 400;
-    color: rgba(50, 50, 50, 1);
-    line-height: 22px;
-    margin-top: 20px;
-}
-
-.newsinc img{
-    width:100%;
-}
 /*加载状态*/
-.newsincinfo .nowire,.newsincinfo .nowire{
-    height: calc(100vh - 86px);
-}
-
+.newsincinfo .nowire,
+.newsincinfo .nowire{height:calc(100vh - 86px);}
 
 /*eitcorrespondentdevie   start*/
-.height13{
-    height:13px;
-    background-color: #FAFAFA;
-}
-.height15{
-    height:15px;
-    background-color: #FAFAFA;
-}
-.addeditcd{
-    padding: 22px 15px 0;
-}
+.height13{height:13px;background-color:#FAFAFA;}
+.height15{height:15px;background-color:#FAFAFA;}
+.addeditcd{padding:22px 15px 0;}
+.addeditcd .address .deviceadd{display:flex;align-items:center;justify-content:flex-start;}
+.addeditcd .address .deviceadd div{width:16px;flex-shrink:0;text-align:center;}
+.addeditcd .address .deviceadd img{vertical-align:text-top;}
+.addeditcd .address .deviceadd span{margin-left:14px;font-size:16px;font-family:PingFangSC-Medium,Arial,微软雅黑;font-weight:500;color:rgba(59,59,59,1);}
+.addeditcd .address .deviceaddinfo{margin-top:6px;padding-left:30px;box-sizing:border-box;font-size:12px;font-family:PingFangSC-Medium,Arial,微软雅黑;font-weight:500;color:#999999;}
+.addeditcd .chateditform{margin-top:18px;}
+.addeditcd .chateditform .renameadd{padding-top:13px;}
+.addeditcd .chateditform .renameadd span{font-size:16px;font-family:PingFangSC-Medium,Arial,微软雅黑;font-weight:500;color:rgba(59,59,59,1);line-height:22px;margin-left:14px;}
+.addeditcd .chateditform .chatcname{padding-left:34px;padding-right:15px;}
+.addeditcd .chateditform .chatcname #name{padding-top:13px;border-bottom:1px solid #EDEEF0;}
+.addeditcd .chateditform input{border-bottom:1px solid #EDEEF0;font-size:14px;font-family:PingFangSC-Regular,Arial,微软雅黑;font-weight:400;color:#999999;height:26px;}
+.addeditcd .purge_chat{margin-top:20px;}
+.addeditcd .purge_chat a{font-size:14px;font-weight:400;color:rgba(212,87,87,1);line-height:20px;text-align:center;}
 
-
-.addeditcd .address .deviceadd{
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
-.addeditcd .address .deviceadd div{
-    width: 16px;
-    flex-shrink: 0;
-    text-align: center;
-}
-.addeditcd .address .deviceadd img{
-    vertical-align: text-top;
-}
-.addeditcd .address .deviceadd span{
-    margin-left:14px;
-    font-size:16px;
-    font-family:PingFangSC-Medium,Arial,微软雅黑;
-    font-weight:500;
-    color:rgba(59,59,59,1);
-}
-
-.addeditcd .address .deviceaddinfo{
-    margin-top:6px;
-    padding-left:30px;
-    box-sizing: border-box;
-    font-size:12px;
-    font-family:PingFangSC-Medium,Arial,微软雅黑;
-    font-weight:500;
-    color:#999999;
-}
-
-.addeditcd .chateditform{
-    margin-top: 18px;
-}
-.addeditcd .chateditform .renameadd{
-    padding-top:13px;
-}
-
-.addeditcd .chateditform .renameadd span{
-    font-size:16px;
-    font-family:PingFangSC-Medium,Arial,微软雅黑;
-    font-weight:500;
-    color:rgba(59,59,59,1);
-    line-height:22px;
-    margin-left:14px;
-}
-
-.addeditcd .chateditform .chatcname{
-    padding-left:34px;
-    padding-right:15px;
-}
-
-.addeditcd .chateditform .chatcname #name{
-    padding-top:13px;
-    border-bottom: 1px solid #EDEEF0;
-}
-.addeditcd .chateditform input{
-    border-bottom: 1px solid #EDEEF0;
-    font-size:14px;
-    font-family:PingFangSC-Regular,Arial,微软雅黑;
-    font-weight:400;
-    color:#999999;
-    height:26px;
-}
-.addeditcd .purge_chat{
-    margin-top:20px;
-}
-
-.addeditcd .purge_chat a{
-    font-size:14px;
-    font-weight:400;
-    color:rgba(212,87,87,1);
-    line-height:20px;
-    text-align:center;
-}
 /*eitcorrespondentdevie   end*/
 
-
 /*inviteCOrrespondentDevice  start*/
-.addinvitecd{
-    background-color:#F9FAFC;
-    height:800px;
-}
+.addinvitecd{background-color:#F9FAFC;height:800px;}
+.addinvitecd .myaddress{margin:15px 15px;background:rgba(255,255,255,1);box-shadow:0px 0px 8px 0px rgba(220,220,220,0.5);border-radius:5px;height:350px;}
+.addinvitecd .myaddress span{margin-left:28px;height:22px;font-size:16px;font-family:PingFangSC-Medium,Arial,微软雅黑;font-weight:500;color:rgba(50,50,50,1);line-height:66px;}
+.addinvitecd .myaddress .copycode{width:185px;height:185px;margin:0 auto;}
+.addinvitecd .myaddress .secret{}
+.addinvitecd  .m10t{margin-top:40px;height:17px;font-size:12px;font-family:PingFangSC-Medium,Arial,微软雅黑;font-weight:500;color:rgba(50,50,50,1);line-height:17px;}
+.addinvitecd  .m10t span{margin-left:29px;margin-top:40px;height:17px;font-size:12px;font-family:PingFangSC-Medium,Arial,微软雅黑;font-weight:500;color:rgba(50,50,50,1);line-height:17px;}
+.addinvitecd .row input{width:100%;margin-top:30px;margin-left:15px;height:45px;line-height:45px;background-color:rgb(59,59,59);padding:0;border-radius:3px;font-family:PingFangSC-Regular,Arial,微软雅黑;font-size:14px;font-weight:400;color:rgba(255,255,255,1);}
+.addinvitecd .text-center .button{width:135px;height:40px;background:rgba(69,173,142,1);box-shadow:0px 6px 8px -7px rgba(69,173,142,1);border-radius:29px;}
+.addinvitecd .text-center .button .fi-share{width:14px;height:16px;color:rgba(255,255,255,1);}
+.addinvitecd .text-center .button span{width:70px;height:20px;font-size:14px;font-family:PingFangSC-Medium,Arial,微软雅黑;font-weight:500;color:rgba(255,255,255,1);line-height:20px;margin-left:12px;}
 
-.addinvitecd .myaddress{
-    margin:15px 15px;
-    background:rgba(255,255,255,1);
-    box-shadow:0px 0px 8px 0px rgba(220,220,220,0.5);
-    border-radius:5px;height:350px;
-}
-
-.addinvitecd .myaddress span{
-    margin-left:28px;
-    height:22px;
-    font-size:16px;
-    font-family:PingFangSC-Medium,Arial,微软雅黑;
-    font-weight:500;
-    color:rgba(50,50,50,1);
-    line-height:66px;
-}
-
-.addinvitecd .myaddress .copycode{
-    width:185px;
-    height:185px;
-    margin:0 auto;
-}
-
-.addinvitecd .myaddress .secret{
-
-}
-
-.addinvitecd  .m10t{
-    margin-top:40px;
-    height:17px;
-    font-size:12px;
-    font-family:PingFangSC-Medium,Arial,微软雅黑;
-    font-weight:500;
-    color:rgba(50,50,50,1);
-    line-height:17px;
-}
-
-.addinvitecd  .m10t span{
-    margin-left:29px;
-    margin-top:40px;
-    height:17px;
-    font-size:12px;
-    font-family:PingFangSC-Medium,Arial,微软雅黑;
-    font-weight:500;
-    color:rgba(50,50,50,1);
-    line-height:17px;
-}
-
-
-.addinvitecd .row input{
-    width:100%;
-    margin-top:30px;
-    margin-left:15px;
-    height:45px;
-    line-height: 45px;
-    background-color: rgb(59, 59, 59);
-    padding:0;
-    border-radius: 3px;
-    font-family:PingFangSC-Regular,Arial,微软雅黑;
-    font-size: 14px;
-    font-weight:400;
-    color:rgba(255,255,255,1);
-}
-
-.addinvitecd .text-center .button{
-    width:135px;
-    height:40px;
-    background:rgba(69,173,142,1);
-    box-shadow:0px 6px 8px -7px rgba(69,173,142,1);
-    border-radius:29px;
-
-}
-
-.addinvitecd .text-center .button .fi-share{
-    width:14px;
-    height:16px;
-    color:rgba(255,255,255,1);
-}
-
-.addinvitecd .text-center .button span{
-    width:70px;
-    height:20px;
-    font-size:14px;
-    font-family:PingFangSC-Medium,Arial,微软雅黑;
-    font-weight:500;
-    color:rgba(255,255,255,1);
-    line-height:20px;
-    margin-left:12px;
-}
 /*inviteCOrrespondentDevice  end*/
 
-
-
-
 /*添加设备自己的二维码页面*/
-.checkcode{margin-top:15px;margin-left: 15px;margin-right:15px;background:rgba(255,255,255,1);
-    box-shadow:0px 0px 8px 0px rgba(220,220,220,0.5);
-    border-radius:5px;}
-.aboutQR{
-    font-size:12px;
-    font-family:PingFangSC-Medium,Arial,微软雅黑;
-    font-weight:500;
-    color:rgba(50,50,50,1);margin-top: -20px;}
-.myaddress{
-    font-size:16px;
-    font-family:PingFangSC-Medium,Arial,微软雅黑;
-    font-weight:500;
-    color:#323232;text-align:left;padding:22px 0 0 28px;}
+.checkcode{margin-top:15px;margin-left:15px;margin-right:15px;background:rgba(255,255,255,1);box-shadow:0px 0px 8px 0px rgba(220,220,220,0.5);border-radius:5px;}
+.aboutQR{font-size:12px;font-family:PingFangSC-Medium,Arial,微软雅黑;font-weight:500;color:rgba(50,50,50,1);margin-top:-20px;}
+.myaddress{font-size:16px;font-family:PingFangSC-Medium,Arial,微软雅黑;font-weight:500;color:#323232;text-align:left;padding:22px 0 0 28px;}
 .chatcopycode{margin-top:30px;}
-.chatdevicecode{padding: 20px 10px 50px;color:#3B3B3B;text-align: center;word-break:break-all;font-size:12px;-webkit-user-select: text;user-select:text;}
-.chatdevicecopybtn{display: inline-block;border-radius:29px;background:linear-gradient(90deg,#45AD8E 0%,#45AD8E 100%,#45AD8E 100%);
-    padding:10px 22px;}
-.chatdevicecopybtn a,.chatdevicecopybtn img{display: inline-block;}
-.chatdevicecopybtn img{width:16px;vertical-align: sub;}
-.chatdevicecopybtn a{
-    font-size:14px;
-    font-family:PingFangSC-Medium,Arial,微软雅黑;
-    font-weight:500;
-    color:#FFFFFF;margin-left: 10px;}
-.chatdevicedonebtn{color:#fff;/* background-color: #246d98; */background: rgba(59,59,59,1);width:100%;height:45px;font-size:14px;
-    font-weight:400;
-    color:rgba(255,255,255,1);
-    line-height:20px;
-    text-align:center;
-    margin:30px auto;}
-.chatdevicecodetext{text-align: center;word-break:break-all;margin-top: 20px;padding:0 15px;}
-.chatdevicecodetext2{text-align: center;word-break: break-all;margin-top: 40px;padding:0 15px;box-sizing:border-box;}
+.chatdevicecode{padding:20px 10px 50px;color:#3B3B3B;text-align:center;word-break:break-all;font-size:12px;-webkit-user-select:text;user-select:text;}
+.chatdevicecopybtn{display:inline-block;border-radius:29px;background:linear-gradient(90deg,#45AD8E 0%,#45AD8E 100%,#45AD8E 100%);padding:10px 22px;}
+.chatdevicecopybtn a,
+.chatdevicecopybtn img{display:inline-block;}
+.chatdevicecopybtn img{width:16px;vertical-align:sub;}
+.chatdevicecopybtn a{font-size:14px;font-family:PingFangSC-Medium,Arial,微软雅黑;font-weight:500;color:#FFFFFF;margin-left:10px;}
+.chatdevicedonebtn{color:#fff;/* background-color: #246d98; */background:rgba(59,59,59,1);width:100%;height:45px;font-size:14px;font-weight:400;color:rgba(255,255,255,1);line-height:20px;text-align:center;margin:30px auto;}
+.chatdevicecodetext{text-align:center;word-break:break-all;margin-top:20px;padding:0 15px;}
+.chatdevicecodetext2{text-align:center;word-break:break-all;margin-top:40px;padding:0 15px;box-sizing:border-box;}
+
 /*添加设备自己的二维码页面 e*/
 
 /* acceptCorrespondentinvitation */
-.pairingCodeForm .chatpairinfodiv{
-    width:100%;
-    font-size:12px;
-    font-weight:400;
-    color:rgba(144,144,144,1);
-    line-height:17px;
-}
-.pairingCodeForm .inputcode{
-    width:100%;display:flex;align-items:center;justify-content:flex-start;border-bottom:1px solid #EDEEF0;padding:0 4px;
-    margin-top:35px;
-}
-.pairingCodeForm .paircode{
-    width:24px;height:20px;text-align:center;
-    background:url(../img/pair_code.png) center no-repeat;
-    z-index:2;
-}
-.pairingCodeForm #code{
-    font-size:12px;padding:0 10px 0 15px;font-weight:400;margin:0;width:100%;color:#C4C4C4;border:none;
-}
+.pairingCodeForm .chatpairinfodiv{width:100%;font-size:12px;font-weight:400;color:rgba(144,144,144,1);line-height:17px;}
+.pairingCodeForm .inputcode{width:100%;display:flex;align-items:center;justify-content:flex-start;border-bottom:1px solid #EDEEF0;margin-top:35px;}
+.pairingCodeForm .paircode{width:16px;height:16px;text-align:center;background:url(../img/pair_code.png) center no-repeat;background-size:contain;z-index:2;}
+.pairingCodeForm #code{font-size:12px;padding:0 10px 0 15px;font-weight:400;margin:0;width:100%;color:#C4C4C4;border:none;}
+.pairingCodeForm .buttoncode{margin-top:30px;width:100%;background:rgba(59,59,59,1);border-radius:3px;}
 
-.pairingCodeForm .buttoncode{
-    margin-top:30px;
-    width:100%;
-    background:rgba(59,59,59,1);
-    border-radius:3px;
-}
 /* acceptCorrespondentinvitation e*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
