@@ -145,7 +145,7 @@ angular.module('copayApp.controllers').controller('createwalletController',
             if (isCordova) {
                 window.plugins.spinnerDialog.show(null, gettextCatalog.getString('Loading...'), true);
             }
-
+            $scope.loading = true;
                 profileService.create({ walletName: walletName, password: passphrase, mnemonic: mnemonic }, function (err) {
                     $timeout(function () {
                         if (isCordova)

@@ -1167,8 +1167,9 @@ angular.module('copayApp.controllers')
                                  }
                                  var binding = self.binding;
                                  if(self.chat){
-                                 	let tranMessage = gettextCatalog.getString('Transferred: ')+form.amount.$modelValue+' INVE';
-                                     $rootScope.$emit('Local/paymentDoneAndSendMessage',self.deviceAddress,tranMessage);
+                                      let tranMessage = gettextCatalog.getString('Transferred: ')+form.amount.$modelValue+' INVE';
+                                      $rootScope.$emit('Local/paymentDoneAndSendMessage',self.deviceAddress,tranMessage);
+
                                  }else {
                                      $rootScope.$emit('Local/paymentDone');
 								 }

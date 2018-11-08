@@ -87,7 +87,8 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                 removeNewMessagesDelim();
         });
 
-        $rootScope.$on('Local/paymentDoneAndSendMessage',function (event,deviceAddress,tranMessage) {
+
+        var transactionsSend = $rootScope.$on('Local/paymentDoneAndSendMessage',function (event,deviceAddress,tranMessage) {
            //$scope.sendTransactionSendMessage(deviceAddress,tranMessage)
             $scope.send(deviceAddress,tranMessage);
             correspondentListService.setCurrentCorrespondent(deviceAddress, function(){
@@ -97,6 +98,9 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                 });
             });
 
+        });
+        $scope.$on('$destroy', function() {
+            transactionsSend(); // remove listener.
         });
 
 
@@ -116,7 +120,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             if (!$scope.message && !deviceAddress )
                 return;
             if(deviceAddress) $scope.message = tranMessage;
-            if(!deviceAddress)setOngoingProcess("sending");
+            setOngoingProcess("sending");
             //alert($scope.message);
             var message = lodash.clone($scope.message); // save in var as $scope.message may disappear while we are sending the message over the network
             $scope.message = '';
@@ -126,7 +130,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                 device.sendMessageToDevice(device_address, chatType, message, {
             //device.sendMessageToDevice('0DOJDKCO6CD2JGWMFEWNHJSFXPQQLRSXW', "text", message, {
                 ifOk: function(){
-                    if(!deviceAddress)setOngoingProcess();
+                    setOngoingProcess();
                     //$scope.messageEvents.push({bIncoming: false, message: $sce.trustAsHtml($scope.message)});
                     $scope.autoScrollEnabled = true;
                     var msg_obj = {
