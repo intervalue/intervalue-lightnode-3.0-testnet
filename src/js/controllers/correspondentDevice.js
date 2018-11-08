@@ -26,7 +26,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
         $scope.correspondent = correspondent;
         $scope.showselectwt = false;
         $scope.addressLenght = false;
-        $scope.message = ' ';
+        $scope.message = '';
 //	var myPaymentAddress = indexScope.shared_address;
 
         if (!correspondentListService.messageEventsByCorrespondent[correspondent.device_address])
@@ -120,7 +120,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             if (!$scope.message && !deviceAddress )
                 return;
             if(deviceAddress) $scope.message = tranMessage;
-            setOngoingProcess("sending");
+            setOngoingProcess(gettextCatalog.getString("sending"));
             //alert($scope.message);
             var message = lodash.clone($scope.message); // save in var as $scope.message may disappear while we are sending the message over the network
             $scope.message = '';
