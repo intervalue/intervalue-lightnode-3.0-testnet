@@ -4,7 +4,7 @@
 var constants = require('intervaluecore/constants.js');
 
 angular.module('copayApp.controllers').controller('correspondentDeviceController',
-    function($scope, $rootScope, $timeout, $sce, $modal, configService, profileService, animationService, isCordova, go, correspondentListService, addressService, lodash, $deepStateRedirect, $state, backButton, gettext,gettextCatalog) {
+    function($scope, $rootScope, $timeout, $sce, $modal, configService, profileService, animationService, isCordova, go, correspondentListService, addressService, lodash, $deepStateRedirect, $state, backButton, gettext,gettextCatalog,$stickyState) {
         var async = require('async');
         var chatStorage = require('intervaluecore/chat_storage.js');
         var self = this;
@@ -91,6 +91,12 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
 
         $rootScope.$on('Local/paymentDoneAndSendMessage',function (event,deviceAddress,amount) {
             $scope.send(deviceAddress,amount);
+            correspondentListService.setCurrentCorrespondent(deviceAddress, function(){
+                 		$timeout(function(){
+                			$stickyState.reset('correspondentDevices.correspondentDevice');
+                			go.path('correspondentDevices.correspondentDevice');
+                 		});
+                 	});
         });
 
         $scope.send = function(deviceAddress,amount) {

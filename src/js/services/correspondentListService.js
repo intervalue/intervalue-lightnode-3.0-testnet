@@ -75,6 +75,9 @@ angular.module('copayApp.services').factory('correspondentListService', function
 		};
 		checkAndInsertDate(root.messageEventsByCorrespondent[peer_address], msg_obj);
 		insertMsg(root.messageEventsByCorrespondent[peer_address], msg_obj);
+		//console.log(body);
+		//alert(peer_address);
+		//if(body.indexOf("Transferred:") != -1 ){}
 		// if ($state.is('walletHome') && $rootScope.tab == 'walletHome') {
 		// 	setCurrentCorrespondent(peer_address, function(bAnotherCorrespondent){
 		// 		$timeout(function(){
