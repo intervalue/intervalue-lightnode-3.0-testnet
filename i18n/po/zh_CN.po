@@ -2551,5 +2551,32 @@ msgstr "计价货币"
 msgid "chat recording"
 msgstr "聊天记录"
 
+msgid "insert my address"
+msgstr "插入地址"
+
+msgid "request payment"
+msgstr "请求付款"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
