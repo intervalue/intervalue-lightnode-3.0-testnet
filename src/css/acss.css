@@ -306,7 +306,7 @@
 .scanpop .scanin .scannote{font-size:12px;color:#323232;padding:15px 0;}
 .scanpop .scanin textarea{border:1px solid #D6D6D6;border-radius:3px;padding:10px 12px;width:100%;height:100px;margin-bottom:32px;}
 .scanpop .scanin .item{display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:flex;-webkit-box-pack:start;-moz-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-webkit-box-align:start;-moz-box-align:start;-ms-flex-align:start;align-items:flex-start;padding:0 17px;margin-bottom:46px;text-align:left;}
-.scanpop .scanin .item img{-ms-flex-negative:0;flex-shrink:0;margin-right:16px;}
+.scanpop .scanin .item img{-ms-flex-negative:0;flex-shrink:0;margin-right:16px;width:16px;}
 .scanpop .scanin .item .itemin label{font-size:14px;color:#323232;}
 .scanpop .scanin .item .itemin div{word-break:break-all;font-size:12px;color:#909090;}
 .csend1{background:#F9FAFC;padding:20px 13px 0;}
@@ -562,7 +562,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .f-dropdown li{padding:12px 3px;text-align:center;font-size:12px;font-weight:400;margin-bottom:0;color:#FDFEFF;}
 .f-dropdown li:first-child:hover{color:#FDFEFF;background:rgba(69,173,142,1);border-radius:10px 10px 0 0px;padding:12px 3px 0;margin-bottom:0!important;}
 .f-dropdown li:last-child:hover{color:#FDFEFF;background:rgba(69,173,142,1);border-radius:0 0 10px 0px;padding:12px 3px;margin-bottom:0!important;}
-.f-dropdown li img{margin-right:12px;}
+.f-dropdown li img{margin-right:12px;width:16px;}
 .f-dropdown > *:first-child{padding-bottom:0;}
 .f-dropdown > *:first-child:after{width:100%;margin:0 auto;content:'';display:block;border-bottom:1px solid rgba(255,255,255,0.1667);margin-top:12px;}
 .message-log{position:absolute;width:100%;top:45px;overflow-x:hidden;overflow-y:auto;font-size:13px;background:#F9FAFC;
@@ -598,11 +598,12 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 
 /*发送表单*/
 .chatsendform{height:auto;display:flex;justify-content:flex-start;align-items:flex-end;padding:8px 17px;background:#fff;box-shadow:0px 1px 4px 0px rgba(196,196,196,1);}
-.chatsendform #chatltmessage{flex-shrink:0;cursor:pointer;margin-bottom:3px;}
+.chatsendform #chatltmessage{flex-shrink:0;cursor:pointer;margin-bottom:3px;width:27px;}
 .chatsendform input{margin:0;padding:0;}
 .chatsendform #message{width:100%;margin:0 13px;border:none;border-bottom:1px solid #DEDEDE;max-height:100px;resize:none;outline:none;min-height:auto;
 box-sizing:border-box;padding:8px 0;height:auto;}
-.chatsendform .chatsend{width:26px;height:26px;border-radius:50%;background:url(../img/chatsend.png) no-repeat center;flex-shrink:0;cursor:pointer;margin-bottom:3px;}
+.chatsendform .chatsend{width:26px;height:26px;border-radius:50%;background:url(../img/chatsend.png) no-repeat center;flex-shrink:0;
+    cursor:pointer;margin-bottom:3px;background-size: contain;}
 
 /*correspondentDevice   end*/
 
@@ -628,6 +629,7 @@ box-sizing:border-box;padding:8px 0;height:auto;}
 
 /*chat-requiestpayment   end*/
 .modal-content.chatmodal{top:0;z-index:1006;}
+.chatmodal .chatbiline ul li .limg img{width:16px;}
 .chatbiline ul li .rd .chatsetinfo img{margin-left:8px;width:19px;vertical-align:sub;}
 .chatbiline ul li .rd .chatsetinfo .chatinfoname{font-size:14px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:#323232;}
 .chatbiline ul li .rd .chatsetinfo .chatinfomon{font-size:10px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:#999999;}
