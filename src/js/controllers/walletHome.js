@@ -1167,13 +1167,17 @@ angular.module('copayApp.controllers')
                                  }
                                  var binding = self.binding;
                                  if(self.chat){
-                                     $rootScope.$emit('Local/paymentDoneAndSendMessage',self.deviceAddress,form.amount.$modelValue);
-                                 }
-                                 // eventBus.on("chat_transfer_notification",function (deviceAddress,transactionId) {
-								 //
+                                 	let tranMessage = gettextCatalog.getString('Transferred: ')+form.amount.$modelValue+' INVE';
+                                     $rootScope.$emit('Local/paymentDoneAndSendMessage',self.deviceAddress,tranMessage);
+                                 }else {
+                                     $rootScope.$emit('Local/paymentDone');
+								 }
+                                 //  eventBus.on("chat_transfer_notification",function (deviceAddress,transactionId) {
+								 // 		alert(deviceAddress);
+                                 //      	alert(transactionId);
                                  // });
                                  self.resetForm();
-                                 $rootScope.$emit('Local/paymentDone');
+
 
                                  //$rootScope.$emit('Local/WalletImported', fc.credentials.walletId);
                                  //$rootScope.$emit('Local/TabChanged', 'history');
@@ -1184,6 +1188,28 @@ angular.module('copayApp.controllers')
 				});
 			}, 100);
 		};
+
+		setInterval(function () {
+			let light = require('intervaluecore/light');
+            let device = require('intervaluecore/device');
+             light.findPendingWithChat().then(function (resolve,reject) {
+                 for(let item in  resolve){
+                 	if(resolve[item].result == 'good'){
+                        let tranMessage = gettextCatalog.getString('Successfully transferred: ') + resolve[item].amount/1000000 + ' INVE';
+                        $rootScope.$emit('Local/paymentDoneAndSendMessage', resolve[item].device, tranMessage);
+                        device.delDeviceChatTran(resolve[item].id);
+                        break;
+					}
+				 }
+             });
+
+        },2 * 1000);
+
+
+        // setInterval(function () {
+        //     let light = require('intervaluecore/light');
+        //     let tranId = light.findTranInfoById(key);
+        // }, 1 * 1000);
 
 		//---发送交易结束
 

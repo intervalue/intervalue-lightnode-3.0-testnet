@@ -28,8 +28,6 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
         $scope.addressLenght = false;
         $scope.message = ' ';
 //	var myPaymentAddress = indexScope.shared_address;
-        if (document.chatForm && document.chatForm.message)
-            document.chatForm.message.focus();
 
         if (!correspondentListService.messageEventsByCorrespondent[correspondent.device_address])
             correspondentListService.messageEventsByCorrespondent[correspondent.device_address] = [];
@@ -89,22 +87,35 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                 removeNewMessagesDelim();
         });
 
-        $rootScope.$on('Local/paymentDoneAndSendMessage',function (event,deviceAddress,amount) {
-            $scope.send(deviceAddress,amount);
+        $rootScope.$on('Local/paymentDoneAndSendMessage',function (event,deviceAddress,tranMessage) {
+           //$scope.sendTransactionSendMessage(deviceAddress,tranMessage)
+            $scope.send(deviceAddress,tranMessage);
             correspondentListService.setCurrentCorrespondent(deviceAddress, function(){
-                 		$timeout(function(){
-                			$stickyState.reset('correspondentDevices.correspondentDevice');
-                			go.path('correspondentDevices.correspondentDevice');
-                 		});
-                 	});
+                $timeout(function(){
+                    $stickyState.reset('correspondentDevices.correspondentDevice');
+                    go.path('correspondentDevices.correspondentDevice');
+                });
+            });
+
         });
 
-        $scope.send = function(deviceAddress,amount) {
+
+        // $scope.sendTransactionSendMessage = lodash.debounce(function(deviceAddress,tranMessage){
+        //     $scope.send(deviceAddress,tranMessage);
+        //     correspondentListService.setCurrentCorrespondent(deviceAddress, function(){
+        //         $timeout(function(){
+        //             $stickyState.reset('correspondentDevices.correspondentDevice');
+        //             go.path('correspondentDevices.correspondentDevice');
+        //         });
+        //     });
+        // }, 1 * 1000);
+
+        $scope.send = function(deviceAddress,tranMessage) {
             $scope.error = null;
             //$scope.message = 'testtestestsetset';
             if (!$scope.message && !deviceAddress )
                 return;
-            if(deviceAddress) $scope.message = gettextCatalog.getString('Transferred: ')+amount+' INVE';
+            if(deviceAddress) $scope.message = tranMessage;
             if(!deviceAddress)setOngoingProcess("sending");
             //alert($scope.message);
             var message = lodash.clone($scope.message); // save in var as $scope.message may disappear while we are sending the message over the network
