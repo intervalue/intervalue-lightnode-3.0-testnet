@@ -26,7 +26,7 @@
 		</div>
 		<div class="addwcontentin">
 			<div ng-if="import.showtab == 'tabcold'" ng-controller="addwalletController as add">
-				<div translate>Wallet Seed :</div>
+				<div translate class="m20t">Wallet Seed :</div>
 				<textarea placeholder="{{'Enter your mnemonic, separated by spaces'|translate}}" ng-model="add.importcode"></textarea>
 				<form name="creatwform"  novalidate>
 					<div class="adinputitem" mdinputvalidc>
@@ -60,14 +60,14 @@
 				</form>
 			</div>
 			<div ng-if="import.showtab == 'tabhot'" ng-controller="importwalletController as import">
-				<form name="addressForm" ng-submit="import.generateAddressQRCode()">
+				<form name="addressForm" ng-submit="import.generateAddressQRCode()" class="m20t">
 				<div translate class="m20b">The hot wallet does not need to import the private key, only the wallet address, for daily viewing of accounts, transactions and acceptance notifications. The private key of large funds is recommended to use cold wallet or hardware wallet management to avoid theft and theft.</div>
 				<div class="adinputitem">
 					<div class="adinputic">
 						<div class="adinputimg">
-							<img src="./img/walletpassinput.png">
+							<img src="./img/wallet.png" style="width: 18px;">
 						</div>
-						<input type="text" name="address"  ng-model=index.signatureAddr ng-attr-placeholder="{{'Scan or enter your wallet address'|translate}}" ng-required valid-address-or-account>
+						<input type="text" name="address" style="padding-left: 13px;" ng-model=index.signatureAddr ng-attr-placeholder="{{'Scan or enter your wallet address'|translate}}" ng-required valid-address-or-account>
 					</div>
 				</div>
 				<button type="submit" class="m24b m20t" ng-disabled="addressForm.$invalid || !index.signatureAddr" translate>Start importing</button>

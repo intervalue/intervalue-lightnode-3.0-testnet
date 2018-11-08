@@ -81,7 +81,7 @@
 /*addwallet start*/
 
 /*importwallet start*/
-.tabclicktitle{background:#FAFAFA;height:30px;width:100%;}
+.tabclicktitle{height:30px;width:100%;}
 .addwimportwallet .addwcontentin{padding-top:20px;}
 .addwcontent textarea{padding:12px;height:105px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;border-radius:3px;border:1px solid #D6D6D6;resize:none;color:#323232;font-size:12px;margin-top:10px;margin-bottom:30px;}
 
@@ -512,6 +512,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .news .quotelist .itemin .item .gainsin .gainsinfo{padding:4px 9px;color:#fff;border-radius:3px;background:#C4C4C4;width:70px;}
 .news .quotelist .itemin .item .gainsin.priceblue .gainsinfo{background:#45AD8E;}
 .news .quotelist .itemin .item .gainsin.pricered .gainsinfo{background:#D45757;}
+.news .quotelist .removescroll{max-height:calc(100vh - 160px);}
 @media (max-width: 330px){
     .news .quotelist .titlelabel .numall{left:15px;}
 }
