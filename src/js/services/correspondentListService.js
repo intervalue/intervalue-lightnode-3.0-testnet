@@ -108,7 +108,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	function highlightActions(text, arrMyAddresses,deviceName,message_type){
 		if(message_type =='transaction'){
             if(text.indexOf('Transferred:') != -1 ) return  '<span style="color:#FF0000;font-weight:bold">'+gettextCatalog.getString(text.substring(-1,12))+text.substring(12)+'</span>';
-            if(text.indexOf('Successfully transferred:') != -1) return  gettextCatalog.getString(text.substring(-1,25))+text.substring(25);
+            if(text.indexOf('Successfully transferred:') != -1) return  '<span style="color:#FF0000;font-weight:bold">'+gettextCatalog.getString(text.substring(-1,25))+text.substring(25)+'</span>';
 		}
 	//	return text.replace(/\b[2-7A-Z]{32}\b(?!(\?(amount|asset|device_address|single_address)|"))/g, function(address){
 		return text.replace(/(\s|^)([2-7A-Z]{32})([\s.,;!:]|$)/g, function(str, pre, address, post){
@@ -280,7 +280,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	function formatOutgoingMessage(text,deviceName,message_type){
         if(message_type =='transaction'){
             if(text.indexOf('Transferred:') != -1 ) return  '<span style="color:#FF0000;font-weight:bold">'+gettextCatalog.getString(text.substring(-1,12))+text.substring(12)+'</span>';
-            if(text.indexOf('Successfully transferred:') != -1) return  gettextCatalog.getString(text.substring(-1,25))+text.substring(25);
+            if(text.indexOf('Successfully transferred:') != -1) return  '<span style="color:#FF0000;font-weight:bold">'+gettextCatalog.getString(text.substring(-1,25))+text.substring(25)+'</span>';
         }
 		return escapeHtmlAndInsertBr(text).replace(payment_request_regexp, function(str, address, query_string){
 			if (!ValidationUtils.isValidAddress(address))
@@ -539,8 +539,34 @@ angular.module('copayApp.services').factory('correspondentListService', function
 					messageEvents.unshift({id: message.id, type: message.type, bIncoming: message.is_incoming, message: message.message, timestamp: Math.floor(msg_ts.getTime() / 1000), chat_recording_status: message.chat_recording_status});
 				}
 				if (historyEndForCorrespondent[correspondent.device_address] && messageEvents.length > 1) {
-                    let strDate = ''+last_msg_ts.getFullYear()+'年'+(last_msg_ts.getMonth()+1)+'月'+(last_msg_ts.getDate())+'日'+' 星期 '+(last_msg_ts.getDay() == 0 ? '日':last_msg_ts.getDay());
-					messageEvents.unshift({type: 'system', bIncoming: false, message: "<span>" + (uxLanguage.currentLanguage =='en' ? (last_msg_ts ? last_msg_ts : new Date()).toDateString():strDate ) + "</span>", timestamp: Math.floor((last_msg_ts ? last_msg_ts : new Date()).getTime() / 1000)});
+                    let strDate = ''+last_msg_ts.getFullYear()+'年'+(last_msg_ts.getMonth()+1)+'月'+(last_msg_ts.getDate())+'日';
+                    let week = last_msg_ts.getDay();
+                    var weekDay ;
+                    switch (week) {
+                        case 0:
+                            weekDay = '日';
+                            break;
+                        case 1:
+                            weekDay = '一';
+                            break;
+                        case 2:
+                            weekDay = '二';
+                            break;
+                        case 3:
+                            weekDay = '三';
+                            break;
+                        case 4:
+                            weekDay = '四';
+                            break;
+                        case 5:
+                            weekDay = '五';
+                            break;
+                        case 6:
+                            weekDay = '六';
+                            break;
+
+                    }
+					messageEvents.unshift({type: 'system', bIncoming: false, message: "<span>" + (uxLanguage.currentLanguage =='en' ? (last_msg_ts ? last_msg_ts : new Date()).toDateString():strDate+' 星期 '+ weekDay) + "</span>", timestamp: Math.floor((last_msg_ts ? last_msg_ts : new Date()).getTime() / 1000)});
 					//messageEvents.unshift({type: 'system', bIncoming: false, message: "<span>" + (last_msg_ts ? last_msg_ts : new Date()).toDateString() + "</span>", timestamp: Math.floor((last_msg_ts ? last_msg_ts : new Date()).getTime() / 1000)});
 				}
 				$timeout(function(){
