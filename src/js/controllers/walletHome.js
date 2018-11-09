@@ -924,7 +924,7 @@ angular.module('copayApp.controllers')
 
 			var wallet = require('intervaluecore/wallet.js');
 			var assetInfo = $scope.index.arrBalances[$scope.index.assetIndex];
-			var asset = assetInfo.asset;
+			var asset = assetInfo.asset ? assetInfo.asset : 'base';
 			console.log("asset " + asset);
                 if (isMultipleSend) {
                     if (assetInfo.is_private)

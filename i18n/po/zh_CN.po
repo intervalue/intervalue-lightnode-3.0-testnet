@@ -2587,6 +2587,15 @@ msgstr "付款请求"
 msgid " to "
 msgstr " 到 "
 
+msgid "Transferred:"
+msgstr "转账:"
+
+msgid "Successfully transferred:"
+msgstr "已成功转账:"
+
+
+
+
 
 
 

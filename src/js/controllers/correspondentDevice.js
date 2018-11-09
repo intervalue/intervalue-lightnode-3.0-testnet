@@ -90,13 +90,14 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
 
 
         var transactionsSend = $rootScope.$on('Local/paymentDoneAndSendMessage',function (event,deviceAddress,tranMessage) {
+            $scope.send(deviceAddress,tranMessage);
             correspondentListService.setCurrentCorrespondent(deviceAddress, function(){
                 $timeout(function(){
                     $stickyState.reset('correspondentDevices.correspondentDevice');
                     go.path('correspondentDevices.correspondentDevice');
                 });
             });
-            $scope.send(deviceAddress,tranMessage);
+
         });
         $scope.$on('$destroy', function() {
             transactionsSend(); // remove listener.
@@ -110,7 +111,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             if (!$scope.message && !deviceAddress )
                 return;
             if(deviceAddress) $scope.message = tranMessage;
-            if(!deviceAddress)setOngoingProcess("sending");
+            setOngoingProcess("sending");
             //alert($scope.message);
             var message = lodash.clone($scope.message); // save in var as $scope.message may disappear while we are sending the message over the network
             $scope.message = '';
@@ -120,13 +121,13 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             device.sendMessageToDevice(device_address, chatType, message, {
                 //device.sendMessageToDevice('0DOJDKCO6CD2JGWMFEWNHJSFXPQQLRSXW', "text", message, {
                 ifOk: function(){
-                    if(!deviceAddress)setOngoingProcess();
+                    setOngoingProcess();
                     //$scope.messageEvents.push({bIncoming: false, message: $sce.trustAsHtml($scope.message)});
                     $scope.autoScrollEnabled = true;
                     var msg_obj = {
                         bIncoming: false,
                         //message: correspondentListService.formatOutgoingMessage(message),
-                        message: correspondentListService.formatOutgoingMessage(message),
+                        message: correspondentListService.formatOutgoingMessage(message,chatType),
                         timestamp: Math.floor(Date.now() / 1000)
                     };
                     correspondentListService.checkAndInsertDate($scope.messageEvents, msg_obj);
@@ -135,7 +136,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     $timeout(function(){
                         $scope.$apply();
                     });
-                    if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(device_address, message, 0);
+                    if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(device_address, message, 0,chatType);
                 },
                 ifError: function(error){
                     setOngoingProcess();

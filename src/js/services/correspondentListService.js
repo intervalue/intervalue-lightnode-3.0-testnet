@@ -35,10 +35,10 @@ angular.module('copayApp.services').factory('correspondentListService', function
 		$rootScope.totalNewMsgCnt = lodash.sum(lodash.values(counters));
 	}, true);
 	
-	function addIncomingMessageEvent(from_address, body, message_counter){
+	function addIncomingMessageEvent(from_address, body, message_counter,deviceName,message_type){
 		var walletGeneral = require('intervaluecore/wallet_general.js');
 		walletGeneral.readMyAddresses(function(arrMyAddresses){
-			body = highlightActions(escapeHtml(body), arrMyAddresses);
+			body = highlightActions(escapeHtml(body), arrMyAddresses,deviceName,message_type);
 			body = text2html(body);
 			console.log("body with markup: "+body);
 			addMessageEvent(true, from_address, body, message_counter);
@@ -105,7 +105,11 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	
 	var payment_request_regexp = /\[.*?\]\(intervalue:([0-9A-Z]{32})\?([\w=&;+%]+)\)/g; // payment description within [] is ignored
 	
-	function highlightActions(text, arrMyAddresses,deviceName){
+	function highlightActions(text, arrMyAddresses,deviceName,message_type){
+		if(message_type ='transaction'){
+            if(text.indexOf('Transferred:') != -1 ) return  gettextCatalog.getString(text.substring(-1,12))+text.substring(12);
+            if(text.indexOf('Successfully transferred:') != -1) return  gettextCatalog.getString(text.substring(-1,25))+text.substring(25);
+		}
 	//	return text.replace(/\b[2-7A-Z]{32}\b(?!(\?(amount|asset|device_address|single_address)|"))/g, function(address){
 		return text.replace(/(\s|^)([2-7A-Z]{32})([\s.,;!:]|$)/g, function(str, pre, address, post){
 			if (!ValidationUtils.isValidAddress(address))
@@ -273,7 +277,11 @@ angular.module('copayApp.services').factory('correspondentListService', function
 		return assocPaymentsByAsset;
 	}
 	
-	function formatOutgoingMessage(text){
+	function formatOutgoingMessage(text,message_type){
+        if(message_type ='transaction'){
+            if(text.indexOf('Transferred:') != -1 ) return  gettextCatalog.getString(text.substring(-1,12))+text.substring(12);
+            if(text.indexOf('Successfully transferred:') != -1) return  gettextCatalog.getString(text.substring(-1,25))+text.substring(25);
+        }
 		return escapeHtmlAndInsertBr(text).replace(payment_request_regexp, function(str, address, query_string){
 			if (!ValidationUtils.isValidAddress(address))
 				return str;
@@ -522,10 +530,10 @@ angular.module('copayApp.services').factory('correspondentListService', function
 					last_msg_ts = msg_ts;
 					if (message.type == "text" || message.type == "transaction") {
 						if (message.is_incoming) {
-							message.message = highlightActions(escapeHtml(message.message), arrMyAddresses,correspondent.name);
+							message.message = highlightActions(escapeHtml(message.message), arrMyAddresses,correspondent.name,message.type);
 							message.message = text2html(message.message);
 						} else {
-							message.message = formatOutgoingMessage(message.message);
+							message.message = formatOutgoingMessage(message.message,correspondent.name,message.type );
 						}
 					}
 					messageEvents.unshift({id: message.id, type: message.type, bIncoming: message.is_incoming, message: message.message, timestamp: Math.floor(msg_ts.getTime() / 1000), chat_recording_status: message.chat_recording_status});
@@ -566,7 +574,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 
 		 device.readCorrespondent(from_address, function(correspondent){
 		 	if (!root.messageEventsByCorrespondent[correspondent.device_address]) loadMoreHistory(correspondent);
-		 	addIncomingMessageEvent(correspondent.device_address, body, message_counter);
+		 	addIncomingMessageEvent(correspondent.device_address, body, message_counter,correspondent.name);
 		 	 if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(from_address, body, 1);
 		 });
 	});
@@ -575,8 +583,8 @@ angular.module('copayApp.services').factory('correspondentListService', function
 
         device.readCorrespondent(from_address, function(correspondent){
             if (!root.messageEventsByCorrespondent[correspondent.device_address]) loadMoreHistory(correspondent);
-            addIncomingMessageEvent(correspondent.device_address, body, message_counter);
-            if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(from_address, body, 1);
+            addIncomingMessageEvent(correspondent.device_address, body, message_counter,correspondent.name,'transaction');
+            if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(from_address, body, 1,'transaction');
         });
     });
 
