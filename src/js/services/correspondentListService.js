@@ -5,7 +5,7 @@ var eventBus = require('intervaluecore/event_bus.js');
 var ValidationUtils = require('intervaluecore/validation_utils.js');
 var objectHash = require('intervaluecore/object_hash.js');
 
-angular.module('copayApp.services').factory('correspondentListService', function($state, $rootScope, $sce, $compile, configService, storageService, profileService, go, lodash, $stickyState, $deepStateRedirect, $timeout, gettext, pushNotificationsService,gettextCatalog) {
+angular.module('copayApp.services').factory('correspondentListService', function($state, $rootScope, $sce, $compile, configService, storageService, profileService, go, lodash, $stickyState, $deepStateRedirect, $timeout, gettext, pushNotificationsService,gettextCatalog,uxLanguage) {
 	var root = {};
 	var device = require('intervaluecore/device.js');
 	var wallet = require('intervaluecore/wallet.js');
@@ -539,7 +539,9 @@ angular.module('copayApp.services').factory('correspondentListService', function
 					messageEvents.unshift({id: message.id, type: message.type, bIncoming: message.is_incoming, message: message.message, timestamp: Math.floor(msg_ts.getTime() / 1000), chat_recording_status: message.chat_recording_status});
 				}
 				if (historyEndForCorrespondent[correspondent.device_address] && messageEvents.length > 1) {
-					messageEvents.unshift({type: 'system', bIncoming: false, message: "<span>" + (last_msg_ts ? last_msg_ts : new Date()).toDateString() + "</span>", timestamp: Math.floor((last_msg_ts ? last_msg_ts : new Date()).getTime() / 1000)});
+                    let strDate = ''+last_msg_ts.getFullYear()+'年'+(last_msg_ts.getMonth()+1)+'月'+(last_msg_ts.getDate())+'日'+' 星期 '+(last_msg_ts.getDay() == 0 ? '日':last_msg_ts.getDay());
+					messageEvents.unshift({type: 'system', bIncoming: false, message: "<span>" + (uxLanguage.currentLanguage =='en' ? (last_msg_ts ? last_msg_ts : new Date()).toDateString():strDate ) + "</span>", timestamp: Math.floor((last_msg_ts ? last_msg_ts : new Date()).getTime() / 1000)});
+					//messageEvents.unshift({type: 'system', bIncoming: false, message: "<span>" + (last_msg_ts ? last_msg_ts : new Date()).toDateString() + "</span>", timestamp: Math.floor((last_msg_ts ? last_msg_ts : new Date()).getTime() / 1000)});
 				}
 				$timeout(function(){
 					$rootScope.$digest();
