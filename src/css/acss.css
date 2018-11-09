@@ -637,7 +637,7 @@ box-sizing:border-box;padding:8px 0;height:auto;}
 .chatmodal .chatbiline ul li .limg img{width:16px;}
 .ammountlr .chatbiline ul li .ld{flex-shrink: 0;}
 .ammountlr .chatbiline ul li .rd{width:100%;text-overflow: ellipsis;overflow: hidden;position: relative;}
-.chatbiline ul li .rd .chatsetinfo{width: calc(100% - 22px);}
+.chatbiline ul li .rd .chatsetinfo{width: calc(100% - 22px);text-align: right;}
 .chatbiline ul li .rd .chatsetinfo img{margin-left:0;width:19px;vertical-align:sub;}
 .chatbiline ul li .rd .chatsetinfo .chatinfoname{font-size:14px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:#323232;
     width: 100%;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
