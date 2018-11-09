@@ -149,7 +149,7 @@
 .sendinfo a{color:#45AD8E;}
 .sendform .sendcancel{display:block;font-family:PingFangSC-Regular,Arial,微软雅黑;font-size:14px;width:100%;height:45px;line-height:45px;padding:0px;margin:0px;border-radius:3px;text-align:center;background-color:#FFFFFF;border:1px solid #3B3B3B;color:#3B3B3B;}
 .sendcancel:hover{background-color:#007095;color:#fff;border:none;}
-
+.sendform .chatbiline ul li{background: transparent;padding: 0;}
 /*walletHome-send-part end*/
 
 /*walletHome-wallet-part start*/
@@ -416,7 +416,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .shownewsloading{width:100%;height:45px;background:#fff;font-size:12px;font-weight:400;color:rgba(144,144,144,1);text-align:center;}
 .shownewsloading img{margin-right:10px;width:12px;}
 .nonews{position:relative;height:100%;width:100%;left:0;top:0;background:#fff;z-index:1001;}
-.nonewsin{position:absolute;top:50%;left:0;-webkit-transform:translateY(-50%);transform:translateY(-50%);text-align:center;width:100%;}
+.nonewsin{position:absolute;top:50%;left:0;-webkit-transform:translateY(-50%);transform:translateY(-50%);text-align:center;width:100%;cursor: pointer;}
 .nonewsin img{margin-bottom:20px;width:110px;}
 .nonewsintext{font-size:12px;font-weight:400;color:#909090;text-align:center;}
 .nowire{position:relative;height:100%;width:100%;left:0;top:0;background:#fff;z-index:1001;cursor:pointer;}
@@ -631,7 +631,7 @@ box-sizing:border-box;padding:8px 0;height:auto;}
 /*chat-requiestpayment   end*/
 .modal-content.chatmodal{top:0;z-index:1006;}
 .chatmodal .chatbiline ul li .limg img{width:16px;}
-.chatbiline ul li .rd .chatsetinfo img{margin-left:8px;width:19px;vertical-align:sub;}
+.chatbiline ul li .rd .chatsetinfo img{margin-left:0;width:19px;vertical-align:sub;}
 .chatbiline ul li .rd .chatsetinfo .chatinfoname{font-size:14px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:#323232;}
 .chatbiline ul li .rd .chatsetinfo .chatinfomon{font-size:10px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:#999999;}
 /*chat-requiestpayment    end*/
