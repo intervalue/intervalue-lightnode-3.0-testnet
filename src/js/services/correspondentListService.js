@@ -498,11 +498,12 @@ angular.module('copayApp.services').factory('correspondentListService', function
 			root.messageEventsByCorrespondent[correspondent.device_address] = [];
 		var messageEvents = root.messageEventsByCorrespondent[correspondent.device_address];
 		var limit = 10;
-		var last_msg_ts = null;
+		var last_msg_ts = new Date();;
 		var last_msg_id = 90071992547411;
-		if (messageEvents.length && messageEvents[0].id) {
-			last_msg_ts = new Date(messageEvents[0].timestamp * 1000);
+		if ((messageEvents.length && messageEvents[0].id) ) {
 			last_msg_id = messageEvents[0].id;
+			console.log(last_msg_ts);
+            console.log(last_msg_id);
 		}
 		chatStorage.load(correspondent.device_address, last_msg_id, limit, function(messages){
 			for (var i in messages) {
@@ -621,7 +622,6 @@ angular.module('copayApp.services').factory('correspondentListService', function
 		});
 	});
 
-	//todo delete
 	eventBus.on("received_payment", function(peer_address, amount, asset, message_counter, bToSharedAddress){
 		var title = bToSharedAddress ? 'Payment to smart address' : 'Payment';
 		var body = '<a ng-click="showPayment(\''+asset+'\')" class="payment">'+title+': '+getAmountText(amount, asset)+'</a>';
