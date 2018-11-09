@@ -105,7 +105,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	
 	var payment_request_regexp = /\[.*?\]\(intervalue:([0-9A-Z]{32})\?([\w=&;+%]+)\)/g; // payment description within [] is ignored
 	
-	function highlightActions(text, arrMyAddresses){
+	function highlightActions(text, arrMyAddresses,deviceName){
 	//	return text.replace(/\b[2-7A-Z]{32}\b(?!(\?(amount|asset|device_address|single_address)|"))/g, function(address){
 		return text.replace(/(\s|^)([2-7A-Z]{32})([\s.,;!:]|$)/g, function(str, pre, address, post){
 			if (!ValidationUtils.isValidAddress(address))
@@ -124,10 +124,10 @@ angular.module('copayApp.services').factory('correspondentListService', function
 		//	if (arrMyAddresses.indexOf(address) >= 0)
 		//		return str;
 			var objPaymentRequest = parsePaymentRequestQueryString(query_string);
-			console.log(objPaymentRequest);
+
 			if (!objPaymentRequest)
 				return str;
-			return '<a ng-click="sendPayment(\''+address+'\', '+objPaymentRequest.amount+', \''+objPaymentRequest.asset+'\',\''+'chat'+'\', \''+objPaymentRequest.device_address+'\', \''+objPaymentRequest.single_address+'\')">'+gettextCatalog.getString(objPaymentRequest.amountStr.substring(-1,15))+objPaymentRequest.amountStr.substring(15)+'</a>';
+			return '<a ng-click="sendPayment(\''+address+'\', '+objPaymentRequest.amount+', \''+objPaymentRequest.asset+'\',\''+'chat'+'\', \''+objPaymentRequest.device_address+'\', \''+objPaymentRequest.single_address+'\')">'+gettextCatalog.getString('From')+' '+deviceName+' '+gettextCatalog.getString(objPaymentRequest.amountStr.substring(-1,15))+objPaymentRequest.amountStr.substring(15)+'</a>';
 		}).replace(/\[(.+?)\]\(command:(.+?)\)/g, function(str, description, command){
 			return '<a ng-click="sendCommand(\''+escapeQuotes(command)+'\', \''+escapeQuotes(description)+'\')" class="command">'+description+'</a>';
 		}).replace(/\[(.+?)\]\(payment:(.+?)\)/g, function(str, description, paymentJsonBase64){
@@ -280,7 +280,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 			var objPaymentRequest = parsePaymentRequestQueryString(query_string);
 			if (!objPaymentRequest)
 				return str;
-			return '<i>'+objPaymentRequest.amountStr+gettextCatalog.getString(' to ')+address+'</i>';
+			return '<i>'+gettextCatalog.getString('Payment request') +objPaymentRequest.amountStr.substring(15)+gettextCatalog.getString(' to ')+address+'</i>';
 		}).replace(/\[(.+?)\]\(payment:(.+?)\)/g, function(str, description, paymentJsonBase64){
 			var arrMovements = getMovementsFromJsonBase64PaymentRequest(paymentJsonBase64);
 			if (!arrMovements)
@@ -342,7 +342,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 			single_address = single_address.replace(/^single/, '');
 		if (single_address && !ValidationUtils.isValidAddress(single_address))
 			single_address = 1;
-		var amountStr = gettextCatalog.getString('Payment request')+': ' + getAmountText(amount, asset);
+		var amountStr = 'Request payment: ' + getAmountText(amount, asset);
 		return {
 			amount: amount,
 			asset: asset,
@@ -521,7 +521,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 					last_msg_ts = msg_ts;
 					if (message.type == "text" || message.type == "transaction") {
 						if (message.is_incoming) {
-							message.message = highlightActions(escapeHtml(message.message), arrMyAddresses);
+							message.message = highlightActions(escapeHtml(message.message), arrMyAddresses,correspondent.name);
 							message.message = text2html(message.message);
 						} else {
 							message.message = formatOutgoingMessage(message.message);

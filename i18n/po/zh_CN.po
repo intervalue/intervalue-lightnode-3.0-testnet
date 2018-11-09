@@ -2581,6 +2581,9 @@ msgstr "你确定要删除此设备吗？"
 msgid "Payment request"
 msgstr "请求付款"
 
+msgid "Request payment"
+msgstr "付款请求"
+
 msgid " to "
 msgstr " 到 "
 
