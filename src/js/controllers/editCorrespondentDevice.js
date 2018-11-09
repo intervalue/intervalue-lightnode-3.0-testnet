@@ -15,8 +15,25 @@ angular.module('copayApp.controllers').controller('editCorrespondentDeviceContro
     $scope.showconfirm = false;
     self.address = '';
     self.stables = '';
-    self.walletName = '';
-    self.image = '';
+    self.walletName = fc.credentials.walletName;
+    self.image = fc.image;
+
+    $timeout(function () {
+        var wallet = require('intervaluecore/wallet.js');
+        wallet.readAddressByWallet(fc.credentials.walletId,function (res) {
+            self.address = res;
+            let walletInfo = $scope.index.walletInfo;
+            for(let item in walletInfo){
+                if(walletInfo[item].wallet == fc.credentials.walletId) self.stables = walletInfo[item].stables;
+                break;
+            }
+            $scope.$apply();
+        });
+
+
+    });
+
+
 	$scope.save = function() {
 		$scope.error = null;
 		correspondent.name = $scope.name;
