@@ -1197,14 +1197,50 @@ angular.module('copayApp.controllers')
                  for(let item in  resolve){
                  	if(resolve[item].result == 'good'){
                         let tranMessage = gettextCatalog.getString('Successfully transferred: ') + resolve[item].amount/1000000 + ' INVE';
-                        $rootScope.$emit('Local/paymentDoneAndSendMessage', resolve[item].device, tranMessage);
-                        device.delDeviceChatTran(resolve[item].id);
+                        //$rootScope.$emit('Local/paymentDoneAndSendMessage', resolve[item].device, tranMessage);
+						//$rootScope.sendMessage(resolve[item].device, tranMessage);
+						let deviceAddress = resolve[item].device;
+                            $scope.message = tranMessage;
+                            //alert($scope.message);
+                            var message = lodash.clone($scope.message); // save in var as $scope.message may disappear while we are sending the message over the network
+                            $scope.message = '';
+                            //alert(correspondent.device_address);
+                            let device_address = deviceAddress;
+                            let chatType = deviceAddress ? 'transaction':'text';
+                            device.sendMessageToDevice(device_address, chatType, message, {
+                                //device.sendMessageToDevice('0DOJDKCO6CD2JGWMFEWNHJSFXPQQLRSXW', "text", message, {
+                                ifOk: function(){
+                                    //$scope.messageEvents.push({bIncoming: false, message: $sce.trustAsHtml($scope.message)});
+                                    $scope.autoScrollEnabled = true;
+                                    var msg_obj = {
+                                        bIncoming: false,
+                                        //message: correspondentListService.formatOutgoingMessage(message),
+                                        message: correspondentListService.formatOutgoingMessage(message),
+                                        timestamp: Math.floor(Date.now() / 1000)
+                                    };
+                                    correspondentListService.checkAndInsertDate($scope.messageEvents, msg_obj);
+                                    $scope.message = '';
+                                    $timeout(function(){
+                                        $scope.$apply();
+                                    });
+                                },
+                                ifError: function(error){
+                                    setOngoingProcess();
+                                    setError(error);
+                                }
+                            });
+						device.delDeviceChatTran(resolve[item].id);
                         break;
 					}
 				 }
              });
 
         },2 * 1000);
+
+        function setError(error){
+            console.log("send error:", error);
+            $scope.error = error;
+        }
 
 
         // setInterval(function () {

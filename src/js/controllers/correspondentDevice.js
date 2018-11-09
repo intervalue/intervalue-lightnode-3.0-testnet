@@ -26,7 +26,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
         $scope.correspondent = correspondent;
         $scope.showselectwt = false;
         $scope.addressLenght = false;
-        $scope.message = '';
+        $scope.message = ' ';
 //	var myPaymentAddress = indexScope.shared_address;
 
         if (!correspondentListService.messageEventsByCorrespondent[correspondent.device_address])
@@ -88,47 +88,33 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
         });
 
 
+
         var transactionsSend = $rootScope.$on('Local/paymentDoneAndSendMessage',function (event,deviceAddress,tranMessage) {
-           //$scope.sendTransactionSendMessage(deviceAddress,tranMessage)
-            $scope.send(deviceAddress,tranMessage);
             correspondentListService.setCurrentCorrespondent(deviceAddress, function(){
                 $timeout(function(){
                     $stickyState.reset('correspondentDevices.correspondentDevice');
                     go.path('correspondentDevices.correspondentDevice');
                 });
             });
-
+            $scope.send(deviceAddress,tranMessage);
         });
         $scope.$on('$destroy', function() {
             transactionsSend(); // remove listener.
         });
 
 
-        // $scope.sendTransactionSendMessage = lodash.debounce(function(deviceAddress,tranMessage){
-        //     $scope.send(deviceAddress,tranMessage);
-        //     correspondentListService.setCurrentCorrespondent(deviceAddress, function(){
-        //         $timeout(function(){
-        //             $stickyState.reset('correspondentDevices.correspondentDevice');
-        //             go.path('correspondentDevices.correspondentDevice');
-        //         });
-        //     });
-        // }, 1 * 1000);
 
-        $scope.send = function(deviceAddress,tranMessage) {
+        $scope.send = function() {
             $scope.error = null;
             //$scope.message = 'testtestestsetset';
-            if (!$scope.message && !deviceAddress )
+            if (!$scope.message )
                 return;
-            if(deviceAddress) $scope.message = tranMessage;
-            setOngoingProcess(gettextCatalog.getString("sending"));
+            setOngoingProcess("sending");
             //alert($scope.message);
             var message = lodash.clone($scope.message); // save in var as $scope.message may disappear while we are sending the message over the network
             $scope.message = '';
-            //alert(correspondent.device_address);
-            let device_address = deviceAddress ? deviceAddress:correspondent.device_address;
-            let chatType = deviceAddress ? 'transaction':'text';
-                device.sendMessageToDevice(device_address, chatType, message, {
-            //device.sendMessageToDevice('0DOJDKCO6CD2JGWMFEWNHJSFXPQQLRSXW', "text", message, {
+            device.sendMessageToDevice(correspondent.device_address, 'text', message, {
+                //device.sendMessageToDevice('0DOJDKCO6CD2JGWMFEWNHJSFXPQQLRSXW', "text", message, {
                 ifOk: function(){
                     setOngoingProcess();
                     //$scope.messageEvents.push({bIncoming: false, message: $sce.trustAsHtml($scope.message)});
@@ -145,7 +131,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     $timeout(function(){
                         $scope.$apply();
                     });
-                    if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(device_address, message, 0);
+                    if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(correspondent.device_address, message, 0);
                 },
                 ifError: function(error){
                     setOngoingProcess();
@@ -183,7 +169,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             if(fc.credentials.length != 1){
                 $scope.addressLenght = true;
                 $timeout(function () {
-                   $scope.$apply();
+                    $scope.$apply();
                 });
             }
             var chatltmessage = angular.element(document.getElementById('chatltmessage'));
@@ -461,7 +447,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                                     paymentRequestCode = 'payment:'+paymentJsonBase64;
                                 }
                                 else
-                                    paymentRequestCode = 'luxalpa:'+my_address+'?amount='+peer_amount+'&asset='+encodeURIComponent(contract.peerAsset);
+                                    paymentRequestCode = 'intervalue:'+my_address+'?amount='+peer_amount+'&asset='+encodeURIComponent(contract.peerAsset);
                                 var paymentRequestText = '[your share of payment to the contract]('+paymentRequestCode+')';
                                 device.sendMessageToDevice(correspondent.device_address, 'text', paymentRequestText);
                                 var body = correspondentListService.formatOutgoingMessage(paymentRequestText);
@@ -1117,7 +1103,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     if (asset !== 'base')
                         params += '&asset='+encodeURIComponent(asset);
                     var units = profileService.getUnitName(asset);
-                   appendText('['+amount+' '+units+'](intervalue:'+address+'?'+params+')');
+                    appendText('['+amount+' '+units+'](intervalue:'+address+'?'+params+')');
 
                     $modalInstance.dismiss('cancel');
                 };
