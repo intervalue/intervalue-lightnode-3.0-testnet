@@ -1999,8 +1999,6 @@ angular.module('copayApp.controllers')
                 }
                 $scope.$apply();
             });
-
-
         });
 
 		self.findPaymentAddress = function(walletId,stables,walletName,image){
@@ -2011,4 +2009,7 @@ angular.module('copayApp.controllers')
             self.from_image = image;
 		}
 
+		self.cancel = function () {
+			$rootScope.$emit('Local/paymentDoneAndCallBack',self.deviceAddress);
+        }
 	});

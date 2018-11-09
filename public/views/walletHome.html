@@ -515,6 +515,11 @@
         -->
         <div id="send" class="send tab-view" ng-init="assetIndexSelectorValue=0;home.shownForm='payment'">
             <nav ng-controller="topbarController as topbar" class="tab-bar">
+                <section class="left-small" ng-show="home.chat">
+                    <a ng-click="home.cancel()">
+                        <img src="./img/chatbackstate.png">
+                    </a>
+                </section>
                 <section class="right-small" ng-show="index.isCordova">
                     <qr-scanner ng-show="index.isComplete" on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
                 </section>
@@ -630,7 +635,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li ng-click="showselectwt = true" >
+                            <li ng-click="showselectwt = true" ng-show="home.chat">
                                 <div class="liin">
                                     <div class="ld">
                                         <div class="limg">
@@ -640,7 +645,7 @@
                                     </div>
                                     <div class="rd">
                                         <div class="chatsetinfo">
-                                            <div class="chatinfoname"><img src="{{home.from_image}}"/> {{home.walletName}}</div>
+                                            <div class="chatinfoname"><img src="{{home.from_image}}"/> {{home.from_walletName}}</div>
                                             <div class="chatinfomon"><span translate>Available amount</span>:&nbsp;<span>{{home.from_stables}}</span></div>
                                         </div>
                                         <img src="./img/more.png" class="morerimg"/>
@@ -724,4 +729,6 @@
     </div>
 </div>
 <div class="extra-margin-bottom"></div>
-<div ng-include="'views/includes/menu.html'" ng-show="!index.noFocusedWallet"></div>
+<div ng-controller="walletHomeController as home">
+<div ng-include="'views/includes/menu.html'" ng-show="!index.noFocusedWallet && !home.chat"></div>
+</div>

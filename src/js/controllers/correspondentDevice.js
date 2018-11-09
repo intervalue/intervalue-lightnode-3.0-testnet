@@ -99,8 +99,20 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             });
 
         });
+
+        var transactionsCallBack = $rootScope.$on('Local/paymentDoneAndCallBack',function (event,deviceAddress) {
+            correspondentListService.setCurrentCorrespondent(deviceAddress, function(){
+                $timeout(function(){
+                    $stickyState.reset('correspondentDevices.correspondentDevice');
+                    go.path('correspondentDevices.correspondentDevice');
+                });
+            });
+
+        });
+
         $scope.$on('$destroy', function() {
-            transactionsSend(); // remove listener.
+            transactionsSend();
+            transactionsCallBack();// remove listener.
         });
 
 

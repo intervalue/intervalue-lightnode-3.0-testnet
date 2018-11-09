@@ -106,8 +106,8 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	var payment_request_regexp = /\[.*?\]\(intervalue:([0-9A-Z]{32})\?([\w=&;+%]+)\)/g; // payment description within [] is ignored
 	
 	function highlightActions(text, arrMyAddresses,deviceName,message_type){
-		if(message_type ='transaction'){
-            if(text.indexOf('Transferred:') != -1 ) return  gettextCatalog.getString(text.substring(-1,12))+text.substring(12);
+		if(message_type =='transaction'){
+            if(text.indexOf('Transferred:') != -1 ) return  '<span style="color:#FF0000;font-weight:bold">'+gettextCatalog.getString(text.substring(-1,12))+text.substring(12)+'</span>';
             if(text.indexOf('Successfully transferred:') != -1) return  gettextCatalog.getString(text.substring(-1,25))+text.substring(25);
 		}
 	//	return text.replace(/\b[2-7A-Z]{32}\b(?!(\?(amount|asset|device_address|single_address)|"))/g, function(address){
@@ -277,9 +277,9 @@ angular.module('copayApp.services').factory('correspondentListService', function
 		return assocPaymentsByAsset;
 	}
 	
-	function formatOutgoingMessage(text,message_type){
-        if(message_type ='transaction'){
-            if(text.indexOf('Transferred:') != -1 ) return  gettextCatalog.getString(text.substring(-1,12))+text.substring(12);
+	function formatOutgoingMessage(text,deviceName,message_type){
+        if(message_type =='transaction'){
+            if(text.indexOf('Transferred:') != -1 ) return  '<span style="color:#FF0000;font-weight:bold">'+gettextCatalog.getString(text.substring(-1,12))+text.substring(12)+'</span>';
             if(text.indexOf('Successfully transferred:') != -1) return  gettextCatalog.getString(text.substring(-1,25))+text.substring(25);
         }
 		return escapeHtmlAndInsertBr(text).replace(payment_request_regexp, function(str, address, query_string){
