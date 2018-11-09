@@ -617,7 +617,7 @@ box-sizing:border-box;padding:8px 0;height:auto;}
 .chatbiline ul li{background:#fff;padding:0 15px;cursor:pointer;position:relative;}
 .chatbiline ul li .liin{border-bottom:1px solid #EDEEF0;display:flex;justify-content:space-between;align-items:center;height:58px;}
 .chatbiline ul li .ld{display:flex;justify-content:flex-start;align-items:center;margin-right:10px;}
-.chatbiline ul li .ld span{color:#323232;white-space:nowrap;}
+.chatbiline ul li .ld span{color:#323232;}
 .chatbiline ul li .rd{display:flex;justify-content:flex-end;align-items:center;color:#909090;}
 .chatbiline ul li .limg{width:20px;height:20px;margin-right:10px;}
 .chatbiline ul li img{vertical-align:initial;}

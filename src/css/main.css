@@ -536,9 +536,10 @@ ul.off-canvas-list .whpback{
 
 .sidebar li.nav-item.selected .name-wallet {
   color: #fff;
+}
+.sidebar li.nav-item .name-wallet{
   white-space: nowrap;
 }
-
 .name-wallet i {
   color: #B6E9DF;
 }
