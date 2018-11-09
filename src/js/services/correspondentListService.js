@@ -5,7 +5,7 @@ var eventBus = require('intervaluecore/event_bus.js');
 var ValidationUtils = require('intervaluecore/validation_utils.js');
 var objectHash = require('intervaluecore/object_hash.js');
 
-angular.module('copayApp.services').factory('correspondentListService', function($state, $rootScope, $sce, $compile, configService, storageService, profileService, go, lodash, $stickyState, $deepStateRedirect, $timeout, gettext, pushNotificationsService) {
+angular.module('copayApp.services').factory('correspondentListService', function($state, $rootScope, $sce, $compile, configService, storageService, profileService, go, lodash, $stickyState, $deepStateRedirect, $timeout, gettext, pushNotificationsService,gettextCatalog) {
 	var root = {};
 	var device = require('intervaluecore/device.js');
 	var wallet = require('intervaluecore/wallet.js');
@@ -124,9 +124,10 @@ angular.module('copayApp.services').factory('correspondentListService', function
 		//	if (arrMyAddresses.indexOf(address) >= 0)
 		//		return str;
 			var objPaymentRequest = parsePaymentRequestQueryString(query_string);
+			console.log(objPaymentRequest);
 			if (!objPaymentRequest)
 				return str;
-			return '<a ng-click="sendPayment(\''+address+'\', '+objPaymentRequest.amount+', \''+objPaymentRequest.asset+'\',\''+'chat'+'\', \''+objPaymentRequest.device_address+'\', \''+objPaymentRequest.single_address+'\')">'+objPaymentRequest.amountStr+'</a>';
+			return '<a ng-click="sendPayment(\''+address+'\', '+objPaymentRequest.amount+', \''+objPaymentRequest.asset+'\',\''+'chat'+'\', \''+objPaymentRequest.device_address+'\', \''+objPaymentRequest.single_address+'\')">'+gettextCatalog.getString(objPaymentRequest.amountStr.substring(-1,15))+objPaymentRequest.amountStr.substring(15)+'</a>';
 		}).replace(/\[(.+?)\]\(command:(.+?)\)/g, function(str, description, command){
 			return '<a ng-click="sendCommand(\''+escapeQuotes(command)+'\', \''+escapeQuotes(description)+'\')" class="command">'+description+'</a>';
 		}).replace(/\[(.+?)\]\(payment:(.+?)\)/g, function(str, description, paymentJsonBase64){
@@ -279,7 +280,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 			var objPaymentRequest = parsePaymentRequestQueryString(query_string);
 			if (!objPaymentRequest)
 				return str;
-			return '<i>'+objPaymentRequest.amountStr+' to '+address+'</i>';
+			return '<i>'+objPaymentRequest.amountStr+gettextCatalog.getString(' to ')+address+'</i>';
 		}).replace(/\[(.+?)\]\(payment:(.+?)\)/g, function(str, description, paymentJsonBase64){
 			var arrMovements = getMovementsFromJsonBase64PaymentRequest(paymentJsonBase64);
 			if (!arrMovements)
@@ -341,7 +342,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 			single_address = single_address.replace(/^single/, '');
 		if (single_address && !ValidationUtils.isValidAddress(single_address))
 			single_address = 1;
-		var amountStr = 'Payment request: ' + getAmountText(amount, asset);
+		var amountStr = gettextCatalog.getString('Payment request')+': ' + getAmountText(amount, asset);
 		return {
 			amount: amount,
 			asset: asset,

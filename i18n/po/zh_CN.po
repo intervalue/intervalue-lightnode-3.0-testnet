@@ -2578,6 +2578,14 @@ msgstr "我的配对码"
 msgid "Are you sure you want to delete the device?"
 msgstr "你确定要删除此设备吗？"
 
+msgid "Payment request"
+msgstr "请求付款"
+
+msgid " to "
+msgstr " 到 "
+
+
+
 
 
 
