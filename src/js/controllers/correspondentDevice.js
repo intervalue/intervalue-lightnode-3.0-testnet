@@ -104,19 +104,23 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
 
 
 
-        $scope.send = function() {
+        $scope.send = function(deviceAddress,tranMessage) {
             $scope.error = null;
             //$scope.message = 'testtestestsetset';
-            if (!$scope.message )
+            if (!$scope.message && !deviceAddress )
                 return;
-            setOngoingProcess("sending");
+            if(deviceAddress) $scope.message = tranMessage;
+            if(!deviceAddress)setOngoingProcess("sending");
             //alert($scope.message);
             var message = lodash.clone($scope.message); // save in var as $scope.message may disappear while we are sending the message over the network
             $scope.message = '';
-            device.sendMessageToDevice(correspondent.device_address, 'text', message, {
+            //alert(correspondent.device_address);
+            let device_address = deviceAddress ? deviceAddress:correspondent.device_address;
+            let chatType = deviceAddress ? 'transaction':'text';
+            device.sendMessageToDevice(device_address, chatType, message, {
                 //device.sendMessageToDevice('0DOJDKCO6CD2JGWMFEWNHJSFXPQQLRSXW', "text", message, {
                 ifOk: function(){
-                    setOngoingProcess();
+                    if(!deviceAddress)setOngoingProcess();
                     //$scope.messageEvents.push({bIncoming: false, message: $sce.trustAsHtml($scope.message)});
                     $scope.autoScrollEnabled = true;
                     var msg_obj = {
@@ -131,7 +135,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     $timeout(function(){
                         $scope.$apply();
                     });
-                    if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(correspondent.device_address, message, 0);
+                    if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(device_address, message, 0);
                 },
                 ifError: function(error){
                     setOngoingProcess();
