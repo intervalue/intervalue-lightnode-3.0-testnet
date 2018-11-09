@@ -138,7 +138,7 @@
 /*walletHome-history-part end*/
 
 /*walletHome-send-part start*/
-#send{background:#F9FAFC;}
+#send{background:#FFFFFF;}
 #send .sendform{padding:12px 15px 0;}
 .sendform .adcpitem{height:44px;margin-top:32px;}
 .sendform .adcpmdic input[type='text']{border-bottom:1px solid #CACACA;top:5px;padding-right:30px;}
@@ -149,7 +149,11 @@
 .sendinfo a{color:#45AD8E;}
 .sendform .sendcancel{display:block;font-family:PingFangSC-Regular,Arial,微软雅黑;font-size:14px;width:100%;height:45px;line-height:45px;padding:0px;margin:0px;border-radius:3px;text-align:center;background-color:#FFFFFF;border:1px solid #3B3B3B;color:#3B3B3B;}
 .sendcancel:hover{background-color:#007095;color:#fff;border:none;}
-.sendform .chatbiline ul li{background: transparent;padding: 0;}
+/*表单请求地址*/
+.sendformaddr{padding:12px 0 0;}
+.sendformaddr.chatbiline ul li{background: transparent;padding: 0;}
+.sendformaddr .chatbiline ul li .ld{flex-shrink: 0;}
+.sendformaddr .chatbiline ul li .rd{width:100%;text-overflow: ellipsis;overflow: hidden;position: relative;}
 /*walletHome-send-part end*/
 
 /*walletHome-wallet-part start*/
@@ -547,7 +551,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .popconfirm .popcontentwt ul li:last-child .liin{border-bottom:none;}
 .popconfirm .popcontentwt ul li .ld{display:flex;justify-content:flex-start;align-items:center;}
 .popconfirm .popcontentwt ul li .ld span{color:#323232;}
-.popconfirm .popcontentwt ul li .ld .greendot{width:5px;height:5px;border-radius:50%;margin-right:14px;background:#45AD8E;}
+.popconfirm .popcontentwt ul li .ld .greendot{width:5px;height:5px;border-radius:50%;margin-right:14px;background:#45AD8E;flex-shrink: 0;}
 .popconfirm .popcontentwt ul li .rd{display:flex;justify-content:flex-end;align-items:center;color:#909090;}
 .popconfirm .popcontentwt ul li .limg{width:36px;margin-right:16px;flex-shrink:0;}
 .popconfirm .popcontentwt ul li img{vertical-align:initial;width:36px;vertical-align:top;border-radius:50%;}
@@ -631,9 +635,17 @@ box-sizing:border-box;padding:8px 0;height:auto;}
 /*chat-requiestpayment   end*/
 .modal-content.chatmodal{top:0;z-index:1006;}
 .chatmodal .chatbiline ul li .limg img{width:16px;}
+.ammountlr .chatbiline ul li .ld{flex-shrink: 0;}
+.ammountlr .chatbiline ul li .rd{width:100%;text-overflow: ellipsis;overflow: hidden;position: relative;}
+.chatbiline ul li .rd .chatsetinfo{width: calc(100% - 22px);}
 .chatbiline ul li .rd .chatsetinfo img{margin-left:0;width:19px;vertical-align:sub;}
-.chatbiline ul li .rd .chatsetinfo .chatinfoname{font-size:14px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:#323232;}
+.chatbiline ul li .rd .chatsetinfo .chatinfoname{font-size:14px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:#323232;
+    width: 100%;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
 .chatbiline ul li .rd .chatsetinfo .chatinfomon{font-size:10px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:#999999;}
+
+.chatbiline ul li .rd input{text-align: right;border: none;font-size:18px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:rgba(50,50,50,1);}
+.chatbiline ul li .rd.addrinputp input{padding-right: 52px;}
+.chatbiline ul li .rd label{position: absolute;right:0;font-size:18px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:rgba(119,119,119,1);}
 /*chat-requiestpayment    end*/
 
 /*editCorrespondentDevice    start*/
