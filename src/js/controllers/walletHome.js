@@ -2011,5 +2011,6 @@ angular.module('copayApp.controllers')
 
 		self.cancel = function () {
 			$rootScope.$emit('Local/paymentDoneAndCallBack',self.deviceAddress);
+            self.resetForm();
         }
 	});
