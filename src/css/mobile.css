@@ -23,9 +23,9 @@ input,textarea {
 }
 
 * {
-  /*-webkit-user-drag: none;*/
-  /*-ms-user-drag: none;*/
-  /*user-drag: none;*/
+  -webkit-user-drag: none;
+  -ms-user-drag: none;
+  user-drag: none;
   -webkit-tap-highlight-color:rgba(0,0,0,0);
 }
 
