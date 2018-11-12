@@ -46,7 +46,7 @@ msgid "About InterValue"
 msgstr "关于InterValue"
 
 #: public/views/preferencesGlobal.html:139
-msgid "About InterValue-3.1-testnet"
+msgid "About inWallet"
 msgstr "关于InterValue3.0测试链"
 
 #: src/js/controllers/copayers.js:8

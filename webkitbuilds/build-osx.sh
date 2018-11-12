@@ -10,7 +10,7 @@ if [ -d "$dir" ]; then
 fi
 
 # set up your app name, architecture, and background image file name
-APP_NAME="InterValue-3.1-testnet"
+APP_NAME="inWallet"
 ARCH="$1"
 DMG_BACKGROUND_IMG="Background.png"
 

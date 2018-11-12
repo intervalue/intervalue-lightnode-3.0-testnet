@@ -1,18 +1,18 @@
 {
-  "name": "InterValue-3.1-testnet",
+  "name": "inWallet",
   "description": "Smart payments made simple",
-  "author": "InterValue-3.1-testnet",
+  "author": "inWallet",
   "version": "3.2.3",
   "keywords": [
     "wallet",
-    "intervalue",
+    "inWallet",
     "decentralized",
     "multisignature",
     "bitcoin"
   ],
   "main": "public/index.html",
   "window": {
-    "title": "InterValue-3.1-testnet",
+    "title": "inWallet",
     "icon": "./public/img/icons/icon-white-256.png",
     "show": true,
     "visible": true,

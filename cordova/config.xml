@@ -3,12 +3,12 @@
   version="3.2.3"
   android-versionCode="1062"
   ios-CFBundleVersion="3.2.3">
-    <name>InterValue-3.1-testnet</name>
+    <name>inWallet</name>
     <description>
-      InterValue-3.1-testnet wallet for testnet.
+      inWallet wallet for testnet.
     </description>
     <author email="intervalue@inve.one" href="https://inve.one">
-        InterValue-3.1-testnet
+        inWallet
     </author>
     <content src="index.html" />
     <access origin="*" />
