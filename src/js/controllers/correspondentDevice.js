@@ -1479,7 +1479,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     window.plugins.spinnerDialog.hide();
                 }
             } else {
-                $scope.onGoingProcess = name;
+                $scope.onGoingProcess = gettextCatalog.getString(name);
                 $timeout(function() {
                     $rootScope.$apply();
                 });
