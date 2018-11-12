@@ -211,7 +211,6 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
                 }
             }
             function showimgw(dist){ // dist 下滑的距离，用以拉长背景模拟拉伸效果
-            	console.log(elm)
                 clickimg.style.display = 'none';
                 deleteimg.style.opacity = '1';
                 deleteimg.style.zIndex = '3';
