@@ -148,6 +148,7 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
         restrict:'A',
         link:function(scope, elm, attr){
             var raw = elm[0];
+            var changeimg = elm[0].children[0];
             var clickimg = elm[0].children[0].children[1].children[0];
             var deleteimg = elm[0].children[1];
             scope._start = 0;
@@ -211,8 +212,10 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
                 deleteimg.style.zIndex = '3';
                 if(dist > 80){
                     deleteimg.style.width = 'auto';
+                    changeimg.style.width = "calc(100% - 15px - "+deleteimg.style.width+"px)";
                 }else{
                     deleteimg.style.width = dist + 'px';
+                    changeimg.style.width = "calc(100% - 15px - "+dist+"px)";
                 }
             }
             function showimgok(){
@@ -220,12 +223,14 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
                 deleteimg.style.width = 'auto';
                 deleteimg.style.zIndex = '3';
                 deleteimg.style.opacity = '1';
+                changeimg.style.width = "calc(100% - 15px - "+deleteimg.style.width+"px)";
             }
             function resetdrag(){
                 clickimg.style.display = 'block';
                 deleteimg.style.width = 0 + 'px';
                 deleteimg.style.zIndex = '1';
                 deleteimg.style.opacity = '0';
+                changeimg.style.width = "calc(100% - 30px)";
             }
         }
     }
