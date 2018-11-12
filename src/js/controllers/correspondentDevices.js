@@ -34,7 +34,7 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
         $scope.removechataddr = device_address;
         $scope.showchatdel = true;
         angular.element(document.querySelectorAll('.correspondentList .morerimg')).css({'display':'block'});
-        angular.element(document.querySelectorAll('.correspondentList .chatremovep')).css({'display':'none','width':0});
+        angular.element(document.querySelectorAll('.correspondentList .chatremovep')).css({'opacity':'0','width':0});
 	}
 
 	$scope.showCorrespondent = function(correspondent) {
