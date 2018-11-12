@@ -33,8 +33,8 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
         $event.stopImmediatePropagation();
         $scope.removechataddr = device_address;
         $scope.showchatdel = true;
-        angular.element(document.querySelectorAll('.correspondentList .chatremovep')).css({'display':'none','width':0});
         angular.element(document.querySelectorAll('.correspondentList .morerimg')).css({'display':'block'});
+        angular.element(document.querySelectorAll('.correspondentList .chatremovep')).css({'display':'none','width':0});
 	}
 
 	$scope.showCorrespondent = function(correspondent) {
@@ -207,7 +207,8 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
             }
             function showimgw(dist){ // dist 下滑的距离，用以拉长背景模拟拉伸效果
                 clickimg.style.display = 'none';
-                deleteimg.style.display = 'block';
+                deleteimg.style.opacity = '1';
+                deleteimg.style.zIndex = '3';
                 if(dist > 80){
                     deleteimg.style.width = 'auto';
                 }else{
@@ -216,13 +217,15 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
             }
             function showimgok(){
                 clickimg.style.display = 'none';
-                deleteimg.style.display = 'block';
                 deleteimg.style.width = 'auto';
+                deleteimg.style.zIndex = '3';
+                deleteimg.style.opacity = '1';
             }
             function resetdrag(){
                 clickimg.style.display = 'block';
                 deleteimg.style.width = 0 + 'px';
-                deleteimg.style.display = 'none';
+                deleteimg.style.zIndex = '1';
+                deleteimg.style.opacity = '0';
             }
         }
     }

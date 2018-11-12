@@ -613,8 +613,11 @@
                                         <span translate>Address</span>
                                     </div>
                                     <div class="rd">
-                                        <input type="text" id="address" name="address" ng-disabled="home.blockUx || home.lockAddress || index.arrBalances[index.assetIndex].is_private"
+                                        <input type="text" id="address" name="address" ng-class="{'p34r':!home.chat}" ng-disabled="home.blockUx || home.lockAddress || index.arrBalances[index.assetIndex].is_private"
                                                ng-model="_address" maxlength="32" ng-required valid-address-or-account ng-focus="home.formFocus('address')" ng-blur="home.formFocus(false)"/>
+                                        <a class="postfix size-12 m0 text-gray" ng-show="!home.chat" ng-click="openDestinationAddressModal(index.otherWallets, _address)">
+                                            <img src="./img/address.png" />
+                                        </a>
                                     </div>
                                 </div>
                             </li>
@@ -622,7 +625,7 @@
                                 <div class="liin">
                                     <div class="ld">
                                         <div class="limg">
-                                            <img src="./img/setaddr.png"/>
+                                            <img src="./img/setamount.png"/>
                                         </div>
                                         <span translate>Amount</span>
                                     </div>
@@ -634,6 +637,11 @@
                                                autocomplete="off" ng-focus="home.formFocus('amount')" ng-blur="home.formFocus(false)"/>
                                     </div>
                                 </div>
+                                <label for="amount" class="sendinfo">
+                                    <span translate ng-if="!home.send_multiple"><span translate>Available amount</span>: {{index.ammountTatol}}</span>
+                                    <span translate ng-if="home.send_multiple">Total amount: {{index.ammountTatol}}</span>
+                                    <a ng-click="home.setSendAll()" ng-show="!home.bSendAll && !home.lockAmount" translate>Send all</a>
+                                </label>
                             </li>
                             <li ng-click="showselectwt = true" ng-show="home.chat">
                                 <div class="liin">
