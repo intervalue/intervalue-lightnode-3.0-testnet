@@ -2593,7 +2593,8 @@ msgstr "转账:"
 msgid "Successfully transferred:"
 msgstr "已成功转账:"
 
-
+msgid "Remove"
+msgstr "删除"
 
 
 

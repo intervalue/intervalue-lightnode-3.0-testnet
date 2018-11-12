@@ -33,6 +33,7 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
         $event.stopImmediatePropagation();
         $scope.removechataddr = device_address;
         $scope.showchatdel = true;
+        angular.element(document.querySelectorAll('.correspondentList .liin')).css({'width':'calc(100% - 30px)'});
         angular.element(document.querySelectorAll('.correspondentList .morerimg')).css({'display':'block'});
         angular.element(document.querySelectorAll('.correspondentList .chatremovep')).css({'opacity':'0','width':0});
 	}
@@ -146,11 +147,14 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
   .directive('chatSwiperLeft',function(){
     return{
         restrict:'A',
-        link:function(scope, elm, attr){
+        link:function(scope, elm){
             var raw = elm[0];
-            var changeimg = elm[0].children[0];
-            var clickimg = elm[0].children[0].children[1].children[0];
-            var deleteimg = elm[0].children[1];
+            // var changeimg = elm[0].children[0];
+            // var clickimg = elm[0].children[0].children[1].children[0];
+            // var deleteimg = elm[0].children[1];
+            var changeimg = elm[0];
+            var clickimg = elm[0].children[1].children[0];
+            var deleteimg = elm[0].parentNode.children[1];
             scope._start = 0;
             scope. _end = 0;
             raw.addEventListener("dragstart",dragStart,false);//当鼠标按住屏幕时候触发。
@@ -207,6 +211,7 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
                 }
             }
             function showimgw(dist){ // dist 下滑的距离，用以拉长背景模拟拉伸效果
+            	console.log(elm)
                 clickimg.style.display = 'none';
                 deleteimg.style.opacity = '1';
                 deleteimg.style.zIndex = '3';
