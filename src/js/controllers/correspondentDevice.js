@@ -139,7 +139,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     var msg_obj = {
                         bIncoming: false,
                         //message: correspondentListService.formatOutgoingMessage(message),
-                        message: correspondentListService.formatOutgoingMessage(message,chatType),
+                        message: correspondentListService.formatOutgoingMessage(message,device_address,chatType),
                         timestamp: Math.floor(Date.now() / 1000)
                     };
                     correspondentListService.checkAndInsertDate($scope.messageEvents, msg_obj);
