@@ -32,25 +32,25 @@
 		<div class="mtab chatbiline" ng-class="{'active': mtab == 1}" ng-init="mtab = 1;readList();">
 			<ul class="no-bullet m0 correspondentList">
 				<!-- 聊天联系人列表 -->
-				<li draggable="true" chat-swiper-left="newsData('up')" ng-click="showCorrespondent(correspondent)" ng-repeat="correspondent in list | orderBy:newMsgByAddressComparator">
-					<div class="liin">
+				<li draggable="true" chat-swiper-left="newsData('up')"  ng-repeat="correspondent in list | orderBy:newMsgByAddressComparator">
+					<div class="liin" ng-click="showCorrespondent(correspondent)">
 						<div class="ld">
 							<div class="correspondentlist_badge"
 								 ng-show="newMessagesCount[correspondent.device_address]">
 								{{newMessagesCount[correspondent.device_address]}}
 							</div>
 							<span class="chatname">{{correspondent.name | limitTo:1}}</span>
-							<span>{{correspondent.name}}</span>
+							<span class="chatallname">{{correspondent.name}}</span>
 						</div>
 						<div class="rd">
 							{{prefGlobal.deviceName}}
 							<img src="./img/more.png" class="morerimg" ng-show="!editCorrespondentList && hideRemove"/>
 							<!--消息个数提示-->
 							<!--消息个数提示-->
-							<div  class="chatremovep" ng-click="showchatdelete(correspondent.device_address,$event)">
-								删除
-							</div>
 						</div>
+					</div>
+					<div  class="chatremovep" ng-click="showchatdelete(correspondent.device_address,$event)">
+						删除
 					</div>
 				</li>
 			</ul>

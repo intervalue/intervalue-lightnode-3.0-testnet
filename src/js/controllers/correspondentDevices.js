@@ -149,7 +149,7 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
         link:function(scope, elm, attr){
             var raw = elm[0];
             var clickimg = elm[0].children[0].children[1].children[0];
-            var deleteimg = elm[0].children[0].children[1].children[1];
+            var deleteimg = elm[0].children[1];
             scope._start = 0;
             scope. _end = 0;
             raw.addEventListener("dragstart",dragStart,false);//当鼠标按住屏幕时候触发。
