@@ -520,7 +520,7 @@
                         <img src="./img/chatbackstate.png">
                     </a>
                 </section>
-                <section class="right-small" ng-show="index.isCordova">
+                <section class="right-small" ng-show="index.isCordova && !home.chat">
                     <qr-scanner ng-show="index.isComplete" on-scan="topbar.onQrCodeScanned(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
                 </section>
 
@@ -621,28 +621,6 @@
                                     </div>
                                 </div>
                             </li>
-                            <li >
-                                <div class="liin">
-                                    <div class="ld">
-                                        <div class="limg">
-                                            <img src="./img/setamount.png"/>
-                                        </div>
-                                        <span translate>Amount</span>
-                                    </div>
-                                    <div class="rd addrinputp">
-                                        <label translate for="amount">INVE</label>
-                                        <input type="text" type="number" id="amount" ng-disabled="home.blockUx || home.lockAmount || home.bSendAll"
-                                               name="amount" maxlength="18" ng-model="_amount"
-                                               valid-amount="{{index.arrBalances[index.assetIndex].asset}}" ng-required="!home.bSendAll && !home.send_multiple"
-                                               autocomplete="off" ng-focus="home.formFocus('amount')" ng-blur="home.formFocus(false)"/>
-                                    </div>
-                                </div>
-                                <label for="amount" class="sendinfo">
-                                    <span translate ng-if="!home.send_multiple"><span translate>Available amount</span>: {{index.ammountTatol}}</span>
-                                    <span translate ng-if="home.send_multiple">Total amount: {{index.ammountTatol}}</span>
-                                    <a ng-click="home.setSendAll()" ng-show="!home.bSendAll && !home.lockAmount" translate>Send all</a>
-                                </label>
-                            </li>
                             <li ng-click="showselectwt = true" ng-show="home.chat">
                                 <div class="liin">
                                     <div class="ld">
@@ -660,6 +638,32 @@
                                     </div>
                                 </div>
                             </li>
+                            <li >
+                                <div class="liin">
+                                    <div class="ld">
+                                        <div class="limg">
+                                            <img src="./img/setamount.png"/>
+                                        </div>
+                                        <span translate>Amount</span>
+                                    </div>
+                                    <div class="rd addrinputp">
+                                        <label translate for="amount">INVE</label>
+                                        <input type="text" type="number" id="amount" ng-disabled="home.blockUx || home.lockAmount || home.bSendAll"
+                                               name="amount" maxlength="18" ng-model="_amount"
+                                               valid-amount="{{index.arrBalances[index.assetIndex].asset}}" ng-required="!home.bSendAll && !home.send_multiple"
+                                               autocomplete="off" ng-focus="home.formFocus('amount')" ng-blur="home.formFocus(false)"/>
+                                    </div>
+                                </div>
+                                <label for="amount" class="sendinfo" ng-show="!home.chat">
+                                    <span translate><span translate>Available amount</span>: {{index.ammountTatol}}</span>
+                                    <a ng-click="home.setSendAll()" ng-show="!home.bSendAll && !home.lockAmount" translate>Send all</a>
+                                </label>
+                                <label for="amount" class="sendinfo" ng-show="home.chat">
+                                    <span translate><span translate>Available amount</span>: {{index.ammountTatol}}</span>
+                                    <a ng-click="home.setSendAll()" ng-show="!home.bSendAll && !home.lockAmount" translate>Send all</a>
+                                </label>
+                            </li>
+
                         </ul>
                     </div>
                     <div class="p15h">
