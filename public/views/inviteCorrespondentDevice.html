@@ -27,8 +27,8 @@
                 <div class="chatdevicecode" id="chatdevicecode">{{code}}</div>
             </div>
             <div class="aboutQR">
-                <div class="chatdevicecopybtn" ng-click="shareinviteAddress()" ng-if="index.isCordova">
-                    <img src="./img/share.png" /><a translate>Share pairing code</a>
+                <div class="chatdevicecopybtn" ng-click="copyCode()" ng-if="index.isCordova">
+                    <img src="./img/share.png" /><a translate>Copy pairing code</a>
                 </div>
                 <div class="chatdevicecodetext" ng-if="index.isCordova">
                     <span translate>Scan the above QR code using the other device, or send this pairing code to the other device.</span>
