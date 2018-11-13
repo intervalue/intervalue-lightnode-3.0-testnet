@@ -837,7 +837,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     self.setTab = function (tab, reset, tries, switchState) {
         FastClick.attach(document.body);
-        console.log("setTab", tab, reset, tries, switchState);
+        // console.log("setTab", tab, reset, tries, switchState);
         tries = tries || 0;
 
         var changeTab = function (tab) {
@@ -885,12 +885,12 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 return self.setTab(tab.link, reset, tries, switchState);
             }
         }
-        console.log("current tab " + self.tab + ", requested to set tab " + tab + ", reset=" + reset);
+        //console.log("current tab " + self.tab + ", requested to set tab " + tab + ", reset=" + reset);
         if (self.tab === tab && !reset)
             return;
 
         if (!document.getElementById('menu-' + tab) && ++tries < 5) {
-            console.log("will retry setTab later:", tab, reset, tries, switchState);
+            //console.log("will retry setTab later:", tab, reset, tries, switchState);
             return $timeout(function () {
                 self.setTab(tab, reset, tries, switchState);
             }, (tries === 1) ? 10 : 300);
@@ -1773,7 +1773,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     });
 
     $rootScope.$on('Local/SetTab', function (event, tab, reset, swtichToHome) {
-        console.log("SetTab " + tab + ", reset " + reset);
+        //console.log("SetTab " + tab + ", reset " + reset);
         self.setTab(tab, reset, null, swtichToHome);
     });
 

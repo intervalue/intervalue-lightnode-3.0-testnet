@@ -357,7 +357,7 @@ angular.module('copayApp.services')
                             return cb(new Error('NOPROFILE: No profile'));
                         } else {
                             $log.debug('Profile read');
-                            console.log(profile);
+                            //console.log(profile);
                             return root.bindProfile(profile, cb);
                         }
 

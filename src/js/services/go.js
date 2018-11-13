@@ -505,7 +505,7 @@ X-Ubuntu-StageHint=SideStage\n", {mode: 0755}, function(err){
                 }
             });
         });
-        console.log("argv: "+gui.App.argv);
+        //console.log("argv: "+gui.App.argv);
         if (gui.App.argv[0]){
             // wait till the wallet fully loads
             var removeListener = $rootScope.$on('Local/BalanceUpdatedAndWalletUnlocked', function(){
