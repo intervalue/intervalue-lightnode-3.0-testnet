@@ -152,6 +152,10 @@ angular.module('copayApp.controllers')
             openTranInfoListener();
 		});
 
+        $scope.$on('$destroy', function() {
+            openTranInfoListener();
+        });
+
 		//$rootScope.$apply();
 
 
@@ -1228,21 +1232,22 @@ angular.module('copayApp.controllers')
                             let device_address = deviceAddress;
                             let chatType = deviceAddress ? 'transaction':'text';
                             device.sendMessageToDevice(device_address, chatType, message, {
+
                                 //device.sendMessageToDevice('0DOJDKCO6CD2JGWMFEWNHJSFXPQQLRSXW', "text", message, {
                                 ifOk: function(){
                                     //$scope.messageEvents.push({bIncoming: false, message: $sce.trustAsHtml($scope.message)});
-                                    $scope.autoScrollEnabled = true;
-                                    var msg_obj = {
-                                        bIncoming: false,
-                                        //message: correspondentListService.formatOutgoingMessage(message),
-                                        message: correspondentListService.formatOutgoingMessage(message),
-                                        timestamp: Math.floor(Date.now() / 1000)
-                                    };
-                                    correspondentListService.checkAndInsertDate($scope.messageEvents, msg_obj);
-                                    $scope.message = '';
-                                    $timeout(function(){
-                                        $scope.$apply();
-                                    });
+                                    // $scope.autoScrollEnabled = true;
+                                    // var msg_obj = {
+                                    //     bIncoming: false,
+                                    //     //message: correspondentListService.formatOutgoingMessage(message),
+                                    //     message: correspondentListService.formatOutgoingMessage(message),
+                                    //     timestamp: Math.floor(Date.now() / 1000)
+                                    // };
+                                    // correspondentListService.checkAndInsertDate($scope.messageEvents, msg_obj);
+                                    // $scope.message = '';
+                                    // $timeout(function(){
+                                    //     $scope.$apply();
+                                    // });
                                 },
                                 ifError: function(error){
                                     setOngoingProcess();
