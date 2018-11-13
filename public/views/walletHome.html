@@ -651,7 +651,8 @@
                                         <input type="text" type="number" id="amount" ng-disabled="home.blockUx || home.lockAmount || home.bSendAll"
                                                name="amount" maxlength="18" ng-model="_amount"
                                                valid-amount="{{index.arrBalances[index.assetIndex].asset}}" ng-required="!home.bSendAll && !home.send_multiple"
-                                               autocomplete="off" ng-focus="home.formFocus('amount')" ng-blur="home.formFocus(false)"/>
+                                               autocomplete="off" ng-focus="home.formFocus('amount')" ng-blur="home.formFocus(false)"
+                                               onkeydown="_amount.replace('(([0-9]+\.?[0-9]{0,6})(.*)','$1')"/>
                                     </div>
                                 </div>
                                 <label for="amount" class="sendinfo" ng-show="!home.chat">
