@@ -77,8 +77,8 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 				return;
 			}
 
-			wallet.readDeviceAddressesUsedInSigningPaths(function(arrNotRemovableDeviceAddresses) {
-
+			//wallet.readDeviceAddressesUsedInSigningPaths(function(arrNotRemovableDeviceAddresses) {
+				let arrNotRemovableDeviceAddresses = [ab[0].device_address];
 				// add a new property indicating whether the device can be removed or no
 				if(!ab) return;
 				var length = ab.length;
@@ -92,7 +92,7 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 					// device is removable when not in list
 				 	corrDev.removable = (ix == -1);
 				}
-			});
+			//});
 		
 			$scope.list = ab;
 			bots.load(function(err, rows){
