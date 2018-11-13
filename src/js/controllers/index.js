@@ -1703,7 +1703,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     self.txHistory = self.completeHistory = [];
                     self.startScan(walletId);
                 }, 500);
-                self.updateHistory(3);
+                self.updateHistory(4);
             });
         });
     });
