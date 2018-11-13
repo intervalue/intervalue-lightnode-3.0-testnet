@@ -31,7 +31,7 @@
                         </div>
                         <div class="rd">
                             <input type="hidden" name="address" ng-model= editCont.address>
-                            <span >{{editCont.address}}</span>
+                            <span >{{editCont.tenaddress}}</span>
                         </div>
                     </div>
                 </li>
@@ -98,10 +98,10 @@
                             <div class="limg">
                                 <img ng-src="{{item.image}}" />
                             </div>
-                            <span>{{item.walletName}}</span>
+                            <span class="lname">{{item.walletName}}</span>
                         </div>
                         <div class="rd">
-                            <span translate>Available amount</span>:&nbsp;<span>{{item.stables}}</span>
+                            <span translate>Available amount:</span>&nbsp;<span>{{item.stables}}</span>
                         </div>
                     </div>
                 </li>

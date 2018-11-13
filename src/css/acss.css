@@ -559,7 +559,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .popconfirm .popcontentwt ul li .limg{width:36px;margin-right:16px;flex-shrink:0;}
 .popconfirm .popcontentwt ul li img{vertical-align:initial;width:36px;vertical-align:top;border-radius:50%;}
 .popconfirm .popcontentwt ul li .rd img{margin-left:10px;}
-.popconfirm .popcontentwt ul li .rd span{flex-shrink:0;white-space:nowrap;}
+.popconfirm .popcontentwt ul li .rd span{flex-shrink:0;white-space:nowrap;font-size:12px;}
 
 
 /*聊天记录*/
@@ -633,9 +633,10 @@ box-sizing:border-box;padding:8px 0;height:auto;}
 .chatbiline ul li .ld span{color:#323232;}
 .chatbiline ul li .rd{display:flex;justify-content:flex-end;align-items:center;color:#909090;}
 .chatbiline ul li .limg{width:20px;height:20px;margin-right:14px;}
+.chatbiline ul li .lname{font-size:16px;font-family:PingFangSC-Medium;font-weight:500;color:#3B3B3B;}
 .chatbiline ul li img{vertical-align:initial;}
 .chatbiline ul li .rd img{margin-left:10px;}
-.chatbiline ul li .rd span{word-break:break-all;}
+.chatbiline ul li .rd span{word-break:break-all;font-size:12px;}
 #chat .mtab .chatname{width:40px;height:40px;line-height:40px;font-size:24px;font-family:PingFangSC-Semibold,Arial,"微软雅黑";color:#323232;background:#EFEFEF;text-align:center;border-radius:50%;margin-right:15px;flex-shrink:0;}
 #chat .mtab .chatallname{width: 100%;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
 .chatremovep{opacity: 0;overflow:hidden;position:absolute;right:0;top:0;z-index:1;background:#D45757;font-size:16px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:#fff;padding:0 24px;height:57px;line-height: 57px;}

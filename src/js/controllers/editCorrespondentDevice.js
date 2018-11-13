@@ -22,6 +22,8 @@ angular.module('copayApp.controllers').controller('editCorrespondentDeviceContro
         var wallet = require('intervaluecore/wallet.js');
         wallet.readAddressByWallet(fc.credentials.walletId,function (res) {
             self.address = res;
+            var tenexp = /^([A-Z0-9]{10})(.*)([A-Z0-9]{10})$/g;
+            self.tenaddress = res.replace(tenexp, '$1...$3');
             let walletInfo = $scope.index.walletInfo;
             for(let item in walletInfo){
                 if(walletInfo[item].wallet == fc.credentials.walletId) self.stables = walletInfo[item].stables;
@@ -94,6 +96,8 @@ angular.module('copayApp.controllers').controller('editCorrespondentDeviceContro
       self.insertMyAddress = function(walletId,stables,walletName,image){
           addressService.getAddressToChat(walletId, function(result) {
               self.address = result;
+              var tenexp = /^([A-Z0-9]{10})(.*)([A-Z0-9]{10})$/g;
+              self.tenaddress = result.replace(tenexp, '$1...$3');
               self.stables = stables;
               self.walletName = walletName;
               self.image = image;

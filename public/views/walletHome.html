@@ -700,7 +700,7 @@
                             <div class="adwwtname">{{item.walletName}}
                                 <div class="whpback" ng-show="item.mnemonic || item.mnemonicEncrypted" ng-click="$root.go('backup');index.backwallet=true" translate>Please backup</div>
                             </div>
-                            <div class="adwwtaddr">{{item.address}}</div>
+                            <div class="adwwtaddr">{{item.address | tenEllips}}</div>
                         </div>
                         <img class="moreimg" src="./img/more.png"/>
                     </div>
@@ -728,10 +728,10 @@
                                 <div class="limg">
                                     <img ng-src="{{item.image}}" />
                                 </div>
-                                <span>{{item.walletName}}</span>
+                                <span class="lname">{{item.walletName}}</span>
                             </div>
                             <div class="rd">
-                                <span translate>Available amount</span>:&nbsp;<span>{{item.stables}}</span>
+                                <span translate>Available amount:</span>&nbsp;<span>{{item.stables}}</span>
                             </div>
                         </div>
                     </li>
