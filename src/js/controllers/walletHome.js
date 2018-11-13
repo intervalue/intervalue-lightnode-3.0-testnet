@@ -67,6 +67,25 @@ angular.module('copayApp.controllers')
 			}*/
 		});
 
+        var openTranInfoListener = $rootScope.$on('openTranInfo',function (event,tranId) {
+            let db = require('intervaluecore/db');
+            $scope.btx = {};
+            db.query('SELECT * FROM transactions WHERE id=?',[tranId],function (rows) {
+                if(rows.length == 1){
+                    $scope.btx.amountTl = rows[0].amount/1000000;
+                    $scope.btx.amountStr = rows[0].amount/1000000 +' INVE';
+                    $scope.btx.addressTo = rows[0].addressTo;
+                    $scope.btx.addressFrom = rows[0].addressFrom;
+                    $scope.btx.time = rows[0].creation_date;
+                    $scope.btx.confirmations = rows[0].result;
+                    $scope.btx.result = rows[0].result;
+                    $scope.btx.asset = 'base';
+                    $scope.btx.action = 'received';
+                    self.openTxModal($scope.btx);
+                }
+            });
+        });
+
 		var disablePaymentUriListener = $rootScope.$on('paymentUri', function(event, uri) {
 			$timeout(function() {
 				$rootScope.$emit('Local/SetTab', 'send');
@@ -130,6 +149,7 @@ angular.module('copayApp.controllers')
 			disableClaimTextcoinListener();
 			$rootScope.hideMenuBar = false;
 			eventBus.removeListener("new_wallet_address", onNewWalletAddress);
+            openTranInfoListener();
 		});
 
 		//$rootScope.$apply();
@@ -1196,7 +1216,7 @@ angular.module('copayApp.controllers')
              light.findPendingWithChat().then(function (resolve,reject) {
                  for(let item in  resolve){
                  	if(resolve[item].result == 'good'){
-                        let tranMessage = gettextCatalog.getString('Successfully transferred: ') + resolve[item].amount/1000000 + ' INVE';
+                        let tranMessage = resolve[item].id+'?Successfully transferred: '+ resolve[item].amount/1000000 + ' INVE';
                         //$rootScope.$emit('Local/paymentDoneAndSendMessage', resolve[item].device, tranMessage);
 						//$rootScope.sendMessage(resolve[item].device, tranMessage);
 						let deviceAddress = resolve[item].device;
@@ -2013,4 +2033,8 @@ angular.module('copayApp.controllers')
 			$rootScope.$emit('Local/paymentDoneAndCallBack',self.deviceAddress);
             self.resetForm();
         }
+
+
+
+
 	});

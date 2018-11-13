@@ -210,6 +210,10 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             });
         };
 
+        $scope.openTranInfo = function(tranId){
+            $rootScope.$emit('openTranInfo', tranId);
+        }
+
         $scope.showPayment = function(asset){
             console.log("will show payment in asset "+asset);
             if (!asset)
@@ -1479,7 +1483,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     window.plugins.spinnerDialog.hide();
                 }
             } else {
-                $scope.onGoingProcess = gettextCatalog.getString(name);
+                $scope.onGoingProcess = name;
                 $timeout(function() {
                     $rootScope.$apply();
                 });

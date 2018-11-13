@@ -108,7 +108,11 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	function highlightActions(text, arrMyAddresses,deviceName,message_type){
 		if(message_type =='transaction'){
             if(text.indexOf('Transferred:') != -1 ) return  '<span style="color:#FF0000;font-weight:bold">'+gettextCatalog.getString(text.substring(-1,12))+text.substring(12)+'</span>';
-            if(text.indexOf('Successfully transferred:') != -1) return  '<span style="color:#FF0000;font-weight:bold">'+gettextCatalog.getString(text.substring(-1,25))+text.substring(25)+'</span>';
+            if(text.indexOf('Successfully transferred:') != -1) {
+            	let tranId = text.substring(-1,44);
+                return'<a ng-click="openTranInfo(\''+tranId+'\')">'+gettextCatalog.getString(text.substr(45,25))+text.substring(70)+'</a>';
+            	//return  '<span style="color:#FF0000;font-weight:bold">'+gettextCatalog.getString(text.substring(45,25))+text.substring(70)+'</span>';
+            }
 		}
 	//	return text.replace(/\b[2-7A-Z]{32}\b(?!(\?(amount|asset|device_address|single_address)|"))/g, function(address){
 		return text.replace(/(\s|^)([2-7A-Z]{32})([\s.,;!:]|$)/g, function(str, pre, address, post){
@@ -280,7 +284,10 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	function formatOutgoingMessage(text,deviceName,message_type){
         if(message_type =='transaction'){
             if(text.indexOf('Transferred:') != -1 ) return  '<span style="color:#FF0000;font-weight:bold">'+gettextCatalog.getString(text.substring(-1,12))+text.substring(12)+'</span>';
-            if(text.indexOf('Successfully transferred:') != -1) return  '<span style="color:#FF0000;font-weight:bold">'+gettextCatalog.getString(text.substring(-1,25))+text.substring(25)+'</span>';
+            if(text.indexOf('Successfully transferred:') != -1){
+                let tranId = text.substring(-1,44);
+                return'<a ng-click="openTranInfo(\''+tranId+'\')">'+gettextCatalog.getString(text.substring(45,25))+text.substring(70)+'</a>';
+			}
         }
 		return escapeHtmlAndInsertBr(text).replace(payment_request_regexp, function(str, address, query_string){
 			if (!ValidationUtils.isValidAddress(address))
