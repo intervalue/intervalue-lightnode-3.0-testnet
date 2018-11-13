@@ -227,9 +227,8 @@ angular.module('copayApp.directives')
                         if(value.match(sixellisexp)){
                             ctrl.$setValidity('validAmount', true);
                             parseval = value.replace(sixvl,'$1');
-                            console.log(parseval)
                             $parse(attrs['ngModel']).assign(scope, parseval);
-                            return value;
+                            return parseFloat(parseval);
                         }
                         if (typeof vNum == "number" && vNum > 0) {
                             var sep_index = ('' + value).indexOf('.');
