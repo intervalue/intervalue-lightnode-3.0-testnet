@@ -3,7 +3,7 @@
 var eventBus = require('intervaluecore/event_bus.js');
 
 angular.module('copayApp.controllers').controller('inviteCorrespondentDeviceController',
-    function($scope, $timeout, profileService, go, isCordova, correspondentListService, gettextCatalog) {
+    function($scope, $timeout, profileService, go, isCordova, correspondentListService, gettextCatalog, nodeWebkit) {
 
         var self = this;
 
@@ -25,11 +25,11 @@ angular.module('copayApp.controllers').controller('inviteCorrespondentDeviceCont
         });
 
         $scope.copyCode = function() {
-            console.log("copyCode");
-            //$scope.$digest();
             if (isCordova) {
                 window.cordova.plugins.clipboard.copy($scope.code);
                 window.plugins.toast.showShortCenter(gettextCatalog.getString('Copied to clipboard'));
+            }else if (nodeWebkit.isDefined()) {
+                nodeWebkit.writeToClipboard($scope.code);
             }
         };
 

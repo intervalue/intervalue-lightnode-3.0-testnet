@@ -550,9 +550,9 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .popconfirm .popcontentwt{position:absolute;width:100%;max-height:245px;overflow:scroll;bottom:0;left:0;background:#fff;box-sizing:border-box;z-index:101;border-radius:10px 10px 0 0;padding:6px 0;}
 .popconfirm .popcontentwt ul{list-style-type:none;}
 .popconfirm .popcontentwt ul li{background:#fff;padding:0 15px;cursor:pointer;}
-.popconfirm .popcontentwt ul li .liin{border-bottom:1px solid #EDEEF0;display:flex;justify-content:space-between;align-items:center;padding:10px 13px 10px 0;}
+.popconfirm .popcontentwt ul li .liin{border-bottom:1px solid #EDEEF0;display:flex;justify-content:space-between;align-items:center;padding:10px 0;}
 .popconfirm .popcontentwt ul li:last-child .liin{border-bottom:none;}
-.popconfirm .popcontentwt ul li .ld{display:flex;justify-content:flex-start;align-items:center;}
+.popconfirm .popcontentwt ul li .ld{display:flex;justify-content:flex-start;align-items:center;margin-right:10px;}
 .popconfirm .popcontentwt ul li .ld span{color:#323232;}
 .popconfirm .popcontentwt ul li .ld .greendot{width:5px;height:5px;border-radius:50%;margin-right:14px;background:#45AD8E;flex-shrink: 0;}
 .popconfirm .popcontentwt ul li .rd{display:flex;justify-content:flex-end;align-items:center;color:#909090;}
@@ -560,7 +560,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .popconfirm .popcontentwt ul li img{vertical-align:initial;width:36px;vertical-align:top;border-radius:50%;}
 .popconfirm .popcontentwt ul li .rd img{margin-left:10px;}
 .popconfirm .popcontentwt ul li .rd span{flex-shrink:0;white-space:nowrap;font-size:12px;}
-
+.popconfirm .popcontentwt ul li .ld .lname{display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;overflow: hidden;}
 
 /*聊天记录*/
 .send-form{position:fixed;width:100%;bottom:0px;box-shadow:0px 1px 4px 0px rgba(0,0,0,0.22);background-color:white;z-index:5;white-space:nowrap;text-align:center;height:auto;}
