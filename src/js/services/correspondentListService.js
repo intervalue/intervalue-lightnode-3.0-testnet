@@ -295,7 +295,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 			var objPaymentRequest = parsePaymentRequestQueryString(query_string);
 			if (!objPaymentRequest)
 				return str;
-			return '<i>'+gettextCatalog.getString('Payment request') +objPaymentRequest.amountStr.substring(15)+gettextCatalog.getString(' to ')+address+'</i>';
+			return '<i>'+address+' '+gettextCatalog.getString('Payment request') +objPaymentRequest.amountStr.substring(16)+'</i>';
 		}).replace(/\[(.+?)\]\(payment:(.+?)\)/g, function(str, description, paymentJsonBase64){
 			var arrMovements = getMovementsFromJsonBase64PaymentRequest(paymentJsonBase64);
 			if (!arrMovements)
@@ -545,7 +545,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 					}
 					messageEvents.unshift({id: message.id, type: message.type, bIncoming: message.is_incoming, message: message.message, timestamp: Math.floor(msg_ts.getTime() / 1000), chat_recording_status: message.chat_recording_status});
 				}
-				if (historyEndForCorrespondent[correspondent.device_address] && messageEvents.length > 1) {
+				if (historyEndForCorrespondent[correspondent.device_address] ) {
                     let strDate = ''+last_msg_ts.getFullYear()+'年'+(last_msg_ts.getMonth()+1)+'月'+(last_msg_ts.getDate())+'日';
                     let week = last_msg_ts.getDay();
                     var weekDay ;
