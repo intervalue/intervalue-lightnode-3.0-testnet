@@ -183,9 +183,9 @@ angular.module('copayApp.directives')
         };
     }
     ])
-    .directive('validAmount', ['configService', 'profileService',
-        function(configService, profileService) {
-
+    .directive('validAmount', ['configService', 'profileService', '$parse',
+        function(configService, profileService, $parse) {
+            var parseval = '';
             return {
                 require: 'ngModel',
                 link: function(scope, element, attrs, ctrl) {
@@ -197,6 +197,8 @@ angular.module('copayApp.directives')
                           return value;
                         }*/
                         //console.log('-- amount');
+                        var sixellisexp = /([0-9]+(\.){1}[0-9]{6,18})(.*)/g;
+                        var sixvl = /([0-9]+(\.){1}[0-9]{6})(.*)/g;
                         var constants = require('intervaluecore/constants.js');
                         var asset = attrs.validAmount;
                         var settings = configService.getSync().wallet.settings;
@@ -220,9 +222,15 @@ angular.module('copayApp.directives')
                         if (typeof value == 'undefined' || value == 0) {
                             ctrl.$pristine = true;
                             ctrl.$setValidity('validAmount', false);
+                            return;
+                        }
+                        if(value.match(sixellisexp)){
+                            ctrl.$setValidity('validAmount', true);
+                            parseval = value.replace(sixvl,'$1');
+                            console.log(parseval)
+                            $parse(attrs['ngModel']).assign(scope, parseval);
                             return value;
                         }
-
                         if (typeof vNum == "number" && vNum > 0) {
                             var sep_index = ('' + value).indexOf('.');
                             var str_value = ('' + value).substring(sep_index + 1);
@@ -235,10 +243,12 @@ angular.module('copayApp.directives')
                             }else {
                                 ctrl.$setValidity('validAmount', true);
                             }
+                            return value;
                         } else {
                             ctrl.$setValidity('validAmount', false);
+                            return value;
                         }
-                        return value;
+
                     }
                     ctrl.$parsers.unshift(val);
                     ctrl.$formatters.unshift(val);
@@ -638,7 +648,6 @@ angular.module('copayApp.directives')
         }
         function postLink(scope, elem, attrs, controllerInstance){
             var el = angular.element(elem);
-            var self = this;
             el
                 .on('click', function(ev) {
                     controllerInstance.setFocused(true);
