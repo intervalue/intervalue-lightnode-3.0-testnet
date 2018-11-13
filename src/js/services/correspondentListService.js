@@ -135,7 +135,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 
 			if (!objPaymentRequest)
 				return str;
-			return '<a ng-click="sendPayment(\''+address+'\', '+objPaymentRequest.amount+', \''+objPaymentRequest.asset+'\',\''+'chat'+'\', \''+objPaymentRequest.device_address+'\', \''+objPaymentRequest.single_address+'\')">'+gettextCatalog.getString('From')+' '+deviceName+' '+gettextCatalog.getString(objPaymentRequest.amountStr.substring(-1,15))+objPaymentRequest.amountStr.substring(15)+'</a>';
+			return '<a ng-click="sendPayment(\''+address+'\', '+objPaymentRequest.amount+', \''+objPaymentRequest.asset+'\',\''+'chat'+'\', \''+objPaymentRequest.device_address+'\', \''+objPaymentRequest.single_address+'\')">'+address+' '+gettextCatalog.getString('From')+deviceName+gettextCatalog.getString('is')+objPaymentRequest.amountStr.substring(16)+gettextCatalog.getString(objPaymentRequest.amountStr.substring(-1,15))+'</a>';
 		}).replace(/\[(.+?)\]\(command:(.+?)\)/g, function(str, description, command){
 			return '<a ng-click="sendCommand(\''+escapeQuotes(command)+'\', \''+escapeQuotes(description)+'\')" class="command">'+description+'</a>';
 		}).replace(/\[(.+?)\]\(payment:(.+?)\)/g, function(str, description, paymentJsonBase64){
