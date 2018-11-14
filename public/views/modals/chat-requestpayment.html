@@ -17,11 +17,11 @@
     </div>
     <!-- amountInSmallestUnits = false -->
     <div class="f9fafch"></div>
-    <form name="amountForm" class="ammountlr" ng-submit="submitForm(amountForm)" novalidate>
+    <form name="amountForm" class="ammountlr" ng-submit="submitForm(amountForm,editCont.address)" novalidate>
         <!-- 金额 -->
         <div class="chatbiline" >
             <ul class="m0">
-                <li>
+               <!-- <li>
                     <div class="liin">
                         <div class="ld">
                             <div class="limg">
@@ -34,8 +34,8 @@
                             <span >{{editCont.tenaddress}}</span>
                         </div>
                     </div>
-                </li>
-                <li ng-click="showselectwt = true" ng-show="addressLenght">
+                </li>-->
+                <li ng-click="showselectwt = true" >
                     <div class="liin">
                         <div class="ld">
                             <div class="limg">
@@ -46,7 +46,7 @@
                         <div class="rd">
                             <div class="chatsetinfo">
                                 <div class="chatinfoname"><img src="{{editCont.image}}"/> {{editCont.walletName}}</div>
-                                <div class="chatinfomon"><span translate>Available amount</span>:&nbsp;<span>{{editCont.stables}}</span></div>
+                                <!--<div class="chatinfomon"><span translate>Available amount</span>:&nbsp;<span>{{editCont.stables}}</span></div>-->
                             </div>
                             <img src="./img/more.png" class="morerimg"/>
                         </div>

@@ -1099,18 +1099,17 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                         configurable: true
                     });
 
-                $scope.submitForm = function(form) {
+                $scope.submitForm = function(form,address) {
 
                     if ($scope.index.arrBalances.length === 0)
                         return console.log('showRequestPaymentModal: no balances yet');
                     var amount = form.amount.$modelValue;
-                    let address ='';
                     fc = profileService.profile;
-                    if(fc.credentials.length == 1){
-                        address = myPaymentAddress;
-                    }else {
-                        address = form.address.$modelValue;
-                    }
+                    // if(fc.credentials.length == 1){
+                    //     address = myPaymentAddress;
+                    // }else {
+                    //     address = form.address.$modelValue;
+                    // }
                     if(amount == '' || amount == undefined){
                         console.log('amount'+amount);
                         return false;
