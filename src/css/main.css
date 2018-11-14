@@ -528,8 +528,16 @@ ul.off-canvas-list .avatar-wallet{
   text-overflow: ellipsis;
 }
 ul.off-canvas-list .whpback{
-  padding:0 8px;border:1px solid #8CF8D8;border-radius:18px;font-size:10px;margin-left:10px;flex-shrink:0;cursor:pointer;color: #8CF8D8;
-  line-height:13px;
+ border:1px solid #8CF8D8;font-size:10px;margin-left:10px;flex-shrink:0;cursor:pointer;color: #8CF8D8;
+    height: 14px;
+    line-height: 0;
+    padding: 8px 8px 6px;
+    border-radius: 7px;
+    flex-shrink: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .tab-bar h1, .tab-bar h2, .tab-bar h3, .tab-bar h4, .tab-bar h5, .tab-bar h6 {
   /*line-height: 2.7rem;*/
