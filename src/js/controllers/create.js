@@ -166,7 +166,7 @@ angular.module('copayApp.controllers').controller('createwalletController',
                             });
                         }
                     });
-                    go.walletHome();
+                    $scope.index.updateTxHistory(3);
                 });
         };
         //import wallet
@@ -191,7 +191,7 @@ angular.module('copayApp.controllers').controller('createwalletController',
                                 $scope.$apply();
                             });
                         }
-                            $scope.index.updateHistory(3);
+                            $scope.index.updateTxHistory(3);
                     });
 
                 });

@@ -1288,20 +1288,20 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         // if (!client.isComplete())
         //     return console.log('fc incomplete yet');
         client.getTxHistory('base', walletId, function onGotTxHistory(txs) {
-            $timeout(function () {
-                var newHistory = self.processNewTxs(txs);
-                $log.debug('Tx History synced. Total Txs: ' + newHistory.length);
-                //if (walletId == profileService.focusedClient.credentials.walletId) {
-                self.completeHistory = newHistory;
-                self.txHistory = newHistory.slice(0, self.historyShowLimit);
-                require('intervaluecore/light').findStable2(walletId,function (obj) {
-                    self.ammountTatolNmuber = obj;
-                    self.ammountTatol = profileService.formatAmount(obj,'bytes');
-                    $timeout(function () {
-                        $rootScope.$apply();
-                    },1);
-                });
                 $timeout(function () {
+                    var newHistory = self.processNewTxs(txs);
+                    $log.debug('Tx History synced. Total Txs: ' + newHistory.length);
+                    if(newHistory.length == 0) self.txHistoryError = false;
+                    //if (walletId == profileService.focusedClient.credentials.walletId) {
+                    self.completeHistory = newHistory;
+                    self.txHistory = newHistory.slice(0, self.historyShowLimit);
+                    require('intervaluecore/light').findStable2(walletId,function (obj) {
+                        self.ammountTatolNmuber = obj;
+                        self.ammountTatol = profileService.formatAmount(obj,'bytes');
+                        $timeout(function () {
+                            $rootScope.$apply();
+                        },1);
+                    });
                     require('intervaluecore/wallet').getWalletsInfo(function (obj) {
                         if(!obj) {
                             self.updateHistory(3);
@@ -1342,7 +1342,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                             $rootScope.$apply();
                         },1);
                     });
-                },500);
 
                 self.historyShowShowAll = newHistory.length >= self.historyShowLimit;
                 //}
