@@ -2014,16 +2014,7 @@ angular.module('copayApp.controllers')
             self.from_walletName = fc.credentials.walletName;
             self.from_image = fc.image;
             self.from_walletId = fc.credentials.walletId;
-            var wallet = require('intervaluecore/wallet.js');
-            wallet.readAddressByWallet(fc.credentials.walletId,function (res) {
-                self.address = res;
-                let walletInfo = $scope.index.walletInfo;
-                for(let item in walletInfo){
-                    if(walletInfo[item].wallet == fc.credentials.walletId) self.from_stables = walletInfo[item].stables;
-                    break;
-                }
-                $scope.$apply();
-            });
+            self.from_stables = $scope.index.from_stables;
         });
 
 		self.findPaymentAddress = function(walletId,stables,walletName,image){

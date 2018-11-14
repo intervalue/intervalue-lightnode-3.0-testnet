@@ -58,6 +58,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     //self.showdollar = true;
     self.invedollar = 1;
     self.invermb = 1;
+    self.from_stables = 0;
     function updatePublicKeyRing(walletClient, onDone) {
         var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
         walletDefinedByKeys.readCosigners(walletClient.credentials.walletId, function (arrCosigners) {
@@ -1330,6 +1331,13 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                             });
                         });
                         self.walletInfo = trans;
+                        let walletInfo = self.walletInfo;
+                        for(let item in walletInfo){
+                            if(walletInfo[item].wallet == profileService.focusedClient.credentials.walletId) {
+                                self.from_stables = walletInfo[item].stables;
+                                break;
+                            }
+                        }
                         $timeout(function () {
                             $rootScope.$apply();
                         },1);
