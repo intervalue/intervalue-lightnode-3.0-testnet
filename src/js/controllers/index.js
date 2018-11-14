@@ -1334,7 +1334,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                         let walletInfo = self.walletInfo;
                         for(let item in walletInfo){
                             if(walletInfo[item].wallet == profileService.focusedClient.credentials.walletId) {
-                                self.from_stables = walletInfo[item].stables;
+                                self.stables = walletInfo[item].stables;
                                 break;
                             }
                         }

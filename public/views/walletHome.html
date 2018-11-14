@@ -654,8 +654,8 @@
                                                autocomplete="off" ng-focus="home.formFocus('amount')" ng-blur="home.formFocus(false)"/>
                                     </div>
                                 </div>
-                                <label for="amount" class="sendinfo" ng-show="!home.chat">
-                                    <span translate><span translate>Available amount</span>: {{index.ammountTatol}}</span>
+                                <label for="amount" class="sendinfo" ng-show="(home.chat && !home.lockAmount) || !home.chat">
+                                    <span translate><span translate>Available amount</span>: {{index.stables}}</span>
                                     <a ng-click="home.setSendAll()" ng-show="!home.bSendAll && !home.lockAmount" translate>Send all</a>
                                 </label>
                             </li>

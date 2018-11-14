@@ -1657,9 +1657,7 @@ angular.module('copayApp.controllers')
 			var form = $scope.sendPaymentForm;
 			if (!form || !form.amount) // disappeared?
 				return console.log('form.amount has disappeared');
-			var assetInfo = indexScope.arrBalances[indexScope.assetIndex];
-
-				var full_amount = indexScope.ammountTatol.replace(/,/g,'');
+				var full_amount = $scope.index.stables.replace(/,/g,'');
 				form.amount.$setViewValue('' + full_amount);
 				form.amount.$render();
 
@@ -2014,7 +2012,7 @@ angular.module('copayApp.controllers')
             self.from_walletName = fc.credentials.walletName;
             self.from_image = fc.image;
             self.from_walletId = fc.credentials.walletId;
-            self.from_stables = $scope.index.from_stables;
+            self.from_stables = $scope.index.stables;
         });
 
 		self.findPaymentAddress = function(walletId,stables,walletName,image){
