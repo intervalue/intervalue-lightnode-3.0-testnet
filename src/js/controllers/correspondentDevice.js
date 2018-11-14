@@ -123,7 +123,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             if (!$scope.message && !deviceAddress )
                 return;
             if(deviceAddress) $scope.message = tranMessage;
-            setOngoingProcess("sending");
+            setOngoingProcess(gettextCatalog.getString("sending"));
             //alert($scope.message);
             var message = lodash.clone($scope.message); // save in var as $scope.message may disappear while we are sending the message over the network
             $scope.message = '';
@@ -1483,7 +1483,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     window.plugins.spinnerDialog.hide();
                 }
             } else {
-                $scope.onGoingProcess = name;
+                $scope.onGoingProcess = gettextCatalog.getString(name);
                 $timeout(function() {
                     $rootScope.$apply();
                 });
