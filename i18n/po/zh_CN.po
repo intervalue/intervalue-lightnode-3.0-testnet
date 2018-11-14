@@ -1339,6 +1339,9 @@ msgstr "选择您的身份"
 msgid "Send"
 msgstr "发送"
 
+msgid "send"
+msgstr "发送"
+
 #: public/views/walletHome.html:334
 msgid "Send All"
 msgstr "全部发送"
