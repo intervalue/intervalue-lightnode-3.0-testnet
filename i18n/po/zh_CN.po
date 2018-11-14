@@ -2502,6 +2502,9 @@ msgstr "输入对方配对码"
 msgid "Choose a collection wallet"
 msgstr "选择收款钱包"
 
+msgid "Choose a payment wallet"
+msgstr "选择收款钱包"
+
 msgid "Add device"
 msgstr "添加好友"
 

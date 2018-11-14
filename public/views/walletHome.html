@@ -627,7 +627,7 @@
                                         <div class="limg">
                                             <img src="./img/wallet.png"/>
                                         </div>
-                                        <span translate>Choose a collection wallet</span>
+                                        <span translate>Choose a payment wallet</span>
                                     </div>
                                     <div class="rd">
                                         <div class="chatsetinfo">
@@ -655,10 +655,6 @@
                                     </div>
                                 </div>
                                 <label for="amount" class="sendinfo" ng-show="!home.chat">
-                                    <span translate><span translate>Available amount</span>: {{index.ammountTatol}}</span>
-                                    <a ng-click="home.setSendAll()" ng-show="!home.bSendAll && !home.lockAmount" translate>Send all</a>
-                                </label>
-                                <label for="amount" class="sendinfo" ng-show="home.chat">
                                     <span translate><span translate>Available amount</span>: {{index.ammountTatol}}</span>
                                     <a ng-click="home.setSendAll()" ng-show="!home.bSendAll && !home.lockAmount" translate>Send all</a>
                                 </label>
