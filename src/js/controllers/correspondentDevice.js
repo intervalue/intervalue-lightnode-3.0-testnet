@@ -198,7 +198,21 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
 
         };
 
-
+        $scope.requestPayment = function(){
+            fc  = profileService.profile;
+            if(fc.credentials.length != 1){
+                $scope.addressLenght = true;
+                $timeout(function () {
+                    $scope.$apply();
+                });
+            }
+            var chatltmessage = angular.element(document.getElementById('chatltmessage'));
+            chatltmessage.triggerHandler('click');
+            if (!profileService.focusedClient.credentials.isComplete())
+                return $rootScope.$emit('Local/ShowErrorAlert', "The wallet is not approved yet");
+            readMyPaymentAddress(showRequestPaymentModal);
+            //	issueNextAddressIfNecessary(showRequestPaymentModal);
+        };
 
         $scope.sendPayment = function(address, amount, asset,chat){
             console.log("will send payment to "+address);
