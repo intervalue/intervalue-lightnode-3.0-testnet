@@ -7,6 +7,7 @@
 body {
   font-family: PingFangSC-Regular,Arial,"微软雅黑";
   font-size: 14px;
+  font-weight:400;
   color:#323232;
 }
 
@@ -1152,7 +1153,6 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
   cursor: pointer;
   border-radius: 3px 3px 0 0;
   font-size: 14px;
-  font-weight: 500;
   font-family: PingFangSC-Regular,Arial,"微软雅黑";
 }
 .mtab-title.disabled {

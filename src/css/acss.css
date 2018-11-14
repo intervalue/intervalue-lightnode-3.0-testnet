@@ -97,7 +97,7 @@
 .whlinfo{display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-moz-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-moz-box-align:center;-ms-flex-align:center;align-items:center;}
 .whlinfo span{color:#8CF8D8;}
 .whlinfo .whlogo{width:30px;margin-right:20px;-ms-flex-negative:0;flex-shrink:0;}
-.whlinfo .whname{font-family:PingFangSC-Semibold,Arial,"微软雅黑";margin-right:10px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;font-size:14px;}
+.whlinfo .whname{font-family:PingFangSC-Semibold,Arial,"微软雅黑";font-weight:600;margin-right:10px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;font-size:14px;}
 .whlinfo .whpback{color:#8CF8D8;padding:0 8px;border:1px solid #8CF8D8;border-radius:18px;font-size:10px;margin-right:20px;-ms-flex-negative:0;flex-shrink:0;cursor:pointer;line-height:15px;}
 .whlinfo .whewm{width:15px;height:15px;margin-right:0;-ms-flex-negative:0;flex-shrink:0;cursor:pointer;}
 .whamount{margin-top:10px;font-size:20px;font-weight:bold;}
@@ -147,7 +147,7 @@
 .sendinfo{margin-top:10px;}
 .sendinfo{font-size:12px;font-family:PingFangSC-Medium,Arial,微软雅黑;font-weight:500;color:#999999;}
 .sendinfo a{color:#45AD8E;}
-.sendform .sendcancel{display:block;font-family:PingFangSC-Regular,Arial,微软雅黑;font-size:14px;width:100%;height:45px;line-height:45px;padding:0px;margin:0px;border-radius:3px;text-align:center;background-color:#FFFFFF;border:1px solid #3B3B3B;color:#3B3B3B;}
+.sendform .sendcancel{display:block;font-family:PingFangSC-Regular,Arial,微软雅黑;font-weight:400;font-size:14px;width:100%;height:45px;line-height:45px;padding:0px;margin:0px;border-radius:3px;text-align:center;background-color:#FFFFFF;border:1px solid #3B3B3B;color:#3B3B3B;}
 .sendcancel:hover{background-color:#007095;color:#fff;border:none;}
 /*表单请求地址*/
 .sendformaddr{padding:12px 0 0;}
@@ -228,7 +228,7 @@
 .adwnnumo{padding:18px 15px;}
 .adwnnum{padding:13px;text-align:center;margin-bottom:18px;background:#45AD8E;-webkit-box-shadow:0px 11px 12px -12px #45AD8E;box-shadow:0px 11px 12px -12px #45AD8E;border-radius:3px;}
 .adwnnum .adwnlogo{width:53px;height:53px;margin:0 auto;margin-bottom:10px;}
-.adwnnum .adwnnumamt{font-size:14px;font-family:PingFangSC-Semibold,Arial,"微软雅黑";font-weight:bold;color:#8CF8D8;padding-bottom:16px;border-bottom:1px dashed #fff;}
+.adwnnum .adwnnumamt{font-size:14px;font-family:PingFangSC-Semibold,Arial,"微软雅黑";font-weight:600;color:#8CF8D8;padding-bottom:16px;border-bottom:1px dashed #fff;}
 .adwnnum .adwnnumamt span{margin-right:14px;font-size:20px;font-family:PingFangSC-Semibold,Arial,"微软雅黑";font-weight:600;color:#ffffff;}
 .adwnnum .adwnaddr{margin-top:12px;cursor:pointer;margin-left:20px;}
 .adwnnum .adwnaddr span{margin-right:18px;font-size:12px;font-weight:400;color:#fff;}
@@ -337,7 +337,7 @@
 .warmcolor{color:#646464}
 .greencolor{color:#45AD8E;}
 .nzcolor{color:#909090;}
-.fontbold{font-family:PingFangSC-Semibold,Arial,"微软雅黑";}
+.fontbold{font-family:PingFangSC-Semibold,Arial,"微软雅黑";font-weight:600;}
 .secondcontent{width:100%;position:absolute;top:0;bottom:0;overflow:auto;background:#F9FAFC;}
 .popconfirm{position:fixed;width:100%;height:100%;top:0;left:0;z-index:100;}
 .popconfirm .popmask{position:absolute;width:100%;height:100%;text-align:center;top:0;left:0;background:rgba(0,0,0,0.3);z-index:100;cursor:pointer;}
@@ -591,7 +591,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .system b{background-color:white;border:1px dashed #888;border-width:0 0 1px 0;cursor:pointer;}
 .msg-ts{color:#acacac;font-size:10px;padding-top:10px;width:12%;}
 /*图像*/
-.from-me .chatname,.from-them .chatname{position:absolute;width:40px;height:40px;line-height:40px;font-size:24px;font-family:PingFangSC-Semibold,Arial,"微软雅黑";color:#323232;background:#EFEFEF;text-align:center;
+.from-me .chatname,.from-them .chatname{position:absolute;width:40px;height:40px;line-height:40px;font-size:24px;font-weight:600;font-family:PingFangSC-Semibold,Arial,"微软雅黑";color:#323232;background:#EFEFEF;text-align:center;
     border-radius:50%;}
 .from-them .chatname{left:-54px;top:-18px;}
 .from-me .chatname{right:-54px;top:-18px;}
@@ -601,8 +601,8 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 }
 .dropup-item{max-width:100%;padding:0 15px 0 10px;}
 .dropup-item-link{padding:8px 0!important;display:inline-block!important;max-width:calc(100% - 10px);float:left;}
-.lefttime{text-align:left;position:absolute;left:64px;bottom:8px;color:#909090;font-size:10px;font-family:PingFangSC-Medium,Arial,"微软雅黑";width:calc(100% - 64px);}
-.righttime{text-align:right;position:absolute;right:64px;bottom:8px;color:#909090;font-size:10px;font-family:PingFangSC-Medium,Arial,"微软雅黑";width:calc(100% - 64px);}
+.lefttime{text-align:left;position:absolute;left:64px;bottom:8px;color:#909090;font-size:10px;font-weight:600;font-family:PingFangSC-Medium,Arial,"微软雅黑";width:calc(100% - 64px);}
+.righttime{text-align:right;position:absolute;right:64px;bottom:8px;color:#909090;font-size:10px;font-weight:600;font-family:PingFangSC-Medium,Arial,"微软雅黑";width:calc(100% - 64px);}
 
 /*发送表单*/
 .chatsendform{height:auto;display:flex;justify-content:flex-start;align-items:flex-end;padding:8px 17px;background:#fff;box-shadow:0px 1px 4px 0px rgba(196,196,196,1);}
@@ -637,10 +637,12 @@ box-sizing:border-box;padding:8px 0;height:auto;}
 .chatbiline ul li img{vertical-align:initial;}
 .chatbiline ul li .rd img{margin-left:10px;}
 .chatbiline ul li .rd span{word-break:break-all;font-size:12px;}
-#chat .mtab .chatname{width:40px;height:40px;line-height:40px;font-size:24px;font-family:PingFangSC-Semibold,Arial,"微软雅黑";color:#323232;background:#EFEFEF;text-align:center;border-radius:50%;margin-right:15px;flex-shrink:0;}
+#chat .mtab .chatname{width:40px;height:40px;line-height:40px;font-size:24px;font-weight:600;font-family:PingFangSC-Semibold,Arial,"微软雅黑";color:#323232;background:#EFEFEF;text-align:center;border-radius:50%;margin-right:15px;flex-shrink:0;}
 #chat .mtab .chatallname{width: 100%;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
 .chatremovep{opacity: 0;overflow:hidden;position:absolute;right:0;top:0;z-index:1;background:#D45757;font-size:16px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:#fff;padding:0 24px;height:57px;line-height: 57px;}
-.mtab .correspondentlist_badge{position: absolute;right: auto;left: 42px;padding: 0;width: 11px;height: 11px;font-size: 0;top: 12px;}
+.mtab .correspondentlist_badge{position: absolute;right: auto;left: 28px;top: 8px;display: flex;align-items: center;justify-content: center;}
+.mtab .correspondentlist_badge span{background-color: #EC3939;padding:8px 4px 6px;color:#fff !important;line-height:0;
+    border-radius: 7px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-size:10px;font-weight:500;display: flex;align-items: center;justify-content: center;}
 /*correspondentDevices   end*/
 
 /*chat-requiestpayment   end*/

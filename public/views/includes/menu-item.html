@@ -12,5 +12,7 @@
     </div>
     <div ng-show="item.title == 'Chat' && totalNewMsgCnt > 0" class="badge">
         {{totalNewMsgCnt}}
+        <span ng-if="totalNewMsgCnt <= 999">{{totalNewMsgCnt}}</span>
+		<span ng-if="totalNewMsgCnt > 999">999+</span>
     </div>
 </a>

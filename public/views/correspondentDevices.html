@@ -37,7 +37,8 @@
 						<div class="ld">
 							<div class="correspondentlist_badge"
 								 ng-show="newMessagesCount[correspondent.device_address]">
-								{{newMessagesCount[correspondent.device_address]}}
+								<span ng-if="newMessagesCount[correspondent.device_address] <= 999">{{newMessagesCount[correspondent.device_address]}}</span>
+								<span ng-if="newMessagesCount[correspondent.device_address] > 999">999+</span>
 							</div>
 							<span class="chatname">{{correspondent.name | limitTo:1}}</span>
 							<span class="chatallname">{{correspondent.name}}</span>
