@@ -109,12 +109,12 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 	}
 
 	$scope.remove = function(device_address,$event) {
-		mutex.lock(["remove_device"], function(unlock){
+		//mutex.lock(["remove_device"], function(unlock){
 			// check to be safe
 
 			wallet.determineIfDeviceCanBeRemoved(device_address, function(bRemovable) {
 				if (!bRemovable) {
-					unlock();
+					//unlock();
 					return console.log('device '+device_address+' is not removable');
 				}
 				var device = require('intervaluecore/device.js');
@@ -125,7 +125,7 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 
 				// remove device
 				device.removeCorrespondentDevice(device_address, function() {
-					unlock();
+					//unlock();
 					$scope.hideRemove = true;
 					correspondentListService.currentCorrespondent = null;
 					$scope.readList();
@@ -133,7 +133,7 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 					setTimeout(function(){document.querySelector('[ui-view=chat]').scrollTop = listScrollTop;}, 5);
 				});
 			});
-		});
+		//});
         $scope.showchatdel = false;
 	};
 
