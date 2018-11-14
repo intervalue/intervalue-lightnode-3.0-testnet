@@ -286,7 +286,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
             if(text.indexOf('Transferred:') != -1 ) return  '<span style="color:#FF0000;font-weight:bold">'+gettextCatalog.getString(text.substring(-1,12))+text.substring(12)+'</span>';
             if(text.indexOf('Successfully transferred:') != -1){
                 let tranId = text.substring(-1,44);
-                return'<a ng-click="openTranInfo(\''+tranId+'\')">'+gettextCatalog.getString(text.substring(45,25))+text.substring(70)+'</a>';
+                return'<a ng-click="openTranInfo(\''+tranId+'\')">'+gettextCatalog.getString(text.substr(45,25))+text.substring(70)+'</a>';
 			}
         }
 		return escapeHtmlAndInsertBr(text).replace(payment_request_regexp, function(str, address, query_string){

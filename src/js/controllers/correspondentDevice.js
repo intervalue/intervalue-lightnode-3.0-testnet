@@ -157,6 +157,23 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             });
         };
 
+        $rootScope.sendSuccessfully =  function(device_address, chatType, message){
+            $scope.autoScrollEnabled = true;
+            var msg_obj = {
+                bIncoming: false,
+                //message: correspondentListService.formatOutgoingMessage(message),
+                message: correspondentListService.formatOutgoingMessage(message,device_address,chatType),
+                timestamp: Math.floor(Date.now() / 1000)
+            };
+            correspondentListService.checkAndInsertDate($scope.messageEvents, msg_obj);
+            $scope.messageEvents.push(msg_obj);
+            $scope.message = "";
+            $timeout(function(){
+                $scope.$apply();
+            });
+            if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(device_address, message, 0,chatType);
+        }
+
         $scope.insertMyAddress = function(walletId){
             readMyPaymentAddressToInsert(walletId,function (result) {
                 appendMyPaymentAddress(result);
@@ -181,21 +198,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
 
         };
 
-        $scope.requestPayment = function(){
-            fc  = profileService.profile;
-            if(fc.credentials.length != 1){
-                $scope.addressLenght = true;
-                $timeout(function () {
-                    $scope.$apply();
-                });
-            }
-            var chatltmessage = angular.element(document.getElementById('chatltmessage'));
-            chatltmessage.triggerHandler('click');
-            if (!profileService.focusedClient.credentials.isComplete())
-                return $rootScope.$emit('Local/ShowErrorAlert', "The wallet is not approved yet");
-            readMyPaymentAddress(showRequestPaymentModal);
-            //	issueNextAddressIfNecessary(showRequestPaymentModal);
-        };
+
 
         $scope.sendPayment = function(address, amount, asset,chat){
             console.log("will send payment to "+address);

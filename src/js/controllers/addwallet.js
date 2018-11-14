@@ -169,12 +169,12 @@ angular.module('copayApp.controllers').controller('addwalletController',
                            profileService.clearMnemonic(function() {
                                self.deleted = true;
                                notification.success(successMsg);
-                               go.walletHome();
                                $rootScope.$emit('Local/WalletImported', walletId);
                            });
                        }else{
                            $rootScope.$emit('Local/WalletImported', walletId);
                        }
+                       go.walletHome();
                    });
 
                 });

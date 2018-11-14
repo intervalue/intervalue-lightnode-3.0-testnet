@@ -166,8 +166,7 @@ angular.module('copayApp.controllers').controller('createwalletController',
                             });
                         }
                     });
-
-                    //go.walletHome();
+                    go.walletHome();
                 });
         };
         //import wallet
