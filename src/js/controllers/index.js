@@ -104,18 +104,18 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     self.sendBugReport = sendBugReport;
 
-    if (isCordova && constants.version === '1.0') {
-        var db = require('intervaluecore/db.js');
-        db.query("SELECT 1 FROM units WHERE version!=? LIMIT 1", [constants.version], function (rows) {
-            if (rows.length > 0) {
-                self.showErrorPopup("Looks like you have testnet data.  Please remove the app and reinstall.", function () {
-                    if (navigator && navigator.app) // android
-                        navigator.app.exitApp();
-                    // ios doesn't exit
-                });
-            }
-        });
-    }
+    // if (isCordova && constants.version === '1.0') {
+    //     var db = require('intervaluecore/db.js');
+    //     db.query("SELECT 1 FROM units WHERE version!=? LIMIT 1", [constants.version], function (rows) {
+    //         if (rows.length > 0) {
+    //             self.showErrorPopup("Looks like you have testnet data.  Please remove the app and reinstall.", function () {
+    //                 if (navigator && navigator.app) // android
+    //                     navigator.app.exitApp();
+    //                 // ios doesn't exit
+    //             });
+    //         }
+    //     });
+    // }
 
     eventBus.on('nonfatal_error', function (error_message, error_object) {
         console.log('nonfatal error stack', error_object.stack);
