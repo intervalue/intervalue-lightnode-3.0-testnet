@@ -654,7 +654,7 @@ box-sizing:border-box;padding:8px 0;height:auto;}
     width: 100%;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
 .chatbiline ul li .rd .chatsetinfo .chatinfomon{font-size:10px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:#999999;}
 
-.chatbiline ul li .rd input{text-align: right;border: none;font-size:18px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:rgba(50,50,50,1);}
+.chatbiline ul li .rd input{text-align: right;border: none;font-size:18px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:rgba(50,50,50,1);background:transparent;}
 .chatbiline ul li .rd.addrinputp input{padding-right: 52px;}
 .chatbiline ul li .rd label{position: absolute;right:0;font-size:18px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:rgba(119,119,119,1);}
 /*chat-requiestpayment    end*/
