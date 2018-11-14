@@ -191,7 +191,7 @@ angular.module('copayApp.controllers').controller('createwalletController',
                                 $scope.$apply();
                             });
                         }
-                            $scope.index.updateHistory(4);
+                            $scope.index.updateHistory(3);
                     });
 
                 });

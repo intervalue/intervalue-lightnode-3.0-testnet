@@ -1371,7 +1371,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         var fc = profileService.focusedClient;
         var walletId = fc.credentials.walletId;
         $log.debug('starting Updating Transaction History');
-        if ((!fc.isComplete() || self.arrBalances.length === 0 || self.updatingTxHistory[walletId]) && retry !== 4) {
+        if ((!fc.isComplete() || self.arrBalances.length === 0 || self.updatingTxHistory[walletId]) ) {
             $log.debug('failed Updating Transaction History');
             if (retry) {
                 setTimeout(function () {
@@ -1711,7 +1711,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     self.txHistory = self.completeHistory = [];
                     self.startScan(walletId);
                 }, 500);
-                self.updateHistory(4);
+                self.updateHistory(3);
             });
         });
     });
