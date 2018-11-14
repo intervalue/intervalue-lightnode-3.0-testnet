@@ -449,15 +449,15 @@
                     <div class="titlelabel" id="cointitle">
                         <div class="numall" ng-click="index.orderbyShowValue()">
                             <span translate class="sorttitle">Market value</span>
-                            <span class="cointri" ng-class="{'upcoin':index.orderByValue == 'values', 'downcoin':index.orderByValue == '-values'}"></span>
+                            <span class="cointri" ng-class="{'upcoin':index.orderByValue == '-values', 'downcoin':index.orderByValue == 'values'}"></span>
                         </div>
                         <div class="price" ng-click="index.orderbyShowPrice()">
                             <span translate class="sorttitle">Price</span>
-                            <span class="cointri" ng-class="{'upcoin':index.orderByPrice == 'price', 'downcoin':index.orderByPrice == '-price'}"></span>
+                            <span class="cointri" ng-class="{'upcoin':index.orderByPrice == '-price', 'downcoin':index.orderByPrice == 'price'}"></span>
                         </div>
                         <div class="gains" ng-click="index.orderbyShowGains()">
                             <span translate class="sorttitle">Latest gains</span>
-                            <span class="cointri" ng-class="{'upcoin':index.orderByQuoteChange == 'quoteChange', 'downcoin':index.orderByQuoteChange == '-quoteChange'}"></span>
+                            <span class="cointri" ng-class="{'upcoin':index.orderByQuoteChange == '-quoteChange', 'downcoin':index.orderByQuoteChange == 'quoteChange'}"></span>
                         </div>
                     </div>
                     <div class="removescroll" home-pull-down="index.currencyData('up')"  draggable="true">
