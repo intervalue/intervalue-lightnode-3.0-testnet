@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="org.intervalue.wallet3"
-  version="3.2.5"
+  version="3.2.6"
   android-versionCode="1062"
-  ios-CFBundleVersion="3.2.5">
+  ios-CFBundleVersion="3.2.6">
     <name>inWallet</name>
     <description>
       inWallet wallet for testnet.
