@@ -516,6 +516,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 		var last_msg_ts = new Date();;
 		var last_msg_id = 90071992547411;
 		if ((messageEvents.length && messageEvents[0].id) ) {
+            last_msg_ts = new Date(messageEvents[0].timestamp * 1000);
 			last_msg_id = messageEvents[0].id;
 			console.log(last_msg_ts);
             console.log(last_msg_id);
@@ -532,8 +533,37 @@ angular.module('copayApp.services').factory('correspondentListService', function
 					var message = messages[i];
 					var msg_ts = new Date(message.creation_date.replace(' ', 'T')+'.000Z');
 					if (last_msg_ts && last_msg_ts.getDay() != msg_ts.getDay()) {
-						messageEvents.unshift({type: 'system', bIncoming: false, message: "<span>" + last_msg_ts.toDateString() + "</span>", timestamp: Math.floor(msg_ts.getTime() / 1000)});
-					}
+						//messageEvents.unshift({type: 'system', bIncoming: false, message: "<span>" + last_msg_ts.toDateString() + "</span>", timestamp: Math.floor(msg_ts.getTime() / 1000)});
+                        let strDate = ''+last_msg_ts.getFullYear()+'年'+(last_msg_ts.getMonth()+1)+'月'+(last_msg_ts.getDate())+'日';
+                        let week = last_msg_ts.getDay();
+                        var weekDay ;
+                        switch (week) {
+                            case 0:
+                                weekDay = '日';
+                                break;
+                            case 1:
+                                weekDay = '一';
+                                break;
+                            case 2:
+                                weekDay = '二';
+                                break;
+                            case 3:
+                                weekDay = '三';
+                                break;
+                            case 4:
+                                weekDay = '四';
+                                break;
+                            case 5:
+                                weekDay = '五';
+                                break;
+                            case 6:
+                                weekDay = '六';
+                                break;
+
+                        }
+                        messageEvents.unshift({type: 'system', bIncoming: false, message: "<span>" + (uxLanguage.currentLanguage =='en' ? (last_msg_ts ? last_msg_ts : new Date()).toDateString():strDate+' 星期 '+ weekDay) + "</span>", timestamp: Math.floor((last_msg_ts ? last_msg_ts : new Date()).getTime() / 1000)});
+
+                    }
 					last_msg_ts = msg_ts;
 					if (message.type == "text" || message.type == "transaction") {
 						if (message.is_incoming) {
@@ -545,7 +575,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 					}
 					messageEvents.unshift({id: message.id, type: message.type, bIncoming: message.is_incoming, message: message.message, timestamp: Math.floor(msg_ts.getTime() / 1000), chat_recording_status: message.chat_recording_status});
 				}
-				if (historyEndForCorrespondent[correspondent.device_address] ) {
+				if ((historyEndForCorrespondent[correspondent.device_address] && messageEvents.length > 1) || messageEvents.length == 0) {
                     let strDate = ''+last_msg_ts.getFullYear()+'年'+(last_msg_ts.getMonth()+1)+'月'+(last_msg_ts.getDate())+'日';
                     let week = last_msg_ts.getDay();
                     var weekDay ;
@@ -590,8 +620,37 @@ angular.module('copayApp.services').factory('correspondentListService', function
 		var msg_ts = new Date(message.timestamp * 1000);
 		var last_msg_ts = new Date(messageEvents[messageEvents.length-1].timestamp * 1000);
 		if (last_msg_ts.getDay() != msg_ts.getDay()) {
-			messageEvents.push({type: 'system', bIncoming: false, message: "<span>" + msg_ts.toDateString() + "</span>", timestamp: Math.floor(msg_ts.getTime() / 1000)});	
-		}
+			//messageEvents.push({type: 'system', bIncoming: false, message: "<span>" + msg_ts.toDateString() + "</span>", timestamp: Math.floor(msg_ts.getTime() / 1000)});
+            let strDate = ''+last_msg_ts.getFullYear()+'年'+(last_msg_ts.getMonth()+1)+'月'+(last_msg_ts.getDate())+'日';
+            let week = last_msg_ts.getDay();
+            var weekDay ;
+            switch (week) {
+                case 0:
+                    weekDay = '日';
+                    break;
+                case 1:
+                    weekDay = '一';
+                    break;
+                case 2:
+                    weekDay = '二';
+                    break;
+                case 3:
+                    weekDay = '三';
+                    break;
+                case 4:
+                    weekDay = '四';
+                    break;
+                case 5:
+                    weekDay = '五';
+                    break;
+                case 6:
+                    weekDay = '六';
+                    break;
+
+            }
+            messageEvents.push({type: 'system', bIncoming: false, message: "<span>" + (uxLanguage.currentLanguage =='en' ? (last_msg_ts ? last_msg_ts : new Date()).toDateString():strDate+' 星期 '+ weekDay) + "</span>", timestamp: Math.floor((last_msg_ts ? last_msg_ts : new Date()).getTime() / 1000)});
+
+        }
 	}
 
 	function parseMessage(message) {
