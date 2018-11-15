@@ -116,62 +116,74 @@ angular.module('copayApp.services').factory('correspondentListService', function
             }
 		}
 	//	return text.replace(/\b[2-7A-Z]{32}\b(?!(\?(amount|asset|device_address|single_address)|"))/g, function(address){
-		return text.replace(/(\s|^)([2-7A-Z]{32})([\s.,;!:]|$)/g, function(str, pre, address, post){
-			if (!ValidationUtils.isValidAddress(address))
-				return str;
-		//	if (arrMyAddresses.indexOf(address) >= 0)
-		//		return address;
-			//return '<a send-payment address="'+address+'">'+address+'</a>';
-			return pre+'<a class="chataddamm" ng-click="sendPayment(\''+address+'\',\''+''+'\',\''+''+'\',\''+'chat'+'\')">'+address+'</a>'+post;
-		}).replace(payment_request_regexp, function(str, address, query_string){
-			if (!ValidationUtils.isValidAddress(address))
-				return str;
-		//	if (arrMyAddresses.indexOf(address) >= 0)
-		//		return str;
-			var objPaymentRequest = parsePaymentRequestQueryString(query_string);
+		//
+        let m = text.match(/(\s|^)([2-7A-Z]{32})([\s.,;!:]|$)/g);
+		if(m){
+            return text.replace(/(\s|^)([2-7A-Z]{32})([\s.,;!:]|$)/g, function(str, pre, address, post){
 
-			if (!objPaymentRequest)
-				return str;
-			return '<a class="chataddamm" ng-click="sendPayment(\''+address+'\', '+objPaymentRequest.amount+', \''+objPaymentRequest.asset+'\',\''+'chat'+'\', \''+objPaymentRequest.device_address+'\', \''+objPaymentRequest.single_address+'\')">'+address+' '+gettextCatalog.getString('From')+deviceName+gettextCatalog.getString('is')+objPaymentRequest.amountStr.substring(16)+gettextCatalog.getString(objPaymentRequest.amountStr.substring(-1,15))+'</a>';
-		}).replace(/\[(.+?)\]\(command:(.+?)\)/g, function(str, description, command){
-			return '<a ng-click="sendCommand(\''+escapeQuotes(command)+'\', \''+escapeQuotes(description)+'\')" class="command">'+description+'</a>';
-		}).replace(/\[(.+?)\]\(payment:(.+?)\)/g, function(str, description, paymentJsonBase64){
-			var arrMovements = getMovementsFromJsonBase64PaymentRequest(paymentJsonBase64, true);
-			if (!arrMovements)
-				return '[invalid payment request]';
-			description = 'Payment request: '+arrMovements.join(', ');
-			return '<a ng-click="sendMultiPayment(\''+paymentJsonBase64+'\')">'+description+'</a>';
-		}).replace(/\[(.+?)\]\(vote:(.+?)\)/g, function(str, description, voteJsonBase64){
-			var objVote = getVoteFromJsonBase64(voteJsonBase64);
-			if (!objVote)
-				return '[invalid vote request]';
-			return '<a ng-click="sendVote(\''+voteJsonBase64+'\')">'+objVote.choice+'</a>';
-		}).replace(/\[(.+?)\]\(profile:(.+?)\)/g, function(str, description, privateProfileJsonBase64){
-			var objPrivateProfile = getPrivateProfileFromJsonBase64(privateProfileJsonBase64);
-			if (!objPrivateProfile)
-				return '[invalid profile]';
-			return '<a ng-click="acceptPrivateProfile(\''+privateProfileJsonBase64+'\')">[Profile of '+objPrivateProfile._label+']</a>';
-		}).replace(/\[(.+?)\]\(profile-request:([\w,]+?)\)/g, function(str, description, fields_list){
-			var arrFields = fields_list.split(',');
-			return '<a ng-click="choosePrivateProfile(\''+fields_list+'\')">[Request for profile]</a>';
-		}).replace(/\[(.+?)\]\(sign-message-request:(.+?)\)/g, function(str, description, message_to_sign){
-			return '<a ng-click="showSignMessageModal(\''+message_to_sign+'\')">[Request to sign message: '+message_to_sign+']</a>';
-		}).replace(/\[(.+?)\]\(signed-message:(.+?)\)/g, function(str, description, signedMessageBase64){
-			var info = getSignedMessageInfoFromJsonBase64(signedMessageBase64);
-			if (!info)
-				return '<i>[invalid signed message]</i>';
-			var objSignedMessage = info.objSignedMessage;
-			var text = 'Message signed by '+objSignedMessage.authors[0].address+': '+objSignedMessage.signed_message;
-			if (info.bValid)
-				text += " (valid)";
-			else if (info.bValid === false)
-				text += " (invalid)";
-			else
-				text += ' (<a ng-click="verifySignedMessage(\''+signedMessageBase64+'\')">verify</a>)';
-			return '<i>['+text+']</i>';
-		}).replace(/\bhttps?:\/\/\S+/g, function(str){
-			return '<a ng-click="openExternalLink(\''+escapeQuotes(str)+'\')" class="external-link">'+str+'</a>';
-		});
+                //let m = text.replace(/(\s|^)([2-7A-Z]{32})([\s.,;!:]|$)/g, function(str, pre, address, post){
+                if (!ValidationUtils.isValidAddress(address)){
+                    return str;
+                }
+
+                //	if (arrMyAddresses.indexOf(address) >= 0)
+                //		return address;
+                //return '<a send-payment address="'+address+'">'+address+'</a>';
+                return pre+'<a class="chataddamm" ng-click="sendPayment(\''+address+'\',\''+''+'\',\''+''+'\',\''+'chat'+'\')">'+address+'</a>'+post;
+            }).replace(payment_request_regexp, function(str, address, query_string){
+                if (!ValidationUtils.isValidAddress(address))
+                    return str;
+                //	if (arrMyAddresses.indexOf(address) >= 0)
+                //		return str;
+                var objPaymentRequest = parsePaymentRequestQueryString(query_string);
+
+                if (!objPaymentRequest)
+                    return str;
+                return '<a class="chataddamm" ng-click="sendPayment(\''+address+'\', '+objPaymentRequest.amount+', \''+objPaymentRequest.asset+'\',\''+'chat'+'\', \''+objPaymentRequest.device_address+'\', \''+objPaymentRequest.single_address+'\')">'+address+' '+gettextCatalog.getString('From')+deviceName+gettextCatalog.getString('is')+objPaymentRequest.amountStr.substring(16)+gettextCatalog.getString(objPaymentRequest.amountStr.substring(-1,15))+'</a>';
+            }).replace(/\[(.+?)\]\(command:(.+?)\)/g, function(str, description, command){
+                return '<a ng-click="sendCommand(\''+escapeQuotes(command)+'\', \''+escapeQuotes(description)+'\')" class="command">'+description+'</a>';
+            }).replace(/\[(.+?)\]\(payment:(.+?)\)/g, function(str, description, paymentJsonBase64){
+                var arrMovements = getMovementsFromJsonBase64PaymentRequest(paymentJsonBase64, true);
+                if (!arrMovements)
+                    return '[invalid payment request]';
+                description = 'Payment request: '+arrMovements.join(', ');
+                return '<a ng-click="sendMultiPayment(\''+paymentJsonBase64+'\')">'+description+'</a>';
+            }).replace(/\[(.+?)\]\(vote:(.+?)\)/g, function(str, description, voteJsonBase64){
+                var objVote = getVoteFromJsonBase64(voteJsonBase64);
+                if (!objVote)
+                    return '[invalid vote request]';
+                return '<a ng-click="sendVote(\''+voteJsonBase64+'\')">'+objVote.choice+'</a>';
+            }).replace(/\[(.+?)\]\(profile:(.+?)\)/g, function(str, description, privateProfileJsonBase64){
+                var objPrivateProfile = getPrivateProfileFromJsonBase64(privateProfileJsonBase64);
+                if (!objPrivateProfile)
+                    return '[invalid profile]';
+                return '<a ng-click="acceptPrivateProfile(\''+privateProfileJsonBase64+'\')">[Profile of '+objPrivateProfile._label+']</a>';
+            }).replace(/\[(.+?)\]\(profile-request:([\w,]+?)\)/g, function(str, description, fields_list){
+                var arrFields = fields_list.split(',');
+                return '<a ng-click="choosePrivateProfile(\''+fields_list+'\')">[Request for profile]</a>';
+            }).replace(/\[(.+?)\]\(sign-message-request:(.+?)\)/g, function(str, description, message_to_sign){
+                return '<a ng-click="showSignMessageModal(\''+message_to_sign+'\')">[Request to sign message: '+message_to_sign+']</a>';
+            }).replace(/\[(.+?)\]\(signed-message:(.+?)\)/g, function(str, description, signedMessageBase64){
+                var info = getSignedMessageInfoFromJsonBase64(signedMessageBase64);
+                if (!info)
+                    return '<i>[invalid signed message]</i>';
+                var objSignedMessage = info.objSignedMessage;
+                var text = 'Message signed by '+objSignedMessage.authors[0].address+': '+objSignedMessage.signed_message;
+                if (info.bValid)
+                    text += " (valid)";
+                else if (info.bValid === false)
+                    text += " (invalid)";
+                else
+                    text += ' (<a ng-click="verifySignedMessage(\''+signedMessageBase64+'\')">verify</a>)';
+                return '<i>['+text+']</i>';
+            }).replace(/\bhttps?:\/\/\S+/g, function(str){
+                return '<a ng-click="openExternalLink(\''+escapeQuotes(str)+'\')" class="external-link">'+str+'</a>';
+            });
+		}else {
+			return '<div class="chataddamm" >'+text+'</div>';
+		}
+
+
 
 	}
 	
