@@ -107,10 +107,11 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	
 	function highlightActions(text, arrMyAddresses,deviceName,message_type){
 		if(message_type =='transaction'){
-            if(text.indexOf('Transferred:') != -1 ) return  '<span style="color:#FF0000;font-weight:bold">'+gettextCatalog.getString(text.substring(-1,12))+text.substring(12)+'</span>';
+            if(text.indexOf('Transferred:') != -1 ) return  '<div class="chattransfer"><div class="chattoptran"><img src="./img/setamountw.png"/><span>'+text.substring(12)+'</span></div><div class="chatbttran"><img src="./img/chattraned.png"/><span translate>Has been transferred out</span></div></div>';
             if(text.indexOf('Successfully transferred:') != -1) {
             	let tranId = text.substring(-1,44);
-                return'<a ng-click="openTranInfo(\''+tranId+'\')">'+gettextCatalog.getString(text.substr(45,25))+text.substring(70)+'</a>';
+                //return'<a ng-click="openTranInfo(\''+tranId+'\')">'+gettextCatalog.getString(text.substr(45,25))+text.substring(70)+'</a>';
+                return '<div class="chattransfer chattransferyes"><a ng-click="openTranInfo(\''+tranId+'\')"><div class="chattoptran"><img src="./img/setamountw.png"/><span>'+text.substring(70)+'</span></div><div class="chatbttran"><img src="./img/chattrsusc.png"/><span translate>Successful transfer</span></div></a></div>';
             	//return  '<span style="color:#FF0000;font-weight:bold">'+gettextCatalog.getString(text.substring(45,25))+text.substring(70)+'</span>';
             }
 		}
@@ -121,11 +122,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 		//	if (arrMyAddresses.indexOf(address) >= 0)
 		//		return address;
 			//return '<a send-payment address="'+address+'">'+address+'</a>';
-			return pre+'<a ng-click="sendPayment(\''+address+'\',\''+''+'\',\''+''+'\',\''+'chat'+'\')">'+address+'</a>'+post;
-		//	return '<a ng-click="sendPayment(\''+address+'\')">'+address+'</a>';
-			//return '<a send-payment ng-click="sendPayment(\''+address+'\')">'+address+'</a>';
-			//return '<a send-payment ng-click="console.log(\''+address+'\')">'+address+'</a>';
-			//return '<a onclick="console.log(\''+address+'\')">'+address+'</a>';
+			return pre+'<a class="chataddamm" ng-click="sendPayment(\''+address+'\',\''+''+'\',\''+''+'\',\''+'chat'+'\')">'+address+'</a>'+post;
 		}).replace(payment_request_regexp, function(str, address, query_string){
 			if (!ValidationUtils.isValidAddress(address))
 				return str;
@@ -135,7 +132,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 
 			if (!objPaymentRequest)
 				return str;
-			return '<a ng-click="sendPayment(\''+address+'\', '+objPaymentRequest.amount+', \''+objPaymentRequest.asset+'\',\''+'chat'+'\', \''+objPaymentRequest.device_address+'\', \''+objPaymentRequest.single_address+'\')">'+address+' '+gettextCatalog.getString('From')+deviceName+gettextCatalog.getString('is')+objPaymentRequest.amountStr.substring(16)+gettextCatalog.getString(objPaymentRequest.amountStr.substring(-1,15))+'</a>';
+			return '<a class="chataddamm" ng-click="sendPayment(\''+address+'\', '+objPaymentRequest.amount+', \''+objPaymentRequest.asset+'\',\''+'chat'+'\', \''+objPaymentRequest.device_address+'\', \''+objPaymentRequest.single_address+'\')">'+address+' '+gettextCatalog.getString('From')+deviceName+gettextCatalog.getString('is')+objPaymentRequest.amountStr.substring(16)+gettextCatalog.getString(objPaymentRequest.amountStr.substring(-1,15))+'</a>';
 		}).replace(/\[(.+?)\]\(command:(.+?)\)/g, function(str, description, command){
 			return '<a ng-click="sendCommand(\''+escapeQuotes(command)+'\', \''+escapeQuotes(description)+'\')" class="command">'+description+'</a>';
 		}).replace(/\[(.+?)\]\(payment:(.+?)\)/g, function(str, description, paymentJsonBase64){
@@ -175,6 +172,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 		}).replace(/\bhttps?:\/\/\S+/g, function(str){
 			return '<a ng-click="openExternalLink(\''+escapeQuotes(str)+'\')" class="external-link">'+str+'</a>';
 		});
+
 	}
 	
 	function getMovementsFromJsonBase64PaymentRequest(paymentJsonBase64, bAggregatedByAsset){

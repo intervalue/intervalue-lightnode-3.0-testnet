@@ -139,7 +139,7 @@
 /*walletHome-history-part start*/
 .histxdetail{background:#f9fafc;padding:0 15px;height:calc(100vh - 240px);overflow:scroll;}
 .histop{display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-moz-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-moz-box-align:center;-ms-flex-align:center;align-items:center;margin-bottom:6px;}
-.histopl img{margin-right:20px;}
+.histopl img{margin-right:20px;width:16px;}
 .histopl span{color:#323232;font-size:14px;font-weight:400;}
 .histopr time{font-size:12px;color:#909090;}
 .hisbottom{text-align:right;}
@@ -594,15 +594,29 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     /*height:calc(100vh - 96px);*/
 }
 .chat-message{width:100%;position:relative;}
-.bubble{padding:10px 15px;margin:0px 7px;border-radius:18px;position:relative;max-width:calc(100% - 124px);;text-align:left;word-wrap:break-word;}
+.bubble{margin:0px 7px;border-radius:18px;position:relative;max-width:calc(100% - 124px);;text-align:left;word-wrap:break-word;}
 .from-me{background:#45AD8E;box-shadow:0px 4px 5px -5px rgba(69,173,142,1);border-radius:10px 0px 10px 10px;font-size:13px;font-weight:500;color:#fff;font-family:PingFangSC-Medium,Arial,微软雅黑;float:right;
     position:relative;margin-right:62px;margin-bottom:28px;padding:10px 10px 10px 17px;}
 .from-me a{color:white;}
 .bubble a.payment,
 .bubble a.external-link{text-decoration:underline;}
 .bubble a.command{line-height:2;}
-.from-them{background:#fff;box-shadow:0px 4px 5px -5px rgba(69,173,142,1);border-radius:0px 10px 10px 10px;font-size:13px;font-weight:500;color:rgba(50,50,50,1);font-family:PingFangSC-Medium,Arial,微软雅黑;float:left;
-    margin-left:62px;margin-bottom:28px;padding:10px 17px 10px 10px;}
+/*.from-them{background:#fff;box-shadow:0px 4px 5px -5px rgba(69,173,142,1);border-radius:0px 10px 10px 10px;font-size:13px;font-weight:500;color:rgba(50,50,50,1);font-family:PingFangSC-Medium,Arial,微软雅黑;float:left;*/
+    /*margin-left:62px;margin-bottom:28px;padding:10px 17px 10px 10px;}*/
+.from-them{font-size:13px;font-weight:500;color:rgba(50,50,50,1);font-family:PingFangSC-Medium,Arial,微软雅黑;float:left;
+    margin-left:62px;margin-bottom:28px;}
+.chataddamm{background:#fff;box-shadow:0px 4px 5px -5px rgba(69,173,142,1);border-radius:0px 10px 10px 10px;padding:10px 17px 10px 10px;display:block;}
+/*转入中...*/
+.chattransfer{background:#fff;box-shadow:0px 4px 5px -5px rgba(69,173,142,1);border-radius:3px;font-size:13px;font-weight:500;color:rgba(50,50,50,1);
+    font-family:PingFangSC-Medium,Arial,微软雅黑;border:1px solid #A0D6C9;min-width:210px;}
+.chattransfer a{display: block;}
+.chattransfer .chattoptran{padding:11px 8px 8px 13px;background:#A0D6C9;color:#fff;display:flex;align-items: center;justify-content: space-between;}
+.chattransferyes{border:1px solid #45AD8E;}
+.chattransferyes .chattoptran{background:#45AD8E;}
+.chattransfer .chattoptran img{width:14px;height:14px;}
+/*转成功！*/
+.chattransfer .chatbttran{padding:8px 8px 8px 13px;font-size:10px;display:flex;align-items: center;justify-content: flex-start;}
+.chattransfer .chatbttran img{width:11px;margin-right:12px;}
 .system{position:relative;z-index:1;text-align:center;max-width:100%;font-size:12px;}
 .system>span{padding:1px 16px;font-size:13px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:#fff;background:#DEDEDE;border-radius:3px;}
 .system b{background-color:white;border:1px dashed #888;border-width:0 0 1px 0;cursor:pointer;}

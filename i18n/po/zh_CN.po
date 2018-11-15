@@ -2503,7 +2503,7 @@ msgid "Choose a collection wallet"
 msgstr "选择收款钱包"
 
 msgid "Choose a payment wallet"
-msgstr "选择收款钱包"
+msgstr "选择付款钱包"
 
 msgid "Add device"
 msgstr "添加好友"
@@ -2598,6 +2598,12 @@ msgstr " 到 "
 
 msgid "Transferred:"
 msgstr "转账:"
+
+msgid "Has been transferred out"
+msgstr "已转出"
+
+msgid "Successful transfer"
+msgstr "转出成功"
 
 msgid "Successfully transferred:"
 msgstr "已成功转账:"
