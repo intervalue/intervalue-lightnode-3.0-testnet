@@ -114,7 +114,7 @@ angular.module('copayApp.controllers').controller('importController',
                                                 if (err)
                                                     $rootScope.$emit('Local/ShowErrorAlert', +walletId + ":    " + err);
                                                 profileService.bindProfileOld(profile, function () {
-                                                    $scope.index.updateHistory(3);
+                                                    $scope.index.updateTxHistory(3);
                                                     $timeout(function() {
                                                         profileService.lockFC();
                                                         console.log('time to auto-lock wallet', profileService.focusedClient.credentials);

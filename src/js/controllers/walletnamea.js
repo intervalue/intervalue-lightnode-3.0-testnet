@@ -69,7 +69,7 @@ angular.module('copayApp.controllers').controller('walletnameaController',
                 });
 
             });
-            $scope.index.updateHistory(3);
+            $scope.index.updateTxHistory(3);
         }
 
         //开始删除钱包
@@ -99,7 +99,7 @@ angular.module('copayApp.controllers').controller('walletnameaController',
                                         notification.success(gettextCatalog.getString('Success'), gettextCatalog.getString('The wallet "{{walletName}}" was deleted', {
                                             walletName: walletName
                                         }));
-                                        $scope.index.updateHistory(3);
+                                        $scope.index.updateTxHistory(3);
                                     }
                                 });
                             });
@@ -111,7 +111,7 @@ angular.module('copayApp.controllers').controller('walletnameaController',
                                     notification.success(gettextCatalog.getString('Success'), gettextCatalog.getString('The wallet "{{walletName}}" was deleted', {
                                         walletName: walletName
                                     }));
-                                    $scope.index.updateHistory(3);
+                                    $scope.index.updateTxHistory(3);
                                 }
                             });
                         }

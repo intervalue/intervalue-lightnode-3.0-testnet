@@ -1304,7 +1304,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     });
                     require('intervaluecore/wallet').getWalletsInfo(function (obj) {
                         if(!obj) {
-                            self.updateHistory(3);
+                            self.updateTxHistory(3);
                             return;
                         }
                         self.updateImage();
@@ -1407,7 +1407,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
      */
     $rootScope.$on('Local/paymentDone', function(event){
         $rootScope.$emit('Local/SetTab', 'walletHome');
-        self.updateHistory(3);
+        self.updateTxHistory(3);
     });
 
     //  self.throttledUpdateHistory = lodash.throttle(function() {
@@ -1655,7 +1655,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
     $rootScope.$on('Local/NeedFreshHistory', function (event) {
         breadcrumbs.add('NeedFreshHistory');
-        self.updateHistory(3);
+        self.updateTxHistory(3);
     });
 
 
