@@ -560,7 +560,8 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 
 /*correspondentDevice   start*/
 .view_chat_box{display: flex;flex-direction: column;height: 100%;}
-.view_chat_box .chatlist{flex: 1;overflow: auto;padding: 0;bottom:50px;}
+.view_chat_box .chatlist{flex: 1;overflow: auto;padding: 0;bottom:50px;padding-top:28px;}
+.view_chat_box .chatlist .chat-message:first-child .system{margin-top:-20px;}
 .chatcurchattop{position: fixed;width: 100%;}
 /*弹出框*/
 .popconfirm .popcontentwt{position:absolute;width:100%;max-height:245px;overflow:scroll;bottom:0;left:0;background:#fff;box-sizing:border-box;z-index:101;border-radius:10px 10px 0 0;padding:6px 0;}
