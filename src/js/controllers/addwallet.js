@@ -174,7 +174,6 @@ angular.module('copayApp.controllers').controller('addwalletController',
                        }else{
                            $rootScope.$emit('Local/WalletImported', walletId);
                        }
-                       go.walletHome();
                    });
 
                 });
