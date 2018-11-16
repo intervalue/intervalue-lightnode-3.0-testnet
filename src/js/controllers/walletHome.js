@@ -1162,7 +1162,7 @@ angular.module('copayApp.controllers')
                                  return;
                              }
 
-                             fc.sendMultiPayment(opts, function(err, unit, mnemonics) {
+                             fc.sendMultiPayment(opts, function(err, cb) {
                                  // if multisig, it might take very long before the callback is called
                                  //indexScope.setOngoingProcess(gettext('sending'), false);
                                  breadcrumbs.add('done payment in ' + asset + ', err=' + err);
@@ -1192,7 +1192,7 @@ angular.module('copayApp.controllers')
                                  }
                                  var binding = self.binding;
                                  if(self.chat){
-                                      let tranMessage = gettextCatalog.getString('Transferred: ')+form.amount.$modelValue+' INVE';
+                                      let tranMessage = gettextCatalog.getString(cb.id+'?Transferred: ')+form.amount.$modelValue+' INVE';
                                       $rootScope.$emit('Local/paymentDoneAndSendMessage',self.deviceAddress,tranMessage);
                                      $scope.index.updateTxHistory(3);
 
