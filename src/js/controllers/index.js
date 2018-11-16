@@ -1370,16 +1370,16 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         var fc = profileService.focusedClient;
         var walletId = fc.credentials.walletId;
         $log.debug('starting Updating Transaction History');
-        // if ((!fc.isComplete() || self.arrBalances.length === 0 || self.updatingTxHistory[walletId]) ) {
-        //     $log.debug('failed Updating Transaction History');
-        //     if (retry) {
-        //         setTimeout(function () {
-        //             $log.debug('restarting Updating Transaction History');
-        //             self.updateHistory(retry - 1);
-        //         }, 3 * 1000);
-        //     }
-        //     return;
-        // }
+        if ((!fc.isComplete() || self.arrBalances.length === 0 || self.updatingTxHistory[walletId]) ) {
+            $log.debug('failed Updating Transaction History');
+            if (retry) {
+                setTimeout(function () {
+                    $log.debug('restarting Updating Transaction History');
+                    self.updateHistory(retry - 1);
+                }, 3 * 1000);
+            }
+            return;
+        }
 
         $log.debug('Updating Transaction History');
         self.txHistoryError = false;
