@@ -197,8 +197,8 @@ angular.module('copayApp.directives')
                           return value;
                         }*/
                         //console.log('-- amount');
-                        var sixellisexp = /([0-9]+(\.){1}[0-9]{6,18})(.*)/g;
-                        var sixvl = /([0-9]+(\.){1}[0-9]{6})(.*)/g;
+                        var sixellisexp = /^([0-9]+\.[0-9]{7,})$/g;
+                        var sixvl = /^([0-9]+\.[0-9]{6})([0-9]*)$/;
                         var constants = require('intervaluecore/constants.js');
                         var asset = attrs.validAmount;
                         var settings = configService.getSync().wallet.settings;
@@ -224,13 +224,16 @@ angular.module('copayApp.directives')
                             ctrl.$setValidity('validAmount', false);
                             return;
                         }
+
                         if(value.match(sixellisexp)){
                             ctrl.$setValidity('validAmount', true);
                             parseval = value.replace(sixvl,'$1');
                             $parse(attrs['ngModel']).assign(scope, parseval);
-                            return parseFloat(parseval);
+                            return true;
                         }
+
                         if (typeof vNum == "number" && vNum > 0) {
+
                             var sep_index = ('' + value).indexOf('.');
                             var str_value = ('' + value).substring(sep_index + 1);
                             if (sep_index > 0 && str_value.length > decimals) {
