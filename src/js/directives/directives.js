@@ -183,20 +183,13 @@ angular.module('copayApp.directives')
         };
     }
     ])
-    .directive('validAmount', ['configService', 'profileService', '$parse',
+    /*.directive('validAmount', ['configService', 'profileService', '$parse',
         function(configService, profileService, $parse) {
             var parseval = '';
             return {
                 require: 'ngModel',
                 link: function(scope, element, attrs, ctrl) {
                     var val = function(value) {
-                        //console.log('-- scope', ctrl);
-                        /*if (scope.home && scope.home.bSendAll){
-                          console.log('-- send all');
-                          ctrl.$setValidity('validAmount', true);
-                          return value;
-                        }*/
-                        //console.log('-- amount');
                         var sixellisexp = /^([0-9]+\.[0-9]{7,})$/g;
                         var sixvl = /^([0-9]+\.[0-9]{6})([0-9]*)$/;
                         var constants = require('intervaluecore/constants.js');
@@ -254,6 +247,79 @@ angular.module('copayApp.directives')
                     }
                     ctrl.$parsers.unshift(val);
                     ctrl.$formatters.unshift(val);
+                }
+            }
+        }
+    ])*/
+    .directive('validAmount', ['configService', 'profileService', '$parse',
+        function(configService, profileService, $parse) {
+            var parseval = '';
+            return {
+                require: 'ngModel',
+                link: function(scope, element, attrs, ctrl) {
+                    function validamount(value) {
+                        var sixellisexp = /^([0-9]+\.[0-9]{7,})$/g;
+                        var sixvl = /^([0-9]+\.[0-9]{6})([0-9]*)$/;
+                        var constants = require('intervaluecore/constants.js');
+                        var asset = attrs.validAmount;
+                        var settings = configService.getSync().wallet.settings;
+                        var unitValue = 1;
+                        var decimals = 0;
+                        if (asset === 'base'){
+                            unitValue = settings.unitValue;
+                            decimals = Number(settings.unitDecimals);
+                        }
+                        else if (asset === constants.BLACKBYTES_ASSET){
+                            unitValue = settings.bbUnitValue;
+                            decimals = Number(settings.bbUnitDecimals);
+                        }
+                        else if (profileService.assetMetadata[asset]){
+                            decimals = profileService.assetMetadata[asset].decimals || 0;
+                            unitValue = Math.pow(10, decimals);
+                        }
+
+                        var vNum = Number((value * unitValue).toFixed(0));
+
+                        if (typeof value == 'undefined' || value == 0) {
+                            ctrl.$pristine = true;
+                            ctrl.$setValidity('validAmount', false);
+                            return;
+                        }
+
+                        if(value.match(sixellisexp)){
+                            ctrl.$setValidity('validAmount', false);
+                            parseval = value.replace(sixvl,'$1');
+                            $parse(attrs['ngModel']).assign(scope, parseval);
+                            return true;
+                        }
+
+                        if (typeof vNum == "number" && vNum > 0) {
+
+                            var sep_index = ('' + value).indexOf('.');
+                            var str_value = ('' + value).substring(sep_index + 1);
+                            if (sep_index > 0 && str_value.length > decimals) {
+                                ctrl.$setValidity('validAmount', false);
+                            }else if(sep_index == 0){
+                                ctrl.$setValidity('validAmount', false);
+                            }else if(str_value == 0){
+                                ctrl.$setValidity('validAmount', false);
+                            }else {
+                                ctrl.$setValidity('validAmount', true);
+                            }
+                            return value;
+                        } else {
+                            ctrl.$setValidity('validAmount', false);
+                            return value;
+                        }
+
+                    }
+                    if (ctrl) {
+                        scope.$watch(function(){
+                            return ctrl.$modelValue + "";
+                        },function(val){
+                            validamount(val)
+                        })
+                    }
                 }
             }
         }
@@ -500,87 +566,90 @@ angular.module('copayApp.directives')
             replace: true,
             templateUrl: 'views/includes/available-balance.html'
         }
-    }).directive('selectable', function ($rootScope, $timeout) {
-    return {
-        restrict: 'A',
-        scope: {
-            bindObj: "=model",
-            bindProp: "@prop",
-            targetProp: "@exclusionBind"
-        },
-        link: function (scope, elem, attrs) {
-            $timeout(function(){
-                var dropdown = angular.element(document.querySelector(attrs.selectable));
+    })
+    .directive('selectable', function ($rootScope, $timeout) {
+        return {
+            restrict: 'A',
+            scope: {
+                bindObj: "=model",
+                bindProp: "@prop",
+                targetProp: "@exclusionBind"
+            },
+            link: function (scope, elem, attrs) {
+                $timeout(function(){
+                    var dropdown = angular.element(document.querySelector(attrs.selectable));
 
-                dropdown.find('li').on('click', function(e){
-                    var li = angular.element(this);
-                    elem.html(li.find('a').find('span').eq(0).html());
-                    scope.bindObj[scope.bindProp] = li.attr('data-value');
-                    $timeout(function () {
-                        if(!$rootScope.$$phase) $rootScope.$digest();
-                    },1);
-                });
-                scope.$watch(function(scope){return scope.bindObj[scope.bindProp]}, function(newValue, oldValue) {
-                    angular.forEach(dropdown.find('li'), function(element){
-                        var li = angular.element(element);
-                        if (li.attr('data-value') == newValue) {
-                            elem.html(li.find('a').find('span').eq(0).html());
-                            li.addClass('selected');
-                        } else {
-                            li.removeClass('selected');
-                        }
+                    dropdown.find('li').on('click', function(e){
+                        var li = angular.element(this);
+                        elem.html(li.find('a').find('span').eq(0).html());
+                        scope.bindObj[scope.bindProp] = li.attr('data-value');
+                        $timeout(function () {
+                            if(!$rootScope.$$phase) $rootScope.$digest();
+                        },1);
                     });
-                });
-                var selected = false;
-                angular.forEach(dropdown.find('li'), function(el){
-                    var li = angular.element(el);
-                    var a = angular.element(li.find('a'));
-                    a.append('<i class="fi-check check"></i>');
-                    if (scope.bindObj[scope.bindProp] == li.attr('data-value')) {
-                        a[0].click();
-                        selected = true;
-                    }
-                });
-                if (!selected && typeof attrs.notSelected == "undefined") dropdown.find('a').eq(0)[0].click();
-
-                if (scope.targetProp) {
-                    scope.$watch(function(scope){return scope.bindObj[scope.targetProp]}, function(newValue, oldValue) {
+                    scope.$watch(function(scope){return scope.bindObj[scope.bindProp]}, function(newValue, oldValue) {
                         angular.forEach(dropdown.find('li'), function(element){
                             var li = angular.element(element);
-                            if (li.attr('data-value') != newValue) {
-                                li[0].click();
-                                scope.bindObj[scope.bindProp] = li.attr('data-value');
+                            if (li.attr('data-value') == newValue) {
+                                elem.html(li.find('a').find('span').eq(0).html());
+                                li.addClass('selected');
+                            } else {
+                                li.removeClass('selected');
                             }
                         });
                     });
-                }
-            });
+                    var selected = false;
+                    angular.forEach(dropdown.find('li'), function(el){
+                        var li = angular.element(el);
+                        var a = angular.element(li.find('a'));
+                        a.append('<i class="fi-check check"></i>');
+                        if (scope.bindObj[scope.bindProp] == li.attr('data-value')) {
+                            a[0].click();
+                            selected = true;
+                        }
+                    });
+                    if (!selected && typeof attrs.notSelected == "undefined") dropdown.find('a').eq(0)[0].click();
+
+                    if (scope.targetProp) {
+                        scope.$watch(function(scope){return scope.bindObj[scope.targetProp]}, function(newValue, oldValue) {
+                            angular.forEach(dropdown.find('li'), function(element){
+                                var li = angular.element(element);
+                                if (li.attr('data-value') != newValue) {
+                                    li[0].click();
+                                    scope.bindObj[scope.bindProp] = li.attr('data-value');
+                                }
+                            });
+                        });
+                    }
+                });
+            }
+        }})
+    .directive('cosigners', function() {
+        return {
+            restrict: 'E',
+            template: '<ul class="no-bullet m20b whopays">\
+                      <li class="" ng-repeat="copayer in index.copayers">\
+                          <span class="size-12 text-gray" ng-show="copayer.me">\
+                              <i class="icon-contact size-24 m10r"></i>{{\'Me\'|translate}} <i class="fi-check m5 right"></i>\
+                          </span>\
+                          <div class="size-12" style="width: 100%" ng-show="!copayer.me" ng-click="copayer.signs = !copayer.signs">\
+                              <i class="icon-contact size-24 m10r"></i> {{copayer.name}} ({{copayer.device_address.substr(0,4)}}...) <i class="m5 right" ng-class="copayer.signs ? \'fi-check\' : \'\'"></i>\
+                          </div>\
+                      </li>\
+                    </ul>\
+                    '
         }
-    }}).directive('cosigners', function() {
-    return {
-        restrict: 'E',
-        template: '<ul class="no-bullet m20b whopays">\
-                  <li class="" ng-repeat="copayer in index.copayers">\
-                      <span class="size-12 text-gray" ng-show="copayer.me">\
-                          <i class="icon-contact size-24 m10r"></i>{{\'Me\'|translate}} <i class="fi-check m5 right"></i>\
-                      </span>\
-                      <div class="size-12" style="width: 100%" ng-show="!copayer.me" ng-click="copayer.signs = !copayer.signs">\
-                          <i class="icon-contact size-24 m10r"></i> {{copayer.name}} ({{copayer.device_address.substr(0,4)}}...) <i class="m5 right" ng-class="copayer.signs ? \'fi-check\' : \'\'"></i>\
-                      </div>\
-                  </li>\
-                </ul>\
-                '
-    }
-}).directive('historyBack', ['$window', function($window){
-    return {
-        restrict: "A",
-        link: function(scope, element, attrs) {
-            element.on('click', function() {
-                $window.history.back();
-            });
+    })
+    .directive('historyBack', ['$window', function($window){
+        return {
+            restrict: "A",
+            link: function(scope, element, attrs) {
+                element.on('click', function() {
+                    $window.history.back();
+                });
+            }
         }
-    }
-}])
+    }])
     .directive("mdinputc", function(){
         return {
             scope: {},
@@ -594,53 +663,54 @@ angular.module('copayApp.directives')
                 };
             }
         }
-    }).directive("mdinput",function(){
-    return {
-        scope: {},
-        restrict: 'A',
-        require: ['^mdinputc','?ngModel'],
-        link: postLink
-    }
-    function postLink(scope, elem, attrs, ctrl){
-        var el = angular.element(elem);
-        var self = this;
-        el
-            .on('focus', function(ev) {
-                ctrl[0].setFocused(true);
-                if((elem[0].value).trim() !== ''){
-                    ctrl[0].setHasValue(true);
-                }else{
-                    ctrl[0].setHasValue(false);
-                }
-            })
-            .on('blur', function(ev) {
-                ctrl[0].setFocused(false);
-                if((elem[0].value).trim() !== ''){
-                    ctrl[0].setHasValue(true);
-                }else{
-                    ctrl[0].setHasValue(false);
-                    elem[0].value = '';
-                }
-            });
-        if(ctrl[1]){
-            scope.$watch(function(){
-                return (ctrl[1]).$modelValue + "";
-            },function(val){
-                if(val == 'undefined'){
-                    ctrl[0].setHasValue(false);
-                }else if(val.trim() !== ''){
-                    ctrl[0].setHasValue(true);
-                }else{
-                    ctrl[0].setHasValue(false);
-                }
-            })
+    })
+    .directive("mdinput",function(){
+        return {
+            scope: {},
+            restrict: 'A',
+            require: ['^mdinputc','?ngModel'],
+            link: postLink
         }
-        scope.$on('$destroy', function() {
-            ctrl[0].setFocused(false);
-            ctrl[0].setHasValue(false);
-        });
-    }
-})
+        function postLink(scope, elem, attrs, ctrl){
+            var el = angular.element(elem);
+            var self = this;
+            el
+                .on('focus', function(ev) {
+                    ctrl[0].setFocused(true);
+                    if((elem[0].value).trim() !== ''){
+                        ctrl[0].setHasValue(true);
+                    }else{
+                        ctrl[0].setHasValue(false);
+                    }
+                })
+                .on('blur', function(ev) {
+                    ctrl[0].setFocused(false);
+                    if((elem[0].value).trim() !== ''){
+                        ctrl[0].setHasValue(true);
+                    }else{
+                        ctrl[0].setHasValue(false);
+                        elem[0].value = '';
+                    }
+                });
+            if(ctrl[1]){
+                scope.$watch(function(){
+                    return (ctrl[1]).$modelValue + "";
+                },function(val){
+                    if(val == 'undefined'){
+                        ctrl[0].setHasValue(false);
+                    }else if(val.trim() !== ''){
+                        ctrl[0].setHasValue(true);
+                    }else{
+                        ctrl[0].setHasValue(false);
+                    }
+                })
+            }
+            scope.$on('$destroy', function() {
+                ctrl[0].setFocused(false);
+                ctrl[0].setHasValue(false);
+            });
+        }
+    })
     .directive("mdlabel",function(){
         return {
             scope: {},
@@ -999,15 +1069,17 @@ angular.module('copayApp.directives')
     })
     .filter('encodeURIComponent', function() {
         return window.encodeURIComponent;
-    }).filter('objectKeys', [function() {
-    return function(item) {
-        if (!item) return null;
-        var keys = Object.keys(item);
-        keys.sort();
-        return keys;
-    };
-}]).filter('sumNumbers', [function(){
-    return function(str) {
-        return str ? str.split(/[\n\s,;]/).reduce(function(acc, val){return isNaN(+val) ? acc : acc + (+val)}, 0) : 0;
-    };
+    })
+    .filter('objectKeys', [function() {
+        return function(item) {
+            if (!item) return null;
+            var keys = Object.keys(item);
+            keys.sort();
+            return keys;
+        };
+    }])
+    .filter('sumNumbers', [function(){
+        return function(str) {
+            return str ? str.split(/[\n\s,;]/).reduce(function(acc, val){return isNaN(+val) ? acc : acc + (+val)}, 0) : 0;
+        };
 }]);
