@@ -910,6 +910,7 @@ angular.module('copayApp.controllers')
                             profileService.unlockFC(null, function (err) {
                                 if (err)
                                     return self.setSendError(err.message);
+                                delete self.current_payment_key;
                                 return self.submitPayment(self.chat,self.deviceAddress);
                             });
                             return;
@@ -948,10 +949,10 @@ angular.module('copayApp.controllers')
 
 			var wallet = require('intervaluecore/wallet.js');
 			var assetInfo = $scope.index.arrBalances[$scope.index.assetIndex];
-			var asset = assetInfo.asset ? assetInfo.asset : 'base';
+			var asset = 'base';
 			console.log("asset " + asset);
                 if (isMultipleSend) {
-                    if (assetInfo.is_private)
+                    if (assetInfo != undefined &&assetInfo.is_private)
                         return self.setSendError("private assets can not be sent to multiple addresses");
                     var outputs = [];
                     form.addresses.$modelValue.split('\n').forEach(function(line){
@@ -1100,7 +1101,7 @@ angular.module('copayApp.controllers')
                             });
                         breadcrumbs.add('sending payment in ' + asset);
                         profileService.bKeepUnlocked = true;
-                        var isHot = fc.credentials.xPrivKey ? 0 : 1;//判断冷热钱包,0为普通钱包，1为热钱包
+                        var isHot = fc.credentials.xPrivKeyEncrypted ? 0 : 1;//判断冷热钱包,0为普通钱包，1为热钱包
 
 						 require('intervaluecore/wallet').readAddressByWallet(fc.credentials.walletId,function (cb) {
                                 from_address = cb;
@@ -1127,7 +1128,7 @@ angular.module('copayApp.controllers')
                                      opts.base_outputs = outputs;
                              }
                              var filePath;
-                             if (assetInfo.is_private) {
+                             if (assetInfo != undefined && assetInfo.is_private) {
                                  opts.getPrivateAssetPayloadSavePath = function (cb) {
                                      self.getPrivatePayloadSavePath(function (fullPath, cordovaPathObj) {
                                          filePath = fullPath ? fullPath : (cordovaPathObj ? cordovaPathObj.root + cordovaPathObj.path + '/' + cordovaPathObj.fileName : null);
@@ -1193,6 +1194,7 @@ angular.module('copayApp.controllers')
                                  if(self.chat){
                                       let tranMessage = gettextCatalog.getString('Transferred: ')+form.amount.$modelValue+' INVE';
                                       $rootScope.$emit('Local/paymentDoneAndSendMessage',self.deviceAddress,tranMessage);
+                                     $scope.index.updateTxHistory(3);
 
                                  }else {
                                      $rootScope.$emit('Local/paymentDone');
@@ -1213,7 +1215,6 @@ angular.module('copayApp.controllers')
 				});
 			}, 100);
 		};
-
 		setInterval(function () {
 			let light = require('intervaluecore/light');
             let device = require('intervaluecore/device');
@@ -1234,7 +1235,7 @@ angular.module('copayApp.controllers')
                             device.sendMessageToDevice(device_address, chatType, message, {
                                 //device.sendMessageToDevice('0DOJDKCO6CD2JGWMFEWNHJSFXPQQLRSXW', "text", message, {
                                 ifOk: function(){
-                                    $rootScope.sendSuccessfully(device_address, chatType, message);
+                                   $rootScope.sendSuccessfully(device_address, chatType, message);
                                 },
                                 ifError: function(error){
                                     setOngoingProcess();
