@@ -1646,7 +1646,12 @@ angular.module('copayApp.controllers')
 			if (!form || !form.amount) // disappeared?
 				return console.log('form.amount has disappeared');
 				var full_amount = $scope.index.stables.replace(/,/g,'');
-				form.amount.$setViewValue('' + full_amount);
+				var full_amount2 = self.from_stables.replace(/,/g,'');
+				if(self.chat){
+					form.amount.$setViewValue('' + full_amount2);
+				}else{
+					form.amount.$setViewValue('' + full_amount);
+				}
 				form.amount.$render();
 
 			//console.log('done setsendall')

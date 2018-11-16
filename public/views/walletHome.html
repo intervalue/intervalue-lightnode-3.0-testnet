@@ -661,7 +661,8 @@
                                     </div>
                                 </div>
                                 <label for="amount" class="sendinfo" ng-show="(home.chat && !home.lockAmount) || !home.chat">
-                                    <span translate><span translate>Available amount</span>: {{index.stables}}</span>
+                                    <span ng-show="!home.chat"><span translate>Available amount</span>: {{index.stables}}</span>
+                                    <span ng-show="home.chat"><span translate>Available amount</span>: {{home.from_stables}}</span>
                                     <a ng-click="home.setSendAll()" ng-show="!home.bSendAll && !home.lockAmount" translate>Send all</a>
                                 </label>
                             </li>
