@@ -1191,8 +1191,8 @@ angular.module('copayApp.controllers')
                                  }
                                  var binding = self.binding;
                                  if(self.chat){
-                                      //let tranMessage = gettextCatalog.getString('Transferred: ')+form.amount.$modelValue+' INVE';
-                                      //$rootScope.$emit('Local/paymentDoneAndSendMessage',self.deviceAddress,tranMessage);
+                                      let tranMessage = gettextCatalog.getString('Transferred: ')+form.amount.$modelValue+' INVE';
+                                      $rootScope.$emit('Local/paymentDoneAndSendMessage',self.deviceAddress,tranMessage);
 
                                  }else {
                                      $rootScope.$emit('Local/paymentDone');
@@ -1214,7 +1214,7 @@ angular.module('copayApp.controllers')
 			}, 100);
 		};
 
-		/*setInterval(function () {
+		setInterval(function () {
 			let light = require('intervaluecore/light');
             let device = require('intervaluecore/device');
              light.findPendingWithChat().then(function (resolve,reject) {
@@ -1252,7 +1252,7 @@ angular.module('copayApp.controllers')
         function setError(error){
             console.log("send error:", error);
             $scope.error = error;
-        }*/
+        }
 
 
         // setInterval(function () {
