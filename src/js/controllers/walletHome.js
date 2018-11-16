@@ -1101,8 +1101,6 @@ angular.module('copayApp.controllers')
                             });
                         breadcrumbs.add('sending payment in ' + asset);
                         profileService.bKeepUnlocked = true;
-                        console.log(77777777);
-                       console.log(fc);
                         var isHot = fc.credentials.xPrivKeyEncrypted ? 0 : 1;//判断冷热钱包,0为普通钱包，1为热钱包
 
 						 require('intervaluecore/wallet').readAddressByWallet(fc.credentials.walletId,function (cb) {
@@ -1196,6 +1194,7 @@ angular.module('copayApp.controllers')
                                  if(self.chat){
                                       let tranMessage = gettextCatalog.getString('Transferred: ')+form.amount.$modelValue+' INVE';
                                       $rootScope.$emit('Local/paymentDoneAndSendMessage',self.deviceAddress,tranMessage);
+                                     $scope.index.updateTxHistory(3);
 
                                  }else {
                                      $rootScope.$emit('Local/paymentDone');
@@ -1998,8 +1997,6 @@ angular.module('copayApp.controllers')
 
         $timeout(function () {
         	let fc = profileService.focusedClient;
-            console.log(111111111);
-        	console.log(fc);
             self.from_walletName = fc.credentials.walletName;
             self.from_image = fc.image;
             self.from_walletId = fc.credentials.walletId;
