@@ -96,19 +96,28 @@ angular.module('copayApp.services').factory('correspondentListService', function
 		for (var i = messages.length-1; i >= 0 && msg_obj.message_counter; i--) {
 			var message = messages[i];
 			if (message.message_counter === undefined || message.message_counter && msg_obj.message_counter > message.message_counter) {
+                let msg = msg_obj.message.substr(69,44);
+				let msgUpdate =  true;
+                for(let item in messages){
+                    if(messages[item].message.indexOf(msg_obj.message.substr(69,44)) != -1) {
+                        messages[item].message = msg_obj.message;
+                        msgUpdate = false;
+                    }
+                }
+                if(msgUpdate)
 				messages.splice(i+1, 0, msg_obj);
 				return;
 			}
 
 		}
-		messages.push(msg_obj);
+            messages.push(msg_obj);
 	}
 	
 	var payment_request_regexp = /\[.*?\]\(intervalue:([0-9A-Z]{32})\?([\w=&;+%]+)\)/g; // payment description within [] is ignored
 	
 	function highlightActions(text, arrMyAddresses,deviceName,message_type){
 		if(message_type =='transaction'){
-            if(text.indexOf('Transferred:') != -1 ) return  '<div class="chattransfer"><div class="chattoptran"><img src="./img/setamountw.png"/><span>'+text.substring(12)+'</span></div><div class="chatbttran"><img src="./img/chattraned.png"/><span translate>Has been transferred out</span></div></div>';
+            if(text.indexOf('Transferred:') != -1 ) return  '<div class="chattransfer"><div class="chattoptran" id="'+text.substring(-1,44)+'"><img src="./img/setamountw.png"/><span>'+text.substring(57)+'</span></div><div class="chatbttran"><img src="./img/chattraned.png"/><span translate>Has been transferred out</span></div></div>';
             if(text.indexOf('Successfully transferred:') != -1) {
             	let tranId = text.substring(-1,44);
                 return '<div class="chattransfer chattransferyes"><a ng-click="openTranInfo(\''+tranId+'\')"><div class="chattoptran"><img src="./img/setamountw.png"/><span>'+text.substring(70)+'</span></div><div class="chatbttran"><img src="./img/chattrsusc.png"/><span translate>Successful transfer</span></div></a></div>';
@@ -292,7 +301,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	
 	function formatOutgoingMessage(text,deviceName,message_type){
         if(message_type =='transaction'){
-            if(text.indexOf('Transferred:') != -1 ) return  '<div class="chattransfer"><div class="chattoptran"><img src="./img/setamountw.png"/><span>'+text+'</span></div><div class="chatbttran"><img src="./img/chattraned.png"/><span translate>Has been transferred out</span></div></div>';
+            if(text.indexOf('Transferred:') != -1 ) return  '<div class="chattransfer"><div class="chattoptran" id="'+text.substring(-1,44)+'"><img src="./img/setamountw.png"/><span>'+text.substring(57)+'</span></div><div class="chatbttran"><img src="./img/chattraned.png"/><span translate>Has been transferred out</span></div></div>';
             if(text.indexOf('Successfully transferred:') != -1){
                 let tranId = text.substring(-1,44);
                 return'<div class="chattransfer chattransferyes"><a ng-click="openTranInfo(\''+tranId+'\')"><div class="chattoptran"><img src="./img/setamountw.png"/><span>'+text.substring(70)+'</span></div><div class="chatbttran"><img src="./img/chattrsusc.png"/><span translate>Successful transfer</span></div></a></div>';
@@ -589,6 +598,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 							message.message = formatOutgoingMessage(message.message,correspondent.name,message.type );
 						}
 					}
+
 					messageEvents.unshift({id: message.id, type: message.type, bIncoming: message.is_incoming, message: message.message, timestamp: Math.floor(msg_ts.getTime() / 1000), chat_recording_status: message.chat_recording_status});
 				}
 				if ((historyEndForCorrespondent[correspondent.device_address] && messageEvents.length > 1) || messageEvents.length == 0) {
@@ -681,7 +691,6 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	}
 	
 	eventBus.on("text", function(from_address, body, message_counter){
-
 		 device.readCorrespondent(from_address, function(correspondent){
 		 	if (!root.messageEventsByCorrespondent[correspondent.device_address]) loadMoreHistory(correspondent);
 		 	addIncomingMessageEvent(correspondent.device_address, body, message_counter,correspondent.name);
@@ -690,7 +699,6 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	});
 
     eventBus.on("transaction", function(from_address, body, message_counter){
-
         device.readCorrespondent(from_address, function(correspondent){
             if (!root.messageEventsByCorrespondent[correspondent.device_address]) loadMoreHistory(correspondent);
             addIncomingMessageEvent(correspondent.device_address, body, message_counter,correspondent.name,'transaction');

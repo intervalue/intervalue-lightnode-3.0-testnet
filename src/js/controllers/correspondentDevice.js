@@ -168,16 +168,10 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                 timestamp: Math.floor(Date.now() / 1000)
             };
             correspondentListService.checkAndInsertDate($scope.messageEvents, msg_obj);
-            console.log('$scope.messageEvents sendSuccessfully');
-            console.log($scope.messageEvents);
-            console.log(msg_obj);
-            console.log(msg_obj.message.substr(69,44));
             let msg = msg_obj.message.substr(69,44);
 
             for(let item in $scope.messageEvents){
-                console.log($scope.messageEvents[item].message);
-                console.log(msg);
-                if($scope.messageEvents[item].message.indexOf(msg_obj.message.substr(69,44)) != -1) {
+                if($scope.messageEvents[item].message.indexOf(msg) != -1) {
 
                     $scope.messageEvents[item].message = msg_obj.message;
                 }
