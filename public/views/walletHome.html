@@ -601,6 +601,12 @@
                     </div>
                 </form>-->
                 <form class="sendformaddr" name="sendPaymentForm" ng-submit="home.submitPayment(home.chat,home.deviceAddress)" novalidate>
+                    <div class="box-notification" ng-show="home.error" ng-click="home.resetError()">
+                      <span class="text-warning">
+                        {{home.error|translate}}
+                      </span>
+                        <a class="close-notification text-warning">&#215;</a>
+                    </div>
                     <!-- 金额 -->
                     <div class="chatbiline">
                         <ul class="m0">
