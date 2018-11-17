@@ -69,6 +69,7 @@ angular.module('copayApp.controllers').controller('addwalletController',
             } else {
                 return false;
             }
+            self.watchchose();
         }
         self.minuswordf = function ($event) {
             self.showcodeerr = false;
@@ -86,8 +87,31 @@ angular.module('copayApp.controllers').controller('addwalletController',
             } else {
                 return false;
             }
+            self.watchchose();
         };
-        $scope.$watch(function () {
+        self.watchchose = function(){
+            if (self.chosenWords.length > 11) {
+                var chostr = '';
+                for (var i = 0; i < self.chosenWords.length; i++) {
+                    chostr += self.chosenWords[i].str;
+                }
+                var showstr = '';
+                for (var i = 0; i < self.showcodes.length; i++) {
+                    showstr += self.showcodes[i].str;
+                }
+                if (chostr == showstr) {
+                    for (var i = 0; i < self.showcodes.length; i++) {
+                        self.mnemonic += ' ' + self.showcodes[i].str;
+                    }
+                    self.step = 'deletecode';
+                } else {
+                    self.showcodeerr = true;
+                }
+            }else{
+                return;
+            }
+        }
+        /*$scope.$watch(function () {
             return JSON.stringify(self.chosenWords);
         }, function (newValue, oldValue) {
             if (self.chosenWords.length > 11) {
@@ -108,7 +132,7 @@ angular.module('copayApp.controllers').controller('addwalletController',
                     self.showcodeerr = true;
                 }
             }
-        }, true)
+        }, true)*/
         // 更改代码
         self.haschoosen = function (noWallet) {
             if (self.creatingProfile)
