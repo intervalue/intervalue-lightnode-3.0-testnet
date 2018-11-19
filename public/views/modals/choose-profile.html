@@ -23,13 +23,13 @@
 </style>
 
 <div class="modal-content fix-modals-touch">
-	<div ng-if="error" class="row columns">
+	<div ng-if="error">
 		<span class="has-error size-12">
 			{{error}}
 		</span>
 	</div>
-	<div class="row m20t">
-		<div class="large-12 large-centered columns" ng-if="arrProfiles.length > 0">
+	<div class="m20t">
+		<div ng-if="arrProfiles.length > 0">
 			<select class="m10t" ng-model="vars.selected_profile" ng-options="profile as profile._label for profile in arrProfiles"></select>
 			<div ng-if="vars.selected_profile">
 				<ul class="no-bullet size-14" style="margin-bottom: 0px;">
@@ -63,7 +63,7 @@
 				Send this profile
 			</button>
 		</div>
-		<div class="large-12 large-centered columns" ng-if="arrProfiles.length === 0">
+		<div ng-if="arrProfiles.length === 0">
 			<p ng-if="requested" translate>No profiles matching the requested criteria.</p>
 			<p ng-if="!requested" translate>No profiles yet.</p>
 			<p ng-if="noProfiles" translate>You need to go through an attestation to get a profile.  Look for Real Name Attestation bot in the Bot Store.</p>

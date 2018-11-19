@@ -32,28 +32,24 @@
   </div>
 	
 	<div class="" ng-show="index.m < index.n && index.m > 1">
-		<h4 class="title m0 row columns" translate>Who signs:</h4>
-        <div class="row columns large-12 medium-12">
+		<h4 class="title m0 " translate>Who signs:</h4>
+        <div>
     			<cosigners></cosigners>
     		</div>
     </div>
 	
-	<div ng-if="error" class="row columns">
+	<div ng-if="error" >
 		<span class="has-error size-12">
 			{{error}}
 		</span>
 	</div>
 	
-  <div class="row m20t">
-    <div class="large-12 large-centered columns">
-        <div >
-        </div>
-        <div >
-        </div>
-        <button ng-if="!bAlreadyPaid" type="submit" class="button black round expand" ng-disabled="bDisabled || !index.isEnoughSignersSelected()" ng-style="{'background-color':color}" ng-click="pay()" translate>
+  <div class="m20t">
+    <div>
+        <button ng-if="!bAlreadyPaid" type="submit" class="button black" ng-disabled="bDisabled || !index.isEnoughSignersSelected()" ng-style="{'background-color':color}" ng-click="pay()" translate>
           Send Payment
         </button>
-        <button ng-if="bAlreadyPaid" type="button" class="button black round expand" disabled ng-style="{'background-color':color}" translate>
+        <button ng-if="bAlreadyPaid" type="button" class="button black" disabled ng-style="{'background-color':color}" translate>
           Already Paid
         </button>
     </div>

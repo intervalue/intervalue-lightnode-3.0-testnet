@@ -3,19 +3,59 @@
  * Intervalue main CSS
  *
  */
-
+*, *:before, *:after{
+  box-sizing: border-box;
+}
 body {
   font-family: PingFangSC-Regular,Arial,"微软雅黑";
   font-size: 14px;
   font-weight:400;
   color:#323232;
+  margin:0;
+  padding:0;
+  line-height: 1.5;
+  font-style: normal;
+  cursor: auto;
 }
-
-
+div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, p, blockquote, th, td{
+  margin:0;
+  padding:0;
+}
+a{
+  cursor: pointer;
+}
+p{
+  font-size:0.13rem;
+  margin-bottom:14px;
+}
+ul, ol, dl{
+  font-size: 16px;
+  list-style-type: none;
+}
+h1, h2, h3, h4, h5, h6{
+  color: #222222;
+  font-style: normal;
+  font-weight: normal;
+}
+.text-center{
+  text-align: center;
+}
+.prefix, .postfix{
+  line-height:1;
+}
 .panel h1, .panel h2, .panel h3, .panel h4, .panel h5, .panel h6, .panel p, .panel li, .panel dl {
   color: #2C3E50;
 }
-
+img{
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 100%;
+  height: auto;
+  border: none;
+}
+a img{
+  border:none;
+}
 #qr-canvas { display: none; }
 #qrcode-scanner-video {
   display: block;
@@ -26,10 +66,6 @@ body {
   position: absolute;
   top: 5px;
   right: 0;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: #2C3E50;
 }
 
 h1 {
@@ -47,16 +83,14 @@ h3 {
 }
 
 h4, h2 span.small {
-  font-size: 0.875rem;
+  font-size: 12px;
 }
 
 h4.title {
   background: #F1F3F5;
-  padding: 0.8rem;
   text-transform: uppercase;
   color: #2C3E50;
   font-weight: 700;
-  font-size: 0.7rem;
 }
 
 h4.title a {
@@ -104,9 +138,7 @@ ul.profile-entries li {
 
 .addressbook-input {
   display: block;
-  margin-bottom: 1.5rem;
   background-color: #E4E8EC;
-  padding-left: 0.5rem;
   color: #2C3E50;
   font-size: 13px;
   height: 35px;
@@ -129,7 +161,6 @@ body, html{
 }
 
 .alt-currency {
-  padding: 0.05rem 0.2rem;
   border-radius: 2px;
   font-size: 10px;
   color: #fff;
@@ -174,10 +205,10 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill, inpu
 }
 textarea{
   min-height: 20px;
+  max-width:100%;
 }
 .sub-header {
   background: #F1f3F5;
-  padding: 0.8rem;
   overflow: hidden;
 }
 
@@ -188,7 +219,6 @@ textarea{
   left: 250px;
   right: 0;
   bottom: 0;
-  padding: 10px 1rem 10px 0.5rem;
   z-index: 9;
   font-size: 14px;
   text-align: left;
@@ -208,10 +238,6 @@ textarea{
 .page, .main {
   height:100%;
   background-color: #323232;
-}
-
-.button.small.side-bar {
-  padding: 0rem 0.4rem;
 }
 
 .waiting {
@@ -245,8 +271,6 @@ textarea{
 
 .box-setup-footer {
   overflow: hidden;
-  margin-top: 1rem;
-  padding: 1rem 0 0;
   border-top: 1px solid #425467;
   font-size: 12px;
 }
@@ -254,11 +278,9 @@ textarea{
 .box-notification {
   position: relative;
   font-size: 12px;
-  padding: 0.5rem 2rem 0.5rem 0.7rem;
   border-radius: 2px;
   background: #F2F5F8;
   margin: 0 auto;
-  margin-bottom: 1.6rem;
 }
 
 .box-notification .box-icon {
@@ -267,7 +289,6 @@ textarea{
   left: 0;
   color: white;
   background-color: #1ABC9C;
-  padding:0 0.5rem;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
   height: 100%;
@@ -296,7 +317,6 @@ a.close-notification {
 
 ul.tx-copayers {
   background: #E4E8EC;
-  padding: 0.3rem 0.8rem;
   margin-left: 0;
   box-shadow: inset 0 1px 1px 0 rgba(10,19,28,.12);
   border-radius: 0 0 3px 3px;
@@ -304,7 +324,6 @@ ul.tx-copayers {
 
 .tx-copayers li {
   list-style: none;
-  padding: 0.3rem;
   font-size: 12px;
 }
 
@@ -321,12 +340,10 @@ ul.tx-copayers {
 .sign-action {
   background: #E4E8EC;
   width: 100%;
-  padding: 1rem;
   text-align: center;
 }
 
 .icon-sign {
-  padding: 0.2rem 0.3rem;
   border-radius: 100%;
   color: #fff;
   margin-right: 7px;
@@ -344,14 +361,12 @@ ul.tx-copayers {
   background-color: #213140;
   border-radius: 3px;
   font-size: 12px;
-  padding: 0.2rem 0.4rem;
   color: #7A8C9E;
 }
 
 .input-note {
   margin-top: -10px;
   display: block;
-  margin-bottom: 1rem;
 }
 
 .send-note {
@@ -369,7 +384,6 @@ ul.tx-copayers {
   text-transform: uppercase;
   font-weight: 700;
   color: #4B6178;
-  padding: 1.5rem 1rem;
   display: block;
   overflow: hidden;
 }
@@ -388,17 +402,12 @@ ul.manage li {
   background-color: #4B6178;
   width: 50px;
   height: 50px;
-  padding: 0.65rem;
   border-radius: 100%;
   display: block;
   font-size: 30px;
   color: #fff;
   float: left;
   margin-right: 20px;
-}
-
-.manage a i.circle.plus-fixed {
-  padding: 0.1rem 0.9rem;
 }
 
 .dn {display: none;}
@@ -411,6 +420,7 @@ ul.manage li {
 .size-10 { font-size: 10px; }
 .size-11 { font-size: 11px; }
 .size-12 { font-size: 12px; }
+.size-13 { font-size: 13px; }
 .size-14 { font-size: 14px; }
 .size-16 { font-size: 16px; }
 .size-18 { font-size: 18px; }
@@ -482,7 +492,6 @@ ul.manage li {
 .m10v {margin:10px 0;}
 .m20v {margin:20px 0;}
 .m30a {margin: 30px auto;}
-.m-negative-l {margin-left: -0.9375rem;}
 .br100 {border-radius: 100% !important;}
 .lh {line-height: 0;}
 .lh140 {line-height: 140%;}
@@ -494,12 +503,10 @@ ul.manage li {
 
 .line {
   border-top: 1px solid #F8F8FB;
-  margin: 0.7rem 0;
 }
 
 .line-white {
   border-top: 1px solid #fff;
-  margin: 0.7rem 0;
 }
 
 .line-t {
@@ -540,8 +547,8 @@ ul.off-canvas-list .whpback{
     justify-content: center;
 }
 .tab-bar h1, .tab-bar h2, .tab-bar h3, .tab-bar h4, .tab-bar h5, .tab-bar h6 {
-  /*line-height: 2.7rem;*/
-  line-height: 3rem; /* tested on mac and win */
+  line-height: 0.46rem;
+  margin:0;
 }
 
 .sidebar li.nav-item.selected .name-wallet {
@@ -583,7 +590,6 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .tx-proposal i {
-  padding: .1rem .3rem;
   background-color: #A5B2BF;
   border-radius: 100%;
   color: #fff;
@@ -595,7 +601,6 @@ input[type=number]::-webkit-outer-spin-button {
 
 .label {
   font-weight: 500;
-  padding: 0.3rem 0.4rem;
 }
 
 .label.outline {
@@ -639,19 +644,23 @@ input {
   border-radius: 2px;
   background: #EDEDED;
   color: #2C3E42;
-  padding: 1.2rem 0.7rem;
-  margin-bottom: 1.5rem;
   border: 0;
 }
 
-input[type="color"], input[type="date"], input[type="datetime-local"], input[type="datetime"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"], textarea {
+input:not([type]), input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], input[type="color"], textarea {
   color: #6A7D90;
   height: 40px;
   background: transparent;
   border: none;
   padding:0;
+  border-radius: 0;
   margin:0;
   border-bottom: 1px solid #909090;
+  -webkit-transition: border-color 0.15s linear, background 0.15s linear;
+  -moz-transition: border-color 0.15s linear, background 0.15s linear;
+  -ms-transition: border-color 0.15s linear, background 0.15s linear;
+  -o-transition: border-color 0.15s linear, background 0.15s linear;
+  transition: border-color 0.15s linear, background 0.15s linear;
 }
 
 input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="week"]:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="time"]:focus, input[type="url"]:focus, input[type="color"]:focus, textarea:focus {
@@ -663,8 +672,8 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus
 input[type="text"][disabled], input[type="text"][readonly], fieldset[disabled] input[type="text"], input[type="password"][disabled], input[type="password"][readonly], fieldset[disabled] input[type="password"], input[type="date"][disabled], input[type="date"][readonly], fieldset[disabled] input[type="date"], input[type="datetime"][disabled], input[type="datetime"][readonly], fieldset[disabled] input[type="datetime"], input[type="datetime-local"][disabled], input[type="datetime-local"][readonly], fieldset[disabled] input[type="datetime-local"], input[type="month"][disabled], input[type="month"][readonly], fieldset[disabled] input[type="month"], input[type="week"][disabled], input[type="week"][readonly], fieldset[disabled] input[type="week"], input[type="email"][disabled], input[type="email"][readonly], fieldset[disabled] input[type="email"], input[type="number"][disabled], input[type="number"][readonly], fieldset[disabled] input[type="number"], input[type="search"][disabled], input[type="search"][readonly], fieldset[disabled] input[type="search"], input[type="tel"][disabled], input[type="tel"][readonly], fieldset[disabled] input[type="tel"], input[type="time"][disabled], input[type="time"][readonly], fieldset[disabled] input[type="time"], input[type="url"][disabled], input[type="url"][readonly], fieldset[disabled] input[type="url"], input[type="color"][disabled], input[type="color"][readonly], fieldset[disabled] input[type="color"], textarea[disabled], textarea[readonly], fieldset[disabled] textarea {
   background-color: #E4E8EC;
   color: #2C3E50;
-  padding-left: 0.5rem;
   opacity: 1;
+  width:100%;
 }
 
 select {
@@ -758,6 +767,18 @@ table tbody tr:last-child td {
   color:#45AD8E !important;
 }
 /*////////////////////////////  BUTTON OUTLINE  ////////////////////////////*/
+.button, button {
+  text-transform: uppercase;
+  transition: none !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color:#fff;
+  display: inline-block;
+  transition: background-color 300ms ease-out;
+}
 
 .button.outline,
 .button.outline:hover,
@@ -877,18 +898,19 @@ button.gray:focus,
   color: #2C3E50;
 }
 
-button.disabled, button[disabled], .button.disabled, .button[disabled] {
-  border-color: transparent !important;
-  background-color: #babfc3 !important;
-  color: #fff !important;
+button.disabled, button[disabled], .button.disabled, .button[disabled],button.disabled:hover, button[disabled]:hover, .button.disabled:hover, .button[disabled]:hover {
+  border-color: transparent;
+  background-color: #D6D6D6;
+  color: #fff;
+  box-shadow: none;
+  cursor: default;
+  opacity: 0.7;
 }
 
-.button, button {
-  text-transform: uppercase;
-  transition: none !important;
-}
 
-.button:focus, button:focus {
+button:hover, button:focus, .button:hover, .button:focus{
+  color: #FFFFFF;
+  background-color: #007095;
   outline:0;
 }
 
@@ -903,7 +925,6 @@ ul.wallet-selection.wallets {
 
 .wallet-selection.wallets li {
   overflow: hidden;
-  padding: 1rem;
 }
 
 .wallet-selection.wallets li a {
@@ -918,7 +939,6 @@ ul.wallet-selection.wallets {
   top: 7px;
   -moz-box-shadow: none;
   box-shadow: none;
-  line-height: 1.7rem;
   border-radius: 2px;
 }
 
@@ -981,14 +1001,12 @@ label.postfix, a.postfix img{
 }
 
 .icon-input .fi-check {
-  padding: .2rem .3rem;
   background-color: #1ABC9C;
   border-radius: 100%;
   display: block;
 }
 
 .icon-input .fi-x {
-  padding: .1rem .3rem;
   background-color: #ED4A43;
   border-radius: 100%;
 }
@@ -1025,7 +1043,6 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
 .panel {
   background: #FFFFFF;
   border-radius: 3px;
-  padding: 1rem;
 }
 
 .panel qrcode {
@@ -1181,10 +1198,6 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
   display: block;
 }
 
-.tabbable {
-  margin-bottom: 1.2rem;
-}
-
 .tabs dd.active a {
   background-color: transparent;
   border: 1px solid #213140;
@@ -1202,7 +1215,6 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
   background: #efefef;
   text-transform: uppercase;
   color: #3E4F5D;
-  padding: 1rem;
   text-align: center;
   height: 40px;
   font-size: 14px;
@@ -1221,8 +1233,6 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
 .content-item {
   border-bottom: 1px solid rgba(32,48,64,0.30);
   box-shadow: 0px 1px 0px 0px rgba(121,140,158,0.10);
-  margin: .5rem 1.3rem;
-  padding: 0.3rem 0;
   font-size: 14px;
 }
 
@@ -1233,8 +1243,6 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
 .bg-circle {
   background: #253547;
   border-radius: 100%;
-  margin: 0 0.5rem 0.3rem 0;
-  padding: .45rem 0.5rem;
   display: inline-block;
   text-align: center;
   vertical-align: middle;
@@ -1288,9 +1296,6 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
   background-color: #4B6178;
 }
 
-.splash .start-button button.outline.tiny {
-  font-size: 0.58rem;
-}
 
 .of-asset{
   font-size: 10px;
@@ -1321,10 +1326,6 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
   margin-top: -10px;
 }
 
-.splash .container-image {
-  padding: 2rem 0;
-}
-
 .preferences li {
   cursor: pointer !important;
   overflow: hidden;
@@ -1341,7 +1342,6 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
   .preferences-icon {
     width: 40px;
     height: 40px;
-    padding: 0.55rem !important;
   }
 }
 
@@ -1354,7 +1354,7 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
   left: 5%;
   top: 32%;
   z-index: 1100;
-  padding: 20px 0;
+  padding: 20px;
 }
 
 .passModal {
@@ -1422,11 +1422,8 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
 .onGoingProcess-content {
   background: #213140;
   text-align: center;
-  max-width: 16.5rem;
-  max-height: 3.5rem;
   margin: auto;
   color: #fff;
-  padding: 0.5rem;
   font-size: 13px;
   opacity: 0.8;
   border-radius: 3px;

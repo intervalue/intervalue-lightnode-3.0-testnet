@@ -14,8 +14,8 @@
 	ng-controller="splashController as splash">
 	<div ng-if="!index.hasProfile">
 		<div ng-if="splash.step === 'wallet_type'">
-			<div class="row text-left" style="margin-top: 40px">
-				<div class="start-button large-10 medium-10 small-10 medium-centered small-centered large-centered columns">
+			<div class="text-left" style="margin-top: 40px">
+				<div class="start-button">
 
 					<label><span class="text-white size-14" translate>Please choose how much data to store in your wallet</span></label>
 					<p class="text-gray size-14 m0 text-light" translate>This choice cannot be changed later</p>
@@ -47,18 +47,12 @@
 			</div>
 		</div>
 		<div ng-if="splash.step === 'device_name'">
-			<div class="row">
-				<div class="medium-centered small-centered large-centered columns">
-					<div class="m20t">
-						<span class="text-bold size-16 text-white" translate>WELCOME TO INTERVALUE</span>
-						<p class="text-gray size-14 m0 text-light" donttranslate>Smart payments made simple</p>
-					</div>
-				</div>
+			<div class="m20t">
+				<span class="text-bold size-16 text-white" translate>WELCOME TO INTERVALUE</span>
+				<p class="text-gray size-14 m0 text-light" donttranslate>Smart payments made simple</p>
 			</div>
-			<div class="row">
-				<div class="container-image large-3 medium-3 small-3 medium-centered small-centered large-centered columns">
-					<img src="img/icon-splash.png" alt="icon" width="100%">
-				</div>
+			<div class="container-image">
+				<img src="img/icon-splash.png" alt="icon" width="100%">
 			</div>
 			<div class="text-center size-12 text-warning" ng-show="splash.error && !splash.creatingProfile">
 				{{splash.error|translate}}. <span translate>Retrying...</span>
@@ -75,8 +69,8 @@
 					<span translate>Creating Profile...</span>
 				</div>
 			</div>
-			<div class="row" ng-show="!splash.creatingProfile">
-				<div class="start-button large-8 medium-8 small-8 medium-centered small-centered large-centered columns">
+			<div ng-show="!splash.creatingProfile">
+				<div class="start-button">
 
 					<div ng-show="!splash.bDeviceNameSet">
 						<label><span class="text-gray" translate>Please name this device</span></label>
@@ -87,7 +81,7 @@
 						</button>
 					</div>
 					<div ng-show="splash.bDeviceNameSet">
-						<button ng-click="splash.create()" class="button black expand round size-12 text-spacing" translate>
+						<button ng-click="splash.create()" class="button black size-12 text-spacing" translate>
 							GET STARTED
 						</button>
 					</div>

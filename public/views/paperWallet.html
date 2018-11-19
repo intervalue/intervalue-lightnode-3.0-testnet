@@ -24,8 +24,8 @@
     <span>{{paperWallet.error|translate}}</span>
   </div>
   <form ng-show="!paperWallet.balance" class="oh">
-    <div class="row">
-      <div class="large-12 medium-12 columns">  
+    <div>
+      <div>
         <div class="input">
           <label for="inputData" translate>Paper Wallet Private Key</label>
           <input type="text" placeholder="{{'Paste your paper wallet private key here'|translate}}" ng-model="inputData" id="inputData" ng-change="paperWallet.onData(inputData)">
@@ -52,8 +52,8 @@
       </div>
     </div>
   </form>
-  <div ng-show="paperWallet.balance" class="row">
-     <div class="large-12 medium-12 columns">
+  <div ng-show="paperWallet.balance">
+     <div class="large-12 medium-12">
        <div class="text-center m20b">
          <h4 class="text-bold" translate>Funds found</h4>
          <div class="size-24">

@@ -1,7 +1,7 @@
 
     
 <div class="m20tp p20h text-center" ng-controller="authConfirmationController">
-  <div class="row">
+  <div>
       
     <h2 class="text-center m20b">{{question}}</h2>
       
@@ -12,13 +12,13 @@
         <select class="m10t" ng-model="walletId" ng-options="wallet.id as wallet.name for wallet in index.getWallets()"></select>
     </div>
       
-    <div class="large-6 medium-6 small-6 columns">
-      <button class="button expand round primary" ng-disabled="loading"  ng-click="yes()">
+    <div>
+      <button class="button primary" ng-disabled="loading"  ng-click="yes()">
         <i class="fi-check"></i> <span translate>Yes</span>
       </button>
     </div>
-    <div class="large-6 medium-6 small-6 columns">
-      <button class="button expand round warning" ng-disabled="loading"  ng-click="no()">
+    <div>
+      <button class="button warning" ng-disabled="loading"  ng-click="no()">
         <i class="fi-x"></i> <span class="tu" translate>No</span>
       </button>
     </div>

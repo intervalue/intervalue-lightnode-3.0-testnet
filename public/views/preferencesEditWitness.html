@@ -8,7 +8,7 @@
 
 
   <h4></h4>
-  <form name="editWitnessForm" ng-submit="ewc.save()" class="columns">
+  <form name="editWitnessForm" ng-submit="ewc.save()">
       <div class="text-warning size-12 m10b" ng-show="ewc.error">{{ewc.error|translate}}</div>
     <label><span translate>Witness address</span></label>
     <input type="text" id="witness" type="text" name="witness" ng-model="ewc.witness">

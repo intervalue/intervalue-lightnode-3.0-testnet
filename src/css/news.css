@@ -64,6 +64,6 @@
 .pairingCodeForm .inputcode{width:100%;display:flex;align-items:center;justify-content:flex-start;border-bottom:1px solid #EDEEF0;margin-top:35px;}
 .pairingCodeForm .paircode{width:16px;height:16px;text-align:center;background:url(../img/pair_code.png) center no-repeat;background-size:contain;z-index:2;}
 .pairingCodeForm #code{font-size:12px;padding:0 10px 0 15px;font-weight:400;margin:0;width:100%;color:#C4C4C4;border:none;}
-.pairingCodeForm .buttoncode{margin-top:30px;width:100%;background:rgba(59,59,59,1);border-radius:3px;}
+.pairingCodeForm .buttoncode{margin-top:30px;}
 
 /* acceptCorrespondentinvitation e*/

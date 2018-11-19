@@ -10,7 +10,7 @@
         Add device
       </h1>
     </section>
-    <section class="right-small" >
+    <section class="right-small" ng-show="index.isCordova">
       <qr-scanner on-scan="onQrCodeScanned(data)" before-scan="onBeforeScan()" >
         <img src="./img/chatscannerd.png" >
       </qr-scanner>

@@ -14,7 +14,7 @@
 
 <div class="modal-content fix-modals-touch" style="padding: 15px;">
 	<form name=bindForm style="line-height: 26px">
-	<div ng-if="error" class="row columns">
+	<div ng-if="error">
 		<span class="has-error size-12">
 			{{error}}
 		</span>
@@ -78,7 +78,7 @@
 		<input type="number" min="0.1" required name="timeout" ng-model="binding.timeout" style="text-align: right; width: 30px;" class="inline">
 		<span translate>hours</span>.
 
-		<div class="m20t large-12 large-centered row columns">
+		<div class="m20t">
 			<div >
 			</div>
 			<div >

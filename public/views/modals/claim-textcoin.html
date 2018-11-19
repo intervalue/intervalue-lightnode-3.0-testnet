@@ -12,8 +12,8 @@
 </nav>
 
 <div class="modal-content fix-modals-touch">
-  <div ng-show="!amountInSmallestUnits" class="row m20t">
-    <div class="large-12 large-centered columns">
+  <div ng-show="!amountInSmallestUnits" class="m20t">
+    <div>
       <form name="mnemonicForm" ng-submit="submitForm(mnemonicForm)" novalidate>
         <div class="right" ng-hide="mnemonicForm.mnemonic.$pristine && !mnemonicForm.mnemonic.$modelValue ">
           <span class="has-error right size-12" ng-if="mnemonicForm.mnemonic.$invalid">
