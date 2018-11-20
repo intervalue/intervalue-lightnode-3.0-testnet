@@ -40,12 +40,11 @@ angular.module('copayApp.services').factory('correspondentListService', function
 		walletGeneral.readMyAddresses(function(arrMyAddresses){
 			body = highlightActions(escapeHtml(body), arrMyAddresses,deviceName,message_type);
 			body = text2html(body);
-			console.log("body with markup: "+body);
-			addMessageEvent(true, from_address, body, message_counter);
+			addMessageEvent(true, from_address, body, message_counter,message_type);
 		});
 	}
 	
-	function addMessageEvent(bIncoming, peer_address, body, message_counter, skip_history_load){
+	function addMessageEvent(bIncoming, peer_address, body, message_counter, skip_history_load,message_type){
 		if (!root.messageEventsByCorrespondent[peer_address] && !skip_history_load) {
 			return loadMoreHistory({device_address: peer_address}, function() {
 				addMessageEvent(bIncoming, peer_address, body, message_counter, true);
@@ -74,7 +73,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 			message_counter: message_counter
 		};
 		checkAndInsertDate(root.messageEventsByCorrespondent[peer_address], msg_obj);
-		insertMsg(root.messageEventsByCorrespondent[peer_address], msg_obj);
+		insertMsg(root.messageEventsByCorrespondent[peer_address], msg_obj,message_type);
 		//console.log(body);
 		//alert(peer_address);
 		//if(body.indexOf("Transferred:") != -1 ){}
@@ -92,18 +91,20 @@ angular.module('copayApp.services').factory('correspondentListService', function
 			});
 	}
 
-	function insertMsg(messages, msg_obj) {
+	function insertMsg(messages, msg_obj,message_type) {
 		for (var i = messages.length-1; i >= 0 && msg_obj.message_counter; i--) {
 			var message = messages[i];
 			if (message.message_counter === undefined || message.message_counter && msg_obj.message_counter > message.message_counter) {
                 let msg = msg_obj.message.substr(69,44);
 				let msgUpdate =  true;
                 for(let item in messages){
-                    if(messages[item].message.indexOf(msg_obj.message.substr(69,44)) != -1) {
+                    if(messages[item].message.indexOf(msg) != -1 && message_type =='transaction') {
                         messages[item].message = msg_obj.message;
                         msgUpdate = false;
+                        break;
                     }
                 }
+                console.log('msgUpdate',msgUpdate);
                 if(msgUpdate)
 				messages.splice(i+1, 0, msg_obj);
 				return;
@@ -691,7 +692,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	}
 	
 	eventBus.on("text", function(from_address, body, message_counter){
-		 device.readCorrespondent(from_address, function(correspondent){
+        device.readCorrespondent(from_address, function(correspondent){
 		 	if (!root.messageEventsByCorrespondent[correspondent.device_address]) loadMoreHistory(correspondent);
 		 	addIncomingMessageEvent(correspondent.device_address, body, message_counter,correspondent.name);
 		 	 if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(from_address, body, 1);
@@ -862,7 +863,6 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	
 	root.currentCorrespondent = null;
 	root.messageEventsByCorrespondent = {};
-
 
   root.remove = function(addr, cb) {
 	var fc = profileService.focusedClient;
