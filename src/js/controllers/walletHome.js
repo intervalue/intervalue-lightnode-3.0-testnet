@@ -255,7 +255,7 @@ angular.module('copayApp.controllers')
 							$scope.editAddressbook = true;
 							$scope.toggleEditAddressbook();
 							$timeout(function () {
-                                if(!$rootScope.$$phase) $scope.$apply();
+                                 $rootScope.$apply();
                             },1);
 						});
 				},1000);
