@@ -2001,10 +2001,6 @@ angular.module('copayApp.controllers')
 			}, function(){}, "referrer");
 		}
 
-        // self.gonewsin = function(id){
-        //     $state.go('newsin',{ id: id});
-        // };
-
 
         $timeout(function () {
         	let fc = profileService.focusedClient;

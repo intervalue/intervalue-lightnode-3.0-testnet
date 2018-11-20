@@ -20,6 +20,7 @@
     "foundation": "5",
     "ng-lodash": "0.2.3",
     "qrcode-decoder-js": "*",
+    "animate.css": "3",
     "angular-elastic": "2.5.1",
     "ui-router-extras": "0.1.3"
   }
