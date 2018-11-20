@@ -15,7 +15,7 @@
     "angular-qrcode": "monospaced/angular-qrcode#~7.2.0",
     "angular-ui-router": "0.2.18",
     "angular-ui-switch": "0.1",
-    "animate.css": "3",
+    "angular-animate": "1.7.3",
     "fastclick": "1",
     "foundation": "5",
     "ng-lodash": "0.2.3",

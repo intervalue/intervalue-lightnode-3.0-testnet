@@ -216,6 +216,11 @@
     left: 50%;
     top: 50%;
     transform: translateX(-50%);
+    opacity: 1;
+    transition:all linear 0.3s;
+}
+.copylayer.ng-hide{
+    opacity: 0;
 }
 /*receive end*/
 

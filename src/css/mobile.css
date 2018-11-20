@@ -215,6 +215,7 @@ _:-ms-fullscreen, :root .main {
   width: 20%;
   float: left;
   cursor: pointer;
+  position: relative;
 }
 
 .bottombar-item a {
@@ -622,6 +623,7 @@ body.modal-open {
 }
 
 input[type="color"],
+input[type="date"],
 input[type="date"],
 input[type="datetime-local"],
 input[type="datetime"],
