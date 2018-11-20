@@ -4,6 +4,7 @@
 .newsinc img{width:100%;}
 
 /*加载状态*/
+.newsincinfo{top: 45px;padding-top: 0;}
 .newsincinfo .nowire,
 .newsincinfo .nowire{height:calc(100vh - 86px);}
 
