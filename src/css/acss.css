@@ -206,7 +206,17 @@
 .addreceive .code .coderect{position:relative;top:-226px;height:0px}
 .addreceive .code .coderectin{height:220px;width:220px;margin:auto;background:url(img/qr.png) white}
 .addreceive .code .spinner{margin-top:80px;margin-bottom:30px}
-
+.copylayer{
+    color: #fff;
+    background: #45AD8E;
+    padding: 10px 20px;
+    border-radius: 3px;
+    position: absolute;
+    z-index: 200000;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%);
+}
 /*receive end*/
 
 /*tx-details start*/
@@ -695,7 +705,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .chatsendform{height:auto;display:flex;justify-content:flex-start;align-items:flex-end;padding:8px 17px;background:#fff;box-shadow:0px 1px 4px 0px rgba(196,196,196,1);}
 .chatsendform #chatltmessage{flex-shrink:0;cursor:pointer;margin-bottom:3px;width:27px;}
 .chatsendform input{margin:0;padding:0;}
-.chatsendform #message{width:100%;margin:0 13px;border:none;border-bottom:1px solid #DEDEDE;max-height:100px;resize:none;outline:none;min-height:auto;
+.chatsendform #message{width:100%;margin:0 13px;border:none;border:1px solid #DEDEDE;max-height:100px;resize:none;outline:none;min-height:auto;
 box-sizing:border-box;padding:8px 0;height:auto;}
 .chatsendform .chatsend{width:26px;height:26px;border-radius:50%;background:url(../img/chatsend.png) no-repeat center;flex-shrink:0;
     cursor:pointer;margin-bottom:3px;background-size: contain;}
@@ -704,7 +714,7 @@ box-sizing:border-box;padding:8px 0;height:auto;}
 
 /*correspondentDevices   start*/
 #chat{height:100%;}
-.chatcurchattops .right-small a{font-size:16px;font-weight:400;color:#323232;}
+.chatcurchattops .right-small a{font-size:14px;font-weight:400;color:#323232;}
 .chatcurchattops .right-small a:hover{color:#323232;}
 #chat .mtab{min-height:150px;background-color:#FFFFFF;max-height:calc(100% - 120px);overflow:auto;}
 .chatbiline ul{list-style-type:none;}
@@ -743,8 +753,9 @@ box-sizing:border-box;padding:8px 0;height:auto;}
     width: 100%;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
 .chatbiline ul li .rd .chatsetinfo .chatinfomon{font-size:10px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:#999999;}
 
-.chatbiline ul li .rd input{text-align: right;border: none;font-size:18px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:rgba(50,50,50,1);background:transparent;}
+.chatbiline ul li .rd input{text-align: right;border: none;font-size:16px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:rgba(50,50,50,1);background:transparent;}
 .chatbiline ul li .rd.addrinputp input{padding-right: 52px;}
+.chatbiline ul li .rd input#address{color:#999999;font-size:12px;}
 .chatbiline ul li .rd label{position: absolute;right:0;font-size:18px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:rgba(119,119,119,1);}
 /*chat-requiestpayment    end*/
 

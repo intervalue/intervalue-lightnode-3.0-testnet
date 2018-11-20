@@ -609,6 +609,7 @@ body.modal-open {
   width: 100%;
   z-index: 1005;
   background-color: #FFFFFF;
+  min-height:100vh;
 }
 
 .reveal-modal.animated.slideInRight,

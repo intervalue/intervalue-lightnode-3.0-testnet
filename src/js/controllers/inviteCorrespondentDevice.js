@@ -16,6 +16,7 @@ angular.module('copayApp.controllers').controller('inviteCorrespondentDeviceCont
         var conf = require('intervaluecore/conf.js');
         $scope.protocol = conf.program;
         $scope.isCordova = isCordova;
+        var indexScope = $scope.index;
         var fc = profileService.focusedClient;
         $scope.color = fc.backgroundColor;
 
@@ -30,6 +31,11 @@ angular.module('copayApp.controllers').controller('inviteCorrespondentDeviceCont
                 window.plugins.toast.showShortCenter(gettextCatalog.getString('Copied to clipboard'));
             }else if (nodeWebkit.isDefined()) {
                 nodeWebkit.writeToClipboard($scope.code);
+                indexScope.layershow = true;
+                indexScope.layershowmsg = gettextCatalog.getString('Successful copy');
+                setTimeout(function () {
+                    indexScope.layershow = false;
+                },1000)
             }
         };
 

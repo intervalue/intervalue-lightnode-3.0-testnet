@@ -444,6 +444,11 @@ angular.module('copayApp.controllers')
 			}
 			else if (nodeWebkit.isDefined()) {
 				nodeWebkit.writeToClipboard(addr);
+				indexScope.layershow = true;
+				indexScope.layershowmsg = gettextCatalog.getString('Successful copy');
+				setTimeout(function () {
+                    indexScope.layershow = false;
+                },1000)
 			}
 		};
 
