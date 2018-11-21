@@ -837,7 +837,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
 
     self.setTab = function (tab, reset, tries, switchState) {
-        FastClick.attach(document.body);
         // console.log("setTab", tab, reset, tries, switchState);
         tries = tries || 0;
 
@@ -845,7 +844,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             if (document.querySelector('.tab-in.tab-view')) {
                 var el = angular.element(document.querySelector('.tab-in.tab-view'));
                 el.removeClass('tab-in').addClass('tab-out');
-                var old = document.getElementById('menu-' + self.tab);
+                var old = angular.element(document.getElementById('menu-' + self.tab));
                 if (old) {
                     old.className = '';
                 }
@@ -859,11 +858,28 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 }
                 var el = angular.element(document.getElementById(tab));
                 el.removeClass('tab-out').addClass('tab-in');
-                var newe = document.getElementById('menu-' + tab);
+                var newe = angular.element(document.getElementById('menu-' + tab));
                 if (newe) {
                     newe.className = 'active';
                 }
             }
+
+            let menuu = self.menu;
+            if((self.tab== tab &&!$rootScope.tab) ||self.tab != tab){
+                for(let item in menuu){
+                    if(menuu[item].link == tab) {
+                        let cc = menuu[item];
+                        cc.img = 'active'+cc.img;
+                        menuu.splice(item,1,cc);
+                    }
+                    if(menuu[item].link == $rootScope.tab) {
+                        let cc = menuu[item];
+                        cc.img = cc.img.substring(6);
+                        menuu.splice(item,1,cc);
+                    }
+                }
+            }
+
             $rootScope.tab = self.tab = tab;
             $rootScope.$emit('Local/TabChanged', tab);
         };
@@ -879,8 +895,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 return;
             } else if (tab.new_state) {
                 changeTab(tab.link);
-                $rootScope.tab = self.tab = tab.link;
                 go.path(tab.new_state);
+                $rootScope.tab = self.tab = tab.link;
                 return;
             } else {
                 return self.setTab(tab.link, reset, tries, switchState);
@@ -897,8 +913,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             }, (tries === 1) ? 10 : 300);
         }
 
-        if (!self.tab || !$state.is('walletHome'))
-            $rootScope.tab = self.tab = 'walletHome';
+        // if (!self.tab || !$state.is('walletHome'))
+        //     $rootScope.tab = self.tab = 'walletHome';
 
         if (switchState && !$state.is('walletHome')) {
             go.path('walletHome', function () {
