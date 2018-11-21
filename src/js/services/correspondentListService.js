@@ -40,7 +40,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 		walletGeneral.readMyAddresses(function(arrMyAddresses){
 			body = highlightActions(escapeHtml(body), arrMyAddresses,deviceName,message_type);
 			body = text2html(body);
-			addMessageEvent(true, from_address, body, message_counter,message_type);
+			addMessageEvent(true, from_address, body, message_counter,false,message_type);
 		});
 	}
 	
@@ -104,6 +104,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
                         break;
                     }
                 }
+                console.log('msgUpdate',message_type);
                 console.log('msgUpdate',msgUpdate);
                 if(msgUpdate)
 				messages.splice(i+1, 0, msg_obj);
