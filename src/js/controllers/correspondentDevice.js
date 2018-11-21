@@ -118,6 +118,14 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
 
 
         $scope.send = function(deviceAddress,tranMessage) {
+            if($scope.message.length > 500){
+                indexScope.layershow = true;
+                indexScope.layershowmsg = gettextCatalog.getString('The content you sent is too long, please send it separately.');
+                setTimeout(function () {
+                    indexScope.layershow = false;
+                },800)
+                return;
+            }
             $scope.error = null;
             //$scope.message = 'testtestestsetset';
             if (!$scope.message && !deviceAddress )
@@ -143,8 +151,8 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                         timestamp: Math.floor(Date.now() / 1000)
                     };
                     correspondentListService.checkAndInsertDate($scope.messageEvents, msg_obj);
-                    console.log('$scope.messageEvents');
-                    console.log($scope.messageEvents);
+                    // console.log('$scope.messageEvents');
+                    // console.log($scope.messageEvents);
                     $scope.messageEvents.push(msg_obj);
                     $scope.message = "";
                     $timeout(function(){

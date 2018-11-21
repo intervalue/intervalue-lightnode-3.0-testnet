@@ -2620,7 +2620,11 @@ msgstr "的"
 msgid "Successful copy"
 msgstr "复制成功"
 
+msgid "wallet already exist"
+msgstr "钱包已存在"
 
+msgid "The content you sent is too long, please send it separately."
+msgstr "你发的内容过长，请分开发送。"
 
 
 
