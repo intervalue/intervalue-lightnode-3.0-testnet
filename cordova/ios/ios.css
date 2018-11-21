@@ -14,7 +14,7 @@
     padding-top:34px;
 }
 /*新闻*/
-#news .tabnewsin{
+.news .addwcontent{
     height: calc(100vh - 132px);
     top: 84px;
 }
