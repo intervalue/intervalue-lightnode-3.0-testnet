@@ -14,12 +14,12 @@
     padding-top:34px;
 }
 /*新闻*/
-#news .tabnewsin{
-    height: calc(100vh - 132px);
-    top: 84px;
+.news .addwcontent{
+    height: calc(100vh - 138px);
+    top: 90px;
 }
 .news .letterlist .datenow, .news .quotelist .titlelabel{
-    top:84px;
+    top:90px;
 }
 .news .tab-container a{
     padding:8px 0;
@@ -39,6 +39,6 @@
     height: calc(100vh - 70px);
 }
 /*底部菜单*/
-.bottombar-item a{
-    height:54px;
-}
+/*.bottombar-item a{*/
+    /*height:54px;*/
+/*}*/
