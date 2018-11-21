@@ -166,14 +166,14 @@ angular.module('copayApp.controllers').controller('createwalletController',
                 return console.log('already creating profile');
             self.creatingProfile = true;
             //	saveDeviceName();
-            // if (isCordova) {
-            //     window.plugins.spinnerDialog.show(null, gettextCatalog.getString('Loading...'), true);
-            // }
+            if (isCordova) {
+                window.plugins.spinnerDialog.show(null, gettextCatalog.getString('Loading...'), true);
+            }
             // $scope.loading = true;
                 profileService.create({ walletName: walletName, password: passphrase, mnemonic: mnemonic }, function (err) {
                     $timeout(function () {
-                        // if (isCordova)
-                        //     window.plugins.spinnerDialog.hide();
+                        if (isCordova)
+                            window.plugins.spinnerDialog.hide();
                         if (err) {
                             $log.warn(err);
                             self.error = err;
@@ -199,14 +199,14 @@ angular.module('copayApp.controllers').controller('createwalletController',
                 $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('*Inconsistent password'));
                 return;
             }
-            // if (isCordova) {
-            //     window.plugins.spinnerDialog.show(null, gettextCatalog.getString('Loading...'), true);
-            // }
+            if (isCordova) {
+                window.plugins.spinnerDialog.show(null, gettextCatalog.getString('Loading...'), true);
+            }
 
                 profileService.create({ walletName: self.createwiname, password: self.createwipass, mnemonic: self.importcode }, function (err) {
                     $timeout(function () {
-                        // if (isCordova)
-                        //     window.plugins.spinnerDialog.hide();
+                        if (isCordova)
+                            window.plugins.spinnerDialog.hide();
                         if(err){
                             self.creatingProfile = false;
                             $log.warn(err);
