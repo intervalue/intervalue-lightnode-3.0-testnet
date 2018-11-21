@@ -109,53 +109,15 @@ angular.module('copayApp.controllers').controller('createwalletController',
                 return;
             }
         }
-        /*$scope.$watch(function () {
-            return JSON.stringify(self.chosenWords);
-        }, function (newValue, oldValue) {
-            if (self.chosenWords.length > 11) {
-                var chostr = '';
-                for (var i = 0; i < self.chosenWords.length; i++) {
-                    chostr += self.chosenWords[i].str;
-                }
-                var showstr = '';
-                for (var i = 0; i < self.showcodes.length; i++) {
-                    showstr += self.showcodes[i].str;
-                }
-                if (chostr == showstr) {
-                    for (var i = 0; i < self.showcodes.length; i++) {
-                        self.mnemonic += ' ' + self.showcodes[i].str;
-                    }
-                    self.step = 'deletecode';
-                } else {
-                    self.showcodeerr = true;
-                }
-            }
-        }, true)*/
-        // 更改代码
-        self.haschoosen = function (noWallet) {
-            if (self.creatingProfile)
-                return console.log('already creating profile');
-            self.creatingProfile = true;
-            //	saveDeviceName();
 
-            $timeout(function () {
-                profileService.create({ noWallet: noWallet }, function (err) {
-                    if (err) {
-                        self.creatingProfile = false;
-                        $log.warn(err);
-                        self.error = err;
-                        $timeout(function () {
-                            $scope.$apply();
-                        });
-                        /*$timeout(function() {
-                            self.create(noWallet);
-                        }, 3000);*/
-                    }
-                });
-            }, 100);
-
-        };
-        // 删除口令 修改后
+        /**
+         * 首次创建钱包入口
+         * @param walletName
+         * @param password
+         * @param passphrase
+         * @param mnemonic
+         * @param del
+         */
         self.createWallet= function (walletName, password, passphrase, mnemonic,del) {
             if(password !== passphrase){
                 $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('*Inconsistent password'));
@@ -193,7 +155,10 @@ angular.module('copayApp.controllers').controller('createwalletController',
                     $scope.index.updateTxHistory(3);
                 });
         };
-        //import wallet
+
+        /**
+         * 首次导入钱包入口
+         */
         self.importw = function(){
             if(self.addwipass !== self.addwirpass){
                 $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('*Inconsistent password'));
