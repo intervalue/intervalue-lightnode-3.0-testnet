@@ -8,7 +8,7 @@
 }
 /*聊天*/
 .chatsendform #message{
-    min-height:50px;
+    min-height:34px;
 }
 .view_chat_box .chatlist{
     padding-top:37px;
@@ -20,4 +20,18 @@
 }
 .news .letterlist .datenow, .news .quotelist .titlelabel{
     top:87px;
+}
+/*收款地址*/
+.addreceive{
+    margin-top: 49px;
+}
+/*地址薄*/
+.addedit{
+    padding-top: 27px;
+}
+.addaddbook .modal-content ul.addalist{
+    height: calc(100vh - 149px);
+}
+.addaddbook .modal-content ul.addalist2{
+    height: calc(100vh - 73px);
 }
