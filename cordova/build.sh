@@ -233,7 +233,7 @@ fi
 if [ $CURRENT_OS == "IOS" ]; then
 	echo "IOS project!!!"
 
-    cat $BUILDDIR/android/android.css >> $PROJECT/www/css/intervalue.css
+    cat $BUILDDIR/ios/ios.css >> $PROJECT/www/css/intervalue.css
 
 	cp -R ios $PROJECT/../
 	checkOK
