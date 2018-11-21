@@ -10,6 +10,9 @@
 .chatsendform #message{
     min-height:50px;
 }
+.view_chat_box .chatlist{
+    padding-top:37px;
+}
 /*新闻*/
 #news .tabnewsin{
     height: calc(100vh - 135px);
