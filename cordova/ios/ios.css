@@ -1,0 +1,20 @@
+/*tab-bar*/
+.tab-bar{
+    height:55px;
+    line-height: 55px;
+}
+.tab-bar-section, .left-small, .right-small{
+    height:55px;
+}
+/*聊天*/
+.chatsendform #message{
+    min-height:50px;
+}
+/*新闻*/
+#news .tabnewsin{
+    height: calc(100vh - 135px);
+    top: 87px;
+}
+.news .letterlist .datenow, .news .quotelist .titlelabel{
+    top:87px;
+}
