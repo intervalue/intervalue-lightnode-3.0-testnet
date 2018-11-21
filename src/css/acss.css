@@ -711,7 +711,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .chatsendform #chatltmessage{flex-shrink:0;cursor:pointer;margin-bottom:3px;width:27px;}
 .chatsendform input{margin:0;padding:0;}
 .chatsendform #message{width:100%;margin:0 13px;border:1px solid #DEDEDE;min-height:34px;max-height:100px;resize:none;outline:none;
-box-sizing:border-box;padding:0;padding-top:8px;height:auto;}
+box-sizing:border-box;padding:8px 0;height:34px;}
 .chatsendform .chatsend{width:26px;height:26px;border-radius:50%;background:url(../img/chatsend.png) no-repeat center;flex-shrink:0;
     cursor:pointer;margin-bottom:3px;background-size: contain;}
 
