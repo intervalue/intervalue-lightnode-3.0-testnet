@@ -378,7 +378,7 @@ display: block;
 .fontbold{font-family:PingFangSC-Semibold,Arial,"微软雅黑";font-weight:600;}
 .secondcontent{width:100%;position:absolute;top:0;bottom:0;overflow:auto;background:#F9FAFC;}
 .popconfirm{position:fixed;width:100%;height:100%;top:0;left:0;z-index:100;}
-.popconfirm .popmask{position:absolute;width:100%;height:100%;text-align:center;top:0;left:0;background:rgba(0,0,0,0.3);z-index:100;cursor:pointer;}
+.popconfirm .popmask{position:absolute;width:100%;height:100%;text-align:center;top:0;left:0;background:rgba(0,0,0,0.6);z-index:100;cursor:pointer;}
 .popconfirm .popcontent{position:absolute;width:calc(100% - 26px);top:50%;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);background:#fff;padding:30px 0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;z-index:101;}
 .popconfirm .poptips{font-size:12px;color:#646464;padding-top:20px;border-top:1px solid #F5F5F5;margin-bottom:32px;}
 .popconfirm .popbutton{display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-moz-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-moz-box-align:center;-ms-flex-align:center;align-items:center;}
@@ -607,9 +607,9 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 /*添加设备 start*/
 .addpartner{background:#F9FAFC;position:fixed;width:100%;height:100%;top:0;left:0;overflow:auto;}
 .addpartner ul{list-style-type:none;}
-.addpartner ul li{background:#fff;padding-left:15px;cursor:pointer;}
+.addpartner ul li{background:#fff;cursor:pointer;}
 .addpartner ul li:first-child{margin-top:15px;border-top:1px solid #EDEEF0;}
-.addpartner ul li .liin{border-bottom:1px solid #EDEEF0;display:flex;justify-content:space-between;align-items:center;padding:13px 13px 13px 0;}
+.addpartner ul li .liin{border-bottom:1px solid #EDEEF0;display:flex;justify-content:space-between;align-items:center;padding:13px 13px 13px 15px;}
 .addpartner ul li.preflitwo{border-top:1px solid #EDEEF0;margin-top:15px;}
 .addpartner ul li .ld{display:flex;justify-content:flex-start;align-items:center;}
 .addpartner ul li .ld span{color:#323232;}
@@ -675,7 +675,7 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
     /*margin-left:62px;margin-bottom:28px;padding:10px 17px 10px 10px;}*/
 .from-them{font-size:13px;font-weight:500;color:rgba(50,50,50,1);font-family:PingFangSC-Medium,Arial,微软雅黑;float:left;
     margin-left:62px;margin-bottom:28px;}
-.chataddamm{background:#fff;box-shadow:0px 4px 5px -5px rgba(69,173,142,1);border-radius:0px 10px 10px 10px;padding:10px 17px 10px 10px;display:block;}
+.chataddamm{background:#fff;box-shadow:0px 4px 5px -5px rgba(211,211,211,1);border-radius:0px 10px 10px 10px;padding:10px 17px 10px 10px;display:block;}
 /*转入中...*/
 .chattransfer{background:#fff;box-shadow:0px 4px 5px -5px rgba(69,173,142,1);border-radius:3px;font-size:13px;font-weight:500;color:rgba(50,50,50,1);
     font-family:PingFangSC-Medium,Arial,微软雅黑;border:1px solid #A0D6C9;min-width:210px;}
@@ -688,15 +688,19 @@ textarea::-webkit-input-placeholder{font-size:12px;font-weight:400;color:#909090
 .chattransfer .chatbttran{padding:8px 8px 8px 13px;font-size:10px;display:flex;align-items: center;justify-content: flex-start;}
 .chattransfer .chatbttran span{color:#45AD8E;}
 .chattransfer .chatbttran img{width:11px;margin-right:12px;}
-.system{position:relative;z-index:1;text-align:center;max-width:100%;font-size:12px;margin-bottom:8px;}
+.system{position:relative;z-index:1;text-align:center;max-width:100%;font-size:12px;margin-bottom:20px;}
 .system>span{padding:1px 16px;font-size:13px;font-family:PingFangSC-Medium,Arial,"微软雅黑";font-weight:500;color:#fff;background:#DEDEDE;border-radius:3px;}
 .system b{background-color:white;border:1px dashed #888;border-width:0 0 1px 0;cursor:pointer;}
 .msg-ts{color:#acacac;font-size:10px;padding-top:10px;width:12%;}
 /*图像*/
 .from-me .chatname,.from-them .chatname{position:absolute;width:40px;height:40px;line-height:40px;font-size:24px;font-weight:600;font-family:PingFangSC-Semibold,Arial,"微软雅黑";color:#323232;background:#EFEFEF;text-align:center;
     border-radius:50%;}
-.from-them .chatname{left:-54px;top:-18px;}
-.from-me .chatname{right:-54px;top:-18px;}
+.from-them .chatname{left:-54px;
+    /*top:-18px;*/
+}
+.from-me .chatname{right:-54px;
+    /*top:-18px;*/
+}
 .system .chatname{display: none;}
 @media (max-width:350px){
     .msg-ts{font-size:8px;}

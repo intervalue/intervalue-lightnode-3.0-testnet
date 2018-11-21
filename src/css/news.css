@@ -15,7 +15,7 @@
 .addeditcd .address .deviceadd{display:flex;align-items:center;justify-content:flex-start;}
 .addeditcd .address .deviceadd div{width:16px;flex-shrink:0;text-align:center;}
 .addeditcd .address .deviceadd img{vertical-align:text-top;}
-.addeditcd .address .deviceadd span{margin-left:14px;font-size:16px;font-family:PingFangSC-Medium,Arial,微软雅黑;font-weight:500;color:rgba(59,59,59,1);}
+.addeditcd .address .deviceadd span{margin-left:14px;font-size:16px;font-family:PingFangSC-Regular,Arial,微软雅黑;font-weight:400;color:rgba(59,59,59,1);}
 .addeditcd .address .deviceaddinfo{margin-top:6px;padding-left:30px;box-sizing:border-box;font-size:12px;font-family:PingFangSC-Medium,Arial,微软雅黑;font-weight:500;color:#999999;}
 .addeditcd .chateditform{margin-top:18px;}
 .addeditcd .chateditform .renameadd{padding-top:13px;}
@@ -48,7 +48,7 @@
 .aboutQR{font-size:12px;font-family:PingFangSC-Medium,Arial,微软雅黑;font-weight:500;color:rgba(50,50,50,1);margin-top:-20px;}
 .myaddress{font-size:16px;font-family:PingFangSC-Medium,Arial,微软雅黑;font-weight:500;color:#323232;text-align:left;padding:22px 0 0 28px;}
 .chatcopycode{margin-top:30px;}
-.chatdevicecode{padding:20px 10px 50px;color:#3B3B3B;text-align:center;word-break:break-all;font-size:12px;-webkit-user-select:text;user-select:text;}
+.chatdevicecode{padding:20px 10px 50px;color:#646464;text-align:center;word-break:break-all;font-size:12px;-webkit-user-select:text;user-select:text;}
 .chatdevicecopybtn{display:inline-block;border-radius:29px;background:linear-gradient(90deg,#45AD8E 0%,#45AD8E 100%,#45AD8E 100%);padding:10px 22px;}
 .chatdevicecopybtn a,
 .chatdevicecopybtn img{display:inline-block;}

@@ -17,7 +17,6 @@
     "angular-ui-switch": "0.1",
     "angular-animate": "1.7.3",
     "fastclick": "1",
-    "foundation": "5",
     "ng-lodash": "0.2.3",
     "qrcode-decoder-js": "*",
     "animate.css": "3",
