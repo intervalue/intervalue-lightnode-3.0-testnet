@@ -195,7 +195,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                 }
             });
 
-        },2 * 1000);
+        },3 * 1000);
 
         $scope.sendSuccessfully =  function(device_address, chatType, message){
             $scope.autoScrollEnabled = true;

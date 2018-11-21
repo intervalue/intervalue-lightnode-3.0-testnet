@@ -516,6 +516,8 @@ angular.module('copayApp.services')
                     // check if exists
                     var w = lodash.find(root.profile.credentials, { 'xPubKey': xPubKey });
                     if (w){
+                        if (isCordova)
+                            window.plugins.spinnerDialog.hide();
                         $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('wallet already exist'));
                         return;
                     }
