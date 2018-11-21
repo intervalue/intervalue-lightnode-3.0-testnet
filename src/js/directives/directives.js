@@ -844,6 +844,22 @@ angular.module('copayApp.directives')
             }
         }
     })
+    .directive("input",function(){
+        return {
+            restrict: 'E',
+            link: postLink
+        }
+        function postLink(scope, elem){
+            var el = angular.element(elem);
+            el
+                .on('click', function() {
+                    el[0].focus();
+                })
+            scope.$on('$destroy', function() {
+                el[0].blur();
+            });
+        }
+    })
     .directive('homescrolled', ['$timeout', function($timeout) {
         return function(scope, elm, attr) {
             var raw = elm[0];
