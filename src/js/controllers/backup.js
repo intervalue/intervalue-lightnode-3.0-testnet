@@ -10,10 +10,7 @@ angular.module('copayApp.controllers').controller('wordsController',
       self.ammount = $stateParams.ammount;
       self.mnemonic = $stateParams.mnemonic;
       self.mnemonicEncrypted = $stateParams.mnemonicEncrypted;
-    var msg = gettext('Are you sure you want to delete the backup words?');
-    var successMsg = gettext('Backup words deleted');
-    var self = this;
-    self.show = false;
+      self.show = false;
     var fc = profileService.focusedClient;
 
 
@@ -28,7 +25,6 @@ angular.module('copayApp.controllers').controller('wordsController',
 
 
     }
-    var showconfirm = false;
 	if (!isCordova){
 		var desktopApp = require('intervaluecore/desktop_app.js'+'');
 		self.appDataDir = desktopApp.getAppDataDir();
@@ -63,16 +59,6 @@ angular.module('copayApp.controllers').controller('wordsController',
     self.delete = function() {
       self.needsBackupa = false;
       self.showconfirm = true;
-      // confirmDialog.show(msg, function(ok) {
-      //   if (ok) {
-      //     fc.clearMnemonic();
-      //     profileService.clearMnemonic(function() {
-      //       self.deleted = true;
-      //       notification.success(successMsg);
-      //       go.walletHome();
-      //     });
-      //   }
-      // });
     };
 
     self.deleteyes = function() {
