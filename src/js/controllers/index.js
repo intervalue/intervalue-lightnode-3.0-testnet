@@ -874,9 +874,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     newe.className = 'active';
                 }
             }
-            console.log('tab  ',tab);
-            console.log('self.tab  ',self.tab);
-            console.log('$rootScope.tab ',$rootScope.tab);
+
             /**
              * 根据点击标签内容切换对应标签图标样式
              */
@@ -895,8 +893,6 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     }
                 }
             }
-
-            console.log('menuu  ',menuu);
 
             $rootScope.tab = self.tab = tab;
 
@@ -945,6 +941,28 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         changeTab(tab);
     };
 
+
+    $rootScope.$on('Local/SetTabChat',function (event,tab){
+
+        let menuu = self.menu;
+        if((self.tab== tab &&!$rootScope.tab) ||$rootScope.tab != tab ){
+            for(let item in menuu){
+                if(menuu[item].link == tab) {
+                    let cc = menuu[item];
+                    cc.img = 'active'+cc.img;
+                    menuu.splice(item,1,cc);
+                }
+                if(menuu[item].link == $rootScope.tab) {
+                    let cc = menuu[item];
+                    cc.img = cc.img.substring(6);
+                    menuu.splice(item,1,cc);
+                }
+                console.log(item+': ',menuu);
+            }
+
+        }
+        $rootScope.tab = self.tab = tab;
+    });
 
 
 

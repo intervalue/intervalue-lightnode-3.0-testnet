@@ -1986,7 +1986,8 @@ angular.module('copayApp.controllers')
 		}
 
 		self.cancel = function () {
-			$rootScope.$emit('Local/paymentDoneAndCallBack',self.deviceAddress);
+            $rootScope.$emit('Local/paymentDoneAndCallBack',self.deviceAddress);
+            $rootScope.$emit('Local/SetTabChat','chat');
             self.resetForm();
         }
 
