@@ -1200,7 +1200,7 @@ angular.module('copayApp.controllers')
                                       let tranMessage = gettextCatalog.getString(cb.id+'?Transferred: ')+form.amount.$modelValue+' INVE';
                                       $rootScope.$emit('Local/paymentDoneAndSendMessage',self.deviceAddress,tranMessage);
                                      $scope.index.updateTxHistory(3);
-
+                                     $rootScope.$emit('Local/SetTab','chat');
                                  }else {
                                      $rootScope.$emit('Local/paymentDone');
 								 }

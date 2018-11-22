@@ -874,12 +874,14 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                     newe.className = 'active';
                 }
             }
-
+            console.log('tab  ',tab);
+            console.log('self.tab  ',self.tab);
+            console.log('$rootScope.tab ',$rootScope.tab);
             /**
              * 根据点击标签内容切换对应标签图标样式
              */
             let menuu = self.menu;
-            if((self.tab== tab &&!$rootScope.tab) ||self.tab != tab){
+            if((self.tab== tab &&!$rootScope.tab) ||$rootScope.tab != tab ){
                 for(let item in menuu){
                     if(menuu[item].link == tab) {
                         let cc = menuu[item];
@@ -894,7 +896,10 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 }
             }
 
+            console.log('menuu  ',menuu);
+
             $rootScope.tab = self.tab = tab;
+
             $rootScope.$emit('Local/TabChanged', tab);
         };
 
