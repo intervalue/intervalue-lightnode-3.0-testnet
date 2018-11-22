@@ -527,31 +527,26 @@ to prevent collapsing during animation*/
 }
 
 .dr-notification-content {
-  line-height: 90%;
-  padding: 10px 50px 5px 60px;
+  padding: 10px 30px;
 }
 
 .dr-notification-title {
   color: #fff;
-  font-size: 12px;
+  font-size: 16px;
   margin-bottom: 0;
   font-weight: 700;
 }
 
 .dr-notification {
-  background: rgba(44,62,80,0.90);
-  box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.20);
-  -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.20);
-  -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.20);
+  background: rgba(69,173,142,0.90);
   width: 100%;
   clear: both;
   overflow: hidden;
   border-radius: 0;
-  height: 60px;
 }
 
 .dr-notification-text {
-  font-size: 11px;
+  font-size: 12px;
   color: #fff;
 }
 

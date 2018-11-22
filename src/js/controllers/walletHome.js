@@ -448,7 +448,7 @@ angular.module('copayApp.controllers')
 				indexScope.layershowmsg = gettextCatalog.getString('Successful copy');
 				setTimeout(function () {
                     indexScope.layershow = false;
-                },500)
+                },500);
 			}
 		};
 
