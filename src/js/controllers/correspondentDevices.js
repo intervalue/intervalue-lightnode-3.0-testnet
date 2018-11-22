@@ -111,7 +111,7 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
       correspondentListService.startWaitingForPairing(function(pairingInfo){
           console.log("beginAddCorrespondent " + pairingInfo.pairing_secret);
           let device_pubkey = profileService.profile.device_pubkey;
-          $scope.code = device_pubkey + "@" + pairingInfo.hub + "#" + pairingInfo.pairing_secret;
+          $scope.codee = device_pubkey + "@" + pairingInfo.hub + "#" + pairingInfo.pairing_secret;
 
           function determineQRcodeVersionFromString( inputtext ) {
               // maximum characters per QR code version using ECC level m
@@ -129,7 +129,7 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
               return qrversion;
           }
 
-          var qrstring = $scope.protocol + ":" +$scope.code;  //as passed to the qr generator in inviteCorrespondentDevice.html
+          var qrstring = $scope.protocol + ":" +$scope.codee;  //as passed to the qr generator in inviteCorrespondentDevice.html
           $scope.qr_version = determineQRcodeVersionFromString( qrstring );
 
           $scope.$digest();
@@ -150,10 +150,10 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 
       $scope.copyCode = function() {
           if (isCordova) {
-              window.cordova.plugins.clipboard.copy($scope.code);
+              window.cordova.plugins.clipboard.copy($scope.codee);
               window.plugins.toast.showShortCenter(gettextCatalog.getString('Copied to clipboard'));
           }else if (nodeWebkit.isDefined()) {
-              nodeWebkit.writeToClipboard($scope.code);
+              nodeWebkit.writeToClipboard($scope.codee);
               indexScope.layershow = true;
               indexScope.layershowmsg = gettextCatalog.getString('Successful copy');
               setTimeout(function () {
