@@ -2626,7 +2626,8 @@ msgstr "钱包已存在"
 msgid "The content you sent is too long, please send it separately."
 msgstr "你发的内容过长，请分开发送。"
 
-
+msgid "The network is abnormal. Please check the network for retry."
+msgstr "网络异常，请检查网络重试。"
 
 
 

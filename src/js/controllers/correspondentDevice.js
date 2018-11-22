@@ -128,7 +128,14 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
          * @param tranMessage
          */
         $scope.send = function(deviceAddress,tranMessage) {
-            if($scope.message.length > 500){
+            if(!indexScope.onLine){
+                indexScope.layershow = true;
+                indexScope.layershowmsg = gettextCatalog.getString('The network is abnormal. Please check the network for retry.');
+                setTimeout(function () {
+                    indexScope.layershow = false;
+                },800)
+                return;
+            }else if($scope.message.length > 500){
                 indexScope.layershow = true;
                 indexScope.layershowmsg = gettextCatalog.getString('The content you sent is too long, please send it separately.');
                 setTimeout(function () {
