@@ -128,14 +128,15 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
          * @param tranMessage
          */
         $scope.send = function(deviceAddress,tranMessage) {
-            if(!indexScope.online){
-                indexScope.layershow = true;
-                indexScope.layershowmsg = gettextCatalog.getString('The network is abnormal. Please check the network for retry.');
-                setTimeout(function () {
-                    indexScope.layershow = false;
-                },800);
-                return;
-            }else if($scope.message.length > 500){
+            // if(!indexScope.online){
+            //     indexScope.layershow = true;
+            //     indexScope.layershowmsg = gettextCatalog.getString('The network is abnormal. Please check the network for retry.');
+            //     setTimeout(function () {
+            //         indexScope.layershow = false;
+            //     },800);
+            //     return;
+            // }else
+                if($scope.message.length > 500){
                 indexScope.layershow = true;
                 indexScope.layershowmsg = gettextCatalog.getString('The content you sent is too long, please send it separately.');
                 setTimeout(function () {
@@ -148,7 +149,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             if (!$scope.message && !deviceAddress )
                 return;
             if(deviceAddress) $scope.message = tranMessage;
-            setOngoingProcess("sending");
+           // setOngoingProcess("sending");
             //alert($scope.message);
             var message = lodash.clone($scope.message); // save in var as $scope.message may disappear while we are sending the message over the network
             $scope.message = '';
@@ -178,8 +179,22 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(device_address, message, 0,chatType);
                 },
                 ifError: function(error){
-                    setOngoingProcess();
-                    setError(error);
+                    //setOngoingProcess();
+                    //setError(error);
+                    let errorMessage;
+                    if(error.match(/443/)){
+                        errorMessage = gettextCatalog.getString('The network is abnormal. Please check the network for retry.');
+                    } else{
+                        errorMessage = error;
+                    }
+                    indexScope.layershow = true;
+                    indexScope.layershowmsg = errorMessage;
+                    $timeout(function () {
+                        $rootScope.$apply();
+                    });
+                    setTimeout(function () {
+                        indexScope.layershow = false;
+                    },2 * 1000);
                 }
             });
         };
