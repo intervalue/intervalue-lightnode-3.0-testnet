@@ -33,7 +33,7 @@ angular.module('copayApp.controllers').controller('inviteCorrespondentDeviceCont
         //             indexScope.layershow = false;
         //         },1000)
         //     }
-        };
+        //};
 
         $scope.onTextClick = function ($event) {
             console.log("onTextClick");
