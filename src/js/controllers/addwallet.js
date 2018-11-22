@@ -164,7 +164,10 @@ angular.module('copayApp.controllers').controller('addwalletController',
 
                 });
         };
-        //import wallet
+
+        /**
+         * 通过输入助记次导入钱包
+         */
         self.importw = function(){
             if(self.addwipass !== self.addwirpass){
                 $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('*Inconsistent password'));

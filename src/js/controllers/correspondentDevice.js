@@ -88,7 +88,10 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
         });
 
 
-
+        /**
+         * 监听通过聊天窗口发送交易，返回聊天窗口
+         * @type {*|(function())|angular.noop}
+         */
         var transactionsSend = $rootScope.$on('Local/paymentDoneAndSendMessage',function (event,deviceAddress,tranMessage) {
             $scope.send(deviceAddress,tranMessage);
             correspondentListService.setCurrentCorrespondent(deviceAddress, function(){
@@ -110,13 +113,20 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
 
         });
 
+        /**
+         * 销毁监听事件，防止监听事件重复执行
+         */
         $scope.$on('$destroy', function() {
             transactionsSend();
             transactionsCallBack();// remove listener.
         });
 
 
-
+        /**
+         * 发送聊天信息
+         * @param deviceAddress
+         * @param tranMessage
+         */
         $scope.send = function(deviceAddress,tranMessage) {
             if($scope.message.length > 500){
                 indexScope.layershow = true;
@@ -169,6 +179,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
 
         /**
          * 轮询通过聊天窗口发出的未确认交易
+         * 交易确认后，发送交易成功信息通知设备好友
          */
         setInterval(function () {
             let light = require('intervaluecore/light');
@@ -230,6 +241,10 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(device_address, message, 0,chatType);
         }
 
+        /**
+         * 选择地址时，通过walletId查询到对应地址
+         * @param walletId
+         */
         $scope.insertMyAddress = function(walletId){
             readMyPaymentAddressToInsert(walletId,function (result) {
                 appendMyPaymentAddress(result);

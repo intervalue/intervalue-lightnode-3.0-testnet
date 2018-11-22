@@ -15,6 +15,11 @@ angular.module('copayApp.controllers').controller('wordsController',
     var self = this;
     self.show = false;
     var fc = profileService.focusedClient;
+
+
+      /**
+       * 判断删除的钱包是否当前使用钱包，如果不是需要先切换钱包再删除
+       */
     if(self.walletId && fc.credentials.walletId != self.walletId){
         profileService.setAndStoreFocus(self.walletId, function() {
             fc = profileService.focusedClient;

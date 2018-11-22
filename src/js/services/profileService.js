@@ -439,7 +439,10 @@ angular.module('copayApp.services')
             return cb(null, walletClient);
         };
 
-        //初次创建钱包或还原钱包
+        /**
+         * 初次创建钱包或还原钱包
+         */
+
         root._createNewProfile = function (opts, cb) {
             console.log("_createNewProfile");
             if (opts.noWallet)
@@ -465,7 +468,7 @@ angular.module('copayApp.services')
                     if (err)
                         return cb(gettext('Error creating wallet') + ": " + err);
                     //console.log("created wallet, client: ", JSON.stringify(walletClient));
-                    //将钱包信息存入文件中
+                    //将钱包信息存入内存中
                     var xPrivKey = walletClient.credentials.xPrivKey;
                     var mnemonic = walletClient.credentials.mnemonic;
                     console.log("mnemonic: " + mnemonic + ', xPrivKey: ' + xPrivKey);
