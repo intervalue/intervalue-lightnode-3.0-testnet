@@ -179,7 +179,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
             }).replace(/\[(.+?)\]\(signed-message:(.+?)\)/g, function(str, description, signedMessageBase64){
                 var info = getSignedMessageInfoFromJsonBase64(signedMessageBase64);
                 if (!info)
-                    return '<i>[invalid signed message]</i>';
+                    return '<div>[invalid signed message]</div>';
                 var objSignedMessage = info.objSignedMessage;
                 var text = 'Message signed by '+objSignedMessage.authors[0].address+': '+objSignedMessage.signed_message;
                 if (info.bValid)
@@ -188,7 +188,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
                     text += " (invalid)";
                 else
                     text += ' (<a class="chataddamm"  ng-click="verifySignedMessage(\''+signedMessageBase64+'\')">verify</a>)';
-                return '<i>['+text+']</i>';
+                return '<div>['+text+']</div>';
             }).replace(/\bhttps?:\/\/\S+/g, function(str){
                 return '<a class="chataddamm" ng-click="openExternalLink(\''+escapeQuotes(str)+'\')" class="external-link">'+str+'</a>';
             });
@@ -319,17 +319,17 @@ angular.module('copayApp.services').factory('correspondentListService', function
                 var objPaymentRequest = parsePaymentRequestQueryString(query_string);
                 if (!objPaymentRequest)
                     return '<div class="class="chataddamme">'+str+'</div>';
-                return '<i class="chataddamme">'+address+' '+gettextCatalog.getString('Payment request') +objPaymentRequest.amountStr.substring(16)+'</i>';
+                return '<div class="chataddamme">'+address+' '+gettextCatalog.getString('Payment request') +objPaymentRequest.amountStr.substring(16)+'</div>';
             }).replace(/\[(.+?)\]\(payment:(.+?)\)/g, function(str, description, paymentJsonBase64){
                 var arrMovements = getMovementsFromJsonBase64PaymentRequest(paymentJsonBase64);
                 if (!arrMovements)
                     return '[invalid payment request]';
-                return '<i class="chataddamme">Payment request: '+arrMovements.join(', ')+'</i>';
+                return '<div class="chataddamme">Payment request: '+arrMovements.join(', ')+'</div>';
             }).replace(/\[(.+?)\]\(vote:(.+?)\)/g, function(str, description, voteJsonBase64){
                 var objVote = getVoteFromJsonBase64(voteJsonBase64);
                 if (!objVote)
                     return '[invalid vote request]';
-                return '<i class="chataddamme">Vote request: '+objVote.choice+'</i>';
+                return '<div class="chataddamme">Vote request: '+objVote.choice+'</div>';
             }).replace(/\[(.+?)\]\(profile:(.+?)\)/g, function(str, description, privateProfileJsonBase64){
                 var objPrivateProfile = getPrivateProfileFromJsonBase64(privateProfileJsonBase64);
                 if (!objPrivateProfile)
@@ -339,11 +339,11 @@ angular.module('copayApp.services').factory('correspondentListService', function
                 var arrFields = fields_list.split(',');
                 return '[Request for profile fields '+fields_list+']';
             }).replace(/\[(.+?)\]\(sign-message-request:(.+?)\)/g, function(str, description, message_to_sign){
-                return '<i class="chataddamme">[Request to sign message: '+message_to_sign+']</i>';
+                return '<div class="chataddamme">[Request to sign message: '+message_to_sign+']</div>';
             }).replace(/\[(.+?)\]\(signed-message:(.+?)\)/g, function(str, description, signedMessageBase64){
                 var info = getSignedMessageInfoFromJsonBase64(signedMessageBase64);
                 if (!info)
-                    return '<i class="chataddamme">[invalid signed message]</i>';
+                    return '<div class="chataddamme">[invalid signed message]</div>';
                 var objSignedMessage = info.objSignedMessage;
                 var text = 'Message signed by '+objSignedMessage.authors[0].address+': '+objSignedMessage.signed_message;
                 if (info.bValid)
