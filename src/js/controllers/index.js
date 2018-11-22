@@ -59,6 +59,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.invedollar = 1;
     self.invermb = 1;
     self.from_stables = 0;
+    self.online = true;
     function updatePublicKeyRing(walletClient, onDone) {
         var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
         walletDefinedByKeys.readCosigners(walletClient.credentials.walletId, function (arrCosigners) {
