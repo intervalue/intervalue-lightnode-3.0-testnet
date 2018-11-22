@@ -835,7 +835,14 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         });
     };
 
-
+    /**
+     * 切换钱包标签，进入不同页面
+     * @param tab
+     * @param reset
+     * @param tries
+     * @param switchState
+     * @returns {*}
+     */
     self.setTab = function (tab, reset, tries, switchState) {
         // console.log("setTab", tab, reset, tries, switchState);
         tries = tries || 0;
@@ -864,6 +871,9 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 }
             }
 
+            /**
+             * 根据点击标签内容切换对应标签图标样式
+             */
             let menuu = self.menu;
             if((self.tab== tab &&!$rootScope.tab) ||self.tab != tab){
                 for(let item in menuu){
@@ -1288,7 +1298,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     };
 
 
-
+    /**
+     * 刷新钱包信息：余额，交易记录
+     * @param client
+     * @param cb
+     */
     self.updateLocalTxHistory = function (client, cb) {
         var walletId = client.credentials.walletId;
         self.mnemonicEncrypted = client.credentials.mnemonicEncrypted;
@@ -1541,12 +1555,18 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         */
     };
 
+    /**
+     * 设置语言
+     */
     self.setUxLanguage = function () {
         var userLang = uxLanguage.update();
         self.defaultLanguageIsoCode = userLang;
         self.defaultLanguageName = uxLanguage.getName(userLang);
     };
 
+    /**
+     * 设置资讯行情计价货币
+     */
     self.setUxCurrency = function () {
         var userCoin = uxCurrency.update();
         self.defaultCurrencyIsoCode = userCoin;
