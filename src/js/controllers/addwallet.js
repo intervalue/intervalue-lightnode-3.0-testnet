@@ -4,6 +4,7 @@ angular.module('copayApp.controllers').controller('addwalletController',
     function ($rootScope, $scope, $timeout, storageService, notification, profileService, bwcService, $log,gettext,go,gettextCatalog,isCordova) {
         var self = this;
         var successMsg = gettext('Backup words deleted');
+        var indexScope = $scope.index;
         self.addwname = '';
         self.addwpass = '';
         self.addwrpass = '';
@@ -132,11 +133,16 @@ angular.module('copayApp.controllers').controller('addwalletController',
 
             if (isCordova) {
                 window.plugins.spinnerDialog.show(null, gettextCatalog.getString('Loading...'), true);
+            }else{
+                indexScope.progressing = true;
             }
                 profileService.createWallet({ name: walletName, password: passphrase, mnemonic: mnemonic,m:1,n:1,networkName:"livenet",cosigners:[],isSinglecreateress:true  }, function (err,walletId) {
                    $timeout(function () {
-                       if (isCordova)
+                       if (isCordova){
                            window.plugins.spinnerDialog.hide();
+                       }else{
+                           indexScope.progressing = false;
+                       }
                        if (err) {
                            self.creatingProfile = false;
                            $log.warn(err);
@@ -178,11 +184,16 @@ angular.module('copayApp.controllers').controller('addwalletController',
             self.importcode2 = self.importcode1.replace(/\s+/g, ' ');
             if (isCordova) {
                 window.plugins.spinnerDialog.show(null, gettextCatalog.getString('Loading...'), true);
+            }else{
+                indexScope.progressing = true;
             }
                 profileService.createWallet({ name: self.addwiname, password: self.addwipass, mnemonic: self.importcode2,m:1,n:1,networkName:"livenet",cosigners:[],isSinglecreateress:true }, function (err,walletId) {
                     $timeout(function () {
-                        if (isCordova)
+                        if (isCordova){
                             window.plugins.spinnerDialog.hide();
+                        }else{
+                            indexScope.progressing = false;
+                        }
                         if(err){
                             self.creatingProfile = false;
                             $log.warn(err);

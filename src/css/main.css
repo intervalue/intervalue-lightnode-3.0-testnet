@@ -1435,7 +1435,29 @@ input.ng-invalid-match, input.ng-invalid-match:focus {
   left: 50%;
   transform: translateX(-50%);
 }
-
+.progresslayer {
+  position: fixed;
+  left: 0;
+  top:0;
+  width: 100%;
+  height:100%;
+  background:rgba(0, 0, 0, 0.6);
+  z-index: 1000000000;
+}
+.progresslayerin {
+  background: #45AD8E;
+  text-align: center;
+  margin: auto;
+  color: #fff;
+  font-size: 13px;
+  opacity: 0.8;
+  border-radius: 3px;
+  position: absolute;
+  padding: 6px 10px;
+  bottom:20%;
+  left: 50%;
+  transform: translateX(-50%);
+}
 /*/////////////////// SPINNER ////////////////////*/
 
 #history .spinner, #receive .spinner, #send .spinner {

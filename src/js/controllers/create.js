@@ -4,6 +4,7 @@ angular.module('copayApp.controllers').controller('createwalletController',
     function ($rootScope, $scope, $timeout, storageService, notification, profileService, bwcService, $log,gettext,go,gettextCatalog,isCordova) {
         var self = this;
         var successMsg = gettext('Backup words deleted');
+        var indexScope = $scope.index;
         self.createwname = '';
         self.createwpass = '';
         self.createwrpass = '';
@@ -130,12 +131,17 @@ angular.module('copayApp.controllers').controller('createwalletController',
             //	saveDeviceName();
             if (isCordova) {
                 window.plugins.spinnerDialog.show(null, gettextCatalog.getString('Loading...'), true);
+            }else{
+                indexScope.progressing = true;
             }
             // $scope.loading = true;
                 profileService.create({ walletName: walletName, password: passphrase, mnemonic: mnemonic }, function (err) {
                     $timeout(function () {
-                        if (isCordova)
+                        if (isCordova){
                             window.plugins.spinnerDialog.hide();
+                        }else{
+                            indexScope.progressing = false;
+                        }
                         if (err) {
                             $log.warn(err);
                             self.error = err;
@@ -166,12 +172,17 @@ angular.module('copayApp.controllers').controller('createwalletController',
             }
             if (isCordova) {
                 window.plugins.spinnerDialog.show(null, gettextCatalog.getString('Loading...'), true);
+            }else{
+                indexScope.progressing = true;
             }
 
                 profileService.create({ walletName: self.createwiname, password: self.createwipass, mnemonic: self.importcode }, function (err) {
                     $timeout(function () {
-                        if (isCordova)
+                        if (isCordova){
                             window.plugins.spinnerDialog.hide();
+                        }else{
+                            indexScope.progressing = false;
+                        }
                         if(err){
                             self.creatingProfile = false;
                             $log.warn(err);
