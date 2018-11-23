@@ -95,7 +95,7 @@ angular.module('copayApp.services').factory('correspondentListService', function
 		for (var i = messages.length-1; i >= 0 && msg_obj.message_counter; i--) {
 			var message = messages[i];
 			if (message.message_counter === undefined || message.message_counter && msg_obj.message_counter > message.message_counter) {
-                let msg = msg_obj.message.substr(69,44);
+                let msg = msg_obj.message.substr(69,66);
 				let msgUpdate =  true;
                 for(let item in messages){
                     if(messages[item].message.indexOf(msg) != -1 && message_type =='transaction') {
