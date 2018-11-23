@@ -388,6 +388,8 @@ angular.module('copayApp.services')
 
                 } catch (ex) {
                     $log.info(ex);
+                    if (isCordova){
+                        window.plugins.spinnerDialog.hide();
                     $rootScope.$emit('Local/ShowAlert', gettextCatalog.getString(' Could not create: Invalid wallet seed.'), 'fi-check', function () {
                     });
                     return;
