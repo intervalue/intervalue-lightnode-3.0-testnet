@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('correspondentDevicesController',
-  function($scope, $timeout, configService, profileService, go, correspondentListService, $state, $rootScope, isCordova,gettextCatalog) {
+  function($scope, $timeout, configService, profileService, go, correspondentListService, $state, $rootScope, isCordova,gettextCatalog,nodeWebkit) {
 	
 	var self = this;
 	
@@ -13,6 +13,7 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 	$scope.selectedCorrespondentList = {};
 	var fc = profileService.focusedClient;
 	$scope.backgroundColor = fc.backgroundColor;
+	var indexScope = $scope.index;
 
 	$scope.state = $state;
 	$scope.showchatdel = false;
