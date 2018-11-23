@@ -364,7 +364,7 @@ angular.module('copayApp.controllers')
 					$timeout(function() {
 						indexScope.shared_address = null;
 						indexScope.updateAll();
-						indexScope.updateTxHistory();
+						indexScope.updateTxHistory(3);
 						$rootScope.$emit('paymentRequest', address, amount, asset);
 					});
 				};
@@ -1753,7 +1753,7 @@ angular.module('copayApp.controllers')
 								//todo delete
 								// wallet.eraseTextcoin(btx.unit, btx.addressTo);
 								
-								indexScope.updateTxHistory();
+								indexScope.updateTxHistory(3);
 								$rootScope.$emit('Local/SetTab', 'history');
 							};
 							$scope.cancel = function() {

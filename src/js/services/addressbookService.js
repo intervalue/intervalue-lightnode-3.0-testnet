@@ -16,7 +16,7 @@ angular.module('copayApp.services').factory('addressbookService', function(stora
   root.list = function(cb) {
     //var fc = profileService.focusedClient;
     storageService.getAddressbook('address', function(err, ab) {
-      if(!ab) cb(null);
+      //if(!ab) cb(null);
       if (err) return cb('Could not get the Addressbook');
       if (ab) ab = JSON.parse(ab);
       return cb(err, ab);
@@ -35,7 +35,7 @@ angular.module('copayApp.services').factory('addressbookService', function(stora
       storageService.setAddressbook('address', JSON.stringify(ab), function(err, ab) {
         if (err) return cb('Error adding new entry');
         root.list(function(err, ab) {
-          if(!ab) return;
+          //if(!ab) return;
           return cb(err, ab);
         });
       });
