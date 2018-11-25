@@ -182,11 +182,10 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     //setOngoingProcess();
                     //setError(error);
                     let errorMessage;
-                    console.log('111111: ',error);
                     if(error.match(/443/)){
                         errorMessage = gettextCatalog.getString('The network is abnormal. Please check the network for retry.');
                     } else{
-                        errorMessage = error;
+                        errorMessage = (typeof error === 'object') ? JSON.stringify(error): error;
                     }
                     indexScope.layershow = true;
                     indexScope.layershowmsg = errorMessage;
