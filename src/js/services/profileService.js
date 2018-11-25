@@ -522,6 +522,8 @@ angular.module('copayApp.services')
                     if (w){
                         if (isCordova)
                             window.plugins.spinnerDialog.hide();
+                        else
+                            $rootScope.progressing = false;
                         $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('wallet already exist'));
                         return;
                     }
