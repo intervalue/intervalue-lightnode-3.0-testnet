@@ -128,14 +128,14 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
          * @param tranMessage
          */
         $scope.send = function(deviceAddress,tranMessage) {
-            // if(!indexScope.online){
-            //     indexScope.layershow = true;
-            //     indexScope.layershowmsg = gettextCatalog.getString('The network is abnormal. Please check the network for retry.');
-            //     setTimeout(function () {
-            //         indexScope.layershow = false;
-            //     },800);
-            //     return;
-            // }else
+            if(!indexScope.online){
+                indexScope.layershow = true;
+                indexScope.layershowmsg = gettextCatalog.getString('The network is abnormal. Please check the network for retry.');
+                setTimeout(function () {
+                    indexScope.layershow = false;
+                },800);
+                return;
+            }else
                 if($scope.message.length > 500){
                 indexScope.layershow = true;
                 indexScope.layershowmsg = gettextCatalog.getString('The content you sent is too long, please send it separately.');
@@ -182,6 +182,7 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     //setOngoingProcess();
                     //setError(error);
                     let errorMessage;
+                    console.log('111111: ',error);
                     if(error.match(/443/)){
                         errorMessage = gettextCatalog.getString('The network is abnormal. Please check the network for retry.');
                     } else{
