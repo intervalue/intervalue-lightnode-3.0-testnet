@@ -119,10 +119,10 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	
 	function highlightActions(text, arrMyAddresses,deviceName,message_type){
 		if(message_type =='transaction'){
-            if(text.indexOf('Transferred:') != -1 ) return  '<div class="chattransfer"><div class="chattoptran" id="'+text.substring(-1,44)+'"><img src="./img/setamountw.png"/><span>'+text.substring(57)+'</span></div><div class="chatbttran"><img src="./img/chattraned.png"/><span translate>Has been transferred out</span></div></div>';
+            if(text.indexOf('Transferred:') != -1 ) return  '<div class="chattransfer"><div class="chattoptran" id="'+text.substring(-1,90)+'"><img src="./img/setamountw.png"/><span>'+text.substring(103)+'</span></div><div class="chatbttran"><img src="./img/chattraned.png"/><span translate>Has been transferred out</span></div></div>';
             if(text.indexOf('Successfully transferred:') != -1) {
-            	let tranId = text.substring(-1,44);
-                return '<div class="chattransfer chattransferyes"><a ng-click="openTranInfo(\''+tranId+'\')"><div class="chattoptran"><img src="./img/setamountw.png"/><span>'+text.substring(70)+'</span></div><div class="chatbttran"><img src="./img/chattrsusc.png"/><span translate>Successful transfer</span></div></a></div>';
+            	let tranId = text.substring(-1,90);
+                return '<div class="chattransfer chattransferyes"><a ng-click="openTranInfo(\''+tranId+'\')"><div class="chattoptran"><img src="./img/setamountw.png"/><span>'+text.substring(116)+'</span></div><div class="chatbttran"><img src="./img/chattrsusc.png"/><span translate>Successful transfer</span></div></a></div>';
             }
 		}
 	//	return text.replace(/\b[2-7A-Z]{32}\b(?!(\?(amount|asset|device_address|single_address)|"))/g, function(address){
@@ -303,10 +303,10 @@ angular.module('copayApp.services').factory('correspondentListService', function
 	
 	function formatOutgoingMessage(text,deviceName,message_type){
         if(message_type =='transaction'){
-            if(text.indexOf('Transferred:') != -1 ) return  '<div class="chattransfer"><div class="chattoptran" id="'+text.substring(-1,44)+'"><img src="./img/setamountw.png"/><span>'+text.substring(57)+'</span></div><div class="chatbttran"><img src="./img/chattraned.png"/><span translate>Has been transferred out</span></div></div>';
+            if(text.indexOf('Transferred:') != -1 ) return  '<div class="chattransfer"><div class="chattoptran" id="'+text.substring(-1,90)+'"><img src="./img/setamountw.png"/><span>'+text.substring(103)+'</span></div><div class="chatbttran"><img src="./img/chattraned.png"/><span translate>Has been transferred out</span></div></div>';
             if(text.indexOf('Successfully transferred:') != -1){
-                let tranId = text.substring(-1,44);
-                return'<div class="chattransfer chattransferyes"><a ng-click="openTranInfo(\''+tranId+'\')"><div class="chattoptran"><img src="./img/setamountw.png"/><span>'+text.substring(70)+'</span></div><div class="chatbttran"><img src="./img/chattrsusc.png"/><span translate>Successful transfer</span></div></a></div>';
+                let tranId = text.substring(-1,90);
+                return'<div class="chattransfer chattransferyes"><a ng-click="openTranInfo(\''+tranId+'\')"><div class="chattoptran"><img src="./img/setamountw.png"/><span>'+text.substring(116)+'</span></div><div class="chatbttran"><img src="./img/chattrsusc.png"/><span translate>Successful transfer</span></div></a></div>';
 			}
         }
         let n = escapeHtmlAndInsertBr(text).match(payment_request_regexp) || escapeHtmlAndInsertBr(text).match(/\[(.+?)\]\(payment:(.+?)\)/g) || escapeHtmlAndInsertBr(text).match(/\[(.+?)\]\(vote:(.+?)\)/g)
