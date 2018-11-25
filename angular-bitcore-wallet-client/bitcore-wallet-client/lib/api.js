@@ -677,31 +677,19 @@ API.prototype.getTxHistory = function (asset, walletId, cb) {
 
 API.prototype.initDeviceProperties = function (xPrivKey, device_address, hub, deviceName) {
   console.log("initDeviceProperties");
-  var device = require('intervaluecore/device.js');
+    var device = require('intervaluecore/device.js');
     var lightWallet = require('intervaluecore/light_wallet.js');
-  if (device_address)
-    device.setDeviceAddress(device_address);
-  device.setDeviceName(deviceName);
-    device.setDeviceHub(hub);
-    lightWallet.setLightVendorHost(hub);
   //device.setDevicePrivateKey(Bitcore.HDPrivateKey.fromString(xPrivKey).derive("m/1'").privateKey.toBuffer());
 
   // since this is executed at app launch, give in to allow other startup tasks to complete
   //setTimeout(function(){
   try {
-    /*
-    console.log("device priv key will come next");
-    console.log("xPrivKey=", xPrivKey);
-    console.log("bitcore=", Bitcore);
-    console.log("HDPrivateKey=", Bitcore.HDPrivateKey);
-    console.log("xprivkey=", Bitcore.HDPrivateKey.fromString(xPrivKey));
-    console.log("derived=", Bitcore.HDPrivateKey.fromString(xPrivKey).derive("m/1'"));
-    console.log("privkey=", Bitcore.HDPrivateKey.fromString(xPrivKey).derive("m/1'").privateKey);
-    console.log("bn=", Bitcore.HDPrivateKey.fromString(xPrivKey).derive("m/1'").privateKey.bn);
-    console.log("buffer=", Bitcore.HDPrivateKey.fromString(xPrivKey).derive("m/1'").privateKey.bn.toBuffer({size:32}));
-    console.log("device priv key="+Bitcore.HDPrivateKey.fromString(xPrivKey).derive("m/1'").privateKey.bn.toBuffer({size:32}).toString("base64"));
-    */
     device.setDevicePrivateKey(Bitcore.HDPrivateKey.fromString(xPrivKey).derive("m/1'").privateKey.bn.toBuffer({ size: 32 }));
+      if (device_address)
+          device.setDeviceAddress(device_address);
+      device.setDeviceName(deviceName);
+      device.setDeviceHub(hub);
+      lightWallet.setLightVendorHost(hub);
 
   }
   catch (e) {
