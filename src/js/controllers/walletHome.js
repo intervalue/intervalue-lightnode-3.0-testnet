@@ -877,8 +877,8 @@ angular.module('copayApp.controllers')
 			 self.deviceAddress = deviceAddress;
             var form = $scope.sendPaymentForm;
             //var obj = JSON.parse(form.$$element[0][0].value);
-			if ($scope.index.arrBalances.length === 0)
-				return console.log('send payment: no balances yet');
+			// if ($scope.index.arrBalances.length === 0)
+			// 	return console.log('send payment: no balances yet');
 			var fc = profileService.focusedClient;
 			var unitValue = this.unitValue;
 			var bbUnitValue = this.bbUnitValue;
