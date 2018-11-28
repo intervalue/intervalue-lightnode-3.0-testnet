@@ -44,8 +44,6 @@ input,textarea {
 .inner-wrap {
   -webkit-transition-duration: 200ms;
   transition-duration: 200ms;
-  -webkit-transition-delay: 0;
-  transition-delay: 0;
 }
 
 body {
@@ -94,7 +92,10 @@ _:-ms-fullscreen, :root .main {
   z-index: 5;
   border-bottom: none;
   height:46px;
+  line-height: 46px;
   box-shadow:0px 1px 0px 0px rgba(0,0,0,0.1);
+  position: relative;
+  -webkit-backface-visibility: hidden;
 }
 
 .tab-bar h1 {
@@ -102,24 +103,39 @@ _:-ms-fullscreen, :root .main {
   color:#3B3B3B;
   font-family:PingFangSC-Medium,Arial,微软雅黑;
   font-weight:500;
+  line-height:46px;
+  height:46px;
+}
+.tab-bar-section{
+  height:46px;
+  padding:0;
+  position: absolute;
+  text-align: center;
+  top: 0;
 }
 
 .tab-bar-section.middle {
-  left: 4.7rem;
-  right: 4.7rem;
+  left: 60px;
+  right: 60px;
 }
 
 .left-small {
   height:46px;
-  width: 4.7rem;
+  width: 60px;
   border-right: none;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .right-small {
   height:46px;
-  width: 4.7rem;
+  width: 60px;
   text-align: right;
   border-left: none;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 .left-small a, .right-small a{
   width:100%;
@@ -153,10 +169,6 @@ _:-ms-fullscreen, :root .main {
   animation-duration: 0.3s;
 }
 
-.menu-toggle {
-  padding-top: 1rem !important;
-}
-
 .amount {
   width: 100%;
   text-align: center;
@@ -171,7 +183,12 @@ _:-ms-fullscreen, :root .main {
   color: #fff;
   text-decoration: underline;
 }
-
+.off-canvas-wrap{
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+}
 .off-canvas-wrap,.inner-wrap{
   height:100%;
 }
@@ -181,12 +198,10 @@ _:-ms-fullscreen, :root .main {
 }
 
 .walletHome .avatar-wallet {
-  padding: 0.5rem;
   width: 75px;
   height: 75px;
   position: absolute;
   top: -33px;
-  font-size: 2.2rem;
   border: 3px solid #fff;
   background: #1ABC9C;
   margin: 0;
@@ -198,6 +213,9 @@ _:-ms-fullscreen, :root .main {
 
 .bottombar-item {
   width: 20%;
+  float: left;
+  cursor: pointer;
+  position: relative;
 }
 
 .bottombar-item a {
@@ -205,6 +223,7 @@ _:-ms-fullscreen, :root .main {
   display: block;
   padding: 6px 0;
   height:48px;
+  text-align: center;
 }
 
 .bottombar-item a.active {
@@ -262,6 +281,7 @@ _:-ms-fullscreen, :root .main {
 }
 .right-small a, .left-small a {
   color: #45AD8E;
+  cursor:pointer;
 }
 .right-small a img{
   width:18px;
@@ -280,11 +300,6 @@ _:-ms-fullscreen, :root .main {
   position: static;
   background-color:#3B3B3B;
   border-radius: 3px;
-}
-
-.label {
-  font-size: 70%;
-  padding: 0.2rem 0.2rem;
 }
 
 .sidebar {
@@ -315,7 +330,6 @@ _:-ms-fullscreen, :root .main {
 }
 .sidebar .avatar-wallet, .payment-uri .avatar-wallet, .modal-content .avatar-wallet {
   color: #fff;
-  font-size: 1.4rem;
   font-weight: 700;
   margin-right: 15px;
   text-align: center;
@@ -503,9 +517,7 @@ to prevent collapsing during animation*/
   background-color: #213140;
   width: 40px;
   height: 40px;
-  font-size: 1.5rem;
   border-radius: 100%;
-  margin: 0.6rem;
 }
 
 .dr-notification-image img {
@@ -515,31 +527,26 @@ to prevent collapsing during animation*/
 }
 
 .dr-notification-content {
-  line-height: 90%;
-  padding: 10px 50px 5px 60px;
+  padding: 10px 30px;
 }
 
 .dr-notification-title {
   color: #fff;
-  font-size: 12px;
+  font-size: 16px;
   margin-bottom: 0;
   font-weight: 700;
 }
 
 .dr-notification {
-  background: rgba(44,62,80,0.90);
-  box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.20);
-  -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.20);
-  -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.20);
+  background: rgba(69,173,142,0.90);
   width: 100%;
   clear: both;
   overflow: hidden;
   border-radius: 0;
-  height: 60px;
 }
 
 .dr-notification-text {
-  font-size: 11px;
+  font-size: 12px;
   color: #fff;
 }
 
@@ -552,10 +559,23 @@ to prevent collapsing during animation*/
 
 .reveal-modal-bg {
   display: none !important;
+  background: rgba(0, 0, 0, 0.45);
+  bottom: 0;
+  display: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1004;
+  left: 0;
 }
 
 .reveal-modal.full {
-  top: 0 !important;
+  top: 0;
+  height: 100%;
+  left: 0;
+  margin-left: 0 ;
+  max-width: none ;
+  min-height: 100vh;
 }
 
 .modal-content {
@@ -579,6 +599,13 @@ body.modal-open {
   border-radius: 0;
   outline: 0;
   box-shadow: none;
+  display: none;
+  position: absolute;
+  visibility: hidden;
+  width: 100%;
+  z-index: 1005;
+  background-color: #FFFFFF;
+  min-height:100vh;
 }
 
 .reveal-modal.animated.slideInRight,
@@ -591,6 +618,7 @@ body.modal-open {
 }
 
 input[type="color"],
+input[type="date"],
 input[type="date"],
 input[type="datetime-local"],
 input[type="datetime"],
@@ -625,6 +653,7 @@ input:focus,
 select:focus,
 textarea:focus
 {
+  width:100%;
   outline: 0;
   opacity: 1;
   /*CSS transitions*/
@@ -649,6 +678,7 @@ textarea:focus
   -webkit-box-shadow: none !important;
   -moz-box-shadow: none !important;
   box-shadow: none !important;
+  font-size: 14px;
 }
 
 .popup-txsent {
@@ -659,7 +689,6 @@ textarea:focus
 }
 
 .popup-txsent i {
-  font-size: 5rem;
   background-color: #fff;
   color: #1ABC9C;
   border-radius: 100%;
@@ -667,11 +696,9 @@ textarea:focus
   height: 150px;
   display: block;
   text-align: center;
-  padding-top: 1rem;
 }
 
 .popup-txsigned i {
-  font-size: 5rem;
   background-color: #1ABC9C;
   color: #fff;
   border-radius: 100%;
@@ -679,11 +706,9 @@ textarea:focus
   height: 150px;
   display: block;
   text-align: center;
-  padding-top: 1rem;
 }
 
 .popup-txrejected i {
-  font-size: 5rem;
   background-color: #ED4A43;
   color: #fff;
   border-radius: 100%;
@@ -691,7 +716,6 @@ textarea:focus
   height: 150px;
   display: block;
   text-align: center;
-  padding-top: 1rem;
 }
 
 ::-webkit-input-placeholder {
@@ -742,8 +766,6 @@ textarea:focus
 
 
 .create-tab a {
-  font-size: .7rem;
-  padding: 0 .2rem .6rem .2rem;
   color: #929396;
   text-transform: uppercase;
   font-weight: 500;
@@ -764,6 +786,7 @@ textarea:focus
   width:100%;
   height:100%;
   padding: 15px 0 10px;
+  cursor:pointer;
 }
 
 .tab-container.selected,

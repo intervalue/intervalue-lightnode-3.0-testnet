@@ -31,7 +31,7 @@
 </style>
 
 <div ng-controller="walletHomeController as home">
-    <div class="row columns m20tp" ng-show="index.noFocusedWallet">
+    <div class="m20tp" ng-show="index.noFocusedWallet">
         <div class="text-center text-warning m20b">
             <i class="fi-alert"></i> <span translate>You do not have a wallet</span>
         </div>
@@ -154,7 +154,7 @@
 
                         </div>
 
-                        <div class="notximg" ng-if="!index.txHistoryError" translate>
+                        <div class="notximg" ng-show="!index.txHistoryError" translate>
 
                             <img src="./img/notx.png"/>
 
@@ -166,9 +166,9 @@
 
                 </div>
 
-                <!-- <div class="row m20t text-center" ng-show="index.updatingTxHistory[index.walletId]">
+                <!-- <div class="m20t text-center" ng-show="index.updatingTxHistory[index.walletId]">
 
-                    <div class="columns large-12 medium-12 small-12">
+                    <div>
 
                         <div class="spinner">
 
@@ -249,7 +249,7 @@
                                 </span>
                         </div>
 
-                        <!-- <div class="size-14 text-gray columns m5t" ng-if="btx.message || btx.addressTo">
+                        <!-- <div class="size-14 text-gray m5t" ng-if="btx.message || btx.addressTo">
                         <div ng-show="btx.message"><span translate>Note</span>: {{btx.message}}</div>
                         <div ng-show="!btx.message">
                             <span translate>To</span>: {{index.addressbook[btx.addressTo] || btx.addressTo}}
@@ -263,9 +263,9 @@
                         </div> -->
                     </div>
 
-                    <div class="row m20t text-center" ng-show="index.historyRendering">
+                    <div class="m20t text-center" ng-show="index.historyRendering">
 
-                        <div class="columns large-12 medium-12 small-12">
+                        <div>
 
                             <div class="spinner">
 
@@ -289,7 +289,7 @@
                         Show all
 
                     </button>
-                    <!--<div class="row m20t">
+                    <!--<div class="m20t">
 
                            <div class="large-6 medium-6 small-6 columns">
 
@@ -525,7 +525,7 @@
                 </section>
 
                 <section class="middle tab-bar-section">
-                    <h1 class="title ellipsis" translate>Transaction</h1>
+                    <h1 class="ellipsis" translate>Transaction</h1>
                 </section>
             </nav>
             <div class="height13"></div>

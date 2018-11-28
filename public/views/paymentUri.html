@@ -4,8 +4,8 @@
   ng-init="titleSection='Choose wallet'; closeToHome = true">
 </div>
 
-<div class="content p20v row payment-uri" ng-controller="paymentUriController as payment">
-  <div class="large-12 columns" ng-init="payment.checkBitcoinUri()">
+<div class="content p20v payment-uri" ng-controller="paymentUriController as payment">
+  <div class="large-12" ng-init="payment.checkBitcoinUri()">
     <div class="panel text-center" ng-if="!payment.uri">
       <h1 translate>Bitcoin URI is NOT valid!</h1>
     </div>

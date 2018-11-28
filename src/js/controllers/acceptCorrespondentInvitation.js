@@ -5,7 +5,7 @@ angular.module('copayApp.controllers').controller('acceptCorrespondentInvitation
 	
 	var self = this;
 	console.log("acceptCorrespondentInvitationController");
-	
+	$scope.code = '';
 	var fc = profileService.focusedClient;
 	$scope.backgroundColor = fc.backgroundColor;
 	

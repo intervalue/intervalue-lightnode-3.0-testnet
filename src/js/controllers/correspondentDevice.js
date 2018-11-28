@@ -88,7 +88,10 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
         });
 
 
-
+        /**
+         * 监听通过聊天窗口发送交易，返回聊天窗口
+         * @type {*|(function())|angular.noop}
+         */
         var transactionsSend = $rootScope.$on('Local/paymentDoneAndSendMessage',function (event,deviceAddress,tranMessage) {
             $scope.send(deviceAddress,tranMessage);
             correspondentListService.setCurrentCorrespondent(deviceAddress, function(){
@@ -110,20 +113,43 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
 
         });
 
+        /**
+         * 销毁监听事件，防止监听事件重复执行
+         */
         $scope.$on('$destroy', function() {
             transactionsSend();
             transactionsCallBack();// remove listener.
         });
 
 
-
+        /**
+         * 发送聊天信息
+         * @param deviceAddress
+         * @param tranMessage
+         */
         $scope.send = function(deviceAddress,tranMessage) {
+            if(!indexScope.online){
+                indexScope.layershow = true;
+                indexScope.layershowmsg = gettextCatalog.getString('The network is abnormal. Please check the network for retry.');
+                setTimeout(function () {
+                    indexScope.layershow = false;
+                },800);
+                return;
+            }else
+                if($scope.message.length > 500){
+                indexScope.layershow = true;
+                indexScope.layershowmsg = gettextCatalog.getString('The content you sent is too long, please send it separately.');
+                setTimeout(function () {
+                    indexScope.layershow = false;
+                },800);
+                return;
+            }
             $scope.error = null;
             //$scope.message = 'testtestestsetset';
             if (!$scope.message && !deviceAddress )
                 return;
             if(deviceAddress) $scope.message = tranMessage;
-            setOngoingProcess("sending");
+           // setOngoingProcess("sending");
             //alert($scope.message);
             var message = lodash.clone($scope.message); // save in var as $scope.message may disappear while we are sending the message over the network
             $scope.message = '';
@@ -143,6 +169,8 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                         timestamp: Math.floor(Date.now() / 1000)
                     };
                     correspondentListService.checkAndInsertDate($scope.messageEvents, msg_obj);
+                    // console.log('$scope.messageEvents');
+                    // console.log($scope.messageEvents);
                     $scope.messageEvents.push(msg_obj);
                     $scope.message = "";
                     $timeout(function(){
@@ -151,13 +179,66 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                     if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(device_address, message, 0,chatType);
                 },
                 ifError: function(error){
-                    setOngoingProcess();
-                    setError(error);
+                    //setOngoingProcess();
+                    //setError(error);
+                    let errorMessage;
+                    if(error.match(/443/)){
+                        errorMessage = gettextCatalog.getString('The network is abnormal. Please check the network for retry.');
+                    } else{
+                        errorMessage = (typeof error === 'object') ? JSON.stringify(error): error;
+                    }
+                    indexScope.layershow = true;
+                    indexScope.layershowmsg = errorMessage;
+                    $timeout(function () {
+                        $rootScope.$apply();
+                    });
+                    setTimeout(function () {
+                        indexScope.layershow = false;
+                    },2 * 1000);
                 }
             });
         };
 
-        $rootScope.sendSuccessfully =  function(device_address, chatType, message){
+        /**
+         * 轮询通过聊天窗口发出的未确认交易
+         * 交易确认后，发送交易成功信息通知设备好友
+         */
+        setInterval(function () {
+            let light = require('intervaluecore/light');
+            let device = require('intervaluecore/device');
+            light.findPendingWithChat().then(function (resolve,reject) {
+                for(let item in  resolve){
+                    if(resolve[item].result == 'good'){
+                        let tranMessage = resolve[item].id+'?Successfully transferred: '+ resolve[item].amount/1000000 + ' INVE';
+                        //$rootScope.$emit('Local/paymentDoneAndSendMessage', resolve[item].device, tranMessage);
+                        //$rootScope.sendMessage(resolve[item].device, tranMessage);
+                        let deviceAddress = resolve[item].device;
+                        $scope.message = tranMessage;
+                        //alert($scope.message);
+                        var message = lodash.clone($scope.message); // save in var as $scope.message may disappear while we are sending the message over the network
+                        $scope.message = '';
+                        //alert(correspondent.device_address);
+                        let device_address = deviceAddress;
+                        let chatType = deviceAddress ? 'transaction':'text';
+                        device.sendMessageToDevice(device_address, chatType, message, {
+                            //device.sendMessageToDevice('0DOJDKCO6CD2JGWMFEWNHJSFXPQQLRSXW', "text", message, {
+                            ifOk: function(){
+                                $scope.sendSuccessfully(device_address, chatType, message);
+                            },
+                            ifError: function(error){
+                                setOngoingProcess();
+                                setError(error);
+                            }
+                        });
+                        device.delDeviceChatTran(resolve[item].id);
+                        break;
+                    }
+                }
+            });
+
+        },3 * 1000);
+
+        $scope.sendSuccessfully =  function(device_address, chatType, message){
             $scope.autoScrollEnabled = true;
             var msg_obj = {
                 bIncoming: false,
@@ -166,7 +247,14 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
                 timestamp: Math.floor(Date.now() / 1000)
             };
             correspondentListService.checkAndInsertDate($scope.messageEvents, msg_obj);
-            $scope.messageEvents.push(msg_obj);
+            let msg = msg_obj.message.substr(69,90);
+
+            for(let item in $scope.messageEvents){
+                if($scope.messageEvents[item].message.indexOf(msg) != -1) {
+                    $scope.messageEvents[item].message = msg_obj.message;
+                }
+            }
+            //$scope.messageEvents.push(msg_obj);
             $scope.message = "";
             $timeout(function(){
                 $scope.$apply();
@@ -174,6 +262,10 @@ angular.module('copayApp.controllers').controller('correspondentDeviceController
             if (correspondent.my_record_pref && correspondent.peer_record_pref) chatStorage.store(device_address, message, 0,chatType);
         }
 
+        /**
+         * 选择地址时，通过walletId查询到对应地址
+         * @param walletId
+         */
         $scope.insertMyAddress = function(walletId){
             readMyPaymentAddressToInsert(walletId,function (result) {
                 appendMyPaymentAddress(result);

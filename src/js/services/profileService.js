@@ -388,6 +388,7 @@ angular.module('copayApp.services')
 
                 } catch (ex) {
                     $log.info(ex);
+                    if (isCordova) window.plugins.spinnerDialog.hide();
                     $rootScope.$emit('Local/ShowAlert', gettextCatalog.getString(' Could not create: Invalid wallet seed.'), 'fi-check', function () {
                     });
                     return;
@@ -439,7 +440,10 @@ angular.module('copayApp.services')
             return cb(null, walletClient);
         };
 
-        //初次创建钱包或还原钱包
+        /**
+         * 初次创建钱包或还原钱包
+         */
+
         root._createNewProfile = function (opts, cb) {
             console.log("_createNewProfile");
             if (opts.noWallet)
@@ -465,7 +469,7 @@ angular.module('copayApp.services')
                     if (err)
                         return cb(gettext('Error creating wallet') + ": " + err);
                     //console.log("created wallet, client: ", JSON.stringify(walletClient));
-                    //将钱包信息存入文件中
+                    //将钱包信息存入内存中
                     var xPrivKey = walletClient.credentials.xPrivKey;
                     var mnemonic = walletClient.credentials.mnemonic;
                     console.log("mnemonic: " + mnemonic + ', xPrivKey: ' + xPrivKey);
@@ -516,6 +520,10 @@ angular.module('copayApp.services')
                     // check if exists
                     var w = lodash.find(root.profile.credentials, { 'xPubKey': xPubKey });
                     if (w){
+                        if (isCordova)
+                            window.plugins.spinnerDialog.hide();
+                        else
+                            $rootScope.progressing = false;
                         $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('wallet already exist'));
                         return;
                     }

@@ -27,12 +27,12 @@
 				</a>
 			</section>
 		</nav>
-		<div class="height15"></div>
+		<!--<div class="height15"></div>-->
 		<!-- contacts页签对应视图 -->
 		<div class="mtab chatbiline" ng-class="{'active': mtab == 1}" ng-init="mtab = 1;readList();">
 			<ul class="no-bullet m0 correspondentList">
 				<!-- 聊天联系人列表 -->
-				<li  ng-repeat="correspondent in list | orderBy:newMsgByAddressComparator">
+				<li  ng-repeat="correspondent in list | orderBy:newMsgByAddressComparator track by $index">
 					<div class="liin" draggable="true" chat-swiper-left ng-click="showCorrespondent(correspondent)">
 						<div class="ld">
 							<div class="correspondentlist_badge"

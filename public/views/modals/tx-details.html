@@ -12,7 +12,7 @@
   
     <section class="middle tab-bar-section">
   
-      <h1 class="title ellipsis" ng-style="{'color':color}" translate>
+      <h1 class="title ellipsis" translate>
   
         Transaction Details
   
@@ -80,7 +80,7 @@
 
       </li>
   
-      <li ng-if="!btx.hasMultiplesOutputs && btx.addressTo && btx.addressTo != 'N/A'" class="txli" ng-click="copyAddress(btx.addressTo)">
+      <li ng-if="!btx.hasMultiplesOutputs && btx.addressTo && btx.addressTo != 'N/A'" class="txli">
   
         <span class="ultitle" translate>To</span>
   
@@ -108,7 +108,7 @@
   
   
   
-      <li ng-if="btx.textAddress || btx.original_address" class="txli" ng-click="copyAddress(btx.textAddress || btx.original_address)">
+      <li ng-if="btx.textAddress || btx.original_address" class="txli">
   
         <span class="ultitle">{{getToAddressLabel(btx.textAddress || btx.original_address)}}</span>
   

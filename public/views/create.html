@@ -5,8 +5,8 @@
         <div class="welcometext">
             <img src="./img/welcomeinve.png" >
             <div>
-              <p class="size-13 m0 text-white" translate>Your wallet will be created on this device,</p>
-              <p class="size-13 m0 text-white" translate>keep it safe.  See your backup options in the Settings menu.</p>
+              <p class="m0 text-white" translate>Your wallet will be created on this device,</p>
+              <p class="m0 text-white" translate>keep it safe.  See your backup options in the Settings menu.</p>
             </div>
         </div>
         <div class="twowayin">
@@ -38,12 +38,12 @@
       <div class="f9fafch"></div>
       <div class="addwcontentin">
         <div class="fleximgtext">
-          <img src="./img/warn.png">
-          <div translate class="redcolor size-12">The password is used to protect the private key and transaction authorization, and the strength is very important!</div>
+          <img src="./img/warnb.png">
+          <div translate class="warmcolor size-12">The password is used to protect the private key and transaction authorization, and the strength is very important!</div>
         </div>
         <div class="fleximgtext">
-          <img src="./img/warn.png">
-          <div translate class="redcolor size-12">InterValue does not store passwords and cannot be retrieved for you. Please keep in mind!</div>
+          <img src="./img/warnb.png">
+          <div translate class="warmcolor size-12">InterValue does not store passwords and cannot be retrieved for you. Please keep in mind!</div>
         </div>
         <form name="creatwform" novalidate>
           <div class="adinputitem" mdinputvalidc>
@@ -121,8 +121,8 @@
       <div class="addwcontentin">
         <img class="warnbigimg" src="./img/warnbig.png" />
         <p class="center redcolor m28b" translate>Confirm your mnemonic</p>
-        <p ng-show="create.showcodeerr" translate>Incorrect mnemonic</p>
-        <div style="display: block;">
+        <p ng-show="create.showcodeerr" class="redcolor" translate>Incorrect mnemonic</p>
+        <div style="display: block;min-height:220px;">
           <div class="addwslcbox m24b" ng-click="create.minuswordf($event)">
             <span ng-repeat="item in create.chosenWords track by $index" id="{{item.id}}" >{{item.str}}</span>
           </div>
@@ -163,7 +163,7 @@
             <p class="poptips p25h" translate>This will completely remove the mnemonics from the app and it will not be recoverable. Please reconfirm that you have backed up your mnemonics to a safe place.</p>
             <div class="p25h popbutton">
               <button ng-click="create.createWallet(create.createwname, create.createwpass, create.createwrpass, create.mnemonic,true);" translate>Confirm</button>
-              <button class="awbtn" ng-click="create.createWallet(create.createwname, create.createwpass, create.createwrpass, create.mnemonic);" translate>Cancel</button>
+              <button class="awbtn" ng-click="create.showconfirm = false;" translate>Cancel</button>
             </div>
           </div>
         </div>
@@ -178,7 +178,7 @@
             <img src="./img/chatbackstate.png" />
           </a>
         </section>
-        <section class="right-small">
+        <section class="right-small" ng-show="index.isCordova">
           <qr-scanner  on-scan="topbar.onQrCodeScannedAddr(data)" before-scan="topbar.onBeforeScan()"></qr-scanner>
         </section>
         <section class="middle tab-bar-section">
@@ -197,7 +197,7 @@
       </div>
       <div class="addwcontentin">
         <div ng-if="create.showtab == 'tabcold'">
-          <div translate class="m20t">Wallet Seed :</div>
+          <div translate>Wallet Seed :</div>
           <textarea placeholder="{{'Enter your mnemonic, separated by spaces'|translate}}" ng-model="create.importcode"></textarea>
           <form name="creatwiform" novalidate>
             <div class="adinputitem" mdinputvalidc>
@@ -226,12 +226,12 @@
                 </div>
                 <p class="adinputpass" translate ng-show="creatwiform.addwpass.$valid && create.createwipass !== create.createwirpass">*Inconsistent password</p>
             </div>
-            <button class="m40t m15b" ng-click="create.importw()" ng-disabled=" !create.importcode || !create.createwipass || !create.createwirpass || creatwiform.$invalid || create.createwipass !== create.createwirpass" translate>Start importing</button>
-            <div class="size-12 redcolor" translate>Note: Please be patient while the wallet is recovering. Do not quit the software.</div>
+            <button class="m30t m15b" ng-click="create.importw()" ng-disabled=" !create.importcode || !create.createwipass || !create.createwirpass || creatwiform.$invalid || create.createwipass !== create.createwirpass" translate>Start importing</button>
+            <div class="size-12 warmcolor" translate>Note: Please be patient while the wallet is recovering. Do not quit the software.</div>
           </form>
         </div>
         <div ng-if="create.showtab == 'tabhot'" ng-controller="importwalletController as import">
-          <form name="addressForm" class="m20t" ng-submit="import.generateAddressQRCode()">
+          <form name="addressForm" ng-submit="import.generateAddressQRCode()">
           <div translate class="m20b">The hot wallet does not need to import the private key, only the wallet address, for daily viewing of accounts, transactions and acceptance notifications. The private key of large funds is recommended to use cold wallet or hardware wallet management to avoid theft and theft.</div>
           <div class="adinputitem">
             <div class="adinputic">
@@ -242,7 +242,7 @@
             </div>
           </div>
             <button type="submit" class="m24b m20t" ng-disabled="!index.signatureAddr" translate>Start importing</button>
-          <div class="size-12 redcolor" translate>Note: The hot wallet needs a cold wallet to match the signature when sending the transaction. You can use another idle phone, open the flight mode as a cold wallet, import the wallet private key, and match the offline signature.</div>
+          <div class="size-12 warmcolor" translate>Note: The hot wallet needs a cold wallet to match the signature when sending the transaction. You can use another idle phone, open the flight mode as a cold wallet, import the wallet private key, and match the offline signature.</div>
           </form>
         </div>
       </div>

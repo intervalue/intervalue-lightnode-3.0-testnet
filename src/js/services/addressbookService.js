@@ -4,8 +4,8 @@ angular.module('copayApp.services').factory('addressbookService', function(stora
   var root = {};
 
   root.getLabel = function(addr, cb) {
-    var fc = profileService.focusedClient;
-    storageService.getAddressbook(fc.credentials.network, function(err, ab) {
+    //var fc = profileService.focusedClient;
+    storageService.getAddressbook('address', function(err, ab) {
       if (!ab) return cb();
       ab = JSON.parse(ab);
       if (ab[addr]) return cb(ab[addr]);
@@ -14,9 +14,9 @@ angular.module('copayApp.services').factory('addressbookService', function(stora
   };
 
   root.list = function(cb) {
-    var fc = profileService.focusedClient;
-    storageService.getAddressbook(fc.credentials.network, function(err, ab) {
-      if(!ab) return;
+    //var fc = profileService.focusedClient;
+    storageService.getAddressbook('address', function(err, ab) {
+      //if(!ab) cb(null);
       if (err) return cb('Could not get the Addressbook');
       if (ab) ab = JSON.parse(ab);
       return cb(err, ab);
@@ -24,16 +24,18 @@ angular.module('copayApp.services').factory('addressbookService', function(stora
   };
 
   root.add = function(entry, cb) {
-    var fc = profileService.focusedClient;
+    console.log('entry:',entry);
+    //var fc = profileService.focusedClient;
     root.list(function(err, ab) {
       if (err) return cb(err);
       if (!ab) ab = {};
       if (ab[entry.address]) return cb('Entry already exist');
       ab[entry.address] = entry.label;
-      storageService.setAddressbook(fc.credentials.network, JSON.stringify(ab), function(err, ab) {
+      console.log('ab: ',ab);
+      storageService.setAddressbook('address', JSON.stringify(ab), function(err, ab) {
         if (err) return cb('Error adding new entry');
         root.list(function(err, ab) {
-          if(!ab) return;
+          //if(!ab) return;
           return cb(err, ab);
         });
       });
@@ -41,13 +43,13 @@ angular.module('copayApp.services').factory('addressbookService', function(stora
   };
   
   root.remove = function(addr, cb) {
-    var fc = profileService.focusedClient;
+    //var fc = profileService.focusedClient;
     root.list(function(err, ab) {
       if (err) return cb(err);
       if (!ab) return;
       if (!ab[addr]) return cb('Entry does not exist');
       delete ab[addr];
-      storageService.setAddressbook(fc.credentials.network, JSON.stringify(ab), function(err) {
+      storageService.setAddressbook('address', JSON.stringify(ab), function(err) {
         if (err) return cb('Error deleting entry');
         root.list(function(err, ab) {
           if(!ab) return;
@@ -58,8 +60,8 @@ angular.module('copayApp.services').factory('addressbookService', function(stora
   };
 
   root.removeAll = function() {
-    var fc = profileService.focusedClient;
-    storageService.removeAddressbook(fc.credentials.network, function(err) {
+    //var fc = profileService.focusedClient;
+    storageService.removeAddressbook('address', function(err) {
       if (err) return cb('Error deleting addressbook');
       return cb();
     });

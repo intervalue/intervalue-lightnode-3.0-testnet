@@ -27,13 +27,13 @@
 	</div>
 
 	<div>
-		<form name="settingsDeviceNameForm" class="columns" ng-submit="recFromSeed.recoveryForm()">
+		<form name="settingsDeviceNameForm" ng-submit="recFromSeed.recoveryForm()">
 			<label><span translate>Your Wallet Seed:</span></label>
 			<textarea id="inputMnemonic" ng-model="recFromSeed.inputMnemonic" autocomplete="off"></textarea>
 			<input ng-show="!recFromSeed.scanning" type="submit" class="button expand black round"
 				   value="{{'Recover'|translate}}" ng-style="{'background-color':index.backgroundColor}">
 		</form>
-		<div class="text-alert size-12 columns">
+		<div class="text-alert size-12">
 			<span translate>WARNINGS:</span>
 			<ul class="warnings">
 				<li translate>This will permanently delete all your existing wallets!</li>

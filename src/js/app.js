@@ -3,7 +3,6 @@
 var modules = [
     'ui.router',
     'angularMoment',
-    'angular-carousel',
     'mm.foundation',
     'monospaced.qrcode',
     'monospaced.elastic',
@@ -16,7 +15,8 @@ var modules = [
     'copayApp.controllers',
     'copayApp.directives',
     'copayApp.addons',
-    'ct.ui.router.extras'
+    'ct.ui.router.extras',
+    'ngAnimate'
 ];
 
 var copayApp = window.copayApp = angular.module('copayApp', modules);

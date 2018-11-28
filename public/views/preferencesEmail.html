@@ -23,7 +23,7 @@
   </div>
 
 
-  <form name="emailForm" ng-submit="prefEmail.save(emailForm)" class="columns" novalidate ng-init="prefEmail.email = index.preferencesGlobal.preferencesEmail">
+  <form name="emailForm" ng-submit="prefEmail.save(emailForm)" novalidate ng-init="prefEmail.email = index.preferencesGlobal.preferencesEmail">
     <div class="box-notification" ng-show="prefEmail.error">
       <span class="text-warning size-14">
         {{prefEmail.error|translate}}

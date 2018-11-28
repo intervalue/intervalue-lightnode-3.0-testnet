@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('copayApp.controllers').controller('correspondentDevicesController',
-  function($scope, $timeout, configService, profileService, go, correspondentListService, $state, $rootScope) {
+  function($scope, $timeout, configService, profileService, go, correspondentListService, $state, $rootScope, isCordova,gettextCatalog,nodeWebkit) {
 	
 	var self = this;
 	
@@ -13,10 +13,14 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 	$scope.selectedCorrespondentList = {};
 	var fc = profileService.focusedClient;
 	$scope.backgroundColor = fc.backgroundColor;
+	var indexScope = $scope.index;
 
 	$scope.state = $state;
 	$scope.showchatdel = false;
 	$scope.hideRemove = true;
+      var conf = require('intervaluecore/conf.js');
+      $scope.protocol = conf.program;
+      $scope.isCordova = isCordova;
 
 	var listScrollTop = 0;
 
@@ -103,7 +107,62 @@ angular.module('copayApp.controllers').controller('correspondentDevicesControlle
 			});
 		});
 	};
-	
+
+
+      correspondentListService.startWaitingForPairing(function(pairingInfo){
+          console.log("beginAddCorrespondent " + pairingInfo.pairing_secret);
+          let device_pubkey = profileService.profile.device_pubkey;
+          $scope.codee = device_pubkey + "@" + pairingInfo.hub + "#" + pairingInfo.pairing_secret;
+
+          function determineQRcodeVersionFromString( inputtext ) {
+              // maximum characters per QR code version using ECC level m
+              // source: http://www.qrcode.com/en/about/version.html
+              var maxCharsforQRVersion = [0,14,26,42,62,84,106,122,152,180,213];
+              var qrversion = 5;
+              // find lowest version number that has enough space for our text
+              for (var i = (maxCharsforQRVersion.length-1); i > 0 ; i--) {
+                  if ( maxCharsforQRVersion[i] >= inputtext.length)
+                  {
+                      qrversion = i;
+                  }
+              }
+
+              return qrversion;
+          }
+
+          var qrstring = $scope.protocol + ":" +$scope.codee;  //as passed to the qr generator in inviteCorrespondentDevice.html
+          $scope.qr_version = determineQRcodeVersionFromString( qrstring );
+
+          $scope.$digest();
+          //$timeout(function(){$scope.$digest();}, 100);
+          var eventName = 'paired_by_secret-'+pairingInfo.pairing_secret;
+          eventBus.once(eventName, onPaired);
+          $scope.$on('$destroy', function() {
+              console.log("removing listener for pairing by our secret");
+              eventBus.removeListener(eventName, onPaired);
+          });
+      });
+
+      function onPaired(peer_address){
+          correspondentListService.setCurrentCorrespondent(peer_address, function(bAnotherCorrespondent){
+              go.path('correspondentDevices.correspondentDevice');
+          });
+      }
+
+      $scope.copyCode = function() {
+          if (isCordova) {
+              window.cordova.plugins.clipboard.copy($scope.codee);
+              window.plugins.toast.showShortCenter(gettextCatalog.getString('Copied to clipboard'));
+          }else if (nodeWebkit.isDefined()) {
+              nodeWebkit.writeToClipboard($scope.codee);
+              indexScope.layershow = true;
+              indexScope.layershowmsg = gettextCatalog.getString('Successful copy');
+              setTimeout(function () {
+                  indexScope.layershow = false;
+              },1000)
+          }
+      };
+
 	$scope.hideRemoveButton = function(removable){
 		return $scope.hideRemove || !removable;
 	}

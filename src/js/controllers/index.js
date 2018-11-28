@@ -59,6 +59,10 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     self.invedollar = 1;
     self.invermb = 1;
     self.from_stables = 0;
+    self.online = true;
+    self.layershow = false;
+    self.progressing = false;
+    self.layershowmsg = '';
     function updatePublicKeyRing(walletClient, onDone) {
         var walletDefinedByKeys = require('intervaluecore/wallet_defined_by_keys.js');
         walletDefinedByKeys.readCosigners(walletClient.credentials.walletId, function (arrCosigners) {
@@ -835,9 +839,15 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         });
     };
 
-
+    /**
+     * 切换钱包标签，进入不同页面
+     * @param tab
+     * @param reset
+     * @param tries
+     * @param switchState
+     * @returns {*}
+     */
     self.setTab = function (tab, reset, tries, switchState) {
-        FastClick.attach(document.body);
         // console.log("setTab", tab, reset, tries, switchState);
         tries = tries || 0;
 
@@ -845,7 +855,7 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             if (document.querySelector('.tab-in.tab-view')) {
                 var el = angular.element(document.querySelector('.tab-in.tab-view'));
                 el.removeClass('tab-in').addClass('tab-out');
-                var old = document.getElementById('menu-' + self.tab);
+                var old = angular.element(document.getElementById('menu-' + self.tab));
                 if (old) {
                     old.className = '';
                 }
@@ -859,12 +869,33 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 }
                 var el = angular.element(document.getElementById(tab));
                 el.removeClass('tab-out').addClass('tab-in');
-                var newe = document.getElementById('menu-' + tab);
+                var newe = angular.element(document.getElementById('menu-' + tab));
                 if (newe) {
                     newe.className = 'active';
                 }
             }
+
+            /**
+             * 根据点击标签内容切换对应标签图标样式
+             */
+            let menuu = self.menu;
+            if((self.tab== tab &&!$rootScope.tab) ||$rootScope.tab != tab ){
+                for(let item in menuu){
+                    if(menuu[item].link == tab) {
+                        let cc = menuu[item];
+                        cc.img = 'active'+cc.img;
+                        menuu.splice(item,1,cc);
+                    }
+                    if(menuu[item].link == $rootScope.tab) {
+                        let cc = menuu[item];
+                        cc.img = cc.img.substring(6);
+                        menuu.splice(item,1,cc);
+                    }
+                }
+            }
+
             $rootScope.tab = self.tab = tab;
+
             $rootScope.$emit('Local/TabChanged', tab);
         };
 
@@ -879,8 +910,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
                 return;
             } else if (tab.new_state) {
                 changeTab(tab.link);
-                $rootScope.tab = self.tab = tab.link;
                 go.path(tab.new_state);
+                $rootScope.tab = self.tab = tab.link;
                 return;
             } else {
                 return self.setTab(tab.link, reset, tries, switchState);
@@ -897,8 +928,8 @@ angular.module('copayApp.controllers').controller('indexController', function ($
             }, (tries === 1) ? 10 : 300);
         }
 
-        if (!self.tab || !$state.is('walletHome'))
-            $rootScope.tab = self.tab = 'walletHome';
+        // if (!self.tab || !$state.is('walletHome'))
+        //     $rootScope.tab = self.tab = 'walletHome';
 
         if (switchState && !$state.is('walletHome')) {
             go.path('walletHome', function () {
@@ -910,6 +941,28 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         changeTab(tab);
     };
 
+
+    $rootScope.$on('Local/SetTabChat',function (event,tab){
+
+        let menuu = self.menu;
+        if((self.tab== tab &&!$rootScope.tab) ||$rootScope.tab != tab ){
+            for(let item in menuu){
+                if(menuu[item].link == tab) {
+                    let cc = menuu[item];
+                    cc.img = 'active'+cc.img;
+                    menuu.splice(item,1,cc);
+                }
+                if(menuu[item].link == $rootScope.tab) {
+                    let cc = menuu[item];
+                    cc.img = cc.img.substring(6);
+                    menuu.splice(item,1,cc);
+                }
+                console.log(item+': ',menuu);
+            }
+
+        }
+        $rootScope.tab = self.tab = tab;
+    });
 
 
 
@@ -1272,7 +1325,11 @@ angular.module('copayApp.controllers').controller('indexController', function ($
     };
 
 
-
+    /**
+     * 刷新钱包信息：余额，交易记录
+     * @param client
+     * @param cb
+     */
     self.updateLocalTxHistory = function (client, cb) {
         var walletId = client.credentials.walletId;
         self.mnemonicEncrypted = client.credentials.mnemonicEncrypted;
@@ -1365,12 +1422,12 @@ angular.module('copayApp.controllers').controller('indexController', function ($
 
 
     self.updateHistory = function (retry) {
-        var device = require('intervaluecore/device.js');
-        device.loginToHub();
+        //var device = require('intervaluecore/device.js');
+        //device.loginToHub();
         var fc = profileService.focusedClient;
         var walletId = fc.credentials.walletId;
         $log.debug('starting Updating Transaction History');
-        if ((!fc.isComplete() || self.arrBalances.length === 0 || self.updatingTxHistory[walletId]) ) {
+        if (( self.updatingTxHistory[walletId]) ) {
             $log.debug('failed Updating Transaction History');
             if (retry) {
                 setTimeout(function () {
@@ -1525,12 +1582,18 @@ angular.module('copayApp.controllers').controller('indexController', function ($
         */
     };
 
+    /**
+     * 设置语言
+     */
     self.setUxLanguage = function () {
         var userLang = uxLanguage.update();
         self.defaultLanguageIsoCode = userLang;
         self.defaultLanguageName = uxLanguage.getName(userLang);
     };
 
+    /**
+     * 设置资讯行情计价货币
+     */
     self.setUxCurrency = function () {
         var userCoin = uxCurrency.update();
         self.defaultCurrencyIsoCode = userCoin;

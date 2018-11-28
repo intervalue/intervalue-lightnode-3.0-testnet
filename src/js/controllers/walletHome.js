@@ -255,7 +255,7 @@ angular.module('copayApp.controllers')
 							$scope.editAddressbook = true;
 							$scope.toggleEditAddressbook();
 							$timeout(function () {
-                                if(!$rootScope.$$phase) $scope.$apply();
+                                 $rootScope.$apply();
                             },1);
 						});
 				},1000);
@@ -364,7 +364,7 @@ angular.module('copayApp.controllers')
 					$timeout(function() {
 						indexScope.shared_address = null;
 						indexScope.updateAll();
-						indexScope.updateTxHistory();
+						indexScope.updateTxHistory(3);
 						$rootScope.$emit('paymentRequest', address, amount, asset);
 					});
 				};
@@ -444,6 +444,11 @@ angular.module('copayApp.controllers')
 			}
 			else if (nodeWebkit.isDefined()) {
 				nodeWebkit.writeToClipboard(addr);
+				indexScope.layershow = true;
+				indexScope.layershowmsg = gettextCatalog.getString('Successful copy');
+				setTimeout(function () {
+                    indexScope.layershow = false;
+                },500);
 			}
 		};
 
@@ -872,8 +877,8 @@ angular.module('copayApp.controllers')
 			 self.deviceAddress = deviceAddress;
             var form = $scope.sendPaymentForm;
             //var obj = JSON.parse(form.$$element[0][0].value);
-			if ($scope.index.arrBalances.length === 0)
-				return console.log('send payment: no balances yet');
+			// if ($scope.index.arrBalances.length === 0)
+			// 	return console.log('send payment: no balances yet');
 			var fc = profileService.focusedClient;
 			var unitValue = this.unitValue;
 			var bbUnitValue = this.bbUnitValue;
@@ -1162,7 +1167,7 @@ angular.module('copayApp.controllers')
                                  return;
                              }
 
-                             fc.sendMultiPayment(opts, function(err, unit, mnemonics) {
+                             fc.sendMultiPayment(opts, function(err, cb) {
                                  // if multisig, it might take very long before the callback is called
                                  //indexScope.setOngoingProcess(gettext('sending'), false);
                                  breadcrumbs.add('done payment in ' + asset + ', err=' + err);
@@ -1192,10 +1197,10 @@ angular.module('copayApp.controllers')
                                  }
                                  var binding = self.binding;
                                  if(self.chat){
-                                      let tranMessage = gettextCatalog.getString('Transferred: ')+form.amount.$modelValue+' INVE';
+                                      let tranMessage = gettextCatalog.getString(cb.id+'?Transferred: ')+form.amount.$modelValue+' INVE';
                                       $rootScope.$emit('Local/paymentDoneAndSendMessage',self.deviceAddress,tranMessage);
                                      $scope.index.updateTxHistory(3);
-
+                                     $rootScope.$emit('Local/SetTab','chat');
                                  }else {
                                      $rootScope.$emit('Local/paymentDone');
 								 }
@@ -1215,40 +1220,7 @@ angular.module('copayApp.controllers')
 				});
 			}, 100);
 		};
-		setInterval(function () {
-			let light = require('intervaluecore/light');
-            let device = require('intervaluecore/device');
-             light.findPendingWithChat().then(function (resolve,reject) {
-                 for(let item in  resolve){
-                 	if(resolve[item].result == 'good'){
-                        let tranMessage = resolve[item].id+'?Successfully transferred: '+ resolve[item].amount/1000000 + ' INVE';
-                        //$rootScope.$emit('Local/paymentDoneAndSendMessage', resolve[item].device, tranMessage);
-						//$rootScope.sendMessage(resolve[item].device, tranMessage);
-						let deviceAddress = resolve[item].device;
-                            $scope.message = tranMessage;
-                            //alert($scope.message);
-                            var message = lodash.clone($scope.message); // save in var as $scope.message may disappear while we are sending the message over the network
-                            $scope.message = '';
-                            //alert(correspondent.device_address);
-                            let device_address = deviceAddress;
-                            let chatType = deviceAddress ? 'transaction':'text';
-                            device.sendMessageToDevice(device_address, chatType, message, {
-                                //device.sendMessageToDevice('0DOJDKCO6CD2JGWMFEWNHJSFXPQQLRSXW', "text", message, {
-                                ifOk: function(){
-                                   $rootScope.sendSuccessfully(device_address, chatType, message);
-                                },
-                                ifError: function(error){
-                                    setOngoingProcess();
-                                    setError(error);
-                                }
-                            });
-						device.delDeviceChatTran(resolve[item].id);
-                        break;
-					}
-				 }
-             });
 
-        },2 * 1000);
 
         function setError(error){
             console.log("send error:", error);
@@ -1648,10 +1620,11 @@ angular.module('copayApp.controllers')
 				var full_amount = $scope.index.stables.replace(/,/g,'');
 				var full_amount2 = self.from_stables.replace(/,/g,'');
 				if(self.chat){
-					form.amount.$setViewValue('' + full_amount2);
+                    form.amount.$setViewValue('' + full_amount2);
 				}else{
-					form.amount.$setViewValue('' + full_amount);
+                    form.amount.$setViewValue('' + full_amount);
 				}
+
 				form.amount.$render();
 
 			//console.log('done setsendall')
@@ -1780,7 +1753,7 @@ angular.module('copayApp.controllers')
 								//todo delete
 								// wallet.eraseTextcoin(btx.unit, btx.addressTo);
 								
-								indexScope.updateTxHistory();
+								indexScope.updateTxHistory(3);
 								$rootScope.$emit('Local/SetTab', 'history');
 							};
 							$scope.cancel = function() {
@@ -1995,10 +1968,6 @@ angular.module('copayApp.controllers')
 			}, function(){}, "referrer");
 		}
 
-        // self.gonewsin = function(id){
-        //     $state.go('newsin',{ id: id});
-        // };
-
 
         $timeout(function () {
         	let fc = profileService.focusedClient;
@@ -2017,7 +1986,8 @@ angular.module('copayApp.controllers')
 		}
 
 		self.cancel = function () {
-			$rootScope.$emit('Local/paymentDoneAndCallBack',self.deviceAddress);
+            $rootScope.$emit('Local/paymentDoneAndCallBack',self.deviceAddress);
+            $rootScope.$emit('Local/SetTabChat','chat');
             self.resetForm();
         }
 

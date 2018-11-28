@@ -15,16 +15,16 @@
     </section>
 </nav>
 
-<div ng-controller="inviteCorrespondentDeviceController"
+<div ng-controller="correspondentDevicesController"
      style="overflow: auto;background: #F9FAFC;" class="content">
     <div>
         <div class="text-center">
             <div class="checkcode">
                 <div class="myaddress" translate>My pair code</div>
                 <div ng-click="copyCode()" class="chatcopycode">
-                    <qrcode size="185" version="{{qr_version}}" data="{{protocol}}:{{code}}"></qrcode>
+                    <qrcode size="185" version="{{qr_version}}" data="{{protocol}}:{{codee}}"></qrcode>
                 </div>
-                <div class="chatdevicecode" id="chatdevicecode">{{code}}</div>
+                <div class="chatdevicecode" id="chatdevicecode">{{codee}}</div>
             </div>
             <div class="aboutQR">
                 <div class="chatdevicecopybtn" ng-click="copyCode()">

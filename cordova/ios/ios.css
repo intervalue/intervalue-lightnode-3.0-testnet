@@ -1,0 +1,44 @@
+/*tab-bar*/
+.tab-bar, .tab-bar h1{
+    height:52px;
+    line-height: 52px;
+}
+.tab-bar-section, .left-small, .right-small{
+    height:52px;
+}
+/*聊天*/
+.chatsendform #message{
+    min-height:34px;
+}
+.view_chat_box .chatlist{
+    padding-top:34px;
+}
+/*新闻*/
+.news .addwcontent{
+    height: calc(100vh - 138px);
+    top: 90px;
+}
+.news .letterlist .datenow, .news .quotelist .titlelabel{
+    top:90px;
+}
+.news .tab-container a{
+    padding:8px 0;
+}
+/*收款地址*/
+.addreceive{
+    margin-top: 46px;
+}
+/*地址薄*/
+.addedit{
+    padding-top: 24px;
+}
+.addaddbook .modal-content ul.addalist{
+    height: calc(100vh - 146px);
+}
+.addaddbook .modal-content ul.addalist2{
+    height: calc(100vh - 70px);
+}
+/*底部菜单*/
+/*.bottombar-item a{*/
+    /*height:54px;*/
+/*}*/

@@ -69,6 +69,7 @@ module.exports = function (grunt) {
                     'bower_components/angular/angular.js',
                     'bower_components/angular-ui-router/release/angular-ui-router.js',
                     'bower_components/angular-foundation/mm-foundation-tpls.js',
+                    'bower_components/angular-animate/angular-animate.min.js',
                     'bower_components/angular-moment/angular-moment.js',
                     'bower_components/ng-lodash/build/ng-lodash.js',
                     'bower_components/angular-qrcode/angular-qrcode.js',
@@ -103,9 +104,8 @@ module.exports = function (grunt) {
 			foundation: {
 				src: [
                     'bower_components/angular/angular-csp.css',
-                    'bower_components/foundation/css/foundation.css',
-                    'bower_components/animate.css/animate.css',
                     'bower_components/angular-ui-switch/angular-ui-switch.css',
+                    'bower_components/animate.css/animate.css',
                     'bower_components/angular-carousel/dist/angular-carousel.css'
 				],
 				dest: 'public/css/foundation.css'

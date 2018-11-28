@@ -4,6 +4,7 @@ angular.module('copayApp.controllers').controller('addwalletController',
     function ($rootScope, $scope, $timeout, storageService, notification, profileService, bwcService, $log,gettext,go,gettextCatalog,isCordova) {
         var self = this;
         var successMsg = gettext('Backup words deleted');
+        var indexScope = $scope.index;
         self.addwname = '';
         self.addwpass = '';
         self.addwrpass = '';
@@ -69,6 +70,7 @@ angular.module('copayApp.controllers').controller('addwalletController',
             } else {
                 return false;
             }
+            self.watchchose();
         }
         self.minuswordf = function ($event) {
             self.showcodeerr = false;
@@ -86,10 +88,9 @@ angular.module('copayApp.controllers').controller('addwalletController',
             } else {
                 return false;
             }
+            self.watchchose();
         };
-        $scope.$watch(function () {
-            return JSON.stringify(self.chosenWords);
-        }, function (newValue, oldValue) {
+        self.watchchose = function(){
             if (self.chosenWords.length > 11) {
                 var chostr = '';
                 for (var i = 0; i < self.chosenWords.length; i++) {
@@ -107,33 +108,19 @@ angular.module('copayApp.controllers').controller('addwalletController',
                 } else {
                     self.showcodeerr = true;
                 }
+            }else{
+                return;
             }
-        }, true)
-        // 更改代码
-        self.haschoosen = function (noWallet) {
-            if (self.creatingProfile)
-                return console.log('already creating profile');
-            self.creatingProfile = true;
-            //	saveDeviceName();
+        }
 
-            $timeout(function () {
-                profileService.create({ noWallet: noWallet }, function (err) {
-                    if (err) {
-                        self.creatingProfile = false;
-                        $log.warn(err);
-                        self.error = err;
-                        $timeout(function () {
-                            $scope.$apply();
-                        });
-                        /*$timeout(function() {
-                            self.create(noWallet);
-                        }, 3000);*/
-                    }
-                });
-            }, 100);
-
-        };
-        // 删除口令 修改后
+        /**
+         * 创建钱包
+         * @param walletName
+         * @param password
+         * @param passphrase
+         * @param mnemonic
+         * @param del
+         */
         self.addWallet = function (walletName, password, passphrase, mnemonic,del) {
             if(password !== passphrase){
                 $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('*Inconsistent password'));
@@ -143,14 +130,19 @@ angular.module('copayApp.controllers').controller('addwalletController',
             if (self.creatingProfile)
                 return console.log('already creating profile');
             self.creatingProfile = true;
-            //	saveDeviceName();
-            // if (isCordova) {
-            //     window.plugins.spinnerDialog.show(null, gettextCatalog.getString('Loading...'), true);
-            // }
+
+            if (isCordova)
+                window.plugins.spinnerDialog.show(null, gettextCatalog.getString('Loading...'), true);
+            else
+                $rootScope.progressing = true;
+
                 profileService.createWallet({ name: walletName, password: passphrase, mnemonic: mnemonic,m:1,n:1,networkName:"livenet",cosigners:[],isSinglecreateress:true  }, function (err,walletId) {
                    $timeout(function () {
-                       // if (isCordova)
-                       //     window.plugins.spinnerDialog.hide();
+                       if (isCordova)
+                           window.plugins.spinnerDialog.hide();
+                       else
+                           $rootScope.progressing = false;
+
                        if (err) {
                            self.creatingProfile = false;
                            $log.warn(err);
@@ -178,7 +170,10 @@ angular.module('copayApp.controllers').controller('addwalletController',
 
                 });
         };
-        //import wallet
+
+        /**
+         * 通过输入助记次导入钱包
+         */
         self.importw = function(){
             if(self.addwipass !== self.addwirpass){
                 $rootScope.$emit('Local/ShowErrorAlert', gettextCatalog.getString('*Inconsistent password'));
@@ -187,13 +182,18 @@ angular.module('copayApp.controllers').controller('addwalletController',
 
             self.importcode1 = self.importcode.replace(/^\s+/, '').replace(/\s+$/, '');
             self.importcode2 = self.importcode1.replace(/\s+/g, ' ');
-            // if (isCordova) {
-            //     window.plugins.spinnerDialog.show(null, gettextCatalog.getString('Loading...'), true);
-            // }
+            if (isCordova)
+                window.plugins.spinnerDialog.show(null, gettextCatalog.getString('Loading...'), true);
+            else
+                $rootScope.progressing = true;
+
                 profileService.createWallet({ name: self.addwiname, password: self.addwipass, mnemonic: self.importcode2,m:1,n:1,networkName:"livenet",cosigners:[],isSinglecreateress:true }, function (err,walletId) {
                     $timeout(function () {
                         if (isCordova)
                             window.plugins.spinnerDialog.hide();
+                        else
+                            $rootScope.progressing = false;
+
                         if(err){
                             self.creatingProfile = false;
                             $log.warn(err);

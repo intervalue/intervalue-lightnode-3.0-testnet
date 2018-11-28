@@ -45,7 +45,7 @@
     <div class="message-log size-12 enable_text_select chatlist" scroll-bottom="messageEvents" when-scrolled="loadMoreHistory"
          bind-to-height="['bottom','form[name=chatForm]']"
          ng-mousemove="newMsgCounterEnabled ?'': newMessagesCount[correspondent.device_address] = 0">
-        <div class="chat-message " ng-repeat="messageEvent in messageEvents" >
+        <div class="chat-message clearfix" ng-repeat="messageEvent in messageEvents" >
             <div ng-class="messageEvent.bIncoming ? 'from-them' : (messageEvent.type == 'system' ? 'system' : 'from-me')"
                  class="bubble " ><span class="chatname">{{messageEvent.bIncoming ? (correspondent.name | limitTo:1) : 'me'}} </span>
                 <span dynamic="messageEvent.message"></span></div>
@@ -62,7 +62,6 @@
 
     <form name="chatForm" class="send-form mychatcurform  " id="mychatcurform" no-validate
           ng-mousemove="newMsgCounterEnabled ?'': newMessagesCount[correspondent.device_address] = 0">
-        <!--<div class="text-warning size-12 m10b" ng-show="error">{{error|translate}}</div>-->
         <!-- 左侧功能选项anniu -->
 
         <!-- 左侧功能选项 -->

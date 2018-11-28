@@ -6,7 +6,7 @@
 
 <div class="content preferences" ng-controller="preferencesTorController as tor">
 	<h4></h4>
-	<form class="columns" ng-submit="save(true)">
+	<form ng-submit="save(true)">
 		<div style="margin-bottom: 20px">
 			<switch name="torEnabled" ng-model="torEnabled" class="green right"></switch>
 			<div>TOR enabled</div>
